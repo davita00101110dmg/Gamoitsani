@@ -8,17 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		FF0294E22A5752FB000F7217 /* GamoitsaniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0294E12A5752FB000F7217 /* GamoitsaniApp.swift */; };
-		FF0294E42A5752FB000F7217 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0294E32A5752FB000F7217 /* ContentView.swift */; };
+		FF0294E42A5752FB000F7217 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0294E32A5752FB000F7217 /* MainView.swift */; };
 		FF0294E62A5752FC000F7217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF0294E52A5752FC000F7217 /* Assets.xcassets */; };
 		FF0294E92A5752FC000F7217 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF0294E82A5752FC000F7217 /* Preview Assets.xcassets */; };
+		FF0294F02A5754A4000F7217 /* bpg_nino_mtavruli_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF0294EF2A5754A4000F7217 /* bpg_nino_mtavruli_bold.ttf */; };
+		FF0294F52A575590000F7217 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0294F42A575590000F7217 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FF0294DE2A5752FB000F7217 /* Gamoitsani.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0294E12A5752FB000F7217 /* GamoitsaniApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniApp.swift; sourceTree = "<group>"; };
-		FF0294E32A5752FB000F7217 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FF0294E32A5752FB000F7217 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		FF0294E52A5752FC000F7217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF0294E82A5752FC000F7217 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FF0294EF2A5754A4000F7217 /* bpg_nino_mtavruli_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bpg_nino_mtavruli_bold.ttf; sourceTree = "<group>"; };
+		FF0294F22A5754C2000F7217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF0294F42A575590000F7217 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,19 +57,46 @@
 			isa = PBXGroup;
 			children = (
 				FF0294E12A5752FB000F7217 /* GamoitsaniApp.swift */,
-				FF0294E32A5752FB000F7217 /* ContentView.swift */,
-				FF0294E52A5752FC000F7217 /* Assets.xcassets */,
-				FF0294E72A5752FC000F7217 /* Preview Content */,
+				FF0294E32A5752FB000F7217 /* MainView.swift */,
+				FF0294F32A57557B000F7217 /* Views */,
+				FF0294F82A575623000F7217 /* Models */,
+				FF0294F62A575602000F7217 /* Resources */,
 			);
 			path = Gamoitsani;
 			sourceTree = "<group>";
 		};
-		FF0294E72A5752FC000F7217 /* Preview Content */ = {
+		FF0294F12A5754B1000F7217 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FF0294EF2A5754A4000F7217 /* bpg_nino_mtavruli_bold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FF0294F32A57557B000F7217 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FF0294F42A575590000F7217 /* CustomButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FF0294F62A575602000F7217 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				FF0294E82A5752FC000F7217 /* Preview Assets.xcassets */,
+				FF0294E52A5752FC000F7217 /* Assets.xcassets */,
+				FF0294F22A5754C2000F7217 /* Info.plist */,
+				FF0294F12A5754B1000F7217 /* Fonts */,
 			);
-			path = "Preview Content";
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FF0294F82A575623000F7217 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +159,7 @@
 			files = (
 				FF0294E92A5752FC000F7217 /* Preview Assets.xcassets in Resources */,
 				FF0294E62A5752FC000F7217 /* Assets.xcassets in Resources */,
+				FF0294F02A5754A4000F7217 /* bpg_nino_mtavruli_bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +170,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0294E42A5752FB000F7217 /* ContentView.swift in Sources */,
+				FF0294E42A5752FB000F7217 /* MainView.swift in Sources */,
+				FF0294F52A575590000F7217 /* CustomButton.swift in Sources */,
 				FF0294E22A5752FB000F7217 /* GamoitsaniApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,10 +300,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Gamoitsani/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Gamoitsani/Resources\"";
 				DEVELOPMENT_TEAM = V9DL6T6A4K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gamoitsani/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -280,7 +315,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = davitikhvedelidze.Gamoitsani;
+				PRODUCT_BUNDLE_IDENTIFIER = davitikhvedelidze.Gamoitsanii;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -295,10 +330,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Gamoitsani/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Gamoitsani/Resources\"";
 				DEVELOPMENT_TEAM = V9DL6T6A4K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gamoitsani/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -309,7 +345,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = davitikhvedelidze.Gamoitsani;
+				PRODUCT_BUNDLE_IDENTIFIER = davitikhvedelidze.Gamoitsanii;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
