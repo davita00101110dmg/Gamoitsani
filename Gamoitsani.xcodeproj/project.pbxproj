@@ -9,14 +9,20 @@
 /* Begin PBXBuildFile section */
 		FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D282BD698620046819D /* AppDelegate.swift */; };
 		FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D2A2BD698620046819D /* SceneDelegate.swift */; };
-		FF4D9D2D2BD698620046819D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D2C2BD698620046819D /* ViewController.swift */; };
-		FF4D9D302BD698620046819D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF4D9D2E2BD698620046819D /* Main.storyboard */; };
 		FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */; };
 		FF4D9D352BD698630046819D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF4D9D342BD698630046819D /* Assets.xcassets */; };
 		FF4D9D382BD698630046819D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF4D9D362BD698630046819D /* LaunchScreen.storyboard */; };
 		FF4D9D432BD698630046819D /* GamoitsaniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D422BD698630046819D /* GamoitsaniTests.swift */; };
 		FF4D9D4D2BD698630046819D /* GamoitsaniUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D4C2BD698630046819D /* GamoitsaniUITests.swift */; };
 		FF4D9D4F2BD698630046819D /* GamoitsaniUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D4E2BD698630046819D /* GamoitsaniUITestsLaunchTests.swift */; };
+		FF4D9D782BD69BA20046819D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D772BD69BA20046819D /* HomeViewController.swift */; };
+		FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D792BD69BAC0046819D /* HomeViewModel.swift */; };
+		FF4D9D7C2BD69BC00046819D /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D7B2BD69BC00046819D /* HomeModels.swift */; };
+		FF4D9D9C2BD6F7DB0046819D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D9B2BD6F7DB0046819D /* HomeCoordinator.swift */; };
+		FFFB4CD22BD701E700CDDCB4 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFB4CD12BD701E700CDDCB4 /* HomeViewController.xib */; };
+		FFFB4CD72BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4CD62BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift */; };
+		FFFB4CD92BD7CA9A00CDDCB4 /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4CD82BD7CA9A00CDDCB4 /* BundleExtensions.swift */; };
+		FFFB4CDB2BD7CAEE00CDDCB4 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4CDA2BD7CAEE00CDDCB4 /* BaseCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,17 +46,24 @@
 		FF4D9D252BD698620046819D /* Gamoitsani.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4D9D282BD698620046819D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF4D9D2A2BD698620046819D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FF4D9D2C2BD698620046819D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FF4D9D2F2BD698620046819D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF4D9D322BD698620046819D /* Gamoitsani.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Gamoitsani.xcdatamodel; sourceTree = "<group>"; };
 		FF4D9D342BD698630046819D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF4D9D372BD698630046819D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FF4D9D392BD698630046819D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF4D9D392BD698630046819D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = ../Gamoitsani/SupportingFiles/Info/Info.plist; sourceTree = "<group>"; };
 		FF4D9D3E2BD698630046819D /* GamoitsaniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamoitsaniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4D9D422BD698630046819D /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
 		FF4D9D482BD698630046819D /* GamoitsaniUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamoitsaniUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4D9D4C2BD698630046819D /* GamoitsaniUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniUITests.swift; sourceTree = "<group>"; };
 		FF4D9D4E2BD698630046819D /* GamoitsaniUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FF4D9D772BD69BA20046819D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Gamoitsani/Source/Modules/Home/HomeViewController.swift; sourceTree = SOURCE_ROOT; };
+		FF4D9D792BD69BAC0046819D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FF4D9D7B2BD69BC00046819D /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
+		FF4D9D9B2BD6F7DB0046819D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		FF8929C12BD6FC52000C0B9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFFB4CD12BD701E700CDDCB4 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		FFFB4CD62BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		FFFB4CD82BD7CA9A00CDDCB4 /* BundleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
+		FFFB4CDA2BD7CAEE00CDDCB4 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +114,8 @@
 		FF4D9D272BD698620046819D /* Gamoitsani */ = {
 			isa = PBXGroup;
 			children = (
-				FF4D9D282BD698620046819D /* AppDelegate.swift */,
-				FF4D9D2A2BD698620046819D /* SceneDelegate.swift */,
-				FF4D9D2C2BD698620046819D /* ViewController.swift */,
-				FF4D9D2E2BD698620046819D /* Main.storyboard */,
-				FF4D9D342BD698630046819D /* Assets.xcassets */,
-				FF4D9D362BD698630046819D /* LaunchScreen.storyboard */,
-				FF4D9D392BD698630046819D /* Info.plist */,
-				FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */,
+				FF4D9D5E2BD69A8F0046819D /* Source */,
+				FF4D9D5F2BD69A940046819D /* Resources */,
 			);
 			path = Gamoitsani;
 			sourceTree = "<group>";
@@ -124,10 +131,119 @@
 		FF4D9D4B2BD698630046819D /* GamoitsaniUITests */ = {
 			isa = PBXGroup;
 			children = (
+				FF4D9D392BD698630046819D /* Info.plist */,
 				FF4D9D4C2BD698630046819D /* GamoitsaniUITests.swift */,
 				FF4D9D4E2BD698630046819D /* GamoitsaniUITestsLaunchTests.swift */,
 			);
 			path = GamoitsaniUITests;
+			sourceTree = "<group>";
+		};
+		FF4D9D5E2BD69A8F0046819D /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				FF4D9D612BD69ACF0046819D /* ApplicationLayer */,
+				FF4D9D622BD69AF40046819D /* Modules */,
+				FF4D9D972BD6F4630046819D /* Common */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		FF4D9D5F2BD69A940046819D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FF4D9D602BD69A9D0046819D /* Launch Screen */,
+				FF4D9D342BD698630046819D /* Assets.xcassets */,
+				FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */,
+				FF8929C12BD6FC52000C0B9B /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FF4D9D602BD69A9D0046819D /* Launch Screen */ = {
+			isa = PBXGroup;
+			children = (
+				FF4D9D362BD698630046819D /* LaunchScreen.storyboard */,
+			);
+			path = "Launch Screen";
+			sourceTree = "<group>";
+		};
+		FF4D9D612BD69ACF0046819D /* ApplicationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				FF4D9D692BD69B530046819D /* AppDelegate */,
+				FF4D9D2A2BD698620046819D /* SceneDelegate.swift */,
+			);
+			path = ApplicationLayer;
+			sourceTree = "<group>";
+		};
+		FF4D9D622BD69AF40046819D /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				FF4D9D632BD69AFF0046819D /* Home */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		FF4D9D632BD69AFF0046819D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FF4D9D762BD69B950046819D /* Xib */,
+				FF4D9D772BD69BA20046819D /* HomeViewController.swift */,
+				FF4D9D792BD69BAC0046819D /* HomeViewModel.swift */,
+				FF4D9D7B2BD69BC00046819D /* HomeModels.swift */,
+				FF4D9D9B2BD6F7DB0046819D /* HomeCoordinator.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FF4D9D692BD69B530046819D /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				FF4D9D282BD698620046819D /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		FF4D9D762BD69B950046819D /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				FFFB4CD12BD701E700CDDCB4 /* HomeViewController.xib */,
+			);
+			path = Xib;
+			sourceTree = "<group>";
+		};
+		FF4D9D972BD6F4630046819D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FFFB4CD42BD7CA6F00CDDCB4 /* Constants */,
+				FFFB4CD32BD7CA6700CDDCB4 /* Utils */,
+				FFFB4CDA2BD7CAEE00CDDCB4 /* BaseCoordinator.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		FFFB4CD32BD7CA6700CDDCB4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FFFB4CD52BD7CA7500CDDCB4 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		FFFB4CD42BD7CA6F00CDDCB4 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		FFFB4CD52BD7CA7500CDDCB4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FFFB4CD62BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift */,
+				FFFB4CD82BD7CA9A00CDDCB4 /* BundleExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +311,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
+				ORGANIZATIONNAME = "Daviti Khvedelidze";
 				TargetAttributes = {
 					FF4D9D242BD698620046819D = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -236,7 +353,7 @@
 			files = (
 				FF4D9D382BD698630046819D /* LaunchScreen.storyboard in Resources */,
 				FF4D9D352BD698630046819D /* Assets.xcassets in Resources */,
-				FF4D9D302BD698620046819D /* Main.storyboard in Resources */,
+				FFFB4CD22BD701E700CDDCB4 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,10 +378,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF4D9D2D2BD698620046819D /* ViewController.swift in Sources */,
 				FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */,
 				FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */,
 				FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */,
+				FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */,
+				FFFB4CD72BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift in Sources */,
+				FF4D9D7C2BD69BC00046819D /* HomeModels.swift in Sources */,
+				FF4D9D9C2BD6F7DB0046819D /* HomeCoordinator.swift in Sources */,
+				FF4D9D782BD69BA20046819D /* HomeViewController.swift in Sources */,
+				FFFB4CDB2BD7CAEE00CDDCB4 /* BaseCoordinator.swift in Sources */,
+				FFFB4CD92BD7CA9A00CDDCB4 /* BundleExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,14 +424,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FF4D9D2E2BD698620046819D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FF4D9D2F2BD698620046819D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FF4D9D362BD698630046819D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -372,7 +487,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -429,7 +544,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -449,11 +564,14 @@
 				DEVELOPMENT_TEAM = V9DL6T6A4K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Gamoitsani/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.word-games";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -477,11 +595,14 @@
 				DEVELOPMENT_TEAM = V9DL6T6A4K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Gamoitsani/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.word-games";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
