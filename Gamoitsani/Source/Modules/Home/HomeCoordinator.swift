@@ -8,20 +8,6 @@
 
 import UIKit
 
-class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
-    var childCoordinators: [Coordinator] = []
-    var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-    
-    func start() {
-        navigationController.delegate = self
-        
-        let viewController = HomeViewController.loadFromNib()
-        
-        viewController.coordinator = self
-        navigationController.pushViewController(viewController, animated: false)
-    }
+class HomeCoordinator {
+    // TODO: - Temporary empty
 }

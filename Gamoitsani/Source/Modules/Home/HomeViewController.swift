@@ -9,11 +9,10 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    weak var coordinator: HomeCoordinator?
+    weak var coordinator: MainCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     @IBAction func gameButtonClicked(_ sender: Any) {
@@ -21,6 +20,6 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func settingsButtonClicked(_ sender: Any) {
-        
+        coordinator?.navigateToSettings()
     }
 }
