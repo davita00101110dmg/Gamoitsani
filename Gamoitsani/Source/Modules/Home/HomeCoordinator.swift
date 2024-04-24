@@ -8,6 +8,6 @@
 
 import UIKit
 
-class HomeCoordinator {
+final class HomeCoordinator {
     // TODO: - Temporary empty
 }

@@ -4,14 +4,24 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="BPG-Nino-Mtavruli-Bold.ttf">
+            <string>BPGNinoMtavruli-Bold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Gamoitsani" customModuleProvider="target">
             <connections>
+                <outlet property="gameButton" destination="RKy-b6-2Oi" id="TbL-bk-VeE"/>
+                <outlet property="rulesButton" destination="D8J-Jd-c0D" id="zuJ-nz-XYz"/>
+                <outlet property="titleLabel" destination="lwO-X3-Ts6" id="4pX-TR-Zbu"/>
                 <outlet property="view" destination="iN0-l3-epB" id="yig-jY-6ac"/>
+                <outlet property="wandLabel" destination="9nD-z7-nPt" id="zqs-Mr-33x"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,38 +29,76 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwO-X3-Ts6">
-                    <rect key="frame" x="175" y="165" width="46" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="გამოიცანი" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwO-X3-Ts6">
+                    <rect key="frame" x="84.333333333333329" y="155" width="224.33333333333337" height="50.666666666666657"/>
+                    <fontDescription key="fontDescription" name="BPGNinoMtavruli-Bold" family="BPG Nino Mtavruli" pointSize="44"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jG5-dr-RbB">
-                    <rect key="frame" x="107" y="705" width="178" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Navigate to Settings"/>
-                    <connections>
-                        <action selector="settingsButtonClicked:" destination="-1" eventType="touchUpInside" id="3mn-OZ-BvL"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKy-b6-2Oi">
-                    <rect key="frame" x="116" y="662" width="165" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Navigate to Game "/>
-                    <connections>
-                        <action selector="gameButtonClicked:" destination="-1" eventType="touchUpInside" id="rXl-7k-qH5"/>
-                    </connections>
-                </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🪄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nD-z7-nPt">
+                    <rect key="frame" x="142.66666666666666" y="366.33333333333331" width="108" height="119.66666666666669"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="100"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="9Eq-UI-f78">
+                    <rect key="frame" x="16" y="658" width="361" height="96"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKy-b6-2Oi" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="J5V-oI-Emy"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Game"/>
+                            <connections>
+                                <action selector="gameButtonClicked:" destination="-1" eventType="touchUpInside" id="rXl-7k-qH5"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8J-Jd-c0D" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="56" width="361" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="259-6m-qm6"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Rules"/>
+                            <connections>
+                                <action selector="rulesButtonClicked:" destination="-1" eventType="touchUpInside" id="dxd-5A-q3e"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wand.and.stars" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="N5D-ta-l2U">
+                    <rect key="frame" x="96.666666666666686" y="294.66666666666669" width="200" height="198.66666666666669"/>
+                    <color key="tintColor" name="TintColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="bQL-Dm-S4c"/>
+                        <constraint firstAttribute="width" constant="200" id="rTJ-yt-GLe"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9Eq-UI-f78" secondAttribute="trailing" constant="16" id="1yO-Tr-w1k"/>
+                <constraint firstItem="9nD-z7-nPt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9wA-KE-agd"/>
+                <constraint firstItem="9Eq-UI-f78" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="CqP-Al-pwm"/>
+                <constraint firstItem="lwO-X3-Ts6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GJ5-gT-h6r"/>
+                <constraint firstItem="9Eq-UI-f78" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GLo-LI-R0p"/>
+                <constraint firstItem="9nD-z7-nPt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OIO-Bj-X2l"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="9Eq-UI-f78" secondAttribute="bottom" constant="64" id="X2N-yf-VQu"/>
+                <constraint firstItem="N5D-ta-l2U" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aAy-mZ-gyV"/>
+                <constraint firstItem="N5D-ta-l2U" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-32" id="sBt-da-lKc"/>
+                <constraint firstItem="lwO-X3-Ts6" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="96" id="yj6-DM-ZQo"/>
+            </constraints>
             <point key="canvasLocation" x="68" y="21"/>
         </view>
     </objects>
     <resources>
+        <image name="wand.and.stars" catalog="system" width="128" height="115"/>
+        <namedColor name="TintColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
