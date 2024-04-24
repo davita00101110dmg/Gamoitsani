@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Gamoitsani
+
+  Created by Daviti Khvedelidze on 23/04/2024.
+  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
+*/
+// MARK: General
+"title" = "გამოიცანი";
+
+// MARK: Home
+"screen.home.play_button.title" = "თამაშის დაწყება";
+"screen.home.rules_button.title" = "წესები";
+"screen.home.settings_button.title" = "პარამეტრები";
