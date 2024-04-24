@@ -22,11 +22,29 @@ protocol Coordinator: AnyObject {
 class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     var childCoordinators: [Coordinator] = []
     var navigationController = UINavigationController()
+
+    override init() {
+        super.init()
+        applyTheme()
+    }
+    
+    private func applyTheme() {
+        UINavigationBar.appearance().tintColor = UIColor.gmTint
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : UIColor.gmTint]
+        UIView.appearance().tintColor = UIColor.gmTint
+    }
     
     func start() {
         let initialViewController = HomeViewController.loadFromNib()
         initialViewController.coordinator = self
         navigationController.delegate = self
         navigationController.pushViewController(initialViewController, animated: true)
+    }
+    
+    func navigateToRules() {
+        let rulesVC = RulesViewController.loadFromNib()
+        rulesVC.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(rulesVC, animated: true)
     }
 }
