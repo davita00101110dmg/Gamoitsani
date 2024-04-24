@@ -33,6 +33,12 @@
 		FFFB4D342BD90FD900CDDCB4 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4D332BD90FD900CDDCB4 /* UserDefaultsExtension.swift */; };
 		FFFB4D362BD9128800CDDCB4 /* NotificationExtensons.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4D352BD9128800CDDCB4 /* NotificationExtensons.swift */; };
 		FFFB4D382BD9144B00CDDCB4 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4D372BD9144B00CDDCB4 /* StringExtensions.swift */; };
+		FFFB4D3F2BD9155100CDDCB4 /* RulesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4D3A2BD9155100CDDCB4 /* RulesCoordinator.swift */; };
+		FFFB4D402BD9155100CDDCB4 /* RulesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4D3B2BD9155100CDDCB4 /* RulesModels.swift */; };
+		FFFB4D412BD9155100CDDCB4 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4D3C2BD9155100CDDCB4 /* RulesViewController.swift */; };
+		FFFB4D422BD9155100CDDCB4 /* RulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4D3D2BD9155100CDDCB4 /* RulesViewModel.swift */; };
+		FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFB4D3E2BD9155100CDDCB4 /* RulesViewController.xib */; };
+		FFFB4D462BD928B400CDDCB4 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4D452BD928B400CDDCB4 /* UIFontExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +91,12 @@
 		FFFB4D332BD90FD900CDDCB4 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		FFFB4D352BD9128800CDDCB4 /* NotificationExtensons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensons.swift; sourceTree = "<group>"; };
 		FFFB4D372BD9144B00CDDCB4 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		FFFB4D3A2BD9155100CDDCB4 /* RulesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesCoordinator.swift; sourceTree = "<group>"; };
+		FFFB4D3B2BD9155100CDDCB4 /* RulesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesModels.swift; sourceTree = "<group>"; };
+		FFFB4D3C2BD9155100CDDCB4 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		FFFB4D3D2BD9155100CDDCB4 /* RulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewModel.swift; sourceTree = "<group>"; };
+		FFFB4D3E2BD9155100CDDCB4 /* RulesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RulesViewController.xib; sourceTree = "<group>"; };
+		FFFB4D452BD928B400CDDCB4 /* UIFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				FF4D9D632BD69AFF0046819D /* Home */,
+				FFFB4D392BD914DE00CDDCB4 /* Rules */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -272,6 +285,7 @@
 				FFFB4D332BD90FD900CDDCB4 /* UserDefaultsExtension.swift */,
 				FFFB4D352BD9128800CDDCB4 /* NotificationExtensons.swift */,
 				FFFB4D372BD9144B00CDDCB4 /* StringExtensions.swift */,
+				FFFB4D452BD928B400CDDCB4 /* UIFontExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -299,6 +313,26 @@
 				FFFB4D2F2BD861F300CDDCB4 /* GMButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		FFFB4D392BD914DE00CDDCB4 /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				FFFB4D442BD9155300CDDCB4 /* Xib */,
+				FFFB4D3C2BD9155100CDDCB4 /* RulesViewController.swift */,
+				FFFB4D3D2BD9155100CDDCB4 /* RulesViewModel.swift */,
+				FFFB4D3B2BD9155100CDDCB4 /* RulesModels.swift */,
+				FFFB4D3A2BD9155100CDDCB4 /* RulesCoordinator.swift */,
+			);
+			path = Rules;
+			sourceTree = "<group>";
+		};
+		FFFB4D442BD9155300CDDCB4 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				FFFB4D3E2BD9155100CDDCB4 /* RulesViewController.xib */,
+			);
+			path = Xib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,6 +443,7 @@
 				FF4D9D382BD698630046819D /* LaunchScreen.storyboard in Resources */,
 				FFFB4D072BD8393A00CDDCB4 /* Localizable.strings in Resources */,
 				FF4D9D352BD698630046819D /* Assets.xcassets in Resources */,
+				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
 				FFFB4D1A2BD8441F00CDDCB4 /* BPG-Nino-Mtavruli-Normal.ttf in Resources */,
 				FFFB4D172BD8438800CDDCB4 /* BPG-Nino-Mtavruli-Bold.ttf in Resources */,
 				FFFB4CD22BD701E700CDDCB4 /* HomeViewController.xib in Resources */,
@@ -437,16 +472,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */,
+				FFFB4D422BD9155100CDDCB4 /* RulesViewModel.swift in Sources */,
 				FFFB4D322BD86DAF00CDDCB4 /* AppConstants.swift in Sources */,
 				FFFB4D382BD9144B00CDDCB4 /* StringExtensions.swift in Sources */,
+				FFFB4D462BD928B400CDDCB4 /* UIFontExtensions.swift in Sources */,
 				FFFB4D342BD90FD900CDDCB4 /* UserDefaultsExtension.swift in Sources */,
+				FFFB4D3F2BD9155100CDDCB4 /* RulesCoordinator.swift in Sources */,
 				FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */,
 				FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */,
 				FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */,
 				FFFB4D362BD9128800CDDCB4 /* NotificationExtensons.swift in Sources */,
 				FFFB4CD72BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift in Sources */,
+				FFFB4D412BD9155100CDDCB4 /* RulesViewController.swift in Sources */,
 				FF4D9D7C2BD69BC00046819D /* HomeModels.swift in Sources */,
 				FFFB4D1C2BD850C900CDDCB4 /* UIColorExtensions.swift in Sources */,
+				FFFB4D402BD9155100CDDCB4 /* RulesModels.swift in Sources */,
 				FF4D9D9C2BD6F7DB0046819D /* HomeCoordinator.swift in Sources */,
 				FF4D9D782BD69BA20046819D /* HomeViewController.swift in Sources */,
 				FFFB4CDB2BD7CAEE00CDDCB4 /* MainCoordinator.swift in Sources */,
