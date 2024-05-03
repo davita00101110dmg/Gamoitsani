@@ -8,12 +8,10 @@
 
 import UIKit
 
-final class RulesViewController: BaseViewController {
+final class RulesViewController: BaseViewController<RulesCoordinator> {
     
     @IBOutlet weak var textView: UITextView!
     
-    weak var coordinator: MainCoordinator?
-
     override func setupUI() {
         super.setupUI()
     
@@ -40,6 +38,5 @@ final class RulesViewController: BaseViewController {
                                         .font: UIFont.gmFont(size: 18)])
 
         textView.attributedText = text
-        
     }
 }

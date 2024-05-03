@@ -8,6 +8,21 @@
 
 import UIKit
 
-final class RulesCoordinator {
+final class RulesCoordinator: BaseCoordinator {
 
+    init(navigationController: UINavigationController) {
+        super.init()
+        self.navigationController = navigationController
+    }
+    
+    deinit {
+        print("deinitialized \(self)")
+    }
+    
+    override func start() {
+        let viewController = RulesViewController.loadFromNib()
+        viewController.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(viewController, animated: true)
+    }
 }

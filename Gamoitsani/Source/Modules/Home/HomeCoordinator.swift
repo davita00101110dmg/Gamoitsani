@@ -8,6 +8,30 @@
 
 import UIKit
 
-final class HomeCoordinator {
-    // TODO: - Temporary empty
+final class HomeCoordinator: BaseCoordinator {
+
+    init(navigationController: UINavigationController) {
+        super.init()
+        self.navigationController = navigationController
+    }
+    
+    deinit {
+        print("deinitialized \(self)")
+    }
+    
+    override func start() {
+        let viewController = HomeViewController.loadFromNib()
+        viewController.coordinator = self
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func navigateToRules() {
+        let rulesCoordinator = RulesCoordinator(navigationController: navigationController)
+        coordinate(to: rulesCoordinator)
+    }
+    
+    func navigateToGameSettings() {
+        let gameSettingsCoordinator = GameSettingsCoordinator(navigationController: navigationController)
+        coordinate(to: gameSettingsCoordinator)
+    }
 }

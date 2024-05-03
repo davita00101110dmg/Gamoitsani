@@ -7,15 +7,13 @@
 
 import UIKit
 
-final class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController<HomeCoordinator> {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var wandLabel: UILabel!
     @IBOutlet weak var gameButton: GMButton!
     @IBOutlet weak var rulesButton: GMButton!
-    
-    weak var coordinator: MainCoordinator?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.isHidden = true
@@ -60,7 +58,7 @@ final class HomeViewController: BaseViewController {
     }
     
     @IBAction func gameButtonClicked(_ sender: Any) {
-        
+        coordinator?.navigateToGameSettings()
     }
     
     @IBAction func rulesButtonClicked(_ sender: Any) {
