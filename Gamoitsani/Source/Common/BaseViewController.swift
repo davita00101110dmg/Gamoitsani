@@ -8,7 +8,9 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController<T: Coordinator>: UIViewController {
+    
+    weak var coordinator: T?
 
     override func viewDidLoad() {
         super.viewDidLoad()
