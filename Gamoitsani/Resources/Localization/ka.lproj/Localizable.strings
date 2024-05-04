@@ -1,5 +1,5 @@
 /* 
-  Localizable.strings
+  Localisable.strings
   Gamoitsani
 
   Created by Daviti Khvedelidze on 23/04/2024.
@@ -12,8 +12,14 @@
 "screen.home.play_button.title" = "თამაშის დაწყება";
 "screen.home.rules_button.title" = "წესები";
 "screen.home.settings_button.title" = "პარამეტრები";
+"screen.home.change_language.title" = "ენის შეცვლა";
+
+// MARK: - Game Settings
+"screen.game_settings.title" = "თამაშის პარამეტრები";
+"screen.game_settings.rounds_amount.title" = "რაუნდების რაოდენობა: %@";
+"screen.game_settings.rounds_length.title" = "რაუნდის ხანგრძლივობა: %@ წმ";
+"screen.game_settings.teams.title" = "გუნდები";
 
 // MARK: - Rules
 "screen.rules.title" = "წესები";
 "screen.rules.rules" = "・სიტყვის ახსნისას აკრძალულია ერთფუძიანი სიტყვის გამოყენება \n ・თუ გუნდის წევრი გამოიცნობს სიტყვას, დააჭირეთ ✅ ღილაკს (+1 ქულა) \n ・თუ სიტყვის ახსნა ვერ მოახერხეთ, ან რომელიმე წესი დაირღვა და გინდათ რომ შემდეგ სიტყვაზე გადახვიდეთ დააჭირეთ ❌ ღილაკს (-1 ქულა) \n ・გაიმარჯვებს ის გუნდი, რომელიც დროის ამოწურვამდე დააგროვებს უფრო მეტ ქულას, ან პირველი მიაღწევს რაუნდში დაწესებულ ქულების რაოდენობას. \n გისურვებთ წარმატებებს :)";
-
