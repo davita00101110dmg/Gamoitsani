@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-    var localized: String {
+    func localized(_ arguments: CVarArg...) -> String {
         guard let lang = UserDefaults.appLanguage else {
             UserDefaults.appLanguage = AppConstants.Language.english.identifier
             return self
@@ -18,6 +18,12 @@ extension String {
         let path = Bundle.main.path(forResource: lang, ofType: "lproj")
         let bundle = Bundle(path: path!)
 
-        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+        let localizedString = NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+        
+        if arguments.isEmpty {
+            return localizedString
+        } else {
+            return String(format: localizedString, arguments: arguments)
+        }
     }
 }
