@@ -1,5 +1,5 @@
 /* 
-  Localisable.strings
+  Localizable.strings
   Gamoitsani
 
   Created by Daviti Khvedelidze on 23/04/2024.
@@ -7,6 +7,7 @@
 */
 // MARK: - General
 "app.title" = "Gamoitsani";
+"and" = "and";
 
 // MARK: - Home
 "screen.home.play_button.title" = "Start Game";
@@ -14,12 +15,12 @@
 "screen.home.settings_button.title" = "Settings";
 "screen.home.change_language.title" = "Change language";
 
+// MARK: - Rules
+"screen.rules.title" = "Rules";
+"screen.rules.rules" = "・When explaining the word, it is forbidden to use a single word \n\n ・If a team member guesses the word, press the ✅ button (+1 point) \n\n ・If you can't explain the word, or some rule was broken and you want to go to the next word, press the ❌ button (-1 point) \n\n ・The team that collects more points before the time runs out, or the first to reach the set number of points in the round, wins. \n\n Good luck :)";
+
 // MARK: - Game Settings
 "screen.game_settings.title" = "Game Settings";
 "screen.game_settings.rounds_amount.title" = "Rounds Amount: %@";
 "screen.game_settings.rounds_length.title" = "Round Length: %@ sec";
 "screen.game_settings.teams.title" = "Teams";
-
-// MARK: - Rules
-"screen.rules.title" = "Rules";
-"screen.rules.rules" = "・When explaining the word, it is forbidden to use a single word \n\n ・If a team member guesses the word, press the ✅ button (+1 point) \n\n ・If you can't explain the word, or some rule was broken and you want to go to the next word, press the ❌ button (-1 point) \n\n ・The team that collects more points before the time runs out, or the first to reach the set number of points in the round, wins. \n\n Good luck :)";

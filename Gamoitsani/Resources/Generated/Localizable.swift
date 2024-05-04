@@ -9,8 +9,6 @@ import Foundation
 public enum L10n {
     /// and
     public static var and: String { L10n.tr("Localizable", "and") }
-    /// Yes
-    public static var yes: String { L10n.tr("Localizable", "yes") }
 
     public enum App {
       /// Gamoitsani
