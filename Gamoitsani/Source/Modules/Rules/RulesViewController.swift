@@ -15,8 +15,7 @@ final class RulesViewController: BaseViewController<RulesCoordinator> {
     override func setupUI() {
         super.setupUI()
     
-        title = "screen.rules.title".localized
-        textView.backgroundColor = UIColor.secondary.withAlphaComponent(0.5)
+        textView.backgroundColor = Asset.secondary.color.withAlphaComponent(0.5)
         
         textView.layer.cornerRadius = 10
         textView.textColor = .white
@@ -26,16 +25,17 @@ final class RulesViewController: BaseViewController<RulesCoordinator> {
     override func setupLocalizedTexts() {
         super.setupLocalizedTexts()
         
+        title = L10n.Screen.Rules.title
+        
         let style = NSMutableParagraphStyle()
         style.alignment = .center
         style.lineSpacing = 5
         
-        
         // TODO: Change colour of text
-        let text = NSAttributedString(string: "screen.rules.rules".localized,
+        let text = NSAttributedString(string: L10n.Screen.Rules.rules,
                                       attributes: [
                                         .paragraphStyle: style,
-                                        .font: UIFont.gmFont(size: 18)])
+                                        .font: F.BPGNinoMtavruli.bold.font(size: 18)])
 
         textView.attributedText = text
     }

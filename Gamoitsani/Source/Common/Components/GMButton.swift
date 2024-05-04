@@ -36,13 +36,13 @@ final class GMButton: UIButton {
         
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
             var outgoing = incoming
-            outgoing.font = UIFont(name: AppConstants.Resources.Fonts.mainFontBold, size: 18)
+            outgoing.font = F.BPGNinoMtavruli.bold.font(size: 18)
             return outgoing
         }
         
         setTitle(text, for: .normal)
         
-        configuration.baseBackgroundColor = UIColor.secondary
+        configuration.baseBackgroundColor = Asset.secondary.color
         configuration.baseForegroundColor = UIColor.white
         configuration.contentInsets = NSDirectionalEdgeInsets.init(top: 5, leading: 0, bottom: 0, trailing: 0)
         configuration.cornerStyle = .large

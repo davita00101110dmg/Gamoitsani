@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Combine
 
 class BaseViewController<T: Coordinator>: UIViewController {
     
+    var subscribers = Set<AnyCancellable>()
     weak var coordinator: T?
 
     override func viewDidLoad() {
@@ -31,8 +33,9 @@ class BaseViewController<T: Coordinator>: UIViewController {
     }
     
     func setupUI() { 
-        view.backgroundColor = UIColor.primary
+        view.backgroundColor = Asset.primary.color
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.enableMultilineTitle()
         setupLocalizedTexts()
     }
     

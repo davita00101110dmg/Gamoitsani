@@ -16,9 +16,9 @@ final class AppCoordinator: BaseCoordinator {
     }
     
     private func applyTheme() {
-        UINavigationBar.appearance().tintColor = UIColor.gmTint
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : UIColor.gmTint ?? .tintColor]
-        UIView.appearance().tintColor = UIColor.gmTint
+        UINavigationBar.appearance().tintColor = Asset.tintColor.color
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : Asset.tintColor.color ?? .tintColor]
+        UIView.appearance().tintColor = Asset.tintColor.color
     }
     
     override func start() {

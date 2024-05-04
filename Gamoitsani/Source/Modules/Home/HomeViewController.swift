@@ -9,22 +9,17 @@ import UIKit
 
 final class HomeViewController: BaseViewController<HomeCoordinator> {
 
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var wandLabel: UILabel!
     @IBOutlet weak var gameButton: GMButton!
     @IBOutlet weak var rulesButton: GMButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.isHidden = true
-        navigationController?.navigationBar.prefersLargeTitles = true
-    
         setupRightBarButtonItem()
     }
 
     override func setupUI() {
         super.setupUI()
-        titleLabel.textColor = UIColor.tintColor
         
         wandLabel.text = "🪄"
         wandLabel.font = UIFont.systemFont(ofSize: 175)
@@ -32,10 +27,9 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
     
     override func setupLocalizedTexts() {
         super.setupLocalizedTexts()
-        title = "app.title".localized
-        titleLabel.text = "app.title".localized
-        gameButton.configure(text: "screen.home.play_button.title".localized)
-        rulesButton.configure(text: "screen.home.rules_button.title".localized)
+        title = L10n.App.title
+        gameButton.configure(text: L10n.Screen.Home.PlayButton.title)
+        rulesButton.configure(text: L10n.Screen.Home.RulesButton.title)
     }
     
     private func setupRightBarButtonItem() {
@@ -54,7 +48,6 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
         ])
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "globe"), primaryAction: nil, menu: barButtonMenu)
-        
     }
     
     @IBAction func gameButtonClicked(_ sender: Any) {

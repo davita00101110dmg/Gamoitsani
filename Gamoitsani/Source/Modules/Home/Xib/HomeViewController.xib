@@ -9,17 +9,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="BPG-Nino-Mtavruli-Bold.ttf">
-            <string>BPGNinoMtavruli-Bold</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Gamoitsani" customModuleProvider="target">
             <connections>
                 <outlet property="gameButton" destination="RKy-b6-2Oi" id="TbL-bk-VeE"/>
                 <outlet property="rulesButton" destination="D8J-Jd-c0D" id="zuJ-nz-XYz"/>
-                <outlet property="titleLabel" destination="lwO-X3-Ts6" id="4pX-TR-Zbu"/>
                 <outlet property="view" destination="iN0-l3-epB" id="yig-jY-6ac"/>
                 <outlet property="wandLabel" destination="9nD-z7-nPt" id="zqs-Mr-33x"/>
             </connections>
@@ -29,12 +23,6 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="გამოიცანი" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwO-X3-Ts6">
-                    <rect key="frame" x="84.333333333333329" y="155" width="224.33333333333337" height="50.666666666666657"/>
-                    <fontDescription key="fontDescription" name="BPGNinoMtavruli-Bold" family="BPG Nino Mtavruli" pointSize="44"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🪄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nD-z7-nPt">
                     <rect key="frame" x="142.66666666666666" y="366.33333333333331" width="108" height="119.66666666666669"/>
                     <fontDescription key="fontDescription" type="system" pointSize="100"/>
@@ -83,13 +71,11 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9Eq-UI-f78" secondAttribute="trailing" constant="16" id="1yO-Tr-w1k"/>
                 <constraint firstItem="9nD-z7-nPt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9wA-KE-agd"/>
                 <constraint firstItem="9Eq-UI-f78" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="CqP-Al-pwm"/>
-                <constraint firstItem="lwO-X3-Ts6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GJ5-gT-h6r"/>
                 <constraint firstItem="9Eq-UI-f78" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GLo-LI-R0p"/>
                 <constraint firstItem="9nD-z7-nPt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OIO-Bj-X2l"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="9Eq-UI-f78" secondAttribute="bottom" constant="64" id="X2N-yf-VQu"/>
                 <constraint firstItem="N5D-ta-l2U" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aAy-mZ-gyV"/>
                 <constraint firstItem="N5D-ta-l2U" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-32" id="sBt-da-lKc"/>
-                <constraint firstItem="lwO-X3-Ts6" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="96" id="yj6-DM-ZQo"/>
             </constraints>
             <point key="canvasLocation" x="68" y="21"/>
         </view>
