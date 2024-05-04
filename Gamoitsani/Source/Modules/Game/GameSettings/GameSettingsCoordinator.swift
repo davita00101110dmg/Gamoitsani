@@ -20,10 +20,10 @@ final class GameSettingsCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        let initialViewController = GameSettingsViewController.loadFromNib()
-        initialViewController.coordinator = self
-        navigationController.delegate = self
-        navigationController.pushViewController(initialViewController, animated: true)
+        let gameSettingsViewController = GameSettingsViewController.loadFromNib()
+        gameSettingsViewController.viewModel = GameSettingsViewModel()
+        gameSettingsViewController.coordinator = self
+        navigationController.pushViewController(gameSettingsViewController, animated: true)
     }
     
     func goToHome() {

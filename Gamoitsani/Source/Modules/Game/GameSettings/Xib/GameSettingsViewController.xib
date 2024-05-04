@@ -11,6 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameSettingsViewController" customModule="Gamoitsani" customModuleProvider="target">
             <connections>
+                <outlet property="roundsAmountTitle" destination="IDo-rL-6Pp" id="QJm-OA-8EU"/>
+                <outlet property="roundsLengthStepper" destination="Hyz-q6-1wl" id="eWE-K9-U89"/>
+                <outlet property="roundsLengthTitle" destination="NeN-mg-aP4" id="wcn-B7-wMA"/>
+                <outlet property="roundsStepper" destination="ov7-uJ-vUY" id="viT-Ff-Vvs"/>
+                <outlet property="tableView" destination="W71-Yg-xRR" id="y8n-0b-vbL"/>
+                <outlet property="teamsStepper" destination="bhh-Ye-MbI" id="ql0-vS-Rqv"/>
+                <outlet property="teamsTitle" destination="Ue6-uc-CpB" id="wfJ-3M-Vfi"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ZuL-C9-w7L"/>
             </connections>
         </placeholder>
@@ -19,48 +26,85 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsf-PN-coe">
-                    <rect key="frame" x="140" y="144" width="113" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="6nE-tS-LEk">
-                    <rect key="frame" x="46.666666666666657" y="375.66666666666669" width="300" height="101"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oyL-Uy-ixi">
+                    <rect key="frame" x="16" y="91" width="361" height="72"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bSQ-aK-Peo">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="300" id="syZ-yE-Eh3"/>
-                                <constraint firstAttribute="height" constant="40" id="yUg-nA-Vph"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Start Game"/>
-                            <connections>
-                                <action selector="startGame:" destination="-1" eventType="touchUpInside" id="p1p-WT-5bB"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJp-OE-DA6">
-                            <rect key="frame" x="0.0" y="61" width="300" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="FeE-Eh-tFa"/>
-                                <constraint firstAttribute="width" constant="300" id="O2N-Go-3dh"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Score"/>
-                            <connections>
-                                <action selector="seeScore:" destination="-1" eventType="touchUpInside" id="rcA-tT-BIr"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="5Le-4V-IFZ">
+                            <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="რაუნდების რაოდენობა: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDo-rL-6Pp">
+                                    <rect key="frame" x="0.0" y="0.0" width="243" height="32"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ov7-uJ-vUY">
+                                    <rect key="frame" x="267" y="0.0" width="94" height="32"/>
+                                    <connections>
+                                        <action selector="roundsStepperAction:" destination="-1" eventType="valueChanged" id="NxS-hK-25p"/>
+                                    </connections>
+                                </stepper>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="nUu-lF-qRS">
+                            <rect key="frame" x="0.0" y="40" width="361" height="32"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="რაუნდის ხანგრძლივობა: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeN-mg-aP4">
+                                    <rect key="frame" x="0.0" y="0.0" width="243" height="32"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Hyz-q6-1wl">
+                                    <rect key="frame" x="267" y="0.0" width="94" height="32"/>
+                                    <connections>
+                                        <action selector="roundsLengthStepperAction:" destination="-1" eventType="valueChanged" id="fIZ-Go-U5S"/>
+                                    </connections>
+                                </stepper>
+                            </subviews>
+                        </stackView>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="66" id="5aa-w6-iDh"/>
+                    </constraints>
                 </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="FkI-kR-hVj">
+                    <rect key="frame" x="16" y="195" width="174.33333333333334" height="33"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="გუნდები" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ue6-uc-CpB">
+                            <rect key="frame" x="0.0" y="0.0" width="68.333333333333329" height="33"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="bhh-Ye-MbI">
+                            <rect key="frame" x="80.333333333333329" y="0.0" width="93.999999999999986" height="33"/>
+                            <connections>
+                                <action selector="teamsStepper:" destination="-1" eventType="valueChanged" id="A13-sr-aoM"/>
+                            </connections>
+                        </stepper>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="33" id="CLQ-ns-pRk"/>
+                    </constraints>
+                </stackView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="W71-Yg-xRR" customClass="GMTableView" customModule="Gamoitsani" customModuleProvider="target">
+                    <rect key="frame" x="16" y="250" width="361" height="300"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="6nE-tS-LEk" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7Pm-KC-qZz"/>
-                <constraint firstItem="6nE-tS-LEk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Kli-Eg-WyJ"/>
+                <constraint firstItem="W71-Yg-xRR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="0M2-8a-wEb"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="oyL-Uy-ixi" secondAttribute="trailing" constant="16" id="4OB-sB-5Ba"/>
+                <constraint firstItem="W71-Yg-xRR" firstAttribute="top" secondItem="FkI-kR-hVj" secondAttribute="bottom" constant="8" id="VJC-cc-Zjf"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="W71-Yg-xRR" secondAttribute="trailing" constant="16" id="ab0-Sy-yom"/>
+                <constraint firstItem="FkI-kR-hVj" firstAttribute="top" secondItem="oyL-Uy-ixi" secondAttribute="bottom" constant="32" id="dZN-8D-5b3"/>
+                <constraint firstItem="oyL-Uy-ixi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="f9e-ae-c2x"/>
+                <constraint firstItem="oyL-Uy-ixi" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="32" id="lfE-nS-wGg"/>
+                <constraint firstItem="FkI-kR-hVj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="zIx-WD-7Hm"/>
             </constraints>
             <point key="canvasLocation" x="60" y="20"/>
         </view>
