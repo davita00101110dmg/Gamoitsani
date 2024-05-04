@@ -7,7 +7,3 @@
 //
 
 import UIKit
-
-extension UIColor {
-    static let gmTint = UIColor(named: "TintColor")
-}

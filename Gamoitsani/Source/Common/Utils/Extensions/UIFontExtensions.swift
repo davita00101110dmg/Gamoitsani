@@ -7,9 +7,3 @@
 //
 
 import UIKit
-
-extension UIFont {
-    static func gmFont(size: CGFloat) -> UIFont {
-        return UIFont(name: "BPGNinoMtavruli-Bold", size: size)!
-    }
-}
