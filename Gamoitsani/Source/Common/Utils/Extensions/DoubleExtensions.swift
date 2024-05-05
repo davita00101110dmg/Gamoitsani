@@ -10,5 +10,11 @@ import Foundation
 
 extension Double {
     var toInt: Int { Int(self) }
-    var toString: String { String(self) }
+    
+    func toString(decimalPlaces: Int = 0) -> String {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = decimalPlaces
+        formatter.maximumFractionDigits = decimalPlaces
+        return formatter.string(from: NSNumber(value: self)) ?? "\(Int(self))"
+    }
 }
