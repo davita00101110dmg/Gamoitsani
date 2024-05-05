@@ -18,7 +18,7 @@ final class GameSettingsTeamTableViewCell: UITableViewCell {
     }
     
     func configure(with model: GameSettingsTeamTableViewCellModel) {
-        teamName.text = "\(model.firstMemberName) \(L10n.and) \(model.secondMemberName)"
+        teamName.text = model.team
     }
 
     private func setupUI() {

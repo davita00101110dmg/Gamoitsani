@@ -14,20 +14,17 @@ final class GameSettingsCoordinator: BaseCoordinator {
         super.init()
         self.navigationController = navigationController
     }
-    
-    deinit {
-        print("deinitialized \(self)")
-    }
-    
+
     override func start() {
         let gameSettingsViewController = GameSettingsViewController.loadFromNib()
         gameSettingsViewController.viewModel = GameSettingsViewModel()
         gameSettingsViewController.coordinator = self
+        navigationController.delegate = self
         navigationController.pushViewController(gameSettingsViewController, animated: true)
     }
     
-    func goToHome() {
-        navigationController.popToRootViewController(animated: true)
-        parentCoordinator?.childDidFinish(self)
+    func navigateToGame(_ gameSettingsModel: GameSettingsModel) {
+        let gamesCoordinator = GameCoordinator(navigationController: navigationController, gameSettingsModel: gameSettingsModel)
+        coordinate(to: gamesCoordinator)
     }
 }

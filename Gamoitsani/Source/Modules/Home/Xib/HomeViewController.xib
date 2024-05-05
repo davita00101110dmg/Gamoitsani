@@ -29,13 +29,13 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="9Eq-UI-f78">
-                    <rect key="frame" x="16" y="658" width="361" height="96"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="9Eq-UI-f78">
+                    <rect key="frame" x="16" y="642" width="361" height="112"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKy-b6-2Oi" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="361" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="J5V-oI-Emy"/>
+                                <constraint firstAttribute="height" constant="44" id="J5V-oI-Emy"/>
                             </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="Game"/>
@@ -44,9 +44,9 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8J-Jd-c0D" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="56" width="361" height="40"/>
+                            <rect key="frame" x="0.0" y="68" width="361" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="259-6m-qm6"/>
+                                <constraint firstAttribute="height" constant="44" id="259-6m-qm6"/>
                             </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="Rules"/>

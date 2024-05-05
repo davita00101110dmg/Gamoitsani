@@ -37,6 +37,10 @@ class BaseCoordinator: NSObject, Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController = UINavigationController()
     
+    deinit {
+        dump("Deinited \(self)")
+    }
+    
     func start() {
         fatalError("Start method should be implemented.")
     }

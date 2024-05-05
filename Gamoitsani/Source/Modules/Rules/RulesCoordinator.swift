@@ -15,10 +15,6 @@ final class RulesCoordinator: BaseCoordinator {
         self.navigationController = navigationController
     }
     
-    deinit {
-        print("deinitialized \(self)")
-    }
-    
     override func start() {
         let viewController = RulesViewController.loadFromNib()
         viewController.coordinator = self

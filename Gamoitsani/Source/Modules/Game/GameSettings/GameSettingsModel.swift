@@ -13,9 +13,11 @@ typealias GameSettingsSnapshot = NSDiffableDataSourceSnapshot<Int, GameSettingsC
 
 struct GameSettingsModel {
     let numberOfRounds: Int
-    var currentRound: Int
     let lengthOfRound: Double
-    let teams: [(String, String)]
+    let words: [String]
+    
+    var currentRound: Int = 1
+    var teams: [String: Int]
 }
 
 enum GameSettingsCellItem: Hashable, Equatable {

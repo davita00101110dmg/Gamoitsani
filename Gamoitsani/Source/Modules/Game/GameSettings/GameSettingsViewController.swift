@@ -16,10 +16,11 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
     @IBOutlet weak var roundsLengthStepper: UIStepper!
     @IBOutlet weak var teamsTitle: UILabel!
     @IBOutlet weak var teamsStepper: UIStepper!
+    @IBOutlet weak var startGameButton: GMButton!
     
     @IBOutlet weak var tableView: GMTableView!
     
-    var viewModel: GameSettingsViewModel!
+    var viewModel: GameSettingsViewModel?
     
     private var snapshot: GameSettingsSnapshot?
     
@@ -49,6 +50,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         super.setupUI()
         tableView.backgroundColor = Asset.secondary.color
         tableView.layer.cornerRadius = 8
+        tableView.showsVerticalScrollIndicator = false
         roundsStepper.minimumValue = 0
         roundsStepper.maximumValue = 5
         roundsStepper.value = 1
@@ -65,13 +67,15 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
             $0.font = F.BPGNinoMtavruli.bold.font(size: 16)
             $0.textColor = Asset.tintColor.color
         }
+        // TODO: Localization
+        startGameButton.configure(text: "თამაშის დაწყება")
     }
     
     override func setupLocalizedTexts() {
         super.setupLocalizedTexts()
         title = L10n.Screen.GameSettings.title
-        roundsAmountTitle.text = L10n.Screen.GameSettings.RoundsAmount.title(1.toString)
-        roundsLengthTitle.text = L10n.Screen.GameSettings.RoundsLength.title(45.toString)
+        roundsAmountTitle.text = L10n.Screen.GameSettings.RoundsAmount.title(1.toString())
+        roundsLengthTitle.text = L10n.Screen.GameSettings.RoundsLength.title(45.toString())
         teamsTitle.text = L10n.Screen.GameSettings.Teams.title
     }
     
@@ -81,7 +85,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
     }
     
     private func configureDataSource() {
-        viewModel.teamsPublished
+        viewModel?.teamsPublished
             .sink { teams in
                 self.snapshot = GameSettingsSnapshot()
                 self.snapshot?.appendSections([0])
@@ -94,30 +98,28 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
     }
     
     @IBAction func roundsStepperAction(_ sender: UIStepper) {
-        roundsAmountTitle.text = L10n.Screen.GameSettings.RoundsAmount.title(sender.value.toInt.toString)
+        roundsAmountTitle.text = L10n.Screen.GameSettings.RoundsAmount.title(sender.value.toString())
     }
     
     @IBAction func roundsLengthStepperAction(_ sender: UIStepper) {
-        roundsLengthTitle.text = L10n.Screen.GameSettings.RoundsLength.title(sender.value.toInt.toString)
+        roundsLengthTitle.text = L10n.Screen.GameSettings.RoundsLength.title(sender.value.toString())
     }
     
-    
+    // TODO: Add localization
     @IBAction func teamsStepper(_ sender: UIStepper) {
-        if sender.value.toInt < viewModel.getTeamsCount() {
-            viewModel.removeLastTeam()
+        if sender.value.toInt < viewModel?.getTeamsCount() ?? 0 {
+            viewModel?.removeLastTeam()
         } else {
-            let alert = UIAlertController(title: "დაამატე გუნდი!", message: "ჩაწერე გუნდის მონაწილეების სახელები", preferredStyle: .alert)
+            let alert = UIAlertController(title: "დაამატე გუნდი!", message: "ჩაწერე გუნდის სახელი", preferredStyle: .alert)
             
-            alert.addTextField()
             alert.addTextField()
             
             alert.addAction(.init(title: "დამატება", style: .default) { [weak self] _ in
                 guard let self,
                       let textFields = alert.textFields,
-                      let firstTeamMember = textFields[0].text,
-                      let secondTeamMember = textFields[1].text else { return }
+                      let teamName = textFields[0].text else { return }
                 
-                self.viewModel.addTeam(with: firstTeamMember, secondTeamMember)
+                self.viewModel?.addTeam(with: teamName)
             })
             
             alert.addAction(.init(title: "გაუქმება", style: .cancel) { [weak self] _ in
@@ -127,6 +129,11 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
             
             present(alert, animated: true)
         }
+    }
+    
+    @IBAction func startGameAction(_ sender: Any) {
+        let gameSettingsModel = GameSettingsModel(numberOfRounds: roundsStepper.value.toInt, lengthOfRound: roundsLengthStepper.value, words: [], teams: ["ხარება და გოგია": 0])
+        coordinator?.navigateToGame(gameSettingsModel)
     }
 }
 
@@ -141,7 +148,7 @@ extension GameSettingsViewController: UITableViewDelegate {
         let delete = UIContextualAction(style: .destructive, title: nil) { [weak self] action, _, completion in
             guard let self else { return }
             
-            viewModel.remove(at: indexPath.row)
+            viewModel?.remove(at: indexPath.row)
             completion(true)
         }
     

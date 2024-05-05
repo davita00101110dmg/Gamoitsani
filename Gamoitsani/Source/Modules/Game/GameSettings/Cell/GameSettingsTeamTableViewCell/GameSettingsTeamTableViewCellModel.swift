@@ -10,7 +10,5 @@ import Foundation
 
 struct GameSettingsTeamTableViewCellModel {
     let id: UUID
-    let firstMemberName: String
-    let secondMemberName: String
-    let score: Int
+    let team: String
 }

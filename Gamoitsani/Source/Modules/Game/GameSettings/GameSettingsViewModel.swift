@@ -17,8 +17,8 @@ final class GameSettingsViewModel {
     
     var teamsPublished: Published<[GameSettingsCellItem]>.Publisher { $teams }
     
-    func addTeam(with teamMembers: String...) {
-        teams.append(.teams(model: .init(id: UUID(), firstMemberName: teamMembers[0], secondMemberName: teamMembers[1], score: 0), id: UUID()))
+    func addTeam(with team: String) {
+        teams.append(.teams(model: .init(id: UUID(), team: team), id: UUID()))
     }
     
     func getTeamsCount() -> Int {

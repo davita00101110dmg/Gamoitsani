@@ -15,10 +15,11 @@
                 <outlet property="roundsLengthStepper" destination="Hyz-q6-1wl" id="eWE-K9-U89"/>
                 <outlet property="roundsLengthTitle" destination="NeN-mg-aP4" id="wcn-B7-wMA"/>
                 <outlet property="roundsStepper" destination="ov7-uJ-vUY" id="viT-Ff-Vvs"/>
+                <outlet property="startGameButton" destination="cz4-px-Xcr" id="ikS-fE-fhu"/>
                 <outlet property="tableView" destination="W71-Yg-xRR" id="y8n-0b-vbL"/>
                 <outlet property="teamsStepper" destination="bhh-Ye-MbI" id="ql0-vS-Rqv"/>
                 <outlet property="teamsTitle" destination="Ue6-uc-CpB" id="wfJ-3M-Vfi"/>
-                <outlet property="view" destination="iN0-l3-epB" id="ZuL-C9-w7L"/>
+                <outlet property="view" destination="iN0-l3-epB" id="GHU-mr-oEX"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -93,17 +94,32 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cz4-px-Xcr" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
+                    <rect key="frame" x="16" y="710" width="361" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="jlb-4x-G2A"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    <connections>
+                        <action selector="startGameAction:" destination="-1" eventType="touchUpInside" id="lVr-P4-Ums"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="W71-Yg-xRR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="0M2-8a-wEb"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="oyL-Uy-ixi" secondAttribute="trailing" constant="16" id="4OB-sB-5Ba"/>
+                <constraint firstItem="cz4-px-Xcr" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Ual-Pi-AhW"/>
                 <constraint firstItem="W71-Yg-xRR" firstAttribute="top" secondItem="FkI-kR-hVj" secondAttribute="bottom" constant="8" id="VJC-cc-Zjf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="W71-Yg-xRR" secondAttribute="trailing" constant="16" id="ab0-Sy-yom"/>
                 <constraint firstItem="FkI-kR-hVj" firstAttribute="top" secondItem="oyL-Uy-ixi" secondAttribute="bottom" constant="32" id="dZN-8D-5b3"/>
                 <constraint firstItem="oyL-Uy-ixi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="f9e-ae-c2x"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="cz4-px-Xcr" secondAttribute="bottom" constant="64" id="iGS-0X-LNm"/>
                 <constraint firstItem="oyL-Uy-ixi" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="32" id="lfE-nS-wGg"/>
+                <constraint firstItem="cz4-px-Xcr" firstAttribute="top" relation="greaterThanOrEqual" secondItem="W71-Yg-xRR" secondAttribute="bottom" constant="32" id="q9t-tj-eSW"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cz4-px-Xcr" secondAttribute="trailing" constant="16" id="sUg-Mq-gaO"/>
                 <constraint firstItem="FkI-kR-hVj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="zIx-WD-7Hm"/>
             </constraints>
             <point key="canvasLocation" x="60" y="20"/>
