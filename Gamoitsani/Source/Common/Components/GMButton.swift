@@ -27,7 +27,7 @@ final class GMButton: UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.cornerRadius = Constants.cornerRadius
+        layer.cornerRadius = self.cornerRadius
     }
     
     public func configure(text: String) {
@@ -48,9 +48,16 @@ final class GMButton: UIButton {
         configuration.cornerStyle = .large
         self.configuration = configuration
         
-        self.layoutIfNeeded()
+        layoutIfNeeded()
     }
     
+    public func configure(text: String, isCircle: Bool = false) {
+        self.cornerRadius = frame.width / 2
+        setTitle(text, for: .normal)
+        titleLabel?.font = F.BPGNinoMtavruli.bold.font(size: 18)
+        backgroundColor = Asset.secondary.color
+        layoutIfNeeded()
+    }
 }
 
 private extension GMButton {
