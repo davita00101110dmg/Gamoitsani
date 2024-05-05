@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="PwO-y8-944" customClass="GamePlayView" customModule="Gamoitsani" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="310" height="400"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6s-5M-nPD">
+                    <rect key="frame" x="134.33333333333334" y="190" width="41.333333333333343" height="20.333333333333343"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDl-jc-QGU">
+                    <rect key="frame" x="134.33333333333334" y="32" width="41.333333333333343" height="20.333333333333329"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="fU3-vB-ewf">
+                    <rect key="frame" x="24" y="282" width="262" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqx-xr-SUN" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Tqx-xr-SUN" secondAttribute="height" multiplier="1:1" id="Gx8-qs-pMA"/>
+                                <constraint firstAttribute="width" constant="60" id="h10-bJ-yI0"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="correctWordAction:" destination="PwO-y8-944" eventType="touchUpInside" id="nG8-Xl-U6K"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrX-rg-zwz" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
+                            <rect key="frame" x="202" y="0.0" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="Fg6-7e-SKk"/>
+                                <constraint firstAttribute="width" secondItem="zrX-rg-zwz" secondAttribute="height" multiplier="1:1" id="MF0-To-sAz"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="incorrectButtonAction:" destination="PwO-y8-944" eventType="touchUpInside" id="Rjg-RK-Hpm"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="BmO-Bc-73D"/>
+            <color key="backgroundColor" name="Secondary"/>
+            <constraints>
+                <constraint firstItem="BmO-Bc-73D" firstAttribute="trailing" secondItem="fU3-vB-ewf" secondAttribute="trailing" constant="24" id="DHx-hP-A2u"/>
+                <constraint firstItem="W6s-5M-nPD" firstAttribute="centerY" secondItem="PwO-y8-944" secondAttribute="centerY" id="Ho6-pA-4D9"/>
+                <constraint firstItem="W6s-5M-nPD" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="MMd-dB-aON"/>
+                <constraint firstItem="fU3-vB-ewf" firstAttribute="leading" secondItem="BmO-Bc-73D" secondAttribute="leading" constant="24" id="SWL-MK-ygO"/>
+                <constraint firstItem="VDl-jc-QGU" firstAttribute="top" secondItem="PwO-y8-944" secondAttribute="top" constant="32" id="XH2-kd-qh9"/>
+                <constraint firstItem="VDl-jc-QGU" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="l2m-xM-7HL"/>
+                <constraint firstItem="BmO-Bc-73D" firstAttribute="bottom" secondItem="fU3-vB-ewf" secondAttribute="bottom" constant="24" id="xcn-cI-X1O"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="correctButton" destination="Tqx-xr-SUN" id="YhM-Z0-blS"/>
+                <outlet property="incorrectButton" destination="zrX-rg-zwz" id="R5N-fj-H4A"/>
+                <outlet property="timerLabel" destination="W6s-5M-nPD" id="4fF-LY-dzO"/>
+                <outlet property="wordLabel" destination="VDl-jc-QGU" id="ziK-Tf-gaA"/>
+            </connections>
+            <point key="canvasLocation" x="0.0" y="-104"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Secondary">
+            <color red="0.16470588235294117" green="0.5725490196078431" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
