@@ -25,9 +25,9 @@ final class GameSettingsCoordinator: BaseCoordinator {
         navigationController.pushViewController(gameSettingsViewController, animated: true)
     }
     
-    func navigateToGame(_ gameSettingsModel: GameSettingsModel) {
+    func navigateToGame() {
         guard let navigationController else { return }
-        let gamesCoordinator = GameCoordinator(navigationController: navigationController, gameSettingsModel: gameSettingsModel)
+        let gamesCoordinator = GameCoordinator(navigationController: navigationController)
         coordinate(to: gamesCoordinator)
     }
 }

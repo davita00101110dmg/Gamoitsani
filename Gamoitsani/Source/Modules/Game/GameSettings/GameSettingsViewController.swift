@@ -51,7 +51,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         tableView.backgroundColor = Asset.secondary.color
         tableView.layer.cornerRadius = 8
         tableView.showsVerticalScrollIndicator = false
-        roundsStepper.minimumValue = 0
+        roundsStepper.minimumValue = 1
         roundsStepper.maximumValue = 5
         roundsStepper.value = 1
         roundsStepper.stepValue = 1
@@ -67,8 +67,8 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
             $0.font = F.BPGNinoMtavruli.bold.font(size: 16)
             $0.textColor = Asset.tintColor.color
         }
-        // TODO: Localization
-        startGameButton.configure(text: "თამაშის დაწყება")
+    
+        startGameButton.configure(text: L10n.Screen.GameSettings.StartGame.title)
     }
     
     override func setupLocalizedTexts() {
@@ -106,16 +106,17 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         roundsLengthTitle.text = L10n.Screen.GameSettings.RoundsLength.title(sender.value.toString())
     }
     
-    // TODO: Add localization
     @IBAction func teamsStepper(_ sender: UIStepper) {
         if sender.value.toInt < viewModel?.getTeamsCount() ?? 0 {
             viewModel?.removeLastTeam()
         } else {
-            let alert = UIAlertController(title: "დაამატე გუნდი!", message: "ჩაწერე გუნდის სახელი", preferredStyle: .alert)
+            let alert = UIAlertController(title: L10n.Screen.GameSettings.AddTeamAlert.title,
+                                          message: L10n.Screen.GameSettings.AddTeamAlert.message,
+                                          preferredStyle: .alert)
             
             alert.addTextField()
             
-            alert.addAction(.init(title: "დამატება", style: .default) { [weak self] _ in
+            alert.addAction(.init(title: L10n.add, style: .default) { [weak self] _ in
                 guard let self,
                       let textFields = alert.textFields,
                       let teamName = textFields[0].text else { return }
@@ -123,7 +124,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
                 self.viewModel?.addTeam(with: teamName)
             })
             
-            alert.addAction(.init(title: "გაუქმება", style: .cancel) { [weak self] _ in
+            alert.addAction(.init(title: L10n.cancel, style: .cancel) { [weak self] _ in
                 guard let self else { return }
                 teamsStepper.value -= 1
             })
@@ -133,8 +134,38 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
     }
     
     @IBAction func startGameAction(_ sender: Any) {
-        let gameSettingsModel = GameSettingsModel(numberOfRounds: roundsStepper.value.toInt, lengthOfRound: roundsLengthStepper.value, words: [], teams: ["ხარება და გოგია": 0])
-        coordinator?.navigateToGame(gameSettingsModel)
+        guard let viewModel else { return }
+        
+        if viewModel.getTeamsCount() < 2 {
+            presentIncorrectGameSettingsAlert(message: L10n.Screen.GameSettings.IncorrectGameSettingsNotEnoughTeams.message)
+        } else if !viewModel.areTeamsUniques() {
+            presentIncorrectGameSettingsAlert(message: L10n.Screen.GameSettings.IncorrectGameSettingsNotUniqueTeams.message)
+        } else {
+            startGame()
+        }
+    }
+
+    private func startGame() {
+        updateGameStory()
+        coordinator?.navigateToGame()
+    }
+    
+    private func presentIncorrectGameSettingsAlert(message: String) {
+        let alert = UIAlertController(title: L10n.Screen.GameSettings.IncorrectParameter.title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        alert.addAction(.init(title: L10n.ok, style: .default))
+        present(alert, animated: true)
+    }
+    
+    private func updateGameStory() {
+        guard let viewModel else { return }
+        
+        GameStory.shared.numberOfRounds = roundsStepper.value.toInt
+        GameStory.shared.lengthOfRound = 2 // roundsLengthStepper.value
+        GameStory.shared.words = AppConstants.randomWords // TODO: Should give real API words
+        GameStory.shared.teams = viewModel.getTeamsDictionary()
+        GameStory.shared.maxTotalSessions = roundsStepper.value.toInt * viewModel.getTeamsCount()
     }
 }
 

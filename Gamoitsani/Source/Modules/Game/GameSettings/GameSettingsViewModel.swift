@@ -8,28 +8,54 @@
 
 import Foundation
 import Combine
+import Collections
 
 final class GameSettingsViewModel {
     
-    @Published private var teams = [GameSettingsCellItem]()
-    
-    var gameSettingsMode: GameSettingsModel?
+    @Published private var teams: [GameSettingsCellItem] = []
     
     var teamsPublished: Published<[GameSettingsCellItem]>.Publisher { $teams }
     
-    func addTeam(with team: String) {
-        teams.append(.teams(model: .init(id: UUID(), team: team), id: UUID()))
+    private var teamStrings: [String] = [] {
+        didSet {
+            updateTeams()
+        }
     }
     
-    func getTeamsCount() -> Int {
-        teams.count
+    func addTeam(with team: String) {
+        teamStrings.append(team)
     }
     
     func remove(at index: Int) {
-        teams.remove(at: index)
+        teamStrings.remove(at: index)
     }
     
     func removeLastTeam() {
-        teams.removeLast()
+        teamStrings.removeLast()
     }
+    
+    func clearTeams() {
+        teamStrings.removeAll()
+    }
+    
+    func getTeamsCount() -> Int {
+        teamStrings.count
+    }
+    
+    func areTeamsUniques() -> Bool {
+        Set(teamStrings).count == teamStrings.count
+    }
+    
+    func getTeams() -> [String] {
+        teamStrings
+    }
+    
+    func getTeamsDictionary() -> OrderedDictionary<String, Int> {
+        .init(uniqueKeysWithValues: teamStrings.map { ($0, 0) })
+    }
+    
+    private func updateTeams() {
+        teams = teamStrings.map { GameSettingsCellItem.teams(model: .init(id: UUID(), team: $0), id: UUID()) }
+    }
+    
 }
