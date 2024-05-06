@@ -29,6 +29,7 @@ class BaseViewController<T: Coordinator>: UIViewController {
     }
     
     deinit {
+        dump("deinited \(self)")
         NotificationCenter.default.removeObserver(self)
     }
     
