@@ -86,7 +86,8 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
     
     private func configureDataSource() {
         viewModel?.teamsPublished
-            .sink { teams in
+            .sink { [weak self] teams in
+                guard let self else { return }
                 self.snapshot = GameSettingsSnapshot()
                 self.snapshot?.appendSections([0])
                 self.snapshot?.appendItems(teams)
