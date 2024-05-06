@@ -20,6 +20,14 @@ class BaseViewController<T: Coordinator>: UIViewController {
         subscribeToPublishers()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isMovingFromParent {
+            guard let coordinator else { return }
+            coordinator.childDidFinish(coordinator)
+        }
+    }
+    
     @objc private func languageDidChange() {
         setupLocalizedTexts()
     }

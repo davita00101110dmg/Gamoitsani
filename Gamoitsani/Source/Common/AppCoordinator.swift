@@ -10,7 +10,10 @@ import UIKit
 
 final class AppCoordinator: BaseCoordinator {
     
-    override init() {
+    var navigationController: UINavigationController
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
         super.init()
         applyTheme()
     }

@@ -11,13 +11,12 @@ import UIKit
 protocol Coordinator: AnyObject {
     var parentCoordinator: Coordinator? { get set }
     var childCoordinators: [Coordinator] { get set }
-    var navigationController: UINavigationController { get set }
     
     func start()
 }
 
 extension Coordinator {
-    func coordinate(to coordinator: Coordinator) {
+    func coordinate<T: Coordinator>(to coordinator: T) {
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()
@@ -35,7 +34,6 @@ class BaseCoordinator: NSObject, Coordinator {
     var parentCoordinator: Coordinator?
     
     var childCoordinators: [Coordinator] = []
-    var navigationController = UINavigationController()
     
     deinit {
         dump("Deinited \(self)")
@@ -47,15 +45,5 @@ class BaseCoordinator: NSObject, Coordinator {
     
     func addChildCoordinator(_ coordinator: Coordinator) {
         childCoordinators.append(coordinator)
-    }
-}
-
-extension BaseCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        guard let sourceViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else { return }
-        
-        if navigationController.viewControllers.contains(sourceViewController) { return }
-        
-        childDidFinish(self)
     }
 }
