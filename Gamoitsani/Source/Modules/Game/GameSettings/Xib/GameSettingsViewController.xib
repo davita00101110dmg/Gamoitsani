@@ -65,29 +65,23 @@
                             </subviews>
                         </stackView>
                     </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="66" id="5aa-w6-iDh"/>
-                    </constraints>
                 </stackView>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="FkI-kR-hVj">
-                    <rect key="frame" x="16" y="195" width="174.33333333333334" height="33"/>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="FkI-kR-hVj">
+                    <rect key="frame" x="16" y="195" width="174.33333333333334" height="47"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="გუნდები" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ue6-uc-CpB">
-                            <rect key="frame" x="0.0" y="0.0" width="68.333333333333329" height="33"/>
+                            <rect key="frame" x="0.0" y="13.333333333333341" width="68.333333333333329" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="bhh-Ye-MbI">
-                            <rect key="frame" x="80.333333333333329" y="0.0" width="93.999999999999986" height="33"/>
+                            <rect key="frame" x="80.333333333333329" y="7.6666666666666572" width="93.999999999999986" height="32"/>
                             <connections>
                                 <action selector="teamsStepper:" destination="-1" eventType="valueChanged" id="A13-sr-aoM"/>
                             </connections>
                         </stepper>
                     </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="33" id="CLQ-ns-pRk"/>
-                    </constraints>
                 </stackView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="W71-Yg-xRR" customClass="GMTableView" customModule="Gamoitsani" customModuleProvider="target">
                     <rect key="frame" x="16" y="250" width="361" height="300"/>
