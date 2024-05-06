@@ -36,6 +36,8 @@
 		FF7F1D962BE7B9D800872554 /* GameInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D952BE7B9D800872554 /* GameInfoViewModel.swift */; };
 		FF7F1D992BE7CDD400872554 /* LookinServer in Frameworks */ = {isa = PBXBuildFile; productRef = FF7F1D982BE7CDD400872554 /* LookinServer */; };
 		FF7F1D9B2BE7D25300872554 /* GamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D9A2BE7D25300872554 /* GamePlayViewModel.swift */; };
+		FF7F1D9D2BE92F5000872554 /* GameStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D9C2BE92F5000872554 /* GameStory.swift */; };
+		FF7F1DA32BE93DF900872554 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = FF7F1DA22BE93DF900872554 /* Collections */; };
 		FFF65C9D2BE554B9008E0352 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */; };
 		FFF65C9F2BE555C2008E0352 /* GameSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9E2BE555C2008E0352 /* GameSettingsViewModel.swift */; };
 		FFF65CA12BE555CC008E0352 /* GameSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CA02BE555CC008E0352 /* GameSettingsModel.swift */; };
@@ -124,6 +126,7 @@
 		FF7F1D932BE7B10600872554 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		FF7F1D952BE7B9D800872554 /* GameInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewModel.swift; sourceTree = "<group>"; };
 		FF7F1D9A2BE7D25300872554 /* GamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayViewModel.swift; sourceTree = "<group>"; };
+		FF7F1D9C2BE92F5000872554 /* GameStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStory.swift; sourceTree = "<group>"; };
 		FF8929C12BD6FC52000C0B9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		FFF65C9E2BE555C2008E0352 /* GameSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsViewModel.swift; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF7F1DA32BE93DF900872554 /* Collections in Frameworks */,
 				FF7F1D992BE7CDD400872554 /* LookinServer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,6 +329,7 @@
 		FF4D9D972BD6F4630046819D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FF7F1DA42BE9749500872554 /* Models */,
 				FFFB4D2E2BD861E700CDDCB4 /* Components */,
 				FFFB4CD42BD7CA6F00CDDCB4 /* Constants */,
 				FFFB4CD32BD7CA6700CDDCB4 /* Utils */,
@@ -370,6 +375,22 @@
 				FF7F1D9A2BE7D25300872554 /* GamePlayViewModel.swift */,
 			);
 			path = GamePlay;
+			sourceTree = "<group>";
+		};
+		FF7F1DA42BE9749500872554 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FF7F1DA52BE9749900872554 /* Game */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FF7F1DA52BE9749900872554 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				FF7F1D9C2BE92F5000872554 /* GameStory.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 		FFF65CA72BE6197F008E0352 /* Cell */ = {
@@ -567,6 +588,7 @@
 			name = Gamoitsani;
 			packageProductDependencies = (
 				FF7F1D982BE7CDD400872554 /* LookinServer */,
+				FF7F1DA22BE93DF900872554 /* Collections */,
 			);
 			productName = Gamoitsani;
 			productReference = FF4D9D252BD698620046819D /* Gamoitsani.app */;
@@ -643,6 +665,7 @@
 			mainGroup = FF4D9D1C2BD698620046819D;
 			packageReferences = (
 				FF7F1D972BE7CDD400872554 /* XCRemoteSwiftPackageReference "LookinServer" */,
+				FF7F1DA12BE93DF900872554 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = FF4D9D262BD698620046819D /* Products */;
 			projectDirPath = "";
@@ -737,6 +760,7 @@
 				FF7F1D7E2BE7A2F700872554 /* GameCoordinator.swift in Sources */,
 				FFFB4D462BD928B400CDDCB4 /* UIFontExtensions.swift in Sources */,
 				FF7F1D852BE7A8F200872554 /* GMLabel.swift in Sources */,
+				FF7F1D9D2BE92F5000872554 /* GameStory.swift in Sources */,
 				FFFB4D342BD90FD900CDDCB4 /* UserDefaultsExtension.swift in Sources */,
 				FFF65CAE2BE619A5008E0352 /* GameSettingsTeamTableViewCellModel.swift in Sources */,
 				FF7F1D8E2BE7AE2100872554 /* GameInfoView.swift in Sources */,
@@ -1132,6 +1156,14 @@
 				minimumVersion = 1.2.8;
 			};
 		};
+		FF7F1DA12BE93DF900872554 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1139,6 +1171,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF7F1D972BE7CDD400872554 /* XCRemoteSwiftPackageReference "LookinServer" */;
 			productName = LookinServer;
+		};
+		FF7F1DA22BE93DF900872554 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF7F1DA12BE93DF900872554 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
 		};
 /* End XCSwiftPackageProductDependency section */
 
