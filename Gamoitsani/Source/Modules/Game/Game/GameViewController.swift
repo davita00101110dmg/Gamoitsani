@@ -22,7 +22,14 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupBackButton()
         showGameInfoView()
+    }
+    
+    private func setupBackButton() {
+        navigationItem.hidesBackButton = true
+        let backButton = UIBarButtonItem(title: "Back", image: UIImage(systemName: "chevron.backward"), target: self, action: #selector(presentAlertOnBackButton))
+        navigationItem.leftBarButtonItem = backButton
     }
 
     private func toggleView() {
@@ -55,8 +62,9 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         // TODO: Localization
         let alert = UIAlertController(title: "დარწმუნებული ხარ რომ უკან დაბრუნება გინდა?", message: "ამ შემთხვევაში თამაშის სესია მორჩება.", preferredStyle: .alert)
         
-        alert.addAction(.init(title: "დიახ", style: .destructive, handler: { _ in
-            // coordinator?.goToHome() Implement this later
+        alert.addAction(.init(title: "დიახ", style: .destructive, handler: { [weak self] _ in
+            guard let self else { return }
+            self.coordinator?.goToHome()
         }))
         
         alert.addAction(.init(title: "არა", style: .default))

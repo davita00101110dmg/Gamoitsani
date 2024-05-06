@@ -10,6 +10,8 @@ import UIKit
 
 final class GameCoordinator: BaseCoordinator {
     
+    var navigationController: UINavigationController?
+    
     private var gameSettingsModel: GameSettingsModel
     
     init(navigationController: UINavigationController, gameSettingsModel: GameSettingsModel) {
@@ -19,10 +21,15 @@ final class GameCoordinator: BaseCoordinator {
     }
     
     override func start() {
+        guard let navigationController else { return }
         let gameViewController = GameViewController.loadFromNib()
         gameViewController.viewModel = GameViewModel(gameSettingsModel: gameSettingsModel)
         gameViewController.coordinator = self
-        navigationController.delegate = self
         navigationController.pushViewController(gameViewController, animated: true)
+    }
+    
+    func goToHome() {
+        guard let navigationController else { return }
+        navigationController.popViewController(animated: true)
     }
 }
