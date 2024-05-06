@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol GameInfoViewDelegate {
+protocol GameInfoViewDelegate: AnyObject {
     func didPressStart()
 }
 
@@ -20,7 +20,7 @@ final class GameInfoView: UIView {
     @IBOutlet weak var startButton: GMButton!
     @IBOutlet weak var scoreButton: GMButton!
     
-    var delegate: GameInfoViewDelegate?
+    private weak var delegate: GameInfoViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

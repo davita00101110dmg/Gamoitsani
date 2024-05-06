@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol GamePlayViewDelegate {
+protocol GamePlayViewDelegate: AnyObject {
     func timerDidFinished(roundScore: Int)
 }
 
@@ -23,7 +23,7 @@ final class GamePlayView: UIView {
     private var words: [String] = []
     private var roundLength: Double = 0.0
     
-    var delegate: GamePlayViewDelegate?
+    private weak var delegate: GamePlayViewDelegate?
     var viewModel: GamePlayViewModel!
     
     override func awakeFromNib() {
