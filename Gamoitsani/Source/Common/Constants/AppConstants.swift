@@ -9,6 +9,20 @@
 import Foundation
 
 enum AppConstants {
+    
+    static let randomWords = [
+        "apple", "banana", "orange", "grape", "pineapple",
+        "strawberry", "mango", "watermelon", "kiwi", "blueberry",
+        "raspberry", "blackberry", "cherry", "apricot", "peach",
+        "nectarine", "plum", "lemon", "lime", "grapefruit",
+        "tangerine", "avocado", "papaya", "cantaloupe", "honeydew",
+        "lychee", "pomegranate", "fig", "passionfruit", "cranberry",
+        "coconut", "pear", "apricot", "banana", "cherry",
+        "date", "elderberry", "fig", "grape", "honeydew",
+        "imbe", "jackfruit", "kiwifruit", "lemon", "mango",
+        "nectarine", "olive", "papaya", "quince", "raspberry"
+    ]
+    
     enum Language {
         case english
         case georgian
