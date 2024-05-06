@@ -10,10 +10,5 @@
 import Foundation
 
 final class GameViewModel {
-    
-    var gameSettingsModel: GameSettingsModel
-    
-    init(gameSettingsModel: GameSettingsModel) {
-        self.gameSettingsModel = gameSettingsModel
-    }    
+       
 }

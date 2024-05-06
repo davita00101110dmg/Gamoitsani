@@ -12,10 +12,7 @@ final class GameCoordinator: BaseCoordinator {
     
     var navigationController: UINavigationController?
     
-    private var gameSettingsModel: GameSettingsModel
-    
-    init(navigationController: UINavigationController, gameSettingsModel: GameSettingsModel) {
-        self.gameSettingsModel = gameSettingsModel
+    init(navigationController: UINavigationController) {
         super.init()
         self.navigationController = navigationController
     }
@@ -23,7 +20,7 @@ final class GameCoordinator: BaseCoordinator {
     override func start() {
         guard let navigationController else { return }
         let gameViewController = GameViewController.loadFromNib()
-        gameViewController.viewModel = GameViewModel(gameSettingsModel: gameSettingsModel)
+        gameViewController.viewModel = GameViewModel()
         gameViewController.coordinator = self
         navigationController.pushViewController(gameViewController, animated: true)
     }

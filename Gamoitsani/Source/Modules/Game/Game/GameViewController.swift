@@ -14,10 +14,11 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     
     var viewModel: GameViewModel?
     
-    private var isShowingDashboard: Bool = false
-    private var playingSessionCount = 0
+    private var gameInfoView: GameInfoView?
+    private var gamePlayView: GamePlayView?
     
-    private var mockedTeam = "ხარება და გოგია"
+    private var isShowingInfoView: Bool = false
+    private var gameStory = GameStory.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,50 +27,102 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         showGameInfoView()
     }
     
+    override func setupUI() {
+        super.setupUI()
+        gameInfoView = GameInfoView.loadFromNib()
+        gamePlayView = GamePlayView.loadFromNib()
+    }
+    
     private func setupBackButton() {
         navigationItem.hidesBackButton = true
         let backButton = UIBarButtonItem(title: "Back", image: UIImage(systemName: "chevron.backward"), target: self, action: #selector(presentAlertOnBackButton))
         navigationItem.leftBarButtonItem = backButton
     }
+    
+    private func validateEndOfTheGame() -> Bool {
+        gameStory.currentRound > gameStory.numberOfRounds
+    }
 
     private func toggleView() {
         mainView.removeAllSubviews()
-        isShowingDashboard.toggle()
-        if isShowingDashboard {
-            showGamePlayView()
+        
+        if validateEndOfTheGame() {
+            presentGameoverAlert()
         } else {
-            showGameInfoView()
+            isShowingInfoView.toggle()
+            
+            if isShowingInfoView {
+                gameStory.playingSessionCount += 1
+                showGamePlayView()
+            } else {
+                showGameInfoView()
+            }
         }
     }
     
     // TODO: Review! For now like this
     private func showGameInfoView() {
-        guard let gameInfoView = GameInfoView.loadFromNib() else { return }
-        gameInfoView.configure(with: .init(teamName: mockedTeam, currentRound: viewModel?.gameSettingsModel.currentRound ?? 0), delegate: self)
+        guard let gameInfoView else { return }
+        gameInfoView.configure(with: .init(
+            teamName: gameStory.teams.keys[gameStory.currentTeamIndex],
+            currentRound: gameStory.currentRound),
+                               delegate: self)
+        
         mainView.addSubview(gameInfoView)
     }
     
     // TODO: Review! For now like this
     private func showGamePlayView() {
-        guard let gamePlayView = GamePlayView.loadFromNib() else { return }
-        gamePlayView.configure(with: .init(words: ["სიტყვა", "წაგება", "მოგება"], roundLength: viewModel?.gameSettingsModel.lengthOfRound ?? 0, score: viewModel?.gameSettingsModel.teams[mockedTeam] ?? 0), delegate: self) // score: viewModel.gameSettingsModel.teams[currentTeam]
-        playingSessionCount += 1
+        guard let gamePlayView else { return }
+        gamePlayView.configure(with: .init(
+            words: gameStory.words,
+            roundLength: gameStory.lengthOfRound,
+            score: gameStory.teams.values[gameStory.currentTeamIndex]), delegate: self)
         mainView.addSubview(gamePlayView)
     }
     
-    // TODO: Implement custom back bar button to call this action
     @objc private func presentAlertOnBackButton() {
-        // TODO: Localization
-        let alert = UIAlertController(title: "დარწმუნებული ხარ რომ უკან დაბრუნება გინდა?", message: "ამ შემთხვევაში თამაშის სესია მორჩება.", preferredStyle: .alert)
+        let alert = UIAlertController(title: L10n.Screen.Game.ConfirmationAlert.title,
+                                      message: L10n.Screen.Game.ConfirmationAlert.message,
+                                      preferredStyle: .alert)
         
-        alert.addAction(.init(title: "დიახ", style: .destructive, handler: { [weak self] _ in
+        alert.addAction(.init(title: L10n.yesPolite,
+                              style: .destructive) { [weak self] _ in
+            guard let self else { return }
+            gameStory.reset()
+            self.coordinator?.goToHome()
+        })
+        
+        alert.addAction(.init(title: L10n.no, style: .default))
+        
+        present(alert, animated: true)
+    }
+    
+    private func presentGameoverAlert() {
+        let sortedTeams = gameStory.teams.sorted { l, r in
+            l.value > r.value
+        }
+        
+        guard let winnerTeam = sortedTeams.first else { return }
+
+        // TODO: Localization
+        let alert = UIAlertController(title: "გილოცავთ \(winnerTeam.key)", message: "თქვენ გაიმარჯვეთ \(winnerTeam.value) ქულით", preferredStyle: .alert)
+        
+        alert.addAction(.init(title: "მადლობა!", style: .default, handler: { [weak self] _ in
             guard let self else { return }
             self.coordinator?.goToHome()
         }))
         
-        alert.addAction(.init(title: "არა", style: .default))
-        
         present(alert, animated: true)
+    }
+    
+    private func updateGameInfo() {
+        gameStory.currentTeamIndex = gameStory.playingSessionCount % gameStory.teams.count
+        gameStory.currentRound = gameStory.playingSessionCount / gameStory.teams.count + 1
+    }
+    
+    private func updateTeamScore(_ roundScore: Int) {
+        gameStory.teams.values[gameStory.currentTeamIndex] = roundScore
     }
 }
 
@@ -81,8 +134,9 @@ extension GameViewController: GameInfoViewDelegate {
 
 extension GameViewController: GamePlayViewDelegate {
     func timerDidFinished(roundScore: Int) {
+        updateTeamScore(roundScore)
+        dump("Round: \(gameStory.currentRound) Team: \(gameStory.teams.keys[gameStory.currentTeamIndex]) Score: \(gameStory.teams.values[gameStory.currentTeamIndex])")
+        updateGameInfo()
         toggleView()
-//        viewModel.updateModel()
-        viewModel?.gameSettingsModel.teams[mockedTeam] = roundScore // currentTeam
     }
 }
