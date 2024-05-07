@@ -9,6 +9,8 @@
 import Foundation
 
 extension String {
+    static let empty = ""
+    
     func localized(_ arguments: CVarArg...) -> String {
         guard let lang = UserDefaults.appLanguage else {
             UserDefaults.appLanguage = AppConstants.Language.english.identifier
