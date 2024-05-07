@@ -45,7 +45,6 @@
 		FFF65CA62BE61746008E0352 /* GMTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CA52BE61746008E0352 /* GMTableView.swift */; };
 		FFF65CAB2BE6199A008E0352 /* GameSettingsTeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CA92BE6199A008E0352 /* GameSettingsTeamTableViewCell.swift */; };
 		FFF65CAC2BE6199A008E0352 /* GameSettingsTeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFF65CAA2BE6199A008E0352 /* GameSettingsTeamTableViewCell.xib */; };
-		FFF65CAE2BE619A5008E0352 /* GameSettingsTeamTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CAD2BE619A5008E0352 /* GameSettingsTeamTableViewCellModel.swift */; };
 		FFF65CB02BE61DEA008E0352 /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CAF2BE61DEA008E0352 /* UITableViewExtensions.swift */; };
 		FFF65CB22BE61E17008E0352 /* NSObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CB12BE61E17008E0352 /* NSObjectExtensions.swift */; };
 		FFF65CB42BE61E9C008E0352 /* UINibExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CB32BE61E9C008E0352 /* UINibExtensions.swift */; };
@@ -135,7 +134,6 @@
 		FFF65CA52BE61746008E0352 /* GMTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTableView.swift; sourceTree = "<group>"; };
 		FFF65CA92BE6199A008E0352 /* GameSettingsTeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsTeamTableViewCell.swift; sourceTree = "<group>"; };
 		FFF65CAA2BE6199A008E0352 /* GameSettingsTeamTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameSettingsTeamTableViewCell.xib; sourceTree = "<group>"; };
-		FFF65CAD2BE619A5008E0352 /* GameSettingsTeamTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsTeamTableViewCellModel.swift; sourceTree = "<group>"; };
 		FFF65CAF2BE61DEA008E0352 /* UITableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensions.swift; sourceTree = "<group>"; };
 		FFF65CB12BE61E17008E0352 /* NSObjectExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectExtensions.swift; sourceTree = "<group>"; };
 		FFF65CB32BE61E9C008E0352 /* UINibExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINibExtensions.swift; sourceTree = "<group>"; };
@@ -406,7 +404,6 @@
 			children = (
 				FFF65CA92BE6199A008E0352 /* GameSettingsTeamTableViewCell.swift */,
 				FFF65CAA2BE6199A008E0352 /* GameSettingsTeamTableViewCell.xib */,
-				FFF65CAD2BE619A5008E0352 /* GameSettingsTeamTableViewCellModel.swift */,
 			);
 			path = GameSettingsTeamTableViewCell;
 			sourceTree = "<group>";
@@ -762,7 +759,6 @@
 				FF7F1D852BE7A8F200872554 /* GMLabel.swift in Sources */,
 				FF7F1D9D2BE92F5000872554 /* GameStory.swift in Sources */,
 				FFFB4D342BD90FD900CDDCB4 /* UserDefaultsExtension.swift in Sources */,
-				FFF65CAE2BE619A5008E0352 /* GameSettingsTeamTableViewCellModel.swift in Sources */,
 				FF7F1D8E2BE7AE2100872554 /* GameInfoView.swift in Sources */,
 				FFFB4D3F2BD9155100CDDCB4 /* RulesCoordinator.swift in Sources */,
 				FF7F1D7F2BE7A2F700872554 /* GameModels.swift in Sources */,
