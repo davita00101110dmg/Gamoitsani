@@ -9,14 +9,22 @@ import Foundation
 public enum L10n {
     /// Add
     public static var add: String { L10n.tr("Localizable", "add") }
+    /// Add
+    public static var addIt: String { L10n.tr("Localizable", "add_it") }
     /// and
     public static var and: String { L10n.tr("Localizable", "and") }
     /// Cancel
     public static var cancel: String { L10n.tr("Localizable", "cancel") }
+    /// Change
+    public static var change: String { L10n.tr("Localizable", "change") }
+    /// Delete
+    public static var delete: String { L10n.tr("Localizable", "delete") }
+    /// Edit
+    public static var edit: String { L10n.tr("Localizable", "edit") }
     /// No
     public static var no: String { L10n.tr("Localizable", "no") }
-    /// Ok
-    public static var ok: String { L10n.tr("Localizable", "Ok") }
+    /// OK
+    public static var ok: String { L10n.tr("Localizable", "ok") }
     /// Yes
     public static var yesPolite: String { L10n.tr("Localizable", "yesPolite") }
 
@@ -30,9 +38,9 @@ public enum L10n {
       public enum Game {
 
         public enum ConfirmationAlert {
-          /// In this case, the game session will be lost.
+          /// In this case, the teams' points will be lost
           public static var message: String { L10n.tr("Localizable", "screen.game.confirmation_alert.message") }
-          /// Are you sure you want to go back??
+          /// Are you sure you want to go back?
           public static var title: String { L10n.tr("Localizable", "screen.game.confirmation_alert.title") }
         }
       }
@@ -44,7 +52,7 @@ public enum L10n {
         public enum AddTeamAlert {
           /// Enter team name
           public static var message: String { L10n.tr("Localizable", "screen.game_settings.add_team_alert.message") }
-          /// Add team!
+          /// Add team
           public static var title: String { L10n.tr("Localizable", "screen.game_settings.add_team_alert.title") }
         }
 
@@ -85,6 +93,11 @@ public enum L10n {
         public enum Teams {
           /// Teams
           public static var title: String { L10n.tr("Localizable", "screen.game_settings.teams.title") }
+        }
+
+        public enum UpdateTeamNameAlert {
+          /// Update team name
+          public static var title: String { L10n.tr("Localizable", "screen.game_settings.update_team_name_alert.title") }
         }
       }
 

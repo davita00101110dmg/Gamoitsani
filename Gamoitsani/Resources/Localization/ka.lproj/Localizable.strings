@@ -10,9 +10,13 @@
 "and" = "და";
 "yesPolite" = "დიახ";
 "no" = "არა";
-"Ok" = "Ok";
-"add" = "Add";
-"cancel" = "Cancel";
+"ok" = "კარგი";
+"add" = "დამატება";
+"add_it" = "დაამატე";
+"change" = "შეცვალე";
+"cancel" = "გაუქმება";
+"edit" = "დაარედაქტირე";
+"delete" = "წაშალე";
 
 // MARK: - Home
 "screen.home.play_button.title" = "თამაშის დაწყება";
@@ -29,8 +33,9 @@
 "screen.game_settings.rounds_amount.title" = "რაუნდების რაოდენობა: %@";
 "screen.game_settings.rounds_length.title" = "რაუნდის ხანგრძლივობა: %@ წმ";
 "screen.game_settings.teams.title" = "გუნდები";
-"screen.game_settings.add_team_alert.title" = "დაამატე გუნდი!";
+"screen.game_settings.add_team_alert.title" = "დაამატე გუნდი";
 "screen.game_settings.add_team_alert.message" = "ჩაწერე გუნდის სახელი";
+"screen.game_settings.update_team_name_alert.title" = "შეცვალე გუნდის სახელი";
 "screen.game_settings.start_game.title" = "თამაშის დაწყება";
 "screen.game_settings.incorrect_parameter.title" = "არასწორი პარამეტრი";
 "screen.game_settings.incorrect_game_settings_not_enough_teams.message" = "არასაკმარისი გუნდების რაოდენობა, თამაშის დასაწყებად საჭიროა მინიმუმ 2 გუნდის დამატება!";
@@ -38,4 +43,4 @@
 
 // MARK: - Game
 "screen.game.confirmation_alert.title" = "დარწმუნებული ხარ რომ უკან დაბრუნება გინდა?";
-"screen.game.confirmation_alert.message" = "ამ შემთხვევაში თამაშის სესია მორჩება.";
+"screen.game.confirmation_alert.message" = "ამ შემთხვევაში გუნდების ქულები დაიკარგება.";
