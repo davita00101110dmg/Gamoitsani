@@ -22,6 +22,7 @@ final class AppCoordinator: BaseCoordinator {
         UINavigationBar.appearance().tintColor = Asset.tintColor.color
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : Asset.tintColor.color ?? .tintColor]
         UIView.appearance().tintColor = Asset.tintColor.color
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .black
     }
     
     override func start() {
