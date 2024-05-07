@@ -26,15 +26,15 @@ class GameStory {
     var currentTeamIndex = 0
     
     func reset() {
-        numberOfRounds = 1
-        lengthOfRound = 45
-        words = []
+
+        teams.keys.forEach { teams[$0] = 0 }
         
+        words = []
         currentRound = 1
-        teams = [:]
         
         playingSessionCount = 0
         maxTotalSessions = 0
         currentTeamIndex = 0
     }
 }
+
