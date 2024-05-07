@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,13 +12,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameSettingsViewController" customModule="Gamoitsani" customModuleProvider="target">
             <connections>
+                <outlet property="addTeamButton" destination="p7k-Fq-4XT" id="C8Z-fU-p4B"/>
                 <outlet property="roundsAmountTitle" destination="IDo-rL-6Pp" id="QJm-OA-8EU"/>
                 <outlet property="roundsLengthStepper" destination="Hyz-q6-1wl" id="eWE-K9-U89"/>
                 <outlet property="roundsLengthTitle" destination="NeN-mg-aP4" id="wcn-B7-wMA"/>
                 <outlet property="roundsStepper" destination="ov7-uJ-vUY" id="viT-Ff-Vvs"/>
                 <outlet property="startGameButton" destination="cz4-px-Xcr" id="ikS-fE-fhu"/>
                 <outlet property="tableView" destination="W71-Yg-xRR" id="y8n-0b-vbL"/>
-                <outlet property="teamsStepper" destination="bhh-Ye-MbI" id="ql0-vS-Rqv"/>
                 <outlet property="teamsTitle" destination="Ue6-uc-CpB" id="wfJ-3M-Vfi"/>
                 <outlet property="view" destination="iN0-l3-epB" id="GHU-mr-oEX"/>
             </connections>
@@ -66,21 +67,32 @@
                         </stackView>
                     </subviews>
                 </stackView>
-                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="FkI-kR-hVj">
-                    <rect key="frame" x="16" y="195" width="174.33333333333334" height="47"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="FkI-kR-hVj">
+                    <rect key="frame" x="16" y="195" width="361" height="43"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="გუნდები" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ue6-uc-CpB">
-                            <rect key="frame" x="0.0" y="13.333333333333341" width="68.333333333333329" height="20.333333333333329"/>
+                            <rect key="frame" x="0.0" y="0.0" width="68.333333333333329" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="bhh-Ye-MbI">
-                            <rect key="frame" x="80.333333333333329" y="7.6666666666666572" width="93.999999999999986" height="32"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7k-Fq-4XT">
+                            <rect key="frame" x="261" y="0.0" width="100" height="43"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="s1D-py-FP3"/>
+                            </constraints>
+                            <color key="tintColor" name="Secondary"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="დაამატე"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="teamsStepper:" destination="-1" eventType="valueChanged" id="A13-sr-aoM"/>
+                                <action selector="addTeamAction:" destination="-1" eventType="touchUpInside" id="cFT-Do-hlb"/>
                             </connections>
-                        </stepper>
+                        </button>
                     </subviews>
                 </stackView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="W71-Yg-xRR" customClass="GMTableView" customModule="Gamoitsani" customModuleProvider="target">
@@ -106,7 +118,8 @@
                 <constraint firstItem="W71-Yg-xRR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="0M2-8a-wEb"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="oyL-Uy-ixi" secondAttribute="trailing" constant="16" id="4OB-sB-5Ba"/>
                 <constraint firstItem="cz4-px-Xcr" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Ual-Pi-AhW"/>
-                <constraint firstItem="W71-Yg-xRR" firstAttribute="top" secondItem="FkI-kR-hVj" secondAttribute="bottom" constant="8" id="VJC-cc-Zjf"/>
+                <constraint firstItem="W71-Yg-xRR" firstAttribute="top" secondItem="FkI-kR-hVj" secondAttribute="bottom" constant="12" id="VJC-cc-Zjf"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="FkI-kR-hVj" secondAttribute="trailing" constant="16" id="WJh-0F-8fN"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="W71-Yg-xRR" secondAttribute="trailing" constant="16" id="ab0-Sy-yom"/>
                 <constraint firstItem="FkI-kR-hVj" firstAttribute="top" secondItem="oyL-Uy-ixi" secondAttribute="bottom" constant="32" id="dZN-8D-5b3"/>
                 <constraint firstItem="oyL-Uy-ixi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="f9e-ae-c2x"/>
@@ -120,6 +133,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="Secondary">
+            <color red="0.16470588235294117" green="0.5725490196078431" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

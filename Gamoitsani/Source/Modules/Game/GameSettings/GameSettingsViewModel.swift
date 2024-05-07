@@ -12,50 +12,45 @@ import Collections
 
 final class GameSettingsViewModel {
     
-    @Published private var teams: [GameSettingsCellItem] = []
+    @Published private var teams: [GameSettingsTeamCellItem] = []
     
-    var teamsPublished: Published<[GameSettingsCellItem]>.Publisher { $teams }
-    
-    private var teamStrings: [String] = [] {
-        didSet {
-            updateTeams()
-        }
-    }
+    var teamsPublished: Published<[GameSettingsTeamCellItem]>.Publisher { $teams }
     
     func addTeam(with team: String) {
-        teamStrings.append(team)
+        teams.append(.init(name: team))
     }
     
-    func remove(at index: Int) {
-        teamStrings.remove(at: index)
+    func updateTeam(at index: Int, with newTeam: String) {
+        guard teams.indices.contains(index) else { return }
+        teams[index].name = newTeam
     }
     
-    func removeLastTeam() {
-        teamStrings.removeLast()
-    }
-    
-    func clearTeams() {
-        teamStrings.removeAll()
+    func getTeam(at index: Int) -> String? {
+        guard teams.indices.contains(index) else { return nil }
+        return teams[index].name
     }
     
     func getTeamsCount() -> Int {
-        teamStrings.count
+        teams.count
     }
     
-    func areTeamsUniques() -> Bool {
-        Set(teamStrings).count == teamStrings.count
-    }
-    
-    func getTeams() -> [String] {
-        teamStrings
+    func teamsAreUnique() -> Bool {
+        let teamNames = teams.map { $0.name }
+        return Set(teamNames).count != teamNames.count
     }
     
     func getTeamsDictionary() -> OrderedDictionary<String, Int> {
-        .init(uniqueKeysWithValues: teamStrings.map { ($0, 0) })
+        .init(uniqueKeysWithValues: teams.map { ($0.name, 0) })
     }
     
-    private func updateTeams() {
-        teams = teamStrings.map { GameSettingsCellItem.teams(model: .init(id: UUID(), team: $0), id: UUID()) }
+    @discardableResult
+    func remove(at index: Int) -> String? {
+        guard teams.indices.contains(index) else { return nil }
+        teams.swapAt(index, teams.count - 1)
+        return teams.popLast()?.name
     }
     
+    func updateOrder(with newOrderTeams: [GameSettingsTeamCellItem]) {
+        teams = newOrderTeams
+    }
 }

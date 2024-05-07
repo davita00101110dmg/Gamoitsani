@@ -8,30 +8,9 @@
 
 import UIKit
 
-typealias GameSettingsDataSource = UITableViewDiffableDataSource<Int, GameSettingsCellItem>
-typealias GameSettingsSnapshot = NSDiffableDataSourceSnapshot<Int, GameSettingsCellItem>
+typealias GameSettingsSnapshot = NSDiffableDataSourceSnapshot<Int, GameSettingsTeamCellItem>
 
-struct GameSettingsModel {
-    let numberOfRounds: Int
-    let lengthOfRound: Double
-    let words: [String]
-    
-    var currentRound: Int = 1
-    var teams: [String: Int]
+struct GameSettingsTeamCellItem: Hashable {
+    let id = UUID()
+    var name: String
 }
-
-enum GameSettingsCellItem: Hashable, Equatable {
-    case teams(model: GameSettingsTeamTableViewCellModel, id: UUID = UUID())
-    
-    func hash(into hasher: inout Hasher) {
-        switch self {
-        case .teams(_, let id):
-            hasher.combine(id)
-        }
-    }
-    
-    static func == (lhs: GameSettingsCellItem, rhs: GameSettingsCellItem) -> Bool {
-        return lhs.hashValue == rhs.hashValue
-    }
-}
-
