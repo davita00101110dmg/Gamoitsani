@@ -17,11 +17,13 @@ final class GameSettingsTeamTableViewCell: UITableViewCell {
         setupUI()
     }
     
-    func configure(with model: GameSettingsTeamTableViewCellModel) {
-        teamName.text = model.team
-    }
-
     private func setupUI() {
         backgroundColor = Asset.secondary.color
+        layer.cornerRadius = 10
+        teamName.textColor = Asset.tintColor.color
+    }
+    
+    func configure(with team: String) {
+        teamName.text = team
     }
 }
