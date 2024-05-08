@@ -14,12 +14,17 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     @IBOutlet weak var mainView: UIView!
     
     var viewModel: GameViewModel?
-    
-    private var gameInfoView: GameInfoView?
-    private var gamePlayView: GamePlayView?
-    
+
     private var isShowingInfoView: Bool = false
     private var gameStory = GameStory.shared
+    
+    private lazy var gameInfoView: GameInfoView? = {
+        GameInfoView.loadFromNib()
+    }()
+    
+    private lazy var gamePlayView: GamePlayView? = {
+        GamePlayView.loadFromNib()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +35,6 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     
     override func setupUI() {
         super.setupUI()
-        gameInfoView = GameInfoView.loadFromNib()
-        gamePlayView = GamePlayView.loadFromNib()
     }
     
     private func setupBackButton() {
@@ -48,7 +51,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         mainView.removeAllSubviews()
         
         if validateEndOfTheGame() {
-            presentGameoverAlert()
+            presentGameOverAlert()
         } else {
             isShowingInfoView.toggle()
             
@@ -61,7 +64,6 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         }
     }
     
-    // TODO: Review! For now like this
     private func showGameInfoView() {
         guard let gameInfoView else { return }
         gameInfoView.configure(with: .init(
@@ -72,7 +74,6 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         mainView.addSubview(gameInfoView)
     }
     
-    // TODO: Review! For now like this
     private func showGamePlayView() {
         guard let gamePlayView else { return }
         gamePlayView.configure(with: .init(
@@ -99,7 +100,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         present(alert, animated: true)
     }
     
-    private func presentGameoverAlert() {
+    private func presentGameOverAlert() {
         let sortedTeams = gameStory.teams.sorted { l, r in
             l.value > r.value
         }
