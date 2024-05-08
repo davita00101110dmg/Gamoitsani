@@ -29,4 +29,10 @@ final class GameCoordinator: BaseCoordinator {
         guard let navigationController else { return }
         navigationController.popViewController(animated: true)
     }
+    
+    func presentGameScoreboard() {
+        guard let navigationController else { return }
+        let gameScoreboardCoordinator = GameScoreboardCoordinator(navigationController: navigationController)
+        coordinate(to: gameScoreboardCoordinator)
+    }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: - Review structure
 final class GameViewController: BaseViewController<GameCoordinator> {
     
     @IBOutlet weak var mainView: UIView!
@@ -126,12 +127,18 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     }
 }
 
+// MARK: - GameInfoViewDelegate Methods
 extension GameViewController: GameInfoViewDelegate {
     func didPressStart() {
         toggleView()
     }
+    
+    func didPressShowScoreboard() {
+        coordinator?.presentGameScoreboard()
+    }
 }
 
+// MARK: - GamePlayViewDelegate Methods
 extension GameViewController: GamePlayViewDelegate {
     func timerDidFinished(roundScore: Int) {
         updateTeamScore(roundScore)

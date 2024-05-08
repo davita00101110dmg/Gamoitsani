@@ -10,6 +10,7 @@ import UIKit
 
 protocol GameInfoViewDelegate: AnyObject {
     func didPressStart()
+    func didPressShowScoreboard()
 }
 
 final class GameInfoView: UIView {
@@ -48,5 +49,9 @@ final class GameInfoView: UIView {
     
     @IBAction func startAction(_ sender: Any) {
         delegate?.didPressStart()
+    }
+    
+    @IBAction func showScoreAction(_ sender: Any) {
+        delegate?.didPressShowScoreboard()
     }
 }
