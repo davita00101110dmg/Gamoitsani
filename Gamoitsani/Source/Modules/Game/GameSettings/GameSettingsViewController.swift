@@ -106,7 +106,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
                                        addActionTitle: L10n.addIt) { [weak self] teamName in
             guard let self,
                   let viewModel else { return }
-            viewModel.addTeam(with: teamName)
+            viewModel.addTeam(with: teamName.removeExtraSpaces())
         }
         presentAlert(of: alertType)
     }

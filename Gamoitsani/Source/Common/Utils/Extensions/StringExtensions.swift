@@ -9,7 +9,8 @@
 import Foundation
 
 extension String {
-    static let empty = ""
+    static var empty: String { String() }
+    static var whitespace: String { " " }
     
     func localized(_ arguments: CVarArg...) -> String {
         guard let lang = UserDefaults.appLanguage else {
@@ -28,4 +29,14 @@ extension String {
             return String(format: localizedString, arguments: arguments)
         }
     }
+    
+    func trim() -> String {
+        trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    
+    func removeExtraSpaces() -> String {
+        replacingOccurrences(of: AppConstants.Regex.extraWhitespacesAndNewlines, with: String.whitespace, options: .regularExpression, range: nil)
+    }
+    
 }
