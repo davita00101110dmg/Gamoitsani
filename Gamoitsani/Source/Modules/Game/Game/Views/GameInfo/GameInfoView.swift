@@ -36,14 +36,14 @@ final class GameInfoView: UIView {
             $0.textColor = Asset.tintColor.color
         }
 
-        startButton.configure(text: "დაწყება", isCircle: true)
-        scoreButton.configure(text: "ანგარიში")
+        startButton.configure(text: L10n.start, isCircle: true)
+        scoreButton.configure(text: L10n.scoreboard)
     }
     
     func configure(with model: GameInfoViewModel, delegate: GameInfoViewDelegate) {
         self.delegate = delegate
         
-        roundCountLabel.text = "რაუნდი \(model.currentRound)"
+        roundCountLabel.text = L10n.Screen.Game.CurrentRound.message(model.currentRound.toString)
         teamNameLabel.text = model.teamName
     }
     

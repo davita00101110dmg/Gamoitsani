@@ -25,6 +25,12 @@ public enum L10n {
     public static var no: String { L10n.tr("Localizable", "no") }
     /// OK
     public static var ok: String { L10n.tr("Localizable", "ok") }
+    /// Point
+    public static var point: String { L10n.tr("Localizable", "point") }
+    /// Scoreboard
+    public static var scoreboard: String { L10n.tr("Localizable", "scoreboard") }
+    /// Start
+    public static var start: String { L10n.tr("Localizable", "start") }
     /// Yes
     public static var yesPolite: String { L10n.tr("Localizable", "yesPolite") }
 
@@ -42,6 +48,13 @@ public enum L10n {
           public static var message: String { L10n.tr("Localizable", "screen.game.confirmation_alert.message") }
           /// Are you sure you want to go back?
           public static var title: String { L10n.tr("Localizable", "screen.game.confirmation_alert.title") }
+        }
+
+        public enum CurrentRound {
+          /// Round: %@
+          public static func message( _ p1: String) -> String {
+              return L10n.tr("Localizable", "screen.game.current_round.message", p1)
+          }
         }
       }
 
