@@ -39,6 +39,14 @@
 		FF7F1D9D2BE92F5000872554 /* GameStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D9C2BE92F5000872554 /* GameStory.swift */; };
 		FF7F1DA32BE93DF900872554 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = FF7F1DA22BE93DF900872554 /* Collections */; };
 		FF8EA6FA2BEAB26300F098B8 /* GameSettingsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA6F92BEAB26300F098B8 /* GameSettingsDataSource.swift */; };
+		FF8EA6FC2BEBB46D00F098B8 /* GameScoreboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA6FB2BEBB46D00F098B8 /* GameScoreboardViewController.xib */; };
+		FF8EA7072BEBB9F600F098B8 /* GameScoreboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7062BEBB9F600F098B8 /* GameScoreboardViewController.swift */; };
+		FF8EA7092BEBBA1900F098B8 /* GameScoreboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7082BEBBA1900F098B8 /* GameScoreboardViewModel.swift */; };
+		FF8EA70B2BEBBA1E00F098B8 /* GameScoreboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA70A2BEBBA1E00F098B8 /* GameScoreboardModel.swift */; };
+		FF8EA70D2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA70C2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift */; };
+		FF8EA7112BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA70F2BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift */; };
+		FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA7102BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib */; };
+		FF8EA7142BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7132BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift */; };
 		FFF65C9D2BE554B9008E0352 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */; };
 		FFF65C9F2BE555C2008E0352 /* GameSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9E2BE555C2008E0352 /* GameSettingsViewModel.swift */; };
 		FFF65CA12BE555CC008E0352 /* GameSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CA02BE555CC008E0352 /* GameSettingsModel.swift */; };
@@ -129,6 +137,14 @@
 		FF7F1D9C2BE92F5000872554 /* GameStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStory.swift; sourceTree = "<group>"; };
 		FF8929C12BD6FC52000C0B9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF8EA6F92BEAB26300F098B8 /* GameSettingsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsDataSource.swift; sourceTree = "<group>"; };
+		FF8EA6FB2BEBB46D00F098B8 /* GameScoreboardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameScoreboardViewController.xib; sourceTree = "<group>"; };
+		FF8EA7062BEBB9F600F098B8 /* GameScoreboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameScoreboardViewController.swift; path = Gamoitsani/Source/Modules/Game/GameScoreboard/GameScoreboardViewController.swift; sourceTree = SOURCE_ROOT; };
+		FF8EA7082BEBBA1900F098B8 /* GameScoreboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreboardViewModel.swift; sourceTree = "<group>"; };
+		FF8EA70A2BEBBA1E00F098B8 /* GameScoreboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreboardModel.swift; sourceTree = "<group>"; };
+		FF8EA70C2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreboardCoordinator.swift; sourceTree = "<group>"; };
+		FF8EA70F2BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreboardTeamTableViewCell.swift; sourceTree = "<group>"; };
+		FF8EA7102BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameScoreboardTeamTableViewCell.xib; sourceTree = "<group>"; };
+		FF8EA7132BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreboardTeamTableViewModel.swift; sourceTree = "<group>"; };
 		FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		FFF65C9E2BE555C2008E0352 /* GameSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsViewModel.swift; sourceTree = "<group>"; };
 		FFF65CA02BE555CC008E0352 /* GameSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsModel.swift; sourceTree = "<group>"; };
@@ -401,6 +417,24 @@
 			path = DataSource;
 			sourceTree = "<group>";
 		};
+		FF8EA6FF2BEBB47300F098B8 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				FF8EA6FB2BEBB46D00F098B8 /* GameScoreboardViewController.xib */,
+			);
+			path = Xib;
+			sourceTree = "<group>";
+		};
+		FF8EA70E2BEBEAB700F098B8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FF8EA70F2BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift */,
+				FF8EA7102BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib */,
+				FF8EA7132BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		FFF65CA72BE6197F008E0352 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,7 +564,7 @@
 			children = (
 				FFFB4D482BD937E800CDDCB4 /* GameSettings */,
 				FFFB4D4A2BD9380C00CDDCB4 /* Game */,
-				FFFB4D492BD9380500CDDCB4 /* GameResults */,
+				FFFB4D492BD9380500CDDCB4 /* GameScoreboard */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -549,11 +583,17 @@
 			path = GameSettings;
 			sourceTree = "<group>";
 		};
-		FFFB4D492BD9380500CDDCB4 /* GameResults */ = {
+		FFFB4D492BD9380500CDDCB4 /* GameScoreboard */ = {
 			isa = PBXGroup;
 			children = (
+				FF8EA70E2BEBEAB700F098B8 /* Cell */,
+				FF8EA6FF2BEBB47300F098B8 /* Xib */,
+				FF8EA7062BEBB9F600F098B8 /* GameScoreboardViewController.swift */,
+				FF8EA7082BEBBA1900F098B8 /* GameScoreboardViewModel.swift */,
+				FF8EA70A2BEBBA1E00F098B8 /* GameScoreboardModel.swift */,
+				FF8EA70C2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift */,
 			);
-			path = GameResults;
+			path = GameScoreboard;
 			sourceTree = "<group>";
 		};
 		FFFB4D4A2BD9380C00CDDCB4 /* Game */ = {
@@ -691,6 +731,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF8EA6FC2BEBB46D00F098B8 /* GameScoreboardViewController.xib in Resources */,
 				FF7F1D8C2BE7AE0A00872554 /* GamePlayView.xib in Resources */,
 				FF4D9D382BD698630046819D /* LaunchScreen.storyboard in Resources */,
 				FF7F1D742BE6BCA900872554 /* swiftgen.yml in Resources */,
@@ -702,6 +743,7 @@
 				FF4D9D352BD698630046819D /* Assets.xcassets in Resources */,
 				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
 				FF7F1D822BE7A2F700872554 /* GameViewController.xib in Resources */,
+				FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */,
 				FFFB4D1A2BD8441F00CDDCB4 /* BPG-Nino-Mtavruli-Normal.ttf in Resources */,
 				FFFB4D172BD8438800CDDCB4 /* BPG-Nino-Mtavruli-Bold.ttf in Resources */,
 				FFFB4CD22BD701E700CDDCB4 /* HomeViewController.xib in Resources */,
@@ -751,6 +793,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */,
+				FF8EA70D2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift in Sources */,
 				FFFB4D4C2BD9392D00CDDCB4 /* GameSettingsCoordinator.swift in Sources */,
 				FFF65CC72BE6B0C4008E0352 /* Assets.swift in Sources */,
 				FFF65CB22BE61E17008E0352 /* NSObjectExtensions.swift in Sources */,
@@ -771,7 +814,9 @@
 				FF7F1D9D2BE92F5000872554 /* GameStory.swift in Sources */,
 				FFFB4D342BD90FD900CDDCB4 /* UserDefaultsExtension.swift in Sources */,
 				FF7F1D8E2BE7AE2100872554 /* GameInfoView.swift in Sources */,
+				FF8EA7092BEBBA1900F098B8 /* GameScoreboardViewModel.swift in Sources */,
 				FFFB4D3F2BD9155100CDDCB4 /* RulesCoordinator.swift in Sources */,
+				FF8EA7112BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift in Sources */,
 				FF7F1D7F2BE7A2F700872554 /* GameModels.swift in Sources */,
 				FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */,
 				FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */,
@@ -779,6 +824,7 @@
 				FF7F1D962BE7B9D800872554 /* GameInfoViewModel.swift in Sources */,
 				FFFB4D362BD9128800CDDCB4 /* NotificationExtensons.swift in Sources */,
 				FFFB4CD72BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift in Sources */,
+				FF8EA7142BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift in Sources */,
 				FF7F1D802BE7A2F700872554 /* GameViewController.swift in Sources */,
 				FFFB4D412BD9155100CDDCB4 /* RulesViewController.swift in Sources */,
 				FFF65CA42BE61514008E0352 /* UINavigationItemExtensions.swift in Sources */,
@@ -787,12 +833,14 @@
 				FFF65C9D2BE554B9008E0352 /* BaseCoordinator.swift in Sources */,
 				FFF65CA62BE61746008E0352 /* GMTableView.swift in Sources */,
 				FF4D9D7C2BD69BC00046819D /* HomeModels.swift in Sources */,
+				FF8EA7072BEBB9F600F098B8 /* GameScoreboardViewController.swift in Sources */,
 				FFF65C9F2BE555C2008E0352 /* GameSettingsViewModel.swift in Sources */,
 				FFFB4D402BD9155100CDDCB4 /* RulesModels.swift in Sources */,
 				FF4D9D9C2BD6F7DB0046819D /* HomeCoordinator.swift in Sources */,
 				FF4D9D782BD69BA20046819D /* HomeViewController.swift in Sources */,
 				FFFB4CDB2BD7CAEE00CDDCB4 /* AppCoordinator.swift in Sources */,
 				FFFB4D2B2BD854F900CDDCB4 /* BaseViewController.swift in Sources */,
+				FF8EA70B2BEBBA1E00F098B8 /* GameScoreboardModel.swift in Sources */,
 				FFF65CB62BE62DBB008E0352 /* DoubleExtensions.swift in Sources */,
 				FFFB4D302BD861F300CDDCB4 /* GMButton.swift in Sources */,
 				FFF65CC82BE6B0C4008E0352 /* Localizable.swift in Sources */,
