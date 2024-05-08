@@ -22,7 +22,7 @@ class BaseViewController<T: Coordinator>: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if isMovingFromParent {
+        if isMovingFromParent || isBeingDismissed {
             guard let coordinator else { return }
             coordinator.childDidFinish(coordinator)
         }
