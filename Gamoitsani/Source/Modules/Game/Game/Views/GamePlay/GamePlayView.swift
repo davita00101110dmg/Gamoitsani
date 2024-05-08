@@ -26,12 +26,16 @@ final class GamePlayView: UIView {
     private var roundLengthTimer: Timer?
     private var countdownTimer: Timer?
     
+    private var audioManager = AudioManager()
+    
     private weak var delegate: GamePlayViewDelegate?
+    //TODO: Review this
     var viewModel: GamePlayViewModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
+        audioManager.setupSounds()
     }
     
     private func setupUI() {
@@ -77,13 +81,17 @@ final class GamePlayView: UIView {
         wordLabel.text = word
     }
     
-    @IBAction func correctWordAction(_ sender: Any) {
+    private func wordButtonAction(tag: Int) { // Tag 1: Correct Tag 2: Incorrect
+        audioManager.playSound(tag: tag)
         updateWordLabel(with: words.popLast())
-        viewModel.score += 1
+        viewModel.score += tag == 1 ? 1 : -1
     }
     
-    @IBAction func incorrectButtonAction(_ sender: Any) {
-        updateWordLabel(with: words.popLast())
-        viewModel.score -= 1
+    @IBAction func correctWordAction(_ sender: UIButton) {
+        wordButtonAction(tag: sender.tag)
+    }
+    
+    @IBAction func incorrectButtonAction(_ sender: UIButton) {
+        wordButtonAction(tag: sender.tag)
     }
 }

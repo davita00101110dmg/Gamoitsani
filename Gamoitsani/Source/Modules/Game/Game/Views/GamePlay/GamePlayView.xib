@@ -30,7 +30,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="fU3-vB-ewf">
                     <rect key="frame" x="24" y="282" width="262" height="60"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqx-xr-SUN" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqx-xr-SUN" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Tqx-xr-SUN" secondAttribute="height" multiplier="1:1" id="Gx8-qs-pMA"/>
@@ -42,7 +42,7 @@
                                 <action selector="correctWordAction:" destination="PwO-y8-944" eventType="touchUpInside" id="nG8-Xl-U6K"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrX-rg-zwz" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrX-rg-zwz" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
                             <rect key="frame" x="202" y="0.0" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="Fg6-7e-SKk"/>
@@ -80,7 +80,7 @@
     </objects>
     <resources>
         <namedColor name="Secondary">
-            <color red="0.16470588235294117" green="0.5725490196078431" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27843137254901962" green="0.33725490196078434" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

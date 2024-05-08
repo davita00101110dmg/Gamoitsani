@@ -47,6 +47,9 @@
 		FF8EA7112BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA70F2BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift */; };
 		FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA7102BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib */; };
 		FF8EA7142BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7132BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift */; };
+		FF8EA7212BEC12BD00F098B8 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7202BEC12BD00F098B8 /* AudioManager.swift */; };
+		FF8EA7252BEC13FF00F098B8 /* incorrect.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA7232BEC13FF00F098B8 /* incorrect.wav */; };
+		FF8EA7262BEC13FF00F098B8 /* correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA7242BEC13FF00F098B8 /* correct.mp3 */; };
 		FFF65C9D2BE554B9008E0352 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */; };
 		FFF65C9F2BE555C2008E0352 /* GameSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9E2BE555C2008E0352 /* GameSettingsViewModel.swift */; };
 		FFF65CA12BE555CC008E0352 /* GameSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CA02BE555CC008E0352 /* GameSettingsModel.swift */; };
@@ -145,6 +148,9 @@
 		FF8EA70F2BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreboardTeamTableViewCell.swift; sourceTree = "<group>"; };
 		FF8EA7102BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameScoreboardTeamTableViewCell.xib; sourceTree = "<group>"; };
 		FF8EA7132BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreboardTeamTableViewModel.swift; sourceTree = "<group>"; };
+		FF8EA7202BEC12BD00F098B8 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		FF8EA7232BEC13FF00F098B8 /* incorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incorrect.wav; sourceTree = "<group>"; };
+		FF8EA7242BEC13FF00F098B8 /* correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correct.mp3; sourceTree = "<group>"; };
 		FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		FFF65C9E2BE555C2008E0352 /* GameSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsViewModel.swift; sourceTree = "<group>"; };
 		FFF65CA02BE555CC008E0352 /* GameSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsModel.swift; sourceTree = "<group>"; };
@@ -279,7 +285,6 @@
 				FFF65CB92BE67146008E0352 /* Generated */,
 				FF4D9D602BD69A9D0046819D /* Launch Screen */,
 				FFFB4D0B2BD83F0D00CDDCB4 /* Localization */,
-				FFFB4D0C2BD83FC200CDDCB4 /* Fonts */,
 				FF4D9D342BD698630046819D /* Assets.xcassets */,
 				FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */,
 				FF8929C12BD6FC52000C0B9B /* Info.plist */,
@@ -435,6 +440,23 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		FF8EA7152BEBFDC800F098B8 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FF8EA7202BEC12BD00F098B8 /* AudioManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		FF8EA7222BEC13F600F098B8 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				FF8EA7242BEC13FF00F098B8 /* correct.mp3 */,
+				FF8EA7232BEC13FF00F098B8 /* incorrect.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		FFF65CA72BE6197F008E0352 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,6 +494,8 @@
 		FFF65CD62BE6B4F6008E0352 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				FF8EA7222BEC13F600F098B8 /* Sounds */,
+				FFFB4D0C2BD83FC200CDDCB4 /* Fonts */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -479,6 +503,7 @@
 		FFFB4CD32BD7CA6700CDDCB4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FF8EA7152BEBFDC800F098B8 /* Managers */,
 				FFFB4CD52BD7CA7500CDDCB4 /* Extensions */,
 			);
 			path = Utils;
@@ -742,11 +767,13 @@
 				FF7F1D882BE7ADEB00872554 /* GameInfoView.xib in Resources */,
 				FF4D9D352BD698630046819D /* Assets.xcassets in Resources */,
 				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
+				FF8EA7262BEC13FF00F098B8 /* correct.mp3 in Resources */,
 				FF7F1D822BE7A2F700872554 /* GameViewController.xib in Resources */,
 				FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */,
 				FFFB4D1A2BD8441F00CDDCB4 /* BPG-Nino-Mtavruli-Normal.ttf in Resources */,
 				FFFB4D172BD8438800CDDCB4 /* BPG-Nino-Mtavruli-Bold.ttf in Resources */,
 				FFFB4CD22BD701E700CDDCB4 /* HomeViewController.xib in Resources */,
+				FF8EA7252BEC13FF00F098B8 /* incorrect.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -842,6 +869,7 @@
 				FFFB4D2B2BD854F900CDDCB4 /* BaseViewController.swift in Sources */,
 				FF8EA70B2BEBBA1E00F098B8 /* GameScoreboardModel.swift in Sources */,
 				FFF65CB62BE62DBB008E0352 /* DoubleExtensions.swift in Sources */,
+				FF8EA7212BEC12BD00F098B8 /* AudioManager.swift in Sources */,
 				FFFB4D302BD861F300CDDCB4 /* GMButton.swift in Sources */,
 				FFF65CC82BE6B0C4008E0352 /* Localizable.swift in Sources */,
 				FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */,
