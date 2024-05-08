@@ -35,9 +35,7 @@ enum AppConstants {
         }
     }
     
-    enum Resources {
-        enum Fonts {
-            static let mainFontBold = "BPGNinoMtavruli-Bold"
-        }
+    enum Regex {
+        static let extraWhitespacesAndNewlines = "[\\s\n]+"
     }
 }
