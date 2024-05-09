@@ -53,4 +53,10 @@ final class GameSettingsViewModel {
     func updateOrder(with newOrderTeams: [GameSettingsTeamCellItem]) {
         teams = newOrderTeams
     }
+    
+    func fetchWords() {
+        FirebaseManager.shared.fetchWords { words in
+            GameStory.shared.words = words
+        }
+    }
 }

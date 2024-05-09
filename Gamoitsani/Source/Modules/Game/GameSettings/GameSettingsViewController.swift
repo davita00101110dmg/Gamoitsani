@@ -34,6 +34,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         super.viewDidLoad()
         setupTableView()
         configureDataSource()
+        viewModel?.fetchWords()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,7 +136,6 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         
         GameStory.shared.numberOfRounds = roundsStepper.value.toInt
         GameStory.shared.lengthOfRound = roundsLengthStepper.value
-        GameStory.shared.words = AppConstants.randomWords // TODO: Should give real API words
         GameStory.shared.teams = viewModel.getTeamsDictionary()
         GameStory.shared.maxTotalSessions = roundsStepper.value.toInt * viewModel.getTeamsCount()
     }
