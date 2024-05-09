@@ -20,6 +20,7 @@
 "scoreboard" = "Scoreboard";
 "point" = "Point";
 "start" = "Start";
+"thanks" = "Thanks";
 
 // MARK: - Home
 "screen.home.play_button.title" = "Start Game";
@@ -48,3 +49,5 @@
 "screen.game.confirmation_alert.title" = "Are you sure you want to go back?";
 "screen.game.confirmation_alert.message" = "In this case, the teams' points will be lost";
 "screen.game.current_round.message" = "Round: %@";
+"screen.game.winning_alert.title" = "Congratulations %@";
+"screen.game.winning_alert.message" = "You won with %@ points";

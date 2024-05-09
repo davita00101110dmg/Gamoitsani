@@ -20,6 +20,7 @@
 "scoreboard" = "ანგარიში";
 "point" = "ქულა";
 "start" = "დაწყება";
+"thanks" = "მადლობა";
 
 // MARK: - Home
 "screen.home.play_button.title" = "თამაშის დაწყება";
@@ -48,3 +49,5 @@
 "screen.game.confirmation_alert.title" = "დარწმუნებული ხარ რომ უკან დაბრუნება გინდა?";
 "screen.game.confirmation_alert.message" = "ამ შემთხვევაში გუნდების ქულები დაიკარგება.";
 "screen.game.current_round.message" = "რაუნდი: %@";
+"screen.game.winning_alert.title" = "გილოცავთ %@";
+"screen.game.winning_alert.message" = "თქვენ მოიგეთ %@ ქულით";

@@ -31,6 +31,8 @@ public enum L10n {
     public static var scoreboard: String { L10n.tr("Localizable", "scoreboard") }
     /// Start
     public static var start: String { L10n.tr("Localizable", "start") }
+    /// Thanks
+    public static var thanks: String { L10n.tr("Localizable", "thanks") }
     /// Yes
     public static var yesPolite: String { L10n.tr("Localizable", "yesPolite") }
 
@@ -54,6 +56,17 @@ public enum L10n {
           /// Round: %@
           public static func message( _ p1: String) -> String {
               return L10n.tr("Localizable", "screen.game.current_round.message", p1)
+          }
+        }
+
+        public enum WinningAlert {
+          /// You won with %@ points
+          public static func message( _ p1: String) -> String {
+              return L10n.tr("Localizable", "screen.game.winning_alert.message", p1)
+          }
+          /// Congratulations %@
+          public static func title( _ p1: String) -> String {
+              return L10n.tr("Localizable", "screen.game.winning_alert.title", p1)
           }
         }
       }
