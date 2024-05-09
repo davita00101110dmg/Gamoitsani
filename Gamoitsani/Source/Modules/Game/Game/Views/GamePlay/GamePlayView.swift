@@ -26,7 +26,11 @@ final class GamePlayView: UIView {
     private var roundLengthTimer: Timer?
     private var countdownTimer: Timer?
     
-    private var audioManager = AudioManager()
+    private let audioManager: AudioManager = {
+        let manager = AudioManager()
+        manager.setupSounds()
+        return manager
+    }()
     
     private weak var delegate: GamePlayViewDelegate?
     //TODO: Review this
@@ -35,7 +39,6 @@ final class GamePlayView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
-        audioManager.setupSounds()
     }
     
     private func setupUI() {
