@@ -38,4 +38,9 @@ enum AppConstants {
     enum Regex {
         static let extraWhitespacesAndNewlines = "[\\s\n]+"
     }
+    
+    enum Database {
+        static let url = "https://gamoitsani-26-default-rtdb.europe-west1.firebasedatabase.app"
+        static let tableName = "words"
+    }
 }
