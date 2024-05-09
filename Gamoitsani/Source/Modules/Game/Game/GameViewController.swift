@@ -26,6 +26,8 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         GamePlayView.loadFromNib()
     }()
     
+    private lazy var confettiLayer = CAEmitterLayer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,14 +35,19 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         showGameInfoView()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopConfettiAnimation()
+    }
+    
     override func setupUI() {
         super.setupUI()
     }
     
     private func setupBackButton() {
-        navigationItem.hidesBackButton = true
         let backButton = UIBarButtonItem(title: "Back", image: UIImage(systemName: "chevron.backward"), target: self, action: #selector(presentAlertOnBackButton))
         navigationItem.leftBarButtonItem = backButton
+        navigationItem.hidesBackButton = true
     }
     
     private func validateEndOfTheGame() -> Bool {
@@ -106,25 +113,64 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         }
         
         guard let winnerTeam = sortedTeams.first else { return }
-
-        // TODO: Localization
-        let alert = UIAlertController(title: "გილოცავთ \(winnerTeam.key)", message: "თქვენ გაიმარჯვეთ \(winnerTeam.value) ქულით", preferredStyle: .alert)
         
-        alert.addAction(.init(title: "მადლობა!", style: .default, handler: { [weak self] _ in
+        let alert = UIAlertController(title: L10n.Screen.Game.WinningAlert.title(winnerTeam.key),
+                                      message: L10n.Screen.Game.WinningAlert.message(winnerTeam.value.toString),
+                                      preferredStyle: .alert)
+        
+        alert.addAction(.init(title: L10n.thanks, style: .default, handler: { [weak self] _ in
             guard let self else { return }
             self.coordinator?.goToHome()
         }))
         
         present(alert, animated: true)
+        
+        startConfettiAnimation()
     }
     
-    private func updateGameInfo() {
+    private func updateGameInfo(_ roundScore: Int) {
+        gameStory.teams.values[gameStory.currentTeamIndex] = roundScore
+        dump("Round: \(gameStory.currentRound) Team: \(gameStory.teams.keys[gameStory.currentTeamIndex]) Score: \(gameStory.teams.values[gameStory.currentTeamIndex])")
         gameStory.currentTeamIndex = gameStory.playingSessionCount % gameStory.teams.count
         gameStory.currentRound = gameStory.playingSessionCount / gameStory.teams.count + 1
     }
     
-    private func updateTeamScore(_ roundScore: Int) {
-        gameStory.teams.values[gameStory.currentTeamIndex] = roundScore
+    private func startConfettiAnimation() {
+        confettiLayer.emitterPosition = .init(x: view.center.x, y: -view.frame.height)
+        confettiLayer.opacity = 1
+        
+        let colors: [UIColor] = [
+            Asset.color1.color,
+            Asset.color2.color,
+            Asset.color3.color,
+            Asset.color4.color,
+            Asset.color5.color,
+            Asset.color6.color,
+            Asset.color7.color,
+            Asset.color8.color,
+            Asset.color9.color,
+            Asset.color10.color
+        ]
+        
+        let cells: [CAEmitterCell] = colors.compactMap {
+            let cell = CAEmitterCell()
+            cell.scale = 0.5
+            cell.emissionRange = .pi * 2
+            cell.lifetime = 20
+            cell.birthRate = 250
+            cell.velocity = 250
+            cell.color = $0.cgColor
+            cell.contents = Asset.confetti.image.cgImage
+            return cell
+        }
+        
+        confettiLayer.emitterCells = cells
+        
+        view.layer.addSublayer(confettiLayer)
+    }
+    
+    private func stopConfettiAnimation() {
+        confettiLayer.removeFromSuperlayer()
     }
 }
 
@@ -142,9 +188,7 @@ extension GameViewController: GameInfoViewDelegate {
 // MARK: - GamePlayViewDelegate Methods
 extension GameViewController: GamePlayViewDelegate {
     func timerDidFinished(roundScore: Int) {
-        updateTeamScore(roundScore)
-        dump("Round: \(gameStory.currentRound) Team: \(gameStory.teams.keys[gameStory.currentTeamIndex]) Score: \(gameStory.teams.values[gameStory.currentTeamIndex])")
-        updateGameInfo()
+        updateGameInfo(roundScore)
         toggleView()
     }
 }
