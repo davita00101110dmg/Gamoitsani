@@ -1,0 +1,36 @@
+//
+//  AddWordViewController.swift
+//  Gamoitsani
+//
+//  Created by Daviti Khvedelidze on 10/05/2024.
+//  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
+//
+
+import UIKit
+
+final class AddWordViewController: BaseViewController<AddWordCoordinator> {
+    
+    @IBOutlet weak var hintMessageLabel: GMLabel!
+    @IBOutlet weak var wordTextField: GMTextField!
+    @IBOutlet weak var addWordButton: GMButton!
+    
+    private var wordsToBeAdded: [String] = []
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        FirebaseManager.shared.addWords(wordsToBeAdded)
+    }
+    
+    override func setupUI() {
+        super.setupUI()
+        title = L10n.Screen.AddWord.title
+        addWordButton.configure(text: L10n.Screen.AddWord.send)
+        hintMessageLabel.configure(with: L10n.Screen.AddWord.hint)
+    }
+    
+    @IBAction func addWordAction(_ sender: Any) {
+        guard let word = wordTextField.text else { return }
+        wordsToBeAdded.append(word.removeExtraSpaces())
+        wordTextField.text = .empty
+    }
+}
