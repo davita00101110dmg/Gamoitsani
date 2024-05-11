@@ -83,8 +83,9 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     
     private func showGamePlayView() {
         guard let gamePlayView else { return }
+    
         gamePlayView.configure(with: .init(
-            words: gameStory.words,
+            words: gameStory.words.removeFirstNItems(100),
             roundLength: gameStory.lengthOfRound,
             score: gameStory.teams.values[gameStory.currentTeamIndex]), delegate: self)
         mainView.addSubview(gamePlayView)
