@@ -43,6 +43,15 @@ public enum L10n {
 
     public enum Screen {
 
+      public enum AddWord {
+        /// Remember to add valid word :)
+        public static var hint: String { L10n.tr("Localizable", "screen.add_word.hint") }
+        /// Send
+        public static var send: String { L10n.tr("Localizable", "screen.add_word.send") }
+        /// Add Word
+        public static var title: String { L10n.tr("Localizable", "screen.add_word.title") }
+      }
+
       public enum Game {
 
         public enum ConfirmationAlert {
@@ -129,6 +138,11 @@ public enum L10n {
 
       public enum Home {
 
+        public enum AddWordButton {
+          /// Add word
+          public static var title: String { L10n.tr("Localizable", "screen.home.add_word_button.title") }
+        }
+
         public enum ChangeLanguage {
           /// Change language
           public static var title: String { L10n.tr("Localizable", "screen.home.change_language.title") }
@@ -151,7 +165,7 @@ public enum L10n {
       }
 
       public enum Rules {
-        /// ・When explaining the word, it is forbidden to use a single word \n\n ・If a team member guesses the word, press the ✅ button (+1 point) \n\n ・If you can't explain the word, or some rule was broken and you want to go to the next word, press the ❌ button (-1 point) \n\n ・The team that collects more points before the time runs out, or the first to reach the set number of points in the round, wins. \n\n Good luck :)
+        /// ・When explaining the word, it is forbidden to use a single word \n\n ・If a team member guesses the word, press the green button (+1 point) \n\n ・If you can't explain the word, or some rule was broken and you want to go to the next word, press the red button (-1 point) \n\n ・The team that collects more points before the time runs out, or the first to reach the set number of points in the round, wins. \n\n Good luck :)
         public static var rules: String { L10n.tr("Localizable", "screen.rules.rules") }
         /// Rules
         public static var title: String { L10n.tr("Localizable", "screen.rules.title") }
