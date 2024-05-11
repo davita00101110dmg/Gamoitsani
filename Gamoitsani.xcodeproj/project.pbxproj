@@ -1123,6 +1123,7 @@
 		};
 		FF4D9D532BD698630046819D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF4FA9CE2BEF8A8700F38F98 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1154,6 +1155,7 @@
 		};
 		FF4D9D542BD698630046819D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF4FA9CE2BEF8A8700F38F98 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
