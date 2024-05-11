@@ -25,6 +25,7 @@
 		FF4FA9C22BED96E800F38F98 /* GMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9C12BED96E800F38F98 /* GMTextField.swift */; };
 		FF4FA9C52BEEB6FD00F38F98 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FF4FA9C42BEEB6FD00F38F98 /* FirebaseFirestore */; };
 		FF4FA9C72BEEB6FD00F38F98 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF4FA9C62BEEB6FD00F38F98 /* FirebaseFirestoreSwift */; };
+		FF4FA9C92BEF7C5900F38F98 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */; };
 		FF7F1D742BE6BCA900872554 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D732BE6BCA900872554 /* swiftgen.yml */; };
 		FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D752BE6D08200872554 /* Fonts.swift */; };
 		FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */; };
@@ -134,6 +135,7 @@
 		FF4FA9BD2BED917300F38F98 /* AddWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewController.swift; sourceTree = "<group>"; };
 		FF4FA9BF2BED917A00F38F98 /* AddWordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordCoordinator.swift; sourceTree = "<group>"; };
 		FF4FA9C12BED96E800F38F98 /* GMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTextField.swift; sourceTree = "<group>"; };
+		FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		FF7F1D732BE6BCA900872554 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = SOURCE_ROOT; };
 		FF7F1D752BE6D08200872554 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "xcassets-swift5.stencil"; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 				FFF65CB52BE62DBB008E0352 /* DoubleExtensions.swift */,
 				FFF65CB72BE651C5008E0352 /* IntExtensions.swift */,
 				FF7F1D932BE7B10600872554 /* UIViewExtensions.swift */,
+				FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -918,6 +921,7 @@
 				FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */,
 				FFFB4D2B2BD854F900CDDCB4 /* BaseViewController.swift in Sources */,
 				FF4FA9BE2BED917300F38F98 /* AddWordViewController.swift in Sources */,
+				FF4FA9C92BEF7C5900F38F98 /* ArrayExtensions.swift in Sources */,
 				FF8EA70B2BEBBA1E00F098B8 /* GameScoreboardModel.swift in Sources */,
 				FFF65CB62BE62DBB008E0352 /* DoubleExtensions.swift in Sources */,
 				FF8EA7212BEC12BD00F098B8 /* AudioManager.swift in Sources */,
