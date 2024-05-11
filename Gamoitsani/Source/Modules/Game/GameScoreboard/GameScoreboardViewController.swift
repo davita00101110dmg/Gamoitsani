@@ -45,6 +45,7 @@ final class GameScoreboardViewController: BaseViewController<GameScoreboardCoord
     }
     
     private func setupTableView() {
+        tableView.rowHeight = 44
         tableView.register(GameScoreboardTeamTableViewCell.self)
     }
     
