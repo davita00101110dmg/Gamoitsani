@@ -26,6 +26,7 @@
 		FF4FA9C52BEEB6FD00F38F98 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FF4FA9C42BEEB6FD00F38F98 /* FirebaseFirestore */; };
 		FF4FA9C72BEEB6FD00F38F98 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF4FA9C62BEEB6FD00F38F98 /* FirebaseFirestoreSwift */; };
 		FF4FA9C92BEF7C5900F38F98 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */; };
+		FF4FA9CC2BEF875B00F38F98 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */; };
 		FF7F1D742BE6BCA900872554 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D732BE6BCA900872554 /* swiftgen.yml */; };
 		FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D752BE6D08200872554 /* Fonts.swift */; };
 		FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */; };
@@ -136,6 +137,8 @@
 		FF4FA9BF2BED917A00F38F98 /* AddWordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordCoordinator.swift; sourceTree = "<group>"; };
 		FF4FA9C12BED96E800F38F98 /* GMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTextField.swift; sourceTree = "<group>"; };
 		FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		FF4FA9CE2BEF8A8700F38F98 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FF7F1D732BE6BCA900872554 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = SOURCE_ROOT; };
 		FF7F1D752BE6D08200872554 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "xcassets-swift5.stencil"; sourceTree = "<group>"; };
@@ -301,6 +304,7 @@
 		FF4D9D5F2BD69A940046819D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FF4FA9CD2BEF876000F38F98 /* Configuration */,
 				FFF65CD62BE6B4F6008E0352 /* SupportingFiles */,
 				FFF65CB92BE67146008E0352 /* Generated */,
 				FF4D9D602BD69A9D0046819D /* Launch Screen */,
@@ -399,6 +403,15 @@
 				FF4FA9BB2BED916700F38F98 /* AddWordViewController.xib */,
 			);
 			path = Xib;
+			sourceTree = "<group>";
+		};
+		FF4FA9CD2BEF876000F38F98 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */,
+				FF4FA9CE2BEF8A8700F38F98 /* Config.xcconfig */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		FF7F1D832BE7A2FE00872554 /* Xib */ = {
@@ -898,6 +911,7 @@
 				FF7F1D7F2BE7A2F700872554 /* GameModels.swift in Sources */,
 				FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */,
 				FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */,
+				FF4FA9CC2BEF875B00F38F98 /* Configuration.swift in Sources */,
 				FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */,
 				FF7F1D962BE7B9D800872554 /* GameInfoViewModel.swift in Sources */,
 				FFFB4D362BD9128800CDDCB4 /* NotificationExtensons.swift in Sources */,

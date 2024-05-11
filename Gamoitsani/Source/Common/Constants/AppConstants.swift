@@ -40,7 +40,22 @@ enum AppConstants {
     }
     
     enum Firebase {
-        static let wordsCollectionName = "words"
-        static let suggestedWordsCollectionName = "suggested-words"
+        static var wordsCollectionName: String {
+            do {
+                return try Configuration.value(for: "WORDS_COLLECTION_NAME")
+            } catch {
+                dump("Error retrieving words collection name: \(error)")
+                return .empty
+            }
+        }
+        
+        static var suggestedWordsCollectionName: String {
+            do {
+                return try Configuration.value(for: "SUGGESTED_WORDS_COLLECTION_NAME")
+            } catch {
+                dump("Error retrieving suggested words collection name: \(error)")
+                return .empty
+            }
+        }
     }
 }
