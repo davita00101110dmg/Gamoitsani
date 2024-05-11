@@ -37,7 +37,6 @@
                                 <constraint firstAttribute="width" constant="60" id="h10-bJ-yI0"/>
                             </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="Button"/>
                             <connections>
                                 <action selector="correctWordAction:" destination="PwO-y8-944" eventType="touchUpInside" id="nG8-Xl-U6K"/>
                             </connections>
@@ -49,7 +48,6 @@
                                 <constraint firstAttribute="width" secondItem="zrX-rg-zwz" secondAttribute="height" multiplier="1:1" id="MF0-To-sAz"/>
                             </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="Button"/>
                             <connections>
                                 <action selector="incorrectButtonAction:" destination="PwO-y8-944" eventType="touchUpInside" id="Rjg-RK-Hpm"/>
                             </connections>
