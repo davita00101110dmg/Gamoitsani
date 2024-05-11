@@ -139,7 +139,7 @@
 		FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		FF4FA9CE2BEF8A8700F38F98 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		FF7F1D732BE6BCA900872554 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = SOURCE_ROOT; };
+		FF7F1D732BE6BCA900872554 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = swiftgen.yml; path = Gamoitsani/Resources/Swiftgen/swiftgen.yml; sourceTree = SOURCE_ROOT; };
 		FF7F1D752BE6D08200872554 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "xcassets-swift5.stencil"; sourceTree = "<group>"; };
 		FF7F1D792BE7A2F700872554 /* GameCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCoordinator.swift; sourceTree = "<group>"; };
@@ -244,8 +244,6 @@
 		FF4D9D1C2BD698620046819D = {
 			isa = PBXGroup;
 			children = (
-				FF7F1D732BE6BCA900872554 /* swiftgen.yml */,
-				FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */,
 				FF4D9D272BD698620046819D /* Gamoitsani */,
 				FF4D9D412BD698630046819D /* GamoitsaniTests */,
 				FF4D9D4B2BD698630046819D /* GamoitsaniUITests */,
@@ -309,6 +307,7 @@
 				FFF65CB92BE67146008E0352 /* Generated */,
 				FF4D9D602BD69A9D0046819D /* Launch Screen */,
 				FFFB4D0B2BD83F0D00CDDCB4 /* Localization */,
+				FF4FA9CF2BEFE9A800F38F98 /* Swiftgen */,
 				FF4D9D342BD698630046819D /* Assets.xcassets */,
 				FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */,
 				FF8929C12BD6FC52000C0B9B /* Info.plist */,
@@ -412,6 +411,15 @@
 				FF4FA9CE2BEF8A8700F38F98 /* Config.xcconfig */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		FF4FA9CF2BEFE9A800F38F98 /* Swiftgen */ = {
+			isa = PBXGroup;
+			children = (
+				FF7F1D732BE6BCA900872554 /* swiftgen.yml */,
+				FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */,
+			);
+			path = Swiftgen;
 			sourceTree = "<group>";
 		};
 		FF7F1D832BE7A2FE00872554 /* Xib */ = {
@@ -872,7 +880,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}/swiftgen/bin/swiftgen\"\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftgen >/dev/null; then\n    swiftgen config run --config Gamoitsani/Resources/Swiftgen/swiftgen.yml\nelse\n    \"echo: Swiftgen not found\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
