@@ -92,7 +92,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
                 self.snapshot?.appendItems(items)
                 self.dataSource.defaultRowAnimation = .automatic
                 
-                if let snapshot = self.snapshot {
+                if let snapshot = self.snapshot, !items.isEmpty {
                     self.dataSource.apply(snapshot, animatingDifferences: true)
                 }
                 
