@@ -23,6 +23,8 @@
 		FF4FA9BE2BED917300F38F98 /* AddWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9BD2BED917300F38F98 /* AddWordViewController.swift */; };
 		FF4FA9C02BED917A00F38F98 /* AddWordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9BF2BED917A00F38F98 /* AddWordCoordinator.swift */; };
 		FF4FA9C22BED96E800F38F98 /* GMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9C12BED96E800F38F98 /* GMTextField.swift */; };
+		FF4FA9C52BEEB6FD00F38F98 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FF4FA9C42BEEB6FD00F38F98 /* FirebaseFirestore */; };
+		FF4FA9C72BEEB6FD00F38F98 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF4FA9C62BEEB6FD00F38F98 /* FirebaseFirestoreSwift */; };
 		FF7F1D742BE6BCA900872554 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D732BE6BCA900872554 /* swiftgen.yml */; };
 		FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D752BE6D08200872554 /* Fonts.swift */; };
 		FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */; };
@@ -56,7 +58,6 @@
 		FF8EA7262BEC13FF00F098B8 /* correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA7242BEC13FF00F098B8 /* correct.mp3 */; };
 		FF8EA7562BEC40B100F098B8 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7552BEC40B100F098B8 /* UIColorExtensions.swift */; };
 		FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */; };
-		FF8EA75E2BED60EE00F098B8 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = FF8EA75D2BED60EE00F098B8 /* FirebaseDatabase */; };
 		FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */; };
 		FFF65C9D2BE554B9008E0352 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */; };
 		FFF65C9F2BE555C2008E0352 /* GameSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9E2BE555C2008E0352 /* GameSettingsViewModel.swift */; };
@@ -211,9 +212,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF8EA75E2BED60EE00F098B8 /* FirebaseDatabase in Frameworks */,
 				FF7F1DA32BE93DF900872554 /* Collections in Frameworks */,
 				FF7F1D992BE7CDD400872554 /* LookinServer in Frameworks */,
+				FF4FA9C52BEEB6FD00F38F98 /* FirebaseFirestore in Frameworks */,
+				FF4FA9C72BEEB6FD00F38F98 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,7 +703,8 @@
 			packageProductDependencies = (
 				FF7F1D982BE7CDD400872554 /* LookinServer */,
 				FF7F1DA22BE93DF900872554 /* Collections */,
-				FF8EA75D2BED60EE00F098B8 /* FirebaseDatabase */,
+				FF4FA9C42BEEB6FD00F38F98 /* FirebaseFirestore */,
+				FF4FA9C62BEEB6FD00F38F98 /* FirebaseFirestoreSwift */,
 			);
 			productName = Gamoitsani;
 			productReference = FF4D9D252BD698620046819D /* Gamoitsani.app */;
@@ -779,7 +782,7 @@
 			packageReferences = (
 				FF7F1D972BE7CDD400872554 /* XCRemoteSwiftPackageReference "LookinServer" */,
 				FF7F1DA12BE93DF900872554 /* XCRemoteSwiftPackageReference "swift-collections" */,
-				FF8EA75C2BED60EE00F098B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				FF4FA9C32BEEB6FD00F38F98 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = FF4D9D262BD698620046819D /* Products */;
 			projectDirPath = "";
@@ -1280,6 +1283,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FF4FA9C32BEEB6FD00F38F98 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.25.0;
+			};
+		};
 		FF7F1D972BE7CDD400872554 /* XCRemoteSwiftPackageReference "LookinServer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/QMUI/LookinServer/";
@@ -1296,17 +1307,19 @@
 				minimumVersion = 1.1.0;
 			};
 		};
-		FF8EA75C2BED60EE00F098B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.25.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FF4FA9C42BEEB6FD00F38F98 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF4FA9C32BEEB6FD00F38F98 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		FF4FA9C62BEEB6FD00F38F98 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF4FA9C32BEEB6FD00F38F98 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
 		FF7F1D982BE7CDD400872554 /* LookinServer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FF7F1D972BE7CDD400872554 /* XCRemoteSwiftPackageReference "LookinServer" */;
@@ -1316,11 +1329,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF7F1DA12BE93DF900872554 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
-		};
-		FF8EA75D2BED60EE00F098B8 /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FF8EA75C2BED60EE00F098B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 
