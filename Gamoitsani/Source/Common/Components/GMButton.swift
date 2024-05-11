@@ -30,7 +30,11 @@ final class GMButton: UIButton {
         layer.cornerRadius = self.cornerRadius
     }
     
-    public func configure(text: String, fontSize: CGFloat = 18, isCircle: Bool = false) {
+    public func configure(text: String, fontSize: CGFloat = 18, isCircle: Bool = false, textColor: UIColor? = nil) {
+        
+        if let textColor {
+            setTitleColor(textColor, for: .normal)
+        }
         
         if isCircle {
             cornerRadius = frame.width / 2
