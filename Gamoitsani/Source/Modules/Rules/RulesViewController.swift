@@ -19,7 +19,6 @@ final class RulesViewController: BaseViewController<RulesCoordinator> {
         
         textView.layer.cornerRadius = 10
         textView.textColor = .white
-        textView.textAlignment = .center
     }
     
     override func setupLocalizedTexts() {
@@ -28,7 +27,7 @@ final class RulesViewController: BaseViewController<RulesCoordinator> {
         title = L10n.Screen.Rules.title
         
         let style = NSMutableParagraphStyle()
-        style.alignment = .center
+        style.alignment = .left
         style.lineSpacing = 5
         
         // TODO: Change colour of text

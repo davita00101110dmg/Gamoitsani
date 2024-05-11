@@ -25,18 +25,18 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84O-fa-58w">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84O-fa-58w">
                     <rect key="frame" x="16" y="306" width="361" height="265"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" id="ohu-qs-9Wt"/>
                     </constraints>
-                    <mutableString key="text">სიტყვების ახსნისას აკრძალულია ერთფუძიანი სიტყვების გამოყენება
+                    <string key="text">სიტყვების ახსნისას აკრძალულია ერთფუძიანი სიტყვების გამოყენება
 თუ გუნდის წევრი გამოიცნობს სიტყვას დააჭირეთ + ღილაკს (+1 ქულა)
 თუ ვერ აუხსენით სიტყვა, ან დაარღვიეთ სიტყვა და გინდათ რომ შემდეგ სიტყვაზე გადახვიდეთ დააჭირეთ X ღილაკს (-1 ქულა)
 იმარჯვებს ის გუნდი რომელიც პირველი დააგროვებს საჭირო ქულებს
 
-გისურვებთ წარმატებებს :)</mutableString>
+გისურვებთ წარმატებებს :)</string>
                     <color key="textColor" systemColor="labelColor"/>
                     <fontDescription key="fontDescription" name="BPGNinoMtavruli-Bold" family="BPG Nino Mtavruli" pointSize="18"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
