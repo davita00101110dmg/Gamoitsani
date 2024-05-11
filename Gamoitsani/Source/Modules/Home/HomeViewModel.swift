@@ -6,12 +6,5 @@
 //
 
 import Foundation
-import Combine
 
-protocol HomeViewModel {
-
-}
-
-final class HomeViewModelImpl: HomeViewModel {
-
-}
+final class HomeViewModel { }

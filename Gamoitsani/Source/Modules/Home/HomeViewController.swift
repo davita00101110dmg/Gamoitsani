@@ -8,20 +8,19 @@
 import UIKit
 
 final class HomeViewController: BaseViewController<HomeCoordinator> {
-
+    
     @IBOutlet weak var wandLabel: UILabel!
     @IBOutlet weak var gameButton: GMButton!
     @IBOutlet weak var rulesButton: GMButton!
     @IBOutlet weak var addWordButton: GMButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRightBarButtonItem()
     }
-
+    
     override func setupUI() {
         super.setupUI()
-        
         wandLabel.text = "🪄"
         wandLabel.font = UIFont.systemFont(ofSize: 175)
     }
@@ -36,11 +35,11 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
     
     private func setupRightBarButtonItem() {
         let menuHandler: UIActionHandler = { action in
-
+            
             let languageIdentifier = action.title == "ქართული" ? AppConstants.Language.georgian.identifier : AppConstants.Language.english.identifier
             
             UserDefaults.appLanguage = languageIdentifier
-
+            
             NotificationCenter.default.post(name: .languageDidChange, object: nil)
         }
         
@@ -51,7 +50,10 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "globe"), primaryAction: nil, menu: barButtonMenu)
     }
-    
+}
+ 
+// MARK: - Actions
+extension HomeViewController {
     @IBAction func gameButtonClicked(_ sender: Any) {
         coordinator?.navigateToGameSettings()
     }

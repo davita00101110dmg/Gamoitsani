@@ -14,7 +14,7 @@ final class RulesViewController: BaseViewController<RulesCoordinator> {
     
     override func setupUI() {
         super.setupUI()
-    
+        
         textView.backgroundColor = Asset.secondary.color.withAlphaComponent(0.5)
         
         textView.layer.cornerRadius = 10
@@ -27,15 +27,14 @@ final class RulesViewController: BaseViewController<RulesCoordinator> {
         title = L10n.Screen.Rules.title
         
         let style = NSMutableParagraphStyle()
-        style.alignment = .left
-        style.lineSpacing = 5
-        
-        // TODO: Change colour of text
         let text = NSAttributedString(string: L10n.Screen.Rules.rules,
                                       attributes: [
                                         .paragraphStyle: style,
                                         .font: F.BPGNinoMtavruli.bold.font(size: 18)])
-
+        
+        style.alignment = .left
+        style.lineSpacing = 5
+        
         textView.attributedText = text
     }
 }

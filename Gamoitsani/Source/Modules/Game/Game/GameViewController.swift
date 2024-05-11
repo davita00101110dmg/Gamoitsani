@@ -8,13 +8,10 @@
 
 import UIKit
 
-// MARK: - Review structure
 final class GameViewController: BaseViewController<GameCoordinator> {
     
     @IBOutlet weak var mainView: UIView!
     
-    var viewModel: GameViewModel?
-
     private var isShowingInfoView: Bool = false
     private var gameStory = GameStory.shared
     
@@ -28,6 +25,8 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     
     private lazy var confettiLayer = CAEmitterLayer()
     
+    var viewModel: GameViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,15 +38,31 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         super.viewWillDisappear(animated)
         stopConfettiAnimation()
     }
-    
-    override func setupUI() {
-        super.setupUI()
-    }
-    
+
     private func setupBackButton() {
         let backButton = UIBarButtonItem(title: "Back", image: UIImage(systemName: "chevron.backward"), target: self, action: #selector(presentAlertOnBackButton))
         navigationItem.leftBarButtonItem = backButton
         navigationItem.hidesBackButton = true
+    }
+    
+    private func showGameInfoView() {
+        guard let gameInfoView else { return }
+        gameInfoView.configure(with: .init(
+            teamName: gameStory.teams.keys[gameStory.currentTeamIndex],
+            currentRound: gameStory.currentRound),
+                               delegate: self)
+        
+        mainView.addSubview(gameInfoView)
+    }
+    
+    private func showGamePlayView() {
+        guard let gamePlayView else { return }
+        
+        gamePlayView.configure(with: .init(
+            words: gameStory.words.removeFirstNItems(100),
+            roundLength: gameStory.lengthOfRound,
+            score: gameStory.teams.values[gameStory.currentTeamIndex]), delegate: self)
+        mainView.addSubview(gamePlayView)
     }
     
     private func validateEndOfTheGame() -> Bool {
@@ -69,26 +84,6 @@ final class GameViewController: BaseViewController<GameCoordinator> {
                 showGameInfoView()
             }
         }
-    }
-    
-    private func showGameInfoView() {
-        guard let gameInfoView else { return }
-        gameInfoView.configure(with: .init(
-            teamName: gameStory.teams.keys[gameStory.currentTeamIndex],
-            currentRound: gameStory.currentRound),
-                               delegate: self)
-        
-        mainView.addSubview(gameInfoView)
-    }
-    
-    private func showGamePlayView() {
-        guard let gamePlayView else { return }
-    
-        gamePlayView.configure(with: .init(
-            words: gameStory.words.removeFirstNItems(100),
-            roundLength: gameStory.lengthOfRound,
-            score: gameStory.teams.values[gameStory.currentTeamIndex]), delegate: self)
-        mainView.addSubview(gamePlayView)
     }
     
     @objc private func presentAlertOnBackButton() {

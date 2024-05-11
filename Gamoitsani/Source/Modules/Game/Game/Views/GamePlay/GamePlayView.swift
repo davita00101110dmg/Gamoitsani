@@ -33,8 +33,8 @@ final class GamePlayView: UIView {
     }()
     
     private weak var delegate: GamePlayViewDelegate?
-    //TODO: Review this
-    var viewModel: GamePlayViewModel!
+    
+    private var viewModel: GamePlayViewModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -72,7 +72,7 @@ final class GamePlayView: UIView {
     private func timerBlock(_: Timer) -> Void {
         countdownTimer?.invalidate()
         roundLengthTimer?.invalidate()
-        delegate?.timerDidFinished(roundScore: viewModel.score)
+        delegate?.timerDidFinished(roundScore: viewModel?.score ?? 0)
     }
     
     private func updateTimerLabel(timer: Timer) -> Void {
@@ -89,7 +89,7 @@ final class GamePlayView: UIView {
     private func wordButtonAction(tag: Int) { // Tag 1: Correct Tag 2: Incorrect
         audioManager.playSound(tag: tag)
         updateWordLabel(with: words.popLast())
-        viewModel.score += tag == 1 ? 1 : -1
+        viewModel?.score += tag == 1 ? 1 : -1
     }
     
     @IBAction func correctWordAction(_ sender: UIButton) {

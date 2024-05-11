@@ -27,6 +27,8 @@
 		FF4FA9C72BEEB6FD00F38F98 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF4FA9C62BEEB6FD00F38F98 /* FirebaseFirestoreSwift */; };
 		FF4FA9C92BEF7C5900F38F98 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */; };
 		FF4FA9CC2BEF875B00F38F98 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */; };
+		FF4FA9D12BEFF30900F38F98 /* AddWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */; };
+		FF4FA9D32BEFF30E00F38F98 /* AddWordModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */; };
 		FF7F1D742BE6BCA900872554 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D732BE6BCA900872554 /* swiftgen.yml */; };
 		FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D752BE6D08200872554 /* Fonts.swift */; };
 		FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */; };
@@ -139,6 +141,8 @@
 		FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		FF4FA9CE2BEF8A8700F38F98 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewModel.swift; sourceTree = "<group>"; };
+		FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordModels.swift; sourceTree = "<group>"; };
 		FF7F1D732BE6BCA900872554 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = swiftgen.yml; path = Gamoitsani/Resources/Swiftgen/swiftgen.yml; sourceTree = SOURCE_ROOT; };
 		FF7F1D752BE6D08200872554 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "xcassets-swift5.stencil"; sourceTree = "<group>"; };
@@ -336,10 +340,10 @@
 		FF4D9D622BD69AF40046819D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				FF4FA9B92BED90B900F38F98 /* AddWord */,
 				FF4D9D632BD69AFF0046819D /* Home */,
 				FFFB4D392BD914DE00CDDCB4 /* Rules */,
 				FFFB4D472BD937D900CDDCB4 /* Game */,
+				FF4FA9B92BED90B900F38F98 /* AddWord */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -391,6 +395,8 @@
 			children = (
 				FF4FA9BA2BED915E00F38F98 /* Xib */,
 				FF4FA9BD2BED917300F38F98 /* AddWordViewController.swift */,
+				FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */,
+				FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */,
 				FF4FA9BF2BED917A00F38F98 /* AddWordCoordinator.swift */,
 			);
 			path = AddWord;
@@ -923,6 +929,7 @@
 				FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */,
 				FF7F1D962BE7B9D800872554 /* GameInfoViewModel.swift in Sources */,
 				FFFB4D362BD9128800CDDCB4 /* NotificationExtensons.swift in Sources */,
+				FF4FA9D12BEFF30900F38F98 /* AddWordViewModel.swift in Sources */,
 				FFFB4CD72BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift in Sources */,
 				FF8EA7142BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift in Sources */,
 				FF7F1D802BE7A2F700872554 /* GameViewController.swift in Sources */,
@@ -950,6 +957,7 @@
 				FFFB4D302BD861F300CDDCB4 /* GMButton.swift in Sources */,
 				FFF65CC82BE6B0C4008E0352 /* Localizable.swift in Sources */,
 				FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */,
+				FF4FA9D32BEFF30E00F38F98 /* AddWordModels.swift in Sources */,
 				FF7F1D922BE7AE5100872554 /* GamePlayView.swift in Sources */,
 				FFFB4CD92BD7CA9A00CDDCB4 /* BundleExtensions.swift in Sources */,
 			);

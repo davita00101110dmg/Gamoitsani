@@ -10,13 +10,9 @@ import Foundation
 
 extension Array {
     mutating func removeFirstNItems(_ n: Int) -> [Element] {
-        guard n <= count else {
-            return []
-        }
-        
-        let removedItems = Array(self[0..<n])
-        removeFirst(n)
-        
+        let numItemsToRemove = Swift.min(n, count)
+        let removedItems = Array(self[0..<numItemsToRemove])
+        removeFirst(numItemsToRemove)
         return removedItems
     }
 }

@@ -9,8 +9,4 @@
 
 import Foundation
 
-protocol RulesViewModel {
-}
-
-final class RulesViewModelImpl: RulesViewModel {
-}
+final class RulesViewModel { }

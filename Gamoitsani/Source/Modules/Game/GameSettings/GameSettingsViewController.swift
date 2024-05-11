@@ -9,7 +9,6 @@
 import UIKit
 
 final class GameSettingsViewController: BaseViewController<GameSettingsCoordinator> {
-    
     @IBOutlet weak var roundsAmountTitle: UILabel!
     @IBOutlet weak var roundsStepper: UIStepper!
     @IBOutlet weak var roundsLengthTitle: UILabel!
@@ -20,8 +19,6 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
     @IBOutlet weak var tableView: GMTableView!
     
     private var snapshot: GameSettingsSnapshot?
-    var viewModel: GameSettingsViewModel?
-    
     private lazy var dataSource = GameSettingsDataSource(tableView: tableView) { [weak self] tableView, indexPath, team in
         guard let self else { return.init() }
         
@@ -30,16 +27,18 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         return cell
     }
     
+    var viewModel: GameSettingsViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         configureDataSource()
-        viewModel?.fetchWords()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         GameStory.shared.reset()
+        viewModel?.fetchWords()
     }
     
     override func setupUI() {
@@ -141,7 +140,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
     }
 }
 
-// MARK: Actions
+// MARK: - Actions
 extension GameSettingsViewController {
     @IBAction func roundsStepperAction(_ sender: UIStepper) {
         roundsAmountTitle.text = L10n.Screen.GameSettings.RoundsAmount.title(sender.value.toString())

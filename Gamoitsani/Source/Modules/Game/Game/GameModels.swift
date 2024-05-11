@@ -6,7 +6,6 @@
 //  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-enum GameModels {
-}
+enum GameModels { }
