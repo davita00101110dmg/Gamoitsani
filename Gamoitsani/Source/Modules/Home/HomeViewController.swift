@@ -12,6 +12,7 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
     @IBOutlet weak var wandLabel: UILabel!
     @IBOutlet weak var gameButton: GMButton!
     @IBOutlet weak var rulesButton: GMButton!
+    @IBOutlet weak var addWordButton: GMButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,7 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
         title = L10n.App.title
         gameButton.configure(text: L10n.Screen.Home.PlayButton.title)
         rulesButton.configure(text: L10n.Screen.Home.RulesButton.title)
+        addWordButton.configure(text: L10n.Screen.Home.AddWordButton.title)
     }
     
     private func setupRightBarButtonItem() {
@@ -56,5 +58,9 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
     
     @IBAction func rulesButtonClicked(_ sender: Any) {
         coordinator?.navigateToRules()
+    }
+    
+    @IBAction func addWordButtonClicked(_ sender: Any) {
+        coordinator?.navigateToAddWord()
     }
 }

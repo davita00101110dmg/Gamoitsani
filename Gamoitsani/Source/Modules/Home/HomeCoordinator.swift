@@ -35,4 +35,10 @@ final class HomeCoordinator: BaseCoordinator {
         let gameSettingsCoordinator = GameSettingsCoordinator(navigationController: navigationController)
         coordinate(to: gameSettingsCoordinator)
     }
+    
+    func navigateToAddWord() {
+        guard let navigationController else { return }
+        let addWordCoordinator = AddWordCoordinator(navigationController: navigationController)
+        coordinate(to: addWordCoordinator)
+    }
 }

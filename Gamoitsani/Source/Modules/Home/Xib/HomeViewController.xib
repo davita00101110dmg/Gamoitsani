@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Gamoitsani" customModuleProvider="target">
             <connections>
+                <outlet property="addWordButton" destination="FZR-BI-XGf" id="Lbz-hn-Mka"/>
                 <outlet property="gameButton" destination="RKy-b6-2Oi" id="TbL-bk-VeE"/>
                 <outlet property="rulesButton" destination="D8J-Jd-c0D" id="zuJ-nz-XYz"/>
                 <outlet property="view" destination="iN0-l3-epB" id="yig-jY-6ac"/>
@@ -30,7 +31,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="9Eq-UI-f78">
-                    <rect key="frame" x="16" y="642" width="361" height="112"/>
+                    <rect key="frame" x="16" y="574" width="361" height="180"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKy-b6-2Oi" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="361" height="44"/>
@@ -52,6 +53,17 @@
                             <state key="normal" title="Rules"/>
                             <connections>
                                 <action selector="rulesButtonClicked:" destination="-1" eventType="touchUpInside" id="dxd-5A-q3e"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZR-BI-XGf" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="136" width="361" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="xJP-3C-Apv"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Add Word"/>
+                            <connections>
+                                <action selector="addWordButtonClicked:" destination="-1" eventType="touchUpInside" id="dWf-be-c8O"/>
                             </connections>
                         </button>
                     </subviews>
