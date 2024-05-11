@@ -80,7 +80,7 @@
     </objects>
     <resources>
         <namedColor name="Secondary">
-            <color red="0.27843137254901962" green="0.33725490196078434" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.32941176470588235" green="0.27843137254901962" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

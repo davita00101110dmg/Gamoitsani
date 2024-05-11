@@ -50,8 +50,10 @@ final class GamePlayView: UIView {
         wordLabel.font = F.BPGNinoMtavruli.bold.font(size: 32)
         timerLabel.font = F.BPGNinoMtavruli.bold.font(size: 100)
         
-        correctButton.configure(text: "✅", isCircle: true)
-        incorrectButton.configure(text: "❌", isCircle: true)
+        correctButton.configure(text: .empty, isCircle: true)
+        correctButton.backgroundColor = Asset.green.color
+        incorrectButton.configure(text: .empty, isCircle: true)
+        incorrectButton.backgroundColor = Asset.red.color
     }
     
     func configure(with model: GamePlayViewModel, delegate: GamePlayViewDelegate) {
