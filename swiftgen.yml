@@ -13,7 +13,7 @@ xcassets:
     - templateName: swift5
       output: Assets.swift
 fonts:
-  inputs: Fonts
+  inputs: SupportingFiles/Fonts
   outputs:
     - templateName: swift5
       output: Fonts.swift
