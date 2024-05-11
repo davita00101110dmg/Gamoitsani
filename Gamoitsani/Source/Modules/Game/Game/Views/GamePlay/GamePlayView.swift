@@ -26,11 +26,7 @@ final class GamePlayView: UIView {
     private var roundLengthTimer: Timer?
     private var countdownTimer: Timer?
     
-    private let audioManager: AudioManager = {
-        let manager = AudioManager()
-        manager.setupSounds()
-        return manager
-    }()
+    private var audioManager: AudioManager?
     
     private weak var delegate: GamePlayViewDelegate?
     
@@ -50,14 +46,14 @@ final class GamePlayView: UIView {
         wordLabel.font = F.BPGNinoMtavruli.bold.font(size: 32)
         timerLabel.font = F.BPGNinoMtavruli.bold.font(size: 100)
         
-        correctButton.configure(text: .empty, isCircle: true)
-        correctButton.backgroundColor = Asset.green.color
-        incorrectButton.configure(text: .empty, isCircle: true)
-        incorrectButton.backgroundColor = Asset.red.color
+        correctButton.configure(text: "✓", fontSize: 30, isCircle: true, textColor: Asset.green.color)
+        incorrectButton.configure(text: "✘", fontSize: 30, isCircle: true, textColor: Asset.red.color)
     }
     
-    func configure(with model: GamePlayViewModel, delegate: GamePlayViewDelegate) {
+    func configure(with model: GamePlayViewModel, audioManager: AudioManager, delegate: GamePlayViewDelegate) {
         self.delegate = delegate
+        self.audioManager = audioManager
+        
         roundLengthTimer = Timer.scheduledTimer(withTimeInterval: model.roundLength, repeats: false, block: timerBlock(_:))
         countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: updateTimerLabel(timer:))
         
@@ -87,7 +83,7 @@ final class GamePlayView: UIView {
     }
     
     private func wordButtonAction(tag: Int) { // Tag 1: Correct Tag 2: Incorrect
-        audioManager.playSound(tag: tag)
+        audioManager?.playSound(tag: tag)
         updateWordLabel(with: words.popLast())
         viewModel?.score += tag == 1 ? 1 : -1
     }

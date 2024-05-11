@@ -24,6 +24,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     }()
     
     private lazy var confettiLayer = CAEmitterLayer()
+    private lazy var audioManager = AudioManager()
     
     var viewModel: GameViewModel?
     
@@ -32,6 +33,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         
         setupBackButton()
         showGameInfoView()
+        configureAudioManager()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,6 +45,14 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         let backButton = UIBarButtonItem(title: "Back", image: UIImage(systemName: "chevron.backward"), target: self, action: #selector(presentAlertOnBackButton))
         navigationItem.leftBarButtonItem = backButton
         navigationItem.hidesBackButton = true
+    }
+    
+    private func configureAudioManager() {
+        let operationQueue = OperationQueue()
+        let audioSetupOperation = BlockOperation { [weak self] in
+            self?.audioManager.setupSounds()
+        }
+        operationQueue.addOperation(audioSetupOperation)
     }
     
     private func showGameInfoView() {
@@ -58,10 +68,11 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     private func showGamePlayView() {
         guard let gamePlayView else { return }
         
-        gamePlayView.configure(with: .init(
-            words: gameStory.words.removeFirstNItems(100),
-            roundLength: gameStory.lengthOfRound,
-            score: gameStory.teams.values[gameStory.currentTeamIndex]), delegate: self)
+        gamePlayView.configure(with: .init(words: gameStory.words.removeFirstNItems(100),
+                                           roundLength: gameStory.lengthOfRound,
+                                           score: gameStory.teams.values[gameStory.currentTeamIndex]),
+                               audioManager: audioManager,
+                               delegate: self)
         mainView.addSubview(gamePlayView)
     }
     
