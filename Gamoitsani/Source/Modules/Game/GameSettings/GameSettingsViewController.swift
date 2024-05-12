@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Network
 
 final class GameSettingsViewController: BaseViewController<GameSettingsCoordinator> {
     @IBOutlet weak var roundsAmountTitle: UILabel!
@@ -27,18 +28,21 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         return cell
     }
     
+    private let networkMonitor = NWPathMonitor()
+    private var hasNetworkConnection = true
+    
     var viewModel: GameSettingsViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         configureDataSource()
+        observeNetworkConnection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         GameStory.shared.reset()
-        viewModel?.fetchWords()
     }
     
     override func setupUI() {
@@ -99,6 +103,22 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
             }.store(in: &subscribers)
     }
     
+    private func observeNetworkConnection() {
+        networkMonitor.pathUpdateHandler = { [weak self] path in
+            guard let self else { return }
+            
+            hasNetworkConnection = path.status == .satisfied
+        
+            if path.status == .satisfied && GameStory.shared.words.isEmpty { 
+                // TODO: Test when i will have at least 500 elements in DB
+                viewModel?.fetchWords()
+            }
+        }
+        
+        let queue = DispatchQueue(label: ViewControllerConstants.networkObserverThreadName)
+        networkMonitor.start(queue: queue)
+    }
+    
     private func presentAddTeamAlert() {
         let alertType = AlertType.team(title: L10n.Screen.GameSettings.AddTeamAlert.title,
                                        message: L10n.Screen.GameSettings.AddTeamAlert.message,
@@ -124,8 +144,9 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         presentAlert(of: alertType)
     }
     
-    private func presentIncorrectGameSettingsAlert(message: String) {
-        let alertType = AlertType.info(title: L10n.Screen.GameSettings.IncorrectParameter.title,
+    private func presentIncorrectGameSettingsAlert(title: String = L10n.Screen.GameSettings.IncorrectParameter.title,
+                                                   message: String) {
+        let alertType = AlertType.info(title: title,
                                        message: message)
         presentAlert(of: alertType)
     }
@@ -167,8 +188,13 @@ extension GameSettingsViewController {
     }
     
     private func startGame() {
-        updateGameStory()
-        coordinator?.navigateToGame()
+        if hasNetworkConnection {
+            updateGameStory()
+            coordinator?.navigateToGame()
+        } else {
+            presentIncorrectGameSettingsAlert(title: L10n.Screen.GameSettings.NoInternetConnectionAlert.title,
+                                              message: L10n.Screen.GameSettings.NoInternetConnectionAlert.message)
+        }
     }
 }
 
@@ -257,6 +283,7 @@ extension GameSettingsViewController: UITableViewDropDelegate {
 // MARK: - ViewController Constants
 extension GameSettingsViewController {
     enum ViewControllerConstants {
+        static let networkObserverThreadName: String = "NetworkMonitor"
         static let tableViewCornerRadius: CGFloat = 8
         static let roundsStepperMinValue: Double = 1
         static let roundsStepperMaxValue: Double = 5
