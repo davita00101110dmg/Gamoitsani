@@ -46,6 +46,8 @@
 "screen.game_settings.add_team_alert.title" = "Add team";
 "screen.game_settings.add_team_alert.message" = "Enter team name";
 "screen.game_settings.update_team_name_alert.title" = "Update team name";
+"screen.game_settings.no_internet_connection_alert.title" = "No internet connection!";
+"screen.game_settings.no_internet_connection_alert.message" = "Internet connection is required to start the game";
 "screen.game_settings.start_game.title" = "Start Game";
 "screen.game_settings.incorrect_parameter.title" = "Incorrect parameter";
 "screen.game_settings.incorrect_game_settings_not_enough_teams.message" = "Not enough teams, you need to add at least 2 teams to start the game!";

@@ -106,6 +106,13 @@ public enum L10n {
           public static var title: String { L10n.tr("Localizable", "screen.game_settings.incorrect_parameter.title") }
         }
 
+        public enum NoInternetConnectionAlert {
+          /// Internet connection is required to start the game
+          public static var message: String { L10n.tr("Localizable", "screen.game_settings.no_internet_connection_alert.message") }
+          /// No internet connection!
+          public static var title: String { L10n.tr("Localizable", "screen.game_settings.no_internet_connection_alert.title") }
+        }
+
         public enum RoundsAmount {
           /// Rounds Amount: %@
           public static func title( _ p1: String) -> String {

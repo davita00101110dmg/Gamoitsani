@@ -46,6 +46,8 @@
 "screen.game_settings.add_team_alert.title" = "დაამატე გუნდი";
 "screen.game_settings.add_team_alert.message" = "ჩაწერე გუნდის სახელი";
 "screen.game_settings.update_team_name_alert.title" = "შეცვალე გუნდის სახელი";
+"screen.game_settings.no_internet_connection_alert.title" = "არ არის ინტერნეტთან კავშირი!";
+"screen.game_settings.no_internet_connection_alert.message" = "თამაშის დასაწყებად საჭიროა ინტერნეტთან კავშირი";
 "screen.game_settings.start_game.title" = "თამაშის დაწყება";
 "screen.game_settings.incorrect_parameter.title" = "არასწორი პარამეტრი";
 "screen.game_settings.incorrect_game_settings_not_enough_teams.message" = "არასაკმარისი გუნდების რაოდენობა, თამაშის დასაწყებად საჭიროა მინიმუმ 2 გუნდის დამატება!";
