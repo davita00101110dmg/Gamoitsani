@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Network
 
 final class GameSettingsViewController: BaseViewController<GameSettingsCoordinator> {
     @IBOutlet weak var roundsAmountTitle: UILabel!
@@ -28,8 +27,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         return cell
     }
     
-    private let networkMonitor = NWPathMonitor()
-    private var hasNetworkConnection = true
+    private var gameStory = GameStory.shared
     
     var viewModel: GameSettingsViewModel?
     
@@ -37,12 +35,12 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         super.viewDidLoad()
         setupTableView()
         configureDataSource()
-        observeNetworkConnection()
+        viewModel?.observeNetworkConnection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        GameStory.shared.reset()
+        gameStory.reset()
     }
     
     override func setupUI() {
@@ -96,27 +94,11 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
                 self.snapshot?.appendItems(items)
                 self.dataSource.defaultRowAnimation = .automatic
                 
-                if let snapshot = self.snapshot, !items.isEmpty {
+                if let snapshot, !items.isEmpty {
                     self.dataSource.apply(snapshot, animatingDifferences: true)
                 }
                 
             }.store(in: &subscribers)
-    }
-    
-    private func observeNetworkConnection() {
-        networkMonitor.pathUpdateHandler = { [weak self] path in
-            guard let self else { return }
-            
-            hasNetworkConnection = path.status == .satisfied
-        
-            if path.status == .satisfied && GameStory.shared.words.isEmpty { 
-                // TODO: Test when i will have at least 500 elements in DB
-                viewModel?.fetchWords()
-            }
-        }
-        
-        let queue = DispatchQueue(label: ViewControllerConstants.networkObserverThreadName)
-        networkMonitor.start(queue: queue)
     }
     
     private func presentAddTeamAlert() {
@@ -126,7 +108,12 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
                                        addActionTitle: L10n.addIt) { [weak self] teamName in
             guard let self,
                   let viewModel else { return }
-            viewModel.addTeam(with: teamName.removeExtraSpaces())
+            let teamName = teamName.removeExtraSpaces()
+            if teamName == .empty {
+                presentIncorrectGameSettingsAlert(message: L10n.Screen.GameSettings.IncorrectGameSettingsEmptyTeamName.message)
+            } else {
+                viewModel.addTeam(with: teamName.removeExtraSpaces())
+            }
         }
         presentAlert(of: alertType)
     }
@@ -154,10 +141,10 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
     private func updateGameStory() {
         guard let viewModel else { return }
         
-        GameStory.shared.numberOfRounds = roundsStepper.value.toInt
-        GameStory.shared.lengthOfRound = roundsLengthStepper.value
-        GameStory.shared.teams = viewModel.getTeamsDictionary()
-        GameStory.shared.maxTotalSessions = roundsStepper.value.toInt * viewModel.getTeamsCount()
+        gameStory.numberOfRounds = roundsStepper.value.toInt
+        gameStory.lengthOfRound = roundsLengthStepper.value
+        gameStory.teams = viewModel.getTeamsDictionary()
+        gameStory.maxTotalSessions = roundsStepper.value.toInt * viewModel.getTeamsCount()
     }
 }
 
@@ -172,7 +159,11 @@ extension GameSettingsViewController {
     }
     
     @IBAction func addTeamAction(_ sender: Any) {
-        presentAddTeamAlert()
+        if let viewModel, viewModel.getTeamsCount() < 5 {
+            presentAddTeamAlert()
+        } else {
+            presentIncorrectGameSettingsAlert(message: L10n.Screen.GameSettings.IncorrectGameSettingsMaximumTeams.message)
+        }
     }
     
     @IBAction func startGameAction(_ sender: Any) {
@@ -188,7 +179,7 @@ extension GameSettingsViewController {
     }
     
     private func startGame() {
-        if hasNetworkConnection {
+        if let viewModel, viewModel.hasNetworkConnection() {
             updateGameStory()
             coordinator?.navigateToGame()
         } else {
@@ -283,7 +274,6 @@ extension GameSettingsViewController: UITableViewDropDelegate {
 // MARK: - ViewController Constants
 extension GameSettingsViewController {
     enum ViewControllerConstants {
-        static let networkObserverThreadName: String = "NetworkMonitor"
         static let tableViewCornerRadius: CGFloat = 8
         static let roundsStepperMinValue: Double = 1
         static let roundsStepperMaxValue: Double = 5
