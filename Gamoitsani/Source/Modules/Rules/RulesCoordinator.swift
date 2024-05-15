@@ -18,8 +18,9 @@ final class RulesCoordinator: BaseCoordinator {
     
     override func start() {
         guard let navigationController else { return }
-        let viewController = RulesViewController.loadFromNib()
-        viewController.coordinator = self
-        navigationController.pushViewController(viewController, animated: true)
+        let rulesViewController = RulesViewController.loadFromNib()
+        rulesViewController.viewModel = RulesViewModel()
+        rulesViewController.coordinator = self
+        navigationController.pushViewController(rulesViewController, animated: true)
     }
 }

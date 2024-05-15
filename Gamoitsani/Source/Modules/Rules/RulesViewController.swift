@@ -10,31 +10,53 @@ import UIKit
 
 final class RulesViewController: BaseViewController<RulesCoordinator> {
     
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var tableView: UITableView!
     
-    override func setupUI() {
-        super.setupUI()
-        
-        textView.backgroundColor = Asset.secondary.color.withAlphaComponent(0.5)
-        
-        textView.layer.cornerRadius = 10
-        textView.textColor = .white
+    var viewModel: RulesViewModel?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupTableView()
+        title = L10n.Screen.Rules.title
     }
     
-    override func setupLocalizedTexts() {
-        super.setupLocalizedTexts()
-        
-        title = L10n.Screen.Rules.title
-        
-        let style = NSMutableParagraphStyle()
-        let text = NSAttributedString(string: L10n.Screen.Rules.rules,
-                                      attributes: [
-                                        .paragraphStyle: style,
-                                        .font: F.BPGNinoMtavruli.bold.font(size: 18)])
-        
-        style.alignment = .left
-        style.lineSpacing = 5
-        
-        textView.attributedText = text
+    private func setupTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(RuleTableViewCell.self)
+    }
+}
+
+// MARK: - UITableView Delegate and DataSource Methods
+extension RulesViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if let viewModel {
+            return viewModel.numberOfItems()
+        }
+
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard section != 0 else { return nil }
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.red
+        return headerView
+    }
+     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: RuleTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        let rule = viewModel?.rule(at: indexPath.section)
+        cell.configure(with: rule)
+        return cell
     }
 }

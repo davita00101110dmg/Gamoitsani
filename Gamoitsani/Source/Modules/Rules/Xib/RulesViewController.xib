@@ -8,15 +8,10 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="BPG-Nino-Mtavruli-Bold.ttf">
-            <string>BPGNinoMtavruli-Bold</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RulesViewController" customModule="Gamoitsani" customModuleProvider="target">
             <connections>
-                <outlet property="textView" destination="84O-fa-58w" id="hmI-bp-fAK"/>
+                <outlet property="tableView" destination="zgV-fI-Vl3" id="33K-tI-9Ua"/>
                 <outlet property="view" destination="iN0-l3-epB" id="0KC-av-3hg"/>
             </connections>
         </placeholder>
@@ -25,38 +20,35 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84O-fa-58w">
-                    <rect key="frame" x="16" y="306" width="361" height="265"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zgV-fI-Vl3">
+                    <rect key="frame" x="16" y="155" width="361" height="663"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <navigationBar hidden="YES" contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EtG-p6-Taa">
+                    <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" id="ohu-qs-9Wt"/>
+                        <constraint firstAttribute="height" id="f8v-Ns-C2g"/>
                     </constraints>
-                    <string key="text">სიტყვების ახსნისას აკრძალულია ერთფუძიანი სიტყვების გამოყენება
-თუ გუნდის წევრი გამოიცნობს სიტყვას დააჭირეთ + ღილაკს (+1 ქულა)
-თუ ვერ აუხსენით სიტყვა, ან დაარღვიეთ სიტყვა და გინდათ რომ შემდეგ სიტყვაზე გადახვიდეთ დააჭირეთ X ღილაკს (-1 ქულა)
-იმარჯვებს ის გუნდი რომელიც პირველი დააგროვებს საჭირო ქულებს
-
-გისურვებთ წარმატებებს :)</string>
-                    <color key="textColor" systemColor="labelColor"/>
-                    <fontDescription key="fontDescription" name="BPGNinoMtavruli-Bold" family="BPG Nino Mtavruli" pointSize="18"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
+                    <items>
+                        <navigationItem title="Title" id="BBc-8g-7bA"/>
+                    </items>
+                </navigationBar>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="84O-fa-58w" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="3gG-CN-ub2"/>
-                <constraint firstItem="84O-fa-58w" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Apa-Gf-426"/>
-                <constraint firstItem="84O-fa-58w" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="Dw6-gE-tbM"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="84O-fa-58w" secondAttribute="trailing" constant="16" id="vIb-Mf-vP3"/>
+                <constraint firstItem="EtG-p6-Taa" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="ETD-u8-Mvn"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="zgV-fI-Vl3" secondAttribute="bottom" id="Zdz-In-bDg"/>
+                <constraint firstItem="EtG-p6-Taa" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="bch-dH-m7o"/>
+                <constraint firstItem="zgV-fI-Vl3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="gTF-gi-S9T"/>
+                <constraint firstItem="zgV-fI-Vl3" firstAttribute="top" secondItem="EtG-p6-Taa" secondAttribute="bottom" id="m9J-Fe-U46"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zgV-fI-Vl3" secondAttribute="trailing" constant="16" id="qZx-nk-4qd"/>
+                <constraint firstItem="EtG-p6-Taa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="xVZ-lE-qbb"/>
             </constraints>
-            <point key="canvasLocation" x="-415" y="-10"/>
+            <point key="canvasLocation" x="-416.03053435114504" y="-10.563380281690142"/>
         </view>
     </objects>
     <resources>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

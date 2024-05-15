@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */; };
+		FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */; };
 		FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D282BD698620046819D /* AppDelegate.swift */; };
 		FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D2A2BD698620046819D /* SceneDelegate.swift */; };
 		FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */; };
@@ -119,6 +121,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleTableViewCell.swift; sourceTree = "<group>"; };
+		FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RuleTableViewCell.xib; sourceTree = "<group>"; };
 		FF4D9D252BD698620046819D /* Gamoitsani.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4D9D282BD698620046819D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF4D9D2A2BD698620046819D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -245,6 +249,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF38FAC42BF5406B006AD774 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FF38FAC52BF5406E006AD774 /* RuleTableViewCell */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		FF38FAC52BF5406E006AD774 /* RuleTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */,
+				FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */,
+			);
+			path = RuleTableViewCell;
+			sourceTree = "<group>";
+		};
 		FF4D9D1C2BD698620046819D = {
 			isa = PBXGroup;
 			children = (
@@ -638,6 +659,7 @@
 		FFFB4D392BD914DE00CDDCB4 /* Rules */ = {
 			isa = PBXGroup;
 			children = (
+				FF38FAC42BF5406B006AD774 /* Cell */,
 				FFFB4D442BD9155300CDDCB4 /* Xib */,
 				FFFB4D3C2BD9155100CDDCB4 /* RulesViewController.swift */,
 				FFFB4D3D2BD9155100CDDCB4 /* RulesViewModel.swift */,
@@ -844,6 +866,7 @@
 				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
 				FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */,
 				FF8EA7262BEC13FF00F098B8 /* correct.mp3 in Resources */,
+				FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */,
 				FF7F1D822BE7A2F700872554 /* GameViewController.xib in Resources */,
 				FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */,
 				FFFB4D1A2BD8441F00CDDCB4 /* BPG-Nino-Mtavruli-Normal.ttf in Resources */,
@@ -924,6 +947,7 @@
 				FF8EA7112BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift in Sources */,
 				FF7F1D7F2BE7A2F700872554 /* GameModels.swift in Sources */,
 				FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */,
+				FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */,
 				FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */,
 				FF4FA9CC2BEF875B00F38F98 /* Configuration.swift in Sources */,
 				FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */,
