@@ -1,13 +1,13 @@
 {
   "images" : [
     {
-      "filename" : "App Icon 1.png",
+      "filename" : "App Icon White.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
     },
     {
-      "filename" : "App Icon.png",
+      "filename" : "App Icon White 1.png",
       "idiom" : "universal",
       "platform" : "watchos",
       "size" : "1024x1024"
