@@ -46,8 +46,10 @@ final class GamePlayView: UIView {
         wordLabel.font = F.BPGNinoMtavruli.bold.font(size: 32)
         timerLabel.font = F.BPGNinoMtavruli.bold.font(size: 100)
         
-        correctButton.configure(text: "✓", fontSize: 30, isCircle: true, textColor: Asset.green.color)
-        incorrectButton.configure(text: "✘", fontSize: 30, isCircle: true, textColor: Asset.red.color)
+        correctButton.configure(text: "✓", fontSize: 30, isCircle: true)
+        correctButton.backgroundColor = Asset.green.color
+        incorrectButton.configure(text: "✘", fontSize: 30, isCircle: true)
+        incorrectButton.backgroundColor = Asset.red.color
     }
     
     func configure(with model: GamePlayViewModel, audioManager: AudioManager, delegate: GamePlayViewDelegate) {
