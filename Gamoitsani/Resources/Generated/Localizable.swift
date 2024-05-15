@@ -91,6 +91,16 @@ public enum L10n {
           public static var title: String { L10n.tr("Localizable", "screen.game_settings.add_team_alert.title") }
         }
 
+        public enum IncorrectGameSettingsEmptyTeamName {
+          /// Team name cannot be empty
+          public static var message: String { L10n.tr("Localizable", "screen.game_settings.incorrect_game_settings_empty_team_name.message") }
+        }
+
+        public enum IncorrectGameSettingsMaximumTeams {
+          /// It is not possible to add more than 5 teams
+          public static var message: String { L10n.tr("Localizable", "screen.game_settings.incorrect_game_settings_maximum_teams.message") }
+        }
+
         public enum IncorrectGameSettingsNotEnoughTeams {
           /// Not enough teams, you need to add at least 2 teams to start the game!
           public static var message: String { L10n.tr("Localizable", "screen.game_settings.incorrect_game_settings_not_enough_teams.message") }
@@ -156,7 +166,7 @@ public enum L10n {
         }
 
         public enum PlayButton {
-          /// Start Game
+          /// Game
           public static var title: String { L10n.tr("Localizable", "screen.home.play_button.title") }
         }
 
@@ -172,8 +182,18 @@ public enum L10n {
       }
 
       public enum Rules {
-        /// ・When explaining the word, it is forbidden to use a single word \n\n ・If a team member guesses the word, press the green button (+1 point) \n\n ・If you can't explain the word, or some rule was broken and you want to go to the next word, press the red button (-1 point) \n\n ・The team that collects more points before the time runs out, or the first to reach the set number of points in the round, wins. \n\n Good luck :)
-        public static var rules: String { L10n.tr("Localizable", "screen.rules.rules") }
+        /// Note that at this moment you can only play with Georgian words
+        public static var rule1: String { L10n.tr("Localizable", "screen.rules.rule1") }
+        /// When explaining the word, it is forbidden to use a single word
+        public static var rule2: String { L10n.tr("Localizable", "screen.rules.rule2") }
+        /// If a team member guesses the word, press the green button (+1 point)
+        public static var rule3: String { L10n.tr("Localizable", "screen.rules.rule3") }
+        /// If you can't explain the word, or some rule was broken and you want to go to the next word, press the red button (-1 point)
+        public static var rule4: String { L10n.tr("Localizable", "screen.rules.rule4") }
+        /// The team that collects more points before the time runs out, or the first to reach the set number of points in the round, wins
+        public static var rule5: String { L10n.tr("Localizable", "screen.rules.rule5") }
+        /// Good luck :)
+        public static var rule6: String { L10n.tr("Localizable", "screen.rules.rule6") }
         /// Rules
         public static var title: String { L10n.tr("Localizable", "screen.rules.title") }
       }

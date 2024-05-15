@@ -23,7 +23,7 @@
 "thanks" = "Thanks";
 
 // MARK: - Home
-"screen.home.play_button.title" = "Start Game";
+"screen.home.play_button.title" = "Game";
 "screen.home.rules_button.title" = "Rules";
 "screen.home.add_word_button.title" = "Add word";
 "screen.home.settings_button.title" = "Settings";
@@ -31,7 +31,12 @@
 
 // MARK: - Rules
 "screen.rules.title" = "Rules";
-"screen.rules.rules" = "・When explaining the word, it is forbidden to use a single word \n\n ・If a team member guesses the word, press the green button (+1 point) \n\n ・If you can't explain the word, or some rule was broken and you want to go to the next word, press the red button (-1 point) \n\n ・The team that collects more points before the time runs out, or the first to reach the set number of points in the round, wins. \n\n Good luck :)";
+"screen.rules.rule1" = "Note that at this moment you can only play with Georgian words";
+"screen.rules.rule2" = "When explaining the word, it is forbidden to use a single word";
+"screen.rules.rule3" = "If a team member guesses the word, press the green button (+1 point)";
+"screen.rules.rule4" = "If you can't explain the word, or some rule was broken and you want to go to the next word, press the red button (-1 point)";
+"screen.rules.rule5" = "The team that collects more points before the time runs out, or the first to reach the set number of points in the round, wins";
+"screen.rules.rule6" = "Good luck :)";
 
 // MARK: - Add Word
 "screen.add_word.title" = "Add Word";
@@ -52,6 +57,8 @@
 "screen.game_settings.incorrect_parameter.title" = "Incorrect parameter";
 "screen.game_settings.incorrect_game_settings_not_enough_teams.message" = "Not enough teams, you need to add at least 2 teams to start the game!";
 "screen.game_settings.incorrect_game_settings_not_unique_teams.message" = "Team names must be unique!";
+"screen.game_settings.incorrect_game_settings_maximum_teams.message" = "It is not possible to add more than 5 teams";
+"screen.game_settings.incorrect_game_settings_empty_team_name.message" = "Team name cannot be empty";
 
 // MARK: - Game
 "screen.game.confirmation_alert.title" = "Are you sure you want to go back?";
