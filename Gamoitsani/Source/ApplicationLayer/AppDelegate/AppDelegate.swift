@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        registerInitialUserDefaultValues()
+
         return true
     }
 
@@ -79,5 +81,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    private func registerInitialUserDefaultValues() {
+        UserDefaults.standard.register(defaults: [
+            UserDefaults.Keys.appLanguage: AppConstants.Language.georgian.identifier
+        ])
+    }
 }
 
