@@ -258,6 +258,12 @@ extension GameSettingsViewController: UITableViewDragDelegate {
         
         viewModel?.updateOrder(with: newOrder)
     }
+    
+    func tableView(_ tableView: UITableView, dropPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        let param = UIDragPreviewParameters()
+        param.backgroundColor = .clear
+        return param
+    }
 }
 
 // MARK: - UITableViewDropDelegate Delegate Methods
