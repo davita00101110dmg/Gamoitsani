@@ -43,7 +43,6 @@ class BaseViewController<T: Coordinator>: UIViewController {
     
     func setupUI() { 
         view.backgroundColor = Asset.primary.color
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.enableMultilineTitle()
         setupLocalizedTexts()
     }
