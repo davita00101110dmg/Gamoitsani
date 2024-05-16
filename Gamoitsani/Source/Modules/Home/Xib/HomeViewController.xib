@@ -6,9 +6,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="BPG-Nino-Mtavruli-Bold.ttf">
+            <string>BPGNinoMtavruli-Bold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Gamoitsani" customModuleProvider="target">
             <connections>
@@ -16,7 +20,6 @@
                 <outlet property="gameButton" destination="RKy-b6-2Oi" id="TbL-bk-VeE"/>
                 <outlet property="rulesButton" destination="D8J-Jd-c0D" id="zuJ-nz-XYz"/>
                 <outlet property="view" destination="iN0-l3-epB" id="yig-jY-6ac"/>
-                <outlet property="wandLabel" destination="9nD-z7-nPt" id="zqs-Mr-33x"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -24,12 +27,6 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🪄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nD-z7-nPt">
-                    <rect key="frame" x="142.66666666666666" y="366.33333333333331" width="108" height="119.66666666666669"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="100"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="9Eq-UI-f78">
                     <rect key="frame" x="16" y="574" width="361" height="180"/>
                     <subviews>
@@ -68,37 +65,40 @@
                         </button>
                     </subviews>
                 </stackView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wand.and.stars" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="N5D-ta-l2U">
-                    <rect key="frame" x="96.666666666666686" y="294.66666666666669" width="200" height="198.66666666666669"/>
-                    <color key="tintColor" name="TintColor"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="27j-1w-vXC">
+                    <rect key="frame" x="48" y="242" width="297" height="300"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="bQL-Dm-S4c"/>
-                        <constraint firstAttribute="width" constant="200" id="rTJ-yt-GLe"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="bMZ-He-GZl"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="გამოიცანი" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ree-sI-huk">
+                    <rect key="frame" x="94.666666666666686" y="160" width="204" height="46"/>
+                    <fontDescription key="fontDescription" name="BPGNinoMtavruli-Bold" family="BPG Nino Mtavruli" pointSize="40"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="Primary"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9Eq-UI-f78" secondAttribute="trailing" constant="16" id="1yO-Tr-w1k"/>
-                <constraint firstItem="9nD-z7-nPt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9wA-KE-agd"/>
+                <constraint firstItem="ree-sI-huk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="top" constant="24" id="5Mr-F1-93d"/>
+                <constraint firstItem="27j-1w-vXC" firstAttribute="top" secondItem="ree-sI-huk" secondAttribute="bottom" constant="36" id="89j-Qb-MWn"/>
+                <constraint firstItem="27j-1w-vXC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="48" id="BXm-cZ-XZ3"/>
                 <constraint firstItem="9Eq-UI-f78" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="CqP-Al-pwm"/>
                 <constraint firstItem="9Eq-UI-f78" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GLo-LI-R0p"/>
-                <constraint firstItem="9nD-z7-nPt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OIO-Bj-X2l"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="27j-1w-vXC" secondAttribute="trailing" constant="48" id="H93-Kf-OcT"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="9Eq-UI-f78" secondAttribute="bottom" constant="64" id="X2N-yf-VQu"/>
-                <constraint firstItem="N5D-ta-l2U" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aAy-mZ-gyV"/>
-                <constraint firstItem="N5D-ta-l2U" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-32" id="sBt-da-lKc"/>
+                <constraint firstItem="ree-sI-huk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ftj-6E-2UV"/>
+                <constraint firstItem="9Eq-UI-f78" firstAttribute="top" secondItem="27j-1w-vXC" secondAttribute="bottom" constant="32" id="jPu-Ql-Pwd"/>
             </constraints>
-            <point key="canvasLocation" x="68" y="21"/>
+            <point key="canvasLocation" x="67.938931297709928" y="20.422535211267608"/>
         </view>
     </objects>
     <resources>
-        <image name="wand.and.stars" catalog="system" width="128" height="115"/>
-        <namedColor name="TintColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="Logo" width="1024" height="1024"/>
+        <namedColor name="Primary">
+            <color red="0.059000000357627869" green="0.0" blue="0.22400000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
