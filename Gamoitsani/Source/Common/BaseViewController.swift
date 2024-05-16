@@ -13,6 +13,8 @@ class BaseViewController<T: Coordinator>: UIViewController {
     
     var subscribers = Set<AnyCancellable>()
     weak var coordinator: T?
+    
+    var shouldApplyGradientBackground: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +38,30 @@ class BaseViewController<T: Coordinator>: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(languageDidChange), name: .languageDidChange, object: nil)
     }
     
+    private func setupGradientBackground() {
+        guard shouldApplyGradientBackground else {
+            view.backgroundColor = Asset.primary.color
+            return
+        }
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [Asset.gradientColor1.color.cgColor,
+                                Asset.gradientColor2.color.cgColor,
+                                Asset.gradientColor3.color.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: -0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradientLayer.locations = [0, 0.47, 1]
+        gradientLayer.frame = view.bounds
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
     deinit {
         dump("deinited \(self)")
         NotificationCenter.default.removeObserver(self)
     }
     
     func setupUI() { 
-        view.backgroundColor = Asset.primary.color
+        setupGradientBackground()
         navigationItem.enableMultilineTitle()
         setupLocalizedTexts()
     }
