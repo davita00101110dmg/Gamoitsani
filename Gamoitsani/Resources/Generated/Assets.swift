@@ -38,6 +38,7 @@ internal enum Asset {
   internal static let gradientColor2 = ColorAsset(name: "Gradient Color 2")
   internal static let gradientColor3 = ColorAsset(name: "Gradient Color 3")
   internal static let green = ColorAsset(name: "Green")
+  internal static let logo = ImageAsset(name: "Logo")
   internal static let primary = ColorAsset(name: "Primary")
   internal static let red = ColorAsset(name: "Red")
   internal static let secondary = ColorAsset(name: "Secondary")
