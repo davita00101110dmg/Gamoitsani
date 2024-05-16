@@ -34,6 +34,7 @@ final class GameScoreboardViewController: BaseViewController<GameScoreboardCoord
     }
     
     override func setupUI() {
+        shouldApplyGradientBackground = false
         super.setupUI()
         titleLabel.configure(with: L10n.scoreboard, fontSize: ViewControllerConstants.titleFontSize)
         
