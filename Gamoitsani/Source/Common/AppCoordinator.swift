@@ -21,8 +21,10 @@ final class AppCoordinator: BaseCoordinator {
     private func applyTheme() {
         UINavigationBar.appearance().tintColor = Asset.tintColor.color
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : Asset.tintColor.color]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : Asset.tintColor.color]
-        UINavigationBar.appearance().prefersLargeTitles = true
+        UINavigationBar.appearance().titleTextAttributes = [
+            .foregroundColor : Asset.tintColor.color,
+            .font: F.BPGNinoMtavruli.bold.font(size: 18)]
+        UINavigationBar.appearance().prefersLargeTitles = false
 
         UIView.appearance().tintColor = Asset.tintColor.color
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .black
