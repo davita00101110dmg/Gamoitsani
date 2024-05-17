@@ -46,7 +46,6 @@
 		FF7F1D922BE7AE5100872554 /* GamePlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D912BE7AE5100872554 /* GamePlayView.swift */; };
 		FF7F1D942BE7B10600872554 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D932BE7B10600872554 /* UIViewExtensions.swift */; };
 		FF7F1D962BE7B9D800872554 /* GameInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D952BE7B9D800872554 /* GameInfoViewModel.swift */; };
-		FF7F1D992BE7CDD400872554 /* LookinServer in Frameworks */ = {isa = PBXBuildFile; productRef = FF7F1D982BE7CDD400872554 /* LookinServer */; };
 		FF7F1D9B2BE7D25300872554 /* GamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D9A2BE7D25300872554 /* GamePlayViewModel.swift */; };
 		FF7F1D9D2BE92F5000872554 /* GameStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D9C2BE92F5000872554 /* GameStory.swift */; };
 		FF7F1DA32BE93DF900872554 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = FF7F1DA22BE93DF900872554 /* Collections */; };
@@ -226,7 +225,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF7F1DA32BE93DF900872554 /* Collections in Frameworks */,
-				FF7F1D992BE7CDD400872554 /* LookinServer in Frameworks */,
 				FF4FA9C52BEEB6FD00F38F98 /* FirebaseFirestore in Frameworks */,
 				FF4FA9C72BEEB6FD00F38F98 /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -753,7 +751,6 @@
 			);
 			name = Gamoitsani;
 			packageProductDependencies = (
-				FF7F1D982BE7CDD400872554 /* LookinServer */,
 				FF7F1DA22BE93DF900872554 /* Collections */,
 				FF4FA9C42BEEB6FD00F38F98 /* FirebaseFirestore */,
 				FF4FA9C62BEEB6FD00F38F98 /* FirebaseFirestoreSwift */,
@@ -832,7 +829,6 @@
 			);
 			mainGroup = FF4D9D1C2BD698620046819D;
 			packageReferences = (
-				FF7F1D972BE7CDD400872554 /* XCRemoteSwiftPackageReference "LookinServer" */,
 				FF7F1DA12BE93DF900872554 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				FF4FA9C32BEEB6FD00F38F98 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
@@ -1353,14 +1349,6 @@
 				minimumVersion = 10.25.0;
 			};
 		};
-		FF7F1D972BE7CDD400872554 /* XCRemoteSwiftPackageReference "LookinServer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/QMUI/LookinServer/";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.8;
-			};
-		};
 		FF7F1DA12BE93DF900872554 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -1381,11 +1369,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF4FA9C32BEEB6FD00F38F98 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
-		};
-		FF7F1D982BE7CDD400872554 /* LookinServer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FF7F1D972BE7CDD400872554 /* XCRemoteSwiftPackageReference "LookinServer" */;
-			productName = LookinServer;
 		};
 		FF7F1DA22BE93DF900872554 /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
