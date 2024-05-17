@@ -8,7 +8,7 @@
 	<string>${SUGGESTED_WORDS_COLLECTION_NAME}</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Resources/Fonts/BPGNinoMtavruli.ttf</string>
+		<string>Resources/Fonts/Mersad.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

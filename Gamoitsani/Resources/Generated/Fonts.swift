@@ -20,12 +20,19 @@ public typealias Font = FontConvertible.Font
 
 // swiftlint:disable identifier_name line_length type_body_length
 public enum F {
-  public enum BPGNinoMtavruli {
-    public static let regular = FontConvertible(name: "BPGNinoMtavruli", family: "BPG Nino Mtavruli", path: "BPG-Nino-Mtavruli-Normal.ttf")
-    public static let bold = FontConvertible(name: "BPGNinoMtavruli-Bold", family: "BPG Nino Mtavruli", path: "BPG-Nino-Mtavruli-Bold.ttf")
-    public static let all: [FontConvertible] = [regular, bold]
+  public enum Mersad {
+    public static let regular = FontConvertible(name: "Mersad-Regular", family: "Mersad", path: "Mersad.ttf")
+    public static let black = FontConvertible(name: "Mersad-Regular_Black", family: "Mersad", path: "Mersad.ttf")
+    public static let bold = FontConvertible(name: "Mersad-Regular_Bold", family: "Mersad", path: "Mersad.ttf")
+    public static let extraBold = FontConvertible(name: "Mersad-Regular_Extra-Bold", family: "Mersad", path: "Mersad.ttf")
+    public static let extraLight = FontConvertible(name: "Mersad-Regular_Extra-Light", family: "Mersad", path: "Mersad.ttf")
+    public static let light = FontConvertible(name: "Mersad-Regular_Light", family: "Mersad", path: "Mersad.ttf")
+    public static let medium = FontConvertible(name: "Mersad-Regular_Medium", family: "Mersad", path: "Mersad.ttf")
+    public static let semiBold = FontConvertible(name: "Mersad-Regular_Semi-Bold", family: "Mersad", path: "Mersad.ttf")
+    public static let thin = FontConvertible(name: "Mersad-Regular_Thin", family: "Mersad", path: "Mersad.ttf")
+    public static let all: [FontConvertible] = [regular, black, bold, extraBold, extraLight, light, medium, semiBold, thin]
   }
-  public static let allCustomFonts: [FontConvertible] = [BPGNinoMtavruli.all].flatMap { $0 }
+  public static let allCustomFonts: [FontConvertible] = [Mersad.all].flatMap { $0 }
   public static func registerAllCustomFonts() {
     allCustomFonts.forEach { $0.register() }
   }
