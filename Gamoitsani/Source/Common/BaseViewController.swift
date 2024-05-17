@@ -15,6 +15,8 @@ class BaseViewController<T: Coordinator>: UIViewController {
     weak var coordinator: T?
     
     var shouldApplyGradientBackground: Bool = true
+    
+    private let gradientLayer = CAGradientLayer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,10 @@ class BaseViewController<T: Coordinator>: UIViewController {
             guard let coordinator else { return }
             coordinator.childDidFinish(coordinator)
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        gradientLayer.frame = view.bounds
     }
     
     @objc private func languageDidChange() {
@@ -44,7 +50,6 @@ class BaseViewController<T: Coordinator>: UIViewController {
             return
         }
         
-        let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [Asset.gradientColor1.color.cgColor,
                                 Asset.gradientColor2.color.cgColor,
                                 Asset.gradientColor3.color.cgColor]
