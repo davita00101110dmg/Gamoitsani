@@ -10,7 +10,7 @@ import UIKit
 
 final class GMLabel: UILabel {
 
-    public func configure(with string: String, fontSize: CGFloat = 16, color: UIColor = Asset.tintColor.color) {
+    public func configure(with string: String?, fontSize: CGFloat = 16, color: UIColor = .white) {
         text = string
         font = F.BPGNinoMtavruli.bold.font(size: fontSize)
         textColor = color
