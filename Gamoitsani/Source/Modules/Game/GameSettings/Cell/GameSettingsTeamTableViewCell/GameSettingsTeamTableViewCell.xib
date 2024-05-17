@@ -23,7 +23,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yc-bb-0Lv">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yc-bb-0Lv" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
                         <rect key="frame" x="15.999999999999996" y="12" width="36.666666666666657" height="20"/>
                         <fontDescription key="fontDescription" name="BPGNinoMtavruli-Bold" family="BPG Nino Mtavruli" pointSize="17"/>
                         <nil key="textColor"/>
@@ -45,7 +45,7 @@
     </objects>
     <resources>
         <namedColor name="Secondary">
-            <color red="0.16470588235294117" green="0.5725490196078431" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27843137254901962" green="0.33725490196078434" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

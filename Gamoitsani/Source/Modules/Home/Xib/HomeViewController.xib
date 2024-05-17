@@ -19,6 +19,7 @@
                 <outlet property="addWordButton" destination="FZR-BI-XGf" id="Lbz-hn-Mka"/>
                 <outlet property="gameButton" destination="RKy-b6-2Oi" id="TbL-bk-VeE"/>
                 <outlet property="rulesButton" destination="D8J-Jd-c0D" id="zuJ-nz-XYz"/>
+                <outlet property="titleLabel" destination="ree-sI-huk" id="N4g-Ax-JYZ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="yig-jY-6ac"/>
             </connections>
         </placeholder>
@@ -71,7 +72,7 @@
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="bMZ-He-GZl"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="გამოიცანი" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ree-sI-huk">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="გამოიცანი" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ree-sI-huk" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
                     <rect key="frame" x="94.666666666666686" y="160" width="204" height="46"/>
                     <fontDescription key="fontDescription" name="BPGNinoMtavruli-Bold" family="BPG Nino Mtavruli" pointSize="40"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

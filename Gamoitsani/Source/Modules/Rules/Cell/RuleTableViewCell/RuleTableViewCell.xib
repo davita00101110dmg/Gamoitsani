@@ -23,7 +23,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLh-T9-cfs" userLabel="Rule Label">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLh-T9-cfs" userLabel="Rule Label" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
                         <rect key="frame" x="15.999999999999996" y="16" width="36.666666666666657" height="12"/>
                         <fontDescription key="fontDescription" name="BPGNinoMtavruli-Bold" family="BPG Nino Mtavruli" pointSize="17"/>
                         <nil key="textColor"/>

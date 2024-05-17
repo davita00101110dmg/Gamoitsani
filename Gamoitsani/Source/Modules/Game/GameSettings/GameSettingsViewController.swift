@@ -9,11 +9,11 @@
 import UIKit
 
 final class GameSettingsViewController: BaseViewController<GameSettingsCoordinator> {
-    @IBOutlet weak var roundsAmountTitle: UILabel!
+    @IBOutlet weak var roundsAmountTitle: GMLabel!
     @IBOutlet weak var roundsStepper: UIStepper!
-    @IBOutlet weak var roundsLengthTitle: UILabel!
+    @IBOutlet weak var roundsLengthTitle: GMLabel!
     @IBOutlet weak var roundsLengthStepper: UIStepper!
-    @IBOutlet weak var teamsTitle: UILabel!
+    @IBOutlet weak var teamsTitle: GMLabel!
     @IBOutlet weak var addTeamButton: GMButton!
     @IBOutlet weak var startGameButton: GMButton!
     @IBOutlet weak var tableView: GMTableView!
@@ -60,19 +60,14 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         
         addTeamButton.configure(text: L10n.add, fontSize: ViewControllerConstants.buttonTitleFontValue)
         startGameButton.configure(text: L10n.Screen.GameSettings.StartGame.title)
-        
-        [roundsAmountTitle, roundsLengthTitle, teamsTitle].forEach {
-            $0.font = F.BPGNinoMtavruli.bold.font(size: ViewControllerConstants.buttonTitleFontValue)
-            $0.textColor = Asset.tintColor.color
-        }
     }
     
     override func setupLocalizedTexts() {
         super.setupLocalizedTexts()
         title = L10n.Screen.GameSettings.title
-        roundsAmountTitle.text = L10n.Screen.GameSettings.RoundsAmount.title(ViewControllerConstants.roundsStepperDefaultValue.toString())
-        roundsLengthTitle.text = L10n.Screen.GameSettings.RoundsLength.title(ViewControllerConstants.roundsLengthStepperDefaultValue.toString())
-        teamsTitle.text = L10n.Screen.GameSettings.Teams.title
+        roundsAmountTitle.configure(with: L10n.Screen.GameSettings.RoundsAmount.title(ViewControllerConstants.roundsStepperDefaultValue.toString()))
+        roundsLengthTitle.configure(with: L10n.Screen.GameSettings.RoundsLength.title(ViewControllerConstants.roundsLengthStepperDefaultValue.toString()))
+        teamsTitle.configure(with: L10n.Screen.GameSettings.Teams.title)
     }
     
     private func setupTableView() {

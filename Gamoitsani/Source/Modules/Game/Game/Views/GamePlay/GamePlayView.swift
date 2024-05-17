@@ -14,8 +14,8 @@ protocol GamePlayViewDelegate: AnyObject {
 
 final class GamePlayView: UIView {
     
-    @IBOutlet weak var wordLabel: UILabel!
-    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var wordLabel: GMLabel!
+    @IBOutlet weak var timerLabel: GMLabel!
     
     @IBOutlet weak var correctButton: GMButton!
     @IBOutlet weak var incorrectButton: GMButton!
@@ -40,11 +40,6 @@ final class GamePlayView: UIView {
     private func setupUI() {
         backgroundColor = Asset.secondary.color.withAlphaComponent(0.3)
         layer.cornerRadius = 10
-        [wordLabel, timerLabel].forEach {
-            $0.textColor = Asset.tintColor.color
-        }
-        wordLabel.font = F.BPGNinoMtavruli.bold.font(size: 32)
-        timerLabel.font = F.BPGNinoMtavruli.bold.font(size: 100)
         
         correctButton.configure(text: "✓", fontSize: 30, isCircle: true)
         correctButton.backgroundColor = Asset.green.color
@@ -63,8 +58,8 @@ final class GamePlayView: UIView {
         words = model.words
         roundLength = model.roundLength
         
-        timerLabel.text = roundLength.toString()
-        wordLabel.text = words.popLast()
+        timerLabel.configure(with: roundLength.toString(), fontSize: 100)
+        wordLabel.configure(with: words.popLast(), fontSize: 32)
     }
     
     private func timerBlock(_: Timer) -> Void {
@@ -81,7 +76,7 @@ final class GamePlayView: UIView {
     }
     
     private func updateWordLabel(with word: String?) {
-        wordLabel.text = word
+        wordLabel.text = word != nil ? word : L10n.Screen.Game.NoMoreWords.message
     }
     
     private func wordButtonAction(tag: Int) { // Tag 1: Correct Tag 2: Incorrect

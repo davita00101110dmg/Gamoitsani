@@ -10,8 +10,8 @@ import UIKit
 
 final class GameScoreboardTeamTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var teamLabel: UILabel!
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var teamLabel: GMLabel!
+    @IBOutlet weak var scoreLabel: GMLabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,11 +21,10 @@ final class GameScoreboardTeamTableViewCell: UITableViewCell {
     private func setupUI() {
         backgroundColor = Asset.secondary.color
         layer.cornerRadius = 10
-        [teamLabel, scoreLabel].forEach { $0.textColor = Asset.tintColor.color }
     }
     
     func configure(with model: GameScoreboardTeamTableViewModel) {
-        teamLabel.text = model.name
-        scoreLabel.text = "\(model.score) \(L10n.point)"
+        teamLabel.configure(with: model.name)
+        scoreLabel.configure(with: "\(model.score) \(L10n.point)")
     }
 }

@@ -15,14 +15,14 @@
             <rect key="frame" x="0.0" y="0.0" width="310" height="400"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6s-5M-nPD">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6s-5M-nPD" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
                     <rect key="frame" x="134.33333333333334" y="190" width="41.333333333333343" height="20.333333333333343"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDl-jc-QGU">
-                    <rect key="frame" x="134.33333333333334" y="32" width="41.333333333333343" height="20.333333333333329"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDl-jc-QGU" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
+                    <rect key="frame" x="134.33333333333334" y="48" width="41.333333333333343" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
                 <constraint firstItem="W6s-5M-nPD" firstAttribute="centerY" secondItem="PwO-y8-944" secondAttribute="centerY" id="Ho6-pA-4D9"/>
                 <constraint firstItem="W6s-5M-nPD" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="MMd-dB-aON"/>
                 <constraint firstItem="fU3-vB-ewf" firstAttribute="leading" secondItem="BmO-Bc-73D" secondAttribute="leading" constant="24" id="SWL-MK-ygO"/>
-                <constraint firstItem="VDl-jc-QGU" firstAttribute="top" secondItem="PwO-y8-944" secondAttribute="top" constant="32" id="XH2-kd-qh9"/>
+                <constraint firstItem="VDl-jc-QGU" firstAttribute="top" secondItem="PwO-y8-944" secondAttribute="top" constant="48" id="XH2-kd-qh9"/>
                 <constraint firstItem="VDl-jc-QGU" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="l2m-xM-7HL"/>
                 <constraint firstItem="BmO-Bc-73D" firstAttribute="bottom" secondItem="fU3-vB-ewf" secondAttribute="bottom" constant="24" id="xcn-cI-X1O"/>
             </constraints>
@@ -78,7 +78,7 @@
     </objects>
     <resources>
         <namedColor name="Secondary">
-            <color red="0.32941176470588235" green="0.27843137254901962" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27843137254901962" green="0.33725490196078434" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

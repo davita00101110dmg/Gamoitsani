@@ -10,7 +10,7 @@ import UIKit
 
 final class GameSettingsTeamTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var teamName: UILabel!
+    @IBOutlet weak var teamName: GMLabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,10 +20,9 @@ final class GameSettingsTeamTableViewCell: UITableViewCell {
     private func setupUI() {
         backgroundColor = Asset.secondary.color
         layer.cornerRadius = 10
-        teamName.textColor = Asset.tintColor.color
     }
     
     func configure(with team: String) {
-        teamName.text = team
+        teamName.configure(with: team)
     }
 }

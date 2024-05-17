@@ -10,7 +10,7 @@ import UIKit
 
 final class RuleTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var ruleLabel: UILabel!
+    @IBOutlet weak var ruleLabel: GMLabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,10 +21,9 @@ final class RuleTableViewCell: UITableViewCell {
         layer.masksToBounds = true
         backgroundColor = Asset.secondary.color
         layer.cornerRadius = 10
-        ruleLabel.textColor = Asset.tintColor.color
     }
     
     func configure(with text: String?) {
-        ruleLabel.text = text
+        ruleLabel.configure(with: text)
     }
 }

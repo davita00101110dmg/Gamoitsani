@@ -21,11 +21,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zgV-fI-Vl3">
-                    <rect key="frame" x="16" y="155" width="361" height="663"/>
+                    <rect key="frame" x="16" y="75" width="361" height="743"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <navigationBar hidden="YES" contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EtG-p6-Taa">
-                    <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                    <rect key="frame" x="0.0" y="59" width="393" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="height" id="f8v-Ns-C2g"/>
                     </constraints>
@@ -41,7 +41,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="zgV-fI-Vl3" secondAttribute="bottom" id="Zdz-In-bDg"/>
                 <constraint firstItem="EtG-p6-Taa" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="bch-dH-m7o"/>
                 <constraint firstItem="zgV-fI-Vl3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="gTF-gi-S9T"/>
-                <constraint firstItem="zgV-fI-Vl3" firstAttribute="top" secondItem="EtG-p6-Taa" secondAttribute="bottom" id="m9J-Fe-U46"/>
+                <constraint firstItem="zgV-fI-Vl3" firstAttribute="top" secondItem="EtG-p6-Taa" secondAttribute="bottom" constant="16" id="m9J-Fe-U46"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zgV-fI-Vl3" secondAttribute="trailing" constant="16" id="qZx-nk-4qd"/>
                 <constraint firstItem="EtG-p6-Taa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="xVZ-lE-qbb"/>
             </constraints>

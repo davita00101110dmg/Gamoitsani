@@ -23,13 +23,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pst-Me-faM">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pst-Me-faM" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
                         <rect key="frame" x="15.999999999999996" y="12" width="36.666666666666657" height="20"/>
                         <fontDescription key="fontDescription" name="BPGNinoMtavruli-Bold" family="BPG Nino Mtavruli" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbu-zr-3fk">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbu-zr-3fk" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
                         <rect key="frame" x="267.33333333333331" y="12" width="36.666666666666686" height="20"/>
                         <fontDescription key="fontDescription" name="BPGNinoMtavruli-Bold" family="BPG Nino Mtavruli" pointSize="17"/>
                         <nil key="textColor"/>

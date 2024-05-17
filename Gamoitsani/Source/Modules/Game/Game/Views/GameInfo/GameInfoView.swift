@@ -31,11 +31,6 @@ final class GameInfoView: UIView {
     private func setupUI() {
         backgroundColor = Asset.secondary.color.withAlphaComponent(0.3)
         layer.cornerRadius = 10
-        [roundCountLabel, teamNameLabel].forEach {
-            $0.font = F.BPGNinoMtavruli.bold.font(size: 16)
-            $0.textColor = Asset.tintColor.color
-        }
-
         startButton.configure(text: L10n.start, isCircle: true)
         scoreButton.configure(text: L10n.scoreboard)
     }
@@ -43,8 +38,8 @@ final class GameInfoView: UIView {
     func configure(with model: GameInfoViewModel, delegate: GameInfoViewDelegate) {
         self.delegate = delegate
         
-        roundCountLabel.text = L10n.Screen.Game.CurrentRound.message(model.currentRound.toString)
-        teamNameLabel.text = model.teamName
+        roundCountLabel.configure(with: L10n.Screen.Game.CurrentRound.message(model.currentRound.toString))
+        teamNameLabel.configure(with: model.teamName)
     }
     
     @IBAction func startAction(_ sender: Any) {
