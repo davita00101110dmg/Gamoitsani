@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdE-ix-K0J" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
-                    <rect key="frame" x="24" y="326" width="262" height="38"/>
+                    <rect key="frame" x="24" y="338" width="262" height="38"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38" id="ngk-BV-BsY"/>
                     </constraints>
@@ -59,7 +59,7 @@
             <viewLayoutGuide key="safeArea" id="hr9-qp-yZK"/>
             <color key="backgroundColor" name="Secondary"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="VdE-ix-K0J" secondAttribute="bottom" constant="36" id="8qy-1P-FKt"/>
+                <constraint firstAttribute="bottom" secondItem="VdE-ix-K0J" secondAttribute="bottom" constant="24" id="8qy-1P-FKt"/>
                 <constraint firstItem="VdE-ix-K0J" firstAttribute="leading" secondItem="hr9-qp-yZK" secondAttribute="leading" constant="24" id="C5O-Q2-7tQ"/>
                 <constraint firstItem="yAj-cF-Avn" firstAttribute="leading" secondItem="hr9-qp-yZK" secondAttribute="leading" constant="24" id="Cfb-OD-Qz8"/>
                 <constraint firstItem="yAj-cF-Avn" firstAttribute="centerX" secondItem="X2f-M8-weE" secondAttribute="centerX" id="Dmz-4g-R8C"/>

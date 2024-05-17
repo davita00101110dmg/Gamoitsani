@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_12" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
@@ -16,19 +16,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6s-5M-nPD" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
-                    <rect key="frame" x="134.33333333333334" y="190" width="41.333333333333343" height="20.333333333333343"/>
+                    <rect key="frame" x="134.33333333333334" y="202" width="41.333333333333343" height="20.333333333333343"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDl-jc-QGU" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
-                    <rect key="frame" x="134.33333333333334" y="48" width="41.333333333333343" height="20.333333333333329"/>
+                    <rect key="frame" x="134.33333333333334" y="24" width="41.333333333333343" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="fU3-vB-ewf">
-                    <rect key="frame" x="24" y="282" width="262" height="60"/>
+                    <rect key="frame" x="83" y="295" width="144" height="60"/>
                     <subviews>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqx-xr-SUN" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -42,7 +42,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrX-rg-zwz" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
-                            <rect key="frame" x="202" y="0.0" width="60" height="60"/>
+                            <rect key="frame" x="84" y="0.0" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="Fg6-7e-SKk"/>
                                 <constraint firstAttribute="width" secondItem="zrX-rg-zwz" secondAttribute="height" multiplier="1:1" id="MF0-To-sAz"/>
@@ -60,14 +60,36 @@
             <constraints>
                 <constraint firstItem="fU3-vB-ewf" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="06t-Pw-cH2"/>
                 <constraint firstItem="BmO-Bc-73D" firstAttribute="bottom" secondItem="fU3-vB-ewf" secondAttribute="bottom" constant="24" id="2Pn-bc-iqf"/>
+                <constraint firstItem="VDl-jc-QGU" firstAttribute="top" secondItem="BmO-Bc-73D" secondAttribute="top" constant="24" id="7Vd-qH-4ei"/>
                 <constraint firstItem="BmO-Bc-73D" firstAttribute="trailing" secondItem="fU3-vB-ewf" secondAttribute="trailing" constant="24" id="DHx-hP-A2u"/>
                 <constraint firstItem="W6s-5M-nPD" firstAttribute="centerY" secondItem="PwO-y8-944" secondAttribute="centerY" id="Ho6-pA-4D9"/>
                 <constraint firstItem="W6s-5M-nPD" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="MMd-dB-aON"/>
+                <constraint firstItem="W6s-5M-nPD" firstAttribute="centerY" secondItem="PwO-y8-944" secondAttribute="centerY" constant="12" id="R89-aO-KzA"/>
                 <constraint firstItem="fU3-vB-ewf" firstAttribute="leading" secondItem="BmO-Bc-73D" secondAttribute="leading" constant="24" id="SWL-MK-ygO"/>
                 <constraint firstItem="VDl-jc-QGU" firstAttribute="top" secondItem="PwO-y8-944" secondAttribute="top" constant="48" id="XH2-kd-qh9"/>
                 <constraint firstItem="VDl-jc-QGU" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="l2m-xM-7HL"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="XH2-kd-qh9"/>
+                    <exclude reference="7Vd-qH-4ei"/>
+                    <exclude reference="Ho6-pA-4D9"/>
+                    <exclude reference="R89-aO-KzA"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact">
+                <mask key="constraints">
+                    <include reference="7Vd-qH-4ei"/>
+                    <include reference="R89-aO-KzA"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="XH2-kd-qh9"/>
+                    <include reference="Ho6-pA-4D9"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="correctButton" destination="Tqx-xr-SUN" id="YhM-Z0-blS"/>
                 <outlet property="incorrectButton" destination="zrX-rg-zwz" id="R5N-fj-H4A"/>
