@@ -43,7 +43,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
 
     private func setupBackButton() {
         let backButton = UIBarButtonItem(title: "Back", image: UIImage(systemName: "chevron.backward"), target: self, action: #selector(presentAlertOnBackButton))
-        navigationItem.leftBarButtonItem = backButton
+        navigationItem.setLeftBarButton(backButton, animated: true)
         navigationItem.hidesBackButton = true
     }
     
@@ -62,17 +62,19 @@ final class GameViewController: BaseViewController<GameCoordinator> {
             currentRound: gameStory.currentRound),
                                delegate: self)
         
+        gameInfoView.frame = mainView.bounds
         mainView.addSubview(gameInfoView)
     }
     
     private func showGamePlayView() {
         guard let gamePlayView else { return }
         
-        gamePlayView.configure(with: .init(words: gameStory.words.removeFirstNItems(100),
+        gamePlayView.configure(with: .init(words: gameStory.words.removeFirstNItems(50),
                                            roundLength: gameStory.lengthOfRound,
                                            score: gameStory.teams.values[gameStory.currentTeamIndex]),
                                audioManager: audioManager,
                                delegate: self)
+        gamePlayView.frame = mainView.bounds
         mainView.addSubview(gamePlayView)
     }
     
@@ -115,6 +117,8 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     }
     
     private func presentGameOverAlert() {
+        navigationItem.leftBarButtonItem = nil
+        
         let sortedTeams = gameStory.teams.sorted { l, r in
             l.value > r.value
         }
