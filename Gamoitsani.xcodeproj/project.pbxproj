@@ -64,6 +64,7 @@
 		FF8EA7562BEC40B100F098B8 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7552BEC40B100F098B8 /* UIColorExtensions.swift */; };
 		FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */; };
 		FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */; };
+		FF91B8D92BF785B200EB85F1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = FF91B8D82BF785B200EB85F1 /* Config.xcconfig */; };
 		FFF65C9D2BE554B9008E0352 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */; };
 		FFF65C9F2BE555C2008E0352 /* GameDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9E2BE555C2008E0352 /* GameDetailsViewModel.swift */; };
 		FFF65CA12BE555CC008E0352 /* GameDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CA02BE555CC008E0352 /* GameDetailsModel.swift */; };
@@ -143,7 +144,6 @@
 		FF4FA9C12BED96E800F38F98 /* GMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTextField.swift; sourceTree = "<group>"; };
 		FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		FF4FA9CE2BEF8A8700F38F98 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewModel.swift; sourceTree = "<group>"; };
 		FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordModels.swift; sourceTree = "<group>"; };
 		FF7F1D732BE6BCA900872554 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = swiftgen.yml; path = Gamoitsani/Resources/Swiftgen/swiftgen.yml; sourceTree = SOURCE_ROOT; };
@@ -179,6 +179,7 @@
 		FF8EA7552BEC40B100F098B8 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		FF91B8D82BF785B200EB85F1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		FFF65C9E2BE555C2008E0352 /* GameDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsViewModel.swift; sourceTree = "<group>"; };
 		FFF65CA02BE555CC008E0352 /* GameDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsModel.swift; sourceTree = "<group>"; };
@@ -433,7 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */,
-				FF4FA9CE2BEF8A8700F38F98 /* Config.xcconfig */,
+				FF91B8D82BF785B200EB85F1 /* Config.xcconfig */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -862,6 +863,7 @@
 				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
 				FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */,
 				FF8EA7262BEC13FF00F098B8 /* correct.mp3 in Resources */,
+				FF91B8D92BF785B200EB85F1 /* Config.xcconfig in Resources */,
 				FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */,
 				FF7F1D822BE7A2F700872554 /* GameViewController.xib in Resources */,
 				FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */,
@@ -1159,7 +1161,7 @@
 		};
 		FF4D9D532BD698630046819D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF4FA9CE2BEF8A8700F38F98 /* Config.xcconfig */;
+			baseConfigurationReference = FF91B8D82BF785B200EB85F1 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1192,7 +1194,7 @@
 		};
 		FF4D9D542BD698630046819D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF4FA9CE2BEF8A8700F38F98 /* Config.xcconfig */;
+			baseConfigurationReference = FF91B8D82BF785B200EB85F1 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
