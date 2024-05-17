@@ -1,5 +1,5 @@
 //
-//  GameSettingsDataSource.swift
+//  GameDetailsDataSource.swift
 //  Gamoitsani
 //
 //  Created by Daviti Khvedelidze on 07/05/2024.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class GameSettingsDataSource: UITableViewDiffableDataSource<Int, GameSettingsTeamCellItem> {
+final class GameDetailsDataSource: UITableViewDiffableDataSource<Int, GameDetailsTeamCellItem> {
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         true

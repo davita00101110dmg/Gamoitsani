@@ -1,5 +1,5 @@
 //
-//  GameSettingsViewController.swift
+//  GameDetailsViewController.swift
 //  Gamoitsani
 //
 //  Created by Daviti Khvedelidze on 24/04/2024.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class GameSettingsViewController: BaseViewController<GameSettingsCoordinator> {
+final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator> {
     @IBOutlet weak var roundsAmountTitle: GMLabel!
     @IBOutlet weak var roundsStepper: UIStepper!
     @IBOutlet weak var roundsLengthTitle: GMLabel!
@@ -18,18 +18,18 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
     @IBOutlet weak var startGameButton: GMButton!
     @IBOutlet weak var tableView: GMTableView!
     
-    private var snapshot: GameSettingsSnapshot?
-    private lazy var dataSource = GameSettingsDataSource(tableView: tableView) { [weak self] tableView, indexPath, team in
+    private var snapshot: GameDetailsSnapshot?
+    private lazy var dataSource = GameDetailsDataSource(tableView: tableView) { [weak self] tableView, indexPath, team in
         guard let self else { return.init() }
         
-        let cell: GameSettingsTeamTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        let cell: GameDetailsTeamTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.configure(with: team.name)
         return cell
     }
     
     private var gameStory = GameStory.shared
     
-    var viewModel: GameSettingsViewModel?
+    var viewModel: GameDetailsViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,19 +59,19 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         roundsLengthStepper.stepValue = ViewControllerConstants.roundsLengthStepperStepValue
         
         addTeamButton.configure(text: L10n.add, fontSize: ViewControllerConstants.buttonTitleFontValue)
-        startGameButton.configure(text: L10n.Screen.GameSettings.StartGame.title)
+        startGameButton.configure(text: L10n.Screen.GameDetails.StartGame.title)
     }
     
     override func setupLocalizedTexts() {
         super.setupLocalizedTexts()
-        title = L10n.Screen.GameSettings.title
-        roundsAmountTitle.configure(with: L10n.Screen.GameSettings.RoundsAmount.title(ViewControllerConstants.roundsStepperDefaultValue.toString()))
-        roundsLengthTitle.configure(with: L10n.Screen.GameSettings.RoundsLength.title(ViewControllerConstants.roundsLengthStepperDefaultValue.toString()))
-        teamsTitle.configure(with: L10n.Screen.GameSettings.Teams.title)
+        title = L10n.Screen.GameDetails.title
+        roundsAmountTitle.configure(with: L10n.Screen.GameDetails.RoundsAmount.title(ViewControllerConstants.roundsStepperDefaultValue.toString()))
+        roundsLengthTitle.configure(with: L10n.Screen.GameDetails.RoundsLength.title(ViewControllerConstants.roundsLengthStepperDefaultValue.toString()))
+        teamsTitle.configure(with: L10n.Screen.GameDetails.Teams.title)
     }
     
     private func setupTableView() {
-        tableView.register(GameSettingsTeamTableViewCell.self)
+        tableView.register(GameDetailsTeamTableViewCell.self)
         tableView.delegate = self
         tableView.dragDelegate = self
         tableView.dropDelegate = self
@@ -84,7 +84,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
             .sink { [weak self] items in
                 guard let self else { return }
                 
-                self.snapshot = GameSettingsSnapshot()
+                self.snapshot = GameDetailsSnapshot()
                 self.snapshot?.appendSections([0])
                 self.snapshot?.appendItems(items)
                 self.dataSource.defaultRowAnimation = .automatic
@@ -97,15 +97,15 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
     }
     
     private func presentAddTeamAlert() {
-        let alertType = AlertType.team(title: L10n.Screen.GameSettings.AddTeamAlert.title,
-                                       message: L10n.Screen.GameSettings.AddTeamAlert.message,
+        let alertType = AlertType.team(title: L10n.Screen.GameDetails.AddTeamAlert.title,
+                                       message: L10n.Screen.GameDetails.AddTeamAlert.message,
                                        initialText: nil,
                                        addActionTitle: L10n.addIt) { [weak self] teamName in
             guard let self,
                   let viewModel else { return }
             let teamName = teamName.removeExtraSpaces()
             if teamName == .empty {
-                presentIncorrectGameSettingsAlert(message: L10n.Screen.GameSettings.IncorrectGameSettingsEmptyTeamName.message)
+                presentIncorrectGameDetailsAlert(message: L10n.Screen.GameDetails.IncorrectGameDetailsEmptyTeamName.message)
             } else {
                 viewModel.addTeam(with: teamName.removeExtraSpaces())
             }
@@ -117,7 +117,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         guard let viewModel else { return }
         let initialText = viewModel.getTeam(at: index)
         
-        let alertType = AlertType.team(title: L10n.Screen.GameSettings.UpdateTeamNameAlert.title,
+        let alertType = AlertType.team(title: L10n.Screen.GameDetails.UpdateTeamNameAlert.title,
                                        message: nil,
                                        initialText: initialText,
                                        addActionTitle: L10n.change) { teamName in
@@ -126,7 +126,7 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
         presentAlert(of: alertType)
     }
     
-    private func presentIncorrectGameSettingsAlert(title: String = L10n.Screen.GameSettings.IncorrectParameter.title,
+    private func presentIncorrectGameDetailsAlert(title: String = L10n.Screen.GameDetails.IncorrectParameter.title,
                                                    message: String) {
         let alertType = AlertType.info(title: title,
                                        message: message)
@@ -144,20 +144,20 @@ final class GameSettingsViewController: BaseViewController<GameSettingsCoordinat
 }
 
 // MARK: - Actions
-extension GameSettingsViewController {
+extension GameDetailsViewController {
     @IBAction func roundsStepperAction(_ sender: UIStepper) {
-        roundsAmountTitle.text = L10n.Screen.GameSettings.RoundsAmount.title(sender.value.toString())
+        roundsAmountTitle.text = L10n.Screen.GameDetails.RoundsAmount.title(sender.value.toString())
     }
     
     @IBAction func roundsLengthStepperAction(_ sender: UIStepper) {
-        roundsLengthTitle.text = L10n.Screen.GameSettings.RoundsLength.title(sender.value.toString())
+        roundsLengthTitle.text = L10n.Screen.GameDetails.RoundsLength.title(sender.value.toString())
     }
     
     @IBAction func addTeamAction(_ sender: Any) {
         if let viewModel, viewModel.getTeamsCount() < 5 {
             presentAddTeamAlert()
         } else {
-            presentIncorrectGameSettingsAlert(message: L10n.Screen.GameSettings.IncorrectGameSettingsMaximumTeams.message)
+            presentIncorrectGameDetailsAlert(message: L10n.Screen.GameDetails.IncorrectGameDetailsMaximumTeams.message)
         }
     }
     
@@ -165,9 +165,9 @@ extension GameSettingsViewController {
         guard let viewModel else { return }
         
         if viewModel.getTeamsCount() < 2 {
-            presentIncorrectGameSettingsAlert(message: L10n.Screen.GameSettings.IncorrectGameSettingsNotEnoughTeams.message)
+            presentIncorrectGameDetailsAlert(message: L10n.Screen.GameDetails.IncorrectGameDetailsNotEnoughTeams.message)
         } else if viewModel.teamsAreUnique() {
-            presentIncorrectGameSettingsAlert(message: L10n.Screen.GameSettings.IncorrectGameSettingsNotUniqueTeams.message)
+            presentIncorrectGameDetailsAlert(message: L10n.Screen.GameDetails.IncorrectGameDetailsNotUniqueTeams.message)
         } else {
             startGame()
         }
@@ -178,14 +178,14 @@ extension GameSettingsViewController {
             updateGameStory()
             coordinator?.navigateToGame()
         } else {
-            presentIncorrectGameSettingsAlert(title: L10n.Screen.GameSettings.NoInternetConnectionAlert.title,
-                                              message: L10n.Screen.GameSettings.NoInternetConnectionAlert.message)
+            presentIncorrectGameDetailsAlert(title: L10n.Screen.GameDetails.NoInternetConnectionAlert.title,
+                                              message: L10n.Screen.GameDetails.NoInternetConnectionAlert.message)
         }
     }
 }
 
 // MARK: - UITableView Delegate Methods
-extension GameSettingsViewController: UITableViewDelegate {
+extension GameDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
         let delete = UIContextualAction(style: .destructive,
@@ -236,7 +236,7 @@ extension GameSettingsViewController: UITableViewDelegate {
 }
 
 // MARK: - UITableViewDragDelegate Delegate Methods
-extension GameSettingsViewController: UITableViewDragDelegate {
+extension GameDetailsViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return [] }
         
@@ -262,7 +262,7 @@ extension GameSettingsViewController: UITableViewDragDelegate {
 }
 
 // MARK: - UITableViewDropDelegate Delegate Methods
-extension GameSettingsViewController: UITableViewDropDelegate {
+extension GameDetailsViewController: UITableViewDropDelegate {
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
     }
@@ -273,7 +273,7 @@ extension GameSettingsViewController: UITableViewDropDelegate {
 }
 
 // MARK: - ViewController Constants
-extension GameSettingsViewController {
+extension GameDetailsViewController {
     enum ViewControllerConstants {
         static let tableViewCornerRadius: CGFloat = 8
         static let roundsStepperMinValue: Double = 1

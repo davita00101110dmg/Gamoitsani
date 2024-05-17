@@ -68,6 +68,11 @@ public enum L10n {
           }
         }
 
+        public enum NoMoreWords {
+          /// No more words
+          public static var message: String { L10n.tr("Localizable", "screen.game.no_more_words.message") }
+        }
+
         public enum WinningAlert {
           /// You won with %@ points
           public static func message( _ p1: String) -> String {
@@ -80,76 +85,76 @@ public enum L10n {
         }
       }
 
-      public enum GameSettings {
-        /// Game Settings
-        public static var title: String { L10n.tr("Localizable", "screen.game_settings.title") }
+      public enum GameDetails {
+        /// Game Details
+        public static var title: String { L10n.tr("Localizable", "screen.game_details.title") }
 
         public enum AddTeamAlert {
           /// Enter team name
-          public static var message: String { L10n.tr("Localizable", "screen.game_settings.add_team_alert.message") }
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.add_team_alert.message") }
           /// Add team
-          public static var title: String { L10n.tr("Localizable", "screen.game_settings.add_team_alert.title") }
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.add_team_alert.title") }
         }
 
-        public enum IncorrectGameSettingsEmptyTeamName {
+        public enum IncorrectGameDetailsEmptyTeamName {
           /// Team name cannot be empty
-          public static var message: String { L10n.tr("Localizable", "screen.game_settings.incorrect_game_settings_empty_team_name.message") }
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.incorrect_game_details_empty_team_name.message") }
         }
 
-        public enum IncorrectGameSettingsMaximumTeams {
+        public enum IncorrectGameDetailsMaximumTeams {
           /// It is not possible to add more than 5 teams
-          public static var message: String { L10n.tr("Localizable", "screen.game_settings.incorrect_game_settings_maximum_teams.message") }
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.incorrect_game_details_maximum_teams.message") }
         }
 
-        public enum IncorrectGameSettingsNotEnoughTeams {
+        public enum IncorrectGameDetailsNotEnoughTeams {
           /// Not enough teams, you need to add at least 2 teams to start the game!
-          public static var message: String { L10n.tr("Localizable", "screen.game_settings.incorrect_game_settings_not_enough_teams.message") }
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.incorrect_game_details_not_enough_teams.message") }
         }
 
-        public enum IncorrectGameSettingsNotUniqueTeams {
+        public enum IncorrectGameDetailsNotUniqueTeams {
           /// Team names must be unique!
-          public static var message: String { L10n.tr("Localizable", "screen.game_settings.incorrect_game_settings_not_unique_teams.message") }
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.incorrect_game_details_not_unique_teams.message") }
         }
 
         public enum IncorrectParameter {
           /// Incorrect parameter
-          public static var title: String { L10n.tr("Localizable", "screen.game_settings.incorrect_parameter.title") }
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.incorrect_parameter.title") }
         }
 
         public enum NoInternetConnectionAlert {
           /// Internet connection is required to start the game
-          public static var message: String { L10n.tr("Localizable", "screen.game_settings.no_internet_connection_alert.message") }
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.no_internet_connection_alert.message") }
           /// No internet connection!
-          public static var title: String { L10n.tr("Localizable", "screen.game_settings.no_internet_connection_alert.title") }
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.no_internet_connection_alert.title") }
         }
 
         public enum RoundsAmount {
           /// Rounds Amount: %@
           public static func title( _ p1: String) -> String {
-              return L10n.tr("Localizable", "screen.game_settings.rounds_amount.title", p1)
+              return L10n.tr("Localizable", "screen.game_details.rounds_amount.title", p1)
           }
         }
 
         public enum RoundsLength {
           /// Round Length: %@ sec
           public static func title( _ p1: String) -> String {
-              return L10n.tr("Localizable", "screen.game_settings.rounds_length.title", p1)
+              return L10n.tr("Localizable", "screen.game_details.rounds_length.title", p1)
           }
         }
 
         public enum StartGame {
           /// Start Game
-          public static var title: String { L10n.tr("Localizable", "screen.game_settings.start_game.title") }
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.start_game.title") }
         }
 
         public enum Teams {
           /// Teams
-          public static var title: String { L10n.tr("Localizable", "screen.game_settings.teams.title") }
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.teams.title") }
         }
 
         public enum UpdateTeamNameAlert {
           /// Update team name
-          public static var title: String { L10n.tr("Localizable", "screen.game_settings.update_team_name_alert.title") }
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.update_team_name_alert.title") }
         }
       }
 
@@ -174,15 +179,10 @@ public enum L10n {
           /// Rules
           public static var title: String { L10n.tr("Localizable", "screen.home.rules_button.title") }
         }
-
-        public enum SettingsButton {
-          /// Settings
-          public static var title: String { L10n.tr("Localizable", "screen.home.settings_button.title") }
-        }
       }
 
       public enum Rules {
-        /// Note that at this moment you can only play with Georgian words
+        /// Note that at this moment you can only play with Georgian words⚠️
         public static var rule1: String { L10n.tr("Localizable", "screen.rules.rule1") }
         /// When explaining the word, it is forbidden to use a single word
         public static var rule2: String { L10n.tr("Localizable", "screen.rules.rule2") }

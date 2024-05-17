@@ -1,5 +1,5 @@
 //
-//  GameSettingsTeamTableViewCell.swift
+//  GameDetailsTeamTableViewCell.swift
 //  Gamoitsani
 //
 //  Created by Daviti Khvedelidze on 04/05/2024.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class GameSettingsTeamTableViewCell: UITableViewCell {
+final class GameDetailsTeamTableViewCell: UITableViewCell {
 
     @IBOutlet weak var teamName: GMLabel!
     

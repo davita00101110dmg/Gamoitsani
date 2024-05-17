@@ -49,7 +49,7 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
 // MARK: - Actions
 extension HomeViewController {
     @IBAction func gameButtonClicked(_ sender: Any) {
-        coordinator?.navigateToGameSettings()
+        coordinator?.navigateToGameDetails()
     }
     
     @IBAction func rulesButtonClicked(_ sender: Any) {

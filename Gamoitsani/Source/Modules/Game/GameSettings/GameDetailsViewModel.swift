@@ -1,5 +1,5 @@
 //
-//  GameSettingsViewModel.swift
+//  GameDetailsViewModel.swift
 //  Gamoitsani
 //
 //  Created by Daviti Khvedelidze on 03/05/2024.
@@ -11,14 +11,14 @@ import Combine
 import Collections
 import Network
 
-final class GameSettingsViewModel {
+final class GameDetailsViewModel {
     
     private let networkMonitor = NWPathMonitor()
     private var shouldFetchWords = true
     
-    @Published private var teams: [GameSettingsTeamCellItem] = []
+    @Published private var teams: [GameDetailsTeamCellItem] = []
     
-    var teamsPublished: Published<[GameSettingsTeamCellItem]>.Publisher { $teams }
+    var teamsPublished: Published<[GameDetailsTeamCellItem]>.Publisher { $teams }
     
     func addTeam(with team: String) {
         teams.append(.init(name: team))
@@ -54,7 +54,7 @@ final class GameSettingsViewModel {
         return teams.popLast()?.name
     }
     
-    func updateOrder(with newOrderTeams: [GameSettingsTeamCellItem]) {
+    func updateOrder(with newOrderTeams: [GameDetailsTeamCellItem]) {
         teams = newOrderTeams
     }
     
@@ -85,7 +85,7 @@ final class GameSettingsViewModel {
     }
 }
 
-extension GameSettingsViewModel {
+extension GameDetailsViewModel {
     enum ViewModelConstants {
         static let networkObserverThreadName: String = "NetworkMonitor"
     }

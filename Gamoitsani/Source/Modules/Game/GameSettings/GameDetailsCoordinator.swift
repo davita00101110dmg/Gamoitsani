@@ -1,5 +1,5 @@
 //
-//  GameSettingsCoordinator.swift
+//  GameDetailsCoordinator.swift
 //  Gamoitsani
 //
 //  Created by Daviti Khvedelidze on 24/04/2024.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class GameSettingsCoordinator: BaseCoordinator {
+final class GameDetailsCoordinator: BaseCoordinator {
     
     var navigationController: UINavigationController?
     
@@ -19,10 +19,10 @@ final class GameSettingsCoordinator: BaseCoordinator {
 
     override func start() {
         guard let navigationController else { return }
-        let gameSettingsViewController = GameSettingsViewController.loadFromNib()
-        gameSettingsViewController.viewModel = GameSettingsViewModel()
-        gameSettingsViewController.coordinator = self
-        navigationController.pushViewController(gameSettingsViewController, animated: true)
+        let gameDetailsViewController = GameDetailsViewController.loadFromNib()
+        gameDetailsViewController.viewModel = GameDetailsViewModel()
+        gameDetailsViewController.coordinator = self
+        navigationController.pushViewController(gameDetailsViewController, animated: true)
     }
     
     func navigateToGame() {

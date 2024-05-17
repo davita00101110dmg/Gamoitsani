@@ -30,10 +30,10 @@ final class HomeCoordinator: BaseCoordinator {
         coordinate(to: rulesCoordinator)
     }
     
-    func navigateToGameSettings() {
+    func navigateToGameDetails() {
         guard let navigationController else { return }
-        let gameSettingsCoordinator = GameSettingsCoordinator(navigationController: navigationController)
-        coordinate(to: gameSettingsCoordinator)
+        let gameDetailsCoordinator = GameDetailsCoordinator(navigationController: navigationController)
+        coordinate(to: gameDetailsCoordinator)
     }
     
     func navigateToAddWord() {

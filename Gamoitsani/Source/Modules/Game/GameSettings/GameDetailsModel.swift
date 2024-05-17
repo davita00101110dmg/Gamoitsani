@@ -1,5 +1,5 @@
 //
-//  GameSettingsModel.swift
+//  GameDetailsModel.swift
 //  Gamoitsani
 //
 //  Created by Daviti Khvedelidze on 03/05/2024.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-typealias GameSettingsSnapshot = NSDiffableDataSourceSnapshot<Int, GameSettingsTeamCellItem>
+typealias GameDetailsSnapshot = NSDiffableDataSourceSnapshot<Int, GameDetailsTeamCellItem>
 
-struct GameSettingsTeamCellItem: Hashable {
+struct GameDetailsTeamCellItem: Hashable {
     let id = UUID()
     var name: String
 }

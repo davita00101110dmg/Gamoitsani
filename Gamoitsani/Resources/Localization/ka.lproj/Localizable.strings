@@ -31,7 +31,7 @@
 
 // MARK: - Rules
 "screen.rules.title" = "წესები";
-"screen.rules.rule1" = "გაითვალისწინე, რომ ამ ეტაპზე მხოლოდ ქართული სიტყვებით შეგიძლია თამაში";
+"screen.rules.rule1" = "გაითვალისწინე, რომ ამ ეტაპზე მხოლოდ ქართული სიტყვებით შეგიძლია თამაში⚠️";
 "screen.rules.rule2" = "სიტყვის ახსნისას აკრძალულია ერთფუძიანი სიტყვის გამოყენება";
 "screen.rules.rule3" = "თუ გუნდის წევრი გამოიცნობს სიტყვას, დააჭირეთ მწვანე ღილაკს (+1 ქულა)";
 "screen.rules.rule4" = "თუ სიტყვის ახსნა ვერ მოახერხეთ, ან რომელიმე წესი დაირღვა და გინდათ რომ შემდეგ სიტყვაზე გადახვიდეთ დააჭირეთ წითელ ღილაკს (-1 ქულა)";
@@ -43,22 +43,22 @@
 "screen.add_word.send" = "გააგზავნე";
 "screen.add_word.hint" = "გაითვალისწინე, რომ დაამატო ერთფუძიანი ქართული სიტყვა :)";
 
-// MARK: - Game Settings
-"screen.game_settings.title" = "თამაშის პარამეტრები";
-"screen.game_settings.rounds_amount.title" = "რაუნდების რაოდენობა: %@";
-"screen.game_settings.rounds_length.title" = "რაუნდის ხანგრძლივობა: %@ წმ";
-"screen.game_settings.teams.title" = "გუნდები";
-"screen.game_settings.add_team_alert.title" = "დაამატე გუნდი";
-"screen.game_settings.add_team_alert.message" = "ჩაწერე გუნდის სახელი";
-"screen.game_settings.update_team_name_alert.title" = "შეცვალე გუნდის სახელი";
-"screen.game_settings.no_internet_connection_alert.title" = "არ არის ინტერნეტთან კავშირი!";
-"screen.game_settings.no_internet_connection_alert.message" = "თამაშის დასაწყებად საჭიროა ინტერნეტთან კავშირი";
-"screen.game_settings.start_game.title" = "თამაშის დაწყება";
-"screen.game_settings.incorrect_parameter.title" = "არასწორი პარამეტრი";
-"screen.game_settings.incorrect_game_settings_not_enough_teams.message" = "არასაკმარისი გუნდების რაოდენობა, თამაშის დასაწყებად საჭიროა მინიმუმ 2 გუნდის დამატება!";
-"screen.game_settings.incorrect_game_settings_not_unique_teams.message" = "გუნდების სახელები უნდა იყოს უნიკალური!";
-"screen.game_settings.incorrect_game_settings_maximum_teams.message" = "5 გუნდზე მეტის დამატება შეუძლებელია";
-"screen.game_settings.incorrect_game_settings_empty_team_name.message" = "გუნდის სახელი ვერ იქნება ცარიელი";
+// MARK: - Game Details
+"screen.game_details.title" = "თამაშის დეტალები";
+"screen.game_details.rounds_amount.title" = "რაუნდების რაოდენობა: %@";
+"screen.game_details.rounds_length.title" = "რაუნდის ხანგრძლივობა: %@ წმ";
+"screen.game_details.teams.title" = "გუნდები";
+"screen.game_details.add_team_alert.title" = "დაამატე გუნდი";
+"screen.game_details.add_team_alert.message" = "ჩაწერე გუნდის სახელი";
+"screen.game_details.update_team_name_alert.title" = "შეცვალე გუნდის სახელი";
+"screen.game_details.no_internet_connection_alert.title" = "არ არის ინტერნეტთან კავშირი!";
+"screen.game_details.no_internet_connection_alert.message" = "თამაშის დასაწყებად საჭიროა ინტერნეტთან კავშირი";
+"screen.game_details.start_game.title" = "თამაშის დაწყება";
+"screen.game_details.incorrect_parameter.title" = "არასწორი პარამეტრი";
+"screen.game_details.incorrect_game_details_not_enough_teams.message" = "არასაკმარისი გუნდების რაოდენობა, თამაშის დასაწყებად საჭიროა მინიმუმ 2 გუნდის დამატება!";
+"screen.game_details.incorrect_game_details_not_unique_teams.message" = "გუნდების სახელები უნდა იყოს უნიკალური!";
+"screen.game_details.incorrect_game_details_maximum_teams.message" = "5 გუნდზე მეტის დამატება შეუძლებელია";
+"screen.game_details.incorrect_game_details_empty_team_name.message" = "გუნდის სახელი ვერ იქნება ცარიელი";
 
 // MARK: - Game
 "screen.game.confirmation_alert.title" = "დარწმუნებული ხარ რომ უკან დაბრუნება გინდა?";
@@ -66,3 +66,4 @@
 "screen.game.current_round.message" = "რაუნდი: %@";
 "screen.game.winning_alert.title" = "გილოცავთ %@";
 "screen.game.winning_alert.message" = "თქვენ მოიგეთ %@ ქულით";
+"screen.game.no_more_words.message" = "სიტყვები ამოიწურა";
