@@ -10,21 +10,24 @@ import UIKit
 
 final class GMTextField: UITextField {
     
-    var cornerRadius: CGFloat {
+    enum PaddingSpace {
+        case left(CGFloat)
+        case right(CGFloat)
+        case equalSpacing(CGFloat)
+    }
+
+    var cornerRadius: CGFloat = 8 {
         didSet {
             layer.cornerRadius = cornerRadius
         }
     }
-
+    
     init() {
-        self.cornerRadius = Constants.cornerRadius
         super.init(frame: .zero)
         setupTextField()
     }
     
-    
     required init?(coder: NSCoder) {
-        self.cornerRadius = Constants.cornerRadius
         super.init(coder: coder)
         setupTextField()
     }
@@ -33,18 +36,35 @@ final class GMTextField: UITextField {
         super.layoutSubviews()
         layer.cornerRadius = cornerRadius
     }
-    
+
+    func addPadding(padding: PaddingSpace) {
+
+        leftViewMode = .always
+        layer.masksToBounds = true
+
+        switch padding {
+        case .left(let spacing):
+            let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: spacing, height: frame.height))
+            leftView = leftPaddingView
+            leftViewMode = .always
+
+        case .right(let spacing):
+            let rightPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: spacing, height: frame.height))
+            rightView = rightPaddingView
+            rightViewMode = .always
+
+        case .equalSpacing(let spacing):
+            let equalPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: spacing, height: frame.height))
+            leftView = equalPaddingView
+            leftViewMode = .always
+            rightView = equalPaddingView
+            rightViewMode = .always
+        }
+    }
     
     private func setupTextField() {
-        cornerRadius = 12
         backgroundColor = Asset.secondary.color
-        font = F.BPGNinoMtavruli.bold.font(size: 18)
+        font = F.Mersad.bold.font(size: 18)
         textColor = .white
-    }
-}
-
-private extension GMTextField {
-    enum Constants {
-        static let cornerRadius: CGFloat = 12
     }
 }

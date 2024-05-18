@@ -9,61 +9,67 @@
 import UIKit
 
 final class GMButton: UIButton {
-    var cornerRadius: CGFloat {
-        didSet {
-            layer.cornerRadius = self.cornerRadius
-        }
-    }
     
-    init() {
-        self.cornerRadius = Constants.cornerRadius
-        super.init(frame: .zero)
-    }
-
-    required public init?(coder: NSCoder) {
-        self.cornerRadius = Constants.cornerRadius
-        super.init(coder: coder)
-    }
+    private var isCircle: Bool = false
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.cornerRadius = self.cornerRadius
+        updateCornerRadius()
     }
     
-    public func configure(text: String, fontSize: CGFloat = 18, isCircle: Bool = false, textColor: UIColor? = nil) {
+    public func configure(with text: String,
+                          fontSizeForPhone: CGFloat = Constants.buttonPhoneFontSize,
+                          fontSizeForPad: CGFloat = Constants.buttonPadFontSize,
+                          isCircle: Bool = false,
+                          textColor: UIColor? = .white) {
         
-        if let textColor {
-            setTitleColor(textColor, for: .normal)
-        }
+        self.isCircle = isCircle
+        setTitle(text, for: .normal)
+        setTitleColor(textColor, for: .normal)
+        
+        let fontSize = UIDevice.current.userInterfaceIdiom == .pad ? fontSizeForPad : fontSizeForPhone
+        titleLabel?.font = F.Mersad.bold.font(size: fontSize)
         
         if isCircle {
-            cornerRadius = frame.width / 2
-            titleLabel?.font = F.BPGNinoMtavruli.bold.font(size: fontSize)
-            backgroundColor = Asset.secondary.color
+            applyCircleStyle()
         } else {
-            var configuration = UIButton.Configuration.filled()
-            
-            configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-                var outgoing = incoming
-                outgoing.font = F.BPGNinoMtavruli.bold.font(size: fontSize)
-                return outgoing
-            }
-            
-            configuration.baseBackgroundColor = Asset.secondary.color
-            configuration.baseForegroundColor = UIColor.white
-            configuration.contentInsets = NSDirectionalEdgeInsets.init(top: 5, leading: 0, bottom: 0, trailing: 0)
-            configuration.cornerStyle = .large
-            self.configuration = configuration
+            applyDefaultStyle(fontSize: fontSize)
         }
         
-        setTitle(text, for: .normal)
         layoutIfNeeded()
     }
-
+    
+    private func updateCornerRadius() {
+        if isCircle {
+            layer.cornerRadius = bounds.size.width / 2
+        }
+    }
+    
+    private func applyCircleStyle() {
+        layer.cornerRadius = bounds.size.width / 2
+        backgroundColor = Asset.secondary.color
+    }
+    
+    private func applyDefaultStyle(fontSize: CGFloat) {
+        var configuration = UIButton.Configuration.filled()
+        
+        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+            var outgoing = incoming
+            outgoing.font = F.Mersad.bold.font(size: fontSize)
+            return outgoing
+        }
+        
+        configuration.baseBackgroundColor = Asset.secondary.color
+        configuration.baseForegroundColor = .white
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0)
+        configuration.cornerStyle = .large
+        self.configuration = configuration
+    }
 }
 
 private extension GMButton {
     enum Constants {
-        static let cornerRadius: CGFloat = 12
+        static let buttonPhoneFontSize: CGFloat = 18
+        static let buttonPadFontSize: CGFloat = 24
     }
 }
