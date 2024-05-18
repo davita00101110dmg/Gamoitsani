@@ -34,11 +34,11 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oyL-Uy-ixi" userLabel="Round Stack View">
                             <rect key="frame" x="0.0" y="0.0" width="361" height="72"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="5Le-4V-IFZ">
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5Le-4V-IFZ">
                                     <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="რაუნდების რაოდენობა: 0" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDo-rL-6Pp" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="5.9999999999999982" width="243" height="20.333333333333329"/>
+                                            <rect key="frame" x="0.0" y="5.9999999999999982" width="208.66666666666666" height="20.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -69,11 +69,11 @@
                                         </mask>
                                     </variation>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="nUu-lF-qRS">
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nUu-lF-qRS">
                                     <rect key="frame" x="0.0" y="40" width="361" height="32"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="რაუნდის ხანგრძლივობა: 0" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeN-mg-aP4" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="5.9999999999999982" width="243" height="20.333333333333329"/>
+                                            <rect key="frame" x="0.0" y="5.9999999999999982" width="217" height="20.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
