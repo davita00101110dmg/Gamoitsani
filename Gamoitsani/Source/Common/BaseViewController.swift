@@ -11,11 +11,19 @@ import Combine
 
 class BaseViewController<T: Coordinator>: UIViewController {
     
+    private lazy var customBackBarButtonItem: UIBarButtonItem = {
+        return BackBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
+    }()
+    
+    private lazy var defaultBackBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
+    }()
+    
     var subscribers = Set<AnyCancellable>()
     weak var coordinator: T?
     
     var shouldApplyGradientBackground: Bool = true
-    var customBackBarButtonItem: Bool = false
+    var shouldUseCustomBackBarButtonItem: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,15 +50,11 @@ class BaseViewController<T: Coordinator>: UIViewController {
     }
     
     private func setupCustomBackBarButtonItem() {
-        let backButton: UIBarButtonItem
-        
-        if customBackBarButtonItem {
-            backButton = BackBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
+        if shouldUseCustomBackBarButtonItem {
+            navigationItem.backBarButtonItem = customBackBarButtonItem
         } else {
-            backButton = UIBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
+            navigationItem.backBarButtonItem = defaultBackBarButtonItem
         }
-        
-        navigationItem.backBarButtonItem = backButton
     }
 
     private func setupGradientBackground() {
