@@ -41,16 +41,16 @@ final class GamePlayView: UIView {
         backgroundColor = Asset.secondary.color.withAlphaComponent(Constants.backgroundColorAlpha)
         layer.cornerRadius = Constants.viewCornerRadius
         
-        correctButton.backgroundColor = Asset.green.color
-        incorrectButton.backgroundColor = Asset.red.color
         correctButton.configure(with: Constants.correctSymbol,
                                 fontSizeForPhone: Constants.correctIncorrectButtonFontSizeForPhone,
                                 fontSizeForPad: Constants.correctIncorrectButtonFontSizeForPad,
-                                isCircle: true)
+                                isCircle: true,
+                                backgroundColor: Asset.green.color)
         incorrectButton.configure(with: Constants.incorrectSymbol,
                                   fontSizeForPhone: Constants.correctIncorrectButtonFontSizeForPhone,
                                   fontSizeForPad: Constants.correctIncorrectButtonFontSizeForPad,
-                                  isCircle: true)
+                                  isCircle: true,
+                                  backgroundColor: Asset.red.color)
     }
 
     func configure(with model: GamePlayViewModel, audioManager: AudioManager, delegate: GamePlayViewDelegate) {
