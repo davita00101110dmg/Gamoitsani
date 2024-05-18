@@ -16,6 +16,11 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
     
     private var wordsToBeAdded: [String] = []
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addHideKeyboardTapGestureRecogniser()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         sendWordsToDB()
@@ -31,6 +36,15 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
     
     private func sendWordsToDB() {
         if !wordsToBeAdded.isEmpty { FirebaseManager.shared.addWords(wordsToBeAdded) }
+    }
+    
+    private func addHideKeyboardTapGestureRecogniser() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
     }
     
     @IBAction func addWordAction(_ sender: Any) {
