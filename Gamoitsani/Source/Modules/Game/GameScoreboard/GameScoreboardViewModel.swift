@@ -7,11 +7,14 @@
 //
 
 import Foundation
+import Combine
 
 final class GameScoreboardViewModel {
     @Published var teams: [GameScoreboardTeamCellItem] = []
     
-    var teamsPublished: Published<[GameScoreboardTeamCellItem]>.Publisher { $teams }
+    var teamsPublished: AnyPublisher<[GameScoreboardTeamCellItem], Never> {
+        $teams.eraseToAnyPublisher()
+    }
     
     func fetchTeams() {
         teams = GameStory.shared.teams.map { .init(name: $0.key, score: $0.value) }
