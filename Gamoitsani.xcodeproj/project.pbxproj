@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF1E92B62BF8FE8E00127FDE /* GMGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */; };
 		FF1F14152BF7A897004116A1 /* Mersad.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF1F14132BF7A897004116A1 /* Mersad.ttf */; };
 		FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */; };
 		FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */; };
@@ -120,6 +121,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMGradientView.swift; sourceTree = "<group>"; };
 		FF1F14132BF7A897004116A1 /* Mersad.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mersad.ttf; sourceTree = "<group>"; };
 		FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleTableViewCell.swift; sourceTree = "<group>"; };
 		FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RuleTableViewCell.xib; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 				FFF65CA52BE61746008E0352 /* GMTableView.swift */,
 				FF7F1D842BE7A8F200872554 /* GMLabel.swift */,
 				FF4FA9C12BED96E800F38F98 /* GMTextField.swift */,
+				FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -926,6 +929,7 @@
 				FFF65CA12BE555CC008E0352 /* GameDetailsModel.swift in Sources */,
 				FFFB4D322BD86DAF00CDDCB4 /* AppConstants.swift in Sources */,
 				FFFB4D382BD9144B00CDDCB4 /* StringExtensions.swift in Sources */,
+				FF1E92B62BF8FE8E00127FDE /* GMGradientView.swift in Sources */,
 				FFF65CB82BE651C5008E0352 /* IntExtensions.swift in Sources */,
 				FFF65CB02BE61DEA008E0352 /* UITableViewExtensions.swift in Sources */,
 				FF7F1D9B2BE7D25300872554 /* GamePlayViewModel.swift in Sources */,
