@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FF1E92B62BF8FE8E00127FDE /* GMGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */; };
 		FF1E92B82BF9017100127FDE /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */; };
+		FF1E92BA2BF91C8C00127FDE /* GMBackBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */; };
 		FF1F14152BF7A897004116A1 /* Mersad.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF1F14132BF7A897004116A1 /* Mersad.ttf */; };
 		FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */; };
 		FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */; };
@@ -124,6 +125,7 @@
 /* Begin PBXFileReference section */
 		FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMGradientView.swift; sourceTree = "<group>"; };
 		FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
+		FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMBackBarButtonItem.swift; sourceTree = "<group>"; };
 		FF1F14132BF7A897004116A1 /* Mersad.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mersad.ttf; sourceTree = "<group>"; };
 		FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleTableViewCell.swift; sourceTree = "<group>"; };
 		FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RuleTableViewCell.xib; sourceTree = "<group>"; };
@@ -654,6 +656,7 @@
 				FF7F1D842BE7A8F200872554 /* GMLabel.swift */,
 				FF4FA9C12BED96E800F38F98 /* GMTextField.swift */,
 				FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */,
+				FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -947,6 +950,7 @@
 				FF8EA7092BEBBA1900F098B8 /* GameScoreboardViewModel.swift in Sources */,
 				FFFB4D3F2BD9155100CDDCB4 /* RulesCoordinator.swift in Sources */,
 				FF8EA7112BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift in Sources */,
+				FF1E92BA2BF91C8C00127FDE /* GMBackBarButtonItem.swift in Sources */,
 				FF7F1D7F2BE7A2F700872554 /* GameModels.swift in Sources */,
 				FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */,
 				FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */,

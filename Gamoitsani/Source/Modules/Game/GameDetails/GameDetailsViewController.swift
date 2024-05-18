@@ -32,6 +32,7 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
     var viewModel: GameDetailsViewModel?
     
     override func viewDidLoad() {
+        customBackBarButtonItem = true
         super.viewDidLoad()
         setupTableView()
         configureDataSource()

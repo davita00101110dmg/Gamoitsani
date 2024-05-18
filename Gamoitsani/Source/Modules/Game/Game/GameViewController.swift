@@ -39,12 +39,17 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopConfettiAnimation()
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//        navigationItem.setHidesBackButton(false, animated: false)
     }
 
     private func setupBackButton() {
-        let backButton = UIBarButtonItem(title: "Back", image: UIImage(systemName: "chevron.backward"), target: self, action: #selector(presentAlertOnBackButton))
-        navigationItem.setLeftBarButton(backButton, animated: true)
-        navigationItem.hidesBackButton = true
+        let action = UIAction { [weak self] _ in
+            self?.presentAlertOnBackButton()
+        }
+        
+        navigationItem.backAction = action
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     private func configureAudioManager() {
@@ -117,8 +122,6 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     }
     
     private func presentGameOverAlert() {
-        navigationItem.leftBarButtonItem = nil
-        
         let sortedTeams = gameStory.teams.sorted { l, r in
             l.value > r.value
         }
