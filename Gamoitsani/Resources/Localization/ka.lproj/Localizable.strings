@@ -21,6 +21,7 @@
 "point" = "ქულა";
 "start" = "დაწყება";
 "thanks" = "მადლობა";
+"back" = "უკან";
 
 // MARK: - Home
 "screen.home.play_button.title" = "თამაში";

@@ -21,6 +21,7 @@
 "point" = "Point";
 "start" = "Start";
 "thanks" = "Thanks";
+"back" = "Back";
 
 // MARK: - Home
 "screen.home.play_button.title" = "Game";

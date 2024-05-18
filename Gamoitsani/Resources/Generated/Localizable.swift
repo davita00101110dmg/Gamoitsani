@@ -13,6 +13,8 @@ public enum L10n {
     public static var addIt: String { L10n.tr("Localizable", "add_it") }
     /// and
     public static var and: String { L10n.tr("Localizable", "and") }
+    /// Back
+    public static var back: String { L10n.tr("Localizable", "back") }
     /// Cancel
     public static var cancel: String { L10n.tr("Localizable", "cancel") }
     /// Change
