@@ -40,7 +40,6 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         super.viewWillDisappear(animated)
         stopConfettiAnimation()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-//        navigationItem.setHidesBackButton(false, animated: false)
     }
 
     private func setupBackButton() {
