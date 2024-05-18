@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="landscape" appearance="light"/>
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
@@ -12,42 +12,100 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="PwO-y8-944" customClass="GamePlayView" customModule="Gamoitsani" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="310" height="400"/>
+            <rect key="frame" x="0.0" y="0.0" width="324" height="400"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6s-5M-nPD" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
-                    <rect key="frame" x="134.33333333333334" y="202" width="41.333333333333343" height="20.333333333333343"/>
+                    <rect key="frame" x="141.33333333333334" y="190" width="41.333333333333343" height="20.333333333333343"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDl-jc-QGU" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
-                    <rect key="frame" x="134.33333333333334" y="24" width="41.333333333333343" height="20.333333333333329"/>
+                    <rect key="frame" x="141.33333333333334" y="48" width="41.333333333333343" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="fU3-vB-ewf">
-                    <rect key="frame" x="83" y="295" width="144" height="60"/>
+                    <rect key="frame" x="24" y="282" width="276" height="60"/>
                     <subviews>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqx-xr-SUN" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                             <constraints>
+                                <constraint firstAttribute="width" secondItem="Tqx-xr-SUN" secondAttribute="height" multiplier="1:1" id="EVB-Zs-PTQ"/>
                                 <constraint firstAttribute="width" secondItem="Tqx-xr-SUN" secondAttribute="height" multiplier="1:1" id="Gx8-qs-pMA"/>
                                 <constraint firstAttribute="width" constant="60" id="h10-bJ-yI0"/>
+                                <constraint firstAttribute="width" constant="120" id="n1Q-g2-QFs"/>
                             </constraints>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="h10-bJ-yI0"/>
+                                    <exclude reference="n1Q-g2-QFs"/>
+                                    <exclude reference="EVB-Zs-PTQ"/>
+                                    <exclude reference="Gx8-qs-pMA"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=compact">
+                                <mask key="constraints">
+                                    <include reference="h10-bJ-yI0"/>
+                                    <include reference="Gx8-qs-pMA"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="h10-bJ-yI0"/>
+                                    <include reference="Gx8-qs-pMA"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <mask key="constraints">
+                                    <include reference="n1Q-g2-QFs"/>
+                                    <include reference="EVB-Zs-PTQ"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="correctWordAction:" destination="PwO-y8-944" eventType="touchUpInside" id="nG8-Xl-U6K"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrX-rg-zwz" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
-                            <rect key="frame" x="84" y="0.0" width="60" height="60"/>
+                            <rect key="frame" x="216" y="0.0" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="Fg6-7e-SKk"/>
+                                <constraint firstAttribute="height" constant="120" id="HNN-c4-dQB"/>
                                 <constraint firstAttribute="width" secondItem="zrX-rg-zwz" secondAttribute="height" multiplier="1:1" id="MF0-To-sAz"/>
+                                <constraint firstAttribute="width" secondItem="zrX-rg-zwz" secondAttribute="height" multiplier="1:1" id="U4P-o6-VLo"/>
                             </constraints>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Fg6-7e-SKk"/>
+                                    <exclude reference="MF0-To-sAz"/>
+                                    <exclude reference="U4P-o6-VLo"/>
+                                    <exclude reference="HNN-c4-dQB"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=compact">
+                                <mask key="constraints">
+                                    <include reference="Fg6-7e-SKk"/>
+                                    <include reference="MF0-To-sAz"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="Fg6-7e-SKk"/>
+                                    <include reference="MF0-To-sAz"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <mask key="constraints">
+                                    <include reference="U4P-o6-VLo"/>
+                                    <include reference="HNN-c4-dQB"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="incorrectButtonAction:" destination="PwO-y8-944" eventType="touchUpInside" id="Rjg-RK-Hpm"/>
                             </connections>
@@ -59,35 +117,63 @@
             <color key="backgroundColor" name="Secondary"/>
             <constraints>
                 <constraint firstItem="fU3-vB-ewf" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="06t-Pw-cH2"/>
+                <constraint firstItem="BmO-Bc-73D" firstAttribute="trailing" secondItem="fU3-vB-ewf" secondAttribute="trailing" constant="42" id="0O3-gs-hS9"/>
                 <constraint firstItem="BmO-Bc-73D" firstAttribute="bottom" secondItem="fU3-vB-ewf" secondAttribute="bottom" constant="24" id="2Pn-bc-iqf"/>
                 <constraint firstItem="VDl-jc-QGU" firstAttribute="top" secondItem="BmO-Bc-73D" secondAttribute="top" constant="24" id="7Vd-qH-4ei"/>
                 <constraint firstItem="BmO-Bc-73D" firstAttribute="trailing" secondItem="fU3-vB-ewf" secondAttribute="trailing" constant="24" id="DHx-hP-A2u"/>
                 <constraint firstItem="W6s-5M-nPD" firstAttribute="centerY" secondItem="PwO-y8-944" secondAttribute="centerY" id="Ho6-pA-4D9"/>
+                <constraint firstItem="W6s-5M-nPD" firstAttribute="centerY" secondItem="PwO-y8-944" secondAttribute="centerY" id="LB6-CZ-Q0v"/>
                 <constraint firstItem="W6s-5M-nPD" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="MMd-dB-aON"/>
                 <constraint firstItem="W6s-5M-nPD" firstAttribute="centerY" secondItem="PwO-y8-944" secondAttribute="centerY" constant="12" id="R89-aO-KzA"/>
                 <constraint firstItem="fU3-vB-ewf" firstAttribute="leading" secondItem="BmO-Bc-73D" secondAttribute="leading" constant="24" id="SWL-MK-ygO"/>
                 <constraint firstItem="VDl-jc-QGU" firstAttribute="top" secondItem="PwO-y8-944" secondAttribute="top" constant="48" id="XH2-kd-qh9"/>
+                <constraint firstItem="VDl-jc-QGU" firstAttribute="top" secondItem="BmO-Bc-73D" secondAttribute="top" constant="72" id="acE-3O-Dml"/>
+                <constraint firstItem="fU3-vB-ewf" firstAttribute="leading" secondItem="BmO-Bc-73D" secondAttribute="leading" constant="42" id="eai-eM-zb0"/>
                 <constraint firstItem="VDl-jc-QGU" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="l2m-xM-7HL"/>
+                <constraint firstItem="BmO-Bc-73D" firstAttribute="bottom" secondItem="fU3-vB-ewf" secondAttribute="bottom" constant="42" id="rYa-GL-8jn"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="0O3-gs-hS9"/>
+                    <exclude reference="DHx-hP-A2u"/>
+                    <exclude reference="2Pn-bc-iqf"/>
+                    <exclude reference="rYa-GL-8jn"/>
                     <exclude reference="XH2-kd-qh9"/>
                     <exclude reference="7Vd-qH-4ei"/>
+                    <exclude reference="acE-3O-Dml"/>
                     <exclude reference="Ho6-pA-4D9"/>
+                    <exclude reference="LB6-CZ-Q0v"/>
                     <exclude reference="R89-aO-KzA"/>
+                    <exclude reference="SWL-MK-ygO"/>
+                    <exclude reference="eai-eM-zb0"/>
                 </mask>
             </variation>
             <variation key="heightClass=compact">
                 <mask key="constraints">
+                    <include reference="DHx-hP-A2u"/>
+                    <include reference="2Pn-bc-iqf"/>
                     <include reference="7Vd-qH-4ei"/>
                     <include reference="R89-aO-KzA"/>
+                    <include reference="SWL-MK-ygO"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="constraints">
+                    <include reference="DHx-hP-A2u"/>
+                    <include reference="2Pn-bc-iqf"/>
                     <include reference="XH2-kd-qh9"/>
                     <include reference="Ho6-pA-4D9"/>
+                    <include reference="SWL-MK-ygO"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="0O3-gs-hS9"/>
+                    <include reference="rYa-GL-8jn"/>
+                    <include reference="acE-3O-Dml"/>
+                    <include reference="LB6-CZ-Q0v"/>
+                    <include reference="eai-eM-zb0"/>
                 </mask>
             </variation>
             <connections>
@@ -96,7 +182,7 @@
                 <outlet property="timerLabel" destination="W6s-5M-nPD" id="4fF-LY-dzO"/>
                 <outlet property="wordLabel" destination="VDl-jc-QGU" id="ziK-Tf-gaA"/>
             </connections>
-            <point key="canvasLocation" x="0.0" y="-104"/>
+            <point key="canvasLocation" x="7.9101562499999991" y="-104.09956076134699"/>
         </view>
     </objects>
     <resources>

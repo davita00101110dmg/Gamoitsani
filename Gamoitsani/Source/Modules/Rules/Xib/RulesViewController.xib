@@ -24,28 +24,36 @@
                     <rect key="frame" x="16" y="75" width="361" height="727"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <navigationBar hidden="YES" contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EtG-p6-Taa">
-                    <rect key="frame" x="0.0" y="59" width="393" height="0.0"/>
-                    <constraints>
-                        <constraint firstAttribute="height" id="f8v-Ns-C2g"/>
-                    </constraints>
-                    <items>
-                        <navigationItem title="Title" id="BBc-8g-7bA"/>
-                    </items>
-                </navigationBar>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="EtG-p6-Taa" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="ETD-u8-Mvn"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="zgV-fI-Vl3" secondAttribute="bottom" constant="16" id="Zdz-In-bDg"/>
-                <constraint firstItem="EtG-p6-Taa" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="bch-dH-m7o"/>
+                <constraint firstItem="zgV-fI-Vl3" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="dwk-ag-ieT"/>
                 <constraint firstItem="zgV-fI-Vl3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="gTF-gi-S9T"/>
-                <constraint firstItem="zgV-fI-Vl3" firstAttribute="top" secondItem="EtG-p6-Taa" secondAttribute="bottom" constant="16" id="m9J-Fe-U46"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zgV-fI-Vl3" secondAttribute="trailing" constant="16" id="qZx-nk-4qd"/>
-                <constraint firstItem="EtG-p6-Taa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="xVZ-lE-qbb"/>
             </constraints>
-            <point key="canvasLocation" x="-416.03053435114504" y="-10.563380281690142"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="dwk-ag-ieT"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact">
+                <mask key="constraints">
+                    <include reference="dwk-ag-ieT"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="dwk-ag-ieT"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="dwk-ag-ieT"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="-416.6015625" y="-10.980966325036603"/>
         </view>
     </objects>
     <resources>

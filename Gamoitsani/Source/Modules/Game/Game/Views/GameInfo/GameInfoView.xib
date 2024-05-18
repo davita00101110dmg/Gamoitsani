@@ -18,10 +18,32 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdE-ix-K0J" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
                     <rect key="frame" x="24" y="338" width="262" height="38"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="60" id="diE-JM-voI"/>
                         <constraint firstAttribute="height" constant="38" id="ngk-BV-BsY"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="diE-JM-voI"/>
+                            <exclude reference="ngk-BV-BsY"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=compact">
+                        <mask key="constraints">
+                            <include reference="ngk-BV-BsY"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="ngk-BV-BsY"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="diE-JM-voI"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="showScoreAction:" destination="X2f-M8-weE" eventType="touchUpInside" id="eKz-2z-ea8"/>
                     </connections>
@@ -29,11 +51,39 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jyn-gU-8dL" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
                     <rect key="frame" x="105" y="150" width="100" height="100"/>
                     <constraints>
+                        <constraint firstAttribute="width" secondItem="Jyn-gU-8dL" secondAttribute="height" multiplier="1:1" id="FkX-IO-4b0"/>
                         <constraint firstAttribute="height" constant="100" id="Vpg-km-XFS"/>
                         <constraint firstAttribute="width" secondItem="Jyn-gU-8dL" secondAttribute="height" multiplier="1:1" id="gXv-Sj-djZ"/>
+                        <constraint firstAttribute="height" constant="200" id="xr5-LI-STC"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="Button"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="FkX-IO-4b0"/>
+                            <exclude reference="gXv-Sj-djZ"/>
+                            <exclude reference="Vpg-km-XFS"/>
+                            <exclude reference="xr5-LI-STC"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=compact">
+                        <mask key="constraints">
+                            <include reference="gXv-Sj-djZ"/>
+                            <include reference="Vpg-km-XFS"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="gXv-Sj-djZ"/>
+                            <include reference="Vpg-km-XFS"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="FkX-IO-4b0"/>
+                            <include reference="xr5-LI-STC"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="startAction:" destination="X2f-M8-weE" eventType="touchUpInside" id="g1v-nj-wJR"/>
                     </connections>
@@ -54,11 +104,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <variation key="heightClass=regular-widthClass=regular" spacing="48"/>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="hr9-qp-yZK"/>
             <color key="backgroundColor" name="Secondary"/>
             <constraints>
+                <constraint firstItem="yAj-cF-Avn" firstAttribute="top" secondItem="hr9-qp-yZK" secondAttribute="top" constant="48" id="7Q6-8D-AY0"/>
                 <constraint firstAttribute="bottom" secondItem="VdE-ix-K0J" secondAttribute="bottom" constant="24" id="8qy-1P-FKt"/>
                 <constraint firstItem="VdE-ix-K0J" firstAttribute="leading" secondItem="hr9-qp-yZK" secondAttribute="leading" constant="24" id="C5O-Q2-7tQ"/>
                 <constraint firstItem="yAj-cF-Avn" firstAttribute="leading" secondItem="hr9-qp-yZK" secondAttribute="leading" constant="24" id="Cfb-OD-Qz8"/>
@@ -70,6 +122,27 @@
                 <constraint firstItem="Jyn-gU-8dL" firstAttribute="centerY" secondItem="X2f-M8-weE" secondAttribute="centerY" id="nBe-Ka-G5j"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="NhC-SS-bs5"/>
+                    <exclude reference="7Q6-8D-AY0"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact">
+                <mask key="constraints">
+                    <include reference="NhC-SS-bs5"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="NhC-SS-bs5"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="7Q6-8D-AY0"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="roundCountLabel" destination="cLG-pY-PfI" id="fro-R7-myt"/>
                 <outlet property="scoreButton" destination="VdE-ix-K0J" id="igw-4Y-hgb"/>

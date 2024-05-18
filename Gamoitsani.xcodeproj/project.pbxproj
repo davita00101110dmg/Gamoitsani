@@ -676,14 +676,14 @@
 		FFFB4D472BD937D900CDDCB4 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				FFFB4D482BD937E800CDDCB4 /* GameSettings */,
+				FFFB4D482BD937E800CDDCB4 /* GameDetails */,
 				FFFB4D4A2BD9380C00CDDCB4 /* Game */,
 				FFFB4D492BD9380500CDDCB4 /* GameScoreboard */,
 			);
 			path = Game;
 			sourceTree = "<group>";
 		};
-		FFFB4D482BD937E800CDDCB4 /* GameSettings */ = {
+		FFFB4D482BD937E800CDDCB4 /* GameDetails */ = {
 			isa = PBXGroup;
 			children = (
 				FF8EA6F82BEAB25000F098B8 /* DataSource */,
@@ -694,7 +694,7 @@
 				FFF65CA02BE555CC008E0352 /* GameDetailsModel.swift */,
 				FFFB4D4B2BD9392D00CDDCB4 /* GameDetailsCoordinator.swift */,
 			);
-			path = GameSettings;
+			path = GameDetails;
 			sourceTree = "<group>";
 		};
 		FFFB4D492BD9380500CDDCB4 /* GameScoreboard */ = {
