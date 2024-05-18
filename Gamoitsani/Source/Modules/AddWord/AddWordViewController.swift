@@ -26,6 +26,7 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
         title = L10n.Screen.AddWord.title
         addWordButton.configure(with: L10n.Screen.AddWord.send)
         hintMessageLabel.configure(with: L10n.Screen.AddWord.hint)
+        wordTextField.addPadding(padding: .equalSpacing(16))
     }
     
     @IBAction func addWordAction(_ sender: Any) {
