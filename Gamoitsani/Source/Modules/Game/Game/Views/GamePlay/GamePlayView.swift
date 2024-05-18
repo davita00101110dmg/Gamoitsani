@@ -37,6 +37,16 @@ final class GamePlayView: UIView {
         setupUI()
     }
     
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        invalidateTimers()
+    }
+    
+    private func invalidateTimers() {
+        roundLengthTimer?.invalidate()
+        countdownTimer?.invalidate()
+    }
+    
     private func setupUI() {
         backgroundColor = Asset.secondary.color.withAlphaComponent(Constants.backgroundColorAlpha)
         layer.cornerRadius = Constants.viewCornerRadius
@@ -74,8 +84,7 @@ final class GamePlayView: UIView {
     }
     
     private func timerBlock(_: Timer) -> Void {
-        countdownTimer?.invalidate()
-        roundLengthTimer?.invalidate()
+        invalidateTimers()
         delegate?.timerDidFinished(roundScore: viewModel?.score ?? 0)
     }
     
