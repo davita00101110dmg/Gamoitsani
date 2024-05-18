@@ -91,7 +91,7 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
                 self.snapshot?.appendItems(items)
                 self.dataSource.defaultRowAnimation = .automatic
                 
-                if let snapshot, !items.isEmpty {
+                if let snapshot {
                     self.dataSource.apply(snapshot, animatingDifferences: true)
                 }
                 

@@ -18,7 +18,9 @@ final class GameDetailsViewModel {
     
     @Published private var teams: [GameDetailsTeamCellItem] = []
     
-    var teamsPublished: Published<[GameDetailsTeamCellItem]>.Publisher { $teams }
+    var teamsPublished: AnyPublisher<[GameDetailsTeamCellItem], Never> {
+        $teams.eraseToAnyPublisher()
+    }
     
     func addTeam(with team: String) {
         teams.append(.init(name: team))
@@ -47,11 +49,9 @@ final class GameDetailsViewModel {
         .init(uniqueKeysWithValues: teams.map { ($0.name, 0) })
     }
     
-    @discardableResult
-    func remove(at index: Int) -> String? {
-        guard teams.indices.contains(index) else { return nil }
-        teams.swapAt(index, teams.count - 1)
-        return teams.popLast()?.name
+    func remove(at index: Int) {
+        guard teams.indices.contains(index) else { return }
+        teams.remove(at: index)
     }
     
     func updateOrder(with newOrderTeams: [GameDetailsTeamCellItem]) {
