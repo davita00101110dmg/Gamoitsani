@@ -24,12 +24,9 @@ final class GameScoreboardViewController: BaseViewController<GameScoreboardCoord
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addSwipeGestureRecogniser()
         setupTableView()
         configureDataSource()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         viewModel?.fetchTeams()
     }
     
@@ -45,6 +42,12 @@ final class GameScoreboardViewController: BaseViewController<GameScoreboardCoord
         tableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    private func addSwipeGestureRecogniser() {
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction))
+        swipeGesture.direction = .down
+        view.addGestureRecognizer(swipeGesture)
+    }
+         
     private func setupTableView() {
         tableView.rowHeight = 44
         tableView.register(GameScoreboardTeamTableViewCell.self)
@@ -64,6 +67,10 @@ final class GameScoreboardViewController: BaseViewController<GameScoreboardCoord
                     self.dataSource.apply(snapshot, animatingDifferences: true)
                 }
             }.store(in: &subscribers)
+    }
+                                           
+    @objc private func swipeAction() {
+        coordinator?.dismiss()
     }
 }
 

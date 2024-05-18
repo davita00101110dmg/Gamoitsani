@@ -23,12 +23,20 @@ final class GameScoreboardCoordinator: BaseCoordinator {
         gameScoreboardViewController.viewModel = GameScoreboardViewModel()
         gameScoreboardViewController.coordinator = self
         
-        if let presentationController = gameScoreboardViewController.presentationController as? UISheetPresentationController {
-            presentationController.detents = [.custom(resolver: { context in 250 }), .medium(), .large()]
-            presentationController.prefersGrabberVisible = true
+        if let sheet = gameScoreboardViewController.presentationController as? UISheetPresentationController {
+            var detents: [UISheetPresentationController.Detent] = []
+            if UIDevice.current.userInterfaceIdiom != .pad {
+                detents.append(.custom(resolver: { context in 250 }))
+            }
+            detents.append(contentsOf: [.medium(), .large()])
+            sheet.detents = detents
+            sheet.prefersGrabberVisible = true
         }
 
         navigationController.present(gameScoreboardViewController, animated: true)
     }
     
+    func dismiss() {
+        navigationController?.dismiss(animated: true)
+    }
 }
