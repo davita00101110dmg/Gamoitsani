@@ -10,11 +10,25 @@ import UIKit
 
 final class GMButton: UIButton {
     
-    private var isCircle: Bool = false
+    var cornerRadius: CGFloat {
+        didSet {
+            layer.cornerRadius = self.cornerRadius
+        }
+    }
     
+    init() {
+        self.cornerRadius = Constants.cornerRadius
+        super.init(frame: .zero)
+    }
+
+    required public init?(coder: NSCoder) {
+        self.cornerRadius = Constants.cornerRadius
+        super.init(coder: coder)
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        updateCornerRadius()
+        layer.cornerRadius = self.cornerRadius
     }
     
     public func configure(with text: String,
@@ -23,12 +37,11 @@ final class GMButton: UIButton {
                           isCircle: Bool = false,
                           backgroundColor: UIColor? = Asset.secondary.color,
                           textColor: UIColor? = .white) {
+                
+        let fontSize = UIDevice.current.userInterfaceIdiom == .pad ? fontSizeForPad : fontSizeForPhone
         
-        self.isCircle = isCircle
         setTitle(text, for: .normal)
         setTitleColor(textColor, for: .normal)
-        
-        let fontSize = UIDevice.current.userInterfaceIdiom == .pad ? fontSizeForPad : fontSizeForPhone
         titleLabel?.font = F.Mersad.bold.font(size: fontSize)
         
         if isCircle {
@@ -40,15 +53,9 @@ final class GMButton: UIButton {
         layoutIfNeeded()
     }
     
-    private func updateCornerRadius() {
-        if isCircle {
-            layer.cornerRadius = bounds.size.width / 2
-        }
-    }
-    
     private func applyCircleStyle(backgroundColor: UIColor?) {
+        cornerRadius = frame.width / 2
         self.backgroundColor = backgroundColor
-        layer.cornerRadius = bounds.size.width / 2
     }
     
     private func applyDefaultStyle(fontSize: CGFloat, backgroundColor: UIColor?) {
@@ -70,6 +77,7 @@ final class GMButton: UIButton {
 
 private extension GMButton {
     enum Constants {
+        static let cornerRadius: CGFloat = 12
         static let buttonPhoneFontSize: CGFloat = 18
         static let buttonPadFontSize: CGFloat = 24
     }
