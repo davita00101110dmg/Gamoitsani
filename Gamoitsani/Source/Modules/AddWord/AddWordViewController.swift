@@ -18,7 +18,7 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        FirebaseManager.shared.addWords(wordsToBeAdded)
+        sendWordsToDB()
     }
     
     override func setupUI() {
@@ -29,8 +29,12 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
         wordTextField.addPadding(padding: .equalSpacing(16))
     }
     
+    private func sendWordsToDB() {
+        if !wordsToBeAdded.isEmpty { FirebaseManager.shared.addWords(wordsToBeAdded) }
+    }
+    
     @IBAction func addWordAction(_ sender: Any) {
-        guard let word = wordTextField.text else { return }
+        guard let word = wordTextField.text, word != .empty else { return }
         wordsToBeAdded.append(word.removeExtraSpaces())
         wordTextField.text = .empty
     }
