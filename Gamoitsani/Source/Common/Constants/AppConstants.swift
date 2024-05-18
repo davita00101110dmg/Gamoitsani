@@ -23,6 +23,10 @@ enum AppConstants {
         "nectarine", "olive", "papaya", "quince", "raspberry"
     ]
     
+    enum FontType {
+        case regular, semiBold, bold
+    }
+    
     enum Language {
         case english
         case georgian
