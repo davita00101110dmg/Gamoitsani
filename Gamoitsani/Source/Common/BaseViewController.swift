@@ -12,11 +12,15 @@ import Combine
 class BaseViewController<T: Coordinator>: UIViewController {
     
     private lazy var customBackBarButtonItem: UIBarButtonItem = {
-        return BackBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
+        let button = BackBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
+        button.setTitleTextAttributes([.font: F.Mersad.semiBold.font(size: 16)], for: .normal)
+        return button
     }()
     
     private lazy var defaultBackBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
+        let button = UIBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
+        button.setTitleTextAttributes([.font: F.Mersad.semiBold.font(size: 16)], for: .normal)
+        return button
     }()
     
     var subscribers = Set<AnyCancellable>()
@@ -42,7 +46,7 @@ class BaseViewController<T: Coordinator>: UIViewController {
     
     @objc private func languageDidChange() {
         setupLocalizedTexts()
-        setupCustomBackBarButtonItem()
+        updateBackBarButtonItemTitles()
     }
     
     private func subscribeToPublishers() {
@@ -50,11 +54,12 @@ class BaseViewController<T: Coordinator>: UIViewController {
     }
     
     private func setupCustomBackBarButtonItem() {
-        if shouldUseCustomBackBarButtonItem {
-            navigationItem.backBarButtonItem = customBackBarButtonItem
-        } else {
-            navigationItem.backBarButtonItem = defaultBackBarButtonItem
-        }
+        navigationItem.backBarButtonItem = shouldUseCustomBackBarButtonItem ? customBackBarButtonItem : defaultBackBarButtonItem
+    }
+    
+    private func updateBackBarButtonItemTitles() {
+        customBackBarButtonItem.title = L10n.back
+        defaultBackBarButtonItem.title = L10n.back
     }
 
     private func setupGradientBackground() {
