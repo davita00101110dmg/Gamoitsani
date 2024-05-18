@@ -9,11 +9,12 @@
 import UIKit
 
 final class GMLabel: UILabel {
-    public func configure(with string: String?,
+    public func configure(with text: String?,
                           fontType: AppConstants.FontType = .semiBold,
                           fontSizeForPhone: CGFloat = Constants.labelPhoneFontSize,
                           fontSizeForPad: CGFloat = Constants.labelPadFontSize,
-                          color: UIColor = .white) {
+                          color: UIColor = .white,
+                          lineHeightMultiple: CGFloat = Constants.lineHeightMultipleConstant) {
         
         let fontSize = UIDevice.current.userInterfaceIdiom == .pad ? fontSizeForPad : fontSizeForPhone
         
@@ -26,8 +27,9 @@ final class GMLabel: UILabel {
             font = F.Mersad.bold.font(size: fontSize)
         }
         
-        text = string ?? .empty
+        setLineSpacing(lineHeightMultiple: lineHeightMultiple)
         textColor = color
+        self.text = text
     }
 }
 
@@ -35,5 +37,6 @@ private extension GMLabel {
     enum Constants {
         static let labelPhoneFontSize: CGFloat = 16
         static let labelPadFontSize: CGFloat = 24
+        static let lineHeightMultipleConstant: CGFloat = 1.3
     }
 }

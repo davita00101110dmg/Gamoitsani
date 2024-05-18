@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FF1E92B62BF8FE8E00127FDE /* GMGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */; };
+		FF1E92B82BF9017100127FDE /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */; };
 		FF1F14152BF7A897004116A1 /* Mersad.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF1F14132BF7A897004116A1 /* Mersad.ttf */; };
 		FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */; };
 		FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */; };
@@ -122,6 +123,7 @@
 
 /* Begin PBXFileReference section */
 		FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMGradientView.swift; sourceTree = "<group>"; };
+		FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
 		FF1F14132BF7A897004116A1 /* Mersad.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mersad.ttf; sourceTree = "<group>"; };
 		FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleTableViewCell.swift; sourceTree = "<group>"; };
 		FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RuleTableViewCell.xib; sourceTree = "<group>"; };
@@ -623,6 +625,7 @@
 				FFF65CB72BE651C5008E0352 /* IntExtensions.swift */,
 				FF7F1D932BE7B10600872554 /* UIViewExtensions.swift */,
 				FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */,
+				FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				FF8EA70D2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift in Sources */,
 				FFFB4D4C2BD9392D00CDDCB4 /* GameDetailsCoordinator.swift in Sources */,
 				FFF65CC72BE6B0C4008E0352 /* Assets.swift in Sources */,
+				FF1E92B82BF9017100127FDE /* UILabelExtensions.swift in Sources */,
 				FFF65CB22BE61E17008E0352 /* NSObjectExtensions.swift in Sources */,
 				FF7F1D942BE7B10600872554 /* UIViewExtensions.swift in Sources */,
 				FF8EA7562BEC40B100F098B8 /* UIColorExtensions.swift in Sources */,
