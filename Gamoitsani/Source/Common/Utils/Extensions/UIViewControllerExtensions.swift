@@ -41,12 +41,12 @@ extension UIViewController {
         case let .team(title, message, initialText, addActionTitle, addActionHandler):
             alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.addTextField { $0.text = initialText }
+            
+            alertController.addAction(UIAlertAction(title: L10n.cancel, style: .default))
             alertController.addAction(UIAlertAction(title: addActionTitle, style: .default) { _ in
                 guard let teamName = alertController.textFields?.first?.text else { return }
                 addActionHandler(teamName)
             })
-            alertController.addAction(UIAlertAction(title: L10n.cancel, style: .cancel))
-            
         case let .info(title, message):
             alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: L10n.ok, style: .default))
