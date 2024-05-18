@@ -58,8 +58,9 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
         roundsLengthStepper.value = ViewControllerConstants.roundsLengthStepperDefaultValue
         roundsLengthStepper.stepValue = ViewControllerConstants.roundsLengthStepperStepValue
         
-        addTeamButton.configure(text: L10n.add, fontSize: ViewControllerConstants.buttonTitleFontValue)
-        startGameButton.configure(text: L10n.Screen.GameDetails.StartGame.title)
+        addTeamButton.configure(with: L10n.add,
+                                fontSizeForPhone: ViewControllerConstants.buttonTitleFontSizeForPhone)
+        startGameButton.configure(with: L10n.Screen.GameDetails.StartGame.title)
     }
     
     override func setupLocalizedTexts() {
@@ -154,7 +155,7 @@ extension GameDetailsViewController {
     }
     
     @IBAction func addTeamAction(_ sender: Any) {
-        if let viewModel, viewModel.getTeamsCount() < 5 {
+        if let viewModel, viewModel.getTeamsCount() < ViewControllerConstants.maximumNumberOfTeams {
             presentAddTeamAlert()
         } else {
             presentIncorrectGameDetailsAlert(message: L10n.Screen.GameDetails.IncorrectGameDetailsMaximumTeams.message)
@@ -164,7 +165,7 @@ extension GameDetailsViewController {
     @IBAction func startGameAction(_ sender: Any) {
         guard let viewModel else { return }
         
-        if viewModel.getTeamsCount() < 2 {
+        if viewModel.getTeamsCount() < ViewControllerConstants.minimumNumberOfTeams {
             presentIncorrectGameDetailsAlert(message: L10n.Screen.GameDetails.IncorrectGameDetailsNotEnoughTeams.message)
         } else if viewModel.teamsAreUnique() {
             presentIncorrectGameDetailsAlert(message: L10n.Screen.GameDetails.IncorrectGameDetailsNotUniqueTeams.message)
@@ -283,6 +284,8 @@ extension GameDetailsViewController {
         static let roundsLengthStepperMaxValue: Double = 75
         static let roundsLengthStepperDefaultValue: Double = 45
         static let roundsLengthStepperStepValue: Double = 5
-        static let buttonTitleFontValue: CGFloat = 16
+        static let buttonTitleFontSizeForPhone: CGFloat = 16
+        static let minimumNumberOfTeams: Int = 2
+        static let maximumNumberOfTeams: Int = 5
     }
 }

@@ -29,17 +29,19 @@ final class GameInfoView: UIView {
     }
     
     private func setupUI() {
-        backgroundColor = Asset.secondary.color.withAlphaComponent(0.3)
-        layer.cornerRadius = 10
-        startButton.configure(text: L10n.start, isCircle: true)
-        scoreButton.configure(text: L10n.scoreboard)
+        backgroundColor = Asset.secondary.color.withAlphaComponent(Constants.backgroundColorAlpha)
+        layer.cornerRadius = Constants.viewCornerRadius
+        startButton.configure(with: L10n.start, fontSizeForPad: Constants.buttonFontSizeForPad, isCircle: true)
+        scoreButton.configure(with: L10n.scoreboard)
     }
     
     func configure(with model: GameInfoViewModel, delegate: GameInfoViewDelegate) {
         self.delegate = delegate
         
-        roundCountLabel.configure(with: L10n.Screen.Game.CurrentRound.message(model.currentRound.toString))
-        teamNameLabel.configure(with: model.teamName)
+        roundCountLabel.configure(with: L10n.Screen.Game.CurrentRound.message(model.currentRound.toString),
+                                  fontSizeForPad: Constants.labelFontSizeForPad)
+        teamNameLabel.configure(with: model.teamName,
+                                fontSizeForPad: Constants.labelFontSizeForPad)
     }
     
     @IBAction func startAction(_ sender: Any) {
@@ -48,5 +50,15 @@ final class GameInfoView: UIView {
     
     @IBAction func showScoreAction(_ sender: Any) {
         delegate?.didPressShowScoreboard()
+    }
+}
+
+// MARK: - View Constants
+extension GameInfoView {
+    enum Constants {
+        static let backgroundColorAlpha: CGFloat = 0.3
+        static let viewCornerRadius: CGFloat = 10
+        static let labelFontSizeForPad: CGFloat = 32
+        static let buttonFontSizeForPad: CGFloat = 32
     }
 }

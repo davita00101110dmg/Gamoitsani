@@ -38,15 +38,21 @@ final class GamePlayView: UIView {
     }
     
     private func setupUI() {
-        backgroundColor = Asset.secondary.color.withAlphaComponent(0.3)
-        layer.cornerRadius = 10
+        backgroundColor = Asset.secondary.color.withAlphaComponent(Constants.backgroundColorAlpha)
+        layer.cornerRadius = Constants.viewCornerRadius
         
-        correctButton.configure(text: "✓", fontSize: 30, isCircle: true)
         correctButton.backgroundColor = Asset.green.color
-        incorrectButton.configure(text: "✘", fontSize: 30, isCircle: true)
         incorrectButton.backgroundColor = Asset.red.color
+        correctButton.configure(with: Constants.correctSymbol,
+                                fontSizeForPhone: Constants.correctIncorrectButtonFontSizeForPhone,
+                                fontSizeForPad: Constants.correctIncorrectButtonFontSizeForPad,
+                                isCircle: true)
+        incorrectButton.configure(with: Constants.incorrectSymbol,
+                                  fontSizeForPhone: Constants.correctIncorrectButtonFontSizeForPhone,
+                                  fontSizeForPad: Constants.correctIncorrectButtonFontSizeForPad,
+                                  isCircle: true)
     }
-    
+
     func configure(with model: GamePlayViewModel, audioManager: AudioManager, delegate: GamePlayViewDelegate) {
         self.delegate = delegate
         self.audioManager = audioManager
@@ -58,8 +64,13 @@ final class GamePlayView: UIView {
         words = model.words
         roundLength = model.roundLength
         
-        timerLabel.configure(with: roundLength.toString(), fontSize: 100)
-        wordLabel.configure(with: words.popLast(), fontSize: 32)
+        wordLabel.configure(with: words.popLast(),
+                            fontType: .bold,
+                            fontSizeForPhone: Constants.wordLabelFontSizeForPhone,
+                            fontSizeForPad: Constants.wordLabelFontSizeForPad)
+        timerLabel.configure(with: roundLength.toString(),
+                             fontSizeForPhone: Constants.timerLabelFontSizeForPhone,
+                             fontSizeForPad: Constants.timerLabelFontSizeForPad)
     }
     
     private func timerBlock(_: Timer) -> Void {
@@ -91,5 +102,22 @@ final class GamePlayView: UIView {
     
     @IBAction func incorrectButtonAction(_ sender: UIButton) {
         wordButtonAction(tag: sender.tag)
+    }
+}
+
+// MARK: - View Constants
+extension GamePlayView {
+    enum Constants {
+        static let correctSymbol: String = "✓"
+        static let incorrectSymbol: String = "✘"
+        static let backgroundColorAlpha: CGFloat = 0.3
+        static let viewCornerRadius: CGFloat = 10
+        static let wordLabelFontSizeForPhone: CGFloat = 32
+        static let wordLabelFontSizeForPad: CGFloat = 52
+        static let timerLabelFontSizeForPhone: CGFloat = 100
+        static let timerLabelFontSizeForPad: CGFloat = 150
+        
+        static let correctIncorrectButtonFontSizeForPhone: CGFloat = 30
+        static let correctIncorrectButtonFontSizeForPad: CGFloat = 60
     }
 }

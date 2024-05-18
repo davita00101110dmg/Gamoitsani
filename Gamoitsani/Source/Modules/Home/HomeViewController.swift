@@ -21,10 +21,13 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
     
     override func setupLocalizedTexts() {
         super.setupLocalizedTexts()
-        titleLabel.configure(with: L10n.App.title, fontSize: 40)
-        gameButton.configure(text: L10n.Screen.Home.PlayButton.title)
-        rulesButton.configure(text: L10n.Screen.Home.RulesButton.title)
-        addWordButton.configure(text: L10n.Screen.Home.AddWordButton.title)
+        titleLabel.configure(with: L10n.App.title,
+                             fontType: .bold,
+                             fontSizeForPhone: ViewControllerConstants.titleLabelFontSizeForPhone,
+                             fontSizeForPad: ViewControllerConstants.titleLabelFontSizeForPad)
+        gameButton.configure(with: L10n.Screen.Home.PlayButton.title)
+        rulesButton.configure(with: L10n.Screen.Home.RulesButton.title)
+        addWordButton.configure(with: L10n.Screen.Home.AddWordButton.title)
     }
     
     private func setupRightBarButtonItem() {
@@ -58,5 +61,13 @@ extension HomeViewController {
     
     @IBAction func addWordButtonClicked(_ sender: Any) {
         coordinator?.navigateToAddWord()
+    }
+}
+
+// MARK: - ViewController Constants
+extension HomeViewController {
+    enum ViewControllerConstants {
+        static let titleLabelFontSizeForPhone: CGFloat = 40
+        static let titleLabelFontSizeForPad: CGFloat = 74
     }
 }

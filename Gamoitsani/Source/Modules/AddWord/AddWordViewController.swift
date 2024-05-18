@@ -24,7 +24,7 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
     override func setupUI() {
         super.setupUI()
         title = L10n.Screen.AddWord.title
-        addWordButton.configure(text: L10n.Screen.AddWord.send)
+        addWordButton.configure(with: L10n.Screen.AddWord.send)
         hintMessageLabel.configure(with: L10n.Screen.AddWord.hint)
     }
     
