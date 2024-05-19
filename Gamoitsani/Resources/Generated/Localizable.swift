@@ -57,7 +57,7 @@ public enum L10n {
       public enum Game {
 
         public enum ConfirmationAlert {
-          /// In this case, the teams' points will be lost
+          /// Teams' points will be lost
           public static var message: String { L10n.tr("Localizable", "screen.game.confirmation_alert.message") }
           /// Are you sure you want to go back?
           public static var title: String { L10n.tr("Localizable", "screen.game.confirmation_alert.title") }
@@ -92,35 +92,38 @@ public enum L10n {
         public static var title: String { L10n.tr("Localizable", "screen.game_details.title") }
 
         public enum AddTeamAlert {
-          /// Enter team name
-          public static var message: String { L10n.tr("Localizable", "screen.game_details.add_team_alert.message") }
-          /// Add team
+          /// Add a team
           public static var title: String { L10n.tr("Localizable", "screen.game_details.add_team_alert.title") }
         }
 
-        public enum IncorrectGameDetailsEmptyTeamName {
+        public enum EditTeamNameAlert {
+          /// Edit team's name
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.edit_team_name_alert.title") }
+        }
+
+        public enum InvalidGameDetailsEmptyTeamName {
           /// Team name cannot be empty
-          public static var message: String { L10n.tr("Localizable", "screen.game_details.incorrect_game_details_empty_team_name.message") }
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.invalid_game_details_empty_team_name.message") }
         }
 
-        public enum IncorrectGameDetailsMaximumTeams {
+        public enum InvalidGameDetailsMaximumTeams {
           /// It is not possible to add more than 5 teams
-          public static var message: String { L10n.tr("Localizable", "screen.game_details.incorrect_game_details_maximum_teams.message") }
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.invalid_game_details_maximum_teams.message") }
         }
 
-        public enum IncorrectGameDetailsNotEnoughTeams {
-          /// Not enough teams, you need to add at least 2 teams to start the game!
-          public static var message: String { L10n.tr("Localizable", "screen.game_details.incorrect_game_details_not_enough_teams.message") }
+        public enum InvalidGameDetailsNotEnoughTeams {
+          /// Add at least 2 teams to start!
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.invalid_game_details_not_enough_teams.message") }
         }
 
-        public enum IncorrectGameDetailsNotUniqueTeams {
+        public enum InvalidGameDetailsNotUniqueTeams {
           /// Team names must be unique!
-          public static var message: String { L10n.tr("Localizable", "screen.game_details.incorrect_game_details_not_unique_teams.message") }
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.invalid_game_details_not_unique_teams.message") }
         }
 
-        public enum IncorrectParameter {
-          /// Incorrect parameter
-          public static var title: String { L10n.tr("Localizable", "screen.game_details.incorrect_parameter.title") }
+        public enum InvalidParameter {
+          /// Invalid parameter
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.invalid_parameter.title") }
         }
 
         public enum NoInternetConnectionAlert {
@@ -131,7 +134,7 @@ public enum L10n {
         }
 
         public enum RoundsAmount {
-          /// Rounds Amount: %@
+          /// Rounds: %@
           public static func title( _ p1: String) -> String {
               return L10n.tr("Localizable", "screen.game_details.rounds_amount.title", p1)
           }
@@ -152,11 +155,6 @@ public enum L10n {
         public enum Teams {
           /// Teams
           public static var title: String { L10n.tr("Localizable", "screen.game_details.teams.title") }
-        }
-
-        public enum UpdateTeamNameAlert {
-          /// Update team name
-          public static var title: String { L10n.tr("Localizable", "screen.game_details.update_team_name_alert.title") }
         }
       }
 

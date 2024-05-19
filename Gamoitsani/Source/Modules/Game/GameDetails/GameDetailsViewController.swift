@@ -100,14 +100,13 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
     
     private func presentAddTeamAlert() {
         let alertType = AlertType.team(title: L10n.Screen.GameDetails.AddTeamAlert.title,
-                                       message: L10n.Screen.GameDetails.AddTeamAlert.message,
-                                       initialText: nil,
-                                       addActionTitle: L10n.addIt) { [weak self] teamName in
+                                       message: nil,
+                                       initialText: nil) { [weak self] teamName in
             guard let self,
                   let viewModel else { return }
             let teamName = teamName.removeExtraSpaces()
             if teamName == .empty {
-                presentIncorrectGameDetailsAlert(message: L10n.Screen.GameDetails.IncorrectGameDetailsEmptyTeamName.message)
+                presentInvalidGameDetailsAlert(message: L10n.Screen.GameDetails.InvalidGameDetailsEmptyTeamName.message)
             } else {
                 viewModel.addTeam(with: teamName.removeExtraSpaces())
             }
@@ -119,16 +118,15 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
         guard let viewModel else { return }
         let initialText = viewModel.getTeam(at: index)
         
-        let alertType = AlertType.team(title: L10n.Screen.GameDetails.UpdateTeamNameAlert.title,
+        let alertType = AlertType.team(title: L10n.Screen.GameDetails.EditTeamNameAlert.title,
                                        message: nil,
-                                       initialText: initialText,
-                                       addActionTitle: L10n.change) { teamName in
+                                       initialText: initialText) { teamName in
             viewModel.updateTeam(at: index, with: teamName)
         }
         presentAlert(of: alertType)
     }
     
-    private func presentIncorrectGameDetailsAlert(title: String = L10n.Screen.GameDetails.IncorrectParameter.title,
+    private func presentInvalidGameDetailsAlert(title: String = L10n.Screen.GameDetails.InvalidParameter.title,
                                                    message: String) {
         let alertType = AlertType.info(title: title,
                                        message: message)
@@ -159,7 +157,7 @@ extension GameDetailsViewController {
         if let viewModel, viewModel.getTeamsCount() < ViewControllerConstants.maximumNumberOfTeams {
             presentAddTeamAlert()
         } else {
-            presentIncorrectGameDetailsAlert(message: L10n.Screen.GameDetails.IncorrectGameDetailsMaximumTeams.message)
+            presentInvalidGameDetailsAlert(message: L10n.Screen.GameDetails.InvalidGameDetailsMaximumTeams.message)
         }
     }
     
@@ -167,9 +165,9 @@ extension GameDetailsViewController {
         guard let viewModel else { return }
         
         if viewModel.getTeamsCount() < ViewControllerConstants.minimumNumberOfTeams {
-            presentIncorrectGameDetailsAlert(message: L10n.Screen.GameDetails.IncorrectGameDetailsNotEnoughTeams.message)
+            presentInvalidGameDetailsAlert(message: L10n.Screen.GameDetails.InvalidGameDetailsNotEnoughTeams.message)
         } else if viewModel.teamsAreUnique() {
-            presentIncorrectGameDetailsAlert(message: L10n.Screen.GameDetails.IncorrectGameDetailsNotUniqueTeams.message)
+            presentInvalidGameDetailsAlert(message: L10n.Screen.GameDetails.InvalidGameDetailsNotUniqueTeams.message)
         } else {
             startGame()
         }
@@ -180,7 +178,7 @@ extension GameDetailsViewController {
             updateGameStory()
             coordinator?.navigateToGame()
         } else {
-            presentIncorrectGameDetailsAlert(title: L10n.Screen.GameDetails.NoInternetConnectionAlert.title,
+            presentInvalidGameDetailsAlert(title: L10n.Screen.GameDetails.NoInternetConnectionAlert.title,
                                               message: L10n.Screen.GameDetails.NoInternetConnectionAlert.message)
         }
     }

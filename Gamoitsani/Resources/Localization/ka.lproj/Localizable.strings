@@ -27,7 +27,6 @@
 "screen.home.play_button.title" = "თამაში";
 "screen.home.rules_button.title" = "წესები";
 "screen.home.add_word_button.title" = "სიტყვის დამატება";
-"screen.home.settings_button.title" = "პარამეტრები";
 "screen.home.change_language.title" = "ენის შეცვლა";
 
 // MARK: - Rules
@@ -50,20 +49,19 @@
 "screen.game_details.rounds_length.title" = "რაუნდის ხანგრძლივობა: %@ წმ";
 "screen.game_details.teams.title" = "გუნდები";
 "screen.game_details.add_team_alert.title" = "დაამატე გუნდი";
-"screen.game_details.add_team_alert.message" = "ჩაწერე გუნდის სახელი";
-"screen.game_details.update_team_name_alert.title" = "შეცვალე გუნდის სახელი";
+"screen.game_details.edit_team_name_alert.title" = "დაარედაქტირე გუნდის სახელი";
 "screen.game_details.no_internet_connection_alert.title" = "არ არის ინტერნეტთან კავშირი!";
 "screen.game_details.no_internet_connection_alert.message" = "თამაშის დასაწყებად საჭიროა ინტერნეტთან კავშირი";
 "screen.game_details.start_game.title" = "თამაშის დაწყება";
-"screen.game_details.incorrect_parameter.title" = "არასწორი პარამეტრი";
-"screen.game_details.incorrect_game_details_not_enough_teams.message" = "არასაკმარისი გუნდების რაოდენობა, თამაშის დასაწყებად საჭიროა მინიმუმ 2 გუნდის დამატება!";
-"screen.game_details.incorrect_game_details_not_unique_teams.message" = "გუნდების სახელები უნდა იყოს უნიკალური!";
-"screen.game_details.incorrect_game_details_maximum_teams.message" = "5 გუნდზე მეტის დამატება შეუძლებელია";
-"screen.game_details.incorrect_game_details_empty_team_name.message" = "გუნდის სახელი ვერ იქნება ცარიელი";
+"screen.game_details.invalid_parameter.title" = "არასწორი პარამეტრი";
+"screen.game_details.invalid_game_details_not_enough_teams.message" = "თამაშის დასაწყებად დაამატე მინიმუმ 2 გუნდი!";
+"screen.game_details.invalid_game_details_not_unique_teams.message" = "გუნდების სახელი უნდა იყოს უნიკალური!";
+"screen.game_details.invalid_game_details_maximum_teams.message" = "5 გუნდზე მეტის დამატება შეუძლებელია";
+"screen.game_details.invalid_game_details_empty_team_name.message" = "გუნდის სახელი არ შეიძლება იყოს ცარიელი";
 
 // MARK: - Game
 "screen.game.confirmation_alert.title" = "დარწმუნებული ხარ რომ უკან დაბრუნება გინდა?";
-"screen.game.confirmation_alert.message" = "ამ შემთხვევაში გუნდების ქულები დაიკარგება.";
+"screen.game.confirmation_alert.message" = "გუნდების ქულები დაიკარგება";
 "screen.game.current_round.message" = "რაუნდი: %@";
 "screen.game.winning_alert.title" = "გილოცავთ %@";
 "screen.game.winning_alert.message" = "თქვენ მოიგეთ %@ ქულით";

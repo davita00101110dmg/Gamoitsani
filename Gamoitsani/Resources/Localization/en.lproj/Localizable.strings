@@ -45,24 +45,23 @@
 
 // MARK: - Game Details
 "screen.game_details.title" = "Game Details";
-"screen.game_details.rounds_amount.title" = "Rounds Amount: %@";
+"screen.game_details.rounds_amount.title" = "Rounds: %@";
 "screen.game_details.rounds_length.title" = "Round Length: %@ sec";
 "screen.game_details.teams.title" = "Teams";
-"screen.game_details.add_team_alert.title" = "Add team";
-"screen.game_details.add_team_alert.message" = "Enter team name";
-"screen.game_details.update_team_name_alert.title" = "Update team name";
+"screen.game_details.add_team_alert.title" = "Add a team";
+"screen.game_details.edit_team_name_alert.title" = "Edit team's name";
 "screen.game_details.no_internet_connection_alert.title" = "No internet connection!";
 "screen.game_details.no_internet_connection_alert.message" = "Internet connection is required to start the game";
 "screen.game_details.start_game.title" = "Start Game";
-"screen.game_details.incorrect_parameter.title" = "Incorrect parameter";
-"screen.game_details.incorrect_game_details_not_enough_teams.message" = "Not enough teams, you need to add at least 2 teams to start the game!";
-"screen.game_details.incorrect_game_details_not_unique_teams.message" = "Team names must be unique!";
-"screen.game_details.incorrect_game_details_maximum_teams.message" = "It is not possible to add more than 5 teams";
-"screen.game_details.incorrect_game_details_empty_team_name.message" = "Team name cannot be empty";
+"screen.game_details.invalid_parameter.title" = "Invalid parameter";
+"screen.game_details.invalid_game_details_not_enough_teams.message" = "Add at least 2 teams to start!";
+"screen.game_details.invalid_game_details_not_unique_teams.message" = "Team names must be unique!";
+"screen.game_details.invalid_game_details_maximum_teams.message" = "It is not possible to add more than 5 teams";
+"screen.game_details.invalid_game_details_empty_team_name.message" = "Team name cannot be empty";
 
 // MARK: - Game
 "screen.game.confirmation_alert.title" = "Are you sure you want to go back?";
-"screen.game.confirmation_alert.message" = "In this case, the teams' points will be lost";
+"screen.game.confirmation_alert.message" = "Teams' points will be lost";
 "screen.game.current_round.message" = "Round: %@";
 "screen.game.winning_alert.title" = "Congratulations %@";
 "screen.game.winning_alert.message" = "You won with %@ points";

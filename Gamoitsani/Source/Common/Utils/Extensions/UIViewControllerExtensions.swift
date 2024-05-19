@@ -30,7 +30,7 @@ extension UIViewController {
     }
     
     enum AlertType {
-        case team(title: String, message: String?, initialText: String?, addActionTitle: String, addActionHandler: (String) -> Void)
+        case team(title: String, message: String?, initialText: String?, addActionTitle: String = L10n.ok, addActionHandler: (String) -> Void)
         case info(title: String, message: String)
     }
 
@@ -42,7 +42,7 @@ extension UIViewController {
             alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.addTextField { $0.text = initialText }
             
-            alertController.addAction(UIAlertAction(title: L10n.cancel, style: .default))
+            alertController.addAction(UIAlertAction(title: L10n.cancel, style: .cancel))
             alertController.addAction(UIAlertAction(title: addActionTitle, style: .default) { _ in
                 guard let teamName = alertController.textFields?.first?.text else { return }
                 addActionHandler(teamName)
