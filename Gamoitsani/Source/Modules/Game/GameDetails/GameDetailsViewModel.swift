@@ -13,6 +13,10 @@ import Network
 
 final class GameDetailsViewModel {
     
+    deinit {
+        networkMonitor.cancel()
+    }
+    
     private let networkMonitor = NWPathMonitor()
     private var shouldFetchWords = true
     
