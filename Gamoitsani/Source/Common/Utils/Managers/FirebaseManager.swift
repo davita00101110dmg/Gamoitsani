@@ -12,13 +12,20 @@ import FirebaseFirestore
 final class FirebaseManager {
     static let shared = FirebaseManager()
     
-    private lazy var wordsRef = Firestore.firestore().collection(AppConstants.Firebase.wordsCollectionName)
-    private lazy var suggestionsRef = Firestore.firestore().collection(AppConstants.Firebase.suggestedWordsCollectionName)
+    private let db = Firestore.firestore()
+    private lazy var wordsRef = db.collection(AppConstants.Firebase.wordsCollectionName)
+    private lazy var suggestionsRef = db.collection(AppConstants.Firebase.suggestedWordsCollectionName)
+    
+    private var wordField: String {
+        UserDefaults.appLanguage == AppConstants.Language.georgian.identifier ? AppConstants.Firebase.wordKa : AppConstants.Firebase.wordEn
+    }
 
     private init() { }
-
-    func fetchWords(quantity: Int = 1000, completion: @escaping ([String]) -> Void) {
-        wordsRef.limit(to: quantity).getDocuments { snapshot, error in
+    
+    func fetchWords(quantity: Int = 1500, completion: @escaping ([String]) -> Void) {
+        wordsRef.limit(to: quantity).getDocuments { [weak self] snapshot, error in
+            guard let self else { return }
+            
             if let error = error {
                 print("Error fetching words: \(error.localizedDescription)")
                 completion([])
@@ -28,7 +35,7 @@ final class FirebaseManager {
             var words: [String] = []
             
             for document in snapshot?.documents ?? [] {
-                let word = document.documentID
+                guard let word = document.get(self.wordField) as? String else { continue }
                 words.append(word)
             }
             
@@ -37,25 +44,32 @@ final class FirebaseManager {
         }
     }
     
+    // TODO: Add categories and definitions.
     func addWords(_ words: [String]) {
         for word in words {
-            suggestionsRef.document(word).getDocument { [weak self] snapshot, error in
-                guard let self = self else { return }
+            suggestionsRef.whereField(wordField, isEqualTo: word).getDocuments { [weak self] (querySnapshot, error) in
+                guard let self else { return }
                 
                 if let error = error {
-                    print("Error checking word: \(error.localizedDescription)")
-                    return
-                }
-                
-                if snapshot?.exists == true {
-                    print("Word '\(word)' already exists in the database.")
+                    print("Error checking for existing word: \(error)")
                 } else {
-                    self.suggestionsRef.document(word).setData([:]) { (error) in
-                        if let error = error {
-                            print("Error adding word: \(error.localizedDescription)")
-                        } else {
-                            print("Added word: \(word)")
+                    if querySnapshot!.documents.isEmpty {
+                        
+                        var data: [String: Any] = [:]
+                        data[AppConstants.Firebase.wordKa] = wordField == AppConstants.Firebase.wordKa ? word : .empty
+                        data[AppConstants.Firebase.wordEn] = wordField == AppConstants.Firebase.wordEn ? word : .empty
+                        data[AppConstants.Firebase.categories] = String.empty
+                        data[AppConstants.Firebase.definitions] = String.empty
+                        
+                        self.suggestionsRef.addDocument(data: data) { (error) in
+                            if let error = error {
+                                print("Error adding document: \(error)")
+                            } else {
+                                print("Document added successfully")
+                            }
                         }
+                    } else {
+                        print("Document with word \(word) already exists")
                     }
                 }
             }

@@ -61,5 +61,10 @@ enum AppConstants {
                 return .empty
             }
         }
+        
+        static let wordKa = "word_ka"
+        static let wordEn = "word_en"
+        static let categories = "categories"
+        static let definitions = "definitions"
     }
 }
