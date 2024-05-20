@@ -16,7 +16,7 @@ class GameStory {
     
     var numberOfRounds: Int = 1
     var lengthOfRound: Double = 45
-    var words: [String] = []
+    var words: [Word] = []
     
     var currentRound: Int = 1
     var teams: OrderedDictionary<String, Int> = [:]
@@ -28,8 +28,7 @@ class GameStory {
     func reset() {
 
         teams.keys.forEach { teams[$0] = 0 }
-        
-        words = []
+
         currentRound = 1
         
         playingSessionCount = 0

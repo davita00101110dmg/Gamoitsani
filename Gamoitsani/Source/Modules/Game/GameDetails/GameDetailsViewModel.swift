@@ -18,7 +18,7 @@ final class GameDetailsViewModel {
     }
     
     private let networkMonitor = NWPathMonitor()
-    private var shouldFetchWords = true
+    private var shouldFetchWordsFromServer = true
     
     @Published private var teams: [GameDetailsTeamCellItem] = []
     
@@ -62,30 +62,23 @@ final class GameDetailsViewModel {
         teams = newOrderTeams
     }
     
-    func fetchWords() {
-        FirebaseManager.shared.fetchWords { words in
-            GameStory.shared.words = words
+    func fetchWordsFromServer() {
+        if shouldFetchWordsFromServer {
+            FirebaseManager.shared.fetchWords()
         }
+        
+        GameStory.shared.words = CoreDataManager.shared.fetchWordsFromCoreData()
     }
     
     func observeNetworkConnection() {
         networkMonitor.pathUpdateHandler = { [weak self] path in
             guard let self else { return }
             
-            shouldFetchWords = path.status == .satisfied
-        
-            if path.status == .satisfied && GameStory.shared.words.isEmpty {
-                // TODO: Test when i will have at least 500 elements in DB
-                fetchWords()
-            }
+            shouldFetchWordsFromServer = path.status == .satisfied
         }
         
         let queue = DispatchQueue(label: ViewModelConstants.networkObserverThreadName)
         networkMonitor.start(queue: queue)
-    }
-    
-    func hasNetworkConnection() -> Bool {
-        shouldFetchWords
     }
 }
 

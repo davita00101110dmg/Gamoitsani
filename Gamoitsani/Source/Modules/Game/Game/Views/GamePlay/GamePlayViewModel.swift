@@ -9,7 +9,7 @@
 import Foundation
 
 struct GamePlayViewModel {
-    let words: [String]
+    let words: [Word]
     let roundLength: Double
     
     var score: Int

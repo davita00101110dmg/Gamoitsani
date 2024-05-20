@@ -20,7 +20,7 @@ final class GamePlayView: UIView {
     @IBOutlet weak var correctButton: GMButton!
     @IBOutlet weak var incorrectButton: GMButton!
     
-    private var words: [String] = []
+    private var words: [Word] = []
     private var roundLength: Double = 0.0
     
     private var roundLengthTimer: Timer?
@@ -31,6 +31,10 @@ final class GamePlayView: UIView {
     private weak var delegate: GamePlayViewDelegate?
     
     private var viewModel: GamePlayViewModel?
+    
+    private var shouldShowGeorgianWords: Bool {
+        UserDefaults.appLanguage == AppConstants.Language.georgian.identifier
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -74,7 +78,7 @@ final class GamePlayView: UIView {
         words = model.words
         roundLength = model.roundLength
         
-        wordLabel.configure(with: words.popLast(),
+        wordLabel.configure(with: shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn,
                             fontType: .bold,
                             fontSizeForPhone: Constants.wordLabelFontSizeForPhone,
                             fontSizeForPad: Constants.wordLabelFontSizeForPad)
@@ -101,7 +105,8 @@ final class GamePlayView: UIView {
     
     private func wordButtonAction(tag: Int) { // Tag 1: Correct Tag 2: Incorrect
         audioManager?.playSound(tag: tag)
-        updateWordLabel(with: words.popLast())
+        
+        updateWordLabel(with: shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn)
         viewModel?.score += tag == 1 ? 1 : -1
     }
     

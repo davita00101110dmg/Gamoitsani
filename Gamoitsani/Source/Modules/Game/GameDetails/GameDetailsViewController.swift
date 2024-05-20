@@ -42,6 +42,7 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         gameStory.reset()
+        viewModel?.fetchWordsFromServer()
     }
     
     override func setupUI() {
@@ -174,13 +175,8 @@ extension GameDetailsViewController {
     }
     
     private func startGame() {
-        if let viewModel, viewModel.hasNetworkConnection() {
-            updateGameStory()
-            coordinator?.navigateToGame()
-        } else {
-            presentInvalidGameDetailsAlert(title: L10n.Screen.GameDetails.NoInternetConnectionAlert.title,
-                                              message: L10n.Screen.GameDetails.NoInternetConnectionAlert.message)
-        }
+        updateGameStory()
+        coordinator?.navigateToGame()
     }
 }
 

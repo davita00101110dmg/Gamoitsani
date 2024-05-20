@@ -35,7 +35,9 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
     }
     
     private func sendWordsToDB() {
-        if !wordsToBeAdded.isEmpty { FirebaseManager.shared.addWords(wordsToBeAdded) }
+        if !wordsToBeAdded.isEmpty { 
+            FirebaseManager.shared.addWordsToSuggestions(wordsToBeAdded)
+        }
     }
     
     private func addHideKeyboardTapGestureRecogniser() {

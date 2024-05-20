@@ -22,54 +22,55 @@ final class FirebaseManager {
 
     private init() { }
     
-    func fetchWords(quantity: Int = 1500, completion: @escaping ([String]) -> Void) {
-        wordsRef.limit(to: quantity).getDocuments { [weak self] snapshot, error in
-            guard let self else { return }
-            
+    func fetchWords(quantity: Int = 1500) {
+        guard let randomField = [AppConstants.Firebase.wordKa, AppConstants.Firebase.wordEn].randomElement() else { return }
+    
+        wordsRef.order(by: randomField, descending: Bool.random()).limit(to: quantity).getDocuments { snapshot, error in
             if let error = error {
-                print("Error fetching words: \(error.localizedDescription)")
-                completion([])
+                dump("Error fetching words: \(error.localizedDescription)")
                 return
             }
             
-            var words: [String] = []
+            dump("Fetching words")
+            
+            var wordsToSave: [(wordKa: String, wordEn: String, categories: [String]?, definitions: [String]?)] = []
             
             for document in snapshot?.documents ?? [] {
-                guard let word = document.get(self.wordField) as? String else { continue }
-                words.append(word)
+                guard let wordKa = document.get(AppConstants.Firebase.wordKa) as? String,
+                      let wordEn = document.get(AppConstants.Firebase.wordEn) as? String,
+                      let categories = document.get(AppConstants.Firebase.categories) as? [String],
+                      let definitions = document.get(AppConstants.Firebase.definitions) as? [String] else { continue }
+                
+                wordsToSave.append((wordKa, wordEn, categories, definitions))
             }
             
-            words.shuffle()
-            completion(words)
+            CoreDataManager.shared.saveWordsFromFirebase(wordsToSave)
         }
     }
     
-    // TODO: Add categories and definitions.
-    func addWords(_ words: [String]) {
+    func addWordsToSuggestions(_ words: [String]) {
         for word in words {
-            suggestionsRef.whereField(wordField, isEqualTo: word).getDocuments { [weak self] (querySnapshot, error) in
-                guard let self else { return }
-                
+            suggestionsRef.whereField(wordField, isEqualTo: word).getDocuments { querySnapshot, error in
                 if let error = error {
-                    print("Error checking for existing word: \(error)")
-                } else {
-                    if querySnapshot!.documents.isEmpty {
-                        
-                        var data: [String: Any] = [:]
-                        data[AppConstants.Firebase.wordKa] = wordField == AppConstants.Firebase.wordKa ? word : .empty
-                        data[AppConstants.Firebase.wordEn] = wordField == AppConstants.Firebase.wordEn ? word : .empty
-                        data[AppConstants.Firebase.categories] = String.empty
-                        data[AppConstants.Firebase.definitions] = String.empty
-                        
-                        self.suggestionsRef.addDocument(data: data) { (error) in
-                            if let error = error {
-                                print("Error adding document: \(error)")
-                            } else {
-                                print("Document added successfully")
-                            }
+                    dump("Error checking for existing word: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let snapshot = querySnapshot else { return }
+                
+                if snapshot.isEmpty {
+                    var data: [String: Any] = [:]
+                    data[AppConstants.Firebase.wordKa] = self.wordField == AppConstants.Firebase.wordKa ? word : ""
+                    data[AppConstants.Firebase.wordEn] = self.wordField == AppConstants.Firebase.wordEn ? word : ""
+                    data[AppConstants.Firebase.categories] = []
+                    data[AppConstants.Firebase.definitions] = []
+                    
+                    self.suggestionsRef.addDocument(data: data) { error in
+                        if let error = error {
+                            dump("Error adding document: \(error.localizedDescription)")
+                        } else {
+                            dump("Document added successfully")
                         }
-                    } else {
-                        print("Document with word \(word) already exists")
                     }
                 }
             }

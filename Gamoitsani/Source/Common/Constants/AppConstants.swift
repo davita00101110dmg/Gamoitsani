@@ -10,6 +10,8 @@ import Foundation
 
 enum AppConstants {
     
+    static let maxWordsToSaveInCoreData = 20000
+    
     static let randomWords = [
         "apple", "banana", "orange", "grape", "pineapple",
         "strawberry", "mango", "watermelon", "kiwi", "blueberry",

@@ -11,6 +11,9 @@
 		FF1E92B82BF9017100127FDE /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */; };
 		FF1E92BA2BF91C8C00127FDE /* GMBackBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */; };
 		FF1F14152BF7A897004116A1 /* Mersad.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF1F14132BF7A897004116A1 /* Mersad.ttf */; };
+		FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37087A2BFBD4280056361F /* CoreDataManager.swift */; };
+		FF37087E2BFBD4FC0056361F /* Word+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37087C2BFBD4FC0056361F /* Word+CoreDataClass.swift */; };
+		FF37087F2BFBD4FC0056361F /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37087D2BFBD4FC0056361F /* Word+CoreDataProperties.swift */; };
 		FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */; };
 		FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */; };
 		FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D282BD698620046819D /* AppDelegate.swift */; };
@@ -127,6 +130,9 @@
 		FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
 		FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMBackBarButtonItem.swift; sourceTree = "<group>"; };
 		FF1F14132BF7A897004116A1 /* Mersad.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mersad.ttf; sourceTree = "<group>"; };
+		FF37087A2BFBD4280056361F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		FF37087C2BFBD4FC0056361F /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FF37087D2BFBD4FC0056361F /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleTableViewCell.swift; sourceTree = "<group>"; };
 		FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RuleTableViewCell.xib; sourceTree = "<group>"; };
 		FF4D9D252BD698620046819D /* Gamoitsani.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,6 +258,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF3708802BFBD5040056361F /* Word */ = {
+			isa = PBXGroup;
+			children = (
+				FF37087C2BFBD4FC0056361F /* Word+CoreDataClass.swift */,
+				FF37087D2BFBD4FC0056361F /* Word+CoreDataProperties.swift */,
+			);
+			path = Word;
+			sourceTree = "<group>";
+		};
 		FF38FAC42BF5406B006AD774 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,6 +507,7 @@
 		FF7F1DA42BE9749500872554 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FF3708802BFBD5040056361F /* Word */,
 				FF7F1DA52BE9749900872554 /* Game */,
 			);
 			path = Models;
@@ -536,6 +552,7 @@
 			children = (
 				FF8EA7202BEC12BD00F098B8 /* AudioManager.swift */,
 				FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */,
+				FF37087A2BFBD4280056361F /* CoreDataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -939,6 +956,7 @@
 				FF1E92B62BF8FE8E00127FDE /* GMGradientView.swift in Sources */,
 				FFF65CB82BE651C5008E0352 /* IntExtensions.swift in Sources */,
 				FFF65CB02BE61DEA008E0352 /* UITableViewExtensions.swift in Sources */,
+				FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */,
 				FF7F1D9B2BE7D25300872554 /* GamePlayViewModel.swift in Sources */,
 				FF7F1D7E2BE7A2F700872554 /* GameCoordinator.swift in Sources */,
 				FFFB4D462BD928B400CDDCB4 /* UIFontExtensions.swift in Sources */,
@@ -948,6 +966,8 @@
 				FFFB4D342BD90FD900CDDCB4 /* UserDefaultsExtension.swift in Sources */,
 				FF7F1D8E2BE7AE2100872554 /* GameInfoView.swift in Sources */,
 				FF8EA7092BEBBA1900F098B8 /* GameScoreboardViewModel.swift in Sources */,
+				FF37087E2BFBD4FC0056361F /* Word+CoreDataClass.swift in Sources */,
+				FF37087F2BFBD4FC0056361F /* Word+CoreDataProperties.swift in Sources */,
 				FFFB4D3F2BD9155100CDDCB4 /* RulesCoordinator.swift in Sources */,
 				FF8EA7112BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift in Sources */,
 				FF1E92BA2BF91C8C00127FDE /* GMBackBarButtonItem.swift in Sources */,
