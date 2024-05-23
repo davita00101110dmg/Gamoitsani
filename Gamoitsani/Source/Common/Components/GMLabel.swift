@@ -14,7 +14,8 @@ final class GMLabel: UILabel {
                           fontSizeForPhone: CGFloat = Constants.labelPhoneFontSize,
                           fontSizeForPad: CGFloat = Constants.labelPadFontSize,
                           color: UIColor = .white,
-                          lineHeightMultiple: CGFloat = Constants.lineHeightMultipleConstant) {
+                          lineHeightMultiple: CGFloat = Constants.lineHeightMultipleConstant,
+                          textAlignment: NSTextAlignment = .left) {
         
         let fontSize = UIDevice.current.userInterfaceIdiom == .pad ? fontSizeForPad : fontSizeForPhone
         
@@ -27,7 +28,7 @@ final class GMLabel: UILabel {
             font = F.Mersad.bold.font(size: fontSize)
         }
         
-        setLineSpacing(lineHeightMultiple: lineHeightMultiple)
+        setLineSpacing(lineHeightMultiple: lineHeightMultiple, textAlignment: textAlignment)
         textColor = color
         self.text = text
     }

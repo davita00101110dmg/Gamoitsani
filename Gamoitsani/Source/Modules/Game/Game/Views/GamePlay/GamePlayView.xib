@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,14 +15,14 @@
             <rect key="frame" x="0.0" y="0.0" width="324" height="400"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6s-5M-nPD" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
-                    <rect key="frame" x="141.33333333333334" y="190" width="41.333333333333343" height="20.333333333333343"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6s-5M-nPD" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
+                    <rect key="frame" x="16" y="190" width="292" height="20.333333333333343"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDl-jc-QGU" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
-                    <rect key="frame" x="141.33333333333334" y="48" width="41.333333333333343" height="20.333333333333329"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDl-jc-QGU" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
+                    <rect key="frame" x="16" y="48" width="292" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -119,6 +119,7 @@
                 <constraint firstItem="fU3-vB-ewf" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="06t-Pw-cH2"/>
                 <constraint firstItem="BmO-Bc-73D" firstAttribute="trailing" secondItem="fU3-vB-ewf" secondAttribute="trailing" constant="42" id="0O3-gs-hS9"/>
                 <constraint firstItem="BmO-Bc-73D" firstAttribute="bottom" secondItem="fU3-vB-ewf" secondAttribute="bottom" constant="24" id="2Pn-bc-iqf"/>
+                <constraint firstItem="VDl-jc-QGU" firstAttribute="leading" secondItem="BmO-Bc-73D" secondAttribute="leading" constant="16" id="7Ot-mT-gik"/>
                 <constraint firstItem="VDl-jc-QGU" firstAttribute="top" secondItem="BmO-Bc-73D" secondAttribute="top" constant="24" id="7Vd-qH-4ei"/>
                 <constraint firstItem="BmO-Bc-73D" firstAttribute="trailing" secondItem="fU3-vB-ewf" secondAttribute="trailing" constant="24" id="DHx-hP-A2u"/>
                 <constraint firstItem="W6s-5M-nPD" firstAttribute="centerY" secondItem="PwO-y8-944" secondAttribute="centerY" id="Ho6-pA-4D9"/>
@@ -128,20 +129,25 @@
                 <constraint firstItem="fU3-vB-ewf" firstAttribute="leading" secondItem="BmO-Bc-73D" secondAttribute="leading" constant="24" id="SWL-MK-ygO"/>
                 <constraint firstItem="VDl-jc-QGU" firstAttribute="top" secondItem="PwO-y8-944" secondAttribute="top" constant="48" id="XH2-kd-qh9"/>
                 <constraint firstItem="VDl-jc-QGU" firstAttribute="top" secondItem="BmO-Bc-73D" secondAttribute="top" constant="72" id="acE-3O-Dml"/>
+                <constraint firstItem="fU3-vB-ewf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="W6s-5M-nPD" secondAttribute="bottom" constant="16" id="afc-s7-I29"/>
                 <constraint firstItem="fU3-vB-ewf" firstAttribute="leading" secondItem="BmO-Bc-73D" secondAttribute="leading" constant="42" id="eai-eM-zb0"/>
+                <constraint firstItem="W6s-5M-nPD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VDl-jc-QGU" secondAttribute="bottom" constant="16" id="krz-H7-SUN"/>
                 <constraint firstItem="VDl-jc-QGU" firstAttribute="centerX" secondItem="PwO-y8-944" secondAttribute="centerX" id="l2m-xM-7HL"/>
+                <constraint firstItem="BmO-Bc-73D" firstAttribute="trailing" secondItem="VDl-jc-QGU" secondAttribute="trailing" constant="16" id="lM3-rn-xEQ"/>
+                <constraint firstItem="BmO-Bc-73D" firstAttribute="trailing" secondItem="W6s-5M-nPD" secondAttribute="trailing" constant="16" id="q9s-wn-IT7"/>
                 <constraint firstItem="BmO-Bc-73D" firstAttribute="bottom" secondItem="fU3-vB-ewf" secondAttribute="bottom" constant="42" id="rYa-GL-8jn"/>
+                <constraint firstItem="W6s-5M-nPD" firstAttribute="leading" secondItem="BmO-Bc-73D" secondAttribute="leading" constant="16" id="vvb-JC-hFW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="XH2-kd-qh9"/>
+                    <exclude reference="7Vd-qH-4ei"/>
+                    <exclude reference="acE-3O-Dml"/>
                     <exclude reference="0O3-gs-hS9"/>
                     <exclude reference="DHx-hP-A2u"/>
                     <exclude reference="2Pn-bc-iqf"/>
                     <exclude reference="rYa-GL-8jn"/>
-                    <exclude reference="XH2-kd-qh9"/>
-                    <exclude reference="7Vd-qH-4ei"/>
-                    <exclude reference="acE-3O-Dml"/>
                     <exclude reference="Ho6-pA-4D9"/>
                     <exclude reference="LB6-CZ-Q0v"/>
                     <exclude reference="R89-aO-KzA"/>
@@ -151,27 +157,27 @@
             </variation>
             <variation key="heightClass=compact">
                 <mask key="constraints">
+                    <include reference="7Vd-qH-4ei"/>
                     <include reference="DHx-hP-A2u"/>
                     <include reference="2Pn-bc-iqf"/>
-                    <include reference="7Vd-qH-4ei"/>
                     <include reference="R89-aO-KzA"/>
                     <include reference="SWL-MK-ygO"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="constraints">
+                    <include reference="XH2-kd-qh9"/>
                     <include reference="DHx-hP-A2u"/>
                     <include reference="2Pn-bc-iqf"/>
-                    <include reference="XH2-kd-qh9"/>
                     <include reference="Ho6-pA-4D9"/>
                     <include reference="SWL-MK-ygO"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
                 <mask key="constraints">
+                    <include reference="acE-3O-Dml"/>
                     <include reference="0O3-gs-hS9"/>
                     <include reference="rYa-GL-8jn"/>
-                    <include reference="acE-3O-Dml"/>
                     <include reference="LB6-CZ-Q0v"/>
                     <include reference="eai-eM-zb0"/>
                 </mask>

@@ -78,13 +78,15 @@ final class GamePlayView: UIView {
         words = model.words
         roundLength = model.roundLength
         
-        wordLabel.configure(with: shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn,
+        wordLabel.configure(with: (shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn) ?? L10n.Screen.Game.NoMoreWords.message,
                             fontType: .bold,
                             fontSizeForPhone: Constants.wordLabelFontSizeForPhone,
-                            fontSizeForPad: Constants.wordLabelFontSizeForPad)
+                            fontSizeForPad: Constants.wordLabelFontSizeForPad,
+                            textAlignment: .center)
         timerLabel.configure(with: roundLength.toString(),
                              fontSizeForPhone: Constants.timerLabelFontSizeForPhone,
-                             fontSizeForPad: Constants.timerLabelFontSizeForPad)
+                             fontSizeForPad: Constants.timerLabelFontSizeForPad,
+                             textAlignment: .center)
     }
     
     private func timerBlock(_: Timer) -> Void {
@@ -100,7 +102,7 @@ final class GamePlayView: UIView {
     }
     
     private func updateWordLabel(with word: String?) {
-        wordLabel.text = word != nil ? word : L10n.Screen.Game.NoMoreWords.message
+        wordLabel.text = word ?? L10n.Screen.Game.NoMoreWords.message
     }
     
     private func wordButtonAction(tag: Int) { // Tag 1: Correct Tag 2: Incorrect
