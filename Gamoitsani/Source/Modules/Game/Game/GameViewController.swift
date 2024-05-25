@@ -11,8 +11,9 @@ import UIKit
 final class GameViewController: BaseViewController<GameCoordinator> {
     
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var mainViewHeightConstraint: NSLayoutConstraint!
     
-    private var isShowingInfoView: Bool = false
+    private var shouldShowInfoView: Bool = false
     private var gameStory = GameStory.shared
     
     private lazy var gameInfoView: GameInfoView? = {
@@ -21,6 +22,10 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     
     private lazy var gamePlayView: GamePlayView? = {
         GamePlayView.loadFromNib()
+    }()
+        
+    private lazy var gameOverView: GameOverView? = {
+        GameOverView.loadFromNib()
     }()
     
     private lazy var confettiLayer = CAEmitterLayer()
@@ -38,7 +43,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        stopConfettiAnimation()
+        navigationController?.isNavigationBarHidden = false
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
 
@@ -82,6 +87,20 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         mainView.addSubview(gamePlayView)
     }
     
+    private func showGameOverView(teamName: String, score: Int) {
+        guard let gameOverView else { return }
+        navigationController?.isNavigationBarHidden = true
+        startConfettiAnimation()
+        
+        mainViewHeightConstraint.constant = 600
+
+        gameOverView.configure(with: .init(teamName: teamName,
+                                           score: score),
+                               delegate: self)
+        gameOverView.frame = mainView.bounds
+        mainView.addSubview(gameOverView)
+    }
+    
     private func validateEndOfTheGame() -> Bool {
         gameStory.currentRound > gameStory.numberOfRounds
     }
@@ -90,11 +109,10 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         mainView.removeAllSubviews()
         
         if validateEndOfTheGame() {
-            presentGameOverAlert()
+            presentGameOverView()
         } else {
-            isShowingInfoView.toggle()
-            
-            if isShowingInfoView {
+            shouldShowInfoView.toggle()
+            if shouldShowInfoView {
                 gameStory.playingSessionCount += 1
                 showGamePlayView()
             } else {
@@ -112,7 +130,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
                               style: .destructive) { [weak self] _ in
             guard let self else { return }
             gameStory.reset()
-            self.coordinator?.goToHome()
+            self.coordinator?.pop()
         })
         
         alert.addAction(.init(title: L10n.no, style: .default))
@@ -120,27 +138,15 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         present(alert, animated: true)
     }
     
-    private func presentGameOverAlert() {
+    private func presentGameOverView() {
         let sortedTeams = gameStory.teams.sorted { l, r in
             l.value > r.value
         }
         
         guard let winnerTeam = sortedTeams.first else { return }
         
-        let alert = UIAlertController(title: L10n.Screen.Game.WinningAlert.title(winnerTeam.key),
-                                      message: L10n.Screen.Game.WinningAlert.message(winnerTeam.value.toString),
-                                      preferredStyle: .alert)
-        
-        alert.addAction(.init(title: L10n.thanks, style: .default, handler: { [weak self] _ in
-            guard let self else { return }
-            self.coordinator?.goToHome()
-        }))
-        
         gameStory.finishedGamesCountInSession += 1
-        
-        present(alert, animated: true)
-        
-        startConfettiAnimation()
+        showGameOverView(teamName: winnerTeam.key, score: winnerTeam.value)
     }
     
     private func updateGameInfo(_ roundScore: Int) {
@@ -187,6 +193,12 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     private func stopConfettiAnimation() {
         confettiLayer.removeFromSuperlayer()
     }
+    
+    private func resetGameViewController() {
+        stopConfettiAnimation()
+        mainViewHeightConstraint.constant = 400
+        gameStory.reset()
+    }
 }
 
 // MARK: - GameInfoViewDelegate Methods
@@ -205,5 +217,22 @@ extension GameViewController: GamePlayViewDelegate {
     func timerDidFinished(roundScore: Int) {
         updateGameInfo(roundScore)
         toggleView()
+    }
+}
+
+// MARK: - GameOverDelegate Methods
+extension GameViewController: GameOverViewDelegate {
+    func didPressStartOver() {
+        resetGameViewController()
+        toggleView()
+    }
+    
+    func didPressGoBack() {
+        stopConfettiAnimation()
+        coordinator?.pop()
+    }
+    
+    func didPressShowFullScoreboard() {
+        coordinator?.presentGameScoreboard(with: [.large()])
     }
 }

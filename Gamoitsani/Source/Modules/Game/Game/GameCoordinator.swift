@@ -25,14 +25,17 @@ final class GameCoordinator: BaseCoordinator {
         navigationController.pushViewController(gameViewController, animated: true)
     }
     
-    func goToHome() {
+    func pop() {
         guard let navigationController else { return }
         navigationController.popViewController(animated: true)
     }
     
-    func presentGameScoreboard() {
+    func presentGameScoreboard(with detents: [UISheetPresentationController.Detent] = UIDevice.current.userInterfaceIdiom != .pad
+                               ? [.custom(resolver: { context in 250 }), .medium(), .large()]
+                               : [.medium(), .large()]) {
         guard let navigationController else { return }
-        let gameScoreboardCoordinator = GameScoreboardCoordinator(navigationController: navigationController)
+        
+        let gameScoreboardCoordinator = GameScoreboardCoordinator(navigationController: navigationController, detents: detents)
         coordinate(to: gameScoreboardCoordinator)
     }
 }
