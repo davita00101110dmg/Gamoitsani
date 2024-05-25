@@ -141,13 +141,13 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="XH2-kd-qh9"/>
-                    <exclude reference="7Vd-qH-4ei"/>
-                    <exclude reference="acE-3O-Dml"/>
                     <exclude reference="0O3-gs-hS9"/>
                     <exclude reference="DHx-hP-A2u"/>
                     <exclude reference="2Pn-bc-iqf"/>
                     <exclude reference="rYa-GL-8jn"/>
+                    <exclude reference="XH2-kd-qh9"/>
+                    <exclude reference="7Vd-qH-4ei"/>
+                    <exclude reference="acE-3O-Dml"/>
                     <exclude reference="Ho6-pA-4D9"/>
                     <exclude reference="LB6-CZ-Q0v"/>
                     <exclude reference="R89-aO-KzA"/>
@@ -157,27 +157,27 @@
             </variation>
             <variation key="heightClass=compact">
                 <mask key="constraints">
-                    <include reference="7Vd-qH-4ei"/>
                     <include reference="DHx-hP-A2u"/>
                     <include reference="2Pn-bc-iqf"/>
+                    <include reference="7Vd-qH-4ei"/>
                     <include reference="R89-aO-KzA"/>
                     <include reference="SWL-MK-ygO"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="constraints">
-                    <include reference="XH2-kd-qh9"/>
                     <include reference="DHx-hP-A2u"/>
                     <include reference="2Pn-bc-iqf"/>
+                    <include reference="XH2-kd-qh9"/>
                     <include reference="Ho6-pA-4D9"/>
                     <include reference="SWL-MK-ygO"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
                 <mask key="constraints">
-                    <include reference="acE-3O-Dml"/>
                     <include reference="0O3-gs-hS9"/>
                     <include reference="rYa-GL-8jn"/>
+                    <include reference="acE-3O-Dml"/>
                     <include reference="LB6-CZ-Q0v"/>
                     <include reference="eai-eM-zb0"/>
                 </mask>
