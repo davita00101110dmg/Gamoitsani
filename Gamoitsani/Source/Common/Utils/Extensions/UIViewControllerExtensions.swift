@@ -30,7 +30,7 @@ extension UIViewController {
     }
     
     enum AlertType {
-        case team(title: String, message: String?, initialText: String?, addActionTitle: String = L10n.ok, addActionHandler: (String) -> Void)
+        case team(title: String, message: String?, initialText: String?, addActionTitle: String = L10n.ok, delegate: UITextFieldDelegate? = nil, addActionHandler: (String) -> Void)
         case info(title: String, message: String)
     }
 
@@ -38,9 +38,12 @@ extension UIViewController {
         let alertController: UIAlertController
         
         switch type {
-        case let .team(title, message, initialText, addActionTitle, addActionHandler):
+        case let .team(title, message, initialText, addActionTitle, delegate, addActionHandler):
             alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.addTextField { $0.text = initialText }
+            alertController.addTextField {
+                $0.text = initialText
+                $0.delegate = delegate
+            }
             
             alertController.addAction(UIAlertAction(title: L10n.cancel, style: .cancel))
             alertController.addAction(UIAlertAction(title: addActionTitle, style: .default) { _ in

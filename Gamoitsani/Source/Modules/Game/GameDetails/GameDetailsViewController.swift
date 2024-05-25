@@ -103,7 +103,8 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
     private func presentAddTeamAlert() {
         let alertType = AlertType.team(title: L10n.Screen.GameDetails.AddTeamAlert.title,
                                        message: nil,
-                                       initialText: nil) { [weak self] teamName in
+                                       initialText: nil,
+                                       delegate: self) { [weak self] teamName in
             guard let self,
                   let viewModel else { return }
             let teamName = teamName.removeExtraSpaces()
@@ -122,7 +123,8 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
         
         let alertType = AlertType.team(title: L10n.Screen.GameDetails.EditTeamNameAlert.title,
                                        message: nil,
-                                       initialText: initialText) { teamName in
+                                       initialText: initialText,
+                                       delegate: self) { teamName in
             viewModel.updateTeam(at: index, with: teamName)
         }
         presentAlert(of: alertType)
@@ -182,6 +184,19 @@ extension GameDetailsViewController {
     private func startGame() {
         updateGameStory()
         coordinator?.navigateToGame()
+    }
+}
+
+// MARK: - UITextFieldDelegate Methods
+extension GameDetailsViewController: UITextFieldDelegate {
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let currentText = textField.text,
+            let range = Range(range, in: currentText) {
+            let updatedText = currentText.replacingCharacters(in: range, with: string)
+            return updatedText.count <= ViewControllerConstants.maximumCharactersOfTeamAlert
+        }
+        
+        return true
     }
 }
 
@@ -287,5 +302,6 @@ extension GameDetailsViewController {
         static let buttonTitleFontSizeForPhone: CGFloat = 16
         static let minimumNumberOfTeams: Int = 2
         static let maximumNumberOfTeams: Int = 5
+        static let maximumCharactersOfTeamAlert: Int = 20
     }
 }
