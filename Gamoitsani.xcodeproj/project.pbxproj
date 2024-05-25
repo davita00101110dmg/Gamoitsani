@@ -38,6 +38,8 @@
 		FF4FA9CC2BEF875B00F38F98 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */; };
 		FF4FA9D12BEFF30900F38F98 /* AddWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */; };
 		FF4FA9D32BEFF30E00F38F98 /* AddWordModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */; };
+		FF7CA15E2C01FCB800E3BEC4 /* StoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7CA15D2C01FCB800E3BEC4 /* StoreReviewManager.swift */; };
+		FF7CA1602C02000900E3BEC4 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7CA15F2C02000900E3BEC4 /* UIApplicationExtensions.swift */; };
 		FF7F1D742BE6BCA900872554 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D732BE6BCA900872554 /* swiftgen.yml */; };
 		FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D752BE6D08200872554 /* Fonts.swift */; };
 		FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */; };
@@ -158,6 +160,8 @@
 		FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewModel.swift; sourceTree = "<group>"; };
 		FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordModels.swift; sourceTree = "<group>"; };
+		FF7CA15D2C01FCB800E3BEC4 /* StoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreReviewManager.swift; sourceTree = "<group>"; };
+		FF7CA15F2C02000900E3BEC4 /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
 		FF7F1D732BE6BCA900872554 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = swiftgen.yml; path = Gamoitsani/Resources/Swiftgen/swiftgen.yml; sourceTree = SOURCE_ROOT; };
 		FF7F1D752BE6D08200872554 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "xcassets-swift5.stencil"; sourceTree = "<group>"; };
@@ -553,6 +557,7 @@
 				FF8EA7202BEC12BD00F098B8 /* AudioManager.swift */,
 				FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */,
 				FF37087A2BFBD4280056361F /* CoreDataManager.swift */,
+				FF7CA15D2C01FCB800E3BEC4 /* StoreReviewManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -629,6 +634,7 @@
 		FFFB4CD52BD7CA7500CDDCB4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FF7CA15F2C02000900E3BEC4 /* UIApplicationExtensions.swift */,
 				FF8EA7552BEC40B100F098B8 /* UIColorExtensions.swift */,
 				FFFB4CD62BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift */,
 				FFFB4CD82BD7CA9A00CDDCB4 /* BundleExtensions.swift */,
@@ -940,6 +946,8 @@
 			files = (
 				FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */,
 				FF8EA70D2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift in Sources */,
+				FF7CA1602C02000900E3BEC4 /* UIApplicationExtensions.swift in Sources */,
+				FF7CA15E2C01FCB800E3BEC4 /* StoreReviewManager.swift in Sources */,
 				FFFB4D4C2BD9392D00CDDCB4 /* GameDetailsCoordinator.swift in Sources */,
 				FFF65CC72BE6B0C4008E0352 /* Assets.swift in Sources */,
 				FF1E92B82BF9017100127FDE /* UILabelExtensions.swift in Sources */,

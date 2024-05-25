@@ -43,6 +43,7 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
         super.viewWillAppear(animated)
         gameStory.reset()
         viewModel?.fetchWordsFromServer()
+        presentAppReviewAlert()
     }
     
     override func setupUI() {
@@ -132,6 +133,10 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
         let alertType = AlertType.info(title: title,
                                        message: message)
         presentAlert(of: alertType)
+    }
+    
+    private func presentAppReviewAlert() {
+        StoreReviewManager.checkAndAskForReview()
     }
     
     private func updateGameStory() {

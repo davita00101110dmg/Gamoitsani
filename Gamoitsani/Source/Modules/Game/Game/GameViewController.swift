@@ -136,6 +136,8 @@ final class GameViewController: BaseViewController<GameCoordinator> {
             self.coordinator?.goToHome()
         }))
         
+        gameStory.finishedGamesCountInSession += 1
+        
         present(alert, animated: true)
         
         startConfettiAnimation()

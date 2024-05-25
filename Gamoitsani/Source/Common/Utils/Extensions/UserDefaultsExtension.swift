@@ -10,14 +10,15 @@ import Foundation
 
 extension UserDefaults {
     struct Keys {
-        static let appLanguage = "app_language"
+        static let APP_LANGUAGE = "APP_LANGUAGE"
+        static let APP_OPENED_COUNT = "APP_OPENED_COUNT"
     }
     
     static var appLanguage: String? {
         get {
-            return UserDefaults.standard.string(forKey: Keys.appLanguage)
+            return UserDefaults.standard.string(forKey: Keys.APP_LANGUAGE)
         } set {
-            UserDefaults.standard.set(newValue, forKey: Keys.appLanguage)
+            UserDefaults.standard.set(newValue, forKey: Keys.APP_LANGUAGE)
             UserDefaults.standard.synchronize()
         }
     }

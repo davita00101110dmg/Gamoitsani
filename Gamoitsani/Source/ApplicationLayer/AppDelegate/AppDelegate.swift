@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         registerInitialUserDefaultValues()
+        StoreReviewManager.incrementAppOpenedCount()
 
         return true
     }
@@ -83,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func registerInitialUserDefaultValues() {
         UserDefaults.standard.register(defaults: [
-            UserDefaults.Keys.appLanguage: AppConstants.Language.georgian.identifier
+            UserDefaults.Keys.APP_LANGUAGE: AppConstants.Language.georgian.identifier
         ])
     }
 }

@@ -21,9 +21,11 @@ class GameStory {
     var currentRound: Int = 1
     var teams: OrderedDictionary<String, Int> = [:]
     
-    var playingSessionCount = 0
-    var maxTotalSessions = 0
-    var currentTeamIndex = 0
+    var playingSessionCount: Int = 0
+    var maxTotalSessions: Int = 0
+    var currentTeamIndex: Int = 0
+    
+    var finishedGamesCountInSession: Int = 0
     
     func reset() {
 
