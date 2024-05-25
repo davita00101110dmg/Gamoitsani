@@ -10,11 +10,14 @@ import UIKit
 
 final class GameScoreboardCoordinator: BaseCoordinator {
     
+    private var detents: [UISheetPresentationController.Detent] = []
+    
     var navigationController: UINavigationController?
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, detents: [UISheetPresentationController.Detent]) {
         super.init()
         self.navigationController = navigationController
+        self.detents = detents
     }
     
     override func start() {
@@ -24,11 +27,6 @@ final class GameScoreboardCoordinator: BaseCoordinator {
         gameScoreboardViewController.coordinator = self
         
         if let sheet = gameScoreboardViewController.presentationController as? UISheetPresentationController {
-            var detents: [UISheetPresentationController.Detent] = []
-            if UIDevice.current.userInterfaceIdiom != .pad {
-                detents.append(.custom(resolver: { context in 250 }))
-            }
-            detents.append(contentsOf: [.medium(), .large()])
             sheet.detents = detents
             sheet.prefersGrabberVisible = true
         }
