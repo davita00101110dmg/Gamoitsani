@@ -147,7 +147,6 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
         gameStory.numberOfRounds = roundsStepper.value.toInt
         gameStory.lengthOfRound = roundsLengthStepper.value
         gameStory.teams = viewModel.getTeamsDictionary()
-        gameStory.maxTotalSessions = roundsStepper.value.toInt * viewModel.getTeamsCount()
     }
 }
 
