@@ -63,6 +63,8 @@
 "screen.game.confirmation_alert.title" = "Are you sure you want to go back?";
 "screen.game.confirmation_alert.message" = "Teams' points will be lost";
 "screen.game.current_round.message" = "Round: %@";
-"screen.game.winning_alert.title" = "Congratulations %@";
-"screen.game.winning_alert.message" = "You won with %@ points";
 "screen.game.no_more_words.message" = "No more words";
+"screen.game.winning_view.title" = "Congrats!";
+"screen.game.winning_view.repeat" = "Repeat";
+"screen.game.winning_view.game_details.title" = "Go Back";
+"screen.game.winning_view.description" = "You won with %@ points";

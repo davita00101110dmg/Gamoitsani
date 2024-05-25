@@ -75,14 +75,19 @@ public enum L10n {
           public static var message: String { L10n.tr("Localizable", "screen.game.no_more_words.message") }
         }
 
-        public enum WinningAlert {
+        public enum WinningView {
           /// You won with %@ points
-          public static func message( _ p1: String) -> String {
-              return L10n.tr("Localizable", "screen.game.winning_alert.message", p1)
+          public static func description( _ p1: String) -> String {
+              return L10n.tr("Localizable", "screen.game.winning_view.description", p1)
           }
-          /// Congratulations %@
-          public static func title( _ p1: String) -> String {
-              return L10n.tr("Localizable", "screen.game.winning_alert.title", p1)
+          /// Repeat
+          public static var `repeat`: String { L10n.tr("Localizable", "screen.game.winning_view.repeat") }
+          /// Congrats!
+          public static var title: String { L10n.tr("Localizable", "screen.game.winning_view.title") }
+
+          public enum GameDetails {
+            /// Go Back
+            public static var title: String { L10n.tr("Localizable", "screen.game.winning_view.game_details.title") }
           }
         }
       }
