@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Mersad.ttf">
+            <string>Mersad-Regular_Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ABF-f4-IMG" customClass="GameOverView" customModule="Gamoitsani" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="310" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="YQM-wk-JAV">
+                    <rect key="frame" x="24" y="83" width="262" height="459"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="jtq-w1-eEx">
+                            <rect key="frame" x="5.3333333333333286" y="0.0" width="251.33333333333337" height="289"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="wss-Qm-1wN" userLabel="Top Stack View">
+                                    <rect key="frame" x="0.0" y="0.0" width="251.33333333333334" height="188.66666666666666"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="გილოცავთ!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNa-ob-Yfh" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
+                                            <rect key="frame" x="12.666666666666671" y="0.0" width="226.33333333333331" height="38"/>
+                                            <fontDescription key="fontDescription" name="Mersad-Regular_Bold" family="Mersad" pointSize="36"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Trophy" translatesAutoresizingMaskIntoConstraints="NO" id="rD9-p0-gPd">
+                                            <rect key="frame" x="66.333333333333343" y="70" width="118.66666666666666" height="118.66666666666669"/>
+                                            <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="175" id="Mne-Pt-OH8">
+                                                    <variation key="heightClass=compact" constant="125"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="175"/>
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="325"/>
+                                                </constraint>
+                                                <constraint firstAttribute="width" secondItem="rD9-p0-gPd" secondAttribute="height" multiplier="1:1" id="w1y-Mu-pCO"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <variation key="heightClass=compact" spacing="12"/>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Mhh-yI-3hs" userLabel="Mid Stack View">
+                                    <rect key="frame" x="0.0" y="236.66666666666671" width="251.33333333333334" height="52.333333333333343"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ხვიჩა და გოჩა" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jh-CQ-QoY" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
+                                            <rect key="frame" x="41.333333333333343" y="0.0" width="168.66666666666666" height="23.333333333333332"/>
+                                            <fontDescription key="fontDescription" name="Mersad-Regular_Bold" family="Mersad" pointSize="22"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="თქვენ გაიმარჯვეთ 21 ქულით" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDr-TY-dSB" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="35.333333333333314" width="251.33333333333334" height="17"/>
+                                            <fontDescription key="fontDescription" name="Mersad-Regular_Bold" family="Mersad" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <variation key="heightClass=compact" spacing="12"/>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hDf-bX-lhc" userLabel="Bottom Stack View">
+                            <rect key="frame" x="0.0" y="313" width="262" height="146"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="icx-bt-tWp" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="262" height="38"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="38" id="dCQ-0a-ZwO"/>
+                                        <constraint firstAttribute="height" constant="60" id="uDd-Rj-34b"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="dCQ-0a-ZwO"/>
+                                            <exclude reference="uDd-Rj-34b"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="dCQ-0a-ZwO"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="dCQ-0a-ZwO"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <mask key="constraints">
+                                            <include reference="uDd-Rj-34b"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <action selector="startOverWithSender:" destination="ABF-f4-IMG" eventType="touchUpInside" id="EDl-jP-iMg"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BM7-sJ-a81" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="54" width="262" height="38"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="38" id="Xxw-Sx-y28"/>
+                                        <constraint firstAttribute="height" constant="60" id="yc6-5X-LK6"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Xxw-Sx-y28"/>
+                                            <exclude reference="yc6-5X-LK6"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="Xxw-Sx-y28"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="Xxw-Sx-y28"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <mask key="constraints">
+                                            <include reference="yc6-5X-LK6"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <action selector="goBackWithSender:" destination="ABF-f4-IMG" eventType="touchUpInside" id="fit-Fq-R4z"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hi2-xH-K1V" customClass="GMButton" customModule="Gamoitsani" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="108" width="262" height="38"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="9Rq-6z-fS4"/>
+                                        <constraint firstAttribute="height" constant="38" id="IKF-qu-Y1f"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="IKF-qu-Y1f"/>
+                                            <exclude reference="9Rq-6z-fS4"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="IKF-qu-Y1f"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="IKF-qu-Y1f"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <mask key="constraints">
+                                            <include reference="9Rq-6z-fS4"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <action selector="showFullScoreboard" destination="ABF-f4-IMG" eventType="touchUpInside" id="2Ho-qR-dLv"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="hDf-bX-lhc" firstAttribute="leading" secondItem="YQM-wk-JAV" secondAttribute="leading" id="esN-Am-auT"/>
+                        <constraint firstAttribute="trailing" secondItem="hDf-bX-lhc" secondAttribute="trailing" id="zFS-vQ-BkK"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="zFS-vQ-BkK"/>
+                            <exclude reference="esN-Am-auT"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=compact" axis="horizontal" distribution="fillEqually"/>
+                    <variation key="heightClass=regular-widthClass=compact" axis="vertical">
+                        <mask key="constraints">
+                            <include reference="zFS-vQ-BkK"/>
+                            <include reference="esN-Am-auT"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="zFS-vQ-BkK"/>
+                            <include reference="esN-Am-auT"/>
+                        </mask>
+                    </variation>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="oDQ-Mw-d7M"/>
+            <color key="backgroundColor" name="Secondary"/>
+            <constraints>
+                <constraint firstItem="YQM-wk-JAV" firstAttribute="top" secondItem="oDQ-Mw-d7M" secondAttribute="top" constant="24" id="D9m-SW-WrU"/>
+                <constraint firstItem="YQM-wk-JAV" firstAttribute="leading" secondItem="ABF-f4-IMG" secondAttribute="leading" constant="24" id="F7E-Lj-uMP"/>
+                <constraint firstAttribute="trailing" secondItem="YQM-wk-JAV" secondAttribute="trailing" constant="16" id="La8-Us-kCd"/>
+                <constraint firstItem="YQM-wk-JAV" firstAttribute="centerX" secondItem="ABF-f4-IMG" secondAttribute="centerX" id="SKM-uB-OcE"/>
+                <constraint firstItem="YQM-wk-JAV" firstAttribute="leading" secondItem="ABF-f4-IMG" secondAttribute="leading" constant="16" id="Z5z-Xz-aIU"/>
+                <constraint firstAttribute="trailing" secondItem="YQM-wk-JAV" secondAttribute="trailing" constant="24" id="cRp-Tb-YzT"/>
+                <constraint firstItem="oDQ-Mw-d7M" firstAttribute="bottom" secondItem="YQM-wk-JAV" secondAttribute="bottom" constant="24" id="t0L-6g-mS3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="SKM-uB-OcE"/>
+                    <exclude reference="La8-Us-kCd"/>
+                    <exclude reference="cRp-Tb-YzT"/>
+                    <exclude reference="F7E-Lj-uMP"/>
+                    <exclude reference="Z5z-Xz-aIU"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact">
+                <mask key="constraints">
+                    <include reference="SKM-uB-OcE"/>
+                    <include reference="La8-Us-kCd"/>
+                    <include reference="Z5z-Xz-aIU"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="cRp-Tb-YzT"/>
+                    <include reference="F7E-Lj-uMP"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="cRp-Tb-YzT"/>
+                    <include reference="F7E-Lj-uMP"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="descriptionLabel" destination="jDr-TY-dSB" id="oAO-aF-f26"/>
+                <outlet property="goBackButton" destination="BM7-sJ-a81" id="HvO-49-CyT"/>
+                <outlet property="icon" destination="rD9-p0-gPd" id="hRm-Xm-cZc"/>
+                <outlet property="repeatButton" destination="icx-bt-tWp" id="Geg-Rw-azE"/>
+                <outlet property="showFullScoreboardButton" destination="Hi2-xH-K1V" id="LYu-HL-alF"/>
+                <outlet property="teamNameLabel" destination="7jh-CQ-QoY" id="DKV-Sx-tyK"/>
+                <outlet property="winLabel" destination="zNa-ob-Yfh" id="oLZ-N1-HJD"/>
+            </connections>
+            <point key="canvasLocation" x="-15" y="-95"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Trophy" width="512" height="512"/>
+        <namedColor name="Secondary">
+            <color red="0.27843137254901962" green="0.33725490196078434" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
