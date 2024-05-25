@@ -14,12 +14,14 @@ class BaseViewController<T: Coordinator>: UIViewController {
     private lazy var customBackBarButtonItem: UIBarButtonItem = {
         let button = BackBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
         button.setTitleTextAttributes([.font: F.Mersad.semiBold.font(size: 16)], for: .normal)
+        button.setTitleTextAttributes([.font: F.Mersad.semiBold.font(size: 16)], for: .selected)
         return button
     }()
     
     private lazy var defaultBackBarButtonItem: UIBarButtonItem = {
         let button = UIBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
         button.setTitleTextAttributes([.font: F.Mersad.semiBold.font(size: 16)], for: .normal)
+        button.setTitleTextAttributes([.font: F.Mersad.semiBold.font(size: 16)], for: .selected)
         return button
     }()
     
