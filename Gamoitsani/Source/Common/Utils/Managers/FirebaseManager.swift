@@ -48,7 +48,7 @@ final class FirebaseManager {
         }
     }
     
-    func addWordsToSuggestions(_ words: [String]) {
+    func addWordToSuggestions(_ words: String...) {
         for word in words {
             suggestionsRef.whereField(wordField, isEqualTo: word).getDocuments { querySnapshot, error in
                 if let error = error {

@@ -14,16 +14,9 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
     @IBOutlet weak var wordTextField: GMTextField!
     @IBOutlet weak var addWordButton: GMButton!
     
-    private var wordsToBeAdded: [String] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addHideKeyboardTapGestureRecogniser()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        sendWordsToDB()
     }
     
     override func setupUI() {
@@ -32,12 +25,6 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
         addWordButton.configure(with: L10n.Screen.AddWord.send)
         hintMessageLabel.configure(with: L10n.Screen.AddWord.hint)
         wordTextField.addPadding(padding: .equalSpacing(16))
-    }
-    
-    private func sendWordsToDB() {
-        if !wordsToBeAdded.isEmpty { 
-            FirebaseManager.shared.addWordsToSuggestions(wordsToBeAdded)
-        }
     }
     
     private func addHideKeyboardTapGestureRecogniser() {
@@ -51,7 +38,7 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
     
     @IBAction func addWordAction(_ sender: Any) {
         guard let word = wordTextField.text, word != .empty else { return }
-        wordsToBeAdded.append(word.removeExtraSpaces())
+        FirebaseManager.shared.addWordToSuggestions(word.removeExtraSpaces())
         wordTextField.text = .empty
     }
 }
