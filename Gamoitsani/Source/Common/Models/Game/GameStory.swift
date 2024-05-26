@@ -19,6 +19,7 @@ class GameStory {
     var words: [Word] = []
     
     var currentRound: Int = 1
+    var currentExtraRound: Int = 0
     var teams: OrderedDictionary<String, Int> = [:]
     
     var playingSessionCount: Int = 0
@@ -30,6 +31,7 @@ class GameStory {
         teams.keys.forEach { teams[$0] = 0 }
 
         currentRound = 1
+        currentExtraRound = 0
         
         playingSessionCount = 0
         currentTeamIndex = 0

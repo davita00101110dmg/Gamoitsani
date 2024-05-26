@@ -38,7 +38,13 @@ final class GameInfoView: UIView {
     func configure(with model: GameInfoViewModel, delegate: GameInfoViewDelegate) {
         self.delegate = delegate
         
-        roundCountLabel.configure(with: L10n.Screen.Game.CurrentRound.message(model.currentRound.toString),
+        var roundCountLabelText = L10n.Screen.Game.CurrentRound.message(model.currentRound.toString)
+        if let currentExtraRound = model.currentExtraRound, currentExtraRound > 0 {
+            roundCountLabelText.append(String.whitespace)
+            roundCountLabelText.append(L10n.Screen.Game.CurrentExtraRound.message(currentExtraRound.toString))
+        }
+        
+        roundCountLabel.configure(with: roundCountLabelText,
                                   fontSizeForPad: Constants.labelFontSizeForPad)
         teamNameLabel.configure(with: model.teamName,
                                 fontSizeForPad: Constants.labelFontSizeForPad)

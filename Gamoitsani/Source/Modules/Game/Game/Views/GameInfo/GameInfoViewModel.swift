@@ -11,4 +11,5 @@ import Foundation
 struct GameInfoViewModel {
     let teamName: String
     let currentRound: Int
+    let currentExtraRound: Int?
 }

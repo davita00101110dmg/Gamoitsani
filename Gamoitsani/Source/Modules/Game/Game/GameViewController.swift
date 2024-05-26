@@ -68,7 +68,8 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         guard let gameInfoView else { return }
         gameInfoView.configure(with: .init(
             teamName: gameStory.teams.keys[gameStory.currentTeamIndex],
-            currentRound: gameStory.currentRound),
+            currentRound: gameStory.currentRound,
+            currentExtraRound: gameStory.currentExtraRound),
                                delegate: self)
         
         gameInfoView.frame = mainView.bounds
@@ -101,26 +102,47 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         mainView.addSubview(gameOverView)
     }
     
-    private func validateEndOfTheGame() -> Bool {
-        gameStory.currentRound > gameStory.numberOfRounds
-    }
-
-    private func toggleView() {
+    private func toggleGameView() {
         mainView.removeAllSubviews()
         
-        if validateEndOfTheGame() {
-            presentGameOverView()
+        if handleEndOfGame() {
+            return
+        }
+
+        toggleInfoView()
+    }
+    
+    private func toggleInfoView() {
+        shouldShowInfoView.toggle()
+        if shouldShowInfoView {
+            gameStory.playingSessionCount += 1
+            showGamePlayView()
         } else {
-            shouldShowInfoView.toggle()
-            if shouldShowInfoView {
-                gameStory.playingSessionCount += 1
-                showGamePlayView()
-            } else {
-                showGameInfoView()
-            }
+            showGameInfoView()
         }
     }
     
+    private func isTie() -> Bool {
+        let sortedTeams = gameStory.teams.sorted { $0.value > $1.value }
+        return sortedTeams[0].value == sortedTeams[1].value
+    }
+    
+    private func isEndOfGame() -> Bool {
+        gameStory.currentRound > gameStory.numberOfRounds && gameStory.currentTeamIndex == 0
+    }
+
+    private func handleEndOfGame() -> Bool {
+        if isEndOfGame() {
+            if isTie() {
+                gameStory.currentExtraRound = gameStory.currentRound - gameStory.numberOfRounds
+            } else {
+                presentGameOverView()
+                return true
+            }
+        }
+        return false
+    }
+
     @objc private func presentAlertOnBackButton() {
         let alert = UIAlertController(title: L10n.Screen.Game.ConfirmationAlert.title,
                                       message: L10n.Screen.Game.ConfirmationAlert.message,
@@ -205,7 +227,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
 // MARK: - GameInfoViewDelegate Methods
 extension GameViewController: GameInfoViewDelegate {
     func didPressStart() {
-        toggleView()
+        toggleGameView()
     }
     
     func didPressShowScoreboard() {
@@ -217,7 +239,7 @@ extension GameViewController: GameInfoViewDelegate {
 extension GameViewController: GamePlayViewDelegate {
     func timerDidFinished(roundScore: Int) {
         updateGameInfo(roundScore)
-        toggleView()
+        toggleGameView()
     }
 }
 
@@ -225,7 +247,7 @@ extension GameViewController: GamePlayViewDelegate {
 extension GameViewController: GameOverViewDelegate {
     func didPressStartOver() {
         resetGameViewController()
-        toggleView()
+        toggleGameView()
     }
     
     func didPressGoBack() {
