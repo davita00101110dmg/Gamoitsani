@@ -195,6 +195,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     }
     
     private func resetGameViewController() {
+        navigationController?.isNavigationBarHidden = false
         stopConfettiAnimation()
         mainViewHeightConstraint.constant = 400
         gameStory.reset()
