@@ -15,7 +15,7 @@ final class GMLabel: UILabel {
                           fontSizeForPad: CGFloat = Constants.labelPadFontSize,
                           color: UIColor = .white,
                           lineHeightMultiple: CGFloat = Constants.lineHeightMultipleConstant,
-                          textAlignment: NSTextAlignment = .left) {
+                          textAlignment: NSTextAlignment = .center) {
         
         let fontSize = UIDevice.current.userInterfaceIdiom == .pad ? fontSizeForPad : fontSizeForPhone
         

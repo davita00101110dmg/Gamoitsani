@@ -37,8 +37,7 @@ final class GameOverView: UIView {
         
         winLabel.configure(with: L10n.Screen.Game.WinningView.title,
                            fontSizeForPhone: Constants.winLabelFontSizeForPhone,
-                           fontSizeForPad: Constants.winLabelFontSizeForPad,
-                           textAlignment: .center)
+                           fontSizeForPad: Constants.winLabelFontSizeForPad)
         repeatButton.configure(with: L10n.Screen.Game.WinningView.repeat)
         goBackButton.configure(with: L10n.Screen.Game.WinningView.GameDetails.title)
         showFullScoreboardButton.configure(with: L10n.scoreboard)
@@ -48,12 +47,10 @@ final class GameOverView: UIView {
         self.delegate = delegate
         teamNameLabel.configure(with: model.teamName,
                                 fontSizeForPhone: Constants.teamLabelFontSizeForPhone,
-                                fontSizeForPad: Constants.teamLabelFontSizeForPad,
-                                textAlignment: .center)
+                                fontSizeForPad: Constants.teamLabelFontSizeForPad)
         descriptionLabel.configure(with: L10n.Screen.Game.WinningView.description(model.score.toString),
                                    fontSizeForPhone: Constants.descriptionLabelFontSizeForPhone,
-                                   fontSizeForPad: Constants.descriptionLabelFontSizeForPad,
-                                   textAlignment: .center)
+                                   fontSizeForPad: Constants.descriptionLabelFontSizeForPad)
     }
 }
 

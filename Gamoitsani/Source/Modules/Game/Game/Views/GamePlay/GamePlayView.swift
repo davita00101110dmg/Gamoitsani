@@ -81,12 +81,10 @@ final class GamePlayView: UIView {
         wordLabel.configure(with: (shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn) ?? L10n.Screen.Game.NoMoreWords.message,
                             fontType: .bold,
                             fontSizeForPhone: Constants.wordLabelFontSizeForPhone,
-                            fontSizeForPad: Constants.wordLabelFontSizeForPad,
-                            textAlignment: .center)
+                            fontSizeForPad: Constants.wordLabelFontSizeForPad)
         timerLabel.configure(with: roundLength.toString(),
                              fontSizeForPhone: Constants.timerLabelFontSizeForPhone,
-                             fontSizeForPad: Constants.timerLabelFontSizeForPad,
-                             textAlignment: .center)
+                             fontSizeForPad: Constants.timerLabelFontSizeForPad)
     }
     
     private func timerBlock(_: Timer) -> Void {

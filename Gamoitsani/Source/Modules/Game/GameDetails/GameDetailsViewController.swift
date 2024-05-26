@@ -69,9 +69,12 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
     override func setupLocalizedTexts() {
         super.setupLocalizedTexts()
         title = L10n.Screen.GameDetails.title
-        roundsAmountTitle.configure(with: L10n.Screen.GameDetails.RoundsAmount.title(ViewControllerConstants.roundsStepperDefaultValue.toString()))
-        roundsLengthTitle.configure(with: L10n.Screen.GameDetails.RoundsLength.title(ViewControllerConstants.roundsLengthStepperDefaultValue.toString()))
-        teamsTitle.configure(with: L10n.Screen.GameDetails.Teams.title)
+        roundsAmountTitle.configure(with: L10n.Screen.GameDetails.RoundsAmount.title(ViewControllerConstants.roundsStepperDefaultValue.toString()),
+                                    textAlignment: .left)
+        roundsLengthTitle.configure(with: L10n.Screen.GameDetails.RoundsLength.title(ViewControllerConstants.roundsLengthStepperDefaultValue.toString()),
+                                    textAlignment: .left)
+        teamsTitle.configure(with: L10n.Screen.GameDetails.Teams.title,
+                             textAlignment: .left)
     }
     
     private func setupTableView() {
