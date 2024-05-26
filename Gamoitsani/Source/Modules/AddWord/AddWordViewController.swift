@@ -23,7 +23,7 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
         super.setupUI()
         title = L10n.Screen.AddWord.title
         addWordButton.configure(with: L10n.Screen.AddWord.send)
-        hintMessageLabel.configure(with: L10n.Screen.AddWord.hint)
+        hintMessageLabel.configure(with: L10n.Screen.AddWord.hint, textAlignment: .left)
         wordTextField.addPadding(padding: .equalSpacing(16))
     }
     

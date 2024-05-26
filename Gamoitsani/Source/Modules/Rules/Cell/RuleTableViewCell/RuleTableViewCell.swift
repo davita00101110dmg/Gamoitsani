@@ -24,6 +24,6 @@ final class RuleTableViewCell: UITableViewCell {
     }
     
     func configure(with text: String?) {
-        ruleLabel.configure(with: text)
+        ruleLabel.configure(with: text, textAlignment: .left)
     }
 }
