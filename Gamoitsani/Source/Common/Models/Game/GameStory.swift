@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Collections
+import OrderedCollections
 
 class GameStory {
     static let shared = GameStory()
