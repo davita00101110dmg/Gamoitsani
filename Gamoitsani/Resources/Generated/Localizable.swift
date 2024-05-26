@@ -63,6 +63,13 @@ public enum L10n {
           public static var title: String { L10n.tr("Localizable", "screen.game.confirmation_alert.title") }
         }
 
+        public enum CurrentExtraRound {
+          /// (Extra: %@)
+          public static func message( _ p1: String) -> String {
+              return L10n.tr("Localizable", "screen.game.current_extra_round.message", p1)
+          }
+        }
+
         public enum CurrentRound {
           /// Round: %@
           public static func message( _ p1: String) -> String {
