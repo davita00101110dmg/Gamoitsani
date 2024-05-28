@@ -93,7 +93,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         navigationController?.isNavigationBarHidden = true
         startConfettiAnimation()
         
-        mainViewHeightConstraint.constant = 600
+        mainViewHeightConstraint.constant = ViewControllerConstants.mainViewHeightForGameOverView
         
         gameOverView.configure(with: .init(teamName: teamName,
                                            score: score),
@@ -204,7 +204,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     private func resetGameViewController() {
         navigationController?.isNavigationBarHidden = false
         stopConfettiAnimation()
-        mainViewHeightConstraint.constant = 400
+        mainViewHeightConstraint.constant = ViewControllerConstants.mainViewHeight
         gameStory.reset()
     }
 }
@@ -243,5 +243,39 @@ extension GameViewController: GameOverViewDelegate {
     
     func didPressShowFullScoreboard() {
         coordinator?.presentGameScoreboard(with: [.large()])
+    }
+}
+
+// MARK: - ViewController Constants
+extension GameViewController {
+    enum ViewControllerConstants {
+        static let mainViewHeight: CGFloat = 400
+        static let mainViewHeightForGameOverView: CGFloat = 600
+        static let gameOverViewTransitionDuration: TimeInterval = 0.5
+        static let cellScale: CGFloat = 0.5
+        static let cellScaleRange: CGFloat = 0.1
+        static let cellLifetime: Float = 30
+        static let cellBirthRate: Float = 5
+        static let cellVelocity: CGFloat = 250
+        static let cellVelocityRange: CGFloat = 150
+        static let cellSpin: CGFloat = 5
+        static let cellSpinRange: CGFloat = 2.5
+        static let birthRateStartFromValue: Float = 1
+        static let birthRateStartToValue: Float = 200
+        static let birthRateStartDuration: CFTimeInterval = 5
+        static let birthRateAnimation: String = "birthRate"
+        static let birthRateAnimationKey: String = "birthRateAnimation"
+        static let confettiColors: [UIColor] = [
+            Asset.color1.color,
+            Asset.color2.color,
+            Asset.color3.color,
+            Asset.color4.color,
+            Asset.color5.color,
+            Asset.color6.color,
+            Asset.color7.color,
+            Asset.color8.color,
+            Asset.color9.color,
+            Asset.color10.color
+        ]
     }
 }
