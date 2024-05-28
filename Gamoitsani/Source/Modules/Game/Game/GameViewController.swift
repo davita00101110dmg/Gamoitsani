@@ -99,7 +99,10 @@ final class GameViewController: BaseViewController<GameCoordinator> {
                                            score: score),
                                delegate: self)
         gameOverView.frame = mainView.bounds
-        mainView.addSubview(gameOverView)
+        
+        UIView.transition(with: mainView, duration: 0.5, options: [.transitionCrossDissolve, .allowUserInteraction], animations: {
+            self.mainView.addSubview(gameOverView)
+        })
     }
     
     private func toggleGameView() {
@@ -149,7 +152,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     }
     
     private func startConfettiAnimation() {
-        confettiLayer.emitterPosition = .init(x: view.center.x, y: -view.frame.height)
+        confettiLayer.emitterPosition = .init(x: view.center.x, y: -view.frame.height/2)
         confettiLayer.opacity = 1
         
         let colors: [UIColor] = [
@@ -167,22 +170,33 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         
         let cells: [CAEmitterCell] = colors.compactMap {
             let cell = CAEmitterCell()
-            cell.scale = 0.5
+            cell.scale = ViewControllerConstants.cellScale
+            cell.scaleRange = ViewControllerConstants.cellScaleRange
             cell.emissionRange = .pi * 2
-            cell.lifetime = 20
-            cell.birthRate = 250
-            cell.velocity = 250
+            cell.lifetime = ViewControllerConstants.cellLifetime
+            cell.birthRate = ViewControllerConstants.cellBirthRate
+            cell.velocity = ViewControllerConstants.cellVelocity
+            cell.velocityRange = ViewControllerConstants.cellVelocityRange
+            cell.spin = ViewControllerConstants.cellSpin
+            cell.spinRange = ViewControllerConstants.cellSpinRange
             cell.color = $0.cgColor
             cell.contents = Asset.confetti.image.cgImage
             return cell
         }
         
-        confettiLayer.emitterCells = cells
+        let birthRateAnimation = CABasicAnimation(keyPath: ViewControllerConstants.birthRateAnimation)
+        birthRateAnimation.fromValue = ViewControllerConstants.birthRateStartFromValue
+        birthRateAnimation.toValue = ViewControllerConstants.birthRateStartToValue
+        birthRateAnimation.duration = ViewControllerConstants.birthRateStartDuration
+        birthRateAnimation.isRemovedOnCompletion = false
         
+        confettiLayer.add(birthRateAnimation, forKey: ViewControllerConstants.birthRateAnimationKey)
+        confettiLayer.emitterCells = cells
         view.layer.addSublayer(confettiLayer)
     }
     
     private func stopConfettiAnimation() {
+        confettiLayer.removeAllAnimations()
         confettiLayer.removeFromSuperlayer()
         confettiLayer.emitterCells = nil
     }
