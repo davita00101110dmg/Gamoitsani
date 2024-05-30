@@ -100,7 +100,10 @@ final class GameViewController: BaseViewController<GameCoordinator> {
                                delegate: self)
         gameOverView.frame = mainView.bounds
         
-        UIView.transition(with: mainView, duration: 0.5, options: [.transitionCrossDissolve, .allowUserInteraction], animations: {
+        UIView.transition(with: mainView,
+                          duration: ViewControllerConstants.gameOverViewTransitionDuration,
+                          options: [.transitionCrossDissolve, .allowUserInteraction],
+                          animations: {
             self.mainView.addSubview(gameOverView)
         })
     }
@@ -152,7 +155,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     }
     
     private func startConfettiAnimation() {
-        confettiLayer.emitterPosition = .init(x: view.center.x, y: -view.frame.height/2)
+        confettiLayer.emitterPosition = .init(x: view.center.x, y: UIApplication.shared.currentScene?.interfaceOrientation == .portrait ? -view.frame.height/2 : -view.frame.height)
         confettiLayer.opacity = 1
         
         let colors: [UIColor] = [
