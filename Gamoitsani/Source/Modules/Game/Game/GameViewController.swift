@@ -141,7 +141,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
             self.coordinator?.pop()
         })
         
-        alert.addAction(.init(title: L10n.no, style: .default))
+        alert.addAction(.init(title: L10n.no, style: .cancel))
         
         present(alert, animated: true)
     }

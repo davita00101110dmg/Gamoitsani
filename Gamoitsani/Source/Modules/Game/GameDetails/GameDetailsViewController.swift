@@ -104,7 +104,7 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
     }
     
     private func presentAddTeamAlert() {
-        let alertType = AlertType.team(title: L10n.Screen.GameDetails.AddTeamAlert.title,
+        let alertType = AlertType.addOrEditTeam(title: L10n.Screen.GameDetails.AddTeamAlert.title,
                                        message: nil,
                                        initialText: nil,
                                        delegate: self) { [weak self] teamName in
@@ -124,12 +124,23 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
         guard let viewModel else { return }
         let initialText = viewModel.getTeam(at: index)
         
-        let alertType = AlertType.team(title: L10n.Screen.GameDetails.EditTeamNameAlert.title,
+        let alertType = AlertType.addOrEditTeam(title: L10n.Screen.GameDetails.EditTeamNameAlert.title,
                                        message: nil,
                                        initialText: initialText,
                                        delegate: self) { teamName in
             viewModel.updateTeam(at: index, with: teamName)
         }
+        presentAlert(of: alertType)
+    }
+    
+    private func presentRemoveTeamAlert(at index: Int) {
+        guard let viewModel else { return }
+        
+        let alertType = AlertType.deleteTeam(title: L10n.Screen.GameDetails.DeleteTeamAlert.title,
+                                             message: nil) {
+            viewModel.remove(at: index)
+        }
+        
         presentAlert(of: alertType)
     }
     
@@ -211,7 +222,7 @@ extension GameDetailsViewController: UITableViewDelegate {
             guard let self,
                   let viewModel else { return }
             
-            viewModel.remove(at: indexPath.row)
+            presentRemoveTeamAlert(at: indexPath.row)
             completion(true)
         }
         
@@ -245,7 +256,7 @@ extension GameDetailsViewController: UITableViewDelegate {
             let deleteAction = UIAction(title: L10n.delete,
                                         image: UIImage(systemName: "square.and.pencil"),
                                         attributes: .destructive) { _ in
-                viewModel.remove(at: indexPath.row)
+                self.presentRemoveTeamAlert(at: indexPath.row)
             }
             
             return UIMenu(title: .empty, children: [editAction, deleteAction])
