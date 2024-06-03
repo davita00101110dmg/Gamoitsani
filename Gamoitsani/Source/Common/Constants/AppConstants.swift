@@ -25,6 +25,13 @@ enum AppConstants {
         "nectarine", "olive", "papaya", "quince", "raspberry"
     ]
     
+    static let helperColors = [
+        Asset.color11.color,
+        Asset.color12.color,
+        Asset.color13.color,
+        Asset.color14.color,
+    ]
+    
     enum FontType {
         case regular, semiBold, bold
     }
