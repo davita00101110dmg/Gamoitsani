@@ -15,7 +15,6 @@ final class RulesViewModel {
     
     init() {
         rules = [
-            L10n.Screen.Rules.rule1,
             L10n.Screen.Rules.rule2,
             L10n.Screen.Rules.rule3,
             L10n.Screen.Rules.rule4,

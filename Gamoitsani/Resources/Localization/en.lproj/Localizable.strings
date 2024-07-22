@@ -31,7 +31,6 @@
 
 // MARK: - Rules
 "screen.rules.title" = "Rules";
-"screen.rules.rule1" = "Note that at this moment you can only play with Georgian words⚠️";
 "screen.rules.rule2" = "When explaining the word, it is forbidden to use a single word";
 "screen.rules.rule3" = "If a team member guesses the word, press the green button (+1 point)";
 "screen.rules.rule4" = "If you can't explain the word, or some rule was broken and you want to go to the next word, press the red button (-1 point)";

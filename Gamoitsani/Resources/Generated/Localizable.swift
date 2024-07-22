@@ -199,8 +199,6 @@ public enum L10n {
       }
 
       public enum Rules {
-        /// Note that at this moment you can only play with Georgian words⚠️
-        public static var rule1: String { L10n.tr("Localizable", "screen.rules.rule1") }
         /// When explaining the word, it is forbidden to use a single word
         public static var rule2: String { L10n.tr("Localizable", "screen.rules.rule2") }
         /// If a team member guesses the word, press the green button (+1 point)
