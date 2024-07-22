@@ -50,6 +50,7 @@
 "screen.game_details.teams.title" = "Teams";
 "screen.game_details.add_team_alert.title" = "Add a team";
 "screen.game_details.edit_team_name_alert.title" = "Edit team's name";
+"screen.game_details.delete_team_alert.title" = "Are you sure you want to delete team?";
 "screen.game_details.no_internet_connection_alert.title" = "No internet connection!";
 "screen.game_details.no_internet_connection_alert.message" = "Internet connection is required to start the game";
 "screen.game_details.start_game.title" = "Start Game";

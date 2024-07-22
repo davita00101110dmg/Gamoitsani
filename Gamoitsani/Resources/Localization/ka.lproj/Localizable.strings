@@ -50,6 +50,7 @@
 "screen.game_details.teams.title" = "გუნდები";
 "screen.game_details.add_team_alert.title" = "დაამატე გუნდი";
 "screen.game_details.edit_team_name_alert.title" = "დაარედაქტირე გუნდის სახელი";
+"screen.game_details.delete_team_alert.title" = "დარწმუნებული ხარ რომ გუნდის წაშლა გინდა?";
 "screen.game_details.no_internet_connection_alert.title" = "არ არის ინტერნეტთან კავშირი!";
 "screen.game_details.no_internet_connection_alert.message" = "თამაშის დასაწყებად საჭიროა ინტერნეტთან კავშირი";
 "screen.game_details.start_game.title" = "თამაშის დაწყება";

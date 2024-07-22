@@ -108,6 +108,11 @@ public enum L10n {
           public static var title: String { L10n.tr("Localizable", "screen.game_details.add_team_alert.title") }
         }
 
+        public enum DeleteTeamAlert {
+          /// Are you sure you want to delete team?
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.delete_team_alert.title") }
+        }
+
         public enum EditTeamNameAlert {
           /// Edit team's name
           public static var title: String { L10n.tr("Localizable", "screen.game_details.edit_team_name_alert.title") }
