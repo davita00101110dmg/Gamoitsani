@@ -222,7 +222,7 @@ extension GameDetailsViewController: UITableViewDelegate {
             guard let self,
                   let viewModel else { return }
             
-            presentRemoveTeamAlert(at: indexPath.row)
+            viewModel.remove(at: indexPath.row)
             completion(true)
         }
         
@@ -256,7 +256,7 @@ extension GameDetailsViewController: UITableViewDelegate {
             let deleteAction = UIAction(title: L10n.delete,
                                         image: UIImage(systemName: "square.and.pencil"),
                                         attributes: .destructive) { _ in
-                self.presentRemoveTeamAlert(at: indexPath.row)
+                viewModel.remove(at: indexPath.row)
             }
             
             return UIMenu(title: .empty, children: [editAction, deleteAction])
