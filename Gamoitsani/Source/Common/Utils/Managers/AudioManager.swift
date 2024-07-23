@@ -15,8 +15,8 @@ final class AudioManager {
     var incorrectSoundAudioPlayer: AVAudioPlayer?
     
     func setupSounds() {
-        guard let correctSoundUrl = Bundle.main.url(forResource: "correct", withExtension: "mp3") else { return }
-        guard let incorrectSoundUrl = Bundle.main.url(forResource: "incorrect", withExtension: "wav") else { return }
+        guard let correctSoundUrl = Bundle.main.url(forResource: "correct", withExtension: "wav") else { return }
+        guard let incorrectSoundUrl = Bundle.main.url(forResource: "incorrect", withExtension: "mp3") else { return }
         do {
             correctSoundAudioPlayer = try AVAudioPlayer(contentsOf: correctSoundUrl)
             incorrectSoundAudioPlayer = try AVAudioPlayer(contentsOf: incorrectSoundUrl)

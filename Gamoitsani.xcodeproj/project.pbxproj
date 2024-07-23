@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF1111892C4FD17500C44F62 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF1111872C4FD17500C44F62 /* correct.wav */; };
+		FF11118A2C4FD17500C44F62 /* incorrect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF1111882C4FD17500C44F62 /* incorrect.mp3 */; };
 		FF1E92B62BF8FE8E00127FDE /* GMGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */; };
 		FF1E92B82BF9017100127FDE /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */; };
 		FF1E92BA2BF91C8C00127FDE /* GMBackBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */; };
@@ -71,8 +73,6 @@
 		FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA7102BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib */; };
 		FF8EA7142BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7132BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift */; };
 		FF8EA7212BEC12BD00F098B8 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7202BEC12BD00F098B8 /* AudioManager.swift */; };
-		FF8EA7252BEC13FF00F098B8 /* incorrect.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA7232BEC13FF00F098B8 /* incorrect.wav */; };
-		FF8EA7262BEC13FF00F098B8 /* correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA7242BEC13FF00F098B8 /* correct.mp3 */; };
 		FF8EA7562BEC40B100F098B8 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7552BEC40B100F098B8 /* UIColorExtensions.swift */; };
 		FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */; };
 		FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */; };
@@ -131,6 +131,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF1111872C4FD17500C44F62 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
+		FF1111882C4FD17500C44F62 /* incorrect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = incorrect.mp3; sourceTree = "<group>"; };
 		FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMGradientView.swift; sourceTree = "<group>"; };
 		FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
 		FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMBackBarButtonItem.swift; sourceTree = "<group>"; };
@@ -196,8 +198,6 @@
 		FF8EA7102BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameScoreboardTeamTableViewCell.xib; sourceTree = "<group>"; };
 		FF8EA7132BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreboardTeamTableViewModel.swift; sourceTree = "<group>"; };
 		FF8EA7202BEC12BD00F098B8 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
-		FF8EA7232BEC13FF00F098B8 /* incorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incorrect.wav; sourceTree = "<group>"; };
-		FF8EA7242BEC13FF00F098B8 /* correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correct.mp3; sourceTree = "<group>"; };
 		FF8EA7552BEC40B100F098B8 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -582,8 +582,8 @@
 		FF8EA7222BEC13F600F098B8 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				FF8EA7242BEC13FF00F098B8 /* correct.mp3 */,
-				FF8EA7232BEC13FF00F098B8 /* incorrect.wav */,
+				FF1111872C4FD17500C44F62 /* correct.wav */,
+				FF1111882C4FD17500C44F62 /* incorrect.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -895,6 +895,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF11118A2C4FD17500C44F62 /* incorrect.mp3 in Resources */,
 				FF8EA6FC2BEBB46D00F098B8 /* GameScoreboardViewController.xib in Resources */,
 				FF7F1D8C2BE7AE0A00872554 /* GamePlayView.xib in Resources */,
 				FF4D9D382BD698630046819D /* LaunchScreen.storyboard in Resources */,
@@ -906,17 +907,16 @@
 				FF7CA1672C02591600E3BEC4 /* GameOverView.xib in Resources */,
 				FFFB4D512BD9398600CDDCB4 /* GameDetailsViewController.xib in Resources */,
 				FFFB4D072BD8393A00CDDCB4 /* Localizable.strings in Resources */,
+				FF1111892C4FD17500C44F62 /* correct.wav in Resources */,
 				FF7F1D882BE7ADEB00872554 /* GameInfoView.xib in Resources */,
 				FF4D9D352BD698630046819D /* Assets.xcassets in Resources */,
 				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
 				FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */,
-				FF8EA7262BEC13FF00F098B8 /* correct.mp3 in Resources */,
 				FF91B8D92BF785B200EB85F1 /* Config.xcconfig in Resources */,
 				FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */,
 				FF7F1D822BE7A2F700872554 /* GameViewController.xib in Resources */,
 				FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */,
 				FFFB4CD22BD701E700CDDCB4 /* HomeViewController.xib in Resources */,
-				FF8EA7252BEC13FF00F098B8 /* incorrect.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
