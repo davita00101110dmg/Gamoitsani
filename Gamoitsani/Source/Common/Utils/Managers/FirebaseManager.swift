@@ -22,7 +22,7 @@ final class FirebaseManager {
 
     private init() { }
     
-    func fetchWords(quantity: Int = 1500) {
+    func fetchWords(quantity: Int = 1500, completion: @escaping (Bool) -> Void) {
         guard let randomField = [AppConstants.Firebase.wordKa, AppConstants.Firebase.wordEn].randomElement() else { return }
     
         wordsRef.order(by: randomField, descending: Bool.random()).limit(to: quantity).getDocuments { snapshot, error in
@@ -45,6 +45,7 @@ final class FirebaseManager {
             }
             
             CoreDataManager.shared.saveWordsFromFirebase(wordsToSave)
+            completion(true)
         }
     }
     

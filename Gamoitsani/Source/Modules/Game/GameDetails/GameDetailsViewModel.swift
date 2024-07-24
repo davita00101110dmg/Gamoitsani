@@ -64,10 +64,10 @@ final class GameDetailsViewModel {
     
     func fetchWordsFromServer() {
         if shouldFetchWordsFromServer {
-            FirebaseManager.shared.fetchWords()
+            FirebaseManager.shared.fetchWords(completion: { success in
+                GameStory.shared.words = CoreDataManager.shared.fetchWordsFromCoreData()
+            })
         }
-        
-        GameStory.shared.words = CoreDataManager.shared.fetchWordsFromCoreData()
     }
     
     func observeNetworkConnection() {
