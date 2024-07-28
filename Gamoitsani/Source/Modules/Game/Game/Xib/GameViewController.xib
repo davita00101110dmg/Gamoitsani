@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_72" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameViewController" customModule="Gamoitsani" customModuleProvider="target">
             <connections>
+                <outlet property="bannerView" destination="ibB-QY-zAL" id="juO-JJ-mDj"/>
                 <outlet property="mainView" destination="DOp-si-W3S" id="dVn-xl-nw5"/>
                 <outlet property="mainViewHeightConstraint" destination="1tK-pM-LM6" id="b84-mS-hBN"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Ear-na-QPK"/>
@@ -18,11 +19,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOp-si-W3S">
-                    <rect key="frame" x="36" y="266" width="358" height="400"/>
+                    <rect key="frame" x="36" y="168" width="342" height="400"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="400" id="1tK-pM-LM6"/>
@@ -45,38 +46,61 @@
                         </mask>
                     </variation>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ibB-QY-zAL" customClass="GADBannerView">
+                    <rect key="frame" x="47" y="670" width="320" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="OQf-8Z-f5F"/>
+                        <constraint firstAttribute="height" constant="50" id="Y3V-2E-leO"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="DOp-si-W3S" secondAttribute="bottom" constant="24" id="2Cb-6X-fuD"/>
                 <constraint firstItem="DOp-si-W3S" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7Ay-7f-xyV"/>
+                <constraint firstItem="ibB-QY-zAL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="AAi-xS-uWh"/>
+                <constraint firstAttribute="bottom" secondItem="DOp-si-W3S" secondAttribute="bottom" constant="24" id="Abf-Tu-pMT"/>
                 <constraint firstItem="DOp-si-W3S" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="36" id="D7U-Q9-5ww"/>
+                <constraint firstItem="ibB-QY-zAL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="DOp-si-W3S" secondAttribute="bottom" constant="16" id="b38-Ww-uJK"/>
                 <constraint firstItem="DOp-si-W3S" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="iTJ-Ze-Dsv"/>
                 <constraint firstItem="DOp-si-W3S" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="12" id="lIo-yc-pEW"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="DOp-si-W3S" secondAttribute="trailing" constant="36" id="seW-fd-Oj0"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ibB-QY-zAL" secondAttribute="bottom" constant="16" id="ww6-D4-mHd"/>
             </constraints>
             <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="ibB-QY-zAL"/>
+                </mask>
                 <mask key="constraints">
+                    <exclude reference="b38-Ww-uJK"/>
                     <exclude reference="7Ay-7f-xyV"/>
                     <exclude reference="iTJ-Ze-Dsv"/>
-                    <exclude reference="2Cb-6X-fuD"/>
+                    <exclude reference="Abf-Tu-pMT"/>
                     <exclude reference="lIo-yc-pEW"/>
                 </mask>
             </variation>
             <variation key="heightClass=compact">
                 <mask key="constraints">
-                    <include reference="2Cb-6X-fuD"/>
+                    <include reference="Abf-Tu-pMT"/>
                     <include reference="lIo-yc-pEW"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="ibB-QY-zAL"/>
+                </mask>
                 <mask key="constraints">
+                    <include reference="b38-Ww-uJK"/>
                     <include reference="7Ay-7f-xyV"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
+                <mask key="subviews">
+                    <include reference="ibB-QY-zAL"/>
+                </mask>
                 <mask key="constraints">
+                    <include reference="b38-Ww-uJK"/>
                     <include reference="iTJ-Ze-Dsv"/>
                 </mask>
             </variation>

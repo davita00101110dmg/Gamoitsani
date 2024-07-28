@@ -8,8 +8,9 @@
 
 import UIKit
 import Combine
+import GoogleMobileAds
 
-class BaseViewController<T: Coordinator>: UIViewController {
+class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegate {
     
     private lazy var customBackBarButtonItem: UIBarButtonItem = {
         let button = BackBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
@@ -86,4 +87,21 @@ class BaseViewController<T: Coordinator>: UIViewController {
     }
     
     func setupLocalizedTexts() { }
+    
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        bannerView.frame.origin.y = view.frame.maxY
+        
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { [weak self] in
+            guard let self else { return }
+            bannerView.frame.origin.y = view.frame.maxY - bannerView.frame.size.height - view.safeAreaInsets.bottom
+        }, completion: nil)
+        
+    }
+    
+    func setupBannerView(with bannerView: GADBannerView) {
+        bannerView.adUnitID = AppConstants.AdMob.bannerAdId
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.load(GADRequest())
+    }
 }

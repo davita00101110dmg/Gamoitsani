@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 final class AddWordViewController: BaseViewController<AddWordCoordinator> {
     
     @IBOutlet weak var hintMessageLabel: GMLabel!
     @IBOutlet weak var wordTextField: GMTextField!
     @IBOutlet weak var addWordButton: GMButton!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addHideKeyboardTapGestureRecogniser()
+        setupBannerView(with: bannerView)
     }
     
     override func setupUI() {

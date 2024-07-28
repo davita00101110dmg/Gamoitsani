@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator> {
     @IBOutlet weak var roundsAmountTitle: GMLabel!
@@ -17,6 +18,7 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
     @IBOutlet weak var addTeamButton: GMButton!
     @IBOutlet weak var startGameButton: GMButton!
     @IBOutlet weak var tableView: GMTableView!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     private var snapshot: GameDetailsSnapshot?
     private lazy var dataSource = GameDetailsDataSource(tableView: tableView) { [weak self] tableView, indexPath, team in
@@ -35,6 +37,7 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
         shouldUseCustomBackBarButtonItem = true
         super.viewDidLoad()
         setupTableView()
+        setupBannerView(with: bannerView)
         configureDataSource()
         viewModel?.observeNetworkConnection()
     }

@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 final class GameViewController: BaseViewController<GameCoordinator> {
     
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var mainViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     private var shouldShowInfoView: Bool = false
     private var gameStory = GameStory.shared
@@ -31,12 +33,17 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     private lazy var confettiLayer = CAEmitterLayer()
     private lazy var audioManager = AudioManager()
     
+    private var interstitial: GADInterstitialAd?
+    private var actionAfterAdDismissal: (() -> Void)?
+    
     var viewModel: GameViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupBackButton()
+        setupBannerView(with: bannerView)
+        setupAndLoadInterstitialAdUnit()
         showGameInfoView()
         configureAudioManager()
     }
@@ -54,6 +61,22 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         
         navigationItem.backAction = action
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
+    
+    private func setupAndLoadInterstitialAdUnit() {
+        Task {
+            await loadInterstitialAdUnit()
+        }
+    }
+    
+    private func loadInterstitialAdUnit() async {
+        do {
+            interstitial = try await GADInterstitialAd.load(
+                withAdUnitID: AppConstants.AdMob.interstitialAdId, request: GADRequest())
+            interstitial?.fullScreenContentDelegate = self
+        } catch {
+            dump("Failed to load interstitial ad with error: \(error.localizedDescription)")
+        }
     }
     
     private func configureAudioManager() {
@@ -120,6 +143,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     }
     
     private func toggleInfoView() {
+        // TODO: Add game info enum and control which view to show from it
         shouldShowInfoView.toggle()
         if shouldShowInfoView {
             gameStory.playingSessionCount += 1
@@ -235,17 +259,44 @@ extension GameViewController: GamePlayViewDelegate {
 // MARK: - GameOverDelegate Methods
 extension GameViewController: GameOverViewDelegate {
     func didPressStartOver() {
-        resetGameViewController()
-        toggleGameView()
+        handleActionWithInterstitial { [weak self] in
+            guard let self else { return }
+            self.resetGameViewController()
+            self.toggleGameView()
+        }
     }
     
     func didPressGoBack() {
-        stopConfettiAnimation()
-        coordinator?.pop()
+        handleActionWithInterstitial { [weak self] in
+            guard let self else { return }
+            self.stopConfettiAnimation()
+            self.coordinator?.pop()
+        }
+    }
+    
+    func handleActionWithInterstitial(action: @escaping () -> Void) {
+        guard let interstitial = interstitial else {
+            print("Ad wasn't ready.")
+            action()
+            return
+        }
+
+        actionAfterAdDismissal = action
+        interstitial.present(fromRootViewController: nil)
     }
     
     func didPressShowFullScoreboard() {
         coordinator?.presentGameScoreboard(with: [.large()])
+    }
+}
+
+// MARK: - GADFullScreenContentDelegate
+extension GameViewController: GADFullScreenContentDelegate {
+    func adDidDismissFullScreenContent(_ ad: any GADFullScreenPresentingAd) {
+        print("Ad did dismiss full screen content.")
+        actionAfterAdDismissal?()
+        actionAfterAdDismissal = nil
+        setupAndLoadInterstitialAdUnit()
     }
 }
 

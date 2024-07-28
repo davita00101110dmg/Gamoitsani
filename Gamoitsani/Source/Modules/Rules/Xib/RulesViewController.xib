@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RulesViewController" customModule="Gamoitsani" customModuleProvider="target">
             <connections>
+                <outlet property="bannerView" destination="6q2-vX-kiF" id="E3S-RG-XB8"/>
                 <outlet property="tableView" destination="zgV-fI-Vl3" id="33K-tI-9Ua"/>
                 <outlet property="view" destination="iN0-l3-epB" id="0KC-av-3hg"/>
             </connections>
@@ -21,16 +22,26 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zgV-fI-Vl3">
-                    <rect key="frame" x="16" y="75" width="361" height="727"/>
+                    <rect key="frame" x="16" y="75" width="361" height="661"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6q2-vX-kiF" customClass="GADBannerView">
+                    <rect key="frame" x="36.666666666666657" y="752" width="320" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="1gs-N2-gQW"/>
+                        <constraint firstAttribute="height" constant="50" id="lTk-UD-w3F"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="zgV-fI-Vl3" secondAttribute="bottom" constant="16" id="Zdz-In-bDg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="6q2-vX-kiF" secondAttribute="bottom" constant="16" id="Plj-ny-qgC"/>
+                <constraint firstItem="6q2-vX-kiF" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cdB-Yv-YrT"/>
                 <constraint firstItem="zgV-fI-Vl3" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="dwk-ag-ieT"/>
                 <constraint firstItem="zgV-fI-Vl3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="gTF-gi-S9T"/>
+                <constraint firstItem="6q2-vX-kiF" firstAttribute="top" secondItem="zgV-fI-Vl3" secondAttribute="bottom" constant="16" id="mCy-Fr-QHt"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zgV-fI-Vl3" secondAttribute="trailing" constant="16" id="qZx-nk-4qd"/>
             </constraints>
             <variation key="default">
@@ -53,7 +64,7 @@
                     <include reference="dwk-ag-ieT"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="-416.6015625" y="-10.980966325036603"/>
+            <point key="canvasLocation" x="-417.55725190839695" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>
