@@ -64,7 +64,7 @@ enum AppConstants {
         
         static var interstitialAdId: String {
             do {
-                return try Configuration.value(for: "BANNER_AD_ID")
+                return try Configuration.value(for: "INTERSTITIAL_AD_ID")
             } catch {
                 dump("Error retrieving interstitialAdId: \(error)")
                 return .empty
