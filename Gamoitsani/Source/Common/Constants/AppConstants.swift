@@ -52,6 +52,26 @@ enum AppConstants {
         static let extraWhitespacesAndNewlines = "[\\s\n]+"
     }
     
+    enum AdMob {
+        static var bannerAdId: String {
+            do {
+                return try Configuration.value(for: "BANNER_AD_ID")
+            } catch {
+                dump("Error retrieving bannerAdId: \(error)")
+                return .empty
+            }
+        }
+        
+        static var interstitialAdId: String {
+            do {
+                return try Configuration.value(for: "BANNER_AD_ID")
+            } catch {
+                dump("Error retrieving interstitialAdId: \(error)")
+                return .empty
+            }
+        }
+    }
+    
     enum Firebase {
         static var wordsCollectionName: String {
             do {
