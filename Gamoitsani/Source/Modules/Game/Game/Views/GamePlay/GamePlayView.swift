@@ -128,7 +128,7 @@ extension GamePlayView {
         static let viewCornerRadius: CGFloat = 10
         static let wordLabelFontSizeForPhone: CGFloat = 32
         static let wordLabelFontSizeForPad: CGFloat = 52
-        static let timerLabelFontSizeForPhone: CGFloat = 100
+        static let timerLabelFontSizeForPhone: CGFloat = 96
         static let timerLabelFontSizeForPad: CGFloat = 150
         
         static let correctIncorrectButtonFontSizeForPhone: CGFloat = 30
