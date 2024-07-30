@@ -99,6 +99,10 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
     }
     
     func setupBannerView(with bannerView: GADBannerView) {
+        guard UserDefaults.appLanguage == AppConstants.Language.english.identifier else { 
+            bannerView.removeFromSuperview()
+            return
+        }
         bannerView.adUnitID = AppConstants.AdMob.bannerAdId
         bannerView.rootViewController = self
         bannerView.delegate = self
