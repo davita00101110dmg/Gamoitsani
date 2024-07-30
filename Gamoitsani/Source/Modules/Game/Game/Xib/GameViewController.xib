@@ -58,6 +58,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DOp-si-W3S" secondAttribute="bottom" priority="999" constant="16" id="15f-Na-0DD"/>
                 <constraint firstItem="DOp-si-W3S" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7Ay-7f-xyV"/>
                 <constraint firstItem="ibB-QY-zAL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="AAi-xS-uWh"/>
                 <constraint firstAttribute="bottom" secondItem="DOp-si-W3S" secondAttribute="bottom" constant="24" id="Abf-Tu-pMT"/>
@@ -73,11 +74,12 @@
                     <exclude reference="ibB-QY-zAL"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="b38-Ww-uJK"/>
+                    <exclude reference="15f-Na-0DD"/>
                     <exclude reference="7Ay-7f-xyV"/>
                     <exclude reference="iTJ-Ze-Dsv"/>
                     <exclude reference="Abf-Tu-pMT"/>
                     <exclude reference="lIo-yc-pEW"/>
+                    <exclude reference="b38-Ww-uJK"/>
                 </mask>
             </variation>
             <variation key="heightClass=compact">
@@ -91,8 +93,9 @@
                     <include reference="ibB-QY-zAL"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="b38-Ww-uJK"/>
+                    <include reference="15f-Na-0DD"/>
                     <include reference="7Ay-7f-xyV"/>
+                    <include reference="b38-Ww-uJK"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
@@ -100,8 +103,9 @@
                     <include reference="ibB-QY-zAL"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="b38-Ww-uJK"/>
+                    <include reference="15f-Na-0DD"/>
                     <include reference="iTJ-Ze-Dsv"/>
+                    <include reference="b38-Ww-uJK"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="-415" y="-10"/>
