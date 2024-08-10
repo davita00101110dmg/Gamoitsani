@@ -17,7 +17,7 @@ final class FirebaseManager {
     private lazy var suggestionsRef = db.collection(AppConstants.Firebase.suggestedWordsCollectionName)
     
     private var wordField: String {
-        UserDefaults.appLanguage == AppConstants.Language.georgian.identifier ? AppConstants.Firebase.wordKa : AppConstants.Firebase.wordEn
+        AppConstants.isAppInEnglish ? AppConstants.Firebase.wordEn : AppConstants.Firebase.wordKa
     }
 
     private init() { }

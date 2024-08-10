@@ -99,7 +99,7 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
     }
     
     func setupBannerView(with bannerView: GADBannerView) {
-        guard UserDefaults.appLanguage == AppConstants.Language.english.identifier else { 
+        guard AppConstants.isAppInEnglish else { 
             bannerView.removeFromSuperview()
             return
         }

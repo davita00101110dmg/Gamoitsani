@@ -33,7 +33,7 @@ final class GamePlayView: UIView {
     private var viewModel: GamePlayViewModel?
     
     private var shouldShowGeorgianWords: Bool {
-        UserDefaults.appLanguage == AppConstants.Language.georgian.identifier
+        !AppConstants.isAppInEnglish
     }
     
     override func awakeFromNib() {

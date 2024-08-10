@@ -64,7 +64,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
     }
     
     private func setupAndLoadInterstitialAdUnit() {
-        guard UserDefaults.appLanguage == AppConstants.Language.english.identifier else { return }
+        guard AppConstants.isAppInEnglish else { return }
         
         Task {
             await loadInterstitialAdUnit()
