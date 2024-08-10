@@ -27,7 +27,6 @@
 		FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */; };
 		FF4D9D352BD698630046819D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF4D9D342BD698630046819D /* Assets.xcassets */; };
 		FF4D9D382BD698630046819D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF4D9D362BD698630046819D /* LaunchScreen.storyboard */; };
-		FF4D9D432BD698630046819D /* GameStoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D422BD698630046819D /* GameStoryTests.swift */; };
 		FF4D9D4D2BD698630046819D /* GamoitsaniUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D4C2BD698630046819D /* GamoitsaniUITests.swift */; };
 		FF4D9D4F2BD698630046819D /* GamoitsaniUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D4E2BD698630046819D /* GamoitsaniUITestsLaunchTests.swift */; };
 		FF4D9D782BD69BA20046819D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D772BD69BA20046819D /* HomeViewController.swift */; };
@@ -190,7 +189,6 @@
 		FF4D9D342BD698630046819D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF4D9D392BD698630046819D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = ../Gamoitsani/SupportingFiles/Info/Info.plist; sourceTree = "<group>"; };
 		FF4D9D3E2BD698630046819D /* GamoitsaniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamoitsaniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF4D9D422BD698630046819D /* GameStoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStoryTests.swift; sourceTree = "<group>"; };
 		FF4D9D482BD698630046819D /* GamoitsaniUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamoitsaniUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4D9D4C2BD698630046819D /* GamoitsaniUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniUITests.swift; sourceTree = "<group>"; };
 		FF4D9D4E2BD698630046819D /* GamoitsaniUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -400,7 +398,6 @@
 		FF4D9D412BD698630046819D /* GamoitsaniTests */ = {
 			isa = PBXGroup;
 			children = (
-				FF4D9D422BD698630046819D /* GameStoryTests.swift */,
 			);
 			path = GamoitsaniTests;
 			sourceTree = "<group>";
@@ -1018,6 +1015,7 @@
 					};
 					FF4D9D3D2BD698630046819D = {
 						CreatedOnToolsVersion = 15.0.1;
+						LastSwiftMigration = 1540;
 						TestTargetID = FF4D9D242BD698620046819D;
 					};
 					FF4D9D472BD698630046819D = {
@@ -1318,7 +1316,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF4D9D432BD698630046819D /* GameStoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1564,6 +1561,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V9DL6T6A4K;
@@ -1573,6 +1571,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = davitikhvedelidze.GamoitsaniTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gamoitsani.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gamoitsani";
@@ -1585,6 +1584,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V9DL6T6A4K;
