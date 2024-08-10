@@ -27,7 +27,7 @@
 		FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */; };
 		FF4D9D352BD698630046819D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF4D9D342BD698630046819D /* Assets.xcassets */; };
 		FF4D9D382BD698630046819D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF4D9D362BD698630046819D /* LaunchScreen.storyboard */; };
-		FF4D9D432BD698630046819D /* GamoitsaniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D422BD698630046819D /* GamoitsaniTests.swift */; };
+		FF4D9D432BD698630046819D /* GameStoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D422BD698630046819D /* GameStoryTests.swift */; };
 		FF4D9D4D2BD698630046819D /* GamoitsaniUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D4C2BD698630046819D /* GamoitsaniUITests.swift */; };
 		FF4D9D4F2BD698630046819D /* GamoitsaniUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D4E2BD698630046819D /* GamoitsaniUITestsLaunchTests.swift */; };
 		FF4D9D782BD69BA20046819D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D772BD69BA20046819D /* HomeViewController.swift */; };
@@ -67,6 +67,20 @@
 		FF7F1D9B2BE7D25300872554 /* GamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D9A2BE7D25300872554 /* GamePlayViewModel.swift */; };
 		FF7F1D9D2BE92F5000872554 /* GameStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D9C2BE92F5000872554 /* GameStory.swift */; };
 		FF7F1DA32BE93DF900872554 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = FF7F1DA22BE93DF900872554 /* Collections */; };
+		FF8675322C67720F0089B52B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675312C67720F0089B52B /* SettingsViewController.swift */; };
+		FF8675382C6772230089B52B /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675372C6772230089B52B /* SettingsCoordinator.swift */; };
+		FF86753F2C6772F70089B52B /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF86753E2C6772F70089B52B /* SettingsViewController.xib */; };
+		FF8675442C67758E0089B52B /* SettingsChangeLanguageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8675432C67758E0089B52B /* SettingsChangeLanguageCell.xib */; };
+		FF8675452C67758E0089B52B /* SettingsChangeLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675422C67758E0089B52B /* SettingsChangeLanguageCell.swift */; };
+		FF8675612C6798680089B52B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675602C6798680089B52B /* SettingsView.swift */; };
+		FF8675662C67A7B40089B52B /* SettingsLanguagePickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675652C67A7B40089B52B /* SettingsLanguagePickerRow.swift */; };
+		FF8675682C67A8160089B52B /* GMTableViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675672C67A8160089B52B /* GMTableViewButton.swift */; };
+		FF86756A2C67DB270089B52B /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675692C67DB270089B52B /* SettingsViewModel.swift */; };
+		FF86756D2C67E0DA0089B52B /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF86756C2C67E0DA0089B52B /* ActivityView.swift */; };
+		FF86756F2C67E71E0089B52B /* GMTappableButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF86756E2C67E71E0089B52B /* GMTappableButtonStyle.swift */; };
+		FF8675732C6808FE0089B52B /* Gamoitsani.storekit in Resources */ = {isa = PBXBuildFile; fileRef = FF8675722C6808FE0089B52B /* Gamoitsani.storekit */; };
+		FF8675772C680E1D0089B52B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8675762C680E1D0089B52B /* StoreKit.framework */; };
+		FF86757B2C681A780089B52B /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF86757A2C681A780089B52B /* SettingsModels.swift */; };
 		FF8EA6FA2BEAB26300F098B8 /* GameDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA6F92BEAB26300F098B8 /* GameDetailsDataSource.swift */; };
 		FF8EA6FC2BEBB46D00F098B8 /* GameScoreboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA6FB2BEBB46D00F098B8 /* GameScoreboardViewController.xib */; };
 		FF8EA7072BEBB9F600F098B8 /* GameScoreboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7062BEBB9F600F098B8 /* GameScoreboardViewController.swift */; };
@@ -176,7 +190,7 @@
 		FF4D9D342BD698630046819D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF4D9D392BD698630046819D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = ../Gamoitsani/SupportingFiles/Info/Info.plist; sourceTree = "<group>"; };
 		FF4D9D3E2BD698630046819D /* GamoitsaniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamoitsaniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF4D9D422BD698630046819D /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
+		FF4D9D422BD698630046819D /* GameStoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStoryTests.swift; sourceTree = "<group>"; };
 		FF4D9D482BD698630046819D /* GamoitsaniUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamoitsaniUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4D9D4C2BD698630046819D /* GamoitsaniUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniUITests.swift; sourceTree = "<group>"; };
 		FF4D9D4E2BD698630046819D /* GamoitsaniUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -214,6 +228,20 @@
 		FF7F1D952BE7B9D800872554 /* GameInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewModel.swift; sourceTree = "<group>"; };
 		FF7F1D9A2BE7D25300872554 /* GamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayViewModel.swift; sourceTree = "<group>"; };
 		FF7F1D9C2BE92F5000872554 /* GameStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStory.swift; sourceTree = "<group>"; };
+		FF8675312C67720F0089B52B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FF8675372C6772230089B52B /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		FF86753E2C6772F70089B52B /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = Gamoitsani/Source/Modules/Home/Xib/SettingsViewController.xib; sourceTree = SOURCE_ROOT; };
+		FF8675422C67758E0089B52B /* SettingsChangeLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsChangeLanguageCell.swift; sourceTree = "<group>"; };
+		FF8675432C67758E0089B52B /* SettingsChangeLanguageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsChangeLanguageCell.xib; sourceTree = "<group>"; };
+		FF8675602C6798680089B52B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		FF8675652C67A7B40089B52B /* SettingsLanguagePickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguagePickerRow.swift; sourceTree = "<group>"; };
+		FF8675672C67A8160089B52B /* GMTableViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTableViewButton.swift; sourceTree = "<group>"; };
+		FF8675692C67DB270089B52B /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		FF86756C2C67E0DA0089B52B /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		FF86756E2C67E71E0089B52B /* GMTappableButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTappableButtonStyle.swift; sourceTree = "<group>"; };
+		FF8675722C6808FE0089B52B /* Gamoitsani.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; name = Gamoitsani.storekit; path = Gamoitsani/Resources/Gamoitsani.storekit; sourceTree = SOURCE_ROOT; };
+		FF8675762C680E1D0089B52B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		FF86757A2C681A780089B52B /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 		FF8929C12BD6FC52000C0B9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF8EA6F92BEAB26300F098B8 /* GameDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsDataSource.swift; sourceTree = "<group>"; };
 		FF8EA6FB2BEBB46D00F098B8 /* GameScoreboardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameScoreboardViewController.xib; sourceTree = "<group>"; };
@@ -274,6 +302,7 @@
 			files = (
 				FF7F1DA32BE93DF900872554 /* Collections in Frameworks */,
 				FF4FA9C52BEEB6FD00F38F98 /* FirebaseFirestore in Frameworks */,
+				FF8675772C680E1D0089B52B /* StoreKit.framework in Frameworks */,
 				FF425BED2C526262003068F0 /* Pods_Gamoitsani.framework in Frameworks */,
 				FF4FA9C72BEEB6FD00F38F98 /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -371,7 +400,7 @@
 		FF4D9D412BD698630046819D /* GamoitsaniTests */ = {
 			isa = PBXGroup;
 			children = (
-				FF4D9D422BD698630046819D /* GamoitsaniTests.swift */,
+				FF4D9D422BD698630046819D /* GameStoryTests.swift */,
 			);
 			path = GamoitsaniTests;
 			sourceTree = "<group>";
@@ -407,6 +436,7 @@
 				FF4FA9CF2BEFE9A800F38F98 /* Swiftgen */,
 				FF4D9D342BD698630046819D /* Assets.xcassets */,
 				FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */,
+				FF8675722C6808FE0089B52B /* Gamoitsani.storekit */,
 				FF8929C12BD6FC52000C0B9B /* Info.plist */,
 				FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */,
 			);
@@ -434,6 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				FF4D9D632BD69AFF0046819D /* Home */,
+				FF8675302C6771F40089B52B /* Settings */,
 				FFFB4D392BD914DE00CDDCB4 /* Rules */,
 				FFFB4D472BD937D900CDDCB4 /* Game */,
 				FF4FA9B92BED90B900F38F98 /* AddWord */,
@@ -472,6 +503,7 @@
 		FF4D9D972BD6F4630046819D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FF86756B2C67E0D30089B52B /* Views */,
 				FF7F1DA42BE9749500872554 /* Models */,
 				FFFB4D2E2BD861E700CDDCB4 /* Components */,
 				FFFB4CD42BD7CA6F00CDDCB4 /* Constants */,
@@ -586,6 +618,84 @@
 			path = Game;
 			sourceTree = "<group>";
 		};
+		FF8675302C6771F40089B52B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FF8675622C6799990089B52B /* Views */,
+				FF8675392C6772250089B52B /* Xib */,
+				FF8675402C6775660089B52B /* Cell */,
+				FF8675312C67720F0089B52B /* SettingsViewController.swift */,
+				FF8675692C67DB270089B52B /* SettingsViewModel.swift */,
+				FF86757A2C681A780089B52B /* SettingsModels.swift */,
+				FF8675372C6772230089B52B /* SettingsCoordinator.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		FF8675392C6772250089B52B /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				FF86753E2C6772F70089B52B /* SettingsViewController.xib */,
+			);
+			path = Xib;
+			sourceTree = "<group>";
+		};
+		FF8675402C6775660089B52B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FF8675412C67756F0089B52B /* SettingsChangeLanguageCell */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		FF8675412C67756F0089B52B /* SettingsChangeLanguageCell */ = {
+			isa = PBXGroup;
+			children = (
+				FF8675422C67758E0089B52B /* SettingsChangeLanguageCell.swift */,
+				FF8675432C67758E0089B52B /* SettingsChangeLanguageCell.xib */,
+			);
+			path = SettingsChangeLanguageCell;
+			sourceTree = "<group>";
+		};
+		FF8675622C6799990089B52B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FF8675602C6798680089B52B /* SettingsView.swift */,
+				FF8675652C67A7B40089B52B /* SettingsLanguagePickerRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FF86756B2C67E0D30089B52B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FF86756C2C67E0DA0089B52B /* ActivityView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FF8675702C67E9020089B52B /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				FF8675672C67A8160089B52B /* GMTableViewButton.swift */,
+				FF86756E2C67E71E0089B52B /* GMTappableButtonStyle.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		FF8675712C67E9060089B52B /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				FFFB4D2F2BD861F300CDDCB4 /* GMButton.swift */,
+				FFF65CA52BE61746008E0352 /* GMTableView.swift */,
+				FF7F1D842BE7A8F200872554 /* GMLabel.swift */,
+				FF4FA9C12BED96E800F38F98 /* GMTextField.swift */,
+				FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */,
+				FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		FF8EA6F82BEAB25000F098B8 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,6 +772,7 @@
 		FFF65CD02BE6B2F3008E0352 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FF8675762C680E1D0089B52B /* StoreKit.framework */,
 				4F4D00D5260D7D4ECEB797C7 /* Pods_Gamoitsani.framework */,
 				B6F7001D47612CB9E8EDBFC1 /* Pods_Gamoitsani_GamoitsaniUITests.framework */,
 				89809CEB45EAA853D37D6434 /* Pods_GamoitsaniTests.framework */,
@@ -738,12 +849,8 @@
 		FFFB4D2E2BD861E700CDDCB4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				FFFB4D2F2BD861F300CDDCB4 /* GMButton.swift */,
-				FFF65CA52BE61746008E0352 /* GMTableView.swift */,
-				FF7F1D842BE7A8F200872554 /* GMLabel.swift */,
-				FF4FA9C12BED96E800F38F98 /* GMTextField.swift */,
-				FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */,
-				FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */,
+				FF8675712C67E9060089B52B /* UIKit */,
+				FF8675702C67E9020089B52B /* SwiftUI */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -958,10 +1065,12 @@
 				FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */,
 				FF4FA9BC2BED916700F38F98 /* AddWordViewController.xib in Resources */,
 				FF7CA1672C02591600E3BEC4 /* GameOverView.xib in Resources */,
+				FF8675442C67758E0089B52B /* SettingsChangeLanguageCell.xib in Resources */,
 				FFFB4D512BD9398600CDDCB4 /* GameDetailsViewController.xib in Resources */,
 				FFFB4D072BD8393A00CDDCB4 /* Localizable.strings in Resources */,
 				FF1111892C4FD17500C44F62 /* correct.wav in Resources */,
 				FF7F1D882BE7ADEB00872554 /* GameInfoView.xib in Resources */,
+				FF86753F2C6772F70089B52B /* SettingsViewController.xib in Resources */,
 				FF4D9D352BD698630046819D /* Assets.xcassets in Resources */,
 				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
 				FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */,
@@ -969,6 +1078,7 @@
 				FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */,
 				FF7F1D822BE7A2F700872554 /* GameViewController.xib in Resources */,
 				FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */,
+				FF8675732C6808FE0089B52B /* Gamoitsani.storekit in Resources */,
 				FFFB4CD22BD701E700CDDCB4 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1117,7 +1227,9 @@
 			files = (
 				FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */,
 				FF8EA70D2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift in Sources */,
+				FF8675322C67720F0089B52B /* SettingsViewController.swift in Sources */,
 				FF7CA1602C02000900E3BEC4 /* UIApplicationExtensions.swift in Sources */,
+				FF8675612C6798680089B52B /* SettingsView.swift in Sources */,
 				FF7CA15E2C01FCB800E3BEC4 /* StoreReviewManager.swift in Sources */,
 				FFFB4D4C2BD9392D00CDDCB4 /* GameDetailsCoordinator.swift in Sources */,
 				FFF65CC72BE6B0C4008E0352 /* Assets.swift in Sources */,
@@ -1137,12 +1249,17 @@
 				FFF65CB02BE61DEA008E0352 /* UITableViewExtensions.swift in Sources */,
 				FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */,
 				FF7F1D9B2BE7D25300872554 /* GamePlayViewModel.swift in Sources */,
+				FF86756A2C67DB270089B52B /* SettingsViewModel.swift in Sources */,
 				FF7F1D7E2BE7A2F700872554 /* GameCoordinator.swift in Sources */,
+				FF8675382C6772230089B52B /* SettingsCoordinator.swift in Sources */,
+				FF8675452C67758E0089B52B /* SettingsChangeLanguageCell.swift in Sources */,
 				FFFB4D462BD928B400CDDCB4 /* UIFontExtensions.swift in Sources */,
 				FF4FA9C02BED917A00F38F98 /* AddWordCoordinator.swift in Sources */,
+				FF8675662C67A7B40089B52B /* SettingsLanguagePickerRow.swift in Sources */,
 				FF7F1D852BE7A8F200872554 /* GMLabel.swift in Sources */,
 				FF7F1D9D2BE92F5000872554 /* GameStory.swift in Sources */,
 				FFFB4D342BD90FD900CDDCB4 /* UserDefaultsExtension.swift in Sources */,
+				FF86756F2C67E71E0089B52B /* GMTappableButtonStyle.swift in Sources */,
 				FF7CA1652C02591100E3BEC4 /* GameOverViewModel.swift in Sources */,
 				FF7F1D8E2BE7AE2100872554 /* GameInfoView.swift in Sources */,
 				FF8EA7092BEBBA1900F098B8 /* GameScoreboardViewModel.swift in Sources */,
@@ -1151,13 +1268,16 @@
 				FFFB4D3F2BD9155100CDDCB4 /* RulesCoordinator.swift in Sources */,
 				FF8EA7112BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift in Sources */,
 				FF1E92BA2BF91C8C00127FDE /* GMBackBarButtonItem.swift in Sources */,
+				FF86756D2C67E0DA0089B52B /* ActivityView.swift in Sources */,
 				FF7F1D7F2BE7A2F700872554 /* GameModels.swift in Sources */,
 				FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */,
 				FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */,
 				FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */,
+				FF86757B2C681A780089B52B /* SettingsModels.swift in Sources */,
 				FF4FA9CC2BEF875B00F38F98 /* Configuration.swift in Sources */,
 				FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */,
 				FF7F1D962BE7B9D800872554 /* GameInfoViewModel.swift in Sources */,
+				FF8675682C67A8160089B52B /* GMTableViewButton.swift in Sources */,
 				FFFB4D362BD9128800CDDCB4 /* NotificationExtensons.swift in Sources */,
 				FF4FA9D12BEFF30900F38F98 /* AddWordViewModel.swift in Sources */,
 				FFFB4CD72BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift in Sources */,
@@ -1198,7 +1318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF4D9D432BD698630046819D /* GamoitsaniTests.swift in Sources */,
+				FF4D9D432BD698630046819D /* GameStoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
