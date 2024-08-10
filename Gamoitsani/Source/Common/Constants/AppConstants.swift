@@ -11,6 +11,12 @@ import Foundation
 enum AppConstants {
     
     static let maxWordsToSaveInCoreData = 20000
+    static let appStoreLink = "https://apps.apple.com/ge/app/gamoitsani/id6502697351"
+    static let reviewUrlLink = "itms-apps://itunes.apple.com/en/app/id6502697351?action=write-review&mt=8"
+    
+    static var isAppInEnglish: Bool {
+        AppConstants.Language.english.identifier == UserDefaults.appLanguage
+    }
     
     static let randomWords = [
         "apple", "banana", "orange", "grape", "pineapple",
