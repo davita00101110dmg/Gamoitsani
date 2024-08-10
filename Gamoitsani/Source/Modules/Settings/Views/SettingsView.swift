@@ -19,7 +19,7 @@ struct SettingsView: View {
             VStack(spacing: 12) {
                 Spacer()
                 Text(L10n.Screen.Settings.title.localized())
-                    .font(.custom(F.Mersad.bold, size: 24))
+                    .font(.custom(F.Mersad.semiBold, size: 18))
                     .foregroundStyle(.white)
                 
                 List {
