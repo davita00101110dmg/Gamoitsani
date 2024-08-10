@@ -31,21 +31,7 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
     }
     
     private func setupRightBarButtonItem() {
-        let menuHandler: UIActionHandler = { action in
-            
-            let languageIdentifier = action.title == "ქართული" ? AppConstants.Language.georgian.identifier : AppConstants.Language.english.identifier
-            
-            UserDefaults.appLanguage = languageIdentifier
-            
-            NotificationCenter.default.post(name: .languageDidChange, object: nil)
-        }
-        
-        let barButtonMenu = UIMenu(title: "Language", children: [
-            UIAction(title: "ქართული", handler: menuHandler),
-            UIAction(title: "English", handler: menuHandler)
-        ])
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "globe"), primaryAction: nil, menu: barButtonMenu)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(rightBarButtonClicked))
     }
 }
  
@@ -61,6 +47,10 @@ extension HomeViewController {
     
     @IBAction func addWordButtonClicked(_ sender: Any) {
         coordinator?.navigateToAddWord()
+    }
+    
+    @objc private func rightBarButtonClicked() {
+        coordinator?.presentSettings()
     }
 }
 

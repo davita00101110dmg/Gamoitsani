@@ -41,4 +41,10 @@ final class HomeCoordinator: BaseCoordinator {
         let addWordCoordinator = AddWordCoordinator(navigationController: navigationController)
         coordinate(to: addWordCoordinator)
     }
+    
+    func presentSettings() {
+        guard let navigationController else { return }
+        let settingsCoordinator = SettingsCoordinator(navigationController: navigationController)
+        coordinate(to: settingsCoordinator)
+    }
 }
