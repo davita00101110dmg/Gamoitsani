@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class GradientView: UIView {
     
@@ -36,5 +37,15 @@ final class GradientView: UIView {
     
     override class var layerClass: AnyClass {
         CAGradientLayer.self
+    }
+}
+
+struct GradientBackground: UIViewRepresentable {
+    func makeUIView(context: Context) -> GradientView {
+        return GradientView() 
+    }
+
+    func updateUIView(_ uiView: GradientView, context: Context) {
+        // No updates needed in this case
     }
 }
