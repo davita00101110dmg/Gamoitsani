@@ -236,6 +236,8 @@
 	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>Remove ads</key>
+	<string>davitikhvedelidze.Gamoitsani.removeAds</string>
 	<key>WORDS_COLLECTION_NAME</key>
 	<string>${WORDS_COLLECTION_NAME}</string>
 </dict>
