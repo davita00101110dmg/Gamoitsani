@@ -29,6 +29,16 @@
 "screen.home.add_word_button.title" = "Add word";
 "screen.home.change_language.title" = "Change language";
 
+// MARK: - Settings
+"screen.settings.title" = "Settings";
+"screen.settings.language" = "Language";
+"screen.settings.remove_ads" = "Remove ads";
+"screen.settings.feedback" = "Help & feedback";
+"screen.settings.share_app" = "Share this app";
+"screen.settings.rate_app" = "Rate this app";
+"screen.settings.can_not_write_review.title" = "Cannot open AppStore";
+"screen.settings.can_not_write_review.message" = "Please select our app from the AppStore and write a review for us. Thanks!!";
+
 // MARK: - Rules
 "screen.rules.title" = "Rules";
 "screen.rules.rule2" = "When explaining the word, it is forbidden to use a single word";

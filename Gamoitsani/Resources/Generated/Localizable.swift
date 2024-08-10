@@ -212,6 +212,28 @@ public enum L10n {
         /// Rules
         public static var title: String { L10n.tr("Localizable", "screen.rules.title") }
       }
+
+      public enum Settings {
+        /// Help & feedback
+        public static var feedback: String { L10n.tr("Localizable", "screen.settings.feedback") }
+        /// Language
+        public static var language: String { L10n.tr("Localizable", "screen.settings.language") }
+        /// Rate this app
+        public static var rateApp: String { L10n.tr("Localizable", "screen.settings.rate_app") }
+        /// Remove ads
+        public static var removeAds: String { L10n.tr("Localizable", "screen.settings.remove_ads") }
+        /// Share this app
+        public static var shareApp: String { L10n.tr("Localizable", "screen.settings.share_app") }
+        /// Settings
+        public static var title: String { L10n.tr("Localizable", "screen.settings.title") }
+
+        public enum CanNotWriteReview {
+          /// Please select our app from the AppStore and write a review for us. Thanks!!
+          public static var message: String { L10n.tr("Localizable", "screen.settings.can_not_write_review.message") }
+          /// Cannot open AppStore
+          public static var title: String { L10n.tr("Localizable", "screen.settings.can_not_write_review.title") }
+        }
+      }
     }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name

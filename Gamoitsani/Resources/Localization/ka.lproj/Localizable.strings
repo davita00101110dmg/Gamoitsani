@@ -29,6 +29,16 @@
 "screen.home.add_word_button.title" = "სიტყვის დამატება";
 "screen.home.change_language.title" = "ენის შეცვლა";
 
+// MARK: - Settings
+"screen.settings.title" = "პარამეტრები";
+"screen.settings.language" = "ენა";
+"screen.settings.remove_ads" = "გააქრე რეკლამები";
+"screen.settings.feedback" = "დახმარება & უკუკავშირი";
+"screen.settings.share_app" = "გააზიარე აპლიკაცია";
+"screen.settings.rate_app" = "შეაფასე აპლიკაცია";
+"screen.settings.can_not_write_review.title" = "App Store ვერ გაიხსნა";
+"screen.settings.can_not_write_review.message" = "გთხოვთ, იპოვეთ ჩვენი აპლიკაცია App Store-ზე და დაგვიწერეთ შეფასება. მადლობა!";
+
 // MARK: - Rules
 "screen.rules.title" = "წესები";
 "screen.rules.rule2" = "სიტყვის ახსნისას აკრძალულია ერთფუძიანი სიტყვის გამოყენება";
