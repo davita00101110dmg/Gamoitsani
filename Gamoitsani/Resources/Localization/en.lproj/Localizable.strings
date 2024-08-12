@@ -33,6 +33,7 @@
 "screen.settings.title" = "Settings";
 "screen.settings.language" = "Language";
 "screen.settings.remove_ads" = "Remove ads";
+"screen.settings.restore_purchase" = "Restore purchase";
 "screen.settings.feedback" = "Help & feedback";
 "screen.settings.share_app" = "Share this app";
 "screen.settings.rate_app" = "Rate this app";

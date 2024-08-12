@@ -33,6 +33,7 @@
 "screen.settings.title" = "პარამეტრები";
 "screen.settings.language" = "ენა";
 "screen.settings.remove_ads" = "გააქრე რეკლამები";
+"screen.settings.restore_purchase" = "აღადგინე ნაყიდი კონტენტი";
 "screen.settings.feedback" = "დახმარება & უკუკავშირი";
 "screen.settings.share_app" = "გააზიარე აპლიკაცია";
 "screen.settings.rate_app" = "შეაფასე აპლიკაცია";

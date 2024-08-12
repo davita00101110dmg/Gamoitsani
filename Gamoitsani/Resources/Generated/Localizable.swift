@@ -222,6 +222,8 @@ public enum L10n {
         public static var rateApp: String { L10n.tr("Localizable", "screen.settings.rate_app") }
         /// Remove ads
         public static var removeAds: String { L10n.tr("Localizable", "screen.settings.remove_ads") }
+        /// Restore purchase
+        public static var restorePurchase: String { L10n.tr("Localizable", "screen.settings.restore_purchase") }
         /// Share this app
         public static var shareApp: String { L10n.tr("Localizable", "screen.settings.share_app") }
         /// Settings
