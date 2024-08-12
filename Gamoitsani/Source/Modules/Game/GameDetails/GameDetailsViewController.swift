@@ -20,7 +20,6 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
     @IBOutlet weak var tableView: GMTableView!
     @IBOutlet weak var bannerView: GADBannerView!
     
-    private var snapshot: GameDetailsSnapshot?
     private lazy var dataSource = GameDetailsDataSource(tableView: tableView) { [weak self] tableView, indexPath, team in
         guard let self else { return.init() }
         
@@ -36,10 +35,10 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
     override func viewDidLoad() {
         shouldUseCustomBackBarButtonItem = true
         super.viewDidLoad()
+        viewModel?.delegate = self
+        viewModel?.observeNetworkConnection()
         setupTableView()
         setupBannerView(with: bannerView)
-        configureDataSource()
-        viewModel?.observeNetworkConnection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,23 +86,6 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
         tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
         tableView.alwaysBounceVertical = true
-    }
-    
-    private func configureDataSource() {
-        viewModel?.teamsPublished
-            .sink { [weak self] items in
-                guard let self else { return }
-                
-                self.snapshot = GameDetailsSnapshot()
-                self.snapshot?.appendSections([0])
-                self.snapshot?.appendItems(items)
-                self.dataSource.defaultRowAnimation = .automatic
-                
-                if let snapshot {
-                    self.dataSource.apply(snapshot, animatingDifferences: true)
-                }
-                
-            }.store(in: &subscribers)
     }
     
     private func presentAddTeamAlert() {
@@ -200,6 +182,14 @@ extension GameDetailsViewController {
     private func startGame() {
         updateGameStory()
         coordinator?.navigateToGame()
+    }
+}
+
+// MARK: - GameDetailsViewModelDelegate Methods
+extension GameDetailsViewController: GameDetailsViewModelDelegate {
+    func applySnapshot(_ snapshot: GameDetailsSnapshot, animatingDifferences: Bool) {
+        dataSource.defaultRowAnimation = .automatic
+        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 }
 

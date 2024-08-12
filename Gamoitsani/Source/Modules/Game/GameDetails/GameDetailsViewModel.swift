@@ -11,7 +11,15 @@ import Combine
 import Collections
 import Network
 
-final class GameDetailsViewModel {
+protocol GameDetailsViewModelDelegate: AnyObject {
+    func applySnapshot(_ snapshot: GameDetailsSnapshot, animatingDifferences: Bool)
+}
+
+final class GameDetailsViewModel: ObservableObject {
+    
+    init() {
+        configureDataSource()
+    }
     
     deinit {
         networkMonitor.cancel()
@@ -21,6 +29,26 @@ final class GameDetailsViewModel {
     private var shouldFetchWordsFromServer = true
     
     @Published private var teams: [GameDetailsTeamCellItem] = []
+    private var subscribers = Set<AnyCancellable>()
+    private var snapshot: GameDetailsSnapshot?
+    
+    weak var delegate: GameDetailsViewModelDelegate?
+    
+    private func configureDataSource() {
+        teamsPublished
+            .sink { [weak self] items in
+                guard let self else { return }
+                
+                self.snapshot = GameDetailsSnapshot()
+                self.snapshot?.appendSections([0])
+                self.snapshot?.appendItems(items)
+                
+                if let snapshot {
+                    self.delegate?.applySnapshot(snapshot, animatingDifferences: true)
+                }
+                
+            }.store(in: &subscribers)
+    }
     
     var teamsPublished: AnyPublisher<[GameDetailsTeamCellItem], Never> {
         $teams.eraseToAnyPublisher()
