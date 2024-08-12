@@ -94,8 +94,8 @@
 		FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */; };
 		FFBFB0312C68CC3A00A877D7 /* GamoitsaniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */; };
 		FFD386D62C6A500A0027A2C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFD386D12C6A500A0027A2C4 /* LaunchScreen.storyboard */; };
-		FFD387042C6A5C410027A2C4 /* Launch Screen iPhone Landscape@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD387022C6A5C3C0027A2C4 /* Launch Screen iPhone Landscape@3x.png */; };
-		FFD387052C6A5C410027A2C4 /* Launch Screen iPhone Portrait@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD387032C6A5C410027A2C4 /* Launch Screen iPhone Portrait@3x.png */; };
+		FFD387042C6A5C410027A2C4 /* LaunchScreenLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD387022C6A5C3C0027A2C4 /* LaunchScreenLandscape.png */; };
+		FFD387052C6A5C410027A2C4 /* LaunchScreenPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD387032C6A5C410027A2C4 /* LaunchScreenPortrait.png */; };
 		FFF65C9D2BE554B9008E0352 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */; };
 		FFF65C9F2BE555C2008E0352 /* GameDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9E2BE555C2008E0352 /* GameDetailsViewModel.swift */; };
 		FFF65CA12BE555CC008E0352 /* GameDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CA02BE555CC008E0352 /* GameDetailsModel.swift */; };
@@ -259,8 +259,8 @@
 		FF91B8D82BF785B200EB85F1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
 		FFD386D12C6A500A0027A2C4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FFD387022C6A5C3C0027A2C4 /* Launch Screen iPhone Landscape@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Launch Screen iPhone Landscape@3x.png"; sourceTree = "<group>"; };
-		FFD387032C6A5C410027A2C4 /* Launch Screen iPhone Portrait@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Launch Screen iPhone Portrait@3x.png"; sourceTree = "<group>"; };
+		FFD387022C6A5C3C0027A2C4 /* LaunchScreenLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenLandscape.png; sourceTree = "<group>"; };
+		FFD387032C6A5C410027A2C4 /* LaunchScreenPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenPortrait.png; sourceTree = "<group>"; };
 		FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		FFF65C9E2BE555C2008E0352 /* GameDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsViewModel.swift; sourceTree = "<group>"; };
 		FFF65CA02BE555CC008E0352 /* GameDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsModel.swift; sourceTree = "<group>"; };
@@ -749,8 +749,8 @@
 		FFD387012C6A5A2E0027A2C4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				FFD387022C6A5C3C0027A2C4 /* Launch Screen iPhone Landscape@3x.png */,
-				FFD387032C6A5C410027A2C4 /* Launch Screen iPhone Portrait@3x.png */,
+				FFD387022C6A5C3C0027A2C4 /* LaunchScreenLandscape.png */,
+				FFD387032C6A5C410027A2C4 /* LaunchScreenPortrait.png */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -1087,11 +1087,11 @@
 				FF7F1D882BE7ADEB00872554 /* GameInfoView.xib in Resources */,
 				FF86753F2C6772F70089B52B /* SettingsViewController.xib in Resources */,
 				FF4D9D352BD698630046819D /* Assets.xcassets in Resources */,
-				FFD387052C6A5C410027A2C4 /* Launch Screen iPhone Portrait@3x.png in Resources */,
+				FFD387052C6A5C410027A2C4 /* LaunchScreenPortrait.png in Resources */,
 				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
 				FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */,
 				FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */,
-				FFD387042C6A5C410027A2C4 /* Launch Screen iPhone Landscape@3x.png in Resources */,
+				FFD387042C6A5C410027A2C4 /* LaunchScreenLandscape.png in Resources */,
 				FF7F1D822BE7A2F700872554 /* GameViewController.xib in Resources */,
 				FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */,
 				FF8675732C6808FE0089B52B /* Gamoitsani.storekit in Resources */,
