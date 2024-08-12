@@ -36,6 +36,8 @@ final class AppCoordinator: BaseCoordinator {
     }
     
     override func start() {
+        guard let window = navigationController.view.window else { return }
+        navigationController.viewControllers.removeAll()
         let homeCoordinator = HomeCoordinator(navigationController: navigationController)
         coordinate(to: homeCoordinator)
     }

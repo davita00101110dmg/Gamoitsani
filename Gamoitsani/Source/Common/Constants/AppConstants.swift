@@ -10,6 +10,8 @@ import Foundation
 
 enum AppConstants {
     
+    static let launchScreen = "LaunchScreen"
+    
     static let maxWordsToSaveInCoreData = 20000
     static let appStoreLink = "https://apps.apple.com/ge/app/gamoitsani/id6502697351"
     static let reviewUrlLink = "itms-apps://itunes.apple.com/en/app/id6502697351?action=write-review&mt=8"
