@@ -99,7 +99,7 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
     }
     
     func setupBannerView(with bannerView: GADBannerView) {
-        guard AppConstants.isAppInEnglish else { 
+        guard AppConstants.shouldShowAdsToUser else { 
             bannerView.removeFromSuperview()
             return
         }

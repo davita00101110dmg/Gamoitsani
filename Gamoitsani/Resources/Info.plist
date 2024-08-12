@@ -12,6 +12,8 @@
 	<false/>
 	<key>PROJECT_ROOT</key>
 	<string>${PROJECT_ROOT}</string>
+	<key>REMOVE_ADS_IN_APP_PURCHASE_PRODUCT_ID</key>
+	<string>$(REMOVE_ADS_IN_APP_PURCHASE_PRODUCT_ID)</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -236,8 +238,6 @@
 	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>Remove ads</key>
-	<string>davitikhvedelidze.Gamoitsani.removeAds</string>
 	<key>WORDS_COLLECTION_NAME</key>
 	<string>${WORDS_COLLECTION_NAME}</string>
 </dict>

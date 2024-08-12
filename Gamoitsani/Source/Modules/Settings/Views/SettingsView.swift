@@ -28,15 +28,15 @@ struct SettingsView: View {
                     }
                     
                     Section {
-                        
-                        // MARK: Temprorary turned off
-                        /*
-                        if viewModel.shouldShowRemoveAdsButton {
+                        if !viewModel.isRemoveAdsPurchased {
                             GMTableViewButton(title: L10n.Screen.Settings.removeAds) {
                                 viewModel.purchaseProduct()
                             }
                         }
-                         */
+                        
+                        GMTableViewButton(title: L10n.Screen.Settings.restorePurchase) {
+                            viewModel.restoreProduct()
+                        }
                         
                         GMTableViewButton(title: L10n.Screen.Settings.rateApp) {
                             viewModel.writeReviewAction()

@@ -16,8 +16,25 @@ enum AppConstants {
     static let appStoreLink = "https://apps.apple.com/ge/app/gamoitsani/id6502697351"
     static let reviewUrlLink = "itms-apps://itunes.apple.com/en/app/id6502697351?action=write-review&mt=8"
     
+    static var removeAdsInAppPurchaseProductID: String {
+        do {
+            return try Configuration.value(for: "REMOVE_ADS_IN_APP_PURCHASE_PRODUCT_ID")
+        } catch {
+            dump("Error retrieving words collection name: \(error)")
+            return .empty
+        }
+    }
+    
     static var isAppInEnglish: Bool {
         AppConstants.Language.english.identifier == UserDefaults.appLanguage
+    }
+    
+    static var hasRemovedAds: Bool {
+        UserDefaults.hasRemovedAds
+    }
+    
+    static var shouldShowAdsToUser: Bool {
+        isAppInEnglish && !hasRemovedAds
     }
     
     static let randomWords = [

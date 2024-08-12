@@ -11,11 +11,11 @@ import StoreKit
 
 final class SettingsViewModel: NSObject, ObservableObject {
     @AppStorage(UserDefaults.Keys.APP_LANGUAGE) var appLanguage: String = AppConstants.Language.georgian.identifier
+    @AppStorage(UserDefaults.Keys.HAS_REMOVED_ADS) var isRemoveAdsPurchased: Bool = false
     @Published var selectedSegment: Int = 0
     @Published var showingAlert: Bool = false
     @Published var languageChanged: Bool = false
     @Published var isShareSheetPresented: Bool = false
-    @Published var isRemoveAdsPurchased = false
         
     private var products: [SKProduct] = []
     
@@ -30,12 +30,8 @@ final class SettingsViewModel: NSObject, ObservableObject {
         SKPaymentQueue.default().remove(self)
     }
     
-    var shouldShowRemoveAdsButton: Bool {
-        AppConstants.isAppInEnglish
-    }
-    
     private func fetchProducts() {
-        let productIdentifiers: Set<String> = ["davitikhvedelidze.Gamoitsani.removeAds"]
+        let productIdentifiers: Set<String> = [AppConstants.removeAdsInAppPurchaseProductID]
         let request = SKProductsRequest(productIdentifiers: productIdentifiers)
         request.delegate = self
         request.start()
@@ -73,6 +69,10 @@ final class SettingsViewModel: NSObject, ObservableObject {
         let payment = SKPayment(product: product)
         SKPaymentQueue.default().add(payment)
     }
+    
+    func restoreProduct() {
+        SKPaymentQueue.default().restoreCompletedTransactions()
+    }
 }
 
 // MARK: - SKProductsRequestDelegate
@@ -84,10 +84,7 @@ extension SettingsViewModel: SKProductsRequestDelegate, SKPaymentTransactionObse
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         transactions.forEach { transaction in
             switch transaction.transactionState {
-            case .purchased:
-                isRemoveAdsPurchased = true
-                SKPaymentQueue.default().finishTransaction(transaction)
-            case .restored:
+            case .purchased, .restored:
                 isRemoveAdsPurchased = true
                 SKPaymentQueue.default().finishTransaction(transaction)
             default:
