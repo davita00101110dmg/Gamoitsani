@@ -337,9 +337,6 @@ extension GameViewController: GameOverViewDelegate {
     
     func didPressShowFullScoreboard() {
         coordinator?.presentGameScoreboard(with: [.large()])
-        let bundle = Bundle(for: GameShareView.self)
-        let contentView = UINib(nibName: "GameShareView", bundle: bundle)
-        let contentViewToShow = contentView.instantiate(withOwner: self, options: nil)[0] as! GameShareView
     }
 }
 
