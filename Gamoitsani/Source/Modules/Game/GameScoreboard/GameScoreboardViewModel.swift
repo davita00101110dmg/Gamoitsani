@@ -10,9 +10,9 @@ import Foundation
 import Combine
 
 final class GameScoreboardViewModel {
-    @Published var teams: [GameScoreboardTeamCellItem] = []
+    @Published var teams: [GameTeamCellItem] = []
     
-    var teamsPublished: AnyPublisher<[GameScoreboardTeamCellItem], Never> {
+    var teamsPublished: AnyPublisher<[GameTeamCellItem], Never> {
         $teams.eraseToAnyPublisher()
     }
     

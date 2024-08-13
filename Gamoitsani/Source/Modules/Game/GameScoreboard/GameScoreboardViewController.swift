@@ -13,8 +13,8 @@ final class GameScoreboardViewController: BaseViewController<GameScoreboardCoord
     @IBOutlet weak var titleLabel: GMLabel!
     @IBOutlet weak var tableView: UITableView!
     
-    private var snapshot: GameScoreboardSnapshot?
-    private lazy var dataSource = GameScoreboardDataSource(tableView: tableView) { tableView, indexPath, team in
+    private var snapshot: GameTeamsSnapshot?
+    private lazy var dataSource = GameTeamsDataSource(tableView: tableView) { tableView, indexPath, team in
         let cell: GameScoreboardTeamTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.configure(with: .init(name: team.name, score: team.score))
         return cell
@@ -58,7 +58,7 @@ final class GameScoreboardViewController: BaseViewController<GameScoreboardCoord
             .sink { [weak self] teams in
                 guard let self else { return }
                 
-                self.snapshot = GameScoreboardSnapshot()
+                self.snapshot = GameTeamsSnapshot()
                 self.snapshot?.appendSections([0])
                 self.snapshot?.appendItems(teams)
                 self.dataSource.defaultRowAnimation = .automatic
