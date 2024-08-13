@@ -77,6 +77,13 @@ public enum L10n {
           }
         }
 
+        public enum GameShareView {
+          /// The winning team is %@ with %@ points!
+          public static func title( _ p1: String, _ p2: String) -> String {
+              return L10n.tr("Localizable", "screen.game.game_share_view.title", p1, p2)
+          }
+        }
+
         public enum NoMoreWords {
           /// No more words
           public static var message: String { L10n.tr("Localizable", "screen.game.no_more_words.message") }
