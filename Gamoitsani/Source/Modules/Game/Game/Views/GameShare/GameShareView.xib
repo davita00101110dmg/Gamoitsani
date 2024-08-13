@@ -33,23 +33,23 @@
                     </subviews>
                 </stackView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="j1M-bC-TXX">
-                    <rect key="frame" x="24" y="117.33333333333334" width="262" height="303.66666666666663"/>
+                    <rect key="frame" x="24" y="117.33333333333334" width="262" height="295.66666666666663"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <inset key="separatorInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sM2-bo-QlT">
-                    <rect key="frame" x="16" y="445" width="286" height="48"/>
+                    <rect key="frame" x="24" y="437" width="262" height="56"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="l1U-PL-Ff5">
-                            <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                            <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="48" id="kVl-Tg-Fc4"/>
+                                <constraint firstAttribute="width" constant="56" id="kVl-Tg-Fc4"/>
                                 <constraint firstAttribute="width" secondItem="l1U-PL-Ff5" secondAttribute="height" multiplier="1:1" id="m7C-hi-l3o"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="გამოიცანი" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10v-LJ-dOl" customClass="GMLabel" customModule="Gamoitsani" customModuleProvider="target">
-                            <rect key="frame" x="56" y="0.0" width="230" height="48"/>
+                            <rect key="frame" x="64" y="0.0" width="198" height="56"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -60,10 +60,10 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" name="Secondary"/>
             <constraints>
+                <constraint firstItem="sM2-bo-QlT" firstAttribute="trailing" secondItem="wPq-g8-HDa" secondAttribute="trailing" id="GOY-3v-wOg"/>
                 <constraint firstItem="wPq-g8-HDa" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Gyw-Vo-DoZ"/>
-                <constraint firstAttribute="trailing" secondItem="sM2-bo-QlT" secondAttribute="trailing" constant="8" id="IaO-sl-MJZ"/>
-                <constraint firstItem="sM2-bo-QlT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Nqf-92-WeV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="j1M-bC-TXX" secondAttribute="trailing" constant="24" id="OCG-gb-MDM"/>
+                <constraint firstItem="sM2-bo-QlT" firstAttribute="leading" secondItem="wPq-g8-HDa" secondAttribute="leading" id="QP5-BL-2gT"/>
                 <constraint firstAttribute="bottom" secondItem="sM2-bo-QlT" secondAttribute="bottom" constant="8" id="SqT-eh-mWG"/>
                 <constraint firstItem="sM2-bo-QlT" firstAttribute="top" secondItem="j1M-bC-TXX" secondAttribute="bottom" constant="24" id="SzE-6h-BWA"/>
                 <constraint firstItem="j1M-bC-TXX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="aEe-yZ-Scw"/>

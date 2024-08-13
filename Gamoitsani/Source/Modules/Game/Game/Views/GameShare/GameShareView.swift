@@ -10,7 +10,6 @@ import UIKit
 
 final class GameShareView: UIView {
     @IBOutlet weak var topLabel: GMLabel!
-    @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var appNameLabel: GMLabel!
     
     @IBOutlet weak var tableView: UITableView!
@@ -25,7 +24,6 @@ final class GameShareView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
-        setupTableView()
     }
     
     private func setupUI() {
@@ -38,25 +36,24 @@ final class GameShareView: UIView {
         tableView.layer.cornerRadius = Constants.tableViewCornerRadius
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    private func setupTableView() {
         tableView.rowHeight = 44
         tableView.register(GameScoreboardTeamTableViewCell.self)
     }
     
     func configure(with model: GameOverViewModel) {
-        topLabel.configure(with: "გამარჯვებული გუნდია: \(model.teamName) \(model.score) ქულით🥳")
+        topLabel.configure(with: L10n.Screen.Game.GameShareView.title(model.teamName, model.score.toString),
+                           fontType: .bold,
+                           fontSizeForPhone: Constants.appNameLabelFontSizeForPhone)
         
-        let teams: [GameTeamCellItem] = GameStory.shared.teams.map { .init(name: $0.key, score: $0.value) }
+        let teams: [GameTeamCellItem] = GameStory.shared.teams.sorted { $0.value > $1.value }.map { .init(name: $0.key, score: $0.value) }
         
-        self.snapshot = GameTeamsSnapshot()
-        self.snapshot?.appendSections([0])
-        self.snapshot?.appendItems(teams)
-        self.dataSource.defaultRowAnimation = .automatic
+        snapshot = GameTeamsSnapshot()
+        snapshot?.appendSections([0])
+        snapshot?.appendItems(teams)
+        dataSource.defaultRowAnimation = .automatic
         
         if let snapshot {
-            self.dataSource.apply(snapshot, animatingDifferences: true)
+            dataSource.apply(snapshot, animatingDifferences: false)
         }
     }
 }

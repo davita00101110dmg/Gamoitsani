@@ -30,6 +30,10 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         GameOverView.loadFromNib()
     }()
     
+    private lazy var gameShareView: GameShareView? = {
+        GameShareView.loadFromNib()
+    }()
+    
     private lazy var confettiLayer = CAEmitterLayer()
     private lazy var audioManager = AudioManager()
     
@@ -133,6 +137,11 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         })
     }
     
+    private func configureGameShareView(teamName: String, score: Int) {
+        gameShareView?.configure(with: .init(teamName: teamName,
+                                           score: score))
+    }
+    
     private func toggleGameView() {
         mainView.removeAllSubviews()
         
@@ -178,6 +187,7 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         
         gameStory.finishedGamesCountInSession += 1
         showGameOverView(teamName: winnerTeam.key, score: winnerTeam.value)
+        configureGameShareView(teamName: winnerTeam.key, score: winnerTeam.value)
     }
     
     private func startConfettiAnimation() {
@@ -236,6 +246,44 @@ final class GameViewController: BaseViewController<GameCoordinator> {
         mainViewHeightConstraint.constant = ViewControllerConstants.mainViewHeight
         gameStory.reset()
     }
+    
+    // TODO: Call it from share button
+    private func shareBackgroundImage() {
+        let appIDString = AppConstants.Meta.appId
+
+        guard let backgroundImageData = gameShareView?.asImage().pngData() else {
+            // TODO: Handle the case where the image couldn't be loaded (e.g., show an alert)
+            print("Error: Failed to load background image")
+            return
+        }
+
+        shareOnInstagramStories(backgroundImage: backgroundImageData, appID: appIDString)
+    }
+    
+    private func shareOnInstagramStories(backgroundImage: Data, appID: String) {
+        let urlSchemeString = "\(ViewControllerConstants.instagramStoriesURLScheme)\(appID)"
+        
+        guard let urlScheme = URL(string: urlSchemeString) else {
+            // TODO: Handle invalid URL (e.g., log an error)
+            print("Error: Invalid Instagram Stories URL scheme")
+            return
+        }
+
+        if UIApplication.shared.canOpenURL(urlScheme) {
+            var pasteboardItems: [String: Any] = ViewControllerConstants.shareImageBackgroundColors
+            pasteboardItems[ViewControllerConstants.PasteboardKeys.stickerImage] = backgroundImage
+
+            let pasteboardOptions: [UIPasteboard.OptionsKey: Any] = [
+                .expirationDate: Date().addingTimeInterval(60 * 5)
+            ]
+
+            UIPasteboard.general.setItems([pasteboardItems], options: pasteboardOptions)
+            UIApplication.shared.open(urlScheme)
+        } else {
+            // TODO: handle
+            print("Error: Instagram Stories is not installed")
+        }
+    }
 }
 
 // MARK: - GameInfoViewDelegate Methods
@@ -289,6 +337,9 @@ extension GameViewController: GameOverViewDelegate {
     
     func didPressShowFullScoreboard() {
         coordinator?.presentGameScoreboard(with: [.large()])
+        let bundle = Bundle(for: GameShareView.self)
+        let contentView = UINib(nibName: "GameShareView", bundle: bundle)
+        let contentViewToShow = contentView.instantiate(withOwner: self, options: nil)[0] as! GameShareView
     }
 }
 
@@ -305,6 +356,13 @@ extension GameViewController: GADFullScreenContentDelegate {
 // MARK: - ViewController Constants
 extension GameViewController {
     enum ViewControllerConstants {
+        
+        enum PasteboardKeys {
+            static let stickerImage = "com.instagram.sharedSticker.stickerImage"
+            static let backgroundTopColor = "com.instagram.sharedSticker.backgroundTopColor"
+            static let backgroundBottomColor = "com.instagram.sharedSticker.backgroundBottomColor"
+        }
+        
         static let mainViewHeight: CGFloat = 400
         static let mainViewHeightForGameOverView: CGFloat = 600
         static let gameOverViewTransitionDuration: TimeInterval = 0.5
@@ -332,6 +390,11 @@ extension GameViewController {
             Asset.color8.color,
             Asset.color9.color,
             Asset.color10.color
+        ]
+        static let instagramStoriesURLScheme = "instagram-stories://share?source_application="
+        static let shareImageBackgroundColors: [String: Any] = [
+            PasteboardKeys.backgroundTopColor: "#4D2E8D",
+            PasteboardKeys.backgroundBottomColor: "#001242"
         ]
     }
 }
