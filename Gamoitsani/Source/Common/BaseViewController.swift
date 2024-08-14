@@ -31,12 +31,19 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
     
     var shouldApplyGradientBackground: Bool = true
     var shouldUseCustomBackBarButtonItem: Bool = false
+    
+    private var bannerView: GADBannerView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         subscribeToPublishers()
         setupCustomBackBarButtonItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        requestAdLoad()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -75,6 +82,10 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
         view.insertSubview(gradientView, at: 0)
     }
     
+    private func requestAdLoad() {
+        bannerView?.load(GADRequest())
+    }
+    
     deinit {
         dump("deinited \(self)")
         NotificationCenter.default.removeObserver(self)
@@ -95,7 +106,10 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
             guard let self else { return }
             bannerView.frame.origin.y = view.frame.maxY - bannerView.frame.size.height - view.safeAreaInsets.bottom
         }, completion: nil)
-        
+    }
+    
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: any Error) {
+        dump("\(#function) \(error.localizedDescription)")
     }
     
     func setupBannerView(with bannerView: GADBannerView) {
@@ -103,9 +117,10 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
             bannerView.removeFromSuperview()
             return
         }
+        
+        self.bannerView = bannerView
         bannerView.adUnitID = AppConstants.AdMob.bannerAdId
         bannerView.rootViewController = self
         bannerView.delegate = self
-        bannerView.load(GADRequest())
     }
 }
