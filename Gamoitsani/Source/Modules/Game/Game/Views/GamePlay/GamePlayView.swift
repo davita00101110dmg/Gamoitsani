@@ -70,13 +70,17 @@ final class GamePlayView: UIView {
     func configure(with model: GamePlayViewModel, audioManager: AudioManager, delegate: GamePlayViewDelegate) {
         self.delegate = delegate
         self.audioManager = audioManager
-        
-        roundLengthTimer = Timer.scheduledTimer(withTimeInterval: model.roundLength, repeats: false, block: timerBlock(_:))
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: updateTimerLabel(timer:))
-        
+                
         viewModel = model
         words = model.words
         roundLength = model.roundLength
+        
+        #if DEBUG
+        roundLength = 1
+        #endif
+        
+        roundLengthTimer = Timer.scheduledTimer(withTimeInterval: roundLength, repeats: false, block: timerBlock(_:))
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: updateTimerLabel(timer:))
         
         wordLabel.configure(with: (shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn) ?? L10n.Screen.Game.NoMoreWords.message,
                             fontType: .bold,
