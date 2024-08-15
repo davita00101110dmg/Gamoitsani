@@ -99,6 +99,7 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
     
     func setupLocalizedTexts() { }
     
+    // MARK: - Admob Methods
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         bannerView.frame.origin.y = view.frame.maxY
         
@@ -122,5 +123,11 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
         bannerView.adUnitID = AppConstants.AdMob.bannerAdId
         bannerView.rootViewController = self
         bannerView.delegate = self
+    }
+    
+    @objc func presentAdInspector() {
+        GADMobileAds.sharedInstance().presentAdInspector(from: self) { error in
+            dump("Inspector error \(error?.localizedDescription ?? .empty)")
+        }
     }
 }
