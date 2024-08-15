@@ -95,6 +95,15 @@ enum AppConstants {
                 return .empty
             }
         }
+        
+        static var testDeviceId: String {
+            do {
+                return try Configuration.value(for: "ADMOB_TEST_DEVICE_ID")
+            } catch {
+                dump("Error retrieving testDeviceId: \(error)")
+                return .empty
+            }
+        }
     }
     
     enum Firebase {

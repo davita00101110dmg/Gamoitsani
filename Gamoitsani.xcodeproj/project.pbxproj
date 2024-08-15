@@ -42,6 +42,9 @@
 		FF4FA9CC2BEF875B00F38F98 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */; };
 		FF4FA9D12BEFF30900F38F98 /* AddWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */; };
 		FF4FA9D32BEFF30E00F38F98 /* AddWordModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */; };
+		FF7069972C6C0C1C00C3D9EA /* Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7069952C6C0C1C00C3D9EA /* Landscape.png */; };
+		FF7069982C6C0C1C00C3D9EA /* Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7069962C6C0C1C00C3D9EA /* Portrait.png */; };
+		FF70699E2C6C0DBA00C3D9EA /* QuestionMark.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70699D2C6C0DBA00C3D9EA /* QuestionMark.png */; };
 		FF67CC7F2C6AD0B80094824E /* GameTeamsSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC7E2C6AD0B80094824E /* GameTeamsSnapshot.swift */; };
 		FF67CC812C6AD0BF0094824E /* GameTeamsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC802C6AD0BF0094824E /* GameTeamsDataSource.swift */; };
 		FF67CC832C6AD0D60094824E /* GameTeamCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC822C6AD0D60094824E /* GameTeamCellItem.swift */; };
@@ -100,8 +103,6 @@
 		FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */; };
 		FFBFB0312C68CC3A00A877D7 /* GamoitsaniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */; };
 		FFD386D62C6A500A0027A2C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFD386D12C6A500A0027A2C4 /* LaunchScreen.storyboard */; };
-		FFD387042C6A5C410027A2C4 /* LaunchScreenLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD387022C6A5C3C0027A2C4 /* LaunchScreenLandscape.png */; };
-		FFD387052C6A5C410027A2C4 /* LaunchScreenPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD387032C6A5C410027A2C4 /* LaunchScreenPortrait.png */; };
 		FFF65C9D2BE554B9008E0352 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */; };
 		FFF65C9F2BE555C2008E0352 /* GameDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9E2BE555C2008E0352 /* GameDetailsViewModel.swift */; };
 		FFF65CA12BE555CC008E0352 /* GameDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CA02BE555CC008E0352 /* GameDetailsModel.swift */; };
@@ -212,6 +213,9 @@
 		FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewModel.swift; sourceTree = "<group>"; };
 		FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordModels.swift; sourceTree = "<group>"; };
+		FF7069952C6C0C1C00C3D9EA /* Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Landscape.png; sourceTree = "<group>"; };
+		FF7069962C6C0C1C00C3D9EA /* Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Portrait.png; sourceTree = "<group>"; };
+		FF70699D2C6C0DBA00C3D9EA /* QuestionMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QuestionMark.png; sourceTree = "<group>"; };
 		FF67CC7E2C6AD0B80094824E /* GameTeamsSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamsSnapshot.swift; sourceTree = "<group>"; };
 		FF67CC802C6AD0BF0094824E /* GameTeamsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamsDataSource.swift; sourceTree = "<group>"; };
 		FF67CC822C6AD0D60094824E /* GameTeamCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamCellItem.swift; sourceTree = "<group>"; };
@@ -270,8 +274,6 @@
 		FF91B8D82BF785B200EB85F1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
 		FFD386D12C6A500A0027A2C4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FFD387022C6A5C3C0027A2C4 /* LaunchScreenLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenLandscape.png; sourceTree = "<group>"; };
-		FFD387032C6A5C410027A2C4 /* LaunchScreenPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenPortrait.png; sourceTree = "<group>"; };
 		FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		FFF65C9E2BE555C2008E0352 /* GameDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsViewModel.swift; sourceTree = "<group>"; };
 		FFF65CA02BE555CC008E0352 /* GameDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsModel.swift; sourceTree = "<group>"; };
@@ -791,8 +793,9 @@
 		FFD387012C6A5A2E0027A2C4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				FFD387022C6A5C3C0027A2C4 /* LaunchScreenLandscape.png */,
-				FFD387032C6A5C410027A2C4 /* LaunchScreenPortrait.png */,
+				FF7069952C6C0C1C00C3D9EA /* Landscape.png */,
+				FF7069962C6C0C1C00C3D9EA /* Portrait.png */,
+				FF70699D2C6C0DBA00C3D9EA /* QuestionMark.png */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -1119,22 +1122,23 @@
 				FF1F14152BF7A897004116A1 /* Mersad.ttf in Resources */,
 				FF7F1D742BE6BCA900872554 /* swiftgen.yml in Resources */,
 				FFF65CAC2BE6199A008E0352 /* GameDetailsTeamTableViewCell.xib in Resources */,
+				FF70699E2C6C0DBA00C3D9EA /* QuestionMark.png in Resources */,
 				FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */,
 				FF4FA9BC2BED916700F38F98 /* AddWordViewController.xib in Resources */,
 				FF7CA1672C02591600E3BEC4 /* GameOverView.xib in Resources */,
 				FFD386D62C6A500A0027A2C4 /* LaunchScreen.storyboard in Resources */,
 				FF8675442C67758E0089B52B /* SettingsChangeLanguageCell.xib in Resources */,
+				FF7069972C6C0C1C00C3D9EA /* Landscape.png in Resources */,
 				FFFB4D512BD9398600CDDCB4 /* GameDetailsViewController.xib in Resources */,
 				FFFB4D072BD8393A00CDDCB4 /* Localizable.strings in Resources */,
 				FF1111892C4FD17500C44F62 /* correct.wav in Resources */,
 				FF7F1D882BE7ADEB00872554 /* GameInfoView.xib in Resources */,
 				FF86753F2C6772F70089B52B /* SettingsViewController.xib in Resources */,
 				FF4D9D352BD698630046819D /* Assets.xcassets in Resources */,
-				FFD387052C6A5C410027A2C4 /* LaunchScreenPortrait.png in Resources */,
+				FF7069982C6C0C1C00C3D9EA /* Portrait.png in Resources */,
 				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
 				FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */,
 				FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */,
-				FFD387042C6A5C410027A2C4 /* LaunchScreenLandscape.png in Resources */,
 				FF7F1D822BE7A2F700872554 /* GameViewController.xib in Resources */,
 				FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */,
 				FF8675732C6808FE0089B52B /* Gamoitsani.storekit in Resources */,

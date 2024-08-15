@@ -20,6 +20,9 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
         super.viewDidLoad()
         addHideKeyboardTapGestureRecogniser()
         setupBannerView(with: bannerView)
+        #if DEBUG
+        configureAdInspector()
+        #endif
     }
     
     override func setupUI() {
@@ -33,6 +36,11 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
     private func addHideKeyboardTapGestureRecogniser() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
+    }
+    
+    private func configureAdInspector() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(presentAdInspector))
+        view.addGestureRecognizer(longPressGesture)
     }
     
     @objc private func hideKeyboard() {
