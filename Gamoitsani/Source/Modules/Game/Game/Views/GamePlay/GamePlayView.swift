@@ -6,136 +6,117 @@
 //  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
-protocol GamePlayViewDelegate: AnyObject {
-    func timerDidFinished(roundScore: Int)
-}
+struct GamePlayView: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @ObservedObject var viewModel: GamePlayViewModel
+    
+    init(viewModel: GamePlayViewModel, onTimerFinished: @escaping (Int) -> Void) {
+        self.viewModel = viewModel
+        self.viewModel.onTimerFinished = onTimerFinished
+    }
+    
+    var body: some View {
+        VStack {
+            Spacer()
+            
+            currentWordLabel
+            
+            Spacer()
+            
+            timerLabel
 
-final class GamePlayView: UIView {
-    
-    @IBOutlet weak var wordLabel: GMLabel!
-    @IBOutlet weak var timerLabel: GMLabel!
-    
-    @IBOutlet weak var correctButton: GMButton!
-    @IBOutlet weak var incorrectButton: GMButton!
-    
-    private var words: [Word] = []
-    private var roundLength: Double = 0.0
-    
-    private var roundLengthTimer: Timer?
-    private var countdownTimer: Timer?
-    
-    private var audioManager: AudioManager?
-    
-    private weak var delegate: GamePlayViewDelegate?
-    
-    private var viewModel: GamePlayViewModel?
-    
-    private var shouldShowGeorgianWords: Bool {
-        !AppConstants.isAppInEnglish
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupUI()
-    }
-    
-    override func removeFromSuperview() {
-        super.removeFromSuperview()
-        invalidateTimers()
-    }
-    
-    private func invalidateTimers() {
-        roundLengthTimer?.invalidate()
-        countdownTimer?.invalidate()
-    }
-    
-    private func setupUI() {
-        backgroundColor = Asset.secondary.color.withAlphaComponent(Constants.backgroundColorAlpha)
-        layer.cornerRadius = Constants.viewCornerRadius
-        
-        correctButton.configure(with: Constants.correctSymbol,
-                                fontSizeForPhone: Constants.correctIncorrectButtonFontSizeForPhone,
-                                fontSizeForPad: Constants.correctIncorrectButtonFontSizeForPad,
-                                isCircle: true,
-                                backgroundColor: Asset.green.color)
-        incorrectButton.configure(with: Constants.incorrectSymbol,
-                                  fontSizeForPhone: Constants.correctIncorrectButtonFontSizeForPhone,
-                                  fontSizeForPad: Constants.correctIncorrectButtonFontSizeForPad,
-                                  isCircle: true,
-                                  backgroundColor: Asset.red.color)
-    }
-
-    func configure(with model: GamePlayViewModel, audioManager: AudioManager, delegate: GamePlayViewDelegate) {
-        self.delegate = delegate
-        self.audioManager = audioManager
+            Spacer()
+            
+            HStack {
+                incorrectButton
                 
-        viewModel = model
-        words = model.words
-        roundLength = model.roundLength
-        
-        #if DEBUG
-        roundLength = 1
-        #endif
-        
-        roundLengthTimer = Timer.scheduledTimer(withTimeInterval: roundLength, repeats: false, block: timerBlock(_:))
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: updateTimerLabel(timer:))
-        
-        wordLabel.configure(with: (shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn) ?? L10n.Screen.Game.NoMoreWords.message,
-                            fontType: .bold,
-                            fontSizeForPhone: Constants.wordLabelFontSizeForPhone,
-                            fontSizeForPad: Constants.wordLabelFontSizeForPad)
-        timerLabel.configure(with: roundLength.toString(),
-                             fontSizeForPhone: Constants.timerLabelFontSizeForPhone,
-                             fontSizeForPad: Constants.timerLabelFontSizeForPad)
-    }
-    
-    private func timerBlock(_: Timer) -> Void {
-        invalidateTimers()
-        delegate?.timerDidFinished(roundScore: viewModel?.score ?? 0)
-    }
-    
-    private func updateTimerLabel(timer: Timer) -> Void {
-        roundLength -= 1
-        if roundLength > 0 {
-            timerLabel.text = roundLength.toString()
+                Spacer()
+                
+                correctButton
+            }
+        }
+        .onAppear {
+            viewModel.startGame()
+        }
+        .onDisappear {
+            viewModel.stopGame()
         }
     }
     
-    private func updateWordLabel(with word: String?) {
-        wordLabel.text = word ?? L10n.Screen.Game.NoMoreWords.message
+    private var currentWordLabel: some View {
+        GMLabelView(
+            text: viewModel.currentWord,
+            fontType: .bold,
+            fontSizeForPhone: ViewConstants.wordLabelFontSizeForPhone,
+            fontSizeForPad: ViewConstants.wordLabelFontSizeForPad
+        )
     }
     
-    private func wordButtonAction(tag: Int) { // Tag 1: Correct Tag 2: Incorrect
-        audioManager?.playSound(tag: tag)
+    private var timerLabel: some View {
+        GMLabelView(
+            text: viewModel.timeRemaining.toString(),
+            fontSizeForPhone: ViewConstants.timerLabelFontSizeForPhone,
+            fontSizeForPad: ViewConstants.timerLabelFontSizeForPad
+        )
+    }
+    
+    private var incorrectButton: some View {
+        GMButtonView(
+            text: ViewConstants.incorrectSymbol,
+            fontSizeForPhone: ViewConstants.buttonFontSizeForPhone,
+            fontSizeForPad: ViewConstants.buttonFontSizeForPad,
+            isCircle: true,
+            backgroundColor: Asset.red.swiftUIColor,
+            height: horizontalSizeClass == .compact ? ViewConstants.buttonHeight : ViewConstants.buttonHeightForIpad
+        ) {
+            viewModel.wordButtonAction(tag: 0) // Incorrect tag
+        }
         
-        updateWordLabel(with: shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn)
-        viewModel?.score += tag == 1 ? 1 : -1
     }
     
-    @IBAction func correctWordAction(_ sender: UIButton) {
-        wordButtonAction(tag: sender.tag)
-    }
-    
-    @IBAction func incorrectButtonAction(_ sender: UIButton) {
-        wordButtonAction(tag: sender.tag)
+    private var correctButton: some View {
+        GMButtonView(
+            text: ViewConstants.correctSymbol,
+            fontSizeForPhone: ViewConstants.buttonFontSizeForPhone,
+            fontSizeForPad: ViewConstants.buttonFontSizeForPad,
+            isCircle: true,
+            backgroundColor: Asset.green.swiftUIColor,
+            height: horizontalSizeClass == .compact ? ViewConstants.buttonHeight : ViewConstants.buttonHeightForIpad
+        ) {
+            viewModel.wordButtonAction(tag: 1) // Correct tag
+        }
     }
 }
 
 // MARK: - View Constants
 extension GamePlayView {
-    enum Constants {
+    enum ViewConstants {
         static let correctSymbol: String = "✓"
         static let incorrectSymbol: String = "✘"
-        static let backgroundColorAlpha: CGFloat = 0.3
-        static let viewCornerRadius: CGFloat = 10
         static let wordLabelFontSizeForPhone: CGFloat = 32
         static let wordLabelFontSizeForPad: CGFloat = 52
         static let timerLabelFontSizeForPhone: CGFloat = 96
         static let timerLabelFontSizeForPad: CGFloat = 150
-        
-        static let correctIncorrectButtonFontSizeForPhone: CGFloat = 30
-        static let correctIncorrectButtonFontSizeForPad: CGFloat = 60
+        static let buttonFontSizeForPhone: CGFloat = 30
+        static let buttonFontSizeForPad: CGFloat = 60
+        static let buttonHeight: CGFloat = 60
+        static let buttonHeightForIpad: CGFloat = 120
     }
+}
+
+#Preview {
+    GamePlayView(viewModel: GamePlayViewModel(words: GameStory.shared.words, roundLength: 60, audioManager: AudioManager())) { _ in
+        
+    }
+    .padding([.top, .bottom, .leading, .trailing], 24)
+    .background(
+        Asset.secondary.swiftUIColor
+            .opacity(0.3)
+    )
+    .cornerRadius(10)
+    .frame(maxHeight: .infinity)
+    .padding(.horizontal, 36)
+    .padding(.vertical, 24)
 }
