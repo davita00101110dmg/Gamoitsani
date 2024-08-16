@@ -6,79 +6,154 @@
 //  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
-protocol GameOverViewDelegate: AnyObject {
-    func didPressStartOver()
-    func didPressGoBack()
-    func didPressShowFullScoreboard()
-}
-
-final class GameOverView: UIView {
-
-    @IBOutlet weak var winLabel: GMLabel!
-    @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var teamNameLabel: GMLabel!
-    @IBOutlet weak var descriptionLabel: GMLabel!
-    @IBOutlet weak var repeatButton: GMButton!
-    @IBOutlet weak var goBackButton: GMButton!
-    @IBOutlet weak var showFullScoreboardButton: GMButton!
+struct GameOverView: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
-    private weak var delegate: GameOverViewDelegate?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupUI()
+    var viewModel: GameOverViewModel
+    var onAppear: () -> Void
+    var onStartOver: () -> Void
+    var onGoBack: () -> Void
+    var onShowFullScoreboard: () -> Void
+
+    var body: some View {
+        DynamicStack(spacing: dynamicStackSpacing) {
+            VStack {
+                Spacer()
+                
+                titleLabel
+                
+                Spacer()
+                
+                trophyImage
+            
+                Spacer()
+                
+                VStack(spacing: ViewConstants.labelsSpacing) {
+                    teamNameLabel
+                    messageLabel
+                }
+                
+                Spacer()
+            }
+            
+            VStack(spacing: ViewConstants.buttonsSpacing) {
+                repeatButton
+                goBackButton
+                showScoreboardButton
+            }
+        }
+        .onAppear {
+            onAppear()
+        }
     }
     
-    private func setupUI() {
-        backgroundColor = Asset.secondary.color.withAlphaComponent(Constants.backgroundColorAlpha)
-        layer.cornerRadius = Constants.viewCornerRadius
+    private var titleLabel: some View {
+        GMLabelView(
+            text: L10n.Screen.Game.WinningView.title,
+            fontSizeForPhone: ViewConstants.winLabelFontSizeForPhone,
+            fontSizeForPad: ViewConstants.winLabelFontSizeForPad
+        )
+    }
+    
+    private var trophyImage: some View {
+        Image(.trophy)
+            .resizable()
+            .scaledToFit()
+            .frame(width: trophyIconSize)
+    }
+    
+    private var teamNameLabel: some View {
+        GMLabelView(
+            text: viewModel.teamName,
+            fontSizeForPhone: ViewConstants.teamLabelFontSizeForPhone,
+            fontSizeForPad: ViewConstants.teamLabelFontSizeForPad
+        )
+    }
+    
+    private var messageLabel: some View {
+        GMLabelView(
+            text: L10n.Screen.Game.WinningView.description(viewModel.score.toString),
+            fontSizeForPhone: ViewConstants.descriptionLabelFontSizeForPhone,
+            fontSizeForPad: ViewConstants.descriptionLabelFontSizeForPad
+        )
+    }
+    
+    private var repeatButton: some View {
+        GMButtonView(
+            text: L10n.Screen.Game.WinningView.repeat,
+            height: buttonHeight
+        ) {
+            onStartOver()
+        }
+    }
         
-        winLabel.configure(with: L10n.Screen.Game.WinningView.title,
-                           fontSizeForPhone: Constants.winLabelFontSizeForPhone,
-                           fontSizeForPad: Constants.winLabelFontSizeForPad)
-        repeatButton.configure(with: L10n.Screen.Game.WinningView.repeat)
-        goBackButton.configure(with: L10n.Screen.Game.WinningView.GameDetails.title)
-        showFullScoreboardButton.configure(with: L10n.scoreboard)
+    private var goBackButton: some View {
+        GMButtonView(
+            text: L10n.Screen.Game.WinningView.GameDetails.title,
+            height: buttonHeight
+        ) {
+            onGoBack()
+        }
     }
     
-    func configure(with model: GameOverViewModel, delegate: GameOverViewDelegate) {
-        self.delegate = delegate
-        teamNameLabel.configure(with: model.teamName,
-                                fontSizeForPhone: Constants.teamLabelFontSizeForPhone,
-                                fontSizeForPad: Constants.teamLabelFontSizeForPad)
-        descriptionLabel.configure(with: L10n.Screen.Game.WinningView.description(model.score.toString),
-                                   fontSizeForPhone: Constants.descriptionLabelFontSizeForPhone,
-                                   fontSizeForPad: Constants.descriptionLabelFontSizeForPad)
+    private var showScoreboardButton: some View {
+        GMButtonView(
+            text: L10n.scoreboard,
+            height: buttonHeight
+        ) {
+            onShowFullScoreboard()
+        }
     }
-}
+    
+    private var trophyIconSize: CGFloat {
+        horizontalSizeClass == .compact ? ViewConstants.trophyIconSizeForPhone : ViewConstants.trophyIconSizeForPad
+    }
 
-// MARK: - Actions
-extension GameOverView {
-    @IBAction func startOver(sender: Any) {
-        delegate?.didPressStartOver()
+    private var buttonHeight: CGFloat {
+        horizontalSizeClass == .compact ? ViewConstants.buttonHeightForPhone : ViewConstants.buttonHeightForPad
     }
-    
-    @IBAction func goBack(sender: Any) {
-        delegate?.didPressGoBack()
-    }
-    
-    @IBAction func showFullScoreboard() {
-        delegate?.didPressShowFullScoreboard()
+
+    private var dynamicStackSpacing: CGFloat {
+        horizontalSizeClass == .compact ? ViewConstants.dynamicStackSpacingForPhone : ViewConstants.dynamicStackSpacingForPad
     }
 }
 
 // MARK: - View Constants
 extension GameOverView {
-    enum Constants {
+    enum ViewConstants {
         static let winLabelFontSizeForPhone: CGFloat = 40
         static let winLabelFontSizeForPad: CGFloat = 74
         static let teamLabelFontSizeForPhone: CGFloat = 22
         static let teamLabelFontSizeForPad: CGFloat = 40
         static let descriptionLabelFontSizeForPhone: CGFloat = 18
         static let descriptionLabelFontSizeForPad: CGFloat = 32
-        static let backgroundColorAlpha: CGFloat = 0.3
-        static let viewCornerRadius: CGFloat = 10
+        static let trophyIconSize: CGFloat = 175
+        static let trophyIconSizeForPhone: CGFloat = 175
+        static let trophyIconSizeForPad: CGFloat = 325
+        static let buttonHeightForPhone: CGFloat = 44
+        static let buttonHeightForPad: CGFloat = 60
+        static let dynamicStackSpacingForPhone: CGFloat = 32
+        static let dynamicStackSpacingForPad: CGFloat = 0
+        static let labelsSpacing: CGFloat = 12
+        static let buttonsSpacing: CGFloat = 16
     }
+}
+
+#Preview {
+    GameOverView(viewModel: GameOverViewModel(teamName: "გუნდი 1", score: 1)) {
+        
+    } onStartOver: {
+        
+    } onGoBack: {
+        
+    } onShowFullScoreboard: {
+        
+    }
+    .background(Asset.secondary.swiftUIColor.opacity(0.3))
+    .cornerRadius(10)
+    .frame(maxHeight: .infinity)
+    .padding(.horizontal, 36)
+    .padding(.vertical, 24)
 }
