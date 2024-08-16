@@ -39,6 +39,9 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
         viewModel?.observeNetworkConnection()
         setupTableView()
         setupBannerView(with: bannerView)
+#if DEBUG
+        addMockedTeams()
+#endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,6 +149,11 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
         gameStory.numberOfRounds = roundsStepper.value.toInt
         gameStory.lengthOfRound = roundsLengthStepper.value
         gameStory.teams = viewModel.getTeamsDictionary()
+    }
+    
+    private func addMockedTeams() {
+        viewModel?.addTeam(with: "Team 1")
+        viewModel?.addTeam(with: "Team 2")
     }
 }
 
