@@ -32,6 +32,7 @@
 		FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D792BD69BAC0046819D /* HomeViewModel.swift */; };
 		FF4D9D7C2BD69BC00046819D /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D7B2BD69BC00046819D /* HomeModels.swift */; };
 		FF4D9D9C2BD6F7DB0046819D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D9B2BD6F7DB0046819D /* HomeCoordinator.swift */; };
+		FF4F12462C702E45000BDBD7 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F12452C702E45000BDBD7 /* BackButton.swift */; };
 		FF4FA9BC2BED916700F38F98 /* AddWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4FA9BB2BED916700F38F98 /* AddWordViewController.xib */; };
 		FF4FA9BE2BED917300F38F98 /* AddWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9BD2BED917300F38F98 /* AddWordViewController.swift */; };
 		FF4FA9C02BED917A00F38F98 /* AddWordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9BF2BED917A00F38F98 /* AddWordCoordinator.swift */; };
@@ -210,6 +211,7 @@
 		FF4D9D792BD69BAC0046819D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FF4D9D7B2BD69BC00046819D /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
 		FF4D9D9B2BD6F7DB0046819D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		FF4F12452C702E45000BDBD7 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		FF4FA9BB2BED916700F38F98 /* AddWordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWordViewController.xib; sourceTree = "<group>"; };
 		FF4FA9BD2BED917300F38F98 /* AddWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewController.swift; sourceTree = "<group>"; };
 		FF4FA9BF2BED917A00F38F98 /* AddWordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordCoordinator.swift; sourceTree = "<group>"; };
@@ -724,6 +726,7 @@
 				FFC172B72C6E71580069623F /* GameScoreboardTeamView.swift */,
 				FFFCF38B2C6EC506003458DC /* ConfettiView.swift */,
 				FFFCF38D2C6FA048003458DC /* DynamicStack.swift */,
+				FF4F12452C702E45000BDBD7 /* BackButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1360,6 +1363,7 @@
 				FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */,
 				FF86757B2C681A780089B52B /* SettingsModels.swift in Sources */,
 				FF4FA9CC2BEF875B00F38F98 /* Configuration.swift in Sources */,
+				FF4F12462C702E45000BDBD7 /* BackButton.swift in Sources */,
 				FF67CC812C6AD0BF0094824E /* GameTeamsDataSource.swift in Sources */,
 				FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */,
 				FF7F1D962BE7B9D800872554 /* GameInfoViewModel.swift in Sources */,
