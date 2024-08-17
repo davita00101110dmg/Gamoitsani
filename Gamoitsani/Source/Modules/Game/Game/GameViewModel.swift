@@ -10,59 +10,109 @@
 import Foundation
 import OrderedCollections
 
-final class GameViewModel { 
-    private var gameStory = GameStory.shared
-    private var shouldShowInfoView: Bool = false
+class GameViewModel: ObservableObject {
     
-    private var playingSessionCount: Int {
-        gameStory.playingSessionCount
+    var gameInfoViewModel: GameInfoViewModel {
+        GameInfoViewModel(
+            teamName: currentTeamName,
+            currentRound: currentRound,
+            currentExtraRound: currentExtraRound
+        )
+    }
+
+    var gamePlayViewModel: GamePlayViewModel {
+        GamePlayViewModel(
+            words: gameStory.words.removeFirstNItems(50) ?? [],
+            roundLength: gameStory.lengthOfRound,
+            audioManager: audioManager
+        )
     }
     
-    private var numberOfTeams: Int {
-        gameStory.teams.count
+    var gameOverViewModel: GameOverViewModel {
+        GameOverViewModel(
+            teamName: getWinnerTeam()?.key ?? .empty,
+            score: getWinnerTeam()?.value ?? 0
+        )
     }
     
-    var currentTeamName: String {
-        gameStory.teams.keys[gameStory.currentTeamIndex]
+    @Published var gameState: GameModels.GameState = .info
+    
+    var currentTeamName: String { gameStory.teams.keys[gameStory.currentTeamIndex] }
+    var currentRound: Int { gameStory.currentRound }
+    var currentExtraRound: Int { gameStory.currentRound - gameStory.numberOfRounds }
+    var currentTeamScore: Int { gameStory.teams.values[gameStory.currentTeamIndex] }
+    var sortedTeams: [(key: String, value: Int)] { gameStory.teams.sorted { $0.value > $1.value } }
+
+    var gameStory = GameStory.shared
+    
+    private var playingSessionCount: Int { gameStory.playingSessionCount }
+    private var numberOfTeams: Int { gameStory.teams.count }
+
+    private lazy var audioManager = AudioManager()
+    
+    init() {
+        configureAudioManager()
+    }
+}
+
+// MARK: - Game Logic
+extension GameViewModel {
+    func handleGamePlayResult(score: Int) {
+        updateGameInfo(with: score)
+
+        if handleEndOfGame() {
+            gameState = .gameOver
+        } else {
+            gameState = .info
+        }
     }
     
-    var currentRound: Int {
-        gameStory.currentRound
+    func startNewGame() {
+        gameStory.reset()
+        gameState = .info
     }
     
-    var currentExtraRound: Int {
-        gameStory.currentRound - gameStory.numberOfRounds
-    }
-    
-    var sortedTeams: [(key: String, value: Int)] {
-        gameStory.teams.sorted { $0.value > $1.value }
+    func getWinnerTeam() -> (key: String, value: Int)? {
+        guard let winnerTeam = sortedTeams.first else { return nil }
+        return winnerTeam
     }
     
     private func isTie() -> Bool {
         return sortedTeams[0].value == sortedTeams[1].value
     }
-    
+
     private func isEndGame() -> Bool {
         gameStory.currentRound > gameStory.numberOfRounds && gameStory.currentTeamIndex == 0
     }
     
-    func handleEndOfGame() -> Bool {
+    private func handleEndOfGame() -> Bool {
         guard isEndGame() else {
             return false
         }
-        
+
         if isTie() {
             gameStory.currentExtraRound = gameStory.currentRound - gameStory.numberOfRounds
             return false
         }
-        
+
         return true
     }
-    
-    func updateGameInfo(with roundScore: Int) {
+
+    private func updateGameInfo(with roundScore: Int) {
         gameStory.teams.values[gameStory.currentTeamIndex] = roundScore
         dump("Round: \(currentRound) Team: \(currentTeamName) Score: \(gameStory.teams.values[gameStory.currentTeamIndex])")
         gameStory.currentTeamIndex = playingSessionCount % numberOfTeams
         gameStory.currentRound = playingSessionCount / numberOfTeams + 1
+    }
+}
+
+// MARK: - Audio Manager
+extension GameViewModel {
+    private func configureAudioManager() {
+        let operationQueue = OperationQueue()
+        let audioSetupOperation = BlockOperation { [weak self] in
+            self?.audioManager.setupSounds()
+        }
+        operationQueue.addOperation(audioSetupOperation)
     }
 }
