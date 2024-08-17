@@ -2,10 +2,36 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>instagram</string>
+		<string>instagram-stories</string>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>$(META_APP_ID)</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>$(META_APP_ID)</string>
+	<key>FacebookClientToken</key>
+	<string>$(META_CLIENT_TOKEN)</string>
+	<key>FacebookDisplayName</key>
+	<string>Gamoitsani</string>
 	<key>BANNER_AD_ID</key>
 	<string>$(BANNER_AD_ID)</string>
 	<key>GADApplicationIdentifier</key>
 	<string>$(ADMOB_APP_ID)</string>
+	<key>META_APP_ID</key>
+	<string>$(META_APP_ID)</string>
+	<key>META_CLIENT_TOKEN</key>
+	<string>$(META_CLIENT_TOKEN)</string>
 	<key>INTERSTITIAL_AD_ID</key>
 	<string>$(INTERSTITIAL_AD_ID)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>

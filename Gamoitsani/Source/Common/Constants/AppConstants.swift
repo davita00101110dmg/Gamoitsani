@@ -130,4 +130,24 @@ enum AppConstants {
         static let categories = "categories"
         static let definitions = "definitions"
     }
+    
+    enum Meta {
+        static var appId: String {
+            do {
+                return try Configuration.value(for: "META_APP_ID")
+            } catch {
+                dump("Error retrieving metaAppId: \(error)")
+                return .empty
+            }
+        }
+        
+        static var clientToken: String {
+            do {
+                return try Configuration.value(for: "META_CLIENT_TOKEN")
+            } catch {
+                dump("Error retrieving metaClientToken: \(error)")
+                return .empty
+            }
+        }
+    }
 }

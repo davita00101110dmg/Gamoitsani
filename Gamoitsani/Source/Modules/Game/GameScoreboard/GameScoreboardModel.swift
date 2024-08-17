@@ -8,11 +8,5 @@
 
 import UIKit
 
-typealias GameScoreboardSnapshot = NSDiffableDataSourceSnapshot<Int, GameScoreboardTeamCellItem>
-typealias GameScoreboardDataSource = UITableViewDiffableDataSource<Int, GameScoreboardTeamCellItem>
+enum GameScoreboardModel { }
 
-struct GameScoreboardTeamCellItem: Hashable {
-    let id = UUID()
-    var name: String
-    var score: Int
-}

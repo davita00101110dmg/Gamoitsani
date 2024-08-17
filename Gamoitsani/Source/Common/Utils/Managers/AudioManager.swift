@@ -35,10 +35,10 @@ final class AudioManager {
     
     func playSound(tag: Int) {
         switch tag {
+        case 0:
+            play(audioPlayer: incorrectSoundAudioPlayer)
         case 1:
             play(audioPlayer: correctSoundAudioPlayer)
-        case 2:
-            play(audioPlayer: incorrectSoundAudioPlayer)
         default:
             return
         }

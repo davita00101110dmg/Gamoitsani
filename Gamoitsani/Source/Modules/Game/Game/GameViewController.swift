@@ -6,305 +6,116 @@
 //  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 import GoogleMobileAds
 
-final class GameViewController: BaseViewController<GameCoordinator> {
+// TODO: 1. Add animation, 2. Add ads 3. Add share view implementation
+struct GameView: View {
+    @EnvironmentObject private var coordinator: GameCoordinator
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @ObservedObject var viewModel = GameViewModel()
     
-    @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var mainViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bannerView: GADBannerView!
+    @State var shouldShowGoBackAlert: Bool = false
     
-    private var shouldShowInfoView: Bool = false
-    private var gameStory = GameStory.shared
-    
-    private lazy var gameInfoView: GameInfoView? = {
-        GameInfoView.loadFromNib()
-    }()
-    
-    private lazy var gamePlayView: GamePlayView? = {
-        GamePlayView.loadFromNib()
-    }()
-    
-    private lazy var gameOverView: GameOverView? = {
-        GameOverView.loadFromNib()
-    }()
-    
-    private lazy var confettiLayer = CAEmitterLayer()
-    private lazy var audioManager = AudioManager()
-    
-    private var interstitial: GADInterstitialAd?
-    private var actionAfterAdDismissal: (() -> Void)?
-    
-    var viewModel: GameViewModel?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupBackButton()
-        setupBannerView(with: bannerView)
-        setupAndLoadInterstitialAdUnit()
-        showGameInfoView()
-        configureAudioManager()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-    }
-    
-    private func setupBackButton() {
-        let action = UIAction { [weak self] _ in
-            self?.presentAlertOnBackButton()
+    var body: some View {
+        ZStack {
+            GradientBackground()
+                .ignoresSafeArea()
+            
+            VStack {
+                switch viewModel.gameState {
+                case .info:
+                    gameInfoView
+                case .play:
+                    gamePlayView
+                case .gameOver:
+                    gameOverView
+                }
+            }
+            .padding([.top, .bottom, .leading, .trailing], ViewConstants.padding)
+            .frame(maxHeight: viewMaxHeight)
+            .background(Asset.secondary.swiftUIColor.opacity(ViewConstants.backgroundOpacity))
+            .cornerRadius(ViewConstants.cornerRadius)
+            .padding(.horizontal, ViewConstants.paddingFromSuperview)
         }
-        
-        navigationItem.backAction = action
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-    }
-    
-    private func setupAndLoadInterstitialAdUnit() {
-        guard AppConstants.isAppInEnglish else { return }
-        
-        Task {
-            await loadInterstitialAdUnit()
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                BackButton {
+                    shouldShowGoBackAlert = true
+                }
+                // TODO: view.sensoryFeedback(.error, trigger: triggerHaptic) for ios 17
+            }
         }
-    }
-    
-    private func loadInterstitialAdUnit() async {
-        do {
-            interstitial = try await GADInterstitialAd.load(
-                withAdUnitID: AppConstants.AdMob.interstitialAdId, request: GADRequest())
-            interstitial?.fullScreenContentDelegate = self
-        } catch {
-            dump("Failed to load interstitial ad with error: \(error.localizedDescription)")
+        .alert(L10n.Screen.Game.ConfirmationAlert.title, isPresented: $shouldShowGoBackAlert) {
+            Button(L10n.yesPolite, role: .destructive) {
+                coordinator.pop()
+                viewModel.startNewGame()
+            }
+            Button(L10n.no, role: .cancel) { }
+        } message: {
+            Text(L10n.Screen.Game.ConfirmationAlert.message)
         }
-    }
-    
-    private func configureAudioManager() {
-        let operationQueue = OperationQueue()
-        let audioSetupOperation = BlockOperation { [weak self] in
-            self?.audioManager.setupSounds()
-        }
-        operationQueue.addOperation(audioSetupOperation)
-    }
-    
-    private func showGameInfoView() {
-        guard let gameInfoView,
-              let viewModel else { return }
-        gameInfoView.configure(with: .init(
-            teamName: viewModel.currentTeamName,
-            currentRound: viewModel.currentRound,
-            currentExtraRound: viewModel.currentExtraRound),
-                               delegate: self)
-        
-        gameInfoView.frame = mainView.bounds
-        mainView.addSubview(gameInfoView)
-    }
-    
-    private func showGamePlayView() {
-        guard let gamePlayView else { return }
-        gamePlayView.configure(with: .init(words: gameStory.words.removeFirstNItems(50),
-                                           roundLength: gameStory.lengthOfRound,
-                                           score: gameStory.teams.values[gameStory.currentTeamIndex]),
-                               audioManager: audioManager,
-                               delegate: self)
-        gamePlayView.frame = mainView.bounds
-        mainView.addSubview(gamePlayView)
-    }
-    
-    private func showGameOverView(teamName: String, score: Int) {
-        guard let gameOverView else { return }
-        navigationController?.isNavigationBarHidden = true
-        startConfettiAnimation()
-        
-        mainViewHeightConstraint.constant = ViewControllerConstants.mainViewHeightForGameOverView
-        
-        gameOverView.configure(with: .init(teamName: teamName,
-                                           score: score),
-                               delegate: self)
-        gameOverView.frame = mainView.bounds
-        
-        UIView.transition(with: mainView,
-                          duration: ViewControllerConstants.gameOverViewTransitionDuration,
-                          options: [.transitionCrossDissolve, .allowUserInteraction],
-                          animations: {
-            self.mainView.addSubview(gameOverView)
+        .onDisappear(perform: {
+            coordinator.childDidFinish(coordinator)
         })
     }
     
-    private func toggleGameView() {
-        mainView.removeAllSubviews()
-        
-        if viewModel?.handleEndOfGame() ?? false {
-            presentGameOverView()
-            return
-        }
-        
-        toggleInfoView()
-    }
-    
-    private func toggleInfoView() {
-        // TODO: Add game info enum and control which view to show from it
-        shouldShowInfoView.toggle()
-        if shouldShowInfoView {
-            gameStory.playingSessionCount += 1
-            showGamePlayView()
-        } else {
-            showGameInfoView()
+    private var gameInfoView: some View {
+        GameInfoView(viewModel: viewModel.gameInfoViewModel) {
+            viewModel.gameState = .play
+        } onShowScoreboard: {
+            coordinator.presentGameScoreboard()
         }
     }
     
-    @objc private func presentAlertOnBackButton() {
-        let alert = UIAlertController(title: L10n.Screen.Game.ConfirmationAlert.title,
-                                      message: L10n.Screen.Game.ConfirmationAlert.message,
-                                      preferredStyle: .alert)
-        
-        alert.addAction(.init(title: L10n.yesPolite,
-                              style: .destructive) { [weak self] _ in
-            guard let self else { return }
-            gameStory.reset()
-            self.coordinator?.pop()
-        })
-        
-        alert.addAction(.init(title: L10n.no, style: .cancel))
-        
-        present(alert, animated: true)
-    }
-    
-    private func presentGameOverView() {
-        guard let sortedTeams = viewModel?.sortedTeams,
-              let winnerTeam = sortedTeams.first else { return }
-        
-        gameStory.finishedGamesCountInSession += 1
-        showGameOverView(teamName: winnerTeam.key, score: winnerTeam.value)
-    }
-    
-    private func startConfettiAnimation() {
-        confettiLayer.emitterPosition = .init(x: view.center.x, y: UIApplication.shared.currentScene?.interfaceOrientation == .portrait ? -view.frame.height/2 : -view.frame.height)
-        confettiLayer.opacity = 1
-        
-        let colors: [UIColor] = [
-            Asset.color1.color,
-            Asset.color2.color,
-            Asset.color3.color,
-            Asset.color4.color,
-            Asset.color5.color,
-            Asset.color6.color,
-            Asset.color7.color,
-            Asset.color8.color,
-            Asset.color9.color,
-            Asset.color10.color
-        ]
-        
-        let cells: [CAEmitterCell] = colors.compactMap {
-            let cell = CAEmitterCell()
-            cell.scale = ViewControllerConstants.cellScale
-            cell.scaleRange = ViewControllerConstants.cellScaleRange
-            cell.emissionRange = .pi * 2
-            cell.lifetime = ViewControllerConstants.cellLifetime
-            cell.birthRate = ViewControllerConstants.cellBirthRate
-            cell.velocity = ViewControllerConstants.cellVelocity
-            cell.velocityRange = ViewControllerConstants.cellVelocityRange
-            cell.spin = ViewControllerConstants.cellSpin
-            cell.spinRange = ViewControllerConstants.cellSpinRange
-            cell.color = $0.cgColor
-            cell.contents = Asset.confetti.image.cgImage
-            return cell
+    private var gamePlayView: some View {
+        GamePlayView(
+            viewModel: viewModel.gamePlayViewModel
+        ) { score in
+            viewModel.handleGamePlayResult(score: score)
         }
-        
-        let birthRateAnimation = CABasicAnimation(keyPath: ViewControllerConstants.birthRateAnimation)
-        birthRateAnimation.fromValue = ViewControllerConstants.birthRateStartFromValue
-        birthRateAnimation.toValue = ViewControllerConstants.birthRateStartToValue
-        birthRateAnimation.duration = ViewControllerConstants.birthRateStartDuration
-        birthRateAnimation.isRemovedOnCompletion = false
-        
-        confettiLayer.add(birthRateAnimation, forKey: ViewControllerConstants.birthRateAnimationKey)
-        confettiLayer.emitterCells = cells
-        view.layer.addSublayer(confettiLayer)
     }
     
-    private func stopConfettiAnimation() {
-        confettiLayer.removeAllAnimations()
-        confettiLayer.removeFromSuperlayer()
-        confettiLayer.emitterCells = nil
+    private var gameOverView: some View {
+        GameOverView(
+            viewModel: viewModel.gameOverViewModel
+        ) {
+            // TODO: Remove if i won't need it
+        } onStartOver: {
+            viewModel.startNewGame()
+        } onGoBack: {
+            coordinator.pop()
+            viewModel.startNewGame()
+        } onShowFullScoreboard: {
+            coordinator.presentGameScoreboard(with: [.large()])
+        }
     }
     
-    private func resetGameViewController() {
-        navigationController?.isNavigationBarHidden = false
-        stopConfettiAnimation()
-        mainViewHeightConstraint.constant = ViewControllerConstants.mainViewHeight
-        gameStory.reset()
+    private var viewMaxHeight: CGFloat {
+        horizontalSizeClass == .compact ? viewModel.gameState == .gameOver ? ViewConstants.gameOverViewHeight : ViewConstants.viewHeight : .infinity
     }
 }
 
-// MARK: - GameInfoViewDelegate Methods
-extension GameViewController: GameInfoViewDelegate {
-    func didPressStart() {
-        toggleGameView()
+// MARK: - ViewConstants
+extension GameView {
+    private enum ViewConstants {
+        static let padding: CGFloat = 24
+        static let paddingFromSuperview: CGFloat = 36
+        static let backgroundOpacity: CGFloat = 0.3
+        static let cornerRadius: CGFloat = 10
+        static let viewHeight: CGFloat = 400
+        static let gameOverViewHeight: CGFloat = 600
     }
     
-    func didPressShowScoreboard() {
-        coordinator?.presentGameScoreboard()
-    }
-}
-
-// MARK: - GamePlayViewDelegate Methods
-extension GameViewController: GamePlayViewDelegate {
-    func timerDidFinished(roundScore: Int) {
-        guard let viewModel else { return }
-        viewModel.updateGameInfo(with: roundScore)
-        toggleGameView()
-    }
-}
-
-// MARK: - GameOverDelegate Methods
-extension GameViewController: GameOverViewDelegate {
-    func didPressStartOver() {
-        handleActionWithInterstitial { [weak self] in
-            guard let self else { return }
-            self.resetGameViewController()
-            self.toggleGameView()
-        }
-    }
-    
-    func didPressGoBack() {
-        handleActionWithInterstitial { [weak self] in
-            guard let self else { return }
-            self.stopConfettiAnimation()
-            self.coordinator?.pop()
-        }
-    }
-    
-    func handleActionWithInterstitial(action: @escaping () -> Void) {
-        guard let interstitial = interstitial else {
-            print("Ad wasn't ready.")
-            action()
-            return
-        }
-
-        actionAfterAdDismissal = action
-        interstitial.present(fromRootViewController: nil)
-    }
-    
-    func didPressShowFullScoreboard() {
-        coordinator?.presentGameScoreboard(with: [.large()])
-    }
-}
-
-// MARK: - GADFullScreenContentDelegate
-extension GameViewController: GADFullScreenContentDelegate {
-    func adDidDismissFullScreenContent(_ ad: any GADFullScreenPresentingAd) {
-        print("Ad did dismiss full screen content.")
-        actionAfterAdDismissal?()
-        actionAfterAdDismissal = nil
-        setupAndLoadInterstitialAdUnit()
-    }
-}
-
-// MARK: - ViewController Constants
-extension GameViewController {
+    // TODO: Leave what i will need
     enum ViewControllerConstants {
+        enum PasteboardKeys {
+            static let stickerImage = "com.instagram.sharedSticker.stickerImage"
+            static let backgroundTopColor = "com.instagram.sharedSticker.backgroundTopColor"
+            static let backgroundBottomColor = "com.instagram.sharedSticker.backgroundBottomColor"
+        }
+        
         static let mainViewHeight: CGFloat = 400
         static let mainViewHeightForGameOverView: CGFloat = 600
         static let gameOverViewTransitionDuration: TimeInterval = 0.5
@@ -332,6 +143,11 @@ extension GameViewController {
             Asset.color8.color,
             Asset.color9.color,
             Asset.color10.color
+        ]
+        static let instagramStoriesURLScheme = "instagram-stories://share?source_application="
+        static let shareImageBackgroundColors: [String: Any] = [
+            PasteboardKeys.backgroundTopColor: "#4D2E8D",
+            PasteboardKeys.backgroundBottomColor: "#001242"
         ]
     }
 }

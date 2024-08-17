@@ -8,4 +8,10 @@
 
 import Foundation
 
-enum GameModels { }
+enum GameModels {
+    enum GameState {
+        case info
+        case play
+        case gameOver
+    }
+}

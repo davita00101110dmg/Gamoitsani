@@ -80,3 +80,4 @@
 "screen.game.winning_view.repeat" = "თავიდან";
 "screen.game.winning_view.game_details.title" = "დაბრუნება";
 "screen.game.winning_view.description" = "თქვენ მოიგეთ %@ ქულით";
+"screen.game.game_share_view.title" = "გამარჯვებული გუნდია %@ %@ ქულით!";

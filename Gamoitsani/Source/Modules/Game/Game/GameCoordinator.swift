@@ -6,9 +6,9 @@
 //  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
-final class GameCoordinator: BaseCoordinator {
+final class GameCoordinator: BaseCoordinator, ObservableObject {
     
     var navigationController: UINavigationController?
     
@@ -19,10 +19,13 @@ final class GameCoordinator: BaseCoordinator {
     
     override func start() {
         guard let navigationController else { return }
-        let gameViewController = GameViewController.loadFromNib()
-        gameViewController.viewModel = GameViewModel()
-        gameViewController.coordinator = self
-        navigationController.pushViewController(gameViewController, animated: true)
+        let viewModel = GameViewModel()
+        let gameView = GameView(viewModel: viewModel)
+            .environmentObject(self)
+        
+        let hostingController = UIHostingController(rootView: gameView)
+        hostingController.modalPresentationStyle = .fullScreen
+        navigationController.pushViewController(hostingController, animated: true)
     }
     
     func pop() {

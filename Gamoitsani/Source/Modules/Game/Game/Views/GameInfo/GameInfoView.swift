@@ -6,65 +6,108 @@
 //  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
-protocol GameInfoViewDelegate: AnyObject {
-    func didPressStart()
-    func didPressShowScoreboard()
-}
+struct GameInfoView: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
 
-final class GameInfoView: UIView {
-    
-    @IBOutlet weak var roundCountLabel: GMLabel!
-    @IBOutlet weak var teamNameLabel: GMLabel!
-    
-    @IBOutlet weak var startButton: GMButton!
-    @IBOutlet weak var scoreButton: GMButton!
-    
-    private weak var delegate: GameInfoViewDelegate?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupUI()
-    }
-    
-    private func setupUI() {
-        backgroundColor = Asset.secondary.color.withAlphaComponent(Constants.backgroundColorAlpha)
-        layer.cornerRadius = Constants.viewCornerRadius
-        startButton.configure(with: L10n.start, fontSizeForPad: Constants.buttonFontSizeForPad, isCircle: true)
-        scoreButton.configure(with: L10n.scoreboard)
-    }
-    
-    func configure(with model: GameInfoViewModel, delegate: GameInfoViewDelegate) {
-        self.delegate = delegate
-        
-        var roundCountLabelText = L10n.Screen.Game.CurrentRound.message(model.currentRound.toString)
-        if let currentExtraRound = model.currentExtraRound, currentExtraRound > 0 {
-            roundCountLabelText.append(String.whitespace)
-            roundCountLabelText.append(L10n.Screen.Game.CurrentExtraRound.message(currentExtraRound.toString))
+    var viewModel: GameInfoViewModel
+    var onStart: () -> Void
+    var onShowScoreboard: () -> Void
+
+    var body: some View {
+        VStack {
+            Spacer()
+            
+            VStack(spacing: ViewConstants.labelsSpacing) {
+                roundCountLabel
+                teamNameLabel
+            }
+            
+            Spacer()
+            
+            startButton
+            
+            Spacer()
+            Spacer()
+            
+            showScoreboardButton
         }
-        
-        roundCountLabel.configure(with: roundCountLabelText,
-                                  fontSizeForPad: Constants.labelFontSizeForPad)
-        teamNameLabel.configure(with: model.teamName,
-                                fontSizeForPad: Constants.labelFontSizeForPad)
     }
     
-    @IBAction func startAction(_ sender: Any) {
-        delegate?.didPressStart()
+    private var roundCountLabel: some View {
+        GMLabelView(
+            text: roundCountLabelText,
+            fontSizeForPad: ViewConstants.labelFontSizeForPad
+        )
     }
     
-    @IBAction func showScoreAction(_ sender: Any) {
-        delegate?.didPressShowScoreboard()
+    private var teamNameLabel: some View {
+        GMLabelView(
+            text: viewModel.teamName,
+            fontSizeForPad: ViewConstants.labelFontSizeForPad
+        )
+    }
+
+    private var startButton: some View {
+        GMButtonView(
+            text: L10n.start,
+            fontSizeForPad: ViewConstants.buttonFontSizeForPad,
+            isCircle: true,
+            height: circleButtonHeight
+        ) {
+            GameStory.shared.playingSessionCount += 1
+            onStart()
+        }
+    }
+    
+    private var showScoreboardButton: some View {
+        GMButtonView(text: L10n.scoreboard, height: showScoreboardButtonHeight) {
+            onShowScoreboard()
+        }
+    }
+    
+    private var roundCountLabelText: String {
+        var text = L10n.Screen.Game.CurrentRound.message(viewModel.currentRound.toString)
+        if let currentExtraRound = viewModel.currentExtraRound, currentExtraRound > 0 {
+            text.append(String.whitespace)
+            text.append(L10n.Screen.Game.CurrentExtraRound.message(currentExtraRound.toString))
+        }
+        return text
+    }
+    
+    private var circleButtonHeight: CGFloat {
+        horizontalSizeClass == .compact ? ViewConstants.circleButtonHeightForPhone : ViewConstants.circleButtonHeightForPad
+    }
+    
+    private var showScoreboardButtonHeight: CGFloat {
+        horizontalSizeClass == .compact ? ViewConstants.showScoreboardButtonHeightForPhone : ViewConstants.showScoreboardButtonHeightForPad
     }
 }
 
 // MARK: - View Constants
 extension GameInfoView {
-    enum Constants {
-        static let backgroundColorAlpha: CGFloat = 0.3
-        static let viewCornerRadius: CGFloat = 10
+    enum ViewConstants {
         static let labelFontSizeForPad: CGFloat = 32
         static let buttonFontSizeForPad: CGFloat = 32
+        static let circleButtonHeightForPhone: CGFloat = 100
+        static let circleButtonHeightForPad: CGFloat = 200
+        static let showScoreboardButtonHeightForPhone: CGFloat = 44
+        static let showScoreboardButtonHeightForPad: CGFloat = 60
+        static let labelsSpacing: CGFloat = 12
     }
+}
+
+#Preview {
+    GameInfoView(viewModel: GameInfoViewModel(teamName: "გუნდი 1", currentRound: 1, currentExtraRound: nil)) {
+        
+    } onShowScoreboard: {
+        
+    }
+    .padding([.top, .bottom, .leading, .trailing], 24)
+    .frame(maxHeight: 400)
+    .background(Asset.secondary.swiftUIColor.opacity(0.3))
+    .cornerRadius(10)
+    .padding(.horizontal, 36)
+    .padding(.vertical, 24)
 }
