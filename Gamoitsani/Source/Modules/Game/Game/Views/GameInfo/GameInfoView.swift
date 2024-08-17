@@ -33,6 +33,7 @@ struct GameInfoView: View {
             
             showScoreboardButton
         }
+        .transition(.scale)
     }
     
     private var roundCountLabel: some View {

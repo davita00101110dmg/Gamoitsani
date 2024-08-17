@@ -43,6 +43,7 @@ struct GamePlayView: View {
         .onDisappear {
             viewModel.stopGame()
         }
+        .transition(.scale)
     }
     
     private var currentWordLabel: some View {

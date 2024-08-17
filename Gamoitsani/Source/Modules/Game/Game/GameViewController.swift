@@ -63,7 +63,9 @@ struct GameView: View {
     
     private var gameInfoView: some View {
         GameInfoView(viewModel: viewModel.gameInfoViewModel) {
-            viewModel.gameState = .play
+            withAnimation(.smooth) {
+                viewModel.gameState = .play
+            }
         } onShowScoreboard: {
             coordinator.presentGameScoreboard()
         }
@@ -73,7 +75,9 @@ struct GameView: View {
         GamePlayView(
             viewModel: viewModel.gamePlayViewModel
         ) { score in
-            viewModel.handleGamePlayResult(score: score)
+            withAnimation(.smooth) {
+                viewModel.handleGamePlayResult(score: score)
+            }
         }
     }
     
@@ -83,7 +87,9 @@ struct GameView: View {
         ) {
             // TODO: Remove if i won't need it
         } onStartOver: {
-            viewModel.startNewGame()
+            withAnimation(.smooth) {
+                viewModel.startNewGame()
+            }
         } onGoBack: {
             coordinator.pop()
             viewModel.startNewGame()
