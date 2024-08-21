@@ -37,6 +37,7 @@
 "screen.settings.feedback" = "Help & feedback";
 "screen.settings.share_app" = "Share this app";
 "screen.settings.rate_app" = "Rate this app";
+"screen.settings.privacy_settings" = "Privacy settings";
 "screen.settings.can_not_write_review.title" = "Cannot open AppStore";
 "screen.settings.can_not_write_review.message" = "Please select our app from the AppStore and write a review for us. Thanks!!";
 

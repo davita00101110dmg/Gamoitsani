@@ -225,6 +225,8 @@ public enum L10n {
         public static var feedback: String { L10n.tr("Localizable", "screen.settings.feedback") }
         /// Language
         public static var language: String { L10n.tr("Localizable", "screen.settings.language") }
+        /// Privacy settings
+        public static var privacySettings: String { L10n.tr("Localizable", "screen.settings.privacy_settings") }
         /// Rate this app
         public static var rateApp: String { L10n.tr("Localizable", "screen.settings.rate_app") }
         /// Remove ads
