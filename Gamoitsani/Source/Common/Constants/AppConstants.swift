@@ -34,7 +34,7 @@ enum AppConstants {
     }
     
     static var shouldShowAdsToUser: Bool {
-        isAppInEnglish && !hasRemovedAds
+        UserDefaults.hasAdConsent && isAppInEnglish && !hasRemovedAds
     }
     
     static let randomWords = [

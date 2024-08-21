@@ -102,6 +102,7 @@
 		FF8EA7562BEC40B100F098B8 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7552BEC40B100F098B8 /* UIColorExtensions.swift */; };
 		FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */; };
 		FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */; };
+		FFB98EAB2C7534380024A925 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB98EAA2C7534380024A925 /* AdManager.swift */; };
 		FFA60DAB2C7639D5005A2660 /* AppOpenAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */; };
 		FFBFB0312C68CC3A00A877D7 /* GamoitsaniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */; };
 		FFC172B42C6E6EAB0069623F /* GMButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B32C6E6EAB0069623F /* GMButtonView.swift */; };
@@ -280,6 +281,7 @@
 		FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FF91B8D82BF785B200EB85F1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		FFB98EAA2C7534380024A925 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAdManager.swift; sourceTree = "<group>"; };
 		FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
 		FFC172B32C6E6EAB0069623F /* GMButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMButtonView.swift; sourceTree = "<group>"; };
@@ -780,6 +782,7 @@
 				FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */,
 				FF37087A2BFBD4280056361F /* CoreDataManager.swift */,
 				FF7CA15D2C01FCB800E3BEC4 /* StoreReviewManager.swift */,
+				FFB98EAA2C7534380024A925 /* AdManager.swift */,
 				FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */,
 			);
 			path = Managers;
@@ -1336,6 +1339,7 @@
 				FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */,
 				FF7F1D9B2BE7D25300872554 /* GamePlayViewModel.swift in Sources */,
 				FF86756A2C67DB270089B52B /* SettingsViewModel.swift in Sources */,
+				FFB98EAB2C7534380024A925 /* AdManager.swift in Sources */,
 				FF7F1D7E2BE7A2F700872554 /* GameCoordinator.swift in Sources */,
 				FF8675382C6772230089B52B /* SettingsCoordinator.swift in Sources */,
 				FF8675452C67758E0089B52B /* SettingsChangeLanguageCell.swift in Sources */,

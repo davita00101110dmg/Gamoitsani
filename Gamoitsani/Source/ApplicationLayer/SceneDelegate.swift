@@ -7,6 +7,8 @@
 
 import UIKit
 import FacebookCore
+import UserMessagingPlatform
+import GoogleMobileAds
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -33,6 +35,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         coordinator?.start()
+        
+        AdManager.shared.requestAdConsent(from: window?.rootViewController)
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
