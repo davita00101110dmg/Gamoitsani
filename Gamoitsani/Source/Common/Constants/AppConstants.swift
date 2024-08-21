@@ -95,6 +95,15 @@ enum AppConstants {
                 return .empty
             }
         }
+                
+        static var appOpenAdId: String {
+            do {
+                return try Configuration.value(for: "APP_OPEN_AD_ID")
+            } catch {
+                dump("Error retrieving appOpenAdId: \(error)")
+                return .empty
+            }
+        }
         
         static var testDeviceId: String {
             do {
