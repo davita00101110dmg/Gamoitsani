@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject private var coordinator: SettingsCoordinator
     @ObservedObject var viewModel = SettingsViewModel()
     
     var body: some View {

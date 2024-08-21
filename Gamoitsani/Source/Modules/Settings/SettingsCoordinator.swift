@@ -6,9 +6,9 @@
 //  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
-final class SettingsCoordinator: BaseCoordinator {
+final class SettingsCoordinator: BaseCoordinator, ObservableObject {
     var navigationController: UINavigationController?
     
     init(navigationController: UINavigationController) {
@@ -18,9 +18,15 @@ final class SettingsCoordinator: BaseCoordinator {
     
     override func start() {
         guard let navigationController else { return }
-        let viewController = SettingsViewController.loadFromNib()
-        viewController.coordinator = self
-        navigationController.present(viewController, animated: true)
+        let settingsView = SettingsView()
+            .environmentObject(self)
+        
+        let hostingController = UIHostingController(rootView: settingsView)
+        navigationController.present(hostingController, animated: true)
+    }
+    
+    func presentPrivacySettings() {
+        AdManager.shared.presentPrivacySettings(from: navigationController?.presentedViewController)
     }
     
     func dismiss() {
