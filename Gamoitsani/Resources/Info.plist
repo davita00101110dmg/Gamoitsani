@@ -26,6 +26,8 @@
 	<string>Gamoitsani</string>
 	<key>BANNER_AD_ID</key>
 	<string>$(BANNER_AD_ID)</string>
+	<key>APP_OPEN_AD_ID</key>
+	<string>$(APP_OPEN_AD_ID)</string>
 	<key>GADApplicationIdentifier</key>
 	<string>$(ADMOB_APP_ID)</string>
 	<key>META_APP_ID</key>

@@ -30,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application,
             didFinishLaunchingWithOptions: launchOptions
         )
+        
+        UserDefaults.isFirstLaunch = true
 
         return true
     }
@@ -99,7 +101,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func registerInitialUserDefaultValues() {
         UserDefaults.standard.register(defaults: [
-            UserDefaults.Keys.APP_LANGUAGE: AppConstants.Language.georgian.identifier
+            UserDefaults.Keys.APP_LANGUAGE: AppConstants.Language.georgian.identifier,
+            UserDefaults.Keys.IS_APP_FIRST_LAUNCH: true
         ])
     }
 }
