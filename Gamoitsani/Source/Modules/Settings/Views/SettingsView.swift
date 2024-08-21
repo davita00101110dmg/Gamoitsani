@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject private var coordinator: SettingsCoordinator
     @ObservedObject var viewModel = SettingsViewModel()
     
     var body: some View {
@@ -41,9 +42,17 @@ struct SettingsView: View {
                         GMTableViewButton(title: L10n.Screen.Settings.rateApp) {
                             viewModel.writeReviewAction()
                         }
+                        
                         GMTableViewButton(title: L10n.Screen.Settings.feedback) {
                             viewModel.feedbackAction()
                         }
+                        
+                        if viewModel.shouldShowPrivacySettingsButton {
+                            GMTableViewButton(title: L10n.Screen.Settings.privacySettings) {
+                                coordinator.presentPrivacySettings()
+                            }
+                        }
+                        
                         GMTableViewButton(title: L10n.Screen.Settings.shareApp) {
                             viewModel.isShareSheetPresented = true
                         }

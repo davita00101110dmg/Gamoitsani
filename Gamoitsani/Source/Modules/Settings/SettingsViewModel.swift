@@ -19,6 +19,10 @@ final class SettingsViewModel: NSObject, ObservableObject {
         
     private var products: [SKProduct] = []
     
+    var shouldShowPrivacySettingsButton: Bool {
+        AdManager.shared.shouldShowPrivacySettingsButton
+    }
+    
     override init() {
         super.init()
         selectedSegment = appLanguage == AppConstants.Language.georgian.identifier ? 0 : 1

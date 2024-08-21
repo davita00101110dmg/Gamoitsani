@@ -75,9 +75,7 @@
 		FF8623722C6AAFA50044A7D7 /* GameShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8623712C6AAFA50044A7D7 /* GameShareView.xib */; };
 		FF8623752C6AB27D0044A7D7 /* GameShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8623742C6AB27D0044A7D7 /* GameShareView.swift */; };
 		FF8623782C6AB8A00044A7D7 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = FF8623772C6AB8A00044A7D7 /* FacebookShare */; };
-		FF8675322C67720F0089B52B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675312C67720F0089B52B /* SettingsViewController.swift */; };
 		FF8675382C6772230089B52B /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675372C6772230089B52B /* SettingsCoordinator.swift */; };
-		FF86753F2C6772F70089B52B /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF86753E2C6772F70089B52B /* SettingsViewController.xib */; };
 		FF8675442C67758E0089B52B /* SettingsChangeLanguageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8675432C67758E0089B52B /* SettingsChangeLanguageCell.xib */; };
 		FF8675452C67758E0089B52B /* SettingsChangeLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675422C67758E0089B52B /* SettingsChangeLanguageCell.swift */; };
 		FF8675612C6798680089B52B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675602C6798680089B52B /* SettingsView.swift */; };
@@ -103,6 +101,7 @@
 		FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */; };
 		FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */; };
 		FFA60DAB2C7639D5005A2660 /* AppOpenAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */; };
+		FFB98EAB2C7534380024A925 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB98EAA2C7534380024A925 /* AdManager.swift */; };
 		FFBFB0312C68CC3A00A877D7 /* GamoitsaniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */; };
 		FFC172B42C6E6EAB0069623F /* GMButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B32C6E6EAB0069623F /* GMButtonView.swift */; };
 		FFC172B62C6E70FA0069623F /* GMLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B52C6E70FA0069623F /* GMLabelView.swift */; };
@@ -251,9 +250,7 @@
 		FF7F1D9C2BE92F5000872554 /* GameStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStory.swift; sourceTree = "<group>"; };
 		FF8623712C6AAFA50044A7D7 /* GameShareView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameShareView.xib; sourceTree = "<group>"; };
 		FF8623742C6AB27D0044A7D7 /* GameShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareView.swift; sourceTree = "<group>"; };
-		FF8675312C67720F0089B52B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FF8675372C6772230089B52B /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
-		FF86753E2C6772F70089B52B /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = Gamoitsani/Source/Modules/Home/Xib/SettingsViewController.xib; sourceTree = SOURCE_ROOT; };
 		FF8675422C67758E0089B52B /* SettingsChangeLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsChangeLanguageCell.swift; sourceTree = "<group>"; };
 		FF8675432C67758E0089B52B /* SettingsChangeLanguageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsChangeLanguageCell.xib; sourceTree = "<group>"; };
 		FF8675602C6798680089B52B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -281,6 +278,7 @@
 		FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FF91B8D82BF785B200EB85F1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAdManager.swift; sourceTree = "<group>"; };
+		FFB98EAA2C7534380024A925 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
 		FFC172B32C6E6EAB0069623F /* GMButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMButtonView.swift; sourceTree = "<group>"; };
 		FFC172B52C6E70FA0069623F /* GMLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMLabelView.swift; sourceTree = "<group>"; };
@@ -677,22 +675,12 @@
 			isa = PBXGroup;
 			children = (
 				FF8675622C6799990089B52B /* Views */,
-				FF8675392C6772250089B52B /* Xib */,
 				FF8675402C6775660089B52B /* Cell */,
-				FF8675312C67720F0089B52B /* SettingsViewController.swift */,
 				FF8675692C67DB270089B52B /* SettingsViewModel.swift */,
 				FF86757A2C681A780089B52B /* SettingsModels.swift */,
 				FF8675372C6772230089B52B /* SettingsCoordinator.swift */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		FF8675392C6772250089B52B /* Xib */ = {
-			isa = PBXGroup;
-			children = (
-				FF86753E2C6772F70089B52B /* SettingsViewController.xib */,
-			);
-			path = Xib;
 			sourceTree = "<group>";
 		};
 		FF8675402C6775660089B52B /* Cell */ = {
@@ -780,6 +768,7 @@
 				FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */,
 				FF37087A2BFBD4280056361F /* CoreDataManager.swift */,
 				FF7CA15D2C01FCB800E3BEC4 /* StoreReviewManager.swift */,
+				FFB98EAA2C7534380024A925 /* AdManager.swift */,
 				FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */,
 			);
 			path = Managers;
@@ -1154,7 +1143,6 @@
 				FFFB4D072BD8393A00CDDCB4 /* Localizable.strings in Resources */,
 				FF1111892C4FD17500C44F62 /* correct.wav in Resources */,
 				FF7F1D882BE7ADEB00872554 /* GameInfoView.xib in Resources */,
-				FF86753F2C6772F70089B52B /* SettingsViewController.xib in Resources */,
 				FF4D9D352BD698630046819D /* Assets.xcassets in Resources */,
 				FF7069982C6C0C1C00C3D9EA /* Portrait.png in Resources */,
 				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
@@ -1312,7 +1300,6 @@
 			files = (
 				FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */,
 				FF8EA70D2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift in Sources */,
-				FF8675322C67720F0089B52B /* SettingsViewController.swift in Sources */,
 				FF7CA1602C02000900E3BEC4 /* UIApplicationExtensions.swift in Sources */,
 				FF8675612C6798680089B52B /* SettingsView.swift in Sources */,
 				FF7CA15E2C01FCB800E3BEC4 /* StoreReviewManager.swift in Sources */,
@@ -1336,6 +1323,7 @@
 				FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */,
 				FF7F1D9B2BE7D25300872554 /* GamePlayViewModel.swift in Sources */,
 				FF86756A2C67DB270089B52B /* SettingsViewModel.swift in Sources */,
+				FFB98EAB2C7534380024A925 /* AdManager.swift in Sources */,
 				FF7F1D7E2BE7A2F700872554 /* GameCoordinator.swift in Sources */,
 				FF8675382C6772230089B52B /* SettingsCoordinator.swift in Sources */,
 				FF8675452C67758E0089B52B /* SettingsChangeLanguageCell.swift in Sources */,

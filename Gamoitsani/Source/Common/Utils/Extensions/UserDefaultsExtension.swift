@@ -14,6 +14,7 @@ extension UserDefaults {
         static let APP_OPENED_COUNT = "APP_OPENED_COUNT"
         static let HAS_REMOVED_ADS = "HAS_REMOVED_ADS"
         static let IS_APP_FIRST_LAUNCH = "IS_APP_FIRST_LAUNCH"
+        static let HAS_AD_CONSENT = "HAS_AD_CONSENT"
     }
     
     static var appLanguage: String? {
@@ -43,4 +44,13 @@ extension UserDefaults {
         }
     }
     
+    
+    static var hasAdConsent: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Keys.HAS_AD_CONSENT)
+        } set {
+            UserDefaults.standard.set(newValue, forKey: Keys.HAS_AD_CONSENT)
+            UserDefaults.standard.synchronize()
+        }
+    }
 }

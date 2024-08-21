@@ -37,6 +37,7 @@
 "screen.settings.feedback" = "დახმარება & უკუკავშირი";
 "screen.settings.share_app" = "გააზიარე აპლიკაცია";
 "screen.settings.rate_app" = "შეაფასე აპლიკაცია";
+"screen.settings.privacy_settings" = "კონფიდენციალურობის პარამეტრები";
 "screen.settings.can_not_write_review.title" = "App Store ვერ გაიხსნა";
 "screen.settings.can_not_write_review.message" = "გთხოვთ, იპოვეთ ჩვენი აპლიკაცია App Store-ზე და დაგვიწერეთ შეფასება. მადლობა!";
 
