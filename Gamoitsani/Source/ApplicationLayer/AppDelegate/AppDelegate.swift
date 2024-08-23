@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        NotificationsManager.shared.requestAuthorization()
         registerInitialUserDefaultValues()
         StoreReviewManager.incrementAppOpenedCount()
         
