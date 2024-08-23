@@ -159,4 +159,20 @@ enum AppConstants {
             }
         }
     }
+    
+    enum Notifications {
+        static let weeklyNotificationIdentifier = "WeeklyNotification"
+        
+        static let notificationTitles: [String] = [
+            "Guess a Word!",
+            "Play Gamoitsani!",
+            "New Words!",
+        ]
+            
+        static let notificationMessages: [String] = [
+            "Join the fun now.",
+            "Challenge awaits.",
+            "Try them out.",
+        ]
+    }
 }
