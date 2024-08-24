@@ -284,6 +284,7 @@
 		FFA60DB32C7A0269005A2660 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		FFA60DB62C7A0288005A2660 /* TransitionViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewModifier.swift; sourceTree = "<group>"; };
 		FFA60DBB2C7A2923005A2660 /* ShakeEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeEffect.swift; sourceTree = "<group>"; };
+		FFA60DBD2C7A2D29005A2660 /* Gamoitsani.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Gamoitsani.entitlements; sourceTree = "<group>"; };
 		FFB98EAA2C7534380024A925 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
 		FFC172B32C6E6EAB0069623F /* GMButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMButtonView.swift; sourceTree = "<group>"; };
@@ -464,6 +465,7 @@
 				FF4D9D342BD698630046819D /* Assets.xcassets */,
 				FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */,
 				FF8675722C6808FE0089B52B /* Gamoitsani.storekit */,
+				FFA60DBD2C7A2D29005A2660 /* Gamoitsani.entitlements */,
 				FF8929C12BD6FC52000C0B9B /* Info.plist */,
 				FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */,
 			);
@@ -1602,7 +1604,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Gamoitsani/Gamoitsani.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Gamoitsani/Resources/Gamoitsani.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = V9DL6T6A4K;
@@ -1636,7 +1638,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Gamoitsani/Gamoitsani.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Gamoitsani/Resources/Gamoitsani.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = V9DL6T6A4K;
