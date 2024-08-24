@@ -9,6 +9,7 @@
 
 import Foundation
 import OrderedCollections
+import SwiftUI
 
 class GameViewModel: ObservableObject {
     
@@ -58,12 +59,15 @@ class GameViewModel: ObservableObject {
 // MARK: - Game Logic
 extension GameViewModel {
     func handleGamePlayResult(score: Int) {
-        updateGameInfo(with: score)
-
-        if handleEndOfGame() {
-            gameState = .gameOver
-        } else {
-            gameState = .info
+        withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {       
+            updateGameInfo(with: score)
+            
+            if handleEndOfGame() {
+                gameState = .gameOver
+            } else {
+                gameState = .info
+            }
+            
         }
     }
     

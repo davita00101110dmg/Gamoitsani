@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class GamePlayViewModel: ObservableObject {
 
@@ -27,6 +28,12 @@ class GamePlayViewModel: ObservableObject {
         self.words = words
         self.timeRemaining = roundLength
         self.audioManager = audioManager
+        
+        updateCurrentWord()
+    }
+    
+    deinit {
+        invalidateTimers()
     }
 
     func startGame() {
@@ -40,14 +47,12 @@ class GamePlayViewModel: ObservableObject {
         roundLengthTimer = Timer.scheduledTimer(withTimeInterval: roundLength, repeats: false) { [weak self] _ in
             guard let self else { return }
             self.stopGame()
-            self.onTimerFinished?(self.score) // Assuming you have onTimerFinished closure in the view model
+            self.onTimerFinished?(self.score)
         }
         countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             guard let self else { return }
             self.updateTimer()
         }
-        
-        updateCurrentWord()
     }
     
     func stopGame() {
@@ -72,8 +77,13 @@ class GamePlayViewModel: ObservableObject {
     }
 
     private func updateCurrentWord() {
-        currentWord = (shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn)
-                        ?? L10n.Screen.Game.NoMoreWords.message
+        // TODO: Add animation between texts, and on last 5 seconds make text red, add shake animation and vibration
+        guard let word = shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn else {
+            currentWord = L10n.Screen.Game.NoMoreWords.message
+            return
+        }
+        currentWord = word
+        
     }
     
 }

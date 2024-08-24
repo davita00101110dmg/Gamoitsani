@@ -32,7 +32,6 @@
 		FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D792BD69BAC0046819D /* HomeViewModel.swift */; };
 		FF4D9D7C2BD69BC00046819D /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D7B2BD69BC00046819D /* HomeModels.swift */; };
 		FF4D9D9C2BD6F7DB0046819D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D9B2BD6F7DB0046819D /* HomeCoordinator.swift */; };
-		FF4F12462C702E45000BDBD7 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F12452C702E45000BDBD7 /* BackButton.swift */; };
 		FF4FA9BC2BED916700F38F98 /* AddWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4FA9BB2BED916700F38F98 /* AddWordViewController.xib */; };
 		FF4FA9BE2BED917300F38F98 /* AddWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9BD2BED917300F38F98 /* AddWordViewController.swift */; };
 		FF4FA9C02BED917A00F38F98 /* AddWordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9BF2BED917A00F38F98 /* AddWordCoordinator.swift */; };
@@ -102,6 +101,8 @@
 		FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */; };
 		FFA60DAB2C7639D5005A2660 /* AppOpenAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */; };
 		FFA60DAD2C7774D8005A2660 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */; };
+		FFA60DB42C7A0269005A2660 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DB32C7A0269005A2660 /* ViewExtensions.swift */; };
+		FFA60DB72C7A0288005A2660 /* TransitionViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DB62C7A0288005A2660 /* TransitionViewModifier.swift */; };
 		FFB98EAB2C7534380024A925 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB98EAA2C7534380024A925 /* AdManager.swift */; };
 		FFBFB0312C68CC3A00A877D7 /* GamoitsaniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */; };
 		FFC172B42C6E6EAB0069623F /* GMButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B32C6E6EAB0069623F /* GMButtonView.swift */; };
@@ -212,7 +213,6 @@
 		FF4D9D792BD69BAC0046819D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FF4D9D7B2BD69BC00046819D /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
 		FF4D9D9B2BD6F7DB0046819D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
-		FF4F12452C702E45000BDBD7 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		FF4FA9BB2BED916700F38F98 /* AddWordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWordViewController.xib; sourceTree = "<group>"; };
 		FF4FA9BD2BED917300F38F98 /* AddWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewController.swift; sourceTree = "<group>"; };
 		FF4FA9BF2BED917A00F38F98 /* AddWordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordCoordinator.swift; sourceTree = "<group>"; };
@@ -280,6 +280,8 @@
 		FF91B8D82BF785B200EB85F1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAdManager.swift; sourceTree = "<group>"; };
 		FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
+		FFA60DB32C7A0269005A2660 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		FFA60DB62C7A0288005A2660 /* TransitionViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewModifier.swift; sourceTree = "<group>"; };
 		FFB98EAA2C7534380024A925 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
 		FFC172B32C6E6EAB0069623F /* GMButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMButtonView.swift; sourceTree = "<group>"; };
@@ -718,7 +720,6 @@
 				FFC172B72C6E71580069623F /* GameScoreboardTeamView.swift */,
 				FFFCF38B2C6EC506003458DC /* ConfettiView.swift */,
 				FFFCF38D2C6FA048003458DC /* DynamicStack.swift */,
-				FF4F12452C702E45000BDBD7 /* BackButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -784,6 +785,14 @@
 				FF1111882C4FD17500C44F62 /* incorrect.mp3 */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		FFA60DB52C7A0281005A2660 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				FFA60DB62C7A0288005A2660 /* TransitionViewModifier.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 		FFBFB02F2C68CC2700A877D7 /* GamoitsaniTests */ = {
@@ -863,6 +872,7 @@
 		FFFB4CD32BD7CA6700CDDCB4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FFA60DB52C7A0281005A2660 /* ViewModifiers */,
 				FF8EA7152BEBFDC800F098B8 /* Managers */,
 				FFFB4CD52BD7CA7500CDDCB4 /* Extensions */,
 			);
@@ -897,6 +907,7 @@
 				FF7F1D932BE7B10600872554 /* UIViewExtensions.swift */,
 				FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */,
 				FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */,
+				FFA60DB32C7A0269005A2660 /* ViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1352,6 +1363,7 @@
 				FF1E92BA2BF91C8C00127FDE /* GMBackBarButtonItem.swift in Sources */,
 				FFC172B42C6E6EAB0069623F /* GMButtonView.swift in Sources */,
 				FF86756D2C67E0DA0089B52B /* ActivityView.swift in Sources */,
+				FFA60DB72C7A0288005A2660 /* TransitionViewModifier.swift in Sources */,
 				FFC172B62C6E70FA0069623F /* GMLabelView.swift in Sources */,
 				FF7F1D7F2BE7A2F700872554 /* GameModels.swift in Sources */,
 				FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */,
@@ -1359,7 +1371,6 @@
 				FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */,
 				FF86757B2C681A780089B52B /* SettingsModels.swift in Sources */,
 				FF4FA9CC2BEF875B00F38F98 /* Configuration.swift in Sources */,
-				FF4F12462C702E45000BDBD7 /* BackButton.swift in Sources */,
 				FF67CC812C6AD0BF0094824E /* GameTeamsDataSource.swift in Sources */,
 				FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */,
 				FF7F1D962BE7B9D800872554 /* GameInfoViewModel.swift in Sources */,
@@ -1394,6 +1405,7 @@
 				FF8EA7212BEC12BD00F098B8 /* AudioManager.swift in Sources */,
 				FFFB4D302BD861F300CDDCB4 /* GMButton.swift in Sources */,
 				FFF65CC82BE6B0C4008E0352 /* Localizable.swift in Sources */,
+				FFA60DB42C7A0269005A2660 /* ViewExtensions.swift in Sources */,
 				FF7CA1632C02590700E3BEC4 /* GameOverView.swift in Sources */,
 				FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */,
 				FF4FA9D32BEFF30E00F38F98 /* AddWordModels.swift in Sources */,

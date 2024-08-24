@@ -26,7 +26,7 @@ struct GamePlayView: View {
             Spacer()
             
             timerLabel
-
+            
             Spacer()
             
             HStack {
@@ -36,7 +36,9 @@ struct GamePlayView: View {
                 
                 correctButton
             }
+            
         }
+        .transitionHandler(duration: AppConstants.viewTransitionTime)
         .onAppear {
             viewModel.startGame()
         }
@@ -64,29 +66,23 @@ struct GamePlayView: View {
     }
     
     private var incorrectButton: some View {
-        GMButtonView(
-            text: ViewConstants.incorrectSymbol,
-            fontSizeForPhone: ViewConstants.buttonFontSizeForPhone,
-            fontSizeForPad: ViewConstants.buttonFontSizeForPad,
-            isCircle: true,
-            backgroundColor: Asset.red.swiftUIColor,
-            height: horizontalSizeClass == .compact ? ViewConstants.buttonHeight : ViewConstants.buttonHeightForIpad
-        ) {
-            viewModel.wordButtonAction(tag: 0) // Incorrect tag
-        }
-        
+        makeButton(text: ViewConstants.incorrectSymbol, color: Asset.red.swiftUIColor, tag: 0)
     }
     
     private var correctButton: some View {
+        makeButton(text: ViewConstants.correctSymbol, color: Asset.green.swiftUIColor, tag: 1)
+    }
+    
+    private func makeButton(text: String, color: Color, tag: Int) -> some View {
         GMButtonView(
-            text: ViewConstants.correctSymbol,
+            text: text,
             fontSizeForPhone: ViewConstants.buttonFontSizeForPhone,
             fontSizeForPad: ViewConstants.buttonFontSizeForPad,
             isCircle: true,
-            backgroundColor: Asset.green.swiftUIColor,
+            backgroundColor: color,
             height: horizontalSizeClass == .compact ? ViewConstants.buttonHeight : ViewConstants.buttonHeightForIpad
         ) {
-            viewModel.wordButtonAction(tag: 1) // Correct tag
+            viewModel.wordButtonAction(tag: tag)
         }
     }
 }

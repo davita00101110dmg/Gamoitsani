@@ -33,6 +33,7 @@ struct GameInfoView: View {
             
             showScoreboardButton
         }
+        .transitionHandler(duration: AppConstants.viewTransitionTime)
         .transition(.scale)
     }
     
@@ -58,7 +59,9 @@ struct GameInfoView: View {
             height: circleButtonHeight
         ) {
             GameStory.shared.playingSessionCount += 1
-            onStart()
+            withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
+                onStart()
+            }
         }
     }
     
