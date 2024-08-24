@@ -80,7 +80,9 @@ struct GamePlayView: View {
             fontSizeForPad: ViewConstants.buttonFontSizeForPad,
             isCircle: true,
             backgroundColor: color,
-            height: horizontalSizeClass == .compact ? ViewConstants.buttonHeight : ViewConstants.buttonHeightForIpad
+            height: horizontalSizeClass == .compact ? ViewConstants.buttonHeight : ViewConstants.buttonHeightForIpad,
+            shouldLowerOpacityOnPress: false,
+            shouldScaleOnPress: true
         ) {
             viewModel.wordButtonAction(tag: tag)
         }
