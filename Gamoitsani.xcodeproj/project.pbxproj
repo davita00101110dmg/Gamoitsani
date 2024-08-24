@@ -103,6 +103,7 @@
 		FFA60DAD2C7774D8005A2660 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */; };
 		FFA60DB42C7A0269005A2660 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DB32C7A0269005A2660 /* ViewExtensions.swift */; };
 		FFA60DB72C7A0288005A2660 /* TransitionViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DB62C7A0288005A2660 /* TransitionViewModifier.swift */; };
+		FFA60DBC2C7A2923005A2660 /* ShakeEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DBB2C7A2923005A2660 /* ShakeEffect.swift */; };
 		FFB98EAB2C7534380024A925 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB98EAA2C7534380024A925 /* AdManager.swift */; };
 		FFBFB0312C68CC3A00A877D7 /* GamoitsaniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */; };
 		FFC172B42C6E6EAB0069623F /* GMButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B32C6E6EAB0069623F /* GMButtonView.swift */; };
@@ -282,6 +283,7 @@
 		FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		FFA60DB32C7A0269005A2660 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		FFA60DB62C7A0288005A2660 /* TransitionViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewModifier.swift; sourceTree = "<group>"; };
+		FFA60DBB2C7A2923005A2660 /* ShakeEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeEffect.swift; sourceTree = "<group>"; };
 		FFB98EAA2C7534380024A925 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
 		FFC172B32C6E6EAB0069623F /* GMButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMButtonView.swift; sourceTree = "<group>"; };
@@ -795,6 +797,14 @@
 			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
+		FFA60DBA2C7A2914005A2660 /* GeometryEffect */ = {
+			isa = PBXGroup;
+			children = (
+				FFA60DBB2C7A2923005A2660 /* ShakeEffect.swift */,
+			);
+			path = GeometryEffect;
+			sourceTree = "<group>";
+		};
 		FFBFB02F2C68CC2700A877D7 /* GamoitsaniTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -872,6 +882,7 @@
 		FFFB4CD32BD7CA6700CDDCB4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FFA60DBA2C7A2914005A2660 /* GeometryEffect */,
 				FFA60DB52C7A0281005A2660 /* ViewModifiers */,
 				FF8EA7152BEBFDC800F098B8 /* Managers */,
 				FFFB4CD52BD7CA7500CDDCB4 /* Extensions */,
@@ -1365,6 +1376,7 @@
 				FF86756D2C67E0DA0089B52B /* ActivityView.swift in Sources */,
 				FFA60DB72C7A0288005A2660 /* TransitionViewModifier.swift in Sources */,
 				FFC172B62C6E70FA0069623F /* GMLabelView.swift in Sources */,
+				FFA60DBC2C7A2923005A2660 /* ShakeEffect.swift in Sources */,
 				FF7F1D7F2BE7A2F700872554 /* GameModels.swift in Sources */,
 				FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */,
 				FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */,

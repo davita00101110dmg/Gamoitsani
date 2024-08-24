@@ -12,6 +12,8 @@ struct GamePlayView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ObservedObject var viewModel: GamePlayViewModel
     
+    @State var shaking: Bool = false
+    
     init(viewModel: GamePlayViewModel, onTimerFinished: @escaping (Int) -> Void) {
         self.viewModel = viewModel
         self.viewModel.onTimerFinished = onTimerFinished
@@ -25,7 +27,7 @@ struct GamePlayView: View {
             
             Spacer()
             
-            timerLabel
+            timerLabelWithFeedback
             
             Spacer()
             
@@ -57,12 +59,33 @@ struct GamePlayView: View {
         )
     }
     
-    private var timerLabel: some View {
-        GMLabelView(
+    private var timerLabelWithFeedback: some View {
+        let isWarning = viewModel.timeRemaining <= 5
+        let timerLabelView = GMLabelView(
             text: viewModel.timeRemaining.toString(),
             fontSizeForPhone: ViewConstants.timerLabelFontSizeForPhone,
-            fontSizeForPad: ViewConstants.timerLabelFontSizeForPad
+            fontSizeForPad: ViewConstants.timerLabelFontSizeForPad,
+            color: isWarning ? Asset.red.swiftUIColor : .white
         )
+            .contentTransition(.numericText())
+            .animation(.linear, value: viewModel.timeRemaining)
+
+        if #available(iOS 17.0, *) {
+            return timerLabelView
+                .onChange(of: viewModel.timeRemaining, { oldValue, newValue in
+                    if newValue <= 5 {
+                        withAnimation(.easeInOut) {
+                            shaking.toggle()
+                        }
+                    }
+                })
+                .modifier(ShakeEffect(animatableData: CGFloat(shaking ? 1 : 0)))
+                .sensoryFeedback(.warning, trigger: viewModel.timeRemaining) { _, newValue in
+                    newValue <= 5
+                }
+        } else {
+            return timerLabelView
+        }
     }
     
     private var incorrectButton: some View {
