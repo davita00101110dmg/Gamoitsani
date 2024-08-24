@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct GameOverView: View {
+    @State var isDisable: Bool = false
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var viewModel: GameOverViewModel
@@ -44,11 +45,12 @@ struct GameOverView: View {
                 showScoreboardButton
             }
         }
+        .transitionHandler(duration: AppConstants.viewTransitionTime)
         .onAppear {
             onAppear()
         }
     }
-    
+
     private var titleLabel: some View {
         GMLabelView(
             text: L10n.Screen.Game.WinningView.title,
@@ -85,7 +87,9 @@ struct GameOverView: View {
             text: L10n.Screen.Game.WinningView.repeat,
             height: buttonHeight
         ) {
-            onStartOver()
+            withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
+                onStartOver()
+            }
         }
     }
         

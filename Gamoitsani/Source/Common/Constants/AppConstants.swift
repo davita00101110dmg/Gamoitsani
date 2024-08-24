@@ -10,6 +10,9 @@ import Foundation
 
 enum AppConstants {
     
+    static let viewTransitionTime: Double = 1
+    static let viewAnimationTime: Double = 0.5
+    
     static let launchScreen = "LaunchScreen"
     
     static let maxWordsToSaveInCoreData = 20000

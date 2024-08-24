@@ -22,6 +22,7 @@ final class SettingsCoordinator: BaseCoordinator, ObservableObject {
             .environmentObject(self)
         
         let hostingController = UIHostingController(rootView: settingsView)
+        hostingController.sheetPresentationController?.prefersGrabberVisible = true
         navigationController.present(hostingController, animated: true)
     }
     

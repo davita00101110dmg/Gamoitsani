@@ -12,6 +12,8 @@ struct GamePlayView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ObservedObject var viewModel: GamePlayViewModel
     
+    @State var shaking: Bool = false
+    
     init(viewModel: GamePlayViewModel, onTimerFinished: @escaping (Int) -> Void) {
         self.viewModel = viewModel
         self.viewModel.onTimerFinished = onTimerFinished
@@ -25,8 +27,8 @@ struct GamePlayView: View {
             
             Spacer()
             
-            timerLabel
-
+            timerLabelWithFeedback
+            
             Spacer()
             
             HStack {
@@ -36,13 +38,16 @@ struct GamePlayView: View {
                 
                 correctButton
             }
+            
         }
+        .transitionHandler(duration: AppConstants.viewTransitionTime)
         .onAppear {
             viewModel.startGame()
         }
         .onDisappear {
             viewModel.stopGame()
         }
+        .transition(.scale)
     }
     
     private var currentWordLabel: some View {
@@ -54,38 +59,55 @@ struct GamePlayView: View {
         )
     }
     
-    private var timerLabel: some View {
-        GMLabelView(
+    private var timerLabelWithFeedback: some View {
+        let isWarning = viewModel.timeRemaining <= 5
+        let timerLabelView = GMLabelView(
             text: viewModel.timeRemaining.toString(),
             fontSizeForPhone: ViewConstants.timerLabelFontSizeForPhone,
-            fontSizeForPad: ViewConstants.timerLabelFontSizeForPad
+            fontSizeForPad: ViewConstants.timerLabelFontSizeForPad,
+            color: isWarning ? Asset.red.swiftUIColor : .white
         )
+            .contentTransition(.numericText())
+            .animation(.linear, value: viewModel.timeRemaining)
+
+        if #available(iOS 17.0, *) {
+            return timerLabelView
+                .onChange(of: viewModel.timeRemaining, { oldValue, newValue in
+                    if newValue <= 5 {
+                        withAnimation(.easeInOut) {
+                            shaking.toggle()
+                        }
+                    }
+                })
+                .modifier(ShakeEffect(animatableData: CGFloat(shaking ? 1 : 0)))
+                .sensoryFeedback(.warning, trigger: viewModel.timeRemaining) { _, newValue in
+                    newValue <= 5
+                }
+        } else {
+            return timerLabelView
+        }
     }
     
     private var incorrectButton: some View {
-        GMButtonView(
-            text: ViewConstants.incorrectSymbol,
-            fontSizeForPhone: ViewConstants.buttonFontSizeForPhone,
-            fontSizeForPad: ViewConstants.buttonFontSizeForPad,
-            isCircle: true,
-            backgroundColor: Asset.red.swiftUIColor,
-            height: horizontalSizeClass == .compact ? ViewConstants.buttonHeight : ViewConstants.buttonHeightForIpad
-        ) {
-            viewModel.wordButtonAction(tag: 0) // Incorrect tag
-        }
-        
+        makeButton(text: ViewConstants.incorrectSymbol, color: Asset.red.swiftUIColor, tag: 0)
     }
     
     private var correctButton: some View {
+        makeButton(text: ViewConstants.correctSymbol, color: Asset.green.swiftUIColor, tag: 1)
+    }
+    
+    private func makeButton(text: String, color: Color, tag: Int) -> some View {
         GMButtonView(
-            text: ViewConstants.correctSymbol,
+            text: text,
             fontSizeForPhone: ViewConstants.buttonFontSizeForPhone,
             fontSizeForPad: ViewConstants.buttonFontSizeForPad,
             isCircle: true,
-            backgroundColor: Asset.green.swiftUIColor,
-            height: horizontalSizeClass == .compact ? ViewConstants.buttonHeight : ViewConstants.buttonHeightForIpad
+            backgroundColor: color,
+            height: horizontalSizeClass == .compact ? ViewConstants.buttonHeight : ViewConstants.buttonHeightForIpad,
+            shouldLowerOpacityOnPress: false,
+            shouldScaleOnPress: true
         ) {
-            viewModel.wordButtonAction(tag: 1) // Correct tag
+            viewModel.wordButtonAction(tag: tag)
         }
     }
 }

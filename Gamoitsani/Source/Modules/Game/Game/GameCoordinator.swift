@@ -24,8 +24,24 @@ final class GameCoordinator: BaseCoordinator, ObservableObject {
             .environmentObject(self)
         
         let hostingController = UIHostingController(rootView: gameView)
+        hostingController.navigationItem.leftBarButtonItem = BackBarButtonItem(image: UIImage(systemName: "flag.checkered.2.crossed")!, style: .plain, target: self, action: #selector(presentGoBackAlert))
         hostingController.modalPresentationStyle = .fullScreen
         navigationController.pushViewController(hostingController, animated: true)
+    }
+    
+    @objc func presentGoBackAlert() {
+        let alert = UIAlertController(
+            title: L10n.Screen.Game.ConfirmationAlert.title,
+            message: L10n.Screen.Game.ConfirmationAlert.message,
+            preferredStyle: .alert)
+        
+        alert.addAction(.init(title: L10n.yesPolite, style: .destructive) { [weak self] _ in
+            self?.pop()
+        })
+        
+        alert.addAction(.init(title: L10n.no, style: .cancel))
+
+        navigationController?.present(alert, animated: true)
     }
     
     func pop() {

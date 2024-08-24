@@ -7,13 +7,10 @@
 //
 
 import Foundation
+import SwiftUI
+import Combine
 
-class GamePlayViewModel: ObservableObject {
-
-    private var roundLengthTimer: Timer?
-    private var countdownTimer: Timer?
-    
-    private var shouldShowGeorgianWords: Bool { !AppConstants.isAppInEnglish }
+final class GamePlayViewModel: ObservableObject {
 
     @Published var words: [Word]
     @Published var timeRemaining: Double
@@ -23,10 +20,15 @@ class GamePlayViewModel: ObservableObject {
     var audioManager: AudioManager
     var onTimerFinished: ((Int) -> Void)?
     
+    private var cancellables = Set<AnyCancellable>()
+    private var shouldShowGeorgianWords: Bool { !AppConstants.isAppInEnglish }
+    
     init(words: [Word], roundLength: Double, audioManager: AudioManager) {
         self.words = words
         self.timeRemaining = roundLength
         self.audioManager = audioManager
+        
+        updateCurrentWord()
     }
 
     func startGame() {
@@ -34,24 +36,29 @@ class GamePlayViewModel: ObservableObject {
         var roundLength = timeRemaining
         
         #if DEBUG
-        roundLength = 2
+//        roundLength = 2
         #endif
         
-        roundLengthTimer = Timer.scheduledTimer(withTimeInterval: roundLength, repeats: false) { [weak self] _ in
-            guard let self else { return }
-            self.stopGame()
-            self.onTimerFinished?(self.score) // Assuming you have onTimerFinished closure in the view model
-        }
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            guard let self else { return }
-            self.updateTimer()
-        }
+        Timer.publish(every: roundLength, on: .main, in: .common)
+            .autoconnect()
+            .first()
+            .sink { [weak self] _ in
+                self?.stopGame()
+                self?.onTimerFinished?(self?.score ?? 0)
+            }
+            .store(in: &cancellables)
         
-        updateCurrentWord()
+        Timer.publish(every: 1.0, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                self?.updateTimer()
+            }
+            .store(in: &cancellables)
     }
     
     func stopGame() {
-        invalidateTimers()
+        cancellables.forEach { $0.cancel() }
+        cancellables.removeAll()
     }
     
     func wordButtonAction(tag: Int) {
@@ -59,12 +66,7 @@ class GamePlayViewModel: ObservableObject {
         score += tag == 1 ? 1 : -1
         updateCurrentWord()
     }
-    
-    private func invalidateTimers() {
-        roundLengthTimer?.invalidate()
-        countdownTimer?.invalidate()
-    }
-    
+
     private func updateTimer() {
         if timeRemaining > 0 {
             timeRemaining -= 1
@@ -72,8 +74,10 @@ class GamePlayViewModel: ObservableObject {
     }
 
     private func updateCurrentWord() {
-        currentWord = (shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn)
-                        ?? L10n.Screen.Game.NoMoreWords.message
+        guard let word = shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn else {
+            currentWord = L10n.Screen.Game.NoMoreWords.message
+            return
+        }
+        currentWord = word
     }
-    
 }

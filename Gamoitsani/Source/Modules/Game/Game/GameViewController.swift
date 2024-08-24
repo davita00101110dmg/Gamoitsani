@@ -9,13 +9,11 @@
 import SwiftUI
 import GoogleMobileAds
 
-// TODO: 1. Add animation, 2. Add ads 3. Add share view implementation
+// TODO: 1. Add ads 2. Add share view implementation
 struct GameView: View {
     @EnvironmentObject private var coordinator: GameCoordinator
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ObservedObject var viewModel = GameViewModel()
-    
-    @State var shouldShowGoBackAlert: Bool = false
     
     var body: some View {
         ZStack {
@@ -39,24 +37,8 @@ struct GameView: View {
             .padding(.horizontal, ViewConstants.paddingFromSuperview)
         }
         .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                BackButton {
-                    shouldShowGoBackAlert = true
-                }
-                // TODO: view.sensoryFeedback(.error, trigger: triggerHaptic) for ios 17
-            }
-        }
-        .alert(L10n.Screen.Game.ConfirmationAlert.title, isPresented: $shouldShowGoBackAlert) {
-            Button(L10n.yesPolite, role: .destructive) {
-                coordinator.pop()
-                viewModel.startNewGame()
-            }
-            Button(L10n.no, role: .cancel) { }
-        } message: {
-            Text(L10n.Screen.Game.ConfirmationAlert.message)
-        }
         .onDisappear(perform: {
+            viewModel.startNewGame()
             coordinator.childDidFinish(coordinator)
         })
     }
@@ -83,7 +65,9 @@ struct GameView: View {
         ) {
             // TODO: Remove if i won't need it
         } onStartOver: {
-            viewModel.startNewGame()
+            withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
+                viewModel.startNewGame()
+            }
         } onGoBack: {
             coordinator.pop()
             viewModel.startNewGame()
