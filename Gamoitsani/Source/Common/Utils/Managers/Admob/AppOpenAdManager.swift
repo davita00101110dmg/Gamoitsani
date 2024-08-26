@@ -9,16 +9,18 @@
 import Foundation
 import GoogleMobileAds
 
-final class AppOpenAdManager: NSObject {
-    var appOpenAd: GADAppOpenAd?
-    var isLoadingAd = false
-    var isShowingAd = false
-    var loadTime: Date?
-    let fourHoursInSeconds = TimeInterval(3600 * 4)
-    
+final class AppOpenAdManager: BaseAdManager {
     static let shared = AppOpenAdManager()
     
-    private func loadAd() async {
+    private var appOpenAd: GADAppOpenAd?
+    private var loadTime: Date?
+    private let fourHoursInSeconds = TimeInterval(3600 * 4)
+    
+    private override init() {
+        super.init()
+    }
+    
+    override func loadAd() async {
         if isLoadingAd || isAdAvailable() {
             return
         }
@@ -36,7 +38,7 @@ final class AppOpenAdManager: NSObject {
         isLoadingAd = false
     }
     
-    func showAdIfAvailable() {
+    override func showAdIfAvailable() {
         guard !isShowingAd else { return }
 
         if !isAdAvailable() {

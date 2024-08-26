@@ -11,7 +11,7 @@ import Foundation
 import OrderedCollections
 import SwiftUI
 
-class GameViewModel: ObservableObject {
+final class GameViewModel: ObservableObject {
     
     var gameInfoViewModel: GameInfoViewModel {
         GameInfoViewModel(
@@ -118,5 +118,18 @@ extension GameViewModel {
             self?.audioManager.setupSounds()
         }
         operationQueue.addOperation(audioSetupOperation)
+    }
+}
+
+// MARK: - Admob Implementation
+extension GameViewModel {
+    func loadAd() {
+        Task {
+            await InterstitialAdManager.shared.loadAd()
+        }
+    }
+    
+    func showAd() {
+        InterstitialAdManager.shared.showAdIfAvailable()
     }
 }

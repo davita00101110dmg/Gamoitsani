@@ -104,7 +104,11 @@
 		FFA60DB42C7A0269005A2660 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DB32C7A0269005A2660 /* ViewExtensions.swift */; };
 		FFA60DB72C7A0288005A2660 /* TransitionViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DB62C7A0288005A2660 /* TransitionViewModifier.swift */; };
 		FFA60DBC2C7A2923005A2660 /* ShakeEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DBB2C7A2923005A2660 /* ShakeEffect.swift */; };
-		FFB98EAB2C7534380024A925 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB98EAA2C7534380024A925 /* AdManager.swift */; };
+		FFA60DC02C7CEBDC005A2660 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DBF2C7CEBDC005A2660 /* AdManager.swift */; };
+		FFA60DC22C7CEC53005A2660 /* InterstitialAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DC12C7CEC53005A2660 /* InterstitialAdManager.swift */; };
+		FFA60DC52C7CFCE3005A2660 /* BannerAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DC42C7CFCE3005A2660 /* BannerAdManager.swift */; };
+		FFA60DC72C7CFF6C005A2660 /* BaseAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DC62C7CFF6C005A2660 /* BaseAdManager.swift */; };
+		FFB98EAB2C7534380024A925 /* AppConsentAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB98EAA2C7534380024A925 /* AppConsentAdManager.swift */; };
 		FFBFB0312C68CC3A00A877D7 /* GamoitsaniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */; };
 		FFC172B42C6E6EAB0069623F /* GMButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B32C6E6EAB0069623F /* GMButtonView.swift */; };
 		FFC172B62C6E70FA0069623F /* GMLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B52C6E70FA0069623F /* GMLabelView.swift */; };
@@ -285,7 +289,11 @@
 		FFA60DB62C7A0288005A2660 /* TransitionViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewModifier.swift; sourceTree = "<group>"; };
 		FFA60DBB2C7A2923005A2660 /* ShakeEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeEffect.swift; sourceTree = "<group>"; };
 		FFA60DBD2C7A2D29005A2660 /* Gamoitsani.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Gamoitsani.entitlements; sourceTree = "<group>"; };
-		FFB98EAA2C7534380024A925 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
+		FFA60DBF2C7CEBDC005A2660 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
+		FFA60DC12C7CEC53005A2660 /* InterstitialAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAdManager.swift; sourceTree = "<group>"; };
+		FFA60DC42C7CFCE3005A2660 /* BannerAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdManager.swift; sourceTree = "<group>"; };
+		FFA60DC62C7CFF6C005A2660 /* BaseAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAdManager.swift; sourceTree = "<group>"; };
+		FFB98EAA2C7534380024A925 /* AppConsentAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConsentAdManager.swift; sourceTree = "<group>"; };
 		FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
 		FFC172B32C6E6EAB0069623F /* GMButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMButtonView.swift; sourceTree = "<group>"; };
 		FFC172B52C6E70FA0069623F /* GMLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMLabelView.swift; sourceTree = "<group>"; };
@@ -771,12 +779,11 @@
 		FF8EA7152BEBFDC800F098B8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				FFA60DC32C7CED9E005A2660 /* Admob */,
 				FF8EA7202BEC12BD00F098B8 /* AudioManager.swift */,
 				FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */,
 				FF37087A2BFBD4280056361F /* CoreDataManager.swift */,
 				FF7CA15D2C01FCB800E3BEC4 /* StoreReviewManager.swift */,
-				FFB98EAA2C7534380024A925 /* AdManager.swift */,
-				FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */,
 				FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */,
 			);
 			path = Managers;
@@ -805,6 +812,26 @@
 				FFA60DBB2C7A2923005A2660 /* ShakeEffect.swift */,
 			);
 			path = GeometryEffect;
+			sourceTree = "<group>";
+		};
+		FFA60DBE2C7CEBD5005A2660 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FFA60DBF2C7CEBDC005A2660 /* AdManager.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		FFA60DC32C7CED9E005A2660 /* Admob */ = {
+			isa = PBXGroup;
+			children = (
+				FFA60DC62C7CFF6C005A2660 /* BaseAdManager.swift */,
+				FFB98EAA2C7534380024A925 /* AppConsentAdManager.swift */,
+				FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */,
+				FFA60DC12C7CEC53005A2660 /* InterstitialAdManager.swift */,
+				FFA60DC42C7CFCE3005A2660 /* BannerAdManager.swift */,
+			);
+			path = Admob;
 			sourceTree = "<group>";
 		};
 		FFBFB02F2C68CC2700A877D7 /* GamoitsaniTests */ = {
@@ -884,6 +911,7 @@
 		FFFB4CD32BD7CA6700CDDCB4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FFA60DBE2C7CEBD5005A2660 /* Protocols */,
 				FFA60DBA2C7A2914005A2660 /* GeometryEffect */,
 				FFA60DB52C7A0281005A2660 /* ViewModifiers */,
 				FF8EA7152BEBFDC800F098B8 /* Managers */,
@@ -1351,10 +1379,11 @@
 				FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */,
 				FF7F1D9B2BE7D25300872554 /* GamePlayViewModel.swift in Sources */,
 				FF86756A2C67DB270089B52B /* SettingsViewModel.swift in Sources */,
-				FFB98EAB2C7534380024A925 /* AdManager.swift in Sources */,
+				FFB98EAB2C7534380024A925 /* AppConsentAdManager.swift in Sources */,
 				FF7F1D7E2BE7A2F700872554 /* GameCoordinator.swift in Sources */,
 				FF8675382C6772230089B52B /* SettingsCoordinator.swift in Sources */,
 				FF8675452C67758E0089B52B /* SettingsChangeLanguageCell.swift in Sources */,
+				FFA60DC52C7CFCE3005A2660 /* BannerAdManager.swift in Sources */,
 				FFFB4D462BD928B400CDDCB4 /* UIFontExtensions.swift in Sources */,
 				FFC172B82C6E71580069623F /* GameScoreboardTeamView.swift in Sources */,
 				FFFCF38C2C6EC506003458DC /* ConfettiView.swift in Sources */,
@@ -1373,6 +1402,7 @@
 				FF37087F2BFBD4FC0056361F /* Word+CoreDataProperties.swift in Sources */,
 				FFFB4D3F2BD9155100CDDCB4 /* RulesCoordinator.swift in Sources */,
 				FF8EA7112BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift in Sources */,
+				FFA60DC22C7CEC53005A2660 /* InterstitialAdManager.swift in Sources */,
 				FF1E92BA2BF91C8C00127FDE /* GMBackBarButtonItem.swift in Sources */,
 				FFC172B42C6E6EAB0069623F /* GMButtonView.swift in Sources */,
 				FF86756D2C67E0DA0089B52B /* ActivityView.swift in Sources */,
@@ -1420,6 +1450,8 @@
 				FFFB4D302BD861F300CDDCB4 /* GMButton.swift in Sources */,
 				FFF65CC82BE6B0C4008E0352 /* Localizable.swift in Sources */,
 				FFA60DB42C7A0269005A2660 /* ViewExtensions.swift in Sources */,
+				FFA60DC72C7CFF6C005A2660 /* BaseAdManager.swift in Sources */,
+				FFA60DC02C7CEBDC005A2660 /* AdManager.swift in Sources */,
 				FF7CA1632C02590700E3BEC4 /* GameOverView.swift in Sources */,
 				FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */,
 				FF4FA9D32BEFF30E00F38F98 /* AddWordModels.swift in Sources */,

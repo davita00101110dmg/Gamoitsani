@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import GoogleMobileAds
 
-class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegate {
+class BaseViewController<T: Coordinator>: UIViewController {
     
     private lazy var customBackBarButtonItem: UIBarButtonItem = {
         let button = BackBarButtonItem(title: L10n.back, style: .plain, target: nil, action: nil)
@@ -39,11 +39,6 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
         setupUI()
         subscribeToPublishers()
         setupCustomBackBarButtonItem()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        requestAdLoad()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -82,10 +77,6 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
         view.insertSubview(gradientView, at: 0)
     }
     
-    private func requestAdLoad() {
-        bannerView?.load(GADRequest())
-    }
-    
     deinit {
         dump("deinited \(self)")
         NotificationCenter.default.removeObserver(self)
@@ -100,29 +91,8 @@ class BaseViewController<T: Coordinator>: UIViewController, GADBannerViewDelegat
     func setupLocalizedTexts() { }
     
     // MARK: - Admob Methods
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        bannerView.frame.origin.y = view.frame.maxY
-        
-        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { [weak self] in
-            guard let self else { return }
-            bannerView.frame.origin.y = view.frame.maxY - bannerView.frame.size.height - view.safeAreaInsets.bottom
-        }, completion: nil)
-    }
-    
-    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: any Error) {
-        dump("\(#function) \(error.localizedDescription)")
-    }
-    
     func setupBannerView(with bannerView: GADBannerView) {
-        guard AppConstants.shouldShowAdsToUser else { 
-            bannerView.removeFromSuperview()
-            return
-        }
-        
-        self.bannerView = bannerView
-        bannerView.adUnitID = AppConstants.AdMob.bannerAdId
-        bannerView.rootViewController = self
-        bannerView.delegate = self
+        BannerAdManager.shared.setupBannerView(in: self, with: bannerView)
     }
     
     @objc func presentAdInspector() {

@@ -27,7 +27,7 @@ final class SettingsCoordinator: BaseCoordinator, ObservableObject {
     }
     
     func presentPrivacySettings() {
-        AdManager.shared.presentPrivacySettings(from: navigationController?.presentedViewController)
+        AppConsentAdManager.shared.presentPrivacySettings(from: navigationController?.presentedViewController)
     }
     
     func dismiss() {

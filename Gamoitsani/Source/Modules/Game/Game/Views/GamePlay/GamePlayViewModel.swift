@@ -36,7 +36,7 @@ final class GamePlayViewModel: ObservableObject {
         var roundLength = timeRemaining
         
         #if DEBUG
-//        roundLength = 2
+        roundLength = 2
         #endif
         
         Timer.publish(every: roundLength, on: .main, in: .common)

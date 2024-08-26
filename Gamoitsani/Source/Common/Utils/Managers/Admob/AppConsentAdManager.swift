@@ -9,10 +9,9 @@
 import UIKit
 import GoogleMobileAds
 import UserMessagingPlatform
-import AdSupport
 
-final class AdManager {
-    static let shared = AdManager()
+final class AppConsentAdManager {
+    static let shared = AppConsentAdManager()
     
     private var isMobileAdsStartCalled = false
     

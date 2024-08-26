@@ -9,7 +9,7 @@
 import SwiftUI
 import GoogleMobileAds
 
-// TODO: 1. Add ads 2. Add share view implementation
+// TODO: 1. Add share view implementation 2. Remove unused XIBs
 struct GameView: View {
     @EnvironmentObject private var coordinator: GameCoordinator
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -37,10 +37,13 @@ struct GameView: View {
             .padding(.horizontal, ViewConstants.paddingFromSuperview)
         }
         .navigationBarBackButtonHidden(true)
-        .onDisappear(perform: {
+        .onAppear {
+            viewModel.loadAd()
+        }
+        .onDisappear {
             viewModel.startNewGame()
             coordinator.childDidFinish(coordinator)
-        })
+        }
     }
     
     private var gameInfoView: some View {
@@ -65,10 +68,12 @@ struct GameView: View {
         ) {
             // TODO: Remove if i won't need it
         } onStartOver: {
+            viewModel.showAd()
             withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
                 viewModel.startNewGame()
             }
         } onGoBack: {
+            viewModel.showAd()
             coordinator.pop()
             viewModel.startNewGame()
         } onShowFullScoreboard: {

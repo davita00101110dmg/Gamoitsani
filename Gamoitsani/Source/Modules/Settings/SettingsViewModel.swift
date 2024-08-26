@@ -20,7 +20,7 @@ final class SettingsViewModel: NSObject, ObservableObject {
     private var products: [SKProduct] = []
     
     var shouldShowPrivacySettingsButton: Bool {
-        AdManager.shared.shouldShowPrivacySettingsButton
+        AppConsentAdManager.shared.shouldShowPrivacySettingsButton
     }
     
     override init() {

@@ -36,7 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         coordinator?.start()
         
-        AdManager.shared.requestAdConsent(from: window?.rootViewController)
+        AppConsentAdManager.shared.requestAdConsent(from: window?.rootViewController)
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
