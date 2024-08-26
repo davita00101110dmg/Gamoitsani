@@ -1,15 +1,15 @@
 //
-//  GameViewController.swift
+//  GameView.swift
 //  Gamoitsani
 //
-//  Created by Daviti Khvedelidze on 05/05/2024.
+//  Created by Daviti Khvedelidze on 26/08/2024.
 //  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 //
 
 import SwiftUI
 import GoogleMobileAds
 
-// TODO: 1. Add share view implementation 2. Remove unused XIBs
+// TODO: Add share view implementation
 struct GameView: View {
     @EnvironmentObject private var coordinator: GameCoordinator
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
