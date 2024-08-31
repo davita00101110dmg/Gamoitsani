@@ -36,6 +36,9 @@ final class InterstitialAdManager: BaseAdManager {
     }
     
     override func showAdIfAvailable() {
+#if DEBUG
+        return
+#else
         guard let interstitialAd = interstitialAd, !isShowingAd else {
             print("Ad wasn't ready or is already showing.")
             return
@@ -43,6 +46,7 @@ final class InterstitialAdManager: BaseAdManager {
         
         isShowingAd = true
         interstitialAd.present(fromRootViewController: nil)
+#endif
     }
 }
 

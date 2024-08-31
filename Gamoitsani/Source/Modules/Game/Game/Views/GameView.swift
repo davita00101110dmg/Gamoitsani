@@ -7,12 +7,13 @@
 //
 
 import SwiftUI
-import GoogleMobileAds
 
 struct GameView: View {
     @EnvironmentObject private var coordinator: GameCoordinator
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ObservedObject var viewModel = GameViewModel()
+    
+    @State private var showConfetti = false
     
     var body: some View {
         ZStack {
@@ -46,6 +47,7 @@ struct GameView: View {
             .cornerRadius(ViewConstants.cornerRadius)
             .padding(.horizontal, ViewConstants.paddingFromSuperview)
         }
+        .displayConfetti(isActive: $showConfetti)
         .navigationBarBackButtonHidden(true)
         .onAppear {
             viewModel.loadAd()
@@ -53,7 +55,16 @@ struct GameView: View {
         .onDisappear {
             viewModel.startNewGame()
             coordinator.childDidFinish(coordinator)
+            stopConfetti()
         }
+    }
+    
+    private func startConfetti() {
+        showConfetti = true
+    }
+    
+    private func stopConfetti() {
+        showConfetti = false
     }
     
     private var gameInfoView: some View {
@@ -80,12 +91,17 @@ struct GameView: View {
             withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
                 viewModel.startNewGame()
             }
+            stopConfetti()
         } onGoBack: {
             viewModel.showAd()
             coordinator.pop()
             viewModel.startNewGame()
+            stopConfetti()
         } onShowFullScoreboard: {
             coordinator.presentGameScoreboard(with: [.large()])
+        }
+        .onAppear {
+            startConfetti()
         }
     }
     
@@ -104,33 +120,20 @@ extension GameView {
         static let viewHeight: CGFloat = 400
         static let gameOverViewHeight: CGFloat = 600
     }
+}
+
+#Preview {
+    let mockViewModel = GameViewModel()
+    let mockCoordinator = GameCoordinator(navigationController: UINavigationController())
     
-    // TODO: Leave what i will need
-    enum ViewControllerConstants {
-        static let cellScale: CGFloat = 0.5
-        static let cellScaleRange: CGFloat = 0.1
-        static let cellLifetime: Float = 30
-        static let cellBirthRate: Float = 5
-        static let cellVelocity: CGFloat = 250
-        static let cellVelocityRange: CGFloat = 150
-        static let cellSpin: CGFloat = 5
-        static let cellSpinRange: CGFloat = 2.5
-        static let birthRateStartFromValue: Float = 1
-        static let birthRateStartToValue: Float = 200
-        static let birthRateStartDuration: CFTimeInterval = 5
-        static let birthRateAnimation: String = "birthRate"
-        static let birthRateAnimationKey: String = "birthRateAnimation"
-        static let confettiColors: [UIColor] = [
-            Asset.color1.color,
-            Asset.color2.color,
-            Asset.color3.color,
-            Asset.color4.color,
-            Asset.color5.color,
-            Asset.color6.color,
-            Asset.color7.color,
-            Asset.color8.color,
-            Asset.color9.color,
-            Asset.color10.color
-        ]
-    }
+    let teams = ["Team A", "Team B"]
+    
+    GameStory.shared.teams = .init(uniqueKeysWithValues: teams.map { ($0, 0) })
+    
+    return GameView(viewModel: mockViewModel)
+        .environmentObject(mockCoordinator)
+        .onAppear {
+            mockViewModel.gameState = .gameOver
+        }
+        .previewDisplayName("Game Over State")
 }
