@@ -2,8 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Enable photo library access to save images to your photo library directly from the app.</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>facebook-stories</string>
 		<string>instagram</string>
 		<string>instagram-stories</string>
 		<string>fbapi</string>
