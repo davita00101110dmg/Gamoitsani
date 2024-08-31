@@ -25,6 +25,8 @@ struct SocialIconView: View {
 
             GMLabelView(text: title, fontSizeForPhone: 12)
         }
+        .foregroundStyle(.white)
+        .frame(width: 75)
     }
 }
 

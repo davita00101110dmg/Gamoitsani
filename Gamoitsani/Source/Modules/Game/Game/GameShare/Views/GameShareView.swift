@@ -50,10 +50,10 @@ struct GameShareView: View {
                     GMLabelView(text: L10n.Screen.GameShare.shareTo)
                         .padding([.bottom], 8)
                     
-                    HStack(spacing: 16) {
+                    HStack {
                         SocialIconView(image: Image(systemName: AppConstants.SFSymbol.photoStack), title: "Save image") {
                             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                        }.foregroundStyle(.white)
+                        }
                         
                         SocialIconView(image: Asset.instagram.swiftUIImage, title: "Instagram") {
                             viewModel.shareStickerImage(on: .instagram, with: image)
@@ -63,6 +63,7 @@ struct GameShareView: View {
                             viewModel.shareStickerImage(on: .facebook, with: image)
                         }
                     }
+                    .frame(maxWidth: .infinity, alignment: .center)
                 }
             )
     }
