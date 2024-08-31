@@ -60,7 +60,9 @@ struct GameView: View {
     }
     
     private func startConfetti() {
-        showConfetti = true
+        if viewModel.gameState == .gameOver {
+            showConfetti = true
+        }
     }
     
     private func stopConfetti() {
@@ -87,16 +89,16 @@ struct GameView: View {
         GameOverView(
             viewModel: viewModel.gameOverViewModel
         ) {
+            stopConfetti()
             viewModel.showAd()
             withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
                 viewModel.startNewGame()
             }
-            stopConfetti()
         } onGoBack: {
+            stopConfetti()
             viewModel.showAd()
             coordinator.pop()
             viewModel.startNewGame()
-            stopConfetti()
         } onShowFullScoreboard: {
             coordinator.presentGameScoreboard(with: [.large()])
         }
