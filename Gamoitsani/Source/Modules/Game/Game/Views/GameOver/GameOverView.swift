@@ -13,7 +13,6 @@ struct GameOverView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var viewModel: GameOverViewModel
-    var onAppear: () -> Void
     var onStartOver: () -> Void
     var onGoBack: () -> Void
     var onShowFullScoreboard: () -> Void
@@ -46,9 +45,6 @@ struct GameOverView: View {
             }
         }
         .transitionHandler(duration: AppConstants.viewTransitionTime)
-        .onAppear {
-            onAppear()
-        }
     }
 
     private var titleLabel: some View {

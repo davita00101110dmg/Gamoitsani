@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-// TODO: Add scale animation
 struct GMButtonView: View {
     var text: String
     var fontSizeForPhone: CGFloat = Constants.buttonPhoneFontSize

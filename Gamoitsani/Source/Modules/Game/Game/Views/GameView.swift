@@ -76,8 +76,6 @@ struct GameView: View {
         GameOverView(
             viewModel: viewModel.gameOverViewModel
         ) {
-            // TODO: Remove if i won't need it
-        } onStartOver: {
             viewModel.showAd()
             withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
                 viewModel.startNewGame()
