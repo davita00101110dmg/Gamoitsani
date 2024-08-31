@@ -235,10 +235,10 @@ extension GameDetailsViewController: UITableViewDelegate {
             completion(true)
         }
         
-        edit.image = UIImage(systemName: "square.and.pencil")
+        edit.image = UIImage(systemName: AppConstants.SFSymbol.squareAndPencil)
         edit.backgroundColor = .orange
         
-        delete.image = UIImage(systemName: "trash")
+        delete.image = UIImage(systemName: AppConstants.SFSymbol.trash)
         
         return UISwipeActionsConfiguration(actions: [delete, edit])
     }
@@ -250,12 +250,12 @@ extension GameDetailsViewController: UITableViewDelegate {
                   let viewModel else { return .init() }
             
             let editAction = UIAction(title: L10n.edit,
-                                      image: UIImage(systemName: "square.and.pencil")) { _ in
+                                      image: UIImage(systemName: AppConstants.SFSymbol.squareAndPencil)) { _ in
                 self.presentUpdateTeamAlert(at: indexPath.row)
             }
             
             let deleteAction = UIAction(title: L10n.delete,
-                                        image: UIImage(systemName: "square.and.pencil"),
+                                        image: UIImage(systemName: AppConstants.SFSymbol.squareAndPencil),
                                         attributes: .destructive) { _ in
                 viewModel.remove(at: indexPath.row)
             }

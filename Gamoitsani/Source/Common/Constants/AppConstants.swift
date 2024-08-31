@@ -60,6 +60,15 @@ enum AppConstants {
         Asset.color14.color,
     ]
     
+    enum SFSymbol {
+        static let gear = "gear"
+        static let squareAndPencil = "square.and.pencil"
+        static let squareAndArrowUp = "square.and.arrow.up"
+        static let trash = "trash"
+        static let photoStack = "photo.stack"
+        static let flagCheckeredTwoCrossed = "flag.checkered.2.crossed"
+    }
+    
     enum FontType {
         case regular, semiBold, bold
     }

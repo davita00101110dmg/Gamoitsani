@@ -51,7 +51,7 @@ struct GameShareView: View {
                         .padding([.bottom], 8)
                     
                     HStack(spacing: 16) {
-                        SocialIconView(image: Image(systemName: "photo.stack"), title: "Save image") {
+                        SocialIconView(image: Image(systemName: AppConstants.SFSymbol.photoStack), title: "Save image") {
                             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                         }.foregroundStyle(.white)
                         

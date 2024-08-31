@@ -35,7 +35,7 @@ struct GameView: View {
                         Button {
                             coordinator.presentGameShareView(with: viewModel.generateShareImage())
                         } label: {
-                            Image(systemName: "square.and.arrow.up")
+                            Image(systemName: AppConstants.SFSymbol.squareAndArrowUp)
                         }
                     }
                 }

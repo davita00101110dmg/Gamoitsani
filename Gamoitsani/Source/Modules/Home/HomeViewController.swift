@@ -31,7 +31,7 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
     }
     
     private func setupRightBarButtonItem() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(rightBarButtonClicked))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: AppConstants.SFSymbol.gear), style: .plain, target: self, action: #selector(rightBarButtonClicked))
     }
 }
  

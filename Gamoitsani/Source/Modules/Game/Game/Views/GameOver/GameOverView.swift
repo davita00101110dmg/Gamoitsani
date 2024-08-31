@@ -143,9 +143,7 @@ extension GameOverView {
 
 #Preview {
     GameOverView(viewModel: GameOverViewModel(teamName: "გუნდი 1", score: 1)) {
-        
-    } onStartOver: {
-        
+ 
     } onGoBack: {
         
     } onShowFullScoreboard: {

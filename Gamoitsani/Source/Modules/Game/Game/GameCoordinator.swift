@@ -24,7 +24,7 @@ final class GameCoordinator: BaseCoordinator, ObservableObject {
             .environmentObject(self)
         
         let hostingController = UIHostingController(rootView: gameView)
-        hostingController.navigationItem.leftBarButtonItem = BackBarButtonItem(image: UIImage(systemName: "flag.checkered.2.crossed")!, style: .plain, target: self, action: #selector(presentGoBackAlert))
+        hostingController.navigationItem.leftBarButtonItem = BackBarButtonItem(image: UIImage(systemName: AppConstants.SFSymbol.flagCheckeredTwoCrossed)!, style: .plain, target: self, action: #selector(presentGoBackAlert))
         hostingController.modalPresentationStyle = .fullScreen
         navigationController.pushViewController(hostingController, animated: true)
     }
