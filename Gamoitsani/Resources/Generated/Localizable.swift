@@ -78,7 +78,7 @@ public enum L10n {
         }
 
         public enum GameShareView {
-          /// The winning team is %@🥳
+          /// The winning team is %@ 🥳
           public static func title( _ p1: String) -> String {
               return L10n.tr("Localizable", "screen.game.game_share_view.title", p1)
           }
