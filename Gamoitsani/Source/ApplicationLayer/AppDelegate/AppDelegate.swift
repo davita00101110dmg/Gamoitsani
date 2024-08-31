@@ -16,6 +16,7 @@ import AdSupport
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var orientationLock: UIInterfaceOrientationMask = .allButUpsideDown
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -37,6 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return [.portrait, .portraitUpsideDown]
+        }
+        
+        return orientationLock
     }
 
     // MARK: UISceneSession Lifecycle
