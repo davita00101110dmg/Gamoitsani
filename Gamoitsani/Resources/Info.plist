@@ -12,15 +12,6 @@
 		<string>fbapi</string>
 		<string>fb-messenger-share-api</string>
 	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>$(META_APP_ID)</string>
-			</array>
-		</dict>
-	</array>
 	<key>FacebookAppID</key>
 	<string>$(META_APP_ID)</string>
 	<key>FacebookClientToken</key>
