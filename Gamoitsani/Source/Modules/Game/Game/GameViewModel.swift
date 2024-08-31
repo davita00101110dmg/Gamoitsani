@@ -81,6 +81,14 @@ extension GameViewModel {
         return winnerTeam
     }
     
+    func generateShareImage() -> UIImage {
+        let view = GameShareUIView.loadFromNib()
+        view?.configure(with: sortedTeams[0].key)
+        
+        guard let image = view?.asImage() else { return UIImage() }
+        return image
+    }
+    
     private func isTie() -> Bool {
         return sortedTeams[0].value == sortedTeams[1].value
     }

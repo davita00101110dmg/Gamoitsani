@@ -57,4 +57,10 @@ final class GameCoordinator: BaseCoordinator, ObservableObject {
         let gameScoreboardCoordinator = GameScoreboardCoordinator(navigationController: navigationController, detents: detents)
         coordinate(to: gameScoreboardCoordinator)
     }
+    
+    func presentGameShareView(with image: UIImage) {
+        guard let navigationController else { return }
+        let coordinator = GameShareCoordinator(navigationController: navigationController, image: image)
+        coordinate(to: coordinator)
+    }
 }

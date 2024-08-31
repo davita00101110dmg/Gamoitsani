@@ -78,9 +78,9 @@ public enum L10n {
         }
 
         public enum GameShareView {
-          /// The winning team is %@ with %@ points!
-          public static func title( _ p1: String, _ p2: String) -> String {
-              return L10n.tr("Localizable", "screen.game.game_share_view.title", p1, p2)
+          /// The winning team is %@🥳
+          public static func title( _ p1: String) -> String {
+              return L10n.tr("Localizable", "screen.game.game_share_view.title", p1)
           }
         }
 
@@ -180,6 +180,13 @@ public enum L10n {
           /// Teams
           public static var title: String { L10n.tr("Localizable", "screen.game_details.teams.title") }
         }
+      }
+
+      public enum GameShare {
+        /// Share to
+        public static var shareTo: String { L10n.tr("Localizable", "screen.game_share.share_to") }
+        /// Share game
+        public static var title: String { L10n.tr("Localizable", "screen.game_share.title") }
       }
 
       public enum Home {

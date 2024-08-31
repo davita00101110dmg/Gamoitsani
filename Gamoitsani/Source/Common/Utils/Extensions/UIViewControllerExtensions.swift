@@ -66,4 +66,23 @@ extension UIViewController {
         
         present(alertController, animated: true)
     }
+    
+    func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+        
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.orientationLock = orientation
+        }
+        
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        windowScene?.keyWindow?.rootViewController?.setNeedsUpdateOfSupportedInterfaceOrientations()
+    }
+    
+    func lockOrientation(_ allowOrientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation: UIInterfaceOrientationMask) {
+        
+        lockOrientation(allowOrientation)
+        
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: rotateOrientation))
+        windowScene?.keyWindow?.rootViewController?.setNeedsUpdateOfSupportedInterfaceOrientations()
+    }
 }

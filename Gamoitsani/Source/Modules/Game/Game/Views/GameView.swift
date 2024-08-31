@@ -9,7 +9,6 @@
 import SwiftUI
 import GoogleMobileAds
 
-// TODO: Add share view implementation
 struct GameView: View {
     @EnvironmentObject private var coordinator: GameCoordinator
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -28,6 +27,17 @@ struct GameView: View {
                     gamePlayView
                 case .gameOver:
                     gameOverView
+                }
+            }
+            .toolbar {
+                if viewModel.gameState == .gameOver {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            coordinator.presentGameShareView(with: viewModel.generateShareImage())
+                        } label: {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                    }
                 }
             }
             .padding([.top, .bottom, .leading, .trailing], ViewConstants.padding)
@@ -99,15 +109,6 @@ extension GameView {
     
     // TODO: Leave what i will need
     enum ViewControllerConstants {
-        enum PasteboardKeys {
-            static let stickerImage = "com.instagram.sharedSticker.stickerImage"
-            static let backgroundTopColor = "com.instagram.sharedSticker.backgroundTopColor"
-            static let backgroundBottomColor = "com.instagram.sharedSticker.backgroundBottomColor"
-        }
-        
-        static let mainViewHeight: CGFloat = 400
-        static let mainViewHeightForGameOverView: CGFloat = 600
-        static let gameOverViewTransitionDuration: TimeInterval = 0.5
         static let cellScale: CGFloat = 0.5
         static let cellScaleRange: CGFloat = 0.1
         static let cellLifetime: Float = 30
@@ -132,11 +133,6 @@ extension GameView {
             Asset.color8.color,
             Asset.color9.color,
             Asset.color10.color
-        ]
-        static let instagramStoriesURLScheme = "instagram-stories://share?source_application="
-        static let shareImageBackgroundColors: [String: Any] = [
-            PasteboardKeys.backgroundTopColor: "#4D2E8D",
-            PasteboardKeys.backgroundBottomColor: "#001242"
         ]
     }
 }

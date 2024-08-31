@@ -81,4 +81,8 @@
 "screen.game.winning_view.repeat" = "Repeat";
 "screen.game.winning_view.game_details.title" = "Go Back";
 "screen.game.winning_view.description" = "You won with %@ points";
-"screen.game.game_share_view.title" = "The winning team is %@ with %@ points!";
+"screen.game.game_share_view.title" = "The winning team is %@ 🥳";
+
+// MARK: - Game Share
+"screen.game_share.title" = "Share game";
+"screen.game_share.share_to" = "Share to";
