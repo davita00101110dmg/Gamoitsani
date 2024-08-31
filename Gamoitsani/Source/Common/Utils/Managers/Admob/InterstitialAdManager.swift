@@ -20,7 +20,7 @@ final class InterstitialAdManager: BaseAdManager {
     }
     
     override func loadAd() async {
-        if isLoadingAd {
+        if isLoadingAd, !AppConstants.shouldShowAdsToUser {
             return
         }
         
@@ -39,7 +39,7 @@ final class InterstitialAdManager: BaseAdManager {
 #if DEBUG
         return
 #else
-        guard let interstitialAd = interstitialAd, !isShowingAd else {
+        guard let interstitialAd = interstitialAd, !isShowingAd, AppConstants.shouldShowAdsToUser else {
             print("Ad wasn't ready or is already showing.")
             return
         }

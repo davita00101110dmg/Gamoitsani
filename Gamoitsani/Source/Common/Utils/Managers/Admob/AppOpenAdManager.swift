@@ -21,7 +21,7 @@ final class AppOpenAdManager: BaseAdManager {
     }
     
     override func loadAd() async {
-        if isLoadingAd || isAdAvailable() {
+        if isLoadingAd || isAdAvailable() || !AppConstants.shouldShowAdsToUser {
             return
         }
         
@@ -39,7 +39,7 @@ final class AppOpenAdManager: BaseAdManager {
     }
     
     override func showAdIfAvailable() {
-        guard !isShowingAd else { return }
+        guard !isShowingAd, AppConstants.shouldShowAdsToUser else { return }
 
         if !isAdAvailable() {
             Task {
