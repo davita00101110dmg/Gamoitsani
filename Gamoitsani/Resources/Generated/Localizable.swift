@@ -185,7 +185,7 @@ public enum L10n {
       public enum GameShare {
         /// Share to
         public static var shareTo: String { L10n.tr("Localizable", "screen.game_share.share_to") }
-        /// Share game
+        /// Share score!
         public static var title: String { L10n.tr("Localizable", "screen.game_share.title") }
       }
 

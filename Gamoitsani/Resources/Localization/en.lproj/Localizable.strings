@@ -84,5 +84,5 @@
 "screen.game.game_share_view.title" = "The winning team is %@ 🥳";
 
 // MARK: - Game Share
-"screen.game_share.title" = "Share game";
+"screen.game_share.title" = "Share score!";
 "screen.game_share.share_to" = "Share to";
