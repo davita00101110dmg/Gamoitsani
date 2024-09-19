@@ -77,8 +77,17 @@ extension GameViewModel {
     }
     
     func getWinnerTeam() -> (key: String, value: Int)? {
-        guard let winnerTeam = sortedTeams.first else { return nil }
-        return winnerTeam
+        guard let firstTeam = sortedTeams.first else { return nil }
+        
+        // Check if there's a tie for first place
+        let tiedTeams = sortedTeams.filter { $0.value == firstTeam.value }
+        
+        // If there's more than one team with the highest score, it's a tie
+        if tiedTeams.count > 1 {
+            return nil
+        }
+        
+        return firstTeam
     }
     
     func generateShareImage() -> UIImage {
@@ -111,8 +120,9 @@ extension GameViewModel {
     }
 
     private func updateGameInfo(with roundScore: Int) {
-        gameStory.teams.values[gameStory.currentTeamIndex] = roundScore
-        dump("Round: \(currentRound) Team: \(currentTeamName) Score: \(gameStory.teams.values[gameStory.currentTeamIndex])")
+        let currentTeamName = gameStory.teams.keys[gameStory.currentTeamIndex]
+        gameStory.teams[currentTeamName, default: 0] += roundScore
+        dump("Round: \(currentRound) Team: \(currentTeamName) Score: \(gameStory.teams[currentTeamName] ?? 0)")
         gameStory.currentTeamIndex = playingSessionCount % numberOfTeams
         gameStory.currentRound = playingSessionCount / numberOfTeams + 1
     }
