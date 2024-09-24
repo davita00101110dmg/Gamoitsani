@@ -21,7 +21,9 @@ final class GamePlayViewModel: ObservableObject {
     var onTimerFinished: ((Int) -> Void)?
     
     private var cancellables = Set<AnyCancellable>()
-    private var shouldShowGeorgianWords: Bool { !AppConstants.isAppInEnglish }
+    private var currentLanguage: Language {
+        AppConstants.currentLanguage
+    }
     
     init(words: [Word], roundLength: Double, audioManager: AudioManager) {
         self.words = words
@@ -74,10 +76,26 @@ final class GamePlayViewModel: ObservableObject {
     }
 
     private func updateCurrentWord() {
-        guard let word = shouldShowGeorgianWords ? words.popLast()?.wordKa : words.popLast()?.wordEn else {
+        guard let word = words.popLast() else {
             currentWord = L10n.Screen.Game.NoMoreWords.message
             return
         }
-        currentWord = word
+        currentWord = getTranslation(for: word)
+    }
+    
+    private func getTranslation(for word: Word) -> String {
+        guard let translations = word.wordTranslations as? Set<Translation>,
+              let translation = translations.first(where: { $0.languageCode == currentLanguage.rawValue }) else {
+            return word.baseWord ?? .empty
+        }
+        return translation.word ?? word.baseWord ?? .empty
+    }
+    
+    func getDifficulty(for word: Word) -> Int {
+        guard let translations = word.wordTranslations as? Set<Translation>,
+              let translation = translations.first(where: { $0.languageCode == currentLanguage.rawValue }) else {
+            return 1
+        }
+        return Int(translation.difficulty)
     }
 }
