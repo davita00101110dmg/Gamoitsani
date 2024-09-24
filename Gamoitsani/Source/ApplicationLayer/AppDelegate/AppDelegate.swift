@@ -109,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func registerInitialUserDefaultValues() {
         UserDefaults.standard.register(defaults: [
-            UserDefaults.Keys.APP_LANGUAGE: AppConstants.Language.georgian.identifier,
+            UserDefaults.Keys.APP_LANGUAGE: Language.georgian.rawValue,
             UserDefaults.Keys.IS_APP_FIRST_LAUNCH: true,
             UserDefaults.Keys.HAS_REMOVED_ADS: false,
             UserDefaults.Keys.HAS_AD_CONSENT: false,

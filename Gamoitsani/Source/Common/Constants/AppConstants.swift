@@ -15,7 +15,7 @@ enum AppConstants {
     
     static let launchScreen = "LaunchScreen"
     
-    static let maxWordsToSaveInCoreData = 20000
+    static var maxWordsToSaveInCoreData = 20000
     static let appStoreLink = "https://apps.apple.com/ge/app/gamoitsani/id6502697351"
     static let reviewUrlLink = "itms-apps://itunes.apple.com/en/app/id6502697351?action=write-review&mt=8"
     
@@ -28,8 +28,12 @@ enum AppConstants {
         }
     }
     
-    static var isAppInEnglish: Bool {
-        AppConstants.Language.english.identifier == UserDefaults.appLanguage
+    static var currentLanguage: Language {
+        return LanguageManager.shared.currentLanguage
+    }
+    
+    static var isAppInGeorgian: Bool {
+        return currentLanguage == .georgian
     }
     
     static var hasRemovedAds: Bool {
@@ -37,7 +41,7 @@ enum AppConstants {
     }
     
     static var shouldShowAdsToUser: Bool {
-        UserDefaults.hasAdConsent && isAppInEnglish && !hasRemovedAds
+        UserDefaults.hasAdConsent && !isAppInGeorgian && !hasRemovedAds
     }
     
     static let randomWords = [
@@ -71,18 +75,6 @@ enum AppConstants {
     
     enum FontType {
         case regular, semiBold, bold
-    }
-    
-    enum Language {
-        case english
-        case georgian
-        
-        var identifier: String {
-            switch self {
-            case .english: "en"
-            case .georgian: "ka"
-            }
-        }
     }
     
     enum Regex {
@@ -129,12 +121,13 @@ enum AppConstants {
     
     enum Firebase {
         static var wordsCollectionName: String {
-            do {
-                return try Configuration.value(for: "WORDS_COLLECTION_NAME")
-            } catch {
-                dump("Error retrieving words collection name: \(error)")
-                return .empty
-            }
+            return "new_words"
+//            do {
+//                return try Configuration.value(for: "WORDS_COLLECTION_NAME")
+//            } catch {
+//                dump("Error retrieving words collection name: \(error)")
+//                return .empty
+//            }
         }
         
         static var suggestedWordsCollectionName: String {

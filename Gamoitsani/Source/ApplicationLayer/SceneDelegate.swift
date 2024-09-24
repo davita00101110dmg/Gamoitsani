@@ -40,7 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        if !UserDefaults.isFirstLaunch && AppConstants.isAppInEnglish {
+        if !UserDefaults.isFirstLaunch && !AppConstants.isAppInGeorgian {
             AppOpenAdManager.shared.showAdIfAvailable()
         }
         

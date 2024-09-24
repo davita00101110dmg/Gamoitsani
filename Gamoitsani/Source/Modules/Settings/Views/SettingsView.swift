@@ -25,7 +25,7 @@ struct SettingsView: View {
                 
                 List {
                     Section {
-                        SettingsLanguagePickerRow(selectedSegment: $viewModel.selectedSegment)
+                        SettingsLanguagePickerRow(viewModel: viewModel)
                     }
                     
                     Section {
@@ -81,5 +81,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(viewModel: SettingsViewModel())
 }
