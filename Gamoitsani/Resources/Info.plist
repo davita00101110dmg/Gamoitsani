@@ -260,7 +260,7 @@
 	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>WORDS_COLLECTION_NAME</key>
-	<string>${WORDS_COLLECTION_NAME}</string>
+	<key>NEW_WORDS_COLLECTION_NAME</key>
+	<string>${NEW_WORDS_COLLECTION_NAME}</string>
 </dict>
 </plist>

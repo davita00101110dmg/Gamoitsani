@@ -121,13 +121,12 @@ enum AppConstants {
     
     enum Firebase {
         static var wordsCollectionName: String {
-            return "new_words"
-//            do {
-//                return try Configuration.value(for: "WORDS_COLLECTION_NAME")
-//            } catch {
-//                dump("Error retrieving words collection name: \(error)")
-//                return .empty
-//            }
+            do {
+                return try Configuration.value(for: "NEW_WORDS_COLLECTION_NAME")
+            } catch {
+                dump("Error retrieving words collection name: \(error)")
+                return .empty
+            }
         }
         
         static var suggestedWordsCollectionName: String {
