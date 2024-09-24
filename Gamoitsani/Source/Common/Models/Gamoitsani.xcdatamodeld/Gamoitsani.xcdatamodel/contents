@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="24A335" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Translation" representedClassName="Translation" syncable="YES">
+        <attribute name="difficulty" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="languageCode" optional="YES" attributeType="String"/>
+        <attribute name="word" optional="YES" attributeType="String"/>
+        <relationship name="originalWord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="wordTranslations" inverseEntity="Word"/>
+    </entity>
+    <entity name="Word" representedClassName=".Word" syncable="YES">
+        <attribute name="baseWord" optional="YES" attributeType="String"/>
+        <attribute name="categoriesData" optional="YES" attributeType="Binary" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
+        <attribute name="last_updated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="wordTranslations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Translation" inverseName="originalWord" inverseEntity="Translation"/>
+    </entity>
+</model>
