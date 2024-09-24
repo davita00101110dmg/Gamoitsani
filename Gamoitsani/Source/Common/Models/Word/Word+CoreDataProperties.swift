@@ -1,9 +1,8 @@
 //
 //  Word+CoreDataProperties.swift
-//  Gamoitsani
+//  
 //
-//  Created by Daviti Khvedelidze on 20/05/2024.
-//  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
+//  Created by Daviti Khvedelidze on 24/09/2024.
 //
 //
 
@@ -17,13 +16,46 @@ extension Word {
         return NSFetchRequest<Word>(entityName: "Word")
     }
 
-    @NSManaged public var wordKa: String?
-    @NSManaged public var wordEn: String?
-    @NSManaged public var categories: [String]?
-    @NSManaged public var definitions: [String]?
+    @NSManaged public var baseWord: String?
+    @NSManaged public var categoriesData: Data?
+    @NSManaged public var last_updated: Date?
+    @NSManaged public var wordTranslations: NSSet?
 
+    var categories: [String] {
+            get {
+                guard let data = categoriesData else { return [] }
+                do {
+                    return try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: data) as? [String] ?? []
+                } catch {
+                    print("Error unarchiving categories: \(error)")
+                    return []
+                }
+            }
+            set {
+                do {
+                    let data = try NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: true)
+                    categoriesData = data
+                } catch {
+                    print("Error archiving categories: \(error)")
+                    categoriesData = nil
+                }
+            }
+        }
 }
 
-extension Word : Identifiable {
+// MARK: Generated accessors for wordTranslations
+extension Word {
+
+    @objc(addWordTranslationsObject:)
+    @NSManaged public func addToWordTranslations(_ value: Translation)
+
+    @objc(removeWordTranslationsObject:)
+    @NSManaged public func removeFromWordTranslations(_ value: Translation)
+
+    @objc(addWordTranslations:)
+    @NSManaged public func addToWordTranslations(_ values: NSSet)
+
+    @objc(removeWordTranslations:)
+    @NSManaged public func removeFromWordTranslations(_ values: NSSet)
 
 }

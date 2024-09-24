@@ -16,8 +16,6 @@
 		FF1E92BA2BF91C8C00127FDE /* GMBackBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */; };
 		FF1F14152BF7A897004116A1 /* Mersad.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF1F14132BF7A897004116A1 /* Mersad.ttf */; };
 		FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37087A2BFBD4280056361F /* CoreDataManager.swift */; };
-		FF37087E2BFBD4FC0056361F /* Word+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37087C2BFBD4FC0056361F /* Word+CoreDataClass.swift */; };
-		FF37087F2BFBD4FC0056361F /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37087D2BFBD4FC0056361F /* Word+CoreDataProperties.swift */; };
 		FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */; };
 		FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */; };
 		FF425BED2C526262003068F0 /* Pods_Gamoitsani.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4D00D5260D7D4ECEB797C7 /* Pods_Gamoitsani.framework */; };
@@ -94,6 +92,7 @@
 		FF8EA7562BEC40B100F098B8 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7552BEC40B100F098B8 /* UIColorExtensions.swift */; };
 		FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */; };
 		FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */; };
+		FF99230A2CA334EE0088395E /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9923092CA334EE0088395E /* LanguageManager.swift */; };
 		FFA60DAB2C7639D5005A2660 /* AppOpenAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */; };
 		FFA60DAD2C7774D8005A2660 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */; };
 		FFA60DB42C7A0269005A2660 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DB32C7A0269005A2660 /* ViewExtensions.swift */; };
@@ -112,6 +111,10 @@
 		FFBFB0312C68CC3A00A877D7 /* GamoitsaniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */; };
 		FFC172B42C6E6EAB0069623F /* GMButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B32C6E6EAB0069623F /* GMButtonView.swift */; };
 		FFC172B62C6E70FA0069623F /* GMLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B52C6E70FA0069623F /* GMLabelView.swift */; };
+		FFC5DE362CA3247900C6600D /* Translation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5DE332CA3247900C6600D /* Translation+CoreDataProperties.swift */; };
+		FFC5DE372CA3247900C6600D /* Translation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5DE322CA3247900C6600D /* Translation+CoreDataClass.swift */; };
+		FFC5DE382CA3247900C6600D /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5DE352CA3247900C6600D /* Word+CoreDataProperties.swift */; };
+		FFC5DE392CA3247900C6600D /* Word+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5DE342CA3247900C6600D /* Word+CoreDataClass.swift */; };
 		FFD386D62C6A500A0027A2C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFD386D12C6A500A0027A2C4 /* LaunchScreen.storyboard */; };
 		FFF65C9D2BE554B9008E0352 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */; };
 		FFF65C9F2BE555C2008E0352 /* GameDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65C9E2BE555C2008E0352 /* GameDetailsViewModel.swift */; };
@@ -199,8 +202,6 @@
 		FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMBackBarButtonItem.swift; sourceTree = "<group>"; };
 		FF1F14132BF7A897004116A1 /* Mersad.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mersad.ttf; sourceTree = "<group>"; };
 		FF37087A2BFBD4280056361F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		FF37087C2BFBD4FC0056361F /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataClass.swift"; sourceTree = "<group>"; };
-		FF37087D2BFBD4FC0056361F /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleTableViewCell.swift; sourceTree = "<group>"; };
 		FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RuleTableViewCell.xib; sourceTree = "<group>"; };
 		FF4D9D252BD698620046819D /* Gamoitsani.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -277,6 +278,8 @@
 		FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FF91B8D82BF785B200EB85F1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		FF9923092CA334EE0088395E /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		FF99230B2CA33A180088395E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAdManager.swift; sourceTree = "<group>"; };
 		FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		FFA60DB32C7A0269005A2660 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -296,6 +299,10 @@
 		FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
 		FFC172B32C6E6EAB0069623F /* GMButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMButtonView.swift; sourceTree = "<group>"; };
 		FFC172B52C6E70FA0069623F /* GMLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMLabelView.swift; sourceTree = "<group>"; };
+		FFC5DE322CA3247900C6600D /* Translation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Translation+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FFC5DE332CA3247900C6600D /* Translation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Translation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FFC5DE342CA3247900C6600D /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FFC5DE352CA3247900C6600D /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FFD386D12C6A500A0027A2C4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		FFF65C9E2BE555C2008E0352 /* GameDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -385,8 +392,10 @@
 		FF3708802BFBD5040056361F /* Word */ = {
 			isa = PBXGroup;
 			children = (
-				FF37087C2BFBD4FC0056361F /* Word+CoreDataClass.swift */,
-				FF37087D2BFBD4FC0056361F /* Word+CoreDataProperties.swift */,
+				FFC5DE322CA3247900C6600D /* Translation+CoreDataClass.swift */,
+				FFC5DE332CA3247900C6600D /* Translation+CoreDataProperties.swift */,
+				FFC5DE342CA3247900C6600D /* Word+CoreDataClass.swift */,
+				FFC5DE352CA3247900C6600D /* Word+CoreDataProperties.swift */,
 			);
 			path = Word;
 			sourceTree = "<group>";
@@ -469,7 +478,6 @@
 				FFFB4D0B2BD83F0D00CDDCB4 /* Localization */,
 				FF4FA9CF2BEFE9A800F38F98 /* Swiftgen */,
 				FF4D9D342BD698630046819D /* Assets.xcassets */,
-				FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */,
 				FF8675722C6808FE0089B52B /* Gamoitsani.storekit */,
 				FFA60DBD2C7A2D29005A2660 /* Gamoitsani.entitlements */,
 				FF8929C12BD6FC52000C0B9B /* Info.plist */,
@@ -651,6 +659,7 @@
 		FF7F1DA42BE9749500872554 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */,
 				FF67CC7D2C6AD0A10094824E /* GameTeams */,
 				FF3708802BFBD5040056361F /* Word */,
 				FF7F1DA52BE9749900872554 /* Game */,
@@ -754,6 +763,7 @@
 				FF37087A2BFBD4280056361F /* CoreDataManager.swift */,
 				FF7CA15D2C01FCB800E3BEC4 /* StoreReviewManager.swift */,
 				FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */,
+				FF9923092CA334EE0088395E /* LanguageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1147,6 +1157,7 @@
 				en,
 				ka,
 				Base,
+				uk,
 			);
 			mainGroup = FF4D9D1C2BD698620046819D;
 			packageReferences = (
@@ -1361,6 +1372,7 @@
 				FFFB4D382BD9144B00CDDCB4 /* StringExtensions.swift in Sources */,
 				FF1E92B62BF8FE8E00127FDE /* GMGradientView.swift in Sources */,
 				FFF65CB82BE651C5008E0352 /* IntExtensions.swift in Sources */,
+				FF99230A2CA334EE0088395E /* LanguageManager.swift in Sources */,
 				FFF65CB02BE61DEA008E0352 /* UITableViewExtensions.swift in Sources */,
 				FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */,
 				FF7F1D9B2BE7D25300872554 /* GamePlayViewModel.swift in Sources */,
@@ -1372,6 +1384,10 @@
 				FFFB4D462BD928B400CDDCB4 /* UIFontExtensions.swift in Sources */,
 				FFFCF38C2C6EC506003458DC /* ConfettiView.swift in Sources */,
 				FFA60DC92C7D01FB005A2660 /* GameView.swift in Sources */,
+				FFC5DE362CA3247900C6600D /* Translation+CoreDataProperties.swift in Sources */,
+				FFC5DE372CA3247900C6600D /* Translation+CoreDataClass.swift in Sources */,
+				FFC5DE382CA3247900C6600D /* Word+CoreDataProperties.swift in Sources */,
+				FFC5DE392CA3247900C6600D /* Word+CoreDataClass.swift in Sources */,
 				FF67CC832C6AD0D60094824E /* GameTeamCellItem.swift in Sources */,
 				FF4FA9C02BED917A00F38F98 /* AddWordCoordinator.swift in Sources */,
 				FF67CC7F2C6AD0B80094824E /* GameTeamsSnapshot.swift in Sources */,
@@ -1383,8 +1399,6 @@
 				FF7CA1652C02591100E3BEC4 /* GameOverViewModel.swift in Sources */,
 				FF7F1D8E2BE7AE2100872554 /* GameInfoView.swift in Sources */,
 				FF8EA7092BEBBA1900F098B8 /* GameScoreboardViewModel.swift in Sources */,
-				FF37087E2BFBD4FC0056361F /* Word+CoreDataClass.swift in Sources */,
-				FF37087F2BFBD4FC0056361F /* Word+CoreDataProperties.swift in Sources */,
 				FFFB4D3F2BD9155100CDDCB4 /* RulesCoordinator.swift in Sources */,
 				FF8EA7112BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.swift in Sources */,
 				FFA60DC22C7CEC53005A2660 /* InterstitialAdManager.swift in Sources */,
@@ -1486,6 +1500,7 @@
 			children = (
 				FFFB4D082BD8393A00CDDCB4 /* en */,
 				FFFB4D0A2BD8395000CDDCB4 /* ka */,
+				FF99230B2CA33A180088395E /* uk */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

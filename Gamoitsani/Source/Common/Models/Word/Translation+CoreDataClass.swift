@@ -1,5 +1,5 @@
 //
-//  Word+CoreDataClass.swift
+//  Translation+CoreDataClass.swift
 //  
 //
 //  Created by Daviti Khvedelidze on 24/09/2024.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-
-public class Word: NSManagedObject {
+@objc(Translation)
+public class Translation: NSManagedObject {
 
 }
