@@ -14,7 +14,7 @@ extension String {
     
     func localized(_ arguments: CVarArg...) -> String {
         guard let lang = UserDefaults.appLanguage else {
-            UserDefaults.appLanguage = AppConstants.Language.english.identifier
+            UserDefaults.appLanguage = Language.english.rawValue
             return self
         }
         

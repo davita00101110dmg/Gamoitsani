@@ -8,26 +8,39 @@
 
 import SwiftUI
 import StoreKit
+import Combine
 
 final class SettingsViewModel: NSObject, ObservableObject {
-    @AppStorage(UserDefaults.Keys.APP_LANGUAGE) var appLanguage: String = AppConstants.Language.georgian.identifier
+    @Published var selectedLanguage: Language
     @AppStorage(UserDefaults.Keys.HAS_REMOVED_ADS) var isRemoveAdsPurchased: Bool = false
-    @Published var selectedSegment: Int = 0
     @Published var showingAlert: Bool = false
     @Published var languageChanged: Bool = false
     @Published var isShareSheetPresented: Bool = false
-        
+    
     private var products: [SKProduct] = []
+    private var cancellables = Set<AnyCancellable>()
     
     var shouldShowPrivacySettingsButton: Bool {
         AppConsentAdManager.shared.shouldShowPrivacySettingsButton
     }
     
+    var availableLanguages: [Language] {
+        Language.allCases
+    }
+    
     override init() {
+        selectedLanguage = LanguageManager.shared.currentLanguage
         super.init()
-        selectedSegment = appLanguage == AppConstants.Language.georgian.identifier ? 0 : 1
+        
         fetchProducts()
         SKPaymentQueue.default().add(self)
+        
+        LanguageManager.shared.$currentLanguage
+            .sink { [weak self] newLanguage in
+                self?.selectedLanguage = newLanguage
+                self?.languageChanged = true
+            }
+            .store(in: &cancellables)
     }
     
     deinit {
@@ -41,9 +54,8 @@ final class SettingsViewModel: NSObject, ObservableObject {
         request.start()
     }
     
-    func updateLanguage(_ segment: Int) {
-        appLanguage = segment == 0 ? AppConstants.Language.georgian.identifier : AppConstants.Language.english.identifier
-        NotificationCenter.default.post(name: .languageDidChange, object: nil)
+    func updateLanguage(_ language: Language) {
+        LanguageManager.shared.setLanguage(language)
     }
     
     func writeReviewAction() {
