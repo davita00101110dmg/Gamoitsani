@@ -40,6 +40,7 @@
 		FF4FA9CC2BEF875B00F38F98 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */; };
 		FF4FA9D12BEFF30900F38F98 /* AddWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */; };
 		FF4FA9D32BEFF30E00F38F98 /* AddWordModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */; };
+		FF6054DE2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6054DD2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift */; };
 		FF67CC7F2C6AD0B80094824E /* GameTeamsSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC7E2C6AD0B80094824E /* GameTeamsSnapshot.swift */; };
 		FF67CC812C6AD0BF0094824E /* GameTeamsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC802C6AD0BF0094824E /* GameTeamsDataSource.swift */; };
 		FF67CC832C6AD0D60094824E /* GameTeamCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC822C6AD0D60094824E /* GameTeamCellItem.swift */; };
@@ -108,7 +109,7 @@
 		FFAE1F202C7E3AA6003A554C /* GameShareModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F1F2C7E3AA6003A554C /* GameShareModels.swift */; };
 		FFAE1F222C7E3AAA003A554C /* GameShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F212C7E3AAA003A554C /* GameShareViewModel.swift */; };
 		FFB98EAB2C7534380024A925 /* AppConsentAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB98EAA2C7534380024A925 /* AppConsentAdManager.swift */; };
-		FFBFB0312C68CC3A00A877D7 /* GamoitsaniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */; };
+		FFBFB0312C68CC3A00A877D7 /* GameViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB0302C68CC3A00A877D7 /* GameViewModelTests.swift */; };
 		FFC172B42C6E6EAB0069623F /* GMButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B32C6E6EAB0069623F /* GMButtonView.swift */; };
 		FFC172B62C6E70FA0069623F /* GMLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B52C6E70FA0069623F /* GMLabelView.swift */; };
 		FFC5DE362CA3247900C6600D /* Translation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5DE332CA3247900C6600D /* Translation+CoreDataProperties.swift */; };
@@ -152,6 +153,7 @@
 		FFFB4D512BD9398600CDDCB4 /* GameDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFB4D502BD9398600CDDCB4 /* GameDetailsViewController.xib */; };
 		FFFCF38C2C6EC506003458DC /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFCF38B2C6EC506003458DC /* ConfettiView.swift */; };
 		FFFCF38E2C6FA048003458DC /* DynamicStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFCF38D2C6FA048003458DC /* DynamicStack.swift */; };
+		FFFFD25F2CBD3B6400622327 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFD25E2CBD3B6400622327 /* CoreDataManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +228,7 @@
 		FF4FA9CB2BEF875B00F38F98 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewModel.swift; sourceTree = "<group>"; };
 		FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordModels.swift; sourceTree = "<group>"; };
+		FF6054DD2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManagerTests.swift; sourceTree = "<group>"; };
 		FF67CC7E2C6AD0B80094824E /* GameTeamsSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamsSnapshot.swift; sourceTree = "<group>"; };
 		FF67CC802C6AD0BF0094824E /* GameTeamsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamsDataSource.swift; sourceTree = "<group>"; };
 		FF67CC822C6AD0D60094824E /* GameTeamCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamCellItem.swift; sourceTree = "<group>"; };
@@ -296,7 +299,7 @@
 		FFAE1F1F2C7E3AA6003A554C /* GameShareModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareModels.swift; sourceTree = "<group>"; };
 		FFAE1F212C7E3AAA003A554C /* GameShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareViewModel.swift; sourceTree = "<group>"; };
 		FFB98EAA2C7534380024A925 /* AppConsentAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConsentAdManager.swift; sourceTree = "<group>"; };
-		FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniTests.swift; sourceTree = "<group>"; };
+		FFBFB0302C68CC3A00A877D7 /* GameViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelTests.swift; sourceTree = "<group>"; };
 		FFC172B32C6E6EAB0069623F /* GMButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMButtonView.swift; sourceTree = "<group>"; };
 		FFC172B52C6E70FA0069623F /* GMLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMLabelView.swift; sourceTree = "<group>"; };
 		FFC5DE322CA3247900C6600D /* Translation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Translation+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -341,6 +344,7 @@
 		FFFB4D502BD9398600CDDCB4 /* GameDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameDetailsViewController.xib; sourceTree = "<group>"; };
 		FFFCF38B2C6EC506003458DC /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		FFFCF38D2C6FA048003458DC /* DynamicStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicStack.swift; sourceTree = "<group>"; };
+		FFFFD25E2CBD3B6400622327 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -837,7 +841,9 @@
 		FFBFB02F2C68CC2700A877D7 /* GamoitsaniTests */ = {
 			isa = PBXGroup;
 			children = (
-				FFBFB0302C68CC3A00A877D7 /* GamoitsaniTests.swift */,
+				FFBFB0302C68CC3A00A877D7 /* GameViewModelTests.swift */,
+				FFFFD25E2CBD3B6400622327 /* CoreDataManagerTests.swift */,
+				FF6054DD2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift */,
 			);
 			path = GamoitsaniTests;
 			sourceTree = "<group>";
@@ -1466,7 +1472,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFBFB0312C68CC3A00A877D7 /* GamoitsaniTests.swift in Sources */,
+				FFFFD25F2CBD3B6400622327 /* CoreDataManagerTests.swift in Sources */,
+				FF6054DE2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift in Sources */,
+				FFBFB0312C68CC3A00A877D7 /* GameViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
