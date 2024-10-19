@@ -49,7 +49,14 @@ final class AddWordViewController: BaseViewController<AddWordCoordinator> {
     
     @IBAction func addWordAction(_ sender: Any) {
         guard let word = wordTextField.text, word != .empty else { return }
-        FirebaseManager.shared.addWordToSuggestions(word.removeExtraSpaces())
+        FirebaseManager.shared.addWordToSuggestions(word.removeExtraSpaces()) { success in
+            // TODO: Add some UI here
+            if success {
+                dump("Word succesfully sent to suggestions")
+            } else {
+                dump("Word wasn't sent to suggestions")
+            }
+        }
         wordTextField.text = .empty
     }
 }

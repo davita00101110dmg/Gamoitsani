@@ -31,7 +31,7 @@ final class CoreDataManager {
                 if existingCount > AppConstants.maxWordsToSaveInCoreData {
                     let excessCount = existingCount - AppConstants.maxWordsToSaveInCoreData
                     let oldestWordsFetchRequest: NSFetchRequest<Word> = Word.fetchRequest()
-                    oldestWordsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "last_updated", ascending: true)]
+                    oldestWordsFetchRequest.sortDescriptors = [NSSortDescriptor(key: AppConstants.Firebase.Fields.lastUpdated, ascending: true)]
                     oldestWordsFetchRequest.fetchLimit = excessCount
                     
                     let oldestWords = try context.fetch(oldestWordsFetchRequest)
@@ -92,7 +92,7 @@ final class CoreDataManager {
         context.performAndWait {
             let fetchRequest: NSFetchRequest<Word> = Word.fetchRequest()
             fetchRequest.fetchLimit = quantity
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "last_updated", ascending: false)]
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: AppConstants.Firebase.Fields.lastUpdated, ascending: false)]
             
             do {
                 fetchedWords = try context.fetch(fetchRequest)
