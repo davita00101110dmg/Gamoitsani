@@ -35,11 +35,50 @@ final class FirebaseManager {
     private lazy var wordsRef = db.collection(AppConstants.Firebase.wordsCollectionName)
     private lazy var suggestionsRef = db.collection(AppConstants.Firebase.suggestedWordsCollectionName)
 
+    var coreDataManager: CoreDataManaging = CoreDataManager.shared
+    var currentDate: Date = Date()
+    
     private init() { }
     
+    func fetchWordsIfNeeded(completion: @escaping ([Word]) -> Void) {
+        let lastSyncTimestamp = UserDefaults.lastWordSyncDate
+        let currentTimestamp = currentDate.timeIntervalSince1970
+        
+        if currentTimestamp - lastSyncTimestamp >= .week {
+            fetchWordsFromFirebase(since: Date(timeIntervalSince1970: lastSyncTimestamp)) { [weak self] firebaseWords in
+                guard let self else { return }
+                self.coreDataManager.saveWordsFromFirebase(firebaseWords)
+                UserDefaults.lastWordSyncDate = currentTimestamp
+                let words = self.coreDataManager.fetchWordsFromCoreData(quantity: 1500)
+                completion(words)
+            }
+        } else {
+            let words = coreDataManager.fetchWordsFromCoreData(quantity: 1500)
+            completion(words)
+        }
+    }
+
+    private func fetchWordsFromFirebase(since date: Date, completion: @escaping ([WordFirebase]) -> Void) {
+        wordsRef
+            .whereField(AppConstants.Firebase.Fields.lastUpdated, isGreaterThan: date)
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    dump("Error fetching words: \(error.localizedDescription)")
+                    completion([])
+                    return
+                }
+                
+                let words = querySnapshot?.documents.compactMap { document -> WordFirebase? in
+                    try? document.data(as: WordFirebase.self)
+                } ?? []
+                
+                completion(words)
+            }
+    }
+
     func fetchWords(limit: Int = 1500, completion: @escaping ([WordFirebase]) -> Void) {
         db.collection(AppConstants.Firebase.wordsCollectionName)
-            .order(by: "last_updated", descending: true)
+            .order(by: AppConstants.Firebase.Fields.lastUpdated, descending: true)
             .limit(to: limit)
             .getDocuments { querySnapshot, error in
                 if let error {
@@ -54,33 +93,40 @@ final class FirebaseManager {
                 completion(words)
             }
     }
-//    
-//    func addWordToSuggestions(_ words: String...) {
-//        for word in words {
-//            suggestionsRef.whereField(wordField, isEqualTo: word).getDocuments { querySnapshot, error in
-//                if let error = error {
-//                    dump("Error checking for existing word: \(error.localizedDescription)")
-//                    return
-//                }
-//                
-//                guard let snapshot = querySnapshot else { return }
-//                
-//                if snapshot.isEmpty {
-//                    var data: [String: Any] = [:]
-//                    data[AppConstants.Firebase.wordKa] = self.wordField == AppConstants.Firebase.wordKa ? word : ""
-//                    data[AppConstants.Firebase.wordEn] = self.wordField == AppConstants.Firebase.wordEn ? word : ""
-//                    data[AppConstants.Firebase.categories] = []
-//                    data[AppConstants.Firebase.definitions] = []
-//                    
-//                    self.suggestionsRef.addDocument(data: data) { error in
-//                        if let error = error {
-//                            dump("Error adding document: \(error.localizedDescription)")
-//                        } else {
-//                            dump("Document added successfully")
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    
+    func addWordToSuggestions(_ word: String, language: Language = .georgian, completion: @escaping (Bool) -> Void) {
+        let query = suggestionsRef.whereField(AppConstants.Firebase.Fields.baseWord, isEqualTo: word)
+        
+        query.getDocuments { [weak self] (querySnapshot, error) in
+            guard let self = self else { return }
+            
+            if let error = error {
+                dump("Error checking for existing word: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            if let querySnapshot = querySnapshot, !querySnapshot.isEmpty {
+                dump("Word already exists in suggestions")
+                completion(false)
+                return
+            }
+            
+            let newSuggestion: [String: Any] = [
+                AppConstants.Firebase.Fields.baseWord: word,
+                AppConstants.Firebase.Fields.language: language.rawValue,
+                AppConstants.Firebase.Fields.lastUpdated: FieldValue.serverTimestamp(),
+            ]
+            
+            self.suggestionsRef.addDocument(data: newSuggestion) { error in
+                if let error = error {
+                    dump("Error adding word suggestion: \(error.localizedDescription)")
+                    completion(false)
+                } else {
+                    dump("Word suggestion added successfully")
+                    completion(true)
+                }
+            }
+        }
+    }
 }

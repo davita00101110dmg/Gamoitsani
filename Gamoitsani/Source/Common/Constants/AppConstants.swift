@@ -120,14 +120,22 @@ enum AppConstants {
     }
     
     enum Firebase {
+        
+        enum Fields {
+            static let baseWord = "base_word"
+            static let language = "language"
+            static let lastUpdated = "last_updated"
+            static let categories = "categories"
+            static let translations = "translations"
+        }
+        
         static var wordsCollectionName: String {
-            return "new_words"
-//            do {
-//                return try Configuration.value(for: "WORDS_COLLECTION_NAME")
-//            } catch {
-//                dump("Error retrieving words collection name: \(error)")
-//                return .empty
-//            }
+            do {
+                return try Configuration.value(for: "WORDS_COLLECTION_NAME")
+            } catch {
+                dump("Error retrieving words collection name: \(error)")
+                return .empty
+            }
         }
         
         static var suggestedWordsCollectionName: String {
@@ -138,11 +146,6 @@ enum AppConstants {
                 return .empty
             }
         }
-        
-        static let wordKa = "word_ka"
-        static let wordEn = "word_en"
-        static let categories = "categories"
-        static let definitions = "definitions"
     }
     
     enum Meta {

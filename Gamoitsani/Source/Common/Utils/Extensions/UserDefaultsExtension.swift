@@ -15,6 +15,7 @@ extension UserDefaults {
         static let HAS_REMOVED_ADS = "HAS_REMOVED_ADS"
         static let IS_APP_FIRST_LAUNCH = "IS_APP_FIRST_LAUNCH"
         static let HAS_AD_CONSENT = "HAS_AD_CONSENT"
+        static let LAST_WORD_SYNC_DATE = "LAST_WORD_SYNC_DATE"
     }
     
     static var appLanguage: String? {
@@ -50,6 +51,15 @@ extension UserDefaults {
             return UserDefaults.standard.bool(forKey: Keys.HAS_AD_CONSENT)
         } set {
             UserDefaults.standard.set(newValue, forKey: Keys.HAS_AD_CONSENT)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var lastWordSyncDate: Double {
+        get {
+            return UserDefaults.standard.double(forKey: Keys.LAST_WORD_SYNC_DATE)
+        } set {
+            UserDefaults.standard.set(newValue, forKey: Keys.LAST_WORD_SYNC_DATE)
             UserDefaults.standard.synchronize()
         }
     }
