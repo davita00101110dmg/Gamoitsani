@@ -9,52 +9,36 @@
 import CoreData
 import UIKit
 
-final class CoreDataManager {
-    static let shared = CoreDataManager()
+protocol CoreDataManaging {
+    @discardableResult
+    func saveWordsFromFirebase(_ words: [WordFirebase]) -> Int
+    func fetchWordsFromCoreData(quantity: Int) -> [Word]
+}
 
+final class CoreDataManager: CoreDataManaging {
+    static var shared = CoreDataManager()
+    
     private init() { }
     
     var context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    @discardableResult
     func saveWordsFromFirebase(_ words: [WordFirebase]) -> Int {
-        let context = self.context
         var savedCount = 0
         
         context.performAndWait {
-            do {
-                // First, count existing words
-                let countFetchRequest = NSFetchRequest<NSNumber>(entityName: "Word")
-                countFetchRequest.resultType = .countResultType
-                let existingCount = try context.fetch(countFetchRequest).first?.intValue ?? 0
+            for firebaseWord in words {
+                let fetchRequest: NSFetchRequest<Word> = Word.fetchRequest()
+                fetchRequest.predicate = NSPredicate(format: "baseWord == %@", firebaseWord.baseWord)
                 
-                // If we already have more words than the limit, delete the excess
-                if existingCount > AppConstants.maxWordsToSaveInCoreData {
-                    let excessCount = existingCount - AppConstants.maxWordsToSaveInCoreData
-                    let oldestWordsFetchRequest: NSFetchRequest<Word> = Word.fetchRequest()
-                    oldestWordsFetchRequest.sortDescriptors = [NSSortDescriptor(key: AppConstants.Firebase.Fields.lastUpdated, ascending: true)]
-                    oldestWordsFetchRequest.fetchLimit = excessCount
-                    
-                    let oldestWords = try context.fetch(oldestWordsFetchRequest)
-                    for word in oldestWords {
-                        context.delete(word)
-                    }
-                }
-                
-                // Determine how many new words we can add
-                let spaceForNewWords = AppConstants.maxWordsToSaveInCoreData - existingCount
-                let wordsToProcess = Array(words.suffix(max(0, min(spaceForNewWords, words.count))))
-                
-                for firebaseWord in wordsToProcess {
-                    let fetchRequest: NSFetchRequest<Word> = Word.fetchRequest()
-                    fetchRequest.predicate = NSPredicate(format: "baseWord == %@", firebaseWord.baseWord)
-                    
+                do {
                     let existingWords = try context.fetch(fetchRequest)
                     let word = existingWords.first ?? Word(context: context)
                     
                     word.baseWord = firebaseWord.baseWord
                     word.categories = firebaseWord.categories
                     word.last_updated = firebaseWord.lastUpdated
-
+                    
                     if let existingTranslations = word.wordTranslations as? Set<Translation> {
                         for translation in existingTranslations {
                             word.removeFromWordTranslations(translation)
@@ -63,23 +47,23 @@ final class CoreDataManager {
                     }
                     
                     for (langCode, translationData) in firebaseWord.translations {
-                        let translationEntity = Translation(context: context)
-                        translationEntity.languageCode = langCode
-                        translationEntity.word = translationData.word
-                        translationEntity.difficulty = Int16(translationData.difficulty)
-                        word.addToWordTranslations(translationEntity)
+                        let translation = Translation(context: context)
+                        translation.languageCode = langCode
+                        translation.word = translationData.word
+                        translation.difficulty = Int16(translationData.difficulty)
+                        word.addToWordTranslations(translation)
                     }
                     
                     savedCount += 1
+                } catch {
+                    dump("Error saving word: \(error)")
                 }
-                
-                // Save the context
-                if context.hasChanges {
-                    try context.save()
-                }
-                
+            }
+            
+            do {
+                try context.save()
             } catch {
-                print("Error processing words: \(error)")
+                dump("Error saving context: \(error)")
             }
         }
         
@@ -96,9 +80,9 @@ final class CoreDataManager {
             
             do {
                 fetchedWords = try context.fetch(fetchRequest)
-                print("Fetched \(fetchedWords.count) words from Core Data")
+                dump("Fetched \(fetchedWords.count) words from Core Data")
             } catch {
-                print("Failed to fetch words from Core Data: \(error)")
+                dump("Failed to fetch words from Core Data: \(error)")
             }
         }
         

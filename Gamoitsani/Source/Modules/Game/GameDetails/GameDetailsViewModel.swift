@@ -91,15 +91,9 @@ final class GameDetailsViewModel: ObservableObject {
     }
     
     func fetchWordsFromServer() {
-        if shouldFetchWordsFromServer {
-            FirebaseManager.shared.fetchWords { words in
-                let savedCount = CoreDataManager.shared.saveWordsFromFirebase(words)
-                dump("Saved \(savedCount) words to Core Data")
-                
-                GameStory.shared.words = CoreDataManager.shared.fetchWordsFromCoreData()
-            }
-        } else {
-            GameStory.shared.words = CoreDataManager.shared.fetchWordsFromCoreData()
+        FirebaseManager.shared.fetchWordsIfNeeded { words in
+            GameStory.shared.words = words
+            dump("Fetched \(words.count) words")
         }
     }
     

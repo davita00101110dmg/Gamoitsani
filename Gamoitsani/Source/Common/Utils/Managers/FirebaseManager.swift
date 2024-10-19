@@ -35,8 +35,47 @@ final class FirebaseManager {
     private lazy var wordsRef = db.collection(AppConstants.Firebase.wordsCollectionName)
     private lazy var suggestionsRef = db.collection(AppConstants.Firebase.suggestedWordsCollectionName)
 
+    var coreDataManager: CoreDataManaging = CoreDataManager.shared
+    var currentDate: Date = Date()
+    
     private init() { }
     
+    func fetchWordsIfNeeded(completion: @escaping ([Word]) -> Void) {
+        let lastSyncTimestamp = UserDefaults.lastWordSyncDate
+        let currentTimestamp = currentDate.timeIntervalSince1970
+        
+        if currentTimestamp - lastSyncTimestamp >= .week {
+            fetchWordsFromFirebase(since: Date(timeIntervalSince1970: lastSyncTimestamp)) { [weak self] firebaseWords in
+                guard let self else { return }
+                self.coreDataManager.saveWordsFromFirebase(firebaseWords)
+                UserDefaults.lastWordSyncDate = currentTimestamp
+                let words = self.coreDataManager.fetchWordsFromCoreData(quantity: 1500)
+                completion(words)
+            }
+        } else {
+            let words = coreDataManager.fetchWordsFromCoreData(quantity: 1500)
+            completion(words)
+        }
+    }
+
+    private func fetchWordsFromFirebase(since date: Date, completion: @escaping ([WordFirebase]) -> Void) {
+        wordsRef
+            .whereField(AppConstants.Firebase.Fields.lastUpdated, isGreaterThan: date)
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    dump("Error fetching words: \(error.localizedDescription)")
+                    completion([])
+                    return
+                }
+                
+                let words = querySnapshot?.documents.compactMap { document -> WordFirebase? in
+                    try? document.data(as: WordFirebase.self)
+                } ?? []
+                
+                completion(words)
+            }
+    }
+
     func fetchWords(limit: Int = 1500, completion: @escaping ([WordFirebase]) -> Void) {
         db.collection(AppConstants.Firebase.wordsCollectionName)
             .order(by: AppConstants.Firebase.Fields.lastUpdated, descending: true)
