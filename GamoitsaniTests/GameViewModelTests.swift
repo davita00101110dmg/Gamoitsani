@@ -1,5 +1,5 @@
 //
-//  GamoitsaniTests.swift
+//  GameViewModelTests.swift
 //  GamoitsaniTests
 //
 //  Created by Daviti Khvedelidze on 28/08/2024.
@@ -7,16 +7,17 @@
 //
 
 import XCTest
+import CoreData
 @testable import Gamoitsani
 
-class GameViewModelTests: XCTestCase {
+final class GameViewModelTests: XCTestCase {
     
     var sut: GameViewModel!
     
     override func setUp() {
         super.setUp()
         sut = GameViewModel()
-        GameStory.shared.reset() // Ensure we start with a clean state
+        GameStory.shared.reset()
     }
     
     override func tearDown() {
