@@ -27,15 +27,7 @@ enum AppConstants {
             return .empty
         }
     }
-    
-    static var currentLanguage: Language {
-        return LanguageManager.shared.currentLanguage
-    }
-    
-    static var isAppInGeorgian: Bool {
-        return currentLanguage == .georgian
-    }
-    
+
     static var hasRemovedAds: Bool {
         UserDefaults.hasRemovedAds
     }

@@ -21,11 +21,11 @@ final class GMLabel: UILabel {
         
         switch fontType {
         case .regular:
-            font = F.Mersad.regular.font(size: fontSize)
+            font = .appFont(type: .regular, size: fontSize)
         case .semiBold:
-            font = F.Mersad.semiBold.font(size: fontSize)
+            font = .appFont(type: .semiBold, size: fontSize)
         case .bold:
-            font = F.Mersad.bold.font(size: fontSize)
+            font = .appFont(type: .bold, size: fontSize)
         }
         
         setLineSpacing(lineHeightMultiple: lineHeightMultiple, textAlignment: textAlignment)

@@ -41,6 +41,9 @@
 		FF4FA9D12BEFF30900F38F98 /* AddWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */; };
 		FF4FA9D32BEFF30E00F38F98 /* AddWordModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */; };
 		FF6054DE2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6054DD2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift */; };
+		FF6054EF2CC550A5003C2AA0 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF6054E52CC550A5003C2AA0 /* Ubuntu-Bold.ttf */; };
+		FF6054F22CC550A5003C2AA0 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF6054EA2CC550A5003C2AA0 /* Ubuntu-Medium.ttf */; };
+		FF6054F62CC55AE9003C2AA0 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6054F52CC55AE9003C2AA0 /* FontExtensions.swift */; };
 		FF67CC7F2C6AD0B80094824E /* GameTeamsSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC7E2C6AD0B80094824E /* GameTeamsSnapshot.swift */; };
 		FF67CC812C6AD0BF0094824E /* GameTeamsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC802C6AD0BF0094824E /* GameTeamsDataSource.swift */; };
 		FF67CC832C6AD0D60094824E /* GameTeamCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC822C6AD0D60094824E /* GameTeamCellItem.swift */; };
@@ -229,6 +232,9 @@
 		FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewModel.swift; sourceTree = "<group>"; };
 		FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordModels.swift; sourceTree = "<group>"; };
 		FF6054DD2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManagerTests.swift; sourceTree = "<group>"; };
+		FF6054E52CC550A5003C2AA0 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
+		FF6054EA2CC550A5003C2AA0 /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
+		FF6054F52CC55AE9003C2AA0 /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		FF67CC7E2C6AD0B80094824E /* GameTeamsSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamsSnapshot.swift; sourceTree = "<group>"; };
 		FF67CC802C6AD0BF0094824E /* GameTeamsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamsDataSource.swift; sourceTree = "<group>"; };
 		FF67CC822C6AD0D60094824E /* GameTeamCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamCellItem.swift; sourceTree = "<group>"; };
@@ -955,6 +961,7 @@
 				FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */,
 				FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */,
 				FFA60DB32C7A0269005A2660 /* ViewExtensions.swift */,
+				FF6054F52CC55AE9003C2AA0 /* FontExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -971,6 +978,8 @@
 			isa = PBXGroup;
 			children = (
 				FF1F14132BF7A897004116A1 /* Mersad.ttf */,
+				FF6054E52CC550A5003C2AA0 /* Ubuntu-Bold.ttf */,
+				FF6054EA2CC550A5003C2AA0 /* Ubuntu-Medium.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -1194,6 +1203,8 @@
 				FFF65CAC2BE6199A008E0352 /* GameDetailsTeamTableViewCell.xib in Resources */,
 				FF70699E2C6C0DBA00C3D9EA /* QuestionMark.png in Resources */,
 				FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */,
+				FF6054EF2CC550A5003C2AA0 /* Ubuntu-Bold.ttf in Resources */,
+				FF6054F22CC550A5003C2AA0 /* Ubuntu-Medium.ttf in Resources */,
 				FF4FA9BC2BED916700F38F98 /* AddWordViewController.xib in Resources */,
 				FFD386D62C6A500A0027A2C4 /* LaunchScreen.storyboard in Resources */,
 				FF7069972C6C0C1C00C3D9EA /* Landscape.png in Resources */,
@@ -1376,6 +1387,7 @@
 				FFF65CA12BE555CC008E0352 /* GameDetailsModel.swift in Sources */,
 				FFFB4D322BD86DAF00CDDCB4 /* AppConstants.swift in Sources */,
 				FFFB4D382BD9144B00CDDCB4 /* StringExtensions.swift in Sources */,
+				FF6054F62CC55AE9003C2AA0 /* FontExtensions.swift in Sources */,
 				FF1E92B62BF8FE8E00127FDE /* GMGradientView.swift in Sources */,
 				FFF65CB82BE651C5008E0352 /* IntExtensions.swift in Sources */,
 				FF99230A2CA334EE0088395E /* LanguageManager.swift in Sources */,

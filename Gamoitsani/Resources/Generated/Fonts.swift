@@ -32,7 +32,12 @@ public enum F {
     public static let thin = FontConvertible(name: "Mersad-Regular_Thin", family: "Mersad", path: "Mersad.ttf")
     public static let all: [FontConvertible] = [regular, black, bold, extraBold, extraLight, light, medium, semiBold, thin]
   }
-  public static let allCustomFonts: [FontConvertible] = [Mersad.all].flatMap { $0 }
+  public enum Ubuntu {
+    public static let bold = FontConvertible(name: "Ubuntu-Bold", family: "Ubuntu", path: "Ubuntu-Bold.ttf")
+    public static let medium = FontConvertible(name: "Ubuntu-Medium", family: "Ubuntu", path: "Ubuntu-Medium.ttf")
+    public static let all: [FontConvertible] = [bold, medium]
+  }
+  public static let allCustomFonts: [FontConvertible] = [Mersad.all, Ubuntu.all].flatMap { $0 }
   public static func registerAllCustomFonts() {
     allCustomFonts.forEach { $0.register() }
   }

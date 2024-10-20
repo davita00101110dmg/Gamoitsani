@@ -23,7 +23,7 @@ struct GMButtonView: View {
     var body: some View {
         Button(action: action) {
             Text(text)
-                .font(F.Mersad.bold.swiftUIFont(size: fontSize))
+                .font(SwiftUI.Font.appFont(type: .bold, size: fontSize))
                 .foregroundColor(textColor ?? .white)
                 .padding(.vertical, 5)
                 .frame(maxWidth: .infinity, maxHeight: height)

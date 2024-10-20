@@ -22,7 +22,7 @@ final class GamePlayViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     private var currentLanguage: Language {
-        AppConstants.currentLanguage
+        LanguageManager.shared.currentLanguage
     }
     
     init(words: [Word], roundLength: Double, audioManager: AudioManager) {

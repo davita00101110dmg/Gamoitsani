@@ -19,7 +19,7 @@ struct GMLabelView: View {
 
     var body: some View {
         Text(text ?? .empty)
-            .font(font)
+            .font(SwiftUI.Font.appFont(type: fontType, size: fontSize))
             .foregroundColor(color)
             .multilineTextAlignment(textAlignment)
             .lineSpacing(lineHeight)
@@ -29,17 +29,6 @@ struct GMLabelView: View {
         UIDevice.current.userInterfaceIdiom == .pad ? fontSizeForPad : fontSizeForPhone
     }
     
-    private var font: SwiftUI.Font {
-        switch fontType {
-        case .regular:
-            return F.Mersad.regular.swiftUIFont(size: fontSize)
-        case .semiBold:
-            return F.Mersad.semiBold.swiftUIFont(size: fontSize)
-        case .bold:
-            return F.Mersad.bold.swiftUIFont(size: fontSize)
-        }
-    }
-
     private var lineHeight: CGFloat {
         (fontSize * lineHeightMultiple) - fontSize
     }
