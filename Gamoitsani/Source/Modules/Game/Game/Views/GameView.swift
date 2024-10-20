@@ -71,7 +71,7 @@ struct GameView: View {
     
     private var gameInfoView: some View {
         GameInfoView(viewModel: viewModel.gameInfoViewModel) {
-            viewModel.gameState = .play
+            viewModel.startPlaying()
         } onShowScoreboard: {
             coordinator.presentGameScoreboard()
         }

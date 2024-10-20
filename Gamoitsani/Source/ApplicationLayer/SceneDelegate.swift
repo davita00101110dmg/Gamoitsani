@@ -40,10 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        if !UserDefaults.isFirstLaunch && !AppConstants.isAppInGeorgian {
-            AppOpenAdManager.shared.showAdIfAvailable()
-        }
-        
+        AppOpenAdManager.shared.showAdIfAvailable()
         UserDefaults.isFirstLaunch = false
     }
     

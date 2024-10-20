@@ -27,6 +27,8 @@ class GameStory {
     
     var finishedGamesCountInSession: Int = 0
     
+    var isGameInProgress: Bool = false
+    
     func reset() {
         teams.keys.forEach { teams[$0] = 0 }
 

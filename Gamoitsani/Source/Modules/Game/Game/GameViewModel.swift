@@ -58,16 +58,21 @@ final class GameViewModel: ObservableObject {
 
 // MARK: - Game Logic
 extension GameViewModel {
+    func startPlaying() {
+        GameStory.shared.isGameInProgress = true
+        gameState = .play
+    }
+    
     func handleGamePlayResult(score: Int) {
-        withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {       
+        withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
             updateGameInfo(with: score)
             
             if handleEndOfGame() {
                 gameState = .gameOver
+                GameStory.shared.isGameInProgress = false
             } else {
                 gameState = .info
             }
-            
         }
     }
     
