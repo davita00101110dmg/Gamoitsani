@@ -86,6 +86,7 @@ final class CoreDataManager: CoreDataManaging {
             }
         }
         
+        fetchedWords.shuffle()
         return fetchedWords
     }
 }
