@@ -20,7 +20,7 @@ struct SettingsView: View {
             VStack(spacing: 12) {
                 Spacer()
                 Text(L10n.Screen.Settings.title.localized())
-                    .font(.custom(F.Mersad.semiBold, size: 18))
+                    .font(SwiftUI.Font.appFont(type: .semiBold, size: 18))
                     .foregroundStyle(.white)
                 
                 List {
@@ -65,7 +65,7 @@ struct SettingsView: View {
                 .onReceive(NotificationCenter.default.publisher(for: .languageDidChange), perform: { _ in
                     viewModel.languageChanged.toggle()
                 })
-                .environment(\.font, .custom(F.Mersad.semiBold, size: 16))
+                .environment(\.font, SwiftUI.Font.appFont(type: .semiBold, size: 16))
                 .foregroundStyle(.white)
                 .scrollContentBackground(.hidden)
                 .alert(isPresented: $viewModel.showingAlert) {

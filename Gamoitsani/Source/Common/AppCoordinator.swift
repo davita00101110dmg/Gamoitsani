@@ -22,10 +22,10 @@ final class AppCoordinator: BaseCoordinator {
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [
             .foregroundColor : UIColor.white,
-            .font: F.Mersad.semiBold.font(size: 18)]
+            .font: UIFont.appFont(type: .semiBold, size: 18)]
         UINavigationBar.appearance().largeTitleTextAttributes = [
             .foregroundColor : UIColor.white,
-            .font: F.Mersad.semiBold.font(size: 48)]
+            .font: UIFont.appFont(type: .semiBold, size: 48)]
 
         UIView.appearance().tintColor = .white
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Asset.tintColor.color

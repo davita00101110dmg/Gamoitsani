@@ -42,7 +42,7 @@ final class GMButton: UIButton {
         
         setTitle(text, for: .normal)
         setTitleColor(textColor, for: .normal)
-        titleLabel?.font = F.Mersad.bold.font(size: fontSize)
+        titleLabel?.font = UIFont.appFont(type: .bold, size: fontSize)
         
         if isCircle {
             applyCircleStyle(backgroundColor: backgroundColor)
@@ -63,7 +63,7 @@ final class GMButton: UIButton {
         
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
             var outgoing = incoming
-            outgoing.font = F.Mersad.bold.font(size: fontSize)
+            outgoing.font = UIFont.appFont(type: .bold, size: fontSize)
             return outgoing
         }
         

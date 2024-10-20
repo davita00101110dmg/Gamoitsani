@@ -30,8 +30,16 @@ enum Language: String, CaseIterable {
     }
 }
 
-class LanguageManager {
+final class LanguageManager {
     static let shared = LanguageManager()
+    
+    var isAppInGeorgian: Bool {
+        return currentLanguage == .georgian
+    }
+    
+    var isAppInUkrainian: Bool {
+        return currentLanguage == .ukrainian
+    }
     
     @Published private(set) var currentLanguage: Language
     
