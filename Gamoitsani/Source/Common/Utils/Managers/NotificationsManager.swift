@@ -29,10 +29,6 @@ final class NotificationsManager {
             if !requests.contains(where: { $0.identifier == AppConstants.Notifications.weeklyNotificationIdentifier }) {
                 scheduleWeeklyNotification()
             }
-            
-            notificationCenter.getPendingNotificationRequests { notifications in
-                notifications.forEach { dump($0) }
-            }
         }
     }
     

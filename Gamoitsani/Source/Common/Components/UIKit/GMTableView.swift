@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GMTableView: UITableView {
+final class GMTableView: UITableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         if bounds.size != intrinsicContentSize {

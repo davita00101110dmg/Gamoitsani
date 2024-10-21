@@ -9,7 +9,7 @@
 import Foundation
 import OrderedCollections
 
-class GameStory {
+final class GameStory {
     static let shared = GameStory()
     
     private init() {}
