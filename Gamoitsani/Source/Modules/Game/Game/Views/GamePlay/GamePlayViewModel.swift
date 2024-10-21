@@ -76,19 +76,26 @@ final class GamePlayViewModel: ObservableObject {
     }
 
     private func updateCurrentWord() {
-        guard let word = words.popLast() else {
-            currentWord = L10n.Screen.Game.NoMoreWords.message
+        while !words.isEmpty {
+            guard let word = words.popLast(),
+                  let translatedWord = getTranslation(for: word),
+                  !translatedWord.isEmpty else {
+                continue
+            }
+            currentWord = translatedWord
             return
         }
-        currentWord = getTranslation(for: word)
+        
+        currentWord = L10n.Screen.Game.NoMoreWords.message
     }
     
-    private func getTranslation(for word: Word) -> String {
+    private func getTranslation(for word: Word) -> String? {
         guard let translations = word.wordTranslations as? Set<Translation>,
-              let translation = translations.first(where: { $0.languageCode == currentLanguage.rawValue }) else {
-            return word.baseWord ?? .empty
+              let translation = translations.first(where: { $0.languageCode == currentLanguage.rawValue }),
+              let translatedWord = translation.word, !translatedWord.isEmpty else {
+            return word.baseWord
         }
-        return translation.word ?? word.baseWord ?? .empty
+        return translatedWord
     }
     
     func getDifficulty(for word: Word) -> Int {
