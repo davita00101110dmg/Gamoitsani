@@ -22,12 +22,8 @@ final class AddWordCoordinator: BaseCoordinator, ObservableObject {
         let addWordView = AddWordView()
             .environmentObject(self)
         
-        let hostingController = AddWordHostingController(rootView: addWordView)
+        let hostingController = UIHostingController(rootView: addWordView)
         hostingController.sheetPresentationController?.prefersGrabberVisible = true
         navigationController.present(hostingController, animated: true)
     }
-}
-
-final class AddWordHostingController<Content>: UIHostingController<Content> where Content: View {
-
 }
