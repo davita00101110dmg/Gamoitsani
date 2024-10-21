@@ -46,10 +46,18 @@ public enum L10n {
     public enum Screen {
 
       public enum AddWord {
+        /// Word could not be sent
+        public static var errorMessage: String { L10n.tr("Localizable", "screen.add_word.error_message") }
         /// Remember to add valid word :)
         public static var hint: String { L10n.tr("Localizable", "screen.add_word.hint") }
+        /// In which language are you adding the word?
+        public static var languagePickerTitle: String { L10n.tr("Localizable", "screen.add_word.language_picker_title") }
         /// Send
         public static var send: String { L10n.tr("Localizable", "screen.add_word.send") }
+        /// Word sent successfully
+        public static var successMessage: String { L10n.tr("Localizable", "screen.add_word.success_message") }
+        /// Enter the word
+        public static var textfieldPlaceholder: String { L10n.tr("Localizable", "screen.add_word.textfield_placeholder") }
         /// Add Word
         public static var title: String { L10n.tr("Localizable", "screen.add_word.title") }
       }

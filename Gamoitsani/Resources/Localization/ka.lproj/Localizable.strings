@@ -53,6 +53,10 @@
 "screen.add_word.title" = "სიტყვის დამატება";
 "screen.add_word.send" = "გააგზავნე";
 "screen.add_word.hint" = "გაითვალისწინე, რომ დაამატო ერთფუძიანი ქართული სიტყვა :)";
+"screen.add_word.language_picker_title" = "რომელ ენაზე ამატებ სიტყვას?";
+"screen.add_word.textfield_placeholder" = "შეიყვანე სიტყვა";
+"screen.add_word.success_message" = "სიტყვა წარმატებით გაიგზავნა";
+"screen.add_word.error_message" = "სიტყვა ვერ გაიგზავნა";
 
 // MARK: - Game Details
 "screen.game_details.title" = "თამაშის დეტალები";

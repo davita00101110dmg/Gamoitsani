@@ -53,6 +53,10 @@
 "screen.add_word.title" = "Додати слово";
 "screen.add_word.send" = "Надіслати";
 "screen.add_word.hint" = "Не забудьте додати дійсне слово :)";
+"screen.add_word.language_picker_title" = "Якою мовою ви додаєте це слово?";
+"screen.add_word.textfield_placeholder" = "Введіть слово";
+"screen.add_word.success_message" = "Слово успішно надіслано";
+"screen.add_word.error_message" = "Не вдалося надіслати слово";
 
 // MARK: - Game Details
 "screen.game_details.title" = "Деталі гри";

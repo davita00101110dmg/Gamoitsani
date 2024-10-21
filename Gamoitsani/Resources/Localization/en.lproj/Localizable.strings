@@ -53,6 +53,10 @@
 "screen.add_word.title" = "Add Word";
 "screen.add_word.send" = "Send";
 "screen.add_word.hint" = "Remember to add valid word :)";
+"screen.add_word.language_picker_title" = "In which language are you adding the word?";
+"screen.add_word.textfield_placeholder" = "Enter the word";
+"screen.add_word.success_message" = "Word sent successfully";
+"screen.add_word.error_message" = "Word could not be sent";
 
 // MARK: - Game Details
 "screen.game_details.title" = "Game Details";
