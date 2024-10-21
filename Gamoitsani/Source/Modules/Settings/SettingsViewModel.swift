@@ -20,6 +20,10 @@ final class SettingsViewModel: NSObject, ObservableObject {
     private var products: [SKProduct] = []
     private var cancellables = Set<AnyCancellable>()
     
+    let languagePickerRowViewModel = LanguagePickerRowViewModel(onLanguageChange: { newLanguage in
+        LanguageManager.shared.setLanguage(newLanguage)
+    })
+    
     var shouldShowPrivacySettingsButton: Bool {
         AppConsentAdManager.shared.shouldShowPrivacySettingsButton
     }

@@ -6,9 +6,9 @@
 //  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
-final class AddWordCoordinator: BaseCoordinator {
+final class AddWordCoordinator: BaseCoordinator, ObservableObject {
     
     var navigationController: UINavigationController?
     
@@ -18,8 +18,16 @@ final class AddWordCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        let addWordViewController = AddWordViewController.loadFromNib()
-        addWordViewController.coordinator = self
-        navigationController?.pushViewController(addWordViewController, animated: true)
+        guard let navigationController else { return }
+        let addWordView = AddWordView()
+            .environmentObject(self)
+        
+        let hostingController = AddWordHostingController(rootView: addWordView)
+        hostingController.sheetPresentationController?.prefersGrabberVisible = true
+        navigationController.present(hostingController, animated: true)
     }
+}
+
+final class AddWordHostingController<Content>: UIHostingController<Content> where Content: View {
+
 }

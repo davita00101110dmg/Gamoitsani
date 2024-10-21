@@ -19,13 +19,13 @@ struct SettingsView: View {
             
             VStack(spacing: 12) {
                 Spacer()
-                Text(L10n.Screen.Settings.title.localized())
+                GMLabelView(text: L10n.Screen.Settings.title)
                     .font(SwiftUI.Font.appFont(type: .semiBold, size: 18))
                     .foregroundStyle(.white)
                 
                 List {
                     Section {
-                        SettingsLanguagePickerRow(viewModel: viewModel)
+                        LanguagePickerRow(viewModel: viewModel.languagePickerRowViewModel)
                     }
                     
                     Section {

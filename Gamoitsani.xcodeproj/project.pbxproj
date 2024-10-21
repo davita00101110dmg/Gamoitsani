@@ -30,8 +30,6 @@
 		FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D792BD69BAC0046819D /* HomeViewModel.swift */; };
 		FF4D9D7C2BD69BC00046819D /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D7B2BD69BC00046819D /* HomeModels.swift */; };
 		FF4D9D9C2BD6F7DB0046819D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D9B2BD6F7DB0046819D /* HomeCoordinator.swift */; };
-		FF4FA9BC2BED916700F38F98 /* AddWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4FA9BB2BED916700F38F98 /* AddWordViewController.xib */; };
-		FF4FA9BE2BED917300F38F98 /* AddWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9BD2BED917300F38F98 /* AddWordViewController.swift */; };
 		FF4FA9C02BED917A00F38F98 /* AddWordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9BF2BED917A00F38F98 /* AddWordCoordinator.swift */; };
 		FF4FA9C22BED96E800F38F98 /* GMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9C12BED96E800F38F98 /* GMTextField.swift */; };
 		FF4FA9C52BEEB6FD00F38F98 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FF4FA9C42BEEB6FD00F38F98 /* FirebaseFirestore */; };
@@ -44,6 +42,11 @@
 		FF6054EF2CC550A5003C2AA0 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF6054E52CC550A5003C2AA0 /* Ubuntu-Bold.ttf */; };
 		FF6054F22CC550A5003C2AA0 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF6054EA2CC550A5003C2AA0 /* Ubuntu-Medium.ttf */; };
 		FF6054F62CC55AE9003C2AA0 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6054F52CC55AE9003C2AA0 /* FontExtensions.swift */; };
+		FF6054F82CC56759003C2AA0 /* GMTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6054F72CC56759003C2AA0 /* GMTextFieldView.swift */; };
+		FF6054FF2CC56A31003C2AA0 /* LanguagePickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6054FC2CC56A31003C2AA0 /* LanguagePickerRow.swift */; };
+		FF6055002CC56A31003C2AA0 /* LanguagePickerRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6054FD2CC56A31003C2AA0 /* LanguagePickerRowViewModel.swift */; };
+		FF6055022CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6055012CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift */; };
+		FF6055062CC6DE38003C2AA0 /* AddWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6055042CC6DE38003C2AA0 /* AddWordView.swift */; };
 		FF67CC7F2C6AD0B80094824E /* GameTeamsSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC7E2C6AD0B80094824E /* GameTeamsSnapshot.swift */; };
 		FF67CC812C6AD0BF0094824E /* GameTeamsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC802C6AD0BF0094824E /* GameTeamsDataSource.swift */; };
 		FF67CC832C6AD0D60094824E /* GameTeamCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC822C6AD0D60094824E /* GameTeamCellItem.swift */; };
@@ -75,7 +78,6 @@
 		FF8623782C6AB8A00044A7D7 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = FF8623772C6AB8A00044A7D7 /* FacebookShare */; };
 		FF8675382C6772230089B52B /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675372C6772230089B52B /* SettingsCoordinator.swift */; };
 		FF8675612C6798680089B52B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675602C6798680089B52B /* SettingsView.swift */; };
-		FF8675662C67A7B40089B52B /* SettingsLanguagePickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675652C67A7B40089B52B /* SettingsLanguagePickerRow.swift */; };
 		FF8675682C67A8160089B52B /* GMTableViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675672C67A8160089B52B /* GMTableViewButton.swift */; };
 		FF86756A2C67DB270089B52B /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675692C67DB270089B52B /* SettingsViewModel.swift */; };
 		FF86756D2C67E0DA0089B52B /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF86756C2C67E0DA0089B52B /* ActivityView.swift */; };
@@ -223,8 +225,6 @@
 		FF4D9D792BD69BAC0046819D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FF4D9D7B2BD69BC00046819D /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
 		FF4D9D9B2BD6F7DB0046819D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
-		FF4FA9BB2BED916700F38F98 /* AddWordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWordViewController.xib; sourceTree = "<group>"; };
-		FF4FA9BD2BED917300F38F98 /* AddWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewController.swift; sourceTree = "<group>"; };
 		FF4FA9BF2BED917A00F38F98 /* AddWordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordCoordinator.swift; sourceTree = "<group>"; };
 		FF4FA9C12BED96E800F38F98 /* GMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTextField.swift; sourceTree = "<group>"; };
 		FF4FA9C82BEF7C5900F38F98 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
@@ -235,6 +235,11 @@
 		FF6054E52CC550A5003C2AA0 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		FF6054EA2CC550A5003C2AA0 /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		FF6054F52CC55AE9003C2AA0 /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
+		FF6054F72CC56759003C2AA0 /* GMTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTextFieldView.swift; sourceTree = "<group>"; };
+		FF6054FC2CC56A31003C2AA0 /* LanguagePickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerRow.swift; sourceTree = "<group>"; };
+		FF6054FD2CC56A31003C2AA0 /* LanguagePickerRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerRowViewModel.swift; sourceTree = "<group>"; };
+		FF6055012CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
+		FF6055042CC6DE38003C2AA0 /* AddWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordView.swift; sourceTree = "<group>"; };
 		FF67CC7E2C6AD0B80094824E /* GameTeamsSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamsSnapshot.swift; sourceTree = "<group>"; };
 		FF67CC802C6AD0BF0094824E /* GameTeamsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamsDataSource.swift; sourceTree = "<group>"; };
 		FF67CC822C6AD0D60094824E /* GameTeamCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamCellItem.swift; sourceTree = "<group>"; };
@@ -264,7 +269,6 @@
 		FF8623742C6AB27D0044A7D7 /* GameShareUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareUIView.swift; sourceTree = "<group>"; };
 		FF8675372C6772230089B52B /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		FF8675602C6798680089B52B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		FF8675652C67A7B40089B52B /* SettingsLanguagePickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguagePickerRow.swift; sourceTree = "<group>"; };
 		FF8675672C67A8160089B52B /* GMTableViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTableViewButton.swift; sourceTree = "<group>"; };
 		FF8675692C67DB270089B52B /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		FF86756C2C67E0DA0089B52B /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
@@ -564,21 +568,12 @@
 		FF4FA9B92BED90B900F38F98 /* AddWord */ = {
 			isa = PBXGroup;
 			children = (
-				FF4FA9BA2BED915E00F38F98 /* Xib */,
-				FF4FA9BD2BED917300F38F98 /* AddWordViewController.swift */,
+				FF6055052CC6DE38003C2AA0 /* Views */,
 				FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */,
 				FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */,
 				FF4FA9BF2BED917A00F38F98 /* AddWordCoordinator.swift */,
 			);
 			path = AddWord;
-			sourceTree = "<group>";
-		};
-		FF4FA9BA2BED915E00F38F98 /* Xib */ = {
-			isa = PBXGroup;
-			children = (
-				FF4FA9BB2BED916700F38F98 /* AddWordViewController.xib */,
-			);
-			path = Xib;
 			sourceTree = "<group>";
 		};
 		FF4FA9CD2BEF876000F38F98 /* Configuration */ = {
@@ -597,6 +592,23 @@
 				FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */,
 			);
 			path = Swiftgen;
+			sourceTree = "<group>";
+		};
+		FF6054FE2CC56A31003C2AA0 /* LanguagePickerRow */ = {
+			isa = PBXGroup;
+			children = (
+				FF6054FC2CC56A31003C2AA0 /* LanguagePickerRow.swift */,
+				FF6054FD2CC56A31003C2AA0 /* LanguagePickerRowViewModel.swift */,
+			);
+			path = LanguagePickerRow;
+			sourceTree = "<group>";
+		};
+		FF6055052CC6DE38003C2AA0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FF6055042CC6DE38003C2AA0 /* AddWordView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		FF67CC7A2C6AD0010094824E /* Cells */ = {
@@ -709,7 +721,6 @@
 			isa = PBXGroup;
 			children = (
 				FF8675602C6798680089B52B /* SettingsView.swift */,
-				FF8675652C67A7B40089B52B /* SettingsLanguagePickerRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -717,6 +728,7 @@
 		FF86756B2C67E0D30089B52B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FF6054FE2CC56A31003C2AA0 /* LanguagePickerRow */,
 				FF86756C2C67E0DA0089B52B /* ActivityView.swift */,
 				FFFCF38B2C6EC506003458DC /* ConfettiView.swift */,
 				FFFCF38D2C6FA048003458DC /* DynamicStack.swift */,
@@ -731,6 +743,7 @@
 				FF86756E2C67E71E0089B52B /* GMTappableButtonStyle.swift */,
 				FFC172B32C6E6EAB0069623F /* GMButtonView.swift */,
 				FFC172B52C6E70FA0069623F /* GMLabelView.swift */,
+				FF6054F72CC56759003C2AA0 /* GMTextFieldView.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -792,6 +805,7 @@
 			children = (
 				FFA60DB62C7A0288005A2660 /* TransitionViewModifier.swift */,
 				FF7555892C8358F700EC37A0 /* DisplayConfettiModifier.swift */,
+				FF6055012CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -1205,7 +1219,6 @@
 				FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */,
 				FF6054EF2CC550A5003C2AA0 /* Ubuntu-Bold.ttf in Resources */,
 				FF6054F22CC550A5003C2AA0 /* Ubuntu-Medium.ttf in Resources */,
-				FF4FA9BC2BED916700F38F98 /* AddWordViewController.xib in Resources */,
 				FFD386D62C6A500A0027A2C4 /* LaunchScreen.storyboard in Resources */,
 				FF7069972C6C0C1C00C3D9EA /* Landscape.png in Resources */,
 				FFFB4D512BD9398600CDDCB4 /* GameDetailsViewController.xib in Resources */,
@@ -1378,11 +1391,14 @@
 				FFF65CB22BE61E17008E0352 /* NSObjectExtensions.swift in Sources */,
 				FF7F1D942BE7B10600872554 /* UIViewExtensions.swift in Sources */,
 				FF8EA7562BEC40B100F098B8 /* UIColorExtensions.swift in Sources */,
+				FF6055062CC6DE38003C2AA0 /* AddWordView.swift in Sources */,
 				FFA60DAB2C7639D5005A2660 /* AppOpenAdManager.swift in Sources */,
 				FFFB4D4E2BD9396C00CDDCB4 /* GameDetailsViewController.swift in Sources */,
 				FFFB4D422BD9155100CDDCB4 /* RulesViewModel.swift in Sources */,
 				FF7F1D812BE7A2F700872554 /* GameViewModel.swift in Sources */,
+				FF6054F82CC56759003C2AA0 /* GMTextFieldView.swift in Sources */,
 				FF75558A2C8358F700EC37A0 /* DisplayConfettiModifier.swift in Sources */,
+				FF6055022CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift in Sources */,
 				FFF65CB42BE61E9C008E0352 /* UINibExtensions.swift in Sources */,
 				FFF65CA12BE555CC008E0352 /* GameDetailsModel.swift in Sources */,
 				FFFB4D322BD86DAF00CDDCB4 /* AppConstants.swift in Sources */,
@@ -1409,7 +1425,6 @@
 				FF67CC832C6AD0D60094824E /* GameTeamCellItem.swift in Sources */,
 				FF4FA9C02BED917A00F38F98 /* AddWordCoordinator.swift in Sources */,
 				FF67CC7F2C6AD0B80094824E /* GameTeamsSnapshot.swift in Sources */,
-				FF8675662C67A7B40089B52B /* SettingsLanguagePickerRow.swift in Sources */,
 				FF7F1D852BE7A8F200872554 /* GMLabel.swift in Sources */,
 				FF7F1D9D2BE92F5000872554 /* GameStory.swift in Sources */,
 				FFFB4D342BD90FD900CDDCB4 /* UserDefaultsExtension.swift in Sources */,
@@ -1452,6 +1467,8 @@
 				FFF65CA62BE61746008E0352 /* GMTableView.swift in Sources */,
 				FFAE1F222C7E3AAA003A554C /* GameShareViewModel.swift in Sources */,
 				FF4D9D7C2BD69BC00046819D /* HomeModels.swift in Sources */,
+				FF6054FF2CC56A31003C2AA0 /* LanguagePickerRow.swift in Sources */,
+				FF6055002CC56A31003C2AA0 /* LanguagePickerRowViewModel.swift in Sources */,
 				FF8EA7072BEBB9F600F098B8 /* GameScoreboardViewController.swift in Sources */,
 				FF4FA9C22BED96E800F38F98 /* GMTextField.swift in Sources */,
 				FFF65C9F2BE555C2008E0352 /* GameDetailsViewModel.swift in Sources */,
@@ -1461,7 +1478,6 @@
 				FFFB4CDB2BD7CAEE00CDDCB4 /* AppCoordinator.swift in Sources */,
 				FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */,
 				FFFB4D2B2BD854F900CDDCB4 /* BaseViewController.swift in Sources */,
-				FF4FA9BE2BED917300F38F98 /* AddWordViewController.swift in Sources */,
 				FF4FA9C92BEF7C5900F38F98 /* ArrayExtensions.swift in Sources */,
 				FF8EA70B2BEBBA1E00F098B8 /* GameScoreboardModel.swift in Sources */,
 				FFF65CB62BE62DBB008E0352 /* DoubleExtensions.swift in Sources */,
