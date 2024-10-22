@@ -35,7 +35,7 @@ final class GMButton: UIButton {
                           fontSizeForPhone: CGFloat = Constants.buttonPhoneFontSize,
                           fontSizeForPad: CGFloat = Constants.buttonPadFontSize,
                           isCircle: Bool = false,
-                          backgroundColor: UIColor? = Asset.secondary.color,
+                          backgroundColor: UIColor? = Asset.gmSecondary.color,
                           textColor: UIColor? = .white) {
                 
         let fontSize = UIDevice.current.userInterfaceIdiom == .pad ? fontSizeForPad : fontSizeForPhone

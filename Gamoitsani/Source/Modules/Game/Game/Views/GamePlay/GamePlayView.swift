@@ -65,7 +65,7 @@ struct GamePlayView: View {
             text: viewModel.timeRemaining.toString(),
             fontSizeForPhone: ViewConstants.timerLabelFontSizeForPhone,
             fontSizeForPad: ViewConstants.timerLabelFontSizeForPad,
-            color: isWarning ? Asset.red.swiftUIColor : .white
+            color: isWarning ? Asset.gmRed.swiftUIColor : .white
         )
             .contentTransition(.numericText())
             .animation(.linear, value: viewModel.timeRemaining)
@@ -89,11 +89,11 @@ struct GamePlayView: View {
     }
     
     private var incorrectButton: some View {
-        makeButton(text: ViewConstants.incorrectSymbol, color: Asset.red.swiftUIColor, tag: 0)
+        makeButton(text: ViewConstants.incorrectSymbol, color: Asset.gmRed.swiftUIColor, tag: 0)
     }
     
     private var correctButton: some View {
-        makeButton(text: ViewConstants.correctSymbol, color: Asset.green.swiftUIColor, tag: 1)
+        makeButton(text: ViewConstants.correctSymbol, color: Asset.gmGreen.swiftUIColor, tag: 1)
     }
     
     private func makeButton(text: String, color: Color, tag: Int) -> some View {
@@ -134,7 +134,7 @@ extension GamePlayView {
     }
     .padding([.top, .bottom, .leading, .trailing], 24)
     .background(
-        Asset.secondary.swiftUIColor
+        Asset.gmSecondary.swiftUIColor
             .opacity(0.3)
     )
     .cornerRadius(10)

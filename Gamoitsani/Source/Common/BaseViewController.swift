@@ -69,7 +69,7 @@ class BaseViewController<T: Coordinator>: UIViewController {
 
     private func setupGradientBackground() {
         guard shouldApplyGradientBackground else {
-            view.backgroundColor = Asset.primary.color
+            view.backgroundColor = Asset.gmPrimary.color
             return
         }
         

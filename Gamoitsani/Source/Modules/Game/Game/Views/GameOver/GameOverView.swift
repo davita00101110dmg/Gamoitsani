@@ -149,7 +149,7 @@ extension GameOverView {
     } onShowFullScoreboard: {
         
     }
-    .background(Asset.secondary.swiftUIColor.opacity(0.3))
+    .background(Asset.gmSecondary.swiftUIColor.opacity(0.3))
     .cornerRadius(10)
     .frame(maxHeight: .infinity)
     .padding(.horizontal, 36)

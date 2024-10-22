@@ -19,7 +19,7 @@ final class RuleTableViewCell: UITableViewCell {
     
     private func setupUI() {
         layer.masksToBounds = true
-        backgroundColor = Asset.secondary.color
+        backgroundColor = Asset.gmSecondary.color
         layer.cornerRadius = 10
     }
     

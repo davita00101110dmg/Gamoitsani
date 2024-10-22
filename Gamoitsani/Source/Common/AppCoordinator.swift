@@ -22,10 +22,10 @@ final class AppCoordinator: BaseCoordinator {
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [
             .foregroundColor : UIColor.white,
-            .font: UIFont.appFont(type: .semiBold, size: 18)]
+            .font: F.Mersad.semiBold.font(size: 18)]
         UINavigationBar.appearance().largeTitleTextAttributes = [
             .foregroundColor : UIColor.white,
-            .font: UIFont.appFont(type: .semiBold, size: 48)]
+            .font: F.Mersad.semiBold.font(size: 48)]
 
         UIView.appearance().tintColor = .white
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Asset.tintColor.color
@@ -36,7 +36,6 @@ final class AppCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        guard let window = navigationController.view.window else { return }
         navigationController.viewControllers.removeAll()
         let homeCoordinator = HomeCoordinator(navigationController: navigationController)
         coordinate(to: homeCoordinator)

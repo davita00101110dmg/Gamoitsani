@@ -28,7 +28,7 @@ struct ConfettiView: View {
                     Asset.color8.swiftUIColor,
                     Asset.color9.swiftUIColor,
                     Asset.color10.swiftUIColor,
-                ].randomElement() ?? Asset.primary.swiftUIColor
+                ].randomElement() ?? Asset.gmPrimary.swiftUIColor
             )
             .frame(width: 20, height: 20)
             .onAppear(perform: { animate = true })

@@ -35,8 +35,8 @@ final class GameScoreboardViewController: BaseViewController<GameScoreboardCoord
         super.setupUI()
         titleLabel.configure(with: L10n.scoreboard, fontSizeForPhone: ViewControllerConstants.titleFontSize)
         
-        view.backgroundColor = Asset.secondary.color
-        tableView.backgroundColor = Asset.secondary.color
+        view.backgroundColor = Asset.gmSecondary.color
+        tableView.backgroundColor = Asset.gmSecondary.color
         tableView.layer.cornerRadius = ViewControllerConstants.tableViewCornerRadius
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false

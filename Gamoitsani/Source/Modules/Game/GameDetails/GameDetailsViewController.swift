@@ -53,7 +53,7 @@ final class GameDetailsViewController: BaseViewController<GameDetailsCoordinator
     
     override func setupUI() {
         super.setupUI()
-        tableView.backgroundColor = Asset.secondary.color
+        tableView.backgroundColor = Asset.gmSecondary.color
         tableView.layer.cornerRadius = ViewControllerConstants.tableViewCornerRadius
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false

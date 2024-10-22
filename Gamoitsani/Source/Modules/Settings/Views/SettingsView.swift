@@ -60,7 +60,7 @@ struct SettingsView: View {
                             ActivityViewController(activityItems: [URL(string: AppConstants.appStoreLink)!])
                                 .presentationDetents([.medium])
                         }
-                    }.listRowBackground(Color(.secondary))
+                    }.listRowBackground(Asset.gmSecondary.swiftUIColor)
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .languageDidChange), perform: { _ in
                     viewModel.languageChanged.toggle()

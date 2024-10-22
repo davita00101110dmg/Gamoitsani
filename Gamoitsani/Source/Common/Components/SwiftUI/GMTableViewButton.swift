@@ -17,7 +17,7 @@ struct GMTableViewButton: View {
             action()
         }
         .buttonStyle(GMTappableButtonStyle())
-        .listRowBackground(Color(.secondary))
+        .listRowBackground(Asset.gmSecondary.swiftUIColor)
     }
 }
 

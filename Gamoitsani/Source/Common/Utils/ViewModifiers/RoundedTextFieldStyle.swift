@@ -14,7 +14,7 @@ struct RoundedTextFieldStyle: TextFieldStyle {
             .padding(.vertical)
             .padding(.horizontal, 24)
             .background(
-                Asset.secondary.swiftUIColor
+                Asset.gmSecondary.swiftUIColor
             )
             .clipShape(Capsule(style: .continuous))
     }

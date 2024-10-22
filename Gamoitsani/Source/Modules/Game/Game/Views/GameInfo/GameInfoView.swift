@@ -110,7 +110,7 @@ extension GameInfoView {
     }
     .padding([.top, .bottom, .leading, .trailing], 24)
     .frame(maxHeight: 400)
-    .background(Asset.secondary.swiftUIColor.opacity(0.3))
+    .background(Asset.gmSecondary.swiftUIColor.opacity(0.3))
     .cornerRadius(10)
     .padding(.horizontal, 36)
     .padding(.vertical, 24)

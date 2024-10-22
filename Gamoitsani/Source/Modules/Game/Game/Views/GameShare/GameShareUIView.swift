@@ -29,12 +29,12 @@ final class GameShareUIView: UIView {
     }
 
     private func setupUI() {
-        backgroundColor = Asset.secondary.color.withAlphaComponent(Constants.backgroundColorAlpha)
+        backgroundColor = Asset.gmSecondary.color.withAlphaComponent(Constants.backgroundColorAlpha)
         layer.cornerRadius = Constants.viewCornerRadius
 
         appNameLabel.configure(with: L10n.App.title, textAlignment: .left)
 
-        tableView.backgroundColor = Asset.secondary.color
+        tableView.backgroundColor = Asset.gmSecondary.color
         tableView.layer.cornerRadius = Constants.tableViewCornerRadius
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false

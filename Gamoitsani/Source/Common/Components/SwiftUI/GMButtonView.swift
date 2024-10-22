@@ -13,7 +13,7 @@ struct GMButtonView: View {
     var fontSizeForPhone: CGFloat = Constants.buttonPhoneFontSize
     var fontSizeForPad: CGFloat = Constants.buttonPadFontSize
     var isCircle: Bool = false
-    var backgroundColor: Color? = Asset.secondary.swiftUIColor
+    var backgroundColor: Color? = Asset.gmSecondary.swiftUIColor
     var textColor: Color? = .white
     var height: CGFloat = Constants.buttonHeight
     var shouldLowerOpacityOnPress: Bool = true

@@ -18,7 +18,7 @@ final class GameDetailsTeamTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        backgroundColor = Asset.secondary.color
+        backgroundColor = Asset.gmSecondary.color
         layer.cornerRadius = 10
     }
     

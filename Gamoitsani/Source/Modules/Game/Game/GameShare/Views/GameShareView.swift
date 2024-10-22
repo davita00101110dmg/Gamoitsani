@@ -79,7 +79,7 @@ extension GameShareView {
 }
 
 #Preview {
-    var gameShareView = GameShareUIView.loadFromNib()
+    let gameShareView = GameShareUIView.loadFromNib()
     gameShareView?.configure(with: "123")
     
     return GameShareView(

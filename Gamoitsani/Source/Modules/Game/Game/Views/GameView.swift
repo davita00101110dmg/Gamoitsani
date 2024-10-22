@@ -43,7 +43,7 @@ struct GameView: View {
             }
             .padding([.top, .bottom, .leading, .trailing], ViewConstants.padding)
             .frame(maxHeight: viewMaxHeight)
-            .background(Asset.secondary.swiftUIColor.opacity(ViewConstants.backgroundOpacity))
+            .background(Asset.gmSecondary.swiftUIColor.opacity(ViewConstants.backgroundOpacity))
             .cornerRadius(ViewConstants.cornerRadius)
             .padding(.horizontal, ViewConstants.paddingFromSuperview)
         }
@@ -137,5 +137,4 @@ extension GameView {
         .onAppear {
             mockViewModel.gameState = .gameOver
         }
-        .previewDisplayName("Game Over State")
 }

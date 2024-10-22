@@ -23,7 +23,7 @@ struct LanguagePickerRow: View {
             }
             .tint(.white)
         }
-        .listRowBackground(Color(.secondary))
+        .listRowBackground(Asset.gmSecondary.swiftUIColor)
         .onChange(of: viewModel.selectedLanguage) { newValue in
             viewModel.languageChanged(newValue)
         }

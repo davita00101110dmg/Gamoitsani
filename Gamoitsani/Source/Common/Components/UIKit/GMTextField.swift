@@ -63,7 +63,7 @@ final class GMTextField: UITextField {
     }
     
     private func setupTextField() {
-        backgroundColor = Asset.secondary.color
+        backgroundColor = Asset.gmSecondary.color
         font = .appFont(type: .bold, size: 18)
         textColor = .white
     }
