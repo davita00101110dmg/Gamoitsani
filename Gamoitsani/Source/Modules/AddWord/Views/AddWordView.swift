@@ -70,17 +70,6 @@ struct AddWordView: View {
     }
 }
 
-struct BannerAdView: UIViewRepresentable {
-    func makeUIView(context: Context) -> GADBannerView {
-        let bannerView = GADBannerView(adSize: GADAdSizeBanner)
-        bannerView.adUnitID = AppConstants.AdMob.bannerAdId
-        bannerView.load(GADRequest())
-        return bannerView
-    }
-    
-    func updateUIView(_ uiView: GADBannerView, context: Context) {}
-}
-
 extension AddWordView {
     enum Constants {
         static let verticalSpacing: CGFloat = 20
