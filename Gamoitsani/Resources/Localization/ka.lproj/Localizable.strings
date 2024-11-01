@@ -1,10 +1,11 @@
-/* 
+/*
   Localizable.strings
   Gamoitsani
 
   Created by Daviti Khvedelidze on 23/04/2024.
   Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 */
+
 // MARK: - General
 "app.title" = "გამოიცანი";
 "and" = "და";
@@ -44,8 +45,8 @@
 // MARK: - Rules
 "screen.rules.title" = "წესები";
 "screen.rules.rule2" = "სიტყვის ახსნისას აკრძალულია ერთფუძიანი სიტყვის გამოყენება";
-"screen.rules.rule3" = "თუ გუნდის წევრი გამოიცნობს სიტყვას, დააჭირეთ მწვანე ღილაკს (+1 ქულა)";
-"screen.rules.rule4" = "თუ სიტყვის ახსნა ვერ მოახერხეთ, ან რომელიმე წესი დაირღვა და გინდათ რომ შემდეგ სიტყვაზე გადახვიდეთ დააჭირეთ წითელ ღილაკს (-1 ქულა)";
+"screen.rules.rule3" = "თუ გუნდის წევრი გამოიცნობს სიტყვას, დააჭირე მწვანე ღილაკს (+1 ქულა)";
+"screen.rules.rule4" = "თუ სიტყვის ახსნა ვერ მოახერხე, ან რომელიმე წესი დაირღვა და გინდა რომ შემდეგ სიტყვაზე გადახვიდე დააჭირე წითელ ღილაკს (-1 ქულა)";
 "screen.rules.rule5" = "გაიმარჯვებს ის გუნდი, რომელიც დროის ამოწურვამდე დააგროვებს უფრო მეტ ქულას, ან პირველი მიაღწევს რაუნდში დაწესებულ ქულების რაოდენობას";
 "screen.rules.rule6" = "გისურვებთ წარმატებებს :)";
 
@@ -62,18 +63,40 @@
 "screen.game_details.title" = "თამაშის დეტალები";
 "screen.game_details.rounds_amount.title" = "რაუნდების რაოდენობა: %@";
 "screen.game_details.rounds_length.title" = "რაუნდის ხანგრძლივობა: %@ წმ";
-"screen.game_details.teams.title" = "გუნდები";
-"screen.game_details.add_team_alert.title" = "დაამატე გუნდი";
-"screen.game_details.edit_team_name_alert.title" = "დაარედაქტირე გუნდის სახელი";
-"screen.game_details.delete_team_alert.title" = "დარწმუნებული ხარ რომ გუნდის წაშლა გინდა?";
-"screen.game_details.no_internet_connection_alert.title" = "არ არის ინტერნეტთან კავშირი!";
-"screen.game_details.no_internet_connection_alert.message" = "თამაშის დასაწყებად საჭიროა ინტერნეტთან კავშირი";
+"screen.game_details.section.teams" = "გუნდები";
+"screen.game_details.section.players" = "მოთამაშეები";
 "screen.game_details.start_game.title" = "თამაშის დაწყება";
-"screen.game_details.invalid_parameter.title" = "არასწორი პარამეტრი";
-"screen.game_details.invalid_game_details_not_enough_teams.message" = "თამაშის დასაწყებად დაამატე მინიმუმ 2 გუნდი!";
-"screen.game_details.invalid_game_details_not_unique_teams.message" = "გუნდების სახელი უნდა იყოს უნიკალური!";
-"screen.game_details.invalid_game_details_maximum_teams.message" = "5 გუნდზე მეტის დამატება შეუძლებელია";
-"screen.game_details.invalid_game_details_empty_team_name.message" = "გუნდის სახელი არ შეიძლება იყოს ცარიელი";
+"screen.game_details.create_teams" = "გუნდების შექმნა";
+
+// Teams
+"screen.game_details.teams.add_placeholder" = "დაამატე გუნდები თამაშის დასაწყებად";
+"screen.game_details.teams.name_placeholder" = "გუნდის სახელი";
+"screen.game_details.teams.name_exists" = "ამ სახელის მქონე გუნდი უკვე არსებობს";
+"screen.game_details.teams.name_too_long" = "გუნდის სახელი არ შეიძლება იყოს %@ სიმბოლოზე მეტი";
+"screen.game_details.teams.add" = "გუნდის დამატება";
+"screen.game_details.teams.edit" = "გუნდის სახელის რედაქტირება";
+"screen.game_details.teams.delete_confirmation" = "დარწმუნებული ხარ, რომ გსურს ამ გუნდის წაშლა?";
+
+// Players
+"screen.game_details.players.add_placeholder" = "დაამატე მოთამაშეები გუნდების შესაქმნელად";
+"screen.game_details.players.name_placeholder" = "მოთამაშის სახელი";
+"screen.game_details.players.name_exists" = "ამ სახელის მქონე მოთამაშე უკვე არსებობს";
+"screen.game_details.players.name_too_long" = "მოთამაშის სახელი არ შეიძლება იყოს %@ სიმბოლოზე მეტი";
+"screen.game_details.players.add" = "მოთამაშის დამატება";
+"screen.game_details.players.edit" = "მოთამაშის რედაქტირება";
+"screen.game_details.players.delete_confirmation" = "დარწმუნებული ხარ, რომ გსურს ამ მოთამაშის წაშლა?";
+"screen.game_details.players.generate_teams" = "გუნდების გენერირება";
+"screen.game_details.players.not_enough" = "გუნდების შესაქმნელად საჭიროა მინიმუმ 2 მოთამაშე";
+"screen.game_details.players.odd_count" = "გუნდების შესაქმნელად საჭიროა მოთამაშეთა ლუწი რაოდენობა";
+
+// Alerts
+"screen.game_details.alert.invalid_parameter" = "არასწორი პარამეტრი";
+"screen.game_details.alert.no_internet.title" = "ინტერნეტთან კავშირი არ არის!";
+"screen.game_details.alert.no_internet.message" = "თამაშის დასაწყებად საჭიროა ინტერნეტის კავშირი";
+"screen.game_details.alert.not_enough_teams" = "დაამატე მინიმუმ 2 გუნდი დასაწყებად!";
+"screen.game_details.alert.not_unique_teams" = "გუნდების სახელები უნდა იყოს უნიკალური!";
+"screen.game_details.alert.maximum_teams" = "5 გუნდის დამატება შეუძლებელია";
+"screen.game_details.alert.empty_name" = "სახელი არ შეიძლება იყოს ცარიელი";
 
 // MARK: - Game
 "screen.game.confirmation_alert.title" = "დარწმუნებული ხარ რომ უკან დაბრუნება გინდა?";

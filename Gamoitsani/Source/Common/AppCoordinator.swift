@@ -30,8 +30,7 @@ final class AppCoordinator: BaseCoordinator {
         UIView.appearance().tintColor = .white
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Asset.tintColor.color
         
-        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.barStyle = .black
         navigationController.navigationBar.prefersLargeTitles = UIDevice.current.userInterfaceIdiom == .pad
     }
     

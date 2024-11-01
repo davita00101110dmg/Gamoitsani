@@ -6,28 +6,28 @@
 //  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
-final class GameDetailsCoordinator: BaseCoordinator {
-    
+final class GameDetailsCoordinator: BaseCoordinator, ObservableObject {
     var navigationController: UINavigationController?
     
     init(navigationController: UINavigationController) {
         super.init()
         self.navigationController = navigationController
     }
-
+    
     override func start() {
         guard let navigationController else { return }
-        let gameDetailsViewController = GameDetailsViewController.loadFromNib()
-        gameDetailsViewController.viewModel = GameDetailsViewModel()
-        gameDetailsViewController.coordinator = self
-        navigationController.pushViewController(gameDetailsViewController, animated: true)
+        let gameDetailsView = GameDetailsView()
+            .environmentObject(self)
+        
+        let hostingController = UIHostingController(rootView: gameDetailsView)
+        navigationController.pushViewController(hostingController, animated: true)
     }
     
     func navigateToGame() {
         guard let navigationController else { return }
-        let gamesCoordinator = GameCoordinator(navigationController: navigationController)
-        coordinate(to: gamesCoordinator)
+        let gameCoordinator = GameCoordinator(navigationController: navigationController)
+        coordinate(to: gameCoordinator)
     }
 }
