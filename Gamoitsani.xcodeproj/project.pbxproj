@@ -47,6 +47,14 @@
 		FF6055002CC56A31003C2AA0 /* LanguagePickerRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6054FD2CC56A31003C2AA0 /* LanguagePickerRowViewModel.swift */; };
 		FF6055022CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6055012CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift */; };
 		FF6055062CC6DE38003C2AA0 /* AddWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6055042CC6DE38003C2AA0 /* AddWordView.swift */; };
+		FF63A4322CD517CF005617E5 /* TeamRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63A4312CD517CF005617E5 /* TeamRowView.swift */; };
+		FF63A4342CD517D9005617E5 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63A4332CD517D9005617E5 /* PlaceholderView.swift */; };
+		FF63A4362CD517E0005617E5 /* PlayerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63A4352CD517E0005617E5 /* PlayerRowView.swift */; };
+		FF63A4392CD517ED005617E5 /* AlertWithTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63A4372CD517ED005617E5 /* AlertWithTextFieldModifier.swift */; };
+		FF63A43A2CD517ED005617E5 /* CustomSegmentedPickerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63A4382CD517ED005617E5 /* CustomSegmentedPickerStyle.swift */; };
+		FF63A43C2CD517F3005617E5 /* GameDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63A43B2CD517F3005617E5 /* GameDetailsView.swift */; };
+		FF63A43E2CD517FB005617E5 /* TeamListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63A43D2CD517FB005617E5 /* TeamListView.swift */; };
+		FF63A4402CD51800005617E5 /* PlayerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63A43F2CD51800005617E5 /* PlayerListView.swift */; };
 		FF67CC7F2C6AD0B80094824E /* GameTeamsSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC7E2C6AD0B80094824E /* GameTeamsSnapshot.swift */; };
 		FF67CC812C6AD0BF0094824E /* GameTeamsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC802C6AD0BF0094824E /* GameTeamsDataSource.swift */; };
 		FF67CC832C6AD0D60094824E /* GameTeamCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF67CC822C6AD0D60094824E /* GameTeamCellItem.swift */; };
@@ -235,6 +243,14 @@
 		FF6054FD2CC56A31003C2AA0 /* LanguagePickerRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerRowViewModel.swift; sourceTree = "<group>"; };
 		FF6055012CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
 		FF6055042CC6DE38003C2AA0 /* AddWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordView.swift; sourceTree = "<group>"; };
+		FF63A4312CD517CF005617E5 /* TeamRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRowView.swift; sourceTree = "<group>"; };
+		FF63A4332CD517D9005617E5 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		FF63A4352CD517E0005617E5 /* PlayerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRowView.swift; sourceTree = "<group>"; };
+		FF63A4372CD517ED005617E5 /* AlertWithTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertWithTextFieldModifier.swift; sourceTree = "<group>"; };
+		FF63A4382CD517ED005617E5 /* CustomSegmentedPickerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedPickerStyle.swift; sourceTree = "<group>"; };
+		FF63A43B2CD517F3005617E5 /* GameDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsView.swift; sourceTree = "<group>"; };
+		FF63A43D2CD517FB005617E5 /* TeamListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamListView.swift; sourceTree = "<group>"; };
+		FF63A43F2CD51800005617E5 /* PlayerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListView.swift; sourceTree = "<group>"; };
 		FF67CC7E2C6AD0B80094824E /* GameTeamsSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamsSnapshot.swift; sourceTree = "<group>"; };
 		FF67CC802C6AD0BF0094824E /* GameTeamsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamsDataSource.swift; sourceTree = "<group>"; };
 		FF67CC822C6AD0D60094824E /* GameTeamCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeamCellItem.swift; sourceTree = "<group>"; };
@@ -601,6 +617,19 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		FF63A42C2CD516A5005617E5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FF63A43B2CD517F3005617E5 /* GameDetailsView.swift */,
+				FF63A4352CD517E0005617E5 /* PlayerRowView.swift */,
+				FF63A4332CD517D9005617E5 /* PlaceholderView.swift */,
+				FF63A43D2CD517FB005617E5 /* TeamListView.swift */,
+				FF63A43F2CD51800005617E5 /* PlayerListView.swift */,
+				FF63A4312CD517CF005617E5 /* TeamRowView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FF67CC7A2C6AD0010094824E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -785,6 +814,8 @@
 		FFA60DB52C7A0281005A2660 /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
+				FF63A4372CD517ED005617E5 /* AlertWithTextFieldModifier.swift */,
+				FF63A4382CD517ED005617E5 /* CustomSegmentedPickerStyle.swift */,
 				FFA60DB62C7A0288005A2660 /* TransitionViewModifier.swift */,
 				FF7555892C8358F700EC37A0 /* DisplayConfettiModifier.swift */,
 				FF6055012CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift */,
@@ -1006,6 +1037,7 @@
 		FFFB4D482BD937E800CDDCB4 /* GameDetails */ = {
 			isa = PBXGroup;
 			children = (
+				FF63A42C2CD516A5005617E5 /* Views */,
 				FFF65C9E2BE555C2008E0352 /* GameDetailsViewModel.swift */,
 				FFF65CA02BE555CC008E0352 /* GameDetailsModel.swift */,
 				FFFB4D4B2BD9392D00CDDCB4 /* GameDetailsCoordinator.swift */,
@@ -1369,8 +1401,12 @@
 				FFFB4D462BD928B400CDDCB4 /* UIFontExtensions.swift in Sources */,
 				FFFCF38C2C6EC506003458DC /* ConfettiView.swift in Sources */,
 				FFA60DC92C7D01FB005A2660 /* GameView.swift in Sources */,
+				FF63A4362CD517E0005617E5 /* PlayerRowView.swift in Sources */,
+				FF63A4392CD517ED005617E5 /* AlertWithTextFieldModifier.swift in Sources */,
+				FF63A43A2CD517ED005617E5 /* CustomSegmentedPickerStyle.swift in Sources */,
 				FFC5DE362CA3247900C6600D /* Translation+CoreDataProperties.swift in Sources */,
 				FFC5DE372CA3247900C6600D /* Translation+CoreDataClass.swift in Sources */,
+				FF63A43E2CD517FB005617E5 /* TeamListView.swift in Sources */,
 				FFC5DE382CA3247900C6600D /* Word+CoreDataProperties.swift in Sources */,
 				FFC5DE392CA3247900C6600D /* Word+CoreDataClass.swift in Sources */,
 				FF67CC832C6AD0D60094824E /* GameTeamCellItem.swift in Sources */,
@@ -1380,6 +1416,7 @@
 				FF7F1D9D2BE92F5000872554 /* GameStory.swift in Sources */,
 				FFFB4D342BD90FD900CDDCB4 /* UserDefaultsExtension.swift in Sources */,
 				FF86756F2C67E71E0089B52B /* GMTappableButtonStyle.swift in Sources */,
+				FF63A4342CD517D9005617E5 /* PlaceholderView.swift in Sources */,
 				FF7CA1652C02591100E3BEC4 /* GameOverViewModel.swift in Sources */,
 				FF7F1D8E2BE7AE2100872554 /* GameInfoView.swift in Sources */,
 				FF8EA7092BEBBA1900F098B8 /* GameScoreboardViewModel.swift in Sources */,
@@ -1392,6 +1429,7 @@
 				FFA60DB72C7A0288005A2660 /* TransitionViewModifier.swift in Sources */,
 				FFAE1F1B2C7E3A92003A554C /* GameShareView.swift in Sources */,
 				FFC172B62C6E70FA0069623F /* GMLabelView.swift in Sources */,
+				FF63A4322CD517CF005617E5 /* TeamRowView.swift in Sources */,
 				FFA60DBC2C7A2923005A2660 /* ShakeEffect.swift in Sources */,
 				FF7555882C7F203700EC37A0 /* SocialIconView.swift in Sources */,
 				FF7F1D7F2BE7A2F700872554 /* GameModels.swift in Sources */,
@@ -1424,6 +1462,7 @@
 				FFFB4D402BD9155100CDDCB4 /* RulesModels.swift in Sources */,
 				FF4D9D9C2BD6F7DB0046819D /* HomeCoordinator.swift in Sources */,
 				FF4D9D782BD69BA20046819D /* HomeViewController.swift in Sources */,
+				FF63A43C2CD517F3005617E5 /* GameDetailsView.swift in Sources */,
 				FFFB4CDB2BD7CAEE00CDDCB4 /* AppCoordinator.swift in Sources */,
 				FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */,
 				FFFB4D2B2BD854F900CDDCB4 /* BaseViewController.swift in Sources */,
@@ -1438,6 +1477,7 @@
 				FFA60DC72C7CFF6C005A2660 /* BaseAdManager.swift in Sources */,
 				FFA60DC02C7CEBDC005A2660 /* AdManager.swift in Sources */,
 				FF7CA1632C02590700E3BEC4 /* GameOverView.swift in Sources */,
+				FF63A4402CD51800005617E5 /* PlayerListView.swift in Sources */,
 				FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */,
 				FF4FA9D32BEFF30E00F38F98 /* AddWordModels.swift in Sources */,
 				FF7F1D922BE7AE5100872554 /* GamePlayView.swift in Sources */,

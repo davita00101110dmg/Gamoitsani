@@ -10,11 +10,19 @@ import SwiftUI
 
 extension View {
     func transitionHandler(duration: TimeInterval) -> some View {
-        self.modifier(TransitionViewModifier(duration: duration))
+        modifier(TransitionViewModifier(duration: duration))
     }
     
     func displayConfetti(isActive: Binding<Bool>) -> some View {
-        self.modifier(DisplayConfettiModifier(isActive: isActive))
+        modifier(DisplayConfettiModifier(isActive: isActive))
+    }
+    
+    func gameDetailsAlert(alertType: Binding<AlertType?>, viewModel: GameDetailsViewModel) -> some View {
+        modifier(AlertWithTextFieldModifier(alertType: alertType, viewModel: viewModel))
+    }
+    
+    func customSegmentedPickerStyle() -> some View {
+        modifier(CustomSegmentedPickerStyle())
     }
     
     @ViewBuilder
