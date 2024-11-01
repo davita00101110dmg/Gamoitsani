@@ -115,54 +115,54 @@ public enum L10n {
       }
 
       public enum GameDetails {
+        /// Create teams
+        public static var createTeams: String { L10n.tr("Localizable", "screen.game_details.create_teams") }
         /// Game Details
         public static var title: String { L10n.tr("Localizable", "screen.game_details.title") }
 
-        public enum AddTeamAlert {
-          /// Add a team
-          public static var title: String { L10n.tr("Localizable", "screen.game_details.add_team_alert.title") }
-        }
-
-        public enum DeleteTeamAlert {
-          /// Are you sure you want to delete team?
-          public static var title: String { L10n.tr("Localizable", "screen.game_details.delete_team_alert.title") }
-        }
-
-        public enum EditTeamNameAlert {
-          /// Edit team's name
-          public static var title: String { L10n.tr("Localizable", "screen.game_details.edit_team_name_alert.title") }
-        }
-
-        public enum InvalidGameDetailsEmptyTeamName {
-          /// Team name cannot be empty
-          public static var message: String { L10n.tr("Localizable", "screen.game_details.invalid_game_details_empty_team_name.message") }
-        }
-
-        public enum InvalidGameDetailsMaximumTeams {
-          /// It is not possible to add more than 5 teams
-          public static var message: String { L10n.tr("Localizable", "screen.game_details.invalid_game_details_maximum_teams.message") }
-        }
-
-        public enum InvalidGameDetailsNotEnoughTeams {
-          /// Add at least 2 teams to start!
-          public static var message: String { L10n.tr("Localizable", "screen.game_details.invalid_game_details_not_enough_teams.message") }
-        }
-
-        public enum InvalidGameDetailsNotUniqueTeams {
-          /// Team names must be unique!
-          public static var message: String { L10n.tr("Localizable", "screen.game_details.invalid_game_details_not_unique_teams.message") }
-        }
-
-        public enum InvalidParameter {
+        public enum Alert {
+          /// Name cannot be empty
+          public static var emptyName: String { L10n.tr("Localizable", "screen.game_details.alert.empty_name") }
           /// Invalid parameter
-          public static var title: String { L10n.tr("Localizable", "screen.game_details.invalid_parameter.title") }
+          public static var invalidParameter: String { L10n.tr("Localizable", "screen.game_details.alert.invalid_parameter") }
+          /// It is not possible to add more than 5 teams
+          public static var maximumTeams: String { L10n.tr("Localizable", "screen.game_details.alert.maximum_teams") }
+          /// Add at least 2 teams to start!
+          public static var notEnoughTeams: String { L10n.tr("Localizable", "screen.game_details.alert.not_enough_teams") }
+          /// Team names must be unique!
+          public static var notUniqueTeams: String { L10n.tr("Localizable", "screen.game_details.alert.not_unique_teams") }
+
+          public enum NoInternet {
+            /// Internet connection is required to start the game
+            public static var message: String { L10n.tr("Localizable", "screen.game_details.alert.no_internet.message") }
+            /// No internet connection!
+            public static var title: String { L10n.tr("Localizable", "screen.game_details.alert.no_internet.title") }
+          }
         }
 
-        public enum NoInternetConnectionAlert {
-          /// Internet connection is required to start the game
-          public static var message: String { L10n.tr("Localizable", "screen.game_details.no_internet_connection_alert.message") }
-          /// No internet connection!
-          public static var title: String { L10n.tr("Localizable", "screen.game_details.no_internet_connection_alert.title") }
+        public enum Players {
+          /// Add Player
+          public static var add: String { L10n.tr("Localizable", "screen.game_details.players.add") }
+          /// Add players to create teams
+          public static var addPlaceholder: String { L10n.tr("Localizable", "screen.game_details.players.add_placeholder") }
+          /// Are you sure you want to delete this player?
+          public static var deleteConfirmation: String { L10n.tr("Localizable", "screen.game_details.players.delete_confirmation") }
+          /// Edit Player
+          public static var edit: String { L10n.tr("Localizable", "screen.game_details.players.edit") }
+          /// Generate Teams
+          public static var generateTeams: String { L10n.tr("Localizable", "screen.game_details.players.generate_teams") }
+          /// Player with this name already exists
+          public static var nameExists: String { L10n.tr("Localizable", "screen.game_details.players.name_exists") }
+          /// Player name
+          public static var namePlaceholder: String { L10n.tr("Localizable", "screen.game_details.players.name_placeholder") }
+          /// Player name cannot be longer than %@ characters
+          public static func nameTooLong( _ p1: String) -> String {
+              return L10n.tr("Localizable", "screen.game_details.players.name_too_long", p1)
+          }
+          /// Need at least 2 players to create teams
+          public static var notEnough: String { L10n.tr("Localizable", "screen.game_details.players.not_enough") }
+          /// Need an even number of players to create teams
+          public static var oddCount: String { L10n.tr("Localizable", "screen.game_details.players.odd_count") }
         }
 
         public enum RoundsAmount {
@@ -179,14 +179,35 @@ public enum L10n {
           }
         }
 
+        public enum Section {
+          /// Players
+          public static var players: String { L10n.tr("Localizable", "screen.game_details.section.players") }
+          /// Teams
+          public static var teams: String { L10n.tr("Localizable", "screen.game_details.section.teams") }
+        }
+
         public enum StartGame {
           /// Start Game
           public static var title: String { L10n.tr("Localizable", "screen.game_details.start_game.title") }
         }
 
         public enum Teams {
-          /// Teams
-          public static var title: String { L10n.tr("Localizable", "screen.game_details.teams.title") }
+          /// Add a team
+          public static var add: String { L10n.tr("Localizable", "screen.game_details.teams.add") }
+          /// Add teams to start playing
+          public static var addPlaceholder: String { L10n.tr("Localizable", "screen.game_details.teams.add_placeholder") }
+          /// Are you sure you want to delete this team?
+          public static var deleteConfirmation: String { L10n.tr("Localizable", "screen.game_details.teams.delete_confirmation") }
+          /// Edit team's name
+          public static var edit: String { L10n.tr("Localizable", "screen.game_details.teams.edit") }
+          /// Team with this name already exists
+          public static var nameExists: String { L10n.tr("Localizable", "screen.game_details.teams.name_exists") }
+          /// Team name
+          public static var namePlaceholder: String { L10n.tr("Localizable", "screen.game_details.teams.name_placeholder") }
+          /// Team name cannot be longer than %@ characters
+          public static func nameTooLong( _ p1: String) -> String {
+              return L10n.tr("Localizable", "screen.game_details.teams.name_too_long", p1)
+          }
         }
       }
 
