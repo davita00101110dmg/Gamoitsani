@@ -1,10 +1,11 @@
-/* 
+/*
   Localizable.strings
   Gamoitsani
 
   Created by Daviti Khvedelidze on 23/04/2024.
   Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 */
+
 // MARK: - General
 "app.title" = "Gamoitsani";
 "and" = "та";
@@ -62,18 +63,40 @@
 "screen.game_details.title" = "Деталі гри";
 "screen.game_details.rounds_amount.title" = "Раунди: %@";
 "screen.game_details.rounds_length.title" = "Тривалість раунду: %@ сек";
-"screen.game_details.teams.title" = "Команди";
-"screen.game_details.add_team_alert.title" = "Додати команду";
-"screen.game_details.edit_team_name_alert.title" = "Редагувати назву команди";
-"screen.game_details.delete_team_alert.title" = "Ви впевнені, що хочете видалити команду?";
-"screen.game_details.no_internet_connection_alert.title" = "Немає підключення до Інтернету!";
-"screen.game_details.no_internet_connection_alert.message" = "Для початку гри потрібне підключення до Інтернету";
+"screen.game_details.section.teams" = "Команди";
+"screen.game_details.section.players" = "Гравці";
 "screen.game_details.start_game.title" = "Почати гру";
-"screen.game_details.invalid_parameter.title" = "Недійсний параметр";
-"screen.game_details.invalid_game_details_not_enough_teams.message" = "Додайте щонайменше 2 команди для початку!";
-"screen.game_details.invalid_game_details_not_unique_teams.message" = "Назви команд повинні бути унікальними!";
-"screen.game_details.invalid_game_details_maximum_teams.message" = "Неможливо додати більше 5 команд";
-"screen.game_details.invalid_game_details_empty_team_name.message" = "Назва команди не може бути порожньою";
+"screen.game_details.create_teams" = "Створення команд";
+
+// Teams
+"screen.game_details.teams.add_placeholder" = "Додайте команди, щоб почати гру";
+"screen.game_details.teams.name_placeholder" = "Назва команди";
+"screen.game_details.teams.name_exists" = "Команда з такою назвою вже існує";
+"screen.game_details.teams.name_too_long" = "Назва команди не може містити більше %@ символів";
+"screen.game_details.teams.add" = "Додати команду";
+"screen.game_details.teams.edit" = "Редагувати назву команди";
+"screen.game_details.teams.delete_confirmation" = "Ви впевнені, що хочете видалити цю команду?";
+
+// Players
+"screen.game_details.players.add_placeholder" = "Додайте гравців для створення команд";
+"screen.game_details.players.name_placeholder" = "Ім'я гравця";
+"screen.game_details.players.name_exists" = "Гравець із таким іменем уже існує";
+"screen.game_details.players.name_too_long" = "Ім'я гравця не може містити більше %@ символів";
+"screen.game_details.players.add" = "Додати гравця";
+"screen.game_details.players.edit" = "Редагувати гравця";
+"screen.game_details.players.delete_confirmation" = "Ви впевнені, що хочете видалити цього гравця?";
+"screen.game_details.players.generate_teams" = "Створити команди";
+"screen.game_details.players.not_enough" = "Для створення команд потрібні принаймні 2 гравці";
+"screen.game_details.players.odd_count" = "Для створення команд потрібна парна кількість гравців";
+
+// Alerts
+"screen.game_details.alert.invalid_parameter" = "Недійсний параметр";
+"screen.game_details.alert.no_internet.title" = "Немає підключення до Інтернету!";
+"screen.game_details.alert.no_internet.message" = "Для запуску гри потрібне підключення до Інтернету";
+"screen.game_details.alert.not_enough_teams" = "Додайте принаймні 2 команди, щоб почати!";
+"screen.game_details.alert.not_unique_teams" = "Назви команд мають бути унікальними!";
+"screen.game_details.alert.maximum_teams" = "Неможливо додати більше 5 команд";
+"screen.game_details.alert.empty_name" = "Назва не може бути пустою";
 
 // MARK: - Game
 "screen.game.confirmation_alert.title" = "Ви впевнені, що хочете повернутися назад?";

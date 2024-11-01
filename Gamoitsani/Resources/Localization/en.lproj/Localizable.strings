@@ -1,10 +1,11 @@
-/* 
+/*
   Localizable.strings
   Gamoitsani
 
   Created by Daviti Khvedelidze on 23/04/2024.
   Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 */
+
 // MARK: - General
 "app.title" = "Gamoitsani";
 "and" = "and";
@@ -62,18 +63,40 @@
 "screen.game_details.title" = "Game Details";
 "screen.game_details.rounds_amount.title" = "Rounds: %@";
 "screen.game_details.rounds_length.title" = "Round Length: %@ sec";
-"screen.game_details.teams.title" = "Teams";
-"screen.game_details.add_team_alert.title" = "Add a team";
-"screen.game_details.edit_team_name_alert.title" = "Edit team's name";
-"screen.game_details.delete_team_alert.title" = "Are you sure you want to delete team?";
-"screen.game_details.no_internet_connection_alert.title" = "No internet connection!";
-"screen.game_details.no_internet_connection_alert.message" = "Internet connection is required to start the game";
+"screen.game_details.section.teams" = "Teams";
+"screen.game_details.section.players" = "Players";
 "screen.game_details.start_game.title" = "Start Game";
-"screen.game_details.invalid_parameter.title" = "Invalid parameter";
-"screen.game_details.invalid_game_details_not_enough_teams.message" = "Add at least 2 teams to start!";
-"screen.game_details.invalid_game_details_not_unique_teams.message" = "Team names must be unique!";
-"screen.game_details.invalid_game_details_maximum_teams.message" = "It is not possible to add more than 5 teams";
-"screen.game_details.invalid_game_details_empty_team_name.message" = "Team name cannot be empty";
+"screen.game_details.create_teams" = "Create teams";
+
+// Teams
+"screen.game_details.teams.add_placeholder" = "Add teams to start playing";
+"screen.game_details.teams.name_placeholder" = "Team name";
+"screen.game_details.teams.name_exists" = "Team with this name already exists";
+"screen.game_details.teams.name_too_long" = "Team name cannot be longer than %@ characters";
+"screen.game_details.teams.add" = "Add a team";
+"screen.game_details.teams.edit" = "Edit team's name";
+"screen.game_details.teams.delete_confirmation" = "Are you sure you want to delete this team?";
+
+// Players
+"screen.game_details.players.add_placeholder" = "Add players to create teams";
+"screen.game_details.players.name_placeholder" = "Player name";
+"screen.game_details.players.name_exists" = "Player with this name already exists";
+"screen.game_details.players.name_too_long" = "Player name cannot be longer than %@ characters";
+"screen.game_details.players.add" = "Add Player";
+"screen.game_details.players.edit" = "Edit Player";
+"screen.game_details.players.delete_confirmation" = "Are you sure you want to delete this player?";
+"screen.game_details.players.generate_teams" = "Generate Teams";
+"screen.game_details.players.not_enough" = "Need at least 2 players to create teams";
+"screen.game_details.players.odd_count" = "Need an even number of players to create teams";
+
+// Alerts
+"screen.game_details.alert.invalid_parameter" = "Invalid parameter";
+"screen.game_details.alert.no_internet.title" = "No internet connection!";
+"screen.game_details.alert.no_internet.message" = "Internet connection is required to start the game";
+"screen.game_details.alert.not_enough_teams" = "Add at least 2 teams to start!";
+"screen.game_details.alert.not_unique_teams" = "Team names must be unique!";
+"screen.game_details.alert.maximum_teams" = "It is not possible to add more than 5 teams";
+"screen.game_details.alert.empty_name" = "Name cannot be empty";
 
 // MARK: - Game
 "screen.game.confirmation_alert.title" = "Are you sure you want to go back?";
