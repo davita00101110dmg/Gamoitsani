@@ -13,15 +13,12 @@ import Network
 import SwiftUI
 
 final class GameDetailsViewModel: ObservableObject {
-    // MARK: - Published Properties
     @Published var roundsAmount: Double = GameDetailsConstants.Game.defaultRoundsAmount
     @Published var roundsLength: Double = GameDetailsConstants.Game.defaultRoundLength
     
     @Published var currentAlert: AlertType?
     @Published var teamSectionMode: GameDetailsTeamSectionMode = .teams
     @Published private var collection = GameDetailsTeamSectionMode.Collection(teams: [], players: [])
-    
-    @State var shouldShowBanner = false
     
     var teams: [GameDetailsTeam] { collection.teams }
     var players: [GameDetailsPlayer] { collection.players }
@@ -219,38 +216,3 @@ extension GameDetailsViewModel {
     }
 }
 #endif
-
-// TODO: Review animations
-struct FloatingAnimation: ViewModifier {
-    @State private var isAnimating = false
-    
-    func body(content: Content) -> some View {
-        content
-            .offset(y: isAnimating ? -5 : 5)
-            .animation(
-                Animation.easeInOut(duration: 2)
-                    .repeatForever(autoreverses: true),
-                value: isAnimating
-            )
-            .onAppear {
-                isAnimating = true
-            }
-    }
-}
-
-struct PulseAnimation: ViewModifier {
-    @State private var isAnimating = false
-    
-    func body(content: Content) -> some View {
-        content
-            .scaleEffect(isAnimating ? 1.1 : 1)
-            .animation(
-                Animation.easeInOut(duration: 1)
-                    .repeatForever(autoreverses: true),
-                value: isAnimating
-            )
-            .onAppear {
-                isAnimating = true
-            }
-    }
-}
