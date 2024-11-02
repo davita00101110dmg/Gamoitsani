@@ -90,11 +90,6 @@ class BaseViewController<T: Coordinator>: UIViewController {
     
     func setupLocalizedTexts() { }
     
-    // MARK: - Admob Methods
-    func setupBannerView(with bannerView: GADBannerView) {
-        BannerAdManager.shared.setupBannerView(in: self, with: bannerView)
-    }
-    
     @objc func presentAdInspector() {
         GADMobileAds.sharedInstance().presentAdInspector(from: self) { error in
             dump("Inspector error \(error?.localizedDescription ?? .empty)")

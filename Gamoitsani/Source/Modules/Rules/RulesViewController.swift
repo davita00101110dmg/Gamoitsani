@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import GoogleMobileAds
 
 final class RulesViewController: BaseViewController<RulesCoordinator> {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var bannerView: GADBannerView!
     
     var viewModel: RulesViewModel?
     
@@ -20,7 +18,6 @@ final class RulesViewController: BaseViewController<RulesCoordinator> {
         super.viewDidLoad()
         title = L10n.Screen.Rules.title
         setupTableView()
-        setupBannerView(with: bannerView)
     }
     
     private func setupTableView() {
