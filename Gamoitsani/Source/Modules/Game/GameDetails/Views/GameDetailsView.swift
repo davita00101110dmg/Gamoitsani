@@ -162,7 +162,7 @@ struct GameDetailsView: View {
     private var bottomSection: some View {
         VStack(spacing: GameDetailsConstants.Layout.bottomSpacing) {
             startGameButton
-            bannerAdView
+            BannerContainerView()
         }
         .padding()
     }
@@ -170,14 +170,6 @@ struct GameDetailsView: View {
     private var startGameButton: some View {
         GMButtonView(text: L10n.Screen.GameDetails.StartGame.title) {
             handleStartGame()
-        }
-    }
-    
-    @ViewBuilder
-    private var bannerAdView: some View {
-        if viewModel.shouldShowBanner {
-            BannerAdView()
-                .frame(maxWidth: 320, maxHeight: 50)
         }
     }
     

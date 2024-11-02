@@ -46,8 +46,7 @@ struct AddWordView: View {
                 
                 Spacer()
                 
-                BannerAdView()
-                    .frame(maxWidth: Constants.bannerWidth, maxHeight: Constants.bannerHeight)
+                BannerContainerView()
             }
             .padding()
         }

@@ -6,57 +6,55 @@
 //  Copyright © 2024 Daviti Khvedelidze. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 import GoogleMobileAds
 
-final class BannerAdManager: NSObject, GADBannerViewDelegate {
+final class BannerAdManager: NSObject, ObservableObject {
     static let shared = BannerAdManager()
     
+    @Published private(set) var isAdLoaded = false
     private var bannerView: GADBannerView?
-    private weak var rootViewController: UIViewController?
     
     private override init() {
         super.init()
     }
     
-    func setupBannerView(in viewController: UIViewController, with bannerView: GADBannerView) {
-        guard AppConstants.shouldShowAdsToUser else {
-            bannerView.removeFromSuperview()
-            return
-        }
-        
-        self.rootViewController = viewController
+    func prepareBannerView() -> GADBannerView {
+        let bannerView = GADBannerView(adSize: GADAdSizeBanner)
+        bannerView.adUnitID = AppConstants.AdMob.bannerAdId
+        bannerView.delegate = self
         self.bannerView = bannerView
-        self.bannerView?.adUnitID = AppConstants.AdMob.bannerAdId
-        self.bannerView?.rootViewController = viewController
-        self.bannerView?.delegate = self
-        
-        loadBannerAd()
+        loadAd()
+        return bannerView
     }
     
-    private func loadBannerAd() {
+    private func loadAd() {
+        guard AppConstants.shouldShowAdsToUser else { return }
         bannerView?.load(GADRequest())
     }
     
-    // MARK: - GADBannerViewDelegate Methods
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        guard let rootViewController = rootViewController else { return }
-        bannerView.frame.origin.y = rootViewController.view.frame.maxY
+    func cleanup() {
+        DispatchQueue.main.async { [weak self] in
+            self?.bannerView?.delegate = nil
+            self?.bannerView = nil
+            self?.isAdLoaded = false
+        }
+    }
+}
 
-        UIView.animate(
-            withDuration: 1.0,
-            delay: 0.0,
-            usingSpringWithDamping: 0.5,
-            initialSpringVelocity: 0.5,
-            options: .curveEaseOut,
-            animations: {
-                bannerView.frame.origin.y = rootViewController.view.frame.maxY - bannerView.frame.size.height - rootViewController.view.safeAreaInsets.bottom
-            },
-            completion: nil
-        )
+// MARK: - GADBannerViewDelegate Methods
+extension BannerAdManager: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        dump("Loaded ad")
+        withAnimation(.smooth(duration: 0.3)) {
+            isAdLoaded = true
+        }
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
-        dump("\(#function) \(error.localizedDescription)")
+        dump("Failed to load - \(error.localizedDescription)")
+        withAnimation(.bouncy(duration: 0.3)) {
+            isAdLoaded = false
+        }
     }
 }
