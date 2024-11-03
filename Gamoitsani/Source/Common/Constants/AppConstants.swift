@@ -109,6 +109,15 @@ enum AppConstants {
                 return .empty
             }
         }
+        
+        static var umpTestDeviceId: String {
+            do {
+                return try Configuration.value(for: "UMP_TEST_DEVICE_ID")
+            } catch {
+                dump("Error retrieving testDeviceId: \(error)")
+                return .empty
+            }
+        }
     }
     
     enum Firebase {

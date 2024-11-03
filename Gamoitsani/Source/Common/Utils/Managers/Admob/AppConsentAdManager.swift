@@ -27,7 +27,7 @@ final class AppConsentAdManager {
         let requestParameters = UMPRequestParameters()
         let debugSettings = UMPDebugSettings()
         debugSettings.geography = .EEA
-        debugSettings.testDeviceIdentifiers = [AppConstants.AdMob.testDeviceId]
+        debugSettings.testDeviceIdentifiers = [AppConstants.AdMob.umpTestDeviceId]
         requestParameters.debugSettings = debugSettings
         
         UMPConsentInformation.sharedInstance.requestConsentInfoUpdate(with: requestParameters) { [weak self]

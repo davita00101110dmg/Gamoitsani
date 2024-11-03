@@ -18,11 +18,13 @@ extension String {
             return self
         }
         
-        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
-        let bundle = Bundle(path: path!)
+        guard let path = Bundle.main.path(forResource: lang, ofType: "lproj"),
+              let bundle = Bundle(path: path) else {
+            return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: .empty, comment: .empty)
+        }
 
-        let localizedString = NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
-        
+        let localizedString = NSLocalizedString(self, tableName: nil, bundle: bundle, value: .empty, comment: .empty)
+
         if arguments.isEmpty {
             return localizedString
         } else {
