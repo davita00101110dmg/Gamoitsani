@@ -63,7 +63,6 @@ final class GameDetailsViewModel: ObservableObject {
     
     func add(with name: String) {
         if let error = validateName(name, isTeam: teamSectionMode == .teams) {
-            showInfoAlert(title: L10n.Screen.GameDetails.Alert.invalidParameter, message: error)
             return
         }
         
@@ -108,25 +107,12 @@ final class GameDetailsViewModel: ObservableObject {
             return L10n.Screen.GameDetails.Alert.emptyName
         }
         
-        if trimmed.count > maxLength {
-            return isTeam ?
-            L10n.Screen.GameDetails.Teams.nameTooLong(maxLength.toString) :
-            L10n.Screen.GameDetails.Players.nameTooLong(maxLength.toString)
-        }
-        
-        let existingNames = isTeam ? teams.map(\.name) : players.map(\.name)
-        if existingNames.contains(trimmed) {
-            return isTeam ?
-            L10n.Screen.GameDetails.Teams.nameExists :
-            L10n.Screen.GameDetails.Players.nameExists
-        }
-        
         return nil
     }
     
     func teamsAreUnique() -> Bool {
         let teamNames = teams.map(\.name)
-        return Set(teamNames).count != teamNames.count
+        return Set(teamNames).count == teamNames.count
     }
     
     func getTeamsDictionary() -> OrderedDictionary<String, Int> {

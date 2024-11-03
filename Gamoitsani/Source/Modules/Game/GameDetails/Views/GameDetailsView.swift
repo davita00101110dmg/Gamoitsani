@@ -204,7 +204,7 @@ private extension GameDetailsView {
                 title: L10n.Screen.GameDetails.Alert.invalidParameter,
                 message: L10n.Screen.GameDetails.Alert.notEnoughTeams
             )
-        } else if viewModel.teamsAreUnique() {
+        } else if !viewModel.teamsAreUnique() {
             viewModel.showInfoAlert(
                 title: L10n.Screen.GameDetails.Alert.invalidParameter,
                 message: L10n.Screen.GameDetails.Alert.notUniqueTeams
