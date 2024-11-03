@@ -37,6 +37,7 @@ struct GameView: View {
                             coordinator.presentGameShareView(with: viewModel.generateShareImage())
                         } label: {
                             Image(systemName: AppConstants.SFSymbol.squareAndArrowUp)
+                                .foregroundStyle(.white)
                         }
                     }
                 }

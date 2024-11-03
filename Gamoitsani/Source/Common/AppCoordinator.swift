@@ -27,7 +27,6 @@ final class AppCoordinator: BaseCoordinator {
             .foregroundColor : UIColor.white,
             .font: F.Mersad.semiBold.font(size: 48)]
 
-        UIView.appearance().tintColor = .white
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Asset.tintColor.color
         
         navigationController.navigationBar.barStyle = .black
