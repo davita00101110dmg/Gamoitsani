@@ -31,7 +31,6 @@ struct GameDetailsView: View {
                 bottomSection
             }
         }
-        .navigationTitle(L10n.Screen.GameDetails.title)
         .onAppear {
             handleOnAppear()
         }

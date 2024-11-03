@@ -22,6 +22,7 @@ final class GameDetailsCoordinator: BaseCoordinator, ObservableObject {
             .environmentObject(self)
         
         let hostingController = UIHostingController(rootView: gameDetailsView)
+        hostingController.title = L10n.Screen.GameDetails.title
         navigationController.pushViewController(hostingController, animated: true)
     }
     
