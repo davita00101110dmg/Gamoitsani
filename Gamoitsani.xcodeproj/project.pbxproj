@@ -1555,7 +1555,7 @@
 /* Begin XCBuildConfiguration section */
 		FF4D9D502BD698630046819D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40E1CB8D6765DF25275723A3 /* Pods-Gamoitsani.debug.xcconfig */;
+			baseConfigurationReference = 0F0FDB5B8BF1E98906A69023 /* Pods-Gamoitsani.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
