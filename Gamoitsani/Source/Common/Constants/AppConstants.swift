@@ -120,6 +120,28 @@ enum AppConstants {
         }
     }
     
+    enum Vungle {
+        static var appId: String {
+            do {
+                return try Configuration.value(for: "VUNGLE_APP_ID")
+            } catch {
+                dump("Error retrieving appId: \(error)")
+                return .empty
+            }
+        }
+    }
+    
+    enum InMobi {
+        static var appId: String {
+            do {
+                return try Configuration.value(for: "INMOBI_APP_ID")
+            } catch {
+                dump("Error retrieving appId: \(error)")
+                return .empty
+            }
+        }
+    }
+    
     enum Firebase {
         
         enum Fields {

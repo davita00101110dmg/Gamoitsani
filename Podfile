@@ -7,8 +7,12 @@ target 'Gamoitsani' do
 
   # Pods for Gamoitsani
   pod 'Google-Mobile-Ads-SDK'
-  pod 'GoogleUserMessagingPlatform'
+  pod 'InMobiSDK'
 
+  pod 'GoogleUserMessagingPlatform'
+  
+  pod 'GoogleMobileAdsMediationVungle'
+  pod 'GoogleMobileAdsMediationInMobi'
 
   target 'GamoitsaniTests' do
     inherit! :search_paths

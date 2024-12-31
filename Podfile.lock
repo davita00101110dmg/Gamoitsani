@@ -1,21 +1,40 @@
 PODS:
   - Google-Mobile-Ads-SDK (11.13.0):
     - GoogleUserMessagingPlatform (>= 1.1)
+  - GoogleMobileAdsMediationInMobi (10.8.0.0):
+    - Google-Mobile-Ads-SDK (~> 11.0)
+    - InMobiSDK (= 10.8.0)
+  - GoogleMobileAdsMediationVungle (7.4.3.0):
+    - Google-Mobile-Ads-SDK (~> 11.0)
+    - VungleAds (= 7.4.3)
   - GoogleUserMessagingPlatform (2.7.0)
+  - InMobiSDK (10.8.0)
+  - VungleAds (7.4.3)
 
 DEPENDENCIES:
   - Google-Mobile-Ads-SDK
+  - GoogleMobileAdsMediationInMobi
+  - GoogleMobileAdsMediationVungle
   - GoogleUserMessagingPlatform
+  - InMobiSDK
 
 SPEC REPOS:
   trunk:
     - Google-Mobile-Ads-SDK
+    - GoogleMobileAdsMediationInMobi
+    - GoogleMobileAdsMediationVungle
     - GoogleUserMessagingPlatform
+    - InMobiSDK
+    - VungleAds
 
 SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 14f57f2dc33532a24db288897e26494640810407
+  GoogleMobileAdsMediationInMobi: 1c09a0189c485bba2b3edc9ab0e062b9a716929f
+  GoogleMobileAdsMediationVungle: e881f89d2819ef365d033be62abaf394c2ad0482
   GoogleUserMessagingPlatform: a8b56893477f67212fbc8411c139e61d463349f5
+  InMobiSDK: 0cfb1a1eb5112fa0236ae1fab549e31fb96c9566
+  VungleAds: 15e589a3e1c3a5d1ca4617154bcca3bc0b6c1167
 
-PODFILE CHECKSUM: 0a1bbfba659dc4502938b1314c1d9b50bab8a993
+PODFILE CHECKSUM: e8d2b8e35a3bb665bba4a557aa17deeae95750a0
 
 COCOAPODS: 1.16.2
