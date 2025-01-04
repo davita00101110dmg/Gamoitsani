@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/db880818-a409-4391-92a1-fad1d221bb8e" width="300"/>
+  <img src="https://github.com/user-attachments/assets/c1b92d55-c418-4b15-9c2d-4ec98a029725"/>
 </p>
 
 ## App is available for download! 🚀
@@ -13,7 +13,7 @@ Welcome to Gamoitsani, the ultimate word-guessing game that brings fun and excit
 
 ## Tech stack 💻
 <ul>
-  <li>This app is written in Swift using <a href="https://developer.apple.com/documentation/uikit/">UIKit</a> framework.</li>
+  <li>This app is written in Swift using <a href="https://developer.apple.com/documentation/uikit/">UIKit</a> and <a href="https://developer.apple.com/xcode/swiftui/">SwiftUI</a> frameworks.</li>
   <li>For words <a href="https://firebase.google.com/">Firebase</a> database was written from scratch.</li>
   <li>The app uses the font <a href="https://www.behance.net/gallery/145150505/Mersad-Free-Variable-Typeface">Mersad</a> as its main font.</li>
 </ul>
