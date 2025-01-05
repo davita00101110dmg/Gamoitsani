@@ -57,7 +57,7 @@ final class GameDetailsViewModel: ObservableObject {
     func fetchWordsFromServer() {
         FirebaseManager.shared.fetchWordsIfNeeded { words in
             GameStory.shared.words = words
-            dump("Fetched \(words.count) words")
+            log(.info, "Fetched \(words.count) words")
         }
     }
     

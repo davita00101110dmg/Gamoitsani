@@ -23,7 +23,7 @@ enum AppConstants {
         do {
             return try Configuration.value(for: "REMOVE_ADS_IN_APP_PURCHASE_PRODUCT_ID")
         } catch {
-            dump("Error retrieving words collection name: \(error)")
+            log(.error, "Error retrieving words collection name: \(error)")
             return .empty
         }
     }
@@ -78,7 +78,7 @@ enum AppConstants {
             do {
                 return try Configuration.value(for: "BANNER_AD_ID")
             } catch {
-                dump("Error retrieving bannerAdId: \(error)")
+                log(.error, "Error retrieving bannerAdId: \(error)")
                 return .empty
             }
         }
@@ -87,7 +87,7 @@ enum AppConstants {
             do {
                 return try Configuration.value(for: "INTERSTITIAL_AD_ID")
             } catch {
-                dump("Error retrieving interstitialAdId: \(error)")
+                log(.error, "Error retrieving interstitialAdId: \(error)")
                 return .empty
             }
         }
@@ -96,7 +96,7 @@ enum AppConstants {
             do {
                 return try Configuration.value(for: "APP_OPEN_AD_ID")
             } catch {
-                dump("Error retrieving appOpenAdId: \(error)")
+                log(.error, "Error retrieving appOpenAdId: \(error)")
                 return .empty
             }
         }
@@ -105,7 +105,7 @@ enum AppConstants {
             do {
                 return try Configuration.value(for: "ADMOB_TEST_DEVICE_ID")
             } catch {
-                dump("Error retrieving testDeviceId: \(error)")
+                log(.error, "Error retrieving testDeviceId: \(error)")
                 return .empty
             }
         }
@@ -114,7 +114,7 @@ enum AppConstants {
             do {
                 return try Configuration.value(for: "UMP_TEST_DEVICE_ID")
             } catch {
-                dump("Error retrieving testDeviceId: \(error)")
+                log(.error, "Error retrieving testDeviceId: \(error)")
                 return .empty
             }
         }
@@ -125,7 +125,7 @@ enum AppConstants {
             do {
                 return try Configuration.value(for: "VUNGLE_APP_ID")
             } catch {
-                dump("Error retrieving appId: \(error)")
+                log(.error, "Error retrieving appId: \(error)")
                 return .empty
             }
         }
@@ -136,7 +136,7 @@ enum AppConstants {
             do {
                 return try Configuration.value(for: "INMOBI_APP_ID")
             } catch {
-                dump("Error retrieving appId: \(error)")
+                log(.error, "Error retrieving appId: \(error)")
                 return .empty
             }
         }
@@ -156,7 +156,7 @@ enum AppConstants {
             do {
                 return try Configuration.value(for: "WORDS_COLLECTION_NAME")
             } catch {
-                dump("Error retrieving words collection name: \(error)")
+                log(.error, "Error retrieving words collection name: \(error)")
                 return .empty
             }
         }
@@ -165,7 +165,7 @@ enum AppConstants {
             do {
                 return try Configuration.value(for: "SUGGESTED_WORDS_COLLECTION_NAME")
             } catch {
-                dump("Error retrieving suggested words collection name: \(error)")
+                log(.error, "Error retrieving suggested words collection name: \(error)")
                 return .empty
             }
         }
@@ -176,7 +176,7 @@ enum AppConstants {
             do {
                 return try Configuration.value(for: "META_APP_ID")
             } catch {
-                dump("Error retrieving metaAppId: \(error)")
+                log(.error, "Error retrieving metaAppId: \(error)")
                 return .empty
             }
         }
@@ -185,7 +185,7 @@ enum AppConstants {
             do {
                 return try Configuration.value(for: "META_CLIENT_TOKEN")
             } catch {
-                dump("Error retrieving metaClientToken: \(error)")
+                log(.error, "Error retrieving metaClientToken: \(error)")
                 return .empty
             }
         }

@@ -33,7 +33,7 @@ final class AppOpenAdManager: BaseAdManager {
             appOpenAd?.fullScreenContentDelegate = self
             loadTime = Date()
         } catch {
-            print("App open ad failed to load with error: \(error.localizedDescription)")
+            log(.error, "App open ad failed to load with error: \(error.localizedDescription)")
         }
         isLoadingAd = false
     }

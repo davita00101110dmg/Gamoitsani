@@ -30,7 +30,7 @@ final class InterstitialAdManager: BaseAdManager {
             interstitialAd = try await GADInterstitialAd.load(withAdUnitID: AppConstants.AdMob.interstitialAdId, request: GADRequest())
             interstitialAd?.fullScreenContentDelegate = self
         } catch {
-            print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+            log(.error, "Failed to load interstitial ad with error: \(error.localizedDescription)")
         }
         isLoadingAd = false
     }
@@ -40,7 +40,7 @@ final class InterstitialAdManager: BaseAdManager {
         return
 #else
         guard let interstitialAd = interstitialAd, !isShowingAd, AppConstants.shouldShowAdsToUser else {
-            print("Ad wasn't ready or is already showing.")
+            log(.debug, "Ad wasn't ready or is already showing.")
             return
         }
         

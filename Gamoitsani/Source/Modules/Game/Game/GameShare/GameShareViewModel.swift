@@ -24,7 +24,7 @@ final class GameShareViewModel {
         
         guard let urlScheme = URL(string: urlString),
               UIApplication.shared.canOpenURL(urlScheme) else {
-            print("Error: Invalid URL scheme")
+            log(.error, "Error: Invalid URL scheme")
             return
         }
         

@@ -56,14 +56,14 @@ final class CoreDataManager: CoreDataManaging {
                     
                     savedCount += 1
                 } catch {
-                    dump("Error saving word: \(error)")
+                    log(.error, "Error saving word: \(error)")
                 }
             }
             
             do {
                 try context.save()
             } catch {
-                dump("Error saving context: \(error)")
+                log(.error, "Error saving context: \(error)")
             }
         }
         
@@ -80,9 +80,9 @@ final class CoreDataManager: CoreDataManaging {
             
             do {
                 fetchedWords = try context.fetch(fetchRequest)
-                dump("Fetched \(fetchedWords.count) words from Core Data")
+                log(.info, "Fetched \(fetchedWords.count) words from Core Data")
             } catch {
-                dump("Failed to fetch words from Core Data: \(error)")
+                log(.error, "Failed to fetch words from Core Data: \(error)")
             }
         }
         

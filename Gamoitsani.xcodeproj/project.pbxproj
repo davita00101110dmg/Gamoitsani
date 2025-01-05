@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B4175E6004401668FFF3022A /* Pods_GamoitsaniTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89809CEB45EAA853D37D6434 /* Pods_GamoitsaniTests.framework */; };
 		E1633DE1BFB2D11FD85E1426 /* Pods_Gamoitsani_GamoitsaniUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F7001D47612CB9E8EDBFC1 /* Pods_Gamoitsani_GamoitsaniUITests.framework */; };
+		FF01C8A82D2AD1FF00BE40D4 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01C8A72D2AD1FF00BE40D4 /* Logger.swift */; };
 		FF1111892C4FD17500C44F62 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF1111872C4FD17500C44F62 /* correct.wav */; };
 		FF11118A2C4FD17500C44F62 /* incorrect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF1111882C4FD17500C44F62 /* incorrect.mp3 */; };
 		FF1E92B62BF8FE8E00127FDE /* GMGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */; };
@@ -208,6 +209,7 @@
 		AC1D967131F4AD0817FD6DCB /* Pods-GamoitsaniTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.debug.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6F7001D47612CB9E8EDBFC1 /* Pods_Gamoitsani_GamoitsaniUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gamoitsani_GamoitsaniUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C63BD04C1919A1B3174842AC /* Pods-GamoitsaniTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.release.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.release.xcconfig"; sourceTree = "<group>"; };
+		FF01C8A72D2AD1FF00BE40D4 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		FF1111872C4FD17500C44F62 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
 		FF1111882C4FD17500C44F62 /* incorrect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = incorrect.mp3; sourceTree = "<group>"; };
 		FF1E92B52BF8FE8E00127FDE /* GMGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMGradientView.swift; sourceTree = "<group>"; };
@@ -413,6 +415,14 @@
 				C63BD04C1919A1B3174842AC /* Pods-GamoitsaniTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FF01C8A62D2AD1F300BE40D4 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				FF01C8A72D2AD1FF00BE40D4 /* Logger.swift */,
+			);
+			path = Logger;
 			sourceTree = "<group>";
 		};
 		FF3708802BFBD5040056361F /* Word */ = {
@@ -950,6 +960,7 @@
 		FFFB4CD32BD7CA6700CDDCB4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FF01C8A62D2AD1F300BE40D4 /* Logger */,
 				FFA60DBE2C7CEBD5005A2660 /* Protocols */,
 				FFA60DBA2C7A2914005A2660 /* GeometryEffect */,
 				FFA60DB52C7A0281005A2660 /* ViewModifiers */,
@@ -1446,6 +1457,7 @@
 				FFF65CB02BE61DEA008E0352 /* UITableViewExtensions.swift in Sources */,
 				FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */,
 				FF7F1D9B2BE7D25300872554 /* GamePlayViewModel.swift in Sources */,
+				FF01C8A82D2AD1FF00BE40D4 /* Logger.swift in Sources */,
 				FF86756A2C67DB270089B52B /* SettingsViewModel.swift in Sources */,
 				FFB98EAB2C7534380024A925 /* AppConsentAdManager.swift in Sources */,
 				FF7F1D7E2BE7A2F700872554 /* GameCoordinator.swift in Sources */,

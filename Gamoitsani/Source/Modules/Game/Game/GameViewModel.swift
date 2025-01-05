@@ -127,7 +127,7 @@ extension GameViewModel {
     private func updateGameInfo(with roundScore: Int) {
         let currentTeamName = gameStory.teams.keys[gameStory.currentTeamIndex]
         gameStory.teams[currentTeamName, default: 0] += roundScore
-        dump("Round: \(currentRound) Team: \(currentTeamName) Score: \(gameStory.teams[currentTeamName] ?? 0)")
+        log(.info, "Round: \(currentRound) Team: \(currentTeamName) Score: \(gameStory.teams[currentTeamName] ?? 0)")
         gameStory.currentTeamIndex = playingSessionCount % numberOfTeams
         gameStory.currentRound = playingSessionCount / numberOfTeams + 1
     }

@@ -63,7 +63,7 @@ final class FirebaseManager {
             .whereField(AppConstants.Firebase.Fields.lastUpdated, isGreaterThan: date)
             .getDocuments { querySnapshot, error in
                 if let error = error {
-                    dump("Error fetching words: \(error.localizedDescription)")
+                    log(.error, "Error fetching words: \(error.localizedDescription)")
                     completion([])
                     return
                 }
@@ -82,7 +82,7 @@ final class FirebaseManager {
             .limit(to: limit)
             .getDocuments { querySnapshot, error in
                 if let error {
-                    dump("Error fetching words: \(error.localizedDescription)")
+                    log(.error, "Error fetching words: \(error.localizedDescription)")
                     return
                 }
                 
@@ -101,13 +101,13 @@ final class FirebaseManager {
             guard let self = self else { return }
             
             if let error = error {
-                dump("Error checking for existing word: \(error.localizedDescription)")
+                log(.error, "Error checking for existing word: \(error.localizedDescription)")
                 completion(false)
                 return
             }
             
             if let querySnapshot = querySnapshot, !querySnapshot.isEmpty {
-                dump("Word already exists in suggestions")
+                log(.error, "Word already exists in suggestions")
                 completion(false)
                 return
             }
@@ -120,10 +120,10 @@ final class FirebaseManager {
             
             self.suggestionsRef.addDocument(data: newSuggestion) { error in
                 if let error = error {
-                    dump("Error adding word suggestion: \(error.localizedDescription)")
+                    log(.error, "Error adding word suggestion: \(error.localizedDescription)")
                     completion(false)
                 } else {
-                    dump("Word suggestion added successfully")
+                    log(.info, "Word suggestion added successfully")
                     completion(true)
                 }
             }

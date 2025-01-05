@@ -78,7 +78,7 @@ class BaseViewController<T: Coordinator>: UIViewController {
     }
     
     deinit {
-        dump("deinited \(self)")
+        log(.info, "Deinited \(self)")
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -92,7 +92,7 @@ class BaseViewController<T: Coordinator>: UIViewController {
     
     @objc func presentAdInspector() {
         GADMobileAds.sharedInstance().presentAdInspector(from: self) { error in
-            dump("Inspector error \(error?.localizedDescription ?? .empty)")
+            log(.error, "Inspector error \(error?.localizedDescription ?? .empty)")
         }
     }
 }

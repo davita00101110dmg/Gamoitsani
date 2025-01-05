@@ -63,14 +63,14 @@ private extension PlaceholderView {
             imageName: "person.2",
             title: "დაამატეთ გუნდები თამაშის დასაწყებად"
         ) {
-            print("Add team tapped")
+            
         }
         
         PlaceholderView(
             imageName: "person.fill.questionmark",
             title: "დაამატეთ მოთამაშეები გუნდების შესაქმნელად"
         ) {
-            print("Add player tapped")
+            
         }
     }
     .padding()

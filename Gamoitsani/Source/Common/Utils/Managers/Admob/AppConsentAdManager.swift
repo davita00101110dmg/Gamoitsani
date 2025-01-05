@@ -60,13 +60,13 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
             guard let self else { return }
             
             if let consentError = requestConsentError {
-                print("Error requesting consent info: \(consentError.localizedDescription)")
+                log(.info, "Error requesting consent info: \(consentError.localizedDescription)")
                 return
             }
             
             UMPConsentForm.loadAndPresentIfRequired(from: viewController) { loadAndPresentError in
                 if let consentError = loadAndPresentError {
-                    print("Error loading or presenting consent form: \(consentError.localizedDescription)")
+                    log(.info, "Error loading or presenting consent form: \(consentError.localizedDescription)")
                     return
                 }
                 
@@ -96,9 +96,9 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         // Initialize Vungle
         VungleAds.initWithAppId(AppConstants.Vungle.appId) { error in
             if let error = error {
-                dump("Vungle SDK initialization failed: \(error)")
+                log(.error, "Vungle SDK initialization failed: \(error)")
             } else {
-                dump("Vungle SDK initialization complete")
+                log(.info, "Vungle SDK initialization complete")
             }
         }
         
@@ -115,7 +115,7 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         guard let viewController else { return }
         UMPConsentForm.presentPrivacyOptionsForm(from: viewController) { [weak self] error in
             if let error = error {
-                print("Privacy form error: \(error.localizedDescription)")
+                log(.error, "Privacy form error: \(error.localizedDescription)")
                 return
             }
             self?.updateInMobiConsent()
@@ -133,9 +133,9 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         IMSdk.initWithAccountID(AppConstants.InMobi.appId,
                               consentDictionary: consentDictionary) { error in
             if let error = error {
-                dump("InMobi initialization error: \(error.localizedDescription)")
+                log(.error, "InMobi initialization error: \(error.localizedDescription)")
             } else {
-                dump("InMobi SDK initialized successfully")
+                log(.info, "InMobi SDK initialized successfully")
             }
         }
     }
@@ -171,13 +171,13 @@ extension AppConsentAdManager {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let clLocation = locations.last {
             IMSdk.setLocation(clLocation)
-            dump("Location updated for InMobi")
+            log(.info, "Location updated for InMobi")
         }
         locationManager?.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        dump("Location manager error: \(error.localizedDescription)")
+        log(.error, "Location manager error: \(error.localizedDescription)")
     }
 
 }

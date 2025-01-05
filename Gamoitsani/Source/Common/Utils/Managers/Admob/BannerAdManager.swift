@@ -45,14 +45,14 @@ final class BannerAdManager: NSObject, ObservableObject {
 // MARK: - GADBannerViewDelegate Methods
 extension BannerAdManager: GADBannerViewDelegate {
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        dump("Loaded ad")
+        log(.info, "Loaded ad")
         withAnimation(.smooth(duration: 0.3)) {
             isAdLoaded = true
         }
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
-        dump("Failed to load - \(error.localizedDescription)")
+        log(.error, "Failed to load - \(error.localizedDescription)")
         withAnimation(.bouncy(duration: 0.3)) {
             isAdLoaded = false
         }

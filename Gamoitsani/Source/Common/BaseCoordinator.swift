@@ -36,7 +36,7 @@ class BaseCoordinator: NSObject, Coordinator {
     var childCoordinators: [Coordinator] = []
     
     deinit {
-        dump("Deinited \(self)")
+        log(.info, "Deinited \(self)")
     }
     
     func start() {

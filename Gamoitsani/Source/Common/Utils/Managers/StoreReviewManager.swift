@@ -30,8 +30,8 @@ struct StoreReviewManager {
         if appOpenCount >= 20 && finishedGamesCountInSession >= 3 {
             StoreReviewManager().requestReview()
         } else {
-            dump("App run count is: \(appOpenCount), Finished Games Count In This Session is: \(finishedGamesCountInSession)")
-        }   
+            log(.info, "App run count is: \(appOpenCount), Finished Games Count In This Session is: \(finishedGamesCountInSession)")
+        }
     }
     
     private func requestReview() {

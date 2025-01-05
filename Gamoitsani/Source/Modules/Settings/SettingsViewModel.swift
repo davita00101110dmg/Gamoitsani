@@ -64,7 +64,7 @@ final class SettingsViewModel: NSObject, ObservableObject {
     
     func writeReviewAction() {
         guard let appStoreReviewURL = URL(string: AppConstants.reviewUrlLink) else {
-            dump("Error: Invalid App Store review URL")
+            log(.error, "Invalid App Store review URL")
             showingAlert = true
             return
         }

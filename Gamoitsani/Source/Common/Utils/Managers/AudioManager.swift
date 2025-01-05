@@ -23,7 +23,7 @@ final class AudioManager {
             correctSoundAudioPlayer?.prepareToPlay()
             incorrectSoundAudioPlayer?.prepareToPlay()
         } catch let error {
-            print(error)
+            log(.error, "Failed to setup sounds: \(error.localizedDescription)")
         }
     }
     

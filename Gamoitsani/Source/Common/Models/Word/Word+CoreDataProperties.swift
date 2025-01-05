@@ -27,7 +27,7 @@ extension Word {
                 do {
                     return try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: data) as? [String] ?? []
                 } catch {
-                    print("Error unarchiving categories: \(error)")
+                    log(.error, "Error unarchiving categories: \(error)")
                     return []
                 }
             }
@@ -36,7 +36,7 @@ extension Word {
                     let data = try NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: true)
                     categoriesData = data
                 } catch {
-                    print("Error archiving categories: \(error)")
+                    log(.error, "Error archiving categories: \(error)")
                     categoriesData = nil
                 }
             }
