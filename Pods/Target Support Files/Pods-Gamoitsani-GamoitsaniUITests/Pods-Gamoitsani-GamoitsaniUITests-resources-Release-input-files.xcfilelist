@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-resources.sh
+${PODS_CONFIGURATION_BUILD_DIR}/FBAudienceNetwork/FBAudienceNetwork.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/Google-Mobile-Ads-SDK/GoogleMobileAdsResources.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/GoogleUserMessagingPlatform/UserMessagingPlatformResources.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/VungleAds/VungleAds.bundle
