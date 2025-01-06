@@ -17,6 +17,10 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRightBarButtonItem()
+#if DEBUG
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        view.addGestureRecognizer(longPressGesture)
+#endif
     }
     
     override func setupLocalizedTexts() {
@@ -33,6 +37,14 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
     private func setupRightBarButtonItem() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: AppConstants.SFSymbol.gear), style: .plain, target: self, action: #selector(rightBarButtonClicked))
     }
+    
+#if DEBUG
+    @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            presentAdInspector()
+        }
+    }
+#endif
 }
  
 // MARK: - Actions
