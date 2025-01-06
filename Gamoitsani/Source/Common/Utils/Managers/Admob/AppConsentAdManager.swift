@@ -12,6 +12,7 @@ import GoogleMobileAds
 import UserMessagingPlatform
 import VungleAdsSDK
 import InMobiSDK
+import FBAudienceNetwork
 
 final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
     static let shared = AppConsentAdManager()
@@ -109,6 +110,9 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         // Initialize InMobi with debug settings
         IMSdk.setLogLevel(IMSDKLogLevel.debug)
         IMUnifiedIdService.enableDebugMode(true)
+        
+        // Meta
+        FBAdSettings.setAdvertiserTrackingEnabled(true)
     }
     
     func presentPrivacySettings(from viewController: UIViewController?) {
