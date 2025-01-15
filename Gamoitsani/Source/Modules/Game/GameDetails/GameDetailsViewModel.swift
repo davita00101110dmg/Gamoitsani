@@ -15,6 +15,7 @@ import SwiftUI
 final class GameDetailsViewModel: ObservableObject {
     @Published var roundsAmount: Double = GameDetailsConstants.Game.defaultRoundsAmount
     @Published var roundsLength: Double = GameDetailsConstants.Game.defaultRoundLength
+    @Published var selectedGameMode: GameMode = .classic
     
     @Published var currentAlert: AlertType?
     @Published var teamSectionMode: GameDetailsTeamSectionMode = .teams

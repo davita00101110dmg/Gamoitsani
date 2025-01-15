@@ -25,7 +25,7 @@ struct GameView: View {
                 case .info:
                     gameInfoView
                 case .play:
-                    gamePlayView
+                    gamePlayContent
                 case .gameOver:
                     gameOverView
                 }
@@ -37,7 +37,6 @@ struct GameView: View {
                             coordinator.presentGameShareView(with: viewModel.generateShareImage())
                         } label: {
                             Image(systemName: AppConstants.SFSymbol.squareAndArrowUp)
-                                .foregroundStyle(.white)
                         }
                     }
                 }
@@ -60,27 +59,36 @@ struct GameView: View {
         }
     }
     
-    private func startConfetti() {
-        if viewModel.gameState == .gameOver {
-            showConfetti = true
+    private var gamePlayContent: some View {
+        Group {
+            switch viewModel.gameMode {
+            case .classic:
+                classicGamePlayView
+            case .arcade:
+                arcadeGamePlayView
+            }
         }
-    }
-    
-    private func stopConfetti() {
-        showConfetti = false
     }
     
     private var gameInfoView: some View {
         GameInfoView(viewModel: viewModel.gameInfoViewModel) {
-            viewModel.startPlaying()
+            viewModel.gameState = .play
         } onShowScoreboard: {
             coordinator.presentGameScoreboard()
         }
     }
     
-    private var gamePlayView: some View {
+    private var classicGamePlayView: some View {
         GamePlayView(
-            viewModel: viewModel.gamePlayViewModel
+            viewModel: viewModel.classicGamePlayViewModel
+        ) { score in
+            viewModel.handleGamePlayResult(score: score)
+        }
+    }
+    
+    private var arcadeGamePlayView: some View {
+        ArcadeGamePlayView(
+            viewModel: viewModel.arcadeGamePlayViewModel
         ) { score in
             viewModel.handleGamePlayResult(score: score)
         }
@@ -109,7 +117,27 @@ struct GameView: View {
     }
     
     private var viewMaxHeight: CGFloat {
-        horizontalSizeClass == .compact ? viewModel.gameState == .gameOver ? ViewConstants.gameOverViewHeight : ViewConstants.viewHeight : .infinity
+        if horizontalSizeClass == .compact {
+            switch viewModel.gameState {
+            case .gameOver:
+                return ViewConstants.viewHeightBig
+            case .play:
+                return viewModel.gameMode == .arcade ? ViewConstants.viewHeightBig : ViewConstants.viewHeightSmall
+            case .info:
+                return ViewConstants.viewHeightSmall
+            }
+        }
+        return .infinity
+    }
+    
+    private func startConfetti() {
+        if viewModel.gameState == .gameOver {
+            showConfetti = true
+        }
+    }
+    
+    private func stopConfetti() {
+        showConfetti = false
     }
 }
 
@@ -120,8 +148,8 @@ extension GameView {
         static let paddingFromSuperview: CGFloat = 36
         static let backgroundOpacity: CGFloat = 0.3
         static let cornerRadius: CGFloat = 10
-        static let viewHeight: CGFloat = 400
-        static let gameOverViewHeight: CGFloat = 600
+        static let viewHeightSmall: CGFloat = 400
+        static let viewHeightBig: CGFloat = 600
     }
 }
 

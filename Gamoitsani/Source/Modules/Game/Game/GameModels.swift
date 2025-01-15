@@ -15,3 +15,35 @@ enum GameModels {
         case gameOver
     }
 }
+
+enum GameMode: String, CaseIterable {
+    case classic
+    case arcade
+    
+    var title: String {
+        switch self {
+        case .classic:
+            return L10n.Screen.GameDetails.Classic.title
+        case .arcade:
+            return L10n.Screen.GameDetails.Arcade.title
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .classic:
+            return L10n.Screen.GameDetails.Classic.description
+        case .arcade:
+            return L10n.Screen.GameDetails.Arcade.description
+        }
+    }
+    
+    var skipPenalty: Int {
+        switch self {
+        case .classic:
+            return 0
+        case .arcade:
+            return -2
+        }
+    }
+}

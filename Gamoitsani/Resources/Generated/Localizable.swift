@@ -64,6 +64,11 @@ public enum L10n {
 
       public enum Game {
 
+        public enum Arcade {
+          /// Skip (-2 points)
+          public static var skipButton: String { L10n.tr("Localizable", "screen.game.arcade.skipButton") }
+        }
+
         public enum ConfirmationAlert {
           /// Teams' points will be lost
           public static var message: String { L10n.tr("Localizable", "screen.game.confirmation_alert.message") }
@@ -138,6 +143,25 @@ public enum L10n {
             /// No internet connection!
             public static var title: String { L10n.tr("Localizable", "screen.game_details.alert.no_internet.title") }
           }
+        }
+
+        public enum Arcade {
+          /// Play with 5 words at once
+          public static var description: String { L10n.tr("Localizable", "screen.game_details.arcade.description") }
+          /// Arcade
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.arcade.title") }
+        }
+
+        public enum Classic {
+          /// Play one word at a time
+          public static var description: String { L10n.tr("Localizable", "screen.game_details.classic.description") }
+          /// Classic
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.classic.title") }
+        }
+
+        public enum GameMode {
+          /// Game mode
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.game_mode.title") }
         }
 
         public enum Players {

@@ -91,6 +91,7 @@ enum GameDetailsConstants {
         static let maximumTeams = 5
         static let minimumPlayers = 2
         static let maximumPlayers = 10
+        static let arcadeWordCount = 5  
     }
     
     enum Validation {

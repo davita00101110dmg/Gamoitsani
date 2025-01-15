@@ -120,6 +120,11 @@
 		FFA60DC52C7CFCE3005A2660 /* BannerAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DC42C7CFCE3005A2660 /* BannerAdManager.swift */; };
 		FFA60DC72C7CFF6C005A2660 /* BaseAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DC62C7CFF6C005A2660 /* BaseAdManager.swift */; };
 		FFA60DC92C7D01FB005A2660 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DC82C7D01FB005A2660 /* GameView.swift */; };
+		FFAA68822D3846C400F0B2C0 /* ArcadeGamePlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA687F2D3846C400F0B2C0 /* ArcadeGamePlayView.swift */; };
+		FFAA68832D3846C400F0B2C0 /* ArcadeGamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68802D3846C400F0B2C0 /* ArcadeGamePlayViewModel.swift */; };
+		FFAA68872D3846DB00F0B2C0 /* GameModeOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68862D3846DB00F0B2C0 /* GameModeOptionView.swift */; };
+		FFAA68892D3846E400F0B2C0 /* GameModePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68882D3846E400F0B2C0 /* GameModePickerView.swift */; };
+		FFAA688D2D3852F300F0B2C0 /* WordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA688B2D3852F300F0B2C0 /* WordCardView.swift */; };
 		FFAE1F1B2C7E3A92003A554C /* GameShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F1A2C7E3A92003A554C /* GameShareView.swift */; };
 		FFAE1F1E2C7E3AA0003A554C /* GameShareCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F1D2C7E3AA0003A554C /* GameShareCoordinator.swift */; };
 		FFAE1F202C7E3AA6003A554C /* GameShareModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F1F2C7E3AA6003A554C /* GameShareModels.swift */; };
@@ -322,6 +327,11 @@
 		FFA60DC42C7CFCE3005A2660 /* BannerAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdManager.swift; sourceTree = "<group>"; };
 		FFA60DC62C7CFF6C005A2660 /* BaseAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAdManager.swift; sourceTree = "<group>"; };
 		FFA60DC82C7D01FB005A2660 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		FFAA687F2D3846C400F0B2C0 /* ArcadeGamePlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcadeGamePlayView.swift; sourceTree = "<group>"; };
+		FFAA68802D3846C400F0B2C0 /* ArcadeGamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcadeGamePlayViewModel.swift; sourceTree = "<group>"; };
+		FFAA68862D3846DB00F0B2C0 /* GameModeOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeOptionView.swift; sourceTree = "<group>"; };
+		FFAA68882D3846E400F0B2C0 /* GameModePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModePickerView.swift; sourceTree = "<group>"; };
+		FFAA688B2D3852F300F0B2C0 /* WordCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCardView.swift; sourceTree = "<group>"; };
 		FFAE1F1A2C7E3A92003A554C /* GameShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareView.swift; sourceTree = "<group>"; };
 		FFAE1F1D2C7E3AA0003A554C /* GameShareCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareCoordinator.swift; sourceTree = "<group>"; };
 		FFAE1F1F2C7E3AA6003A554C /* GameShareModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareModels.swift; sourceTree = "<group>"; };
@@ -637,6 +647,8 @@
 			isa = PBXGroup;
 			children = (
 				FF63A43B2CD517F3005617E5 /* GameDetailsView.swift */,
+				FFAA68882D3846E400F0B2C0 /* GameModePickerView.swift */,
+				FFAA68862D3846DB00F0B2C0 /* GameModeOptionView.swift */,
 				FF63A4352CD517E0005617E5 /* PlayerRowView.swift */,
 				FF63A4332CD517D9005617E5 /* PlaceholderView.swift */,
 				FF63A43D2CD517FB005617E5 /* TeamListView.swift */,
@@ -696,6 +708,7 @@
 			isa = PBXGroup;
 			children = (
 				FFA60DC82C7D01FB005A2660 /* GameView.swift */,
+				FFAA68812D3846C400F0B2C0 /* ArcadeGamePlay */,
 				FF7F1D892BE7ADF300872554 /* GameInfo */,
 				FF7F1D8A2BE7ADFA00872554 /* GamePlay */,
 				FF7CA1612C0258F100E3BEC4 /* GameOver */,
@@ -876,6 +889,24 @@
 				FFA60DC42C7CFCE3005A2660 /* BannerAdManager.swift */,
 			);
 			path = Admob;
+			sourceTree = "<group>";
+		};
+		FFAA68812D3846C400F0B2C0 /* ArcadeGamePlay */ = {
+			isa = PBXGroup;
+			children = (
+				FFAA688C2D3852F300F0B2C0 /* Views */,
+				FFAA687F2D3846C400F0B2C0 /* ArcadeGamePlayView.swift */,
+				FFAA68802D3846C400F0B2C0 /* ArcadeGamePlayViewModel.swift */,
+			);
+			path = ArcadeGamePlay;
+			sourceTree = "<group>";
+		};
+		FFAA688C2D3852F300F0B2C0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FFAA688B2D3852F300F0B2C0 /* WordCardView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		FFAE1F192C7E3A8C003A554C /* GameShare */ = {
@@ -1426,12 +1457,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFAA68892D3846E400F0B2C0 /* GameModePickerView.swift in Sources */,
 				FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */,
 				FF8EA70D2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift in Sources */,
 				FF7CA1602C02000900E3BEC4 /* UIApplicationExtensions.swift in Sources */,
 				FF8675612C6798680089B52B /* SettingsView.swift in Sources */,
 				FF7CA15E2C01FCB800E3BEC4 /* StoreReviewManager.swift in Sources */,
 				FFAE1F1E2C7E3AA0003A554C /* GameShareCoordinator.swift in Sources */,
+				FFAA68872D3846DB00F0B2C0 /* GameModeOptionView.swift in Sources */,
 				FFFB4D4C2BD9392D00CDDCB4 /* GameDetailsCoordinator.swift in Sources */,
 				FFF65CC72BE6B0C4008E0352 /* Assets.swift in Sources */,
 				FF1E92B82BF9017100127FDE /* UILabelExtensions.swift in Sources */,
@@ -1443,6 +1476,8 @@
 				FFA60DAB2C7639D5005A2660 /* AppOpenAdManager.swift in Sources */,
 				FFFB4D422BD9155100CDDCB4 /* RulesViewModel.swift in Sources */,
 				FF7F1D812BE7A2F700872554 /* GameViewModel.swift in Sources */,
+				FFAA68822D3846C400F0B2C0 /* ArcadeGamePlayView.swift in Sources */,
+				FFAA68832D3846C400F0B2C0 /* ArcadeGamePlayViewModel.swift in Sources */,
 				FF6054F82CC56759003C2AA0 /* GMTextFieldView.swift in Sources */,
 				FF75558A2C8358F700EC37A0 /* DisplayConfettiModifier.swift in Sources */,
 				FF6055022CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift in Sources */,
@@ -1485,6 +1520,7 @@
 				FF63A4342CD517D9005617E5 /* PlaceholderView.swift in Sources */,
 				FF63A4572CD647C4005617E5 /* FloatingAnimation.swift in Sources */,
 				FF63A4582CD647C4005617E5 /* PulseAnimation.swift in Sources */,
+				FFAA688D2D3852F300F0B2C0 /* WordCardView.swift in Sources */,
 				FF7CA1652C02591100E3BEC4 /* GameOverViewModel.swift in Sources */,
 				FF7F1D8E2BE7AE2100872554 /* GameInfoView.swift in Sources */,
 				FF8EA7092BEBBA1900F098B8 /* GameScoreboardViewModel.swift in Sources */,

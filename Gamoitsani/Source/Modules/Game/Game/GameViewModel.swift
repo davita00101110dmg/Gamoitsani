@@ -21,8 +21,16 @@ final class GameViewModel: ObservableObject {
         )
     }
 
-    var gamePlayViewModel: GamePlayViewModel {
+    var classicGamePlayViewModel: GamePlayViewModel {
         GamePlayViewModel(
+            words: gameStory.words.removeFirstNItems(50) ?? [],
+            roundLength: gameStory.lengthOfRound,
+            audioManager: audioManager
+        )
+    }
+    
+    var arcadeGamePlayViewModel: ArcadeGamePlayViewModel {
+        ArcadeGamePlayViewModel(
             words: gameStory.words.removeFirstNItems(50) ?? [],
             roundLength: gameStory.lengthOfRound,
             audioManager: audioManager
@@ -44,6 +52,7 @@ final class GameViewModel: ObservableObject {
     var currentTeamScore: Int { gameStory.teams.values[gameStory.currentTeamIndex] }
     var sortedTeams: [(key: String, value: Int)] { gameStory.teams.sorted { $0.value > $1.value } }
 
+    var gameMode: GameMode { gameStory.gameMode }
     var gameStory = GameStory.shared
     
     private var playingSessionCount: Int { gameStory.playingSessionCount }
@@ -84,10 +93,8 @@ extension GameViewModel {
     func getWinnerTeam() -> (key: String, value: Int)? {
         guard let firstTeam = sortedTeams.first else { return nil }
         
-        // Check if there's a tie for first place
         let tiedTeams = sortedTeams.filter { $0.value == firstTeam.value }
         
-        // If there's more than one team with the highest score, it's a tie
         if tiedTeams.count > 1 {
             return nil
         }

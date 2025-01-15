@@ -58,6 +58,11 @@
 "screen.add_word.textfield_placeholder" = "Введіть слово";
 "screen.add_word.success_message" = "Слово успішно надіслано";
 "screen.add_word.error_message" = "Не вдалося надіслати слово";
+"screen.game_details.game_mode.title" = "Режим гри";
+"screen.game_details.classic.title" = "Класичний";
+"screen.game_details.classic.description" = "Грайте одне слово за раз";
+"screen.game_details.arcade.title" = "Аркада";
+"screen.game_details.arcade.description" = "Грайте з 5 словами одночасно";
 
 // MARK: - Game Details
 "screen.game_details.title" = "Деталі гри";
@@ -109,6 +114,7 @@
 "screen.game.winning_view.game_details.title" = "Повернутися";
 "screen.game.winning_view.description" = "Ви перемогли з %@ балами";
 "screen.game.game_share_view.title" = "Команда-переможець - %@ 🥳";
+"screen.game.arcade.skipButton" = "Пропустити (-2 бали)";
 
 // MARK: - Game Share
 "screen.game_share.title" = "Поділитися результатом!";
