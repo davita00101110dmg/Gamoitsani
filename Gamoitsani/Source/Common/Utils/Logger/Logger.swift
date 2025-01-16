@@ -6,7 +6,6 @@
 //  Copyright © 2025 Daviti Khvedelidze. All rights reserved.
 //
 
-#if DEBUG
 import Foundation
 
 /// Represents different logging levels with associated symbols and colors
@@ -16,18 +15,9 @@ enum LogLevel: String {
     case warning = "⚠️"
     case error = "❌"
     case fatal = "💣"
-    
-    var terminalColor: String {
-        switch self {
-        case .debug: return "\u{001B}[0;37m" // White
-        case .info: return "\u{001B}[0;34m"  // Blue
-        case .warning: return "\u{001B}[0;33m" // Yellow
-        case .error: return "\u{001B}[0;31m"  // Red
-        case .fatal: return "\u{001B}[0;35m"  // Purple
-        }
-    }
 }
 
+#if DEBUG
 /// Main logging class with thread-safe singleton access
 final class Logger {
     static let shared = Logger()
@@ -52,7 +42,7 @@ final class Logger {
     }
 }
 
-/// Global logging function
+/// Global logging function for DEBUG builds
 func log(
     _ level: LogLevel = .debug,
     _ message: Any,
@@ -60,5 +50,16 @@ func log(
     file: String = #file
 ) {
     Logger.shared.log(level, message, function: function, file: file)
- }
+}
+
+#else
+/// Empty logging implementation for RELEASE builds
+func log(
+    _ level: LogLevel = .debug,
+    _ message: Any,
+    function: String = #function,
+    file: String = #file
+) {
+    
+}
 #endif
