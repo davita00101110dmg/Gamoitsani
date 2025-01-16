@@ -126,6 +126,7 @@
 		FFAA68942D39154500F0B2C0 /* ClassicGamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68912D39154500F0B2C0 /* ClassicGamePlayViewModel.swift */; };
 		FFAA68972D39156B00F0B2C0 /* BaseGamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68962D39156B00F0B2C0 /* BaseGamePlayViewModel.swift */; };
 		FFAA68992D3915EB00F0B2C0 /* GameModeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68982D3915EB00F0B2C0 /* GameModeFactory.swift */; };
+		FFAA68A82D39AD6F00F0B2C0 /* LanguageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68A72D39AD6F00F0B2C0 /* LanguageManagerTests.swift */; };
 		FFAE1F1B2C7E3A92003A554C /* GameShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F1A2C7E3A92003A554C /* GameShareView.swift */; };
 		FFAE1F1E2C7E3AA0003A554C /* GameShareCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F1D2C7E3AA0003A554C /* GameShareCoordinator.swift */; };
 		FFAE1F202C7E3AA6003A554C /* GameShareModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F1F2C7E3AA6003A554C /* GameShareModels.swift */; };
@@ -334,6 +335,10 @@
 		FFAA68912D39154500F0B2C0 /* ClassicGamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicGamePlayViewModel.swift; sourceTree = "<group>"; };
 		FFAA68962D39156B00F0B2C0 /* BaseGamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGamePlayViewModel.swift; sourceTree = "<group>"; };
 		FFAA68982D3915EB00F0B2C0 /* GameModeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeFactory.swift; sourceTree = "<group>"; };
+		FFAA68A42D39AAC500F0B2C0 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FFAA68A52D39AC5000F0B2C0 /* hy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hy; path = hy.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FFAA68A62D39ACA700F0B2C0 /* az */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = az; path = az.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FFAA68A72D39AD6F00F0B2C0 /* LanguageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManagerTests.swift; sourceTree = "<group>"; };
 		FFAE1F1A2C7E3A92003A554C /* GameShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareView.swift; sourceTree = "<group>"; };
 		FFAE1F1D2C7E3AA0003A554C /* GameShareCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareCoordinator.swift; sourceTree = "<group>"; };
 		FFAE1F1F2C7E3AA6003A554C /* GameShareModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareModels.swift; sourceTree = "<group>"; };
@@ -947,6 +952,7 @@
 				FFBFB0302C68CC3A00A877D7 /* GameViewModelTests.swift */,
 				FFFFD25E2CBD3B6400622327 /* CoreDataManagerTests.swift */,
 				FF6054DD2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift */,
+				FFAA68A72D39AD6F00F0B2C0 /* LanguageManagerTests.swift */,
 			);
 			path = GamoitsaniTests;
 			sourceTree = "<group>";
@@ -1245,6 +1251,9 @@
 				ka,
 				Base,
 				uk,
+				tr,
+				hy,
+				az,
 			);
 			mainGroup = FF4D9D1C2BD698620046819D;
 			packageReferences = (
@@ -1610,6 +1619,7 @@
 				FFFFD25F2CBD3B6400622327 /* CoreDataManagerTests.swift in Sources */,
 				FF6054DE2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift in Sources */,
 				FFBFB0312C68CC3A00A877D7 /* GameViewModelTests.swift in Sources */,
+				FFAA68A82D39AD6F00F0B2C0 /* LanguageManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1644,6 +1654,9 @@
 				FFFB4D082BD8393A00CDDCB4 /* en */,
 				FFFB4D0A2BD8395000CDDCB4 /* ka */,
 				FF99230B2CA33A180088395E /* uk */,
+				FFAA68A42D39AAC500F0B2C0 /* tr */,
+				FFAA68A52D39AC5000F0B2C0 /* hy */,
+				FFAA68A62D39ACA700F0B2C0 /* az */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
