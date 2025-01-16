@@ -28,7 +28,7 @@ final class LanguageManagerTests: XCTestCase {
     
     // MARK: - Language Initialization Tests
     
-    func testDefaultLanguageIsEnglish() {
+    func testDefaultLanguageIsGeorgian() {
         // Given UserDefaults has no language set
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.APP_LANGUAGE)
         
@@ -36,7 +36,7 @@ final class LanguageManagerTests: XCTestCase {
         let manager = LanguageManager.shared
         
         // Then default language should be English
-        XCTAssertEqual(manager.currentLanguage, .english)
+        XCTAssertEqual(manager.currentLanguage, .georgian)
     }
     
     // MARK: - Language Setting Tests
