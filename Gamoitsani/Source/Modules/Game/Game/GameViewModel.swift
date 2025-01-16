@@ -12,38 +12,6 @@ import OrderedCollections
 import SwiftUI
 
 final class GameViewModel: ObservableObject {
-    
-    var gameInfoViewModel: GameInfoViewModel {
-        GameInfoViewModel(
-            teamName: currentTeamName,
-            currentRound: currentRound,
-            currentExtraRound: currentExtraRound
-        )
-    }
-
-    var classicGamePlayViewModel: GamePlayViewModel {
-        GamePlayViewModel(
-            words: gameStory.words.removeFirstNItems(50) ?? [],
-            roundLength: gameStory.lengthOfRound,
-            audioManager: audioManager
-        )
-    }
-    
-    var arcadeGamePlayViewModel: ArcadeGamePlayViewModel {
-        ArcadeGamePlayViewModel(
-            words: gameStory.words.removeFirstNItems(50) ?? [],
-            roundLength: gameStory.lengthOfRound,
-            audioManager: audioManager
-        )
-    }
-    
-    var gameOverViewModel: GameOverViewModel {
-        GameOverViewModel(
-            teamName: getWinnerTeam()?.key ?? .empty,
-            score: getWinnerTeam()?.value ?? 0
-        )
-    }
-    
     @Published var gameState: GameModels.GameState = .info
     
     var currentTeamName: String { gameStory.teams.keys[gameStory.currentTeamIndex] }
@@ -60,13 +28,46 @@ final class GameViewModel: ObservableObject {
 
     private lazy var audioManager = AudioManager()
     
-    init() {
+    private let isTestEnvironment: Bool
+    
+    init(isTestEnvironment: Bool = false) {
+        self.isTestEnvironment = isTestEnvironment
         configureAudioManager()
     }
 }
 
 // MARK: - Game Logic
 extension GameViewModel {
+    func createGameInfoViewModel() -> GameInfoViewModel {
+        GameModeFactory.createInfoViewModel(
+            teamName: currentTeamName,
+            round: currentRound,
+            extraRound: currentExtraRound
+        )
+    }
+
+    func createGameOverViewModel() -> GameOverViewModel {
+        let winner = getWinnerTeam()
+        return GameModeFactory.createGameOverViewModel(
+            teamName: winner?.key,
+            score: winner?.value ?? 0
+        )
+    }
+    
+    func createClassicViewModel() -> ClassicGamePlayViewModel {
+        GameModeFactory.createClassicViewModel(
+            using: gameStory,
+            audioManager: audioManager
+        )
+    }
+    
+    func createArcadeViewModel() -> ArcadeGamePlayViewModel {
+        GameModeFactory.createArcadeViewModel(
+            using: gameStory,
+            audioManager: audioManager
+        )
+    }
+    
     func startPlaying() {
         GameStory.shared.isGameInProgress = true
         gameState = .play
@@ -154,12 +155,14 @@ extension GameViewModel {
 // MARK: - Admob Implementation
 extension GameViewModel {
     func loadAd() {
+        guard !isTestEnvironment else { return }
         Task {
             await InterstitialAdManager.shared.loadAd()
         }
     }
     
     func showAd() {
+        guard !isTestEnvironment else { return }
         InterstitialAdManager.shared.showAdIfAvailable()
     }
 }

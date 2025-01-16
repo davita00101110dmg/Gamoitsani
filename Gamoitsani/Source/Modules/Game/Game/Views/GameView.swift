@@ -71,7 +71,7 @@ struct GameView: View {
     }
     
     private var gameInfoView: some View {
-        GameInfoView(viewModel: viewModel.gameInfoViewModel) {
+        GameInfoView(viewModel: viewModel.createGameInfoViewModel()) {
             viewModel.gameState = .play
         } onShowScoreboard: {
             coordinator.presentGameScoreboard()
@@ -79,8 +79,8 @@ struct GameView: View {
     }
     
     private var classicGamePlayView: some View {
-        GamePlayView(
-            viewModel: viewModel.classicGamePlayViewModel
+        ClassicGamePlayView(
+            viewModel: viewModel.createClassicViewModel()
         ) { score in
             viewModel.handleGamePlayResult(score: score)
         }
@@ -88,7 +88,7 @@ struct GameView: View {
     
     private var arcadeGamePlayView: some View {
         ArcadeGamePlayView(
-            viewModel: viewModel.arcadeGamePlayViewModel
+            viewModel: viewModel.createArcadeViewModel()
         ) { score in
             viewModel.handleGamePlayResult(score: score)
         }
@@ -96,7 +96,7 @@ struct GameView: View {
     
     private var gameOverView: some View {
         GameOverView(
-            viewModel: viewModel.gameOverViewModel
+            viewModel: viewModel.createGameOverViewModel()
         ) {
             stopConfetti()
             viewModel.showAd()
