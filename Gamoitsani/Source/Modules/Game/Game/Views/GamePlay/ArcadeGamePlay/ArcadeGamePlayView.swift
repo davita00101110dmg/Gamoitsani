@@ -61,9 +61,7 @@ struct ArcadeGamePlayView: View {
                         word: wordItem.translation,
                         isGuessed: wordItem.isGuessed
                     ) {
-                        if !wordItem.isGuessed {
-                            viewModel.wordGuessed(id: wordItem.id)
-                        }
+                        viewModel.wordGuessed(id: wordItem.id)
                     }
                 }
             }

@@ -29,7 +29,6 @@ struct WordCardView: View {
         }
         .opacity(isGuessed ? 0.4 : 1)
         .animation(.easeOut(duration: 0.3), value: isGuessed)
-        .disabled(isGuessed)
     }
     
     private enum ViewConstants {

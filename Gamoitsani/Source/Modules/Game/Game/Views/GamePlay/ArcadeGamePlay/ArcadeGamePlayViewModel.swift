@@ -27,11 +27,16 @@ final class ArcadeGamePlayViewModel: BaseGamePlayViewModel {
     func wordGuessed(id: UUID) {
         guard let index = currentWords.firstIndex(where: { $0.id == id }) else { return }
         
-        playSound(isCorrect: true)
-        updateScore(points: 1)
-        
         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-            currentWords[index].isGuessed = true
+            currentWords[index].isGuessed.toggle()
+            
+            if currentWords[index].isGuessed {
+                updateScore(points: 1)
+                playSound(isCorrect: true)
+            } else {
+                updateScore(points: -1)
+                playSound(isCorrect: false)
+            }
         }
         
         if currentWords.allSatisfy({ $0.isGuessed }) {
