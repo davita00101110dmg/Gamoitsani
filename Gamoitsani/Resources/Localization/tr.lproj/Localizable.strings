@@ -1,0 +1,122 @@
+/*
+ Localizable.strings
+ Gamoitsani
+ 
+ Created by Daviti Khvedelidze on 23/04/2024.
+ Copyright © 2024 Daviti Khvedelidze. All rights reserved.
+ */
+
+// MARK: - General
+"app.title" = "Gamoitsani";
+"and" = "ve";
+"yesPolite" = "Evet";
+"no" = "Hayır";
+"ok" = "Tamam";
+"add" = "Ekle";
+"add_it" = "Ekle";
+"change" = "Değiştir";
+"cancel" = "İptal";
+"edit" = "Düzenle";
+"delete" = "Sil";
+"scoreboard" = "Skor Tablosu";
+"point" = "Puan";
+"start" = "Başla";
+"thanks" = "Teşekkürler";
+"back" = "Geri";
+
+// MARK: - Home
+"screen.home.play_button.title" = "Oyun";
+"screen.home.rules_button.title" = "Kurallar";
+"screen.home.add_word_button.title" = "Kelime Ekle";
+"screen.home.change_language.title" = "Dili Değiştir";
+
+// MARK: - Settings
+"screen.settings.title" = "Ayarlar";
+"screen.settings.language" = "Dil";
+"screen.settings.remove_ads" = "Reklamları Kaldır";
+"screen.settings.restore_purchase" = "Satın Alımı Geri Yükle";
+"screen.settings.feedback" = "Yardım & Geri Bildirim";
+"screen.settings.share_app" = "Bu Uygulamayı Paylaş";
+"screen.settings.rate_app" = "Uygulamayı Değerlendir";
+"screen.settings.privacy_settings" = "Gizlilik Ayarları";
+"screen.settings.can_not_write_review.title" = "AppStore Açılamıyor";
+"screen.settings.can_not_write_review.message" = "Lütfen AppStore'dan uygulamamızı seçin ve bize bir değerlendirme yazın. Teşekkürler!!";
+
+// MARK: - Rules
+"screen.rules.title" = "Kurallar";
+"screen.rules.rule2" = "Kelimeyi açıklarken tek kelime kullanmak yasaktır";
+"screen.rules.rule3" = "Eğer takım arkadaşı kelimeyi bilirse, yeşil düğmeye basın (+1 puan)";
+"screen.rules.rule4" = "Kelimeyi açıklayamazsanız veya bir kural ihlali olursa ve sonraki kelimeye geçmek istiyorsanız, kırmızı düğmeye basın (-1 puan)";
+"screen.rules.rule5" = "Süre dolmadan önce daha fazla puan toplayan veya turdaki belirlenen puan sayısına ilk ulaşan takım kazanır";
+"screen.rules.rule6" = "İyi şanslar :)";
+
+// MARK: - Add Word
+"screen.add_word.title" = "Kelime Ekle";
+"screen.add_word.send" = "Gönder";
+"screen.add_word.hint" = "Geçerli bir kelime eklemeyi unutmayın :)";
+"screen.add_word.language_picker_title" = "Kelimeyi hangi dilde ekliyorsunuz?";
+"screen.add_word.textfield_placeholder" = "Kelimeyi girin";
+"screen.add_word.success_message" = "Kelime başarıyla gönderildi";
+"screen.add_word.error_message" = "Kelime gönderilemedi";
+
+// MARK: - Game Details
+"screen.game_details.title" = "Oyun Detayları";
+"screen.game_details.rounds_amount.title" = "Miktar: %@";
+"screen.game_details.rounds_length.title" = "Süre: %@ sn";
+"screen.game_details.rounds_settings.title" = "Tur Ayarları";
+"screen.game_details.section.teams" = "Takımlar";
+"screen.game_details.section.players" = "Oyuncular";
+"screen.game_details.start_game.title" = "Oyunu Başlat";
+"screen.game_details.create_teams" = "Takımları Oluştur";
+"screen.game_details.game_mode.title" = "Oyun modu";
+"screen.game_details.classic.title" = "Klasik";
+"screen.game_details.classic.description" = "Tek seferde bir kelime oyna";
+"screen.game_details.arcade.title" = "Arcade";
+"screen.game_details.arcade.description" = "Aynı anda 5 kelime oyna";
+
+// Teams
+"screen.game_details.teams.add_placeholder" = "Oynamaya başlamak için takım ekleyin";
+"screen.game_details.teams.name_placeholder" = "Takım adı";
+"screen.game_details.teams.name_exists" = "Bu isimde bir takım zaten var";
+"screen.game_details.teams.name_too_long" = "Takım adı %@ karakterden uzun olamaz";
+"screen.game_details.teams.add" = "Takım ekle";
+"screen.game_details.teams.edit" = "Takım adını düzenle";
+"screen.game_details.teams.delete_confirmation" = "Bu takımı silmek istediğinizden emin misiniz?";
+
+// Players
+"screen.game_details.players.add_placeholder" = "Takım oluşturmak için oyuncu ekleyin";
+"screen.game_details.players.name_placeholder" = "Oyuncu adı";
+"screen.game_details.players.name_exists" = "Bu isimde bir oyuncu zaten var";
+"screen.game_details.players.name_too_long" = "Oyuncu adı %@ karakterden uzun olamaz";
+"screen.game_details.players.add" = "Oyuncu Ekle";
+"screen.game_details.players.edit" = "Oyuncuyu Düzenle";
+"screen.game_details.players.delete_confirmation" = "Bu oyuncuyu silmek istediğinizden emin misiniz?";
+"screen.game_details.players.generate_teams" = "Takımları Oluştur";
+"screen.game_details.players.not_enough" = "Takım oluşturmak için en az 2 oyuncu gerekli";
+"screen.game_details.players.odd_count" = "Takım oluşturmak için çift sayıda oyuncu gerekli";
+
+// Alerts
+"screen.game_details.alert.invalid_parameter" = "Geçersiz parametre";
+"screen.game_details.alert.no_internet.title" = "İnternet bağlantısı yok!";
+"screen.game_details.alert.no_internet.message" = "Oyunu başlatmak için internet bağlantısı gerekli";
+"screen.game_details.alert.not_enough_teams" = "Başlamak için en az 2 takım ekleyin!";
+"screen.game_details.alert.not_unique_teams" = "Takım isimleri benzersiz olmalı!";
+"screen.game_details.alert.maximum_teams" = "5'ten fazla takım eklenemez";
+"screen.game_details.alert.empty_name" = "İsim boş olamaz";
+
+// MARK: - Game
+"screen.game.confirmation_alert.title" = "Geri dönmek istediğinizden emin misiniz?";
+"screen.game.confirmation_alert.message" = "Takım puanları kaybolacak";
+"screen.game.current_round.message" = "Tur: %@";
+"screen.game.current_extra_round.message" = "(Ek Tur: %@)";
+"screen.game.no_more_words.message" = "Başka kelime kalmadı";
+"screen.game.winning_view.title" = "Tebrikler!";
+"screen.game.winning_view.repeat" = "Tekrar";
+"screen.game.winning_view.game_details.title" = "Geri Dön";
+"screen.game.winning_view.description" = "%@ puanla kazandınız";
+"screen.game.game_share_view.title" = "Kazanan takım %@ 🥳";
+"screen.game.arcade.skipButton" = "Yeni kelimeler (-2 puan)";
+
+// MARK: - Game Share
+"screen.game_share.title" = "Skoru paylaş!";
+"screen.game_share.share_to" = "Şuraya paylaş";
