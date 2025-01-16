@@ -61,8 +61,9 @@
 
 // MARK: - Game Details
 "screen.game_details.title" = "თამაშის დეტალები";
-"screen.game_details.rounds_amount.title" = "რაუნდების რაოდენობა: %@";
-"screen.game_details.rounds_length.title" = "რაუნდის ხანგრძლივობა: %@ წმ";
+"screen.game_details.rounds_amount.title" = "რაოდენობა: %@";
+"screen.game_details.rounds_length.title" = "ხანგრძლივობა: %@ წმ";
+"screen.game_details.rounds_settings.title" = "რაუნდის პარამეტრები";
 "screen.game_details.section.teams" = "გუნდები";
 "screen.game_details.section.players" = "მოთამაშეები";
 "screen.game_details.start_game.title" = "თამაშის დაწყება";
@@ -70,7 +71,7 @@
 "screen.game_details.game_mode.title" = "თამაშის რეჟიმი";
 "screen.game_details.classic.title" = "კლასიკური";
 "screen.game_details.classic.description" = "ითამაშე თითო სიტყვით";
-"screen.game_details.arcade.title" = "არკადი";
+"screen.game_details.arcade.title" = "არკადა";
 "screen.game_details.arcade.description" = "ითამაშე ერთდროულად 5 სიტყვით";
 
 // Teams

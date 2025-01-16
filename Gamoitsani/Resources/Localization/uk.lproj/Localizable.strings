@@ -58,20 +58,21 @@
 "screen.add_word.textfield_placeholder" = "Введіть слово";
 "screen.add_word.success_message" = "Слово успішно надіслано";
 "screen.add_word.error_message" = "Не вдалося надіслати слово";
+
+// MARK: - Game Details
+"screen.game_details.title" = "Деталі гри";
+"screen.game_details.rounds_amount.title" = "Кількість: %@";
+"screen.game_details.rounds_length.title" = "Тривалість: %@ сек";
+"screen.game_details.rounds_settings.title" = "Параметри раунду";
+"screen.game_details.section.teams" = "Команди";
+"screen.game_details.section.players" = "Гравці";
+"screen.game_details.start_game.title" = "Почати гру";
+"screen.game_details.create_teams" = "Створення команд";
 "screen.game_details.game_mode.title" = "Режим гри";
 "screen.game_details.classic.title" = "Класичний";
 "screen.game_details.classic.description" = "Грайте одне слово за раз";
 "screen.game_details.arcade.title" = "Аркада";
 "screen.game_details.arcade.description" = "Грайте з 5 словами одночасно";
-
-// MARK: - Game Details
-"screen.game_details.title" = "Деталі гри";
-"screen.game_details.rounds_amount.title" = "Раунди: %@";
-"screen.game_details.rounds_length.title" = "Тривалість раунду: %@ сек";
-"screen.game_details.section.teams" = "Команди";
-"screen.game_details.section.players" = "Гравці";
-"screen.game_details.start_game.title" = "Почати гру";
-"screen.game_details.create_teams" = "Створення команд";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Додайте команди, щоб почати гру";

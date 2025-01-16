@@ -190,17 +190,22 @@ public enum L10n {
         }
 
         public enum RoundsAmount {
-          /// Rounds: %@
+          /// Amount: %@
           public static func title( _ p1: String) -> String {
               return L10n.tr("Localizable", "screen.game_details.rounds_amount.title", p1)
           }
         }
 
         public enum RoundsLength {
-          /// Round Length: %@ sec
+          /// Length: %@ sec
           public static func title( _ p1: String) -> String {
               return L10n.tr("Localizable", "screen.game_details.rounds_length.title", p1)
           }
+        }
+
+        public enum RoundsSettings {
+          /// Round Settings
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.rounds_settings.title") }
         }
 
         public enum Section {

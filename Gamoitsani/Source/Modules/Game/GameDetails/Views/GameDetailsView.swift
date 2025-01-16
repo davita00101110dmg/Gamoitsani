@@ -40,6 +40,14 @@ struct GameDetailsView: View {
     
     private var roundManagementSection: some View {
         VStack(spacing: GameDetailsConstants.Layout.managementSpacing) {
+            HStack {
+                GMLabelView(
+                    text: L10n.Screen.GameDetails.RoundsSettings.title,
+                    fontType: .semiBold,
+                    textAlignment: .leading
+                )
+                Spacer()
+            }
             roundsRow
             roundsLengthRow
         }

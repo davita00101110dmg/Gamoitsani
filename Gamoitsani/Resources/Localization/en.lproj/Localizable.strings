@@ -61,8 +61,9 @@
 
 // MARK: - Game Details
 "screen.game_details.title" = "Game Details";
-"screen.game_details.rounds_amount.title" = "Rounds: %@";
-"screen.game_details.rounds_length.title" = "Round Length: %@ sec";
+"screen.game_details.rounds_amount.title" = "Amount: %@";
+"screen.game_details.rounds_length.title" = "Length: %@ sec";
+"screen.game_details.rounds_settings.title" = "Round Settings";
 "screen.game_details.section.teams" = "Teams";
 "screen.game_details.section.players" = "Players";
 "screen.game_details.start_game.title" = "Start Game";
