@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-struct GamePlayView: View {
+struct ClassicGamePlayView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    @ObservedObject var viewModel: GamePlayViewModel
+    @ObservedObject var viewModel: ClassicGamePlayViewModel
     
     @State var shaking: Bool = false
     
-    init(viewModel: GamePlayViewModel, onTimerFinished: @escaping (Int) -> Void) {
+    init(viewModel: ClassicGamePlayViewModel, onTimerFinished: @escaping (Int) -> Void) {
         self.viewModel = viewModel
         self.viewModel.onTimerFinished = onTimerFinished
     }
@@ -113,7 +113,7 @@ struct GamePlayView: View {
 }
 
 // MARK: - View Constants
-extension GamePlayView {
+extension ClassicGamePlayView {
     enum ViewConstants {
         static let correctSymbol: String = "✓"
         static let incorrectSymbol: String = "✘"
@@ -129,7 +129,7 @@ extension GamePlayView {
 }
 
 #Preview {
-    GamePlayView(viewModel: GamePlayViewModel(words: GameStory.shared.words, roundLength: 60, audioManager: AudioManager())) { _ in
+    ClassicGamePlayView(viewModel: ClassicGamePlayViewModel(words: GameStory.shared.words, roundLength: 60, audioManager: AudioManager())) { _ in
         
     }
     .padding([.top, .bottom, .leading, .trailing], 24)

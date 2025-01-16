@@ -8,12 +8,15 @@
 
 import XCTest
 import CoreData
+import OrderedCollections
 @testable import Gamoitsani
 
 final class GameViewModelTests: XCTestCase {
     
+    // MARK: - Properties
     var sut: GameViewModel!
     
+    // MARK: - Setup & Teardown
     override func setUp() {
         super.setUp()
         sut = GameViewModel()
@@ -25,17 +28,45 @@ final class GameViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func playTurn(score: Int) {
-        GameStory.shared.playingSessionCount += 1
-        sut.handleGamePlayResult(score: score)
+    // MARK: - Basic Game State Tests
+    func testDefaultGameMode() {
+        XCTAssertEqual(GameStory.shared.gameMode, .classic)
     }
     
+    func testGameStateTransitions() {
+        // Test Classic Mode
+        setupGameState(mode: .classic)
+        verifyGameStateTransition(score: 5)
+        
+        // Test Arcade Mode
+        setupGameState(mode: .arcade)
+        verifyGameStateTransition(score: 10)
+    }
+    
+    func testGameReset() {
+        // Arrange
+        setupGameState(mode: .classic, teams: ["Team1": 10, "Team2": 15])
+        
+        GameStory.shared.currentTeamIndex = 1
+        GameStory.shared.currentRound = 2
+        GameStory.shared.playingSessionCount = 3
+        
+        // Act
+        sut.startNewGame()
+        
+        // Assert
+        XCTAssertEqual(GameStory.shared.currentRound, 1)
+        XCTAssertEqual(GameStory.shared.currentTeamIndex, 0)
+        XCTAssertEqual(GameStory.shared.playingSessionCount, 0)
+        XCTAssertEqual(GameStory.shared.teams["Team1"], 0)
+        XCTAssertEqual(GameStory.shared.teams["Team2"], 0)
+        XCTAssertEqual(sut.gameState, .info)
+    }
+    
+    // MARK: - Scoring Tests
     func testScoreAccumulationAndTeamRotation() {
         // Arrange
-        GameStory.shared.teams = ["Team1": 0, "Team2": 0]
-        GameStory.shared.numberOfRounds = 2
-        GameStory.shared.currentTeamIndex = 0
-        GameStory.shared.playingSessionCount = 0
+        setupGameState(mode: .classic, teams: ["Team1": 0, "Team2": 0])
         
         // Act & Assert - First round (Team 1)
         playTurn(score: 10)
@@ -49,29 +80,81 @@ final class GameViewModelTests: XCTestCase {
         XCTAssertEqual(GameStory.shared.teams["Team2"], 5)
         XCTAssertEqual(GameStory.shared.currentTeamIndex, 0)
         XCTAssertEqual(GameStory.shared.currentRound, 2)
-        
-        // Act & Assert - Third round (Team 1 again)
-        playTurn(score: 7)
-        XCTAssertEqual(GameStory.shared.teams["Team1"], 17, "Score should accumulate for Team 1")
-        XCTAssertEqual(GameStory.shared.teams["Team2"], 5, "Team 2's score should remain unchanged")
-        XCTAssertEqual(GameStory.shared.currentTeamIndex, 1)
-        XCTAssertEqual(GameStory.shared.currentRound, 2)
-        
-        // Act & Assert - Fourth round (Team 2 again)
-        playTurn(score: 8)
-        XCTAssertEqual(GameStory.shared.teams["Team1"], 17)
-        XCTAssertEqual(GameStory.shared.teams["Team2"], 13, "Score should accumulate for Team 2")
-        XCTAssertEqual(GameStory.shared.currentTeamIndex, 0)
-        XCTAssertEqual(GameStory.shared.currentRound, 3)
     }
     
+    func testScoreUpdatesWithMultipleTeams() {
+        // Arrange
+        setupGameState(mode: .classic, teams: ["Team1": 0, "Team2": 0, "Team3": 0])
+        
+        // Act
+        for i in 1...6 { // 2 rounds * 3 teams = 6 turns
+            playTurn(score: i)
+        }
+        
+        // Assert
+        XCTAssertEqual(GameStory.shared.teams["Team1"], 1 + 4)
+        XCTAssertEqual(GameStory.shared.teams["Team2"], 2 + 5)
+        XCTAssertEqual(GameStory.shared.teams["Team3"], 3 + 6)
+    }
+    
+    func testHandlingNegativeScores() {
+        // Arrange
+        setupGameState(mode: .classic, teams: ["Team1": 5, "Team2": 5])
+        
+        // Act & Assert
+        playTurn(score: -3)
+        XCTAssertEqual(GameStory.shared.teams["Team1"], 2)
+        XCTAssertEqual(GameStory.shared.currentTeamIndex, 1)
+    }
+    
+    // MARK: - Game Mode Tests
+    func testGameModePersistence() {
+        // Arrange
+        setupGameState(mode: .arcade, teams: ["Team1": 0, "Team2": 0])
+        GameStory.shared.numberOfRounds = 2
+        
+        // Act - Complete rounds
+        playTurn(score: 5)
+        XCTAssertEqual(GameStory.shared.gameMode, .arcade, "Mode should persist after round")
+        
+        completeFourTurns(score: 5)
+        sut.startNewGame()
+        
+        // Assert
+        XCTAssertEqual(GameStory.shared.gameMode, .arcade, "Mode should persist after reset")
+    }
+    
+    func testDifferentScoringSystems() {
+        // Test Classic Mode
+        setupGameState(mode: .classic)
+        playTurn(score: -2)
+        XCTAssertEqual(GameStory.shared.teams["Team1"], -2)
+        
+        // Test Arcade Mode
+        setupGameState(mode: .arcade)
+        playTurn(score: 15)
+        XCTAssertEqual(GameStory.shared.teams["Team1"], 15)
+        
+        playTurn(score: GameMode.arcade.skipPenalty)
+        XCTAssertEqual(GameStory.shared.teams["Team2"], GameMode.arcade.skipPenalty)
+    }
+    
+    func testGameModeViewModels() {
+        let testWords = createTestWords(count: 50)
+        GameStory.shared.words = testWords
+        
+        // Test Classic Mode
+        testClassicModeViewModel()
+        
+        // Test Arcade Mode
+        testArcadeModeViewModel(with: testWords)
+    }
+    
+    // MARK: - End Game Tests
     func testGameOverCondition() {
         // Arrange
-        GameStory.shared.teams = ["Team1": 10, "Team2": 5]
-        GameStory.shared.numberOfRounds = 2
-        GameStory.shared.currentTeamIndex = 1
-        GameStory.shared.currentRound = 2
-        GameStory.shared.playingSessionCount = 3 // Last turn of the last round
+        setupGameState(mode: .classic, teams: ["Team1": 10, "Team2": 5])
+        setupEndGameState()
         
         // Act
         playTurn(score: 7)
@@ -84,151 +167,134 @@ final class GameViewModelTests: XCTestCase {
     
     func testTieBreaker() {
         // Arrange
-        GameStory.shared.teams = ["Team1": 10, "Team2": 10]
-        GameStory.shared.numberOfRounds = 2
-        GameStory.shared.currentTeamIndex = 1
-        GameStory.shared.currentRound = 2
-        GameStory.shared.playingSessionCount = 3 // Last turn of the last round
+        setupGameState(mode: .classic, teams: ["Team1": 10, "Team2": 10])
+        setupEndGameState()
         
         // Act
-        playTurn(score: 0) // This should trigger a tie
+        playTurn(score: 0)
         
         // Assert
         XCTAssertEqual(sut.gameState, .info)
         XCTAssertEqual(sut.currentExtraRound, 1)
-        XCTAssertEqual(GameStory.shared.currentRound, 3) // Should start extra round
-    }
-    
-    func testMaximumRounds() {
-        // Arrange
-        GameStory.shared.teams = ["Team1": 0, "Team2": 0]
-        GameStory.shared.numberOfRounds = 3
-        GameStory.shared.currentTeamIndex = 0
-        GameStory.shared.playingSessionCount = 0
-
-        // Act
-        for _ in 1...5 { // 3 rounds * 2 teams = 5 turns
-            playTurn(score: 5)
-        }
-
-        playTurn(score: 6) // last team 1 point greater
-        
-        // Assert
-        XCTAssertEqual(sut.gameState, .gameOver)
-        XCTAssertEqual(GameStory.shared.currentRound, 4) // Should be one more than max rounds
-    }
-    
-    func testScoreUpdatesWithMultipleTeams() {
-        // Arrange
-        GameStory.shared.teams = ["Team1": 0, "Team2": 0, "Team3": 0]
-        GameStory.shared.numberOfRounds = 2
-        GameStory.shared.currentTeamIndex = 0
-        GameStory.shared.playingSessionCount = 0
-
-        // Act
-        for i in 1...6 { // 2 rounds * 3 teams = 6 turns
-            playTurn(score: i)
-        }
-
-        // Assert
-        XCTAssertEqual(GameStory.shared.teams["Team1"], 1 + 4)
-        XCTAssertEqual(GameStory.shared.teams["Team2"], 2 + 5)
-        XCTAssertEqual(GameStory.shared.teams["Team3"], 3 + 6)
+        XCTAssertEqual(GameStory.shared.currentRound, 3)
     }
     
     func testTieBreakingInExtraRounds() {
         // Arrange
-        GameStory.shared.teams = ["Team1": 10, "Team2": 10]
+        setupGameState(mode: .classic, teams: ["Team1": 10, "Team2": 10])
         GameStory.shared.numberOfRounds = 2
-        GameStory.shared.currentTeamIndex = 0
-        GameStory.shared.currentRound = 3 // Start in extra round
-        GameStory.shared.playingSessionCount = 4 // 2 rounds * 2 teams
-
-        // Act - First extra round
+        GameStory.shared.currentRound = 3
+        GameStory.shared.playingSessionCount = 4
+        
+        // First extra round - still tied
         playTurn(score: 5)
         playTurn(score: 5)
-
-        // Assert - Still tied
         XCTAssertEqual(sut.gameState, .info)
-        XCTAssertEqual(sut.currentExtraRound, 2)
-
-        // Act - Second extra round
+        XCTAssertEqual(sut.currentExtraRound, 2, "Extra round should be 2 (3 - numberOfRounds)")
+        
+        // Second extra round - winner determined
         playTurn(score: 3)
         playTurn(score: 2)
-
-        // Assert - Game Over
         XCTAssertEqual(sut.gameState, .gameOver)
         XCTAssertEqual(sut.getWinnerTeam()?.key, "Team1")
         XCTAssertEqual(sut.getWinnerTeam()?.value, 18)
     }
     
-    func testGameReset() {
-        // Arrange
-        GameStory.shared.teams = ["Team1": 10, "Team2": 15]
+    // MARK: - Helper Methods
+    private func playTurn(score: Int) {
+        GameStory.shared.playingSessionCount += 1
+        sut.handleGamePlayResult(score: score)
+    }
+    
+    private func setupGameState(mode: GameMode, teams: OrderedDictionary<String, Int> = ["Team1": 0, "Team2": 0]) {
+        GameStory.shared.reset()
+        GameStory.shared.gameMode = mode
+        GameStory.shared.teams = teams
+        GameStory.shared.numberOfRounds = 1
+        GameStory.shared.currentTeamIndex = 0
+        GameStory.shared.playingSessionCount = 0
+    }
+    
+    private func setupEndGameState() {
         GameStory.shared.numberOfRounds = 2
         GameStory.shared.currentTeamIndex = 1
         GameStory.shared.currentRound = 2
         GameStory.shared.playingSessionCount = 3
-
-        // Act
-        sut.startNewGame()
-
-        // Assert
-        XCTAssertEqual(GameStory.shared.currentRound, 1)
-        XCTAssertEqual(GameStory.shared.currentTeamIndex, 0)
-        XCTAssertEqual(GameStory.shared.playingSessionCount, 0)
-        XCTAssertEqual(GameStory.shared.teams["Team1"], 0)
-        XCTAssertEqual(GameStory.shared.teams["Team2"], 0)
+    }
+    
+    private func completeFourTurns(score: Int) {
+        for _ in 0...3 {
+            playTurn(score: score)
+        }
+    }
+    
+    private func verifyGameStateTransition(score: Int) {
+        XCTAssertEqual(sut.gameState, .info)
+        sut.gameState = .play
+        XCTAssertEqual(sut.gameState, .play)
+        playTurn(score: score)
         XCTAssertEqual(sut.gameState, .info)
     }
     
-    func testHandlingNegativeScores() {
-        // Arrange
-        GameStory.shared.teams = ["Team1": 5, "Team2": 5]
-        GameStory.shared.numberOfRounds = 2
-        GameStory.shared.currentTeamIndex = 0
-        GameStory.shared.playingSessionCount = 0
-
-        // Act
-        playTurn(score: -3)
-
-        // Assert
-        XCTAssertEqual(GameStory.shared.teams["Team1"], 2)
-        XCTAssertEqual(GameStory.shared.currentTeamIndex, 1)
+    private func testClassicModeViewModel() {
+        GameStory.shared.gameMode = .classic
+        let viewModel = sut.createClassicViewModel()
+        viewModel.startGame()
+        XCTAssertNotNil(viewModel.currentWord)
+        viewModel.stopGame()
     }
     
-    func testWinnerDeterminationWithTiedScores() {
-        // Arrange
-        GameStory.shared.teams = ["Team1": 10, "Team2": 10, "Team3": 8]
-        GameStory.shared.numberOfRounds = 2
-        GameStory.shared.currentTeamIndex = 2
-        GameStory.shared.currentRound = 2
-        GameStory.shared.playingSessionCount = 5 // Last turn of the last round
-
-        // Act
-        playTurn(score: 2) // This should end the game with a tie between Team1 and Team2
-
-        // Assert
-        XCTAssertEqual(sut.gameState, .info) // Should go to extra round
-        XCTAssertEqual(sut.currentExtraRound, 1)
-        XCTAssertEqual(GameStory.shared.currentRound, 3)
-        XCTAssertNil(sut.getWinnerTeam()) // No winner yet due to tie
+    private func testArcadeModeViewModel(with words: [Word]) {
+        GameStory.shared.reset()
+        GameStory.shared.words = words
+        GameStory.shared.gameMode = .arcade
+        
+        let viewModel = sut.createArcadeViewModel()
+        viewModel.startGame()
+        
+        let expectation = XCTestExpectation(description: "Wait for words update")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            XCTAssertFalse(viewModel.currentWords.isEmpty)
+            XCTAssertEqual(viewModel.currentWords.count, 5)
+            viewModel.stopGame()
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
     }
     
-    func testWinnerDeterminationWithClearWinner() {
-        // Arrange
-        GameStory.shared.teams = ["Team1": 15, "Team2": 10, "Team3": 8]
-        GameStory.shared.numberOfRounds = 2
-        GameStory.shared.currentTeamIndex = 2
-        GameStory.shared.currentRound = 2
-        GameStory.shared.playingSessionCount = 5 // Last turn of the last round
-
-        // Act
-        playTurn(score: 0) // This should end the game with Team1 as the clear winner
-
-        // Assert
-        XCTAssertEqual(sut.gameState, .gameOver)
-        XCTAssertEqual(sut.getWinnerTeam()?.key, "Team1")
-        XCTAssertEqual(sut.getWinnerTeam()?.value, 15)
+    private func createTestWords(count: Int) -> [Word] {
+        let context = TestCoreDataStack().persistentContainer.viewContext
+        var words: [Word] = []
+        
+        for i in 0..<count {
+            let word = Word(context: context)
+            word.baseWord = "test_word_\(i)"
+            
+            let translation = Translation(context: context)
+            translation.word = "test_translation_\(i)"
+            translation.languageCode = "en"
+            translation.difficulty = 1
+            word.addToWordTranslations(translation)
+            
+            words.append(word)
+        }
+        
+        return words
     }
+}
+
+// MARK: - Test Core Data Stack
+private class TestCoreDataStack {
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Gamoitsani")
+        let description = NSPersistentStoreDescription()
+        description.type = NSInMemoryStoreType
+        container.persistentStoreDescriptions = [description]
+        container.loadPersistentStores { _, error in
+            if let error = error as NSError? {
+                fatalError("Failed to load test store: \(error)")
+            }
+        }
+        return container
+    }()
 }

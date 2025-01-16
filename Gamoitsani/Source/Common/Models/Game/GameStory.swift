@@ -14,6 +14,7 @@ final class GameStory {
     
     private init() {}
     
+    var gameMode: GameMode = .classic
     var numberOfRounds: Int = 1
     var lengthOfRound: Double = 45
     var words: [Word] = []
@@ -39,4 +40,3 @@ final class GameStory {
         currentTeamIndex = 0
     }
 }
-

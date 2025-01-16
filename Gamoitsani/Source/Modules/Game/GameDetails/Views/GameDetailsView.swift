@@ -22,6 +22,7 @@ struct GameDetailsView: View {
                 ScrollView {
                     VStack(spacing: GameDetailsConstants.Layout.sectionSpacing) {
                         roundManagementSection
+                        gameModeSection
                         teamManagementSection
                         Spacer()
                     }
@@ -39,6 +40,14 @@ struct GameDetailsView: View {
     
     private var roundManagementSection: some View {
         VStack(spacing: GameDetailsConstants.Layout.managementSpacing) {
+            HStack {
+                GMLabelView(
+                    text: L10n.Screen.GameDetails.RoundsSettings.title,
+                    fontType: .semiBold,
+                    textAlignment: .leading
+                )
+                Spacer()
+            }
             roundsRow
             roundsLengthRow
         }
@@ -89,6 +98,23 @@ struct GameDetailsView: View {
                 playersContent
             }
         }
+    }
+    
+    private var gameModeSection: some View {
+        VStack(alignment: .leading, spacing: GameDetailsConstants.Layout.managementSpacing) {
+            GMLabelView(
+                text: L10n.Screen.GameDetails.GameMode.title,
+                fontType: .semiBold,
+                textAlignment: .leading
+            )
+            
+            GameModePickerView(selectedMode: $viewModel.selectedGameMode)
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: GameDetailsConstants.Layout.cornerRadius)
+                .fill(Asset.gmSecondary.swiftUIColor)
+        )
     }
     
     private var setupModePicker: some View {
@@ -217,26 +243,13 @@ private extension GameDetailsView {
     
     func updateGameStory() {
         let gameStory = GameStory.shared
+        gameStory.gameMode = viewModel.selectedGameMode
         gameStory.numberOfRounds = Int(viewModel.roundsAmount)
         gameStory.lengthOfRound = viewModel.roundsLength
         gameStory.teams = viewModel.getTeamsDictionary()
     }
 }
 
-#Preview("Team List") {
-    let mockTeams = [
-        GameDetailsTeam(name: "დინამო"),
-        GameDetailsTeam(name: "საბურთალო"),
-        GameDetailsTeam(name: "ლოკომოტივი"),
-        GameDetailsTeam(name: "ტორპედო")
-    ]
-    
-    return TeamListView(
-        teams: mockTeams,
-        onEdit: { _ in },
-        onDelete: { _ in },
-        onAdd: { }
-    )
-    .padding()
-    .background(Asset.gmSecondary.swiftUIColor)
+#Preview {
+    return GameDetailsView()
 }

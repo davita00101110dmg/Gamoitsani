@@ -61,12 +61,18 @@
 
 // MARK: - Game Details
 "screen.game_details.title" = "Game Details";
-"screen.game_details.rounds_amount.title" = "Rounds: %@";
-"screen.game_details.rounds_length.title" = "Round Length: %@ sec";
+"screen.game_details.rounds_amount.title" = "Amount: %@";
+"screen.game_details.rounds_length.title" = "Length: %@ sec";
+"screen.game_details.rounds_settings.title" = "Round Settings";
 "screen.game_details.section.teams" = "Teams";
 "screen.game_details.section.players" = "Players";
 "screen.game_details.start_game.title" = "Start Game";
 "screen.game_details.create_teams" = "Create teams";
+"screen.game_details.game_mode.title" = "Game mode";
+"screen.game_details.classic.title" = "Classic";
+"screen.game_details.classic.description" = "Play one word at a time";
+"screen.game_details.arcade.title" = "Arcade";
+"screen.game_details.arcade.description" = "Play with 5 words at once";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Add teams to start playing";
@@ -109,6 +115,7 @@
 "screen.game.winning_view.game_details.title" = "Go Back";
 "screen.game.winning_view.description" = "You won with %@ points";
 "screen.game.game_share_view.title" = "The winning team is %@ 🥳";
+"screen.game.arcade.skipButton" = "New words (-2 points)";
 
 // MARK: - Game Share
 "screen.game_share.title" = "Share score!";
