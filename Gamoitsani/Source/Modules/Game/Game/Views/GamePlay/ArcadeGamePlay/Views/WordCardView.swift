@@ -16,11 +16,9 @@ struct WordCardView: View {
     var body: some View {
         Button(action: action) {
             HStack {
-                Text(word)
-                    .font(F.Mersad.bold.swiftUIFont(size: ViewConstants.wordFontSize))
-                    .foregroundColor(.white)
+                Spacer()
+                GMLabelView(text: word, fontType: .bold, fontSizeForPhone: ViewConstants.wordFontSize)
                     .padding(.horizontal)
-                
                 Spacer()
             }
             .frame(height: ViewConstants.cardHeight)
@@ -36,8 +34,17 @@ struct WordCardView: View {
     
     private enum ViewConstants {
         static let wordFontSize: CGFloat = 18
-        static let cardHeight: CGFloat = 56
+        static let cardHeight: CGFloat = 44
         static let cardCornerRadius: CGFloat = 12
     }
 }
 
+#Preview {
+    Group {
+        WordCardView(word: "სიტყვა1", isGuessed: false, action: {})
+        WordCardView(word: "ძალიანგრძელისიტყვავნახოთთუდაეტევაძალიანგრძელისიტყვავნახოთთუდაეტევა", isGuessed: true, action: {})
+        WordCardView(word: "სიტყვა3", isGuessed: true, action: {})
+        WordCardView(word: "სიტყვა4", isGuessed: false, action: {})
+        WordCardView(word: "სიტყვა5", isGuessed: false, action: {})
+    }
+}

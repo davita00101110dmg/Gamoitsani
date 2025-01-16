@@ -114,7 +114,7 @@
 "screen.game.winning_view.game_details.title" = "Go Back";
 "screen.game.winning_view.description" = "You won with %@ points";
 "screen.game.game_share_view.title" = "The winning team is %@ 🥳";
-"screen.game.arcade.skipButton" = "Skip (-2 points)";
+"screen.game.arcade.skipButton" = "New words (-2 points)";
 
 // MARK: - Game Share
 "screen.game_share.title" = "Share score!";

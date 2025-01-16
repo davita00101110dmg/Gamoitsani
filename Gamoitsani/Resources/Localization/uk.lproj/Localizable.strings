@@ -114,7 +114,7 @@
 "screen.game.winning_view.game_details.title" = "Повернутися";
 "screen.game.winning_view.description" = "Ви перемогли з %@ балами";
 "screen.game.game_share_view.title" = "Команда-переможець - %@ 🥳";
-"screen.game.arcade.skipButton" = "Пропустити (-2 бали)";
+"screen.game.arcade.skipButton" = "Нові слова (-2 бали)";
 
 // MARK: - Game Share
 "screen.game_share.title" = "Поділитися результатом!";

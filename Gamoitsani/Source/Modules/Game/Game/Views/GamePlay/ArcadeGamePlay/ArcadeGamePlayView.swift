@@ -12,6 +12,8 @@ struct ArcadeGamePlayView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ObservedObject var viewModel: ArcadeGamePlayViewModel
     
+    @State var shaking: Bool = false
+    
     init(viewModel: ArcadeGamePlayViewModel, onTimerFinished: @escaping (Int) -> Void) {
         self.viewModel = viewModel
         self.viewModel.onTimerFinished = onTimerFinished
@@ -22,11 +24,12 @@ struct ArcadeGamePlayView: View {
             timerLabelWithFeedback
                 .padding(.top, ViewConstants.timerTopPadding)
             
+            Spacer()
+            
             GeometryReader { proxy in
                 let isLandscape = proxy.size.width > proxy.size.height
                 
                 wordsList(isLandscape: isLandscape)
-                    .frame(maxHeight: 350)
             }
             
             skipButton
@@ -64,7 +67,6 @@ struct ArcadeGamePlayView: View {
                     }
                 }
             }
-            .padding(.horizontal)
             .padding(.vertical, ViewConstants.gridVerticalPadding)
         }
     }
@@ -72,7 +74,7 @@ struct ArcadeGamePlayView: View {
     private var timerLabelWithFeedback: some View {
         let isWarning = viewModel.timeRemaining <= 5
         
-        return GMLabelView(
+        let timerLabelView = GMLabelView(
             text: viewModel.timeRemaining.toString(),
             fontSizeForPhone: ViewConstants.timerLabelFontSizeForPhone,
             fontSizeForPad: ViewConstants.timerLabelFontSizeForPad,
@@ -80,6 +82,23 @@ struct ArcadeGamePlayView: View {
         )
         .contentTransition(.numericText())
         .animation(.linear, value: viewModel.timeRemaining)
+        
+        if #available(iOS 17.0, *) {
+            return timerLabelView
+                .onChange(of: viewModel.timeRemaining, { oldValue, newValue in
+                    if newValue <= 5 {
+                        withAnimation(.easeInOut) {
+                            shaking.toggle()
+                        }
+                    }
+                })
+                .modifier(ShakeEffect(animatableData: CGFloat(shaking ? 1 : 0)))
+                .sensoryFeedback(.warning, trigger: viewModel.timeRemaining) { _, newValue in
+                    newValue <= 5
+                }
+        } else {
+            return timerLabelView
+        }
     }
     
     private var skipButton: some View {
@@ -91,18 +110,16 @@ struct ArcadeGamePlayView: View {
         ) {
             viewModel.skipCurrentSet()
         }
-        .padding(.horizontal)
     }
     
     private enum ViewConstants {
         static let mainSpacing: CGFloat = 12 
-        static let timerLabelFontSizeForPhone: CGFloat = 72 
-        static let timerLabelFontSizeForPad: CGFloat = 120 
+        static let timerLabelFontSizeForPhone: CGFloat = 84
+        static let timerLabelFontSizeForPad: CGFloat = 140
         static let skipButtonFontSize: CGFloat = 16
         static let skipButtonHeight: CGFloat = 44
-        static let wordsSpacing: CGFloat = 8
+        static let wordsSpacing: CGFloat = 16
         static let gridVerticalPadding: CGFloat = 8
-        static let timerTopPadding: CGFloat = 8
+        static let timerTopPadding: CGFloat = 16
     }
 }
-

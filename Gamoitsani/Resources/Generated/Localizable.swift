@@ -65,7 +65,7 @@ public enum L10n {
       public enum Game {
 
         public enum Arcade {
-          /// Skip (-2 points)
+          /// New words (-2 points)
           public static var skipButton: String { L10n.tr("Localizable", "screen.game.arcade.skipButton") }
         }
 
