@@ -16,6 +16,7 @@ extension UserDefaults {
         static let IS_APP_FIRST_LAUNCH = "IS_APP_FIRST_LAUNCH"
         static let HAS_AD_CONSENT = "HAS_AD_CONSENT"
         static let LAST_WORD_SYNC_DATE = "LAST_WORD_SYNC_DATE"
+        static let DEBUG_QUICK_GAME = "DEBUG_QUICK_GAME"
     }
     
     static var appLanguage: String? {
@@ -60,6 +61,15 @@ extension UserDefaults {
             return UserDefaults.standard.double(forKey: Keys.LAST_WORD_SYNC_DATE)
         } set {
             UserDefaults.standard.set(newValue, forKey: Keys.LAST_WORD_SYNC_DATE)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var isQuickGameEnabled: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Keys.DEBUG_QUICK_GAME)
+        } set {
+            UserDefaults.standard.set(newValue, forKey: Keys.DEBUG_QUICK_GAME)
             UserDefaults.standard.synchronize()
         }
     }

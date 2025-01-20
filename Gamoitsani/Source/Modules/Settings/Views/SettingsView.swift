@@ -61,6 +61,15 @@ struct SettingsView: View {
                                 .presentationDetents([.medium])
                         }
                     }.listRowBackground(Asset.gmSecondary.swiftUIColor)
+                    
+#if DEBUG
+                    Section {
+                        Toggle("Quick Game Mode (Debug)", isOn: .init(
+                            get: { UserDefaults.isQuickGameEnabled },
+                            set: { UserDefaults.isQuickGameEnabled = $0 }
+                        ))
+                    }.listRowBackground(Asset.gmSecondary.swiftUIColor)
+#endif
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .languageDidChange), perform: { _ in
                     viewModel.languageChanged.toggle()

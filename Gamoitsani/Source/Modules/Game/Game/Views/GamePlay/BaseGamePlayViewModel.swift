@@ -50,8 +50,14 @@ class BaseGamePlayViewModel: ObservableObject {
     
     // MARK: - Timer Methods
     private func startTimer() {
+#if DEBUG
+        let shouldUseQuickTimer = UserDefaults.isQuickGameEnabled
+        let timerDuration = shouldUseQuickTimer ? 2.0 : timeRemaining
+#else
+        let timerDuration = timeRemaining
+#endif
         // End game timer
-        Timer.publish(every: timeRemaining, on: .main, in: .common)
+        Timer.publish(every: timerDuration, on: .main, in: .common)
             .autoconnect()
             .first()
             .sink { [weak self] _ in
