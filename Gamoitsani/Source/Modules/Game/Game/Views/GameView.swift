@@ -11,6 +11,7 @@ import SwiftUI
 struct GameView: View {
     @EnvironmentObject private var coordinator: GameCoordinator
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     @ObservedObject var viewModel = GameViewModel()
     
     @State private var showConfetti = false
@@ -21,31 +22,42 @@ struct GameView: View {
                 .ignoresSafeArea()
             
             VStack {
-                switch viewModel.gameState {
-                case .info:
-                    gameInfoView
-                case .play:
-                    gamePlayContent
-                case .gameOver:
-                    gameOverView
+                Spacer()
+                
+                VStack {
+                    switch viewModel.gameState {
+                    case .info:
+                        gameInfoView
+                    case .play:
+                        gamePlayContent
+                    case .gameOver:
+                        gameOverView
+                    }
                 }
-            }
-            .toolbar {
-                if viewModel.gameState == .gameOver {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            coordinator.presentGameShareView(with: viewModel.generateShareImage())
-                        } label: {
-                            Image(systemName: AppConstants.SFSymbol.squareAndArrowUp)
+                .toolbar {
+                    if viewModel.gameState == .gameOver {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button {
+                                coordinator.presentGameShareView(with: viewModel.generateShareImage())
+                            } label: {
+                                Image(systemName: AppConstants.SFSymbol.squareAndArrowUp)
+                            }
                         }
                     }
                 }
+                .padding([.top, .bottom, .leading, .trailing], ViewConstants.padding)
+                .frame(maxHeight: viewMaxHeight)
+                .background(Asset.gmSecondary.swiftUIColor.opacity(ViewConstants.backgroundOpacity))
+                .cornerRadius(ViewConstants.cornerRadius)
+                .padding(.horizontal, ViewConstants.paddingFromSuperview)
+                
+                Spacer()
+                
+                if verticalSizeClass == .regular && AppConstants.shouldShowAdsToUser {
+                    BannerContainerView()
+                        .padding()
+                }
             }
-            .padding([.top, .bottom, .leading, .trailing], ViewConstants.padding)
-            .frame(maxHeight: viewMaxHeight)
-            .background(Asset.gmSecondary.swiftUIColor.opacity(ViewConstants.backgroundOpacity))
-            .cornerRadius(ViewConstants.cornerRadius)
-            .padding(.horizontal, ViewConstants.paddingFromSuperview)
         }
         .displayConfetti(isActive: $showConfetti)
         .navigationBarBackButtonHidden(true)
