@@ -21,6 +21,9 @@ struct GameDetailsView: View {
             VStack {
                 ScrollView {
                     VStack(spacing: GameDetailsConstants.Layout.sectionSpacing) {
+#if DEBUG
+                        debugButtons
+#endif
                         roundManagementSection
                         gameModeSection
                         teamManagementSection
@@ -202,6 +205,21 @@ struct GameDetailsView: View {
         RoundedRectangle(cornerRadius: GameDetailsConstants.Layout.cornerRadius)
             .fill(Asset.gmSecondary.swiftUIColor)
     }
+    
+#if DEBUG
+    private var debugButtons: some View {
+        HStack {
+            GMButtonView(text: "Add Random Team", height: 32) {
+                viewModel.addRandomTeam()
+            }
+            
+            GMButtonView(text: "Add 2 Teams", height: 32) {
+                viewModel.addRandomTeam()
+                viewModel.addRandomTeam()
+            }
+        }
+    }
+#endif
 }
 
 // MARK: - Actions
