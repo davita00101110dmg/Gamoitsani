@@ -37,7 +37,9 @@ final class BannerAdManager: NSObject, ObservableObject {
         DispatchQueue.main.async { [weak self] in
             self?.bannerView?.delegate = nil
             self?.bannerView = nil
-            self?.isAdLoaded = false
+            withAnimation(.smooth(duration: 0.3)) {
+                self?.isAdLoaded = false
+            }
         }
     }
 }
