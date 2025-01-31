@@ -11,10 +11,10 @@ import CoreData
 @testable import Gamoitsani
 
 final class CoreDataManagerTests: XCTestCase {
-
+    
     var sut: CoreDataManager!
     var mockPersistentContainer: NSPersistentContainer!
-
+    
     override func setUp() {
         super.setUp()
         mockPersistentContainer = MockPersistentContainer(name: "Gamoitsani")
@@ -22,44 +22,47 @@ final class CoreDataManagerTests: XCTestCase {
             XCTAssertNil(error)
         }
         sut = CoreDataManager.shared
-        sut.context = mockPersistentContainer.viewContext
+        // No longer need to set context as it's private
     }
-
+    
     override func tearDown() {
         sut = nil
         mockPersistentContainer = nil
         super.tearDown()
     }
-
-    func testSaveWordsFromFirebase() {
+    
+    func testSaveWordsFromFirebase() async throws {
         // Given
         let firebaseWords = [
-            WordFirebase(baseWord: "test", categories: ["category"], translations: ["en": WordFirebase.TranslationData(word: "test", difficulty: 1)], lastUpdated: Date())
+            WordFirebase(baseWord: "test",
+                         categories: ["category"],
+                         translations: ["en": WordFirebase.TranslationData(word: "test", difficulty: 1)],
+                         lastUpdated: Date())
         ]
-
+        
         // When
-        let savedCount = sut.saveWordsFromFirebase(firebaseWords)
-
+        let savedCount = try await sut.saveWordsFromFirebase(firebaseWords)
+        
         // Then
         XCTAssertEqual(savedCount, 1)
-        
-        let fetchRequest: NSFetchRequest<Word> = Word.fetchRequest()
-        let words = try? sut.context.fetch(fetchRequest)
-        XCTAssertEqual(words?.count, 1)
-        XCTAssertEqual(words?.first?.baseWord, "test")
+        let words = await sut.fetchWordsFromCoreData(quantity: 10)
+        XCTAssertEqual(words.count, 1)
+        XCTAssertEqual(words.first?.baseWord, "test")
     }
-
-    func testFetchWordsFromCoreData() {
+    
+    func testFetchWordsFromCoreData() async {
         // Given
-        let word = Word(context: sut.context)
-        word.baseWord = "test"
-        word.categories = ["category"]
-        word.last_updated = Date()
-        try? sut.context.save()
-
+        let firebaseWords = [
+            WordFirebase(baseWord: "test",
+                         categories: ["category"],
+                         translations: ["en": WordFirebase.TranslationData(word: "test", difficulty: 1)],
+                         lastUpdated: Date())
+        ]
+        try? await sut.saveWordsFromFirebase(firebaseWords)
+        
         // When
-        let fetchedWords = sut.fetchWordsFromCoreData()
-
+        let fetchedWords = await sut.fetchWordsFromCoreData()
+        
         // Then
         XCTAssertEqual(fetchedWords.count, 1)
         XCTAssertEqual(fetchedWords.first?.baseWord, "test")

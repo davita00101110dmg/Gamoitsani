@@ -44,7 +44,7 @@ final class FirebaseManagerTests: XCTestCase {
             XCTAssertEqual(UserDefaults.lastWordSyncDate, initialDate.timeIntervalSince1970)
             XCTAssertFalse(self.mockCoreDataManager.saveWordsFromFirebaseCalled)
             expectation.fulfill()
-        }
+        } onStorageWarning: { }
         
         waitForExpectations(timeout: 1, handler: nil)
     }
@@ -65,7 +65,7 @@ final class FirebaseManagerTests: XCTestCase {
             XCTAssertGreaterThan(UserDefaults.lastWordSyncDate, initialDate.timeIntervalSince1970)
             XCTAssertTrue(self.mockCoreDataManager.saveWordsFromFirebaseCalled)
             expectation.fulfill()
-        }
+        } onStorageWarning: { }
         
         waitForExpectations(timeout: 1, handler: nil)
     }
@@ -86,7 +86,7 @@ final class FirebaseManagerTests: XCTestCase {
             XCTAssertGreaterThan(UserDefaults.lastWordSyncDate, initialDate.timeIntervalSince1970)
             XCTAssertTrue(self.mockCoreDataManager.saveWordsFromFirebaseCalled)
             expectation.fulfill()
-        }
+        } onStorageWarning: { }
         
         waitForExpectations(timeout: 1, handler: nil)
     }

@@ -11,82 +11,111 @@ import UIKit
 
 protocol CoreDataManaging {
     @discardableResult
-    func saveWordsFromFirebase(_ words: [WordFirebase]) -> Int
-    func fetchWordsFromCoreData(quantity: Int) -> [Word]
+    func saveWordsFromFirebase(_ words: [WordFirebase]) async throws -> Int
+    func fetchWordsFromCoreData(quantity: Int) async -> [Word]
 }
 
 final class CoreDataManager: CoreDataManaging {
-    static var shared = CoreDataManager()
-    
-    private init() { }
-    
-    var context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    @discardableResult
-    func saveWordsFromFirebase(_ words: [WordFirebase]) -> Int {
-        var savedCount = 0
-        
-        context.performAndWait {
-            for firebaseWord in words {
-                let fetchRequest: NSFetchRequest<Word> = Word.fetchRequest()
-                fetchRequest.predicate = NSPredicate(format: "baseWord == %@", firebaseWord.baseWord)
-                
-                do {
-                    let existingWords = try context.fetch(fetchRequest)
-                    let word = existingWords.first ?? Word(context: context)
-                    
-                    word.baseWord = firebaseWord.baseWord
-                    word.categories = firebaseWord.categories
-                    word.last_updated = firebaseWord.lastUpdated
-                    
-                    if let existingTranslations = word.wordTranslations as? Set<Translation> {
-                        for translation in existingTranslations {
-                            word.removeFromWordTranslations(translation)
-                            context.delete(translation)
-                        }
-                    }
-                    
-                    for (langCode, translationData) in firebaseWord.translations {
-                        let translation = Translation(context: context)
-                        translation.languageCode = langCode
-                        translation.word = translationData.word
-                        translation.difficulty = Int16(translationData.difficulty)
-                        word.addToWordTranslations(translation)
-                    }
-                    
-                    savedCount += 1
-                } catch {
-                    log(.error, "Error saving word: \(error)")
-                }
-            }
-            
-            do {
-                try context.save()
-            } catch {
-                log(.error, "Error saving context: \(error)")
-            }
-        }
-        
-        return savedCount
+    enum StorageError: Error {
+        case insufficientStorage
+        case saveFailed(Error)
     }
     
-    func fetchWordsFromCoreData(quantity: Int = 1500) -> [Word] {
-        var fetchedWords: [Word] = []
-        
-        context.performAndWait {
-            let fetchRequest: NSFetchRequest<Word> = Word.fetchRequest()
-            fetchRequest.fetchLimit = quantity
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: AppConstants.Firebase.Fields.lastUpdated, ascending: false)]
-            
-            do {
-                fetchedWords = try context.fetch(fetchRequest)
-                log(.info, "Fetched \(fetchedWords.count) words from Core Data")
-            } catch {
-                log(.error, "Failed to fetch words from Core Data: \(error)")
-            }
+    static var shared = CoreDataManager()
+    private let persistentContainer: NSPersistentContainer
+    private let backgroundContext: NSManagedObjectContext
+    
+    private init() {
+        persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+        backgroundContext = persistentContainer.newBackgroundContext()
+        backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+    }
+    
+    @discardableResult
+    func saveWordsFromFirebase(_ words: [WordFirebase]) async throws -> Int {
+        guard checkAvailableStorage() else {
+            throw StorageError.insufficientStorage
         }
         
-        fetchedWords.shuffle()
-        return fetchedWords
+        return try await withCheckedThrowingContinuation { continuation in
+            backgroundContext.perform {
+                var savedCount = 0
+                
+                for firebaseWord in words {
+                    let fetchRequest: NSFetchRequest<Word> = Word.fetchRequest()
+                    fetchRequest.predicate = NSPredicate(format: "baseWord == %@", firebaseWord.baseWord)
+                    
+                    do {
+                        let existingWords = try self.backgroundContext.fetch(fetchRequest)
+                        let word = existingWords.first ?? Word(context: self.backgroundContext)
+                        
+                        word.baseWord = firebaseWord.baseWord
+                        word.categories = firebaseWord.categories
+                        word.last_updated = firebaseWord.lastUpdated
+                        
+                        if let existingTranslations = word.wordTranslations as? Set<Translation> {
+                            for translation in existingTranslations {
+                                word.removeFromWordTranslations(translation)
+                                self.backgroundContext.delete(translation)
+                            }
+                        }
+                        
+                        for (langCode, translationData) in firebaseWord.translations {
+                            let translation = Translation(context: self.backgroundContext)
+                            translation.languageCode = langCode
+                            translation.word = translationData.word
+                            translation.difficulty = Int16(translationData.difficulty)
+                            word.addToWordTranslations(translation)
+                        }
+                        
+                        savedCount += 1
+                    } catch {
+                        log(.error, "Error saving word: \(error)")
+                    }
+                }
+                
+                do {
+                    try self.backgroundContext.save()
+                    continuation.resume(returning: savedCount)
+                } catch {
+                    continuation.resume(throwing: StorageError.saveFailed(error))
+                }
+            }
+        }
+    }
+    
+    func fetchWordsFromCoreData(quantity: Int = 1500) async -> [Word] {
+        await withCheckedContinuation { [weak self] continuation in
+            guard let self = self else { return }
+            backgroundContext.perform {
+                let fetchRequest: NSFetchRequest<Word> = Word.fetchRequest()
+                fetchRequest.fetchLimit = quantity
+                fetchRequest.sortDescriptors = [NSSortDescriptor(key: AppConstants.Firebase.Fields.lastUpdated, ascending: false)]
+                
+                do {
+                    var fetchedWords = try self.backgroundContext.fetch(fetchRequest)
+                    fetchedWords.shuffle()
+                    continuation.resume(returning: fetchedWords)
+                } catch {
+                    log(.error, "Failed to fetch words from Core Data: \(error)")
+                    continuation.resume(returning: [])
+                }
+            }
+        }
+    }
+    
+    func checkAvailableStorage() -> Bool {
+        let fileURL = persistentContainer.persistentStoreCoordinator.persistentStores.first?.url
+        let fileManager = FileManager.default
+        
+        guard let path = fileURL?.deletingLastPathComponent().path,
+              let attrs = try? fileManager.attributesOfFileSystem(forPath: path),
+              let freeSize = attrs[FileAttributeKey.systemFreeSize] as? NSNumber,
+              let totalSize = attrs[FileAttributeKey.systemSize] as? NSNumber else {
+            return true
+        }
+        
+        let freeRatio = Double(freeSize.int64Value) / Double(totalSize.int64Value)
+        return freeRatio > 0.001
     }
 }

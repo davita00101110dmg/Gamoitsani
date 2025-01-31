@@ -40,40 +40,60 @@ final class FirebaseManager {
     
     private init() { }
     
-    func fetchWordsIfNeeded(completion: @escaping ([Word]) -> Void) {
-        let lastSyncTimestamp = UserDefaults.lastWordSyncDate
-        let currentTimestamp = currentDate.timeIntervalSince1970
-        
-        if currentTimestamp - lastSyncTimestamp >= .week {
-            fetchWordsFromFirebase(since: Date(timeIntervalSince1970: lastSyncTimestamp)) { [weak self] firebaseWords in
-                guard let self else { return }
-                self.coreDataManager.saveWordsFromFirebase(firebaseWords)
-                UserDefaults.lastWordSyncDate = currentTimestamp
-                let words = self.coreDataManager.fetchWordsFromCoreData(quantity: 1500)
-                completion(words)
+    func fetchWordsIfNeeded(completion: @escaping ([Word]) -> Void, onStorageWarning: @escaping () -> Void) {
+        Task {
+            let lastSyncTimestamp = UserDefaults.lastWordSyncDate
+            let currentTimestamp = currentDate.timeIntervalSince1970
+            
+            if currentTimestamp - lastSyncTimestamp >= .week {
+                let firebaseWords = await fetchWordsFromFirebase(since: Date(timeIntervalSince1970: lastSyncTimestamp))
+                do {
+                    try await coreDataManager.saveWordsFromFirebase(firebaseWords)
+                    await MainActor.run { UserDefaults.lastWordSyncDate = currentTimestamp }
+                    let words = await coreDataManager.fetchWordsFromCoreData(quantity: 1500)
+                    await MainActor.run { completion(words) }
+                } catch CoreDataManager.StorageError.insufficientStorage {
+                    await MainActor.run {
+                        onStorageWarning()
+                        completion([])
+                    }
+                } catch {
+                    log(.error, "Error saving words: \(error)")
+                    await MainActor.run { completion([]) }
+                }
+            } else {
+                let words = await coreDataManager.fetchWordsFromCoreData(quantity: 1500)
+                await MainActor.run { completion(words) }
             }
-        } else {
-            let words = coreDataManager.fetchWordsFromCoreData(quantity: 1500)
-            completion(words)
         }
     }
-
-    private func fetchWordsFromFirebase(since date: Date, completion: @escaping ([WordFirebase]) -> Void) {
-        wordsRef
-            .whereField(AppConstants.Firebase.Fields.lastUpdated, isGreaterThan: date)
-            .getDocuments { querySnapshot, error in
-                if let error = error {
-                    log(.error, "Error fetching words: \(error.localizedDescription)")
-                    completion([])
-                    return
+    
+    private func fetchWordsFromFirebase(since date: Date, retries: Int = 3) async -> [WordFirebase] {
+        return await withCheckedContinuation { continuation in
+            wordsRef
+                .whereField(AppConstants.Firebase.Fields.lastUpdated, isGreaterThan: date)
+                .getDocuments { querySnapshot, error in
+                    if let error = error {
+                        log(.error, "Error fetching words: \(error.localizedDescription)")
+                        
+                        if retries > 0 {
+                            Task {
+                                let retryResult = await self.fetchWordsFromFirebase(since: date, retries: retries - 1)
+                                continuation.resume(returning: retryResult)
+                            }
+                        } else {
+                            continuation.resume(returning: [])
+                        }
+                        return
+                    }
+                    
+                    let words = querySnapshot?.documents.compactMap { document -> WordFirebase? in
+                        try? document.data(as: WordFirebase.self)
+                    } ?? []
+                    
+                    continuation.resume(returning: words)
                 }
-                
-                let words = querySnapshot?.documents.compactMap { document -> WordFirebase? in
-                    try? document.data(as: WordFirebase.self)
-                } ?? []
-                
-                completion(words)
-            }
+        }
     }
 
     func fetchWords(limit: Int = 1500, completion: @escaping ([WordFirebase]) -> Void) {
