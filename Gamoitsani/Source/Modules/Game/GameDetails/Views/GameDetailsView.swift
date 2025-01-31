@@ -12,27 +12,34 @@ struct GameDetailsView: View {
     @EnvironmentObject private var coordinator: GameDetailsCoordinator
     @StateObject var viewModel = GameDetailsViewModel()
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @State private var showStorageAlert = false
     
     var body: some View {
         ZStack {
             GradientBackground()
                 .ignoresSafeArea()
             
-            VStack {
-                ScrollView {
-                    VStack(spacing: GameDetailsConstants.Layout.sectionSpacing) {
+            if viewModel.areWordsLoading {
+                LoadingView(text: L10n.Screen.GameDetails.LoadingWords.message)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .transition(.opacity)
+            } else {
+                VStack {
+                    ScrollView {
+                        VStack(spacing: GameDetailsConstants.Layout.sectionSpacing) {
 #if DEBUG
-                        debugButtons
+                            debugButtons
 #endif
-                        roundManagementSection
-                        gameModeSection
-                        teamManagementSection
-                        Spacer()
+                            roundManagementSection
+                            gameModeSection
+                            teamManagementSection
+                            Spacer()
+                        }
+                        .padding()
                     }
-                    .padding()
+                    
+                    bottomSection
                 }
-                
-                bottomSection
             }
         }
         .onAppear {

@@ -19,6 +19,7 @@ final class GameDetailsViewModel: ObservableObject {
     
     @Published var currentAlert: AlertType?
     @Published var teamSectionMode: GameDetailsTeamSectionMode = .teams
+    @Published var areWordsLoading = false
     @Published private var collection = GameDetailsTeamSectionMode.Collection(teams: [], players: [])
     
     var teams: [GameDetailsTeam] { collection.teams }
@@ -56,10 +57,19 @@ final class GameDetailsViewModel: ObservableObject {
     }
     
     func fetchWordsFromServer() {
-        FirebaseManager.shared.fetchWordsIfNeeded { words in
-            GameStory.shared.words = words
-            log(.info, "Fetched \(words.count) words")
-        }
+        areWordsLoading = true
+        FirebaseManager.shared.fetchWordsIfNeeded(
+            completion: { [weak self] words in
+                GameStory.shared.words = words
+                self?.areWordsLoading = false
+            },
+            onStorageWarning: { [weak self] in
+                self?.showInfoAlert(
+                    title: L10n.Screen.GameDetails.StorageWarning.title,
+                    message: L10n.Screen.GameDetails.StorageWarning.message
+                )
+            }
+        )
     }
     
     func add(with name: String) {
