@@ -164,6 +164,11 @@ public enum L10n {
           public static var title: String { L10n.tr("Localizable", "screen.game_details.game_mode.title") }
         }
 
+        public enum LoadingWords {
+          /// Downloading words in progress
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.loading_words.message") }
+        }
+
         public enum Players {
           /// Add Player
           public static var add: String { L10n.tr("Localizable", "screen.game_details.players.add") }
@@ -218,6 +223,13 @@ public enum L10n {
         public enum StartGame {
           /// Start Game
           public static var title: String { L10n.tr("Localizable", "screen.game_details.start_game.title") }
+        }
+
+        public enum StorageWarning {
+          /// Failed to download words, please try again
+          public static var message: String { L10n.tr("Localizable", "screen.game_details.storage_warning.message") }
+          /// Insufficient storage
+          public static var title: String { L10n.tr("Localizable", "screen.game_details.storage_warning.title") }
         }
 
         public enum Teams {

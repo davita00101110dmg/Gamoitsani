@@ -73,6 +73,9 @@
 "screen.game_details.classic.description" = "Խաղալ մեկ բառով";
 "screen.game_details.arcade.title" = "Արկադ";
 "screen.game_details.arcade.description" = "Խաղալ 5 բառով միաժամանակ";
+"screen.game_details.loading_words.message" = "Բառերի ներբեռնումը շարունակվում է";
+"screen.game_details.storage_warning.title" = "Անբավարար հիշողություն";
+"screen.game_details.storage_warning.message" = "Չհաջողվեց ներբեռնել բառերը, փորձեք կրկին";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Ավելացրեք թիմեր խաղը սկսելու համար";

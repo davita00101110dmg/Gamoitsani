@@ -73,6 +73,9 @@
 "screen.game_details.classic.description" = "Грайте одне слово за раз";
 "screen.game_details.arcade.title" = "Аркада";
 "screen.game_details.arcade.description" = "Грайте з 5 словами одночасно";
+"screen.game_details.loading_words.message" = "Завантаження слів триває";
+"screen.game_details.storage_warning.title" = "Недостатньо пам’яті";
+"screen.game_details.storage_warning.message" = "Не вдалося завантажити слова, спробуйте ще раз";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Додайте команди, щоб почати гру";
