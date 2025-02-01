@@ -1,7 +1,14 @@
 PODS:
+  - ChartboostCoreSDK (1.0.0)
+  - ChartboostMediationSDK (5.2.0):
+    - ChartboostCoreSDK (~> 1.0)
+  - ChartboostSDK (9.8.0)
   - FBAudienceNetwork (6.16.0)
   - Google-Mobile-Ads-SDK (11.13.0):
     - GoogleUserMessagingPlatform (>= 1.1)
+  - GoogleMobileAdsMediationChartboost (9.8.0.0):
+    - ChartboostSDK (= 9.8.0)
+    - Google-Mobile-Ads-SDK (~> 11.0)
   - GoogleMobileAdsMediationFacebook (6.16.0.0):
     - FBAudienceNetwork (= 6.16.0)
     - Google-Mobile-Ads-SDK (~> 11.0)
@@ -16,7 +23,9 @@ PODS:
   - VungleAds (7.4.3)
 
 DEPENDENCIES:
+  - ChartboostMediationSDK
   - Google-Mobile-Ads-SDK
+  - GoogleMobileAdsMediationChartboost
   - GoogleMobileAdsMediationFacebook
   - GoogleMobileAdsMediationInMobi
   - GoogleMobileAdsMediationVungle
@@ -25,8 +34,12 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - ChartboostCoreSDK
+    - ChartboostMediationSDK
+    - ChartboostSDK
     - FBAudienceNetwork
     - Google-Mobile-Ads-SDK
+    - GoogleMobileAdsMediationChartboost
     - GoogleMobileAdsMediationFacebook
     - GoogleMobileAdsMediationInMobi
     - GoogleMobileAdsMediationVungle
@@ -35,8 +48,12 @@ SPEC REPOS:
     - VungleAds
 
 SPEC CHECKSUMS:
+  ChartboostCoreSDK: 8f551e6d3d2eb58691b8155da9063cad65152860
+  ChartboostMediationSDK: 9d6fc0d92be7da6956ba3e98a871c92abc42aad6
+  ChartboostSDK: f8422957daa675fa4a0bb9f159144b3b59ef5c27
   FBAudienceNetwork: d1670939884e3a2e0ad98dca98d7e0c841417228
   Google-Mobile-Ads-SDK: 14f57f2dc33532a24db288897e26494640810407
+  GoogleMobileAdsMediationChartboost: b6815e7b1ce697b08d752cef1cb24248f3598f75
   GoogleMobileAdsMediationFacebook: 234b9cecc2f9c751567a71d035974c00e6803777
   GoogleMobileAdsMediationInMobi: 1c09a0189c485bba2b3edc9ab0e062b9a716929f
   GoogleMobileAdsMediationVungle: e881f89d2819ef365d033be62abaf394c2ad0482
@@ -44,6 +61,6 @@ SPEC CHECKSUMS:
   InMobiSDK: 0cfb1a1eb5112fa0236ae1fab549e31fb96c9566
   VungleAds: 15e589a3e1c3a5d1ca4617154bcca3bc0b6c1167
 
-PODFILE CHECKSUM: e27a88dd374ab89bb34126bde7b932c1f48ccd7a
+PODFILE CHECKSUM: 05d34e0b7a6c2a04ac43a757412033b21e753887
 
 COCOAPODS: 1.16.2

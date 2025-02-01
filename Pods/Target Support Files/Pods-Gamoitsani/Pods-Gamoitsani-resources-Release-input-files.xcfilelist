@@ -1,4 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani-resources.sh
+${PODS_CONFIGURATION_BUILD_DIR}/ChartboostCoreSDK/ChartboostCoreSDK.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/ChartboostMediationSDK/ChartboostMediationSDK.bundle
+${PODS_ROOT}/ChartboostSDK/ChartboostSDKResources.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/FBAudienceNetwork/FBAudienceNetwork.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/Google-Mobile-Ads-SDK/GoogleMobileAdsResources.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/GoogleUserMessagingPlatform/UserMessagingPlatformResources.bundle

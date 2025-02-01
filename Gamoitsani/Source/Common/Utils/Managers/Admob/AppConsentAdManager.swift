@@ -13,6 +13,7 @@ import UserMessagingPlatform
 import VungleAdsSDK
 import InMobiSDK
 import FBAudienceNetwork
+import ChartboostSDK
 
 final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
     static let shared = AppConsentAdManager()
@@ -113,6 +114,18 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         
         // Meta
         FBAdSettings.setAdvertiserTrackingEnabled(true)
+        
+        // Chartboost
+        let gdprConsent = CHBDataUseConsent.GDPR(CHBDataUseConsent.GDPR.Consent.nonBehavioral)
+        let ccpaConsent = CHBDataUseConsent.CCPA(CHBDataUseConsent.CCPA.Consent.optInSale)
+        
+        Chartboost.addDataUseConsent(gdprConsent)
+        Chartboost.addDataUseConsent(ccpaConsent)
+        
+        Chartboost.start(withAppID: AppConstants.Chartboost.appId,
+                         appSignature: AppConstants.Chartboost.appSignature) { _ in
+
+        }
     }
     
     func presentPrivacySettings(from viewController: UIViewController?) {

@@ -142,6 +142,26 @@ enum AppConstants {
         }
     }
     
+    enum Chartboost {
+        static var appId: String {
+            do {
+                return try Configuration.value(for: "CHARTBOOST_APP_ID")
+            } catch {
+                log(.error, "Error retrieving appId: \(error)")
+                return .empty
+            }
+        }
+        
+        static var appSignature: String {
+            do {
+                return try Configuration.value(for: "CHARTBOOST_APP_SIGNATURE")
+            } catch {
+                log(.error, "Error retrieving appId: \(error)")
+                return .empty
+            }
+        }
+    }
+    
     enum Firebase {
         
         enum Fields {
