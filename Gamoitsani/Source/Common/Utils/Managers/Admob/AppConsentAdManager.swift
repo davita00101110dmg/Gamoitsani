@@ -13,6 +13,9 @@ import UserMessagingPlatform
 import VungleAdsSDK
 import InMobiSDK
 import FBAudienceNetwork
+import ChartboostSDK
+import UnityAds
+import IronSource
 
 final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
     static let shared = AppConsentAdManager()
@@ -113,6 +116,29 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         
         // Meta
         FBAdSettings.setAdvertiserTrackingEnabled(true)
+        
+        // Chartboost
+        let gdprConsent = CHBDataUseConsent.GDPR(CHBDataUseConsent.GDPR.Consent.nonBehavioral)
+        let ccpaConsent = CHBDataUseConsent.CCPA(CHBDataUseConsent.CCPA.Consent.optInSale)
+        
+        Chartboost.addDataUseConsent(gdprConsent)
+        Chartboost.addDataUseConsent(ccpaConsent)
+        
+        Chartboost.start(withAppID: AppConstants.Chartboost.appId,
+                         appSignature: AppConstants.Chartboost.appSignature) { _ in
+
+        }
+        
+        // UnityAds
+        let gdprMetaData = UADSMetaData()
+        let ccpaMetaData = UADSMetaData()
+        gdprMetaData.set("gdpr.consent", value: true)
+        ccpaMetaData.set("privacy.consent", value: true)
+        gdprMetaData.commit()
+        
+        // IronSource
+        IronSource.setConsent(true)
+        IronSource.setMetaDataWithKey("do_not_sell", value: "YES")
     }
     
     func presentPrivacySettings(from viewController: UIViewController?) {
@@ -165,7 +191,7 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         configureInMobiConsent()
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [AppConstants.AdMob.testDeviceId]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["d09f1879f31c3d3f0f5bc65a61232a68"]
         UserDefaults.hasAdConsent = true
     }
 }

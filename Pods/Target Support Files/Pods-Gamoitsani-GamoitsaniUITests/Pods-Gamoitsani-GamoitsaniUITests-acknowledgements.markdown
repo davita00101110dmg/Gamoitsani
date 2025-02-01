@@ -1,6 +1,35 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
+## ChartboostCoreSDK
+
+MIT License
+
+Copyright 2023 Chartboost Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## ChartboostMediationSDK
+
+MIT License
+
+Copyright 2018 Chartboost Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+## ChartboostSDK
+
+LICENSE © 2011-2024 Chartboost. All rights reserved. LICENSE
+
 ## FBAudienceNetwork
 
 Copyright (c) Meta Platforms, Inc. and affiliates. All rights reserved.
@@ -26,11 +55,23 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 Copyright 2024 Google LLC
 
+## GoogleMobileAdsMediationChartboost
+
+Copyright 2016 Google LLC
+
 ## GoogleMobileAdsMediationFacebook
 
 Copyright 2016 Google LLC
 
 ## GoogleMobileAdsMediationInMobi
+
+Copyright 2016 Google LLC
+
+## GoogleMobileAdsMediationIronSource
+
+Copyright 2017 Google LLC
+
+## GoogleMobileAdsMediationUnity
 
 Copyright 2016 Google LLC
 
@@ -98,6 +139,17 @@ You represent and warrant that your Children Privacy Compliance setting remains 
 
 This EULA and all disputes arising thereof shall be subject to the laws of Singapore, where the courts at Singapore shall exclusive jurisdiction.
 
+
+## IronSourceSDK
+
+https://platform.ironsrc.com/partners/terms-and-conditions-new-user
+
+## UnityAds
+
+Unity Advertisements copyright © 2024 Unity Technologies.
+This software is subject to, and made available under, the terms of service for Operate Solutions (see https://unity3d.com/legal/one-operate-services-terms-of-service), and is an "Operate Service" as defined therein.
+
+Your use of the Services constitutes your acceptance of such terms. Unless expressly provided otherwise, the software under this license is made available strictly on an "AS IS" BASIS WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. Please review the terms of service for details on these and other terms and conditions.
 
 ## VungleAds
 
