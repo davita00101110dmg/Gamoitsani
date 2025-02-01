@@ -15,6 +15,9 @@ PODS:
   - GoogleMobileAdsMediationInMobi (10.8.0.0):
     - Google-Mobile-Ads-SDK (~> 11.0)
     - InMobiSDK (= 10.8.0)
+  - GoogleMobileAdsMediationIronSource (8.6.0.0.0):
+    - Google-Mobile-Ads-SDK (~> 11.0)
+    - IronSourceSDK (= 8.6.0.0)
   - GoogleMobileAdsMediationUnity (4.12.5.0):
     - Google-Mobile-Ads-SDK (~> 11.0)
     - UnityAds (= 4.12.5)
@@ -23,6 +26,7 @@ PODS:
     - VungleAds (= 7.4.3)
   - GoogleUserMessagingPlatform (2.7.0)
   - InMobiSDK (10.8.0)
+  - IronSourceSDK (8.6.0.0)
   - UnityAds (4.12.5)
   - VungleAds (7.4.3)
 
@@ -32,6 +36,7 @@ DEPENDENCIES:
   - GoogleMobileAdsMediationChartboost
   - GoogleMobileAdsMediationFacebook
   - GoogleMobileAdsMediationInMobi
+  - GoogleMobileAdsMediationIronSource
   - GoogleMobileAdsMediationUnity
   - GoogleMobileAdsMediationVungle
   - GoogleUserMessagingPlatform
@@ -47,10 +52,12 @@ SPEC REPOS:
     - GoogleMobileAdsMediationChartboost
     - GoogleMobileAdsMediationFacebook
     - GoogleMobileAdsMediationInMobi
+    - GoogleMobileAdsMediationIronSource
     - GoogleMobileAdsMediationUnity
     - GoogleMobileAdsMediationVungle
     - GoogleUserMessagingPlatform
     - InMobiSDK
+    - IronSourceSDK
     - UnityAds
     - VungleAds
 
@@ -63,13 +70,15 @@ SPEC CHECKSUMS:
   GoogleMobileAdsMediationChartboost: b6815e7b1ce697b08d752cef1cb24248f3598f75
   GoogleMobileAdsMediationFacebook: 234b9cecc2f9c751567a71d035974c00e6803777
   GoogleMobileAdsMediationInMobi: 1c09a0189c485bba2b3edc9ab0e062b9a716929f
+  GoogleMobileAdsMediationIronSource: af89c2857a63733cd0e0738dc33c1d948081ed11
   GoogleMobileAdsMediationUnity: 165112fe327da66a772f445775dbe968b45c31ef
   GoogleMobileAdsMediationVungle: e881f89d2819ef365d033be62abaf394c2ad0482
   GoogleUserMessagingPlatform: a8b56893477f67212fbc8411c139e61d463349f5
   InMobiSDK: 0cfb1a1eb5112fa0236ae1fab549e31fb96c9566
+  IronSourceSDK: ae03a5aef5cc17a9868540aa409098e9614dfd48
   UnityAds: a4036ed911b4df2227d8137f4f777fcb86c4a2df
   VungleAds: 15e589a3e1c3a5d1ca4617154bcca3bc0b6c1167
 
-PODFILE CHECKSUM: 08b111862542c7909d9945e5601eb7f055cb4e02
+PODFILE CHECKSUM: 26e3dcf67631fe963b76b52951ab6f65f7ca213d
 
 COCOAPODS: 1.16.2

@@ -5,5 +5,6 @@ ${PODS_ROOT}/ChartboostSDK/ChartboostSDKResources.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/FBAudienceNetwork/FBAudienceNetwork.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/Google-Mobile-Ads-SDK/GoogleMobileAdsResources.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/GoogleUserMessagingPlatform/UserMessagingPlatformResources.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/IronSourceSDK/IronSourcePrivacyInfo.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/UnityAds/UnityAdsResources.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/VungleAds/VungleAds.bundle

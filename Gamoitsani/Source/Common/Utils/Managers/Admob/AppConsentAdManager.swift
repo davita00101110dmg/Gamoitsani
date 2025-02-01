@@ -15,6 +15,7 @@ import InMobiSDK
 import FBAudienceNetwork
 import ChartboostSDK
 import UnityAds
+import IronSource
 
 final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
     static let shared = AppConsentAdManager()
@@ -134,6 +135,10 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         gdprMetaData.set("gdpr.consent", value: true)
         ccpaMetaData.set("privacy.consent", value: true)
         gdprMetaData.commit()
+        
+        // IronSource
+        IronSource.setConsent(true)
+        IronSource.setMetaDataWithKey("do_not_sell", value: "YES")
     }
     
     func presentPrivacySettings(from viewController: UIViewController?) {
