@@ -14,6 +14,7 @@ import VungleAdsSDK
 import InMobiSDK
 import FBAudienceNetwork
 import ChartboostSDK
+import UnityAds
 
 final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
     static let shared = AppConsentAdManager()
@@ -126,6 +127,13 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
                          appSignature: AppConstants.Chartboost.appSignature) { _ in
 
         }
+        
+        // UnityAds
+        let gdprMetaData = UADSMetaData()
+        let ccpaMetaData = UADSMetaData()
+        gdprMetaData.set("gdpr.consent", value: true)
+        ccpaMetaData.set("privacy.consent", value: true)
+        gdprMetaData.commit()
     }
     
     func presentPrivacySettings(from viewController: UIViewController?) {
@@ -178,7 +186,7 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         configureInMobiConsent()
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [AppConstants.AdMob.testDeviceId]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["d09f1879f31c3d3f0f5bc65a61232a68"]
         UserDefaults.hasAdConsent = true
     }
 }
