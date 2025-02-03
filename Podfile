@@ -9,7 +9,8 @@ target 'Gamoitsani' do
   pod 'Google-Mobile-Ads-SDK'
   pod 'InMobiSDK'
   pod 'ChartboostMediationSDK'
-
+  pod 'FBAudienceNetwork'
+  
   pod 'GoogleUserMessagingPlatform'
   
   pod 'GoogleMobileAdsMediationVungle'

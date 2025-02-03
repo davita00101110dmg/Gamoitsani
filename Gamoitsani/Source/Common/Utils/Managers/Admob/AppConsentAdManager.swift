@@ -97,6 +97,13 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
 
     
     private func initializeAdSDKs() {
+        // Meta
+        let hasConsent = UMPConsentInformation.sharedInstance.canRequestAds
+        FBAdSettings.setAdvertiserTrackingEnabled(hasConsent)
+        FBAudienceNetworkAds.initialize(with: nil, completionHandler: { result in
+            log(.info, "Meta result: \(result.message)")
+        })
+        
         // Initialize Vungle
         VungleAds.initWithAppId(AppConstants.Vungle.appId) { error in
             if let error = error {
@@ -113,9 +120,6 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         // Initialize InMobi with debug settings
         IMSdk.setLogLevel(IMSDKLogLevel.debug)
         IMUnifiedIdService.enableDebugMode(true)
-        
-        // Meta
-        FBAdSettings.setAdvertiserTrackingEnabled(true)
         
         // Chartboost
         let gdprConsent = CHBDataUseConsent.GDPR(CHBDataUseConsent.GDPR.Consent.nonBehavioral)

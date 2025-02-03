@@ -1084,6 +1084,7 @@
 		53680BB010B5976BF0E84CCBFA2CE5B7 /* ModuleObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModuleObserver.swift; path = Source/Initialization/ModuleObserver.swift; sourceTree = "<group>"; };
 		536C8E85B56C94F6A356A6A82F5AB4B8 /* ISNEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ISNEvent.h; path = "IronSource/IronSource.xcframework/ios-arm64_x86_64-simulator/IronSource.framework/Headers/ISNEvent.h"; sourceTree = "<group>"; };
 		5397B8AC748ABE82A61986818C83055B /* FBNativeAdView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBNativeAdView.h; path = "Static/FBAudienceNetwork.xcframework/ios-arm64/FBAudienceNetwork.framework/Headers/FBNativeAdView.h"; sourceTree = "<group>"; };
+		53F83E5247A05B20ACA07BE9F1435B3B /* LiftoffMonetizeAdapter.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = LiftoffMonetizeAdapter.xcframework; path = "LiftoffMonetizeAdapter-7.4.4.0/LiftoffMonetizeAdapter.xcframework"; sourceTree = "<group>"; };
 		53FBDDDC2C042A5F6788DC96D9B942CA /* ISMetaData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ISMetaData.h; path = "IronSource/IronSource.xcframework/ios-arm64_x86_64-simulator/IronSource.framework/Headers/ISMetaData.h"; sourceTree = "<group>"; };
 		53FC827ADFF7818CFDA9A67B2C7E9057 /* ModuleConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModuleConfiguration.swift; path = Source/Initialization/ModuleConfiguration.swift; sourceTree = "<group>"; };
 		542CC18B1B732C0A23F4713287C6C34B /* ConsentValue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsentValue.swift; path = Source/Consent/ConsentValue.swift; sourceTree = "<group>"; };
@@ -1370,7 +1371,6 @@
 		AA4EBC209CAAE17B6F7D6F8D4614FBF7 /* Environment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Environment.swift; path = Source/Environment/Environment.swift; sourceTree = "<group>"; };
 		AA9EBC5CF1AAA913108C1FD0241C9CC6 /* FBNativeAdCollectionViewAdProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBNativeAdCollectionViewAdProvider.h; path = "Static/FBAudienceNetwork.xcframework/ios-arm64/FBAudienceNetwork.framework/Headers/FBNativeAdCollectionViewAdProvider.h"; sourceTree = "<group>"; };
 		AB19308B8ECC9EDFF5A172C1D59F93E3 /* UIView+ISNativeView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+ISNativeView.h"; path = "IronSource/IronSource.xcframework/ios-arm64_x86_64-simulator/IronSource.framework/Headers/UIView+ISNativeView.h"; sourceTree = "<group>"; };
-		ABD31DB9BFFF52E70CEBA7C416607B86 /* LiftoffMonetizeAdapter.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = LiftoffMonetizeAdapter.xcframework; path = "LiftoffMonetizeAdapter-7.4.3.0/LiftoffMonetizeAdapter.xcframework"; sourceTree = "<group>"; };
 		ACAE2E1C780B42A47D6F18C83A0E7D3A /* FBNativeAdCollectionViewAdProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBNativeAdCollectionViewAdProvider.h; path = "Static/FBAudienceNetwork.xcframework/ios-arm64_x86_64-simulator/FBAudienceNetwork.framework/Headers/FBNativeAdCollectionViewAdProvider.h"; sourceTree = "<group>"; };
 		ACB3A4799E6387B3F8F9E1E8CCB81B80 /* SupersonicLogManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SupersonicLogManager.h; path = "IronSource/IronSource.xcframework/ios-arm64_x86_64-simulator/IronSource.framework/Headers/SupersonicLogManager.h"; sourceTree = "<group>"; };
 		ACC8D85C557AAA2E373EDA1F97077458 /* AdaptiveBannerSizeHTTPRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdaptiveBannerSizeHTTPRequest.swift; path = Source/Networking/HTTPRequest/AdaptiveBannerSizeHTTPRequest.swift; sourceTree = "<group>"; };
@@ -1779,6 +1779,14 @@
 				3D0FACBAF068F00CD00DBB1B963941F7 /* PrivacyInfo.xcprivacy */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		1A1B75E8985BA74BE9727D05FF705196 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53F83E5247A05B20ACA07BE9F1435B3B /* LiftoffMonetizeAdapter.xcframework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		1D9128C0FEB6772003234DB815CEC847 /* Targets Support Files */ = {
@@ -2253,7 +2261,7 @@
 		7925474158DE348672F2875DFCC29EC7 /* GoogleMobileAdsMediationVungle */ = {
 			isa = PBXGroup;
 			children = (
-				EB24967709BB7684FE58065EDEF32857 /* Frameworks */,
+				1A1B75E8985BA74BE9727D05FF705196 /* Frameworks */,
 				E720D84291A4E7FC6AD452E097DDD674 /* Support Files */,
 			);
 			name = GoogleMobileAdsMediationVungle;
@@ -3051,14 +3059,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/GoogleMobileAdsMediationVungle";
-			sourceTree = "<group>";
-		};
-		EB24967709BB7684FE58065EDEF32857 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				ABD31DB9BFFF52E70CEBA7C416607B86 /* LiftoffMonetizeAdapter.xcframework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F1F97F8FFAC6D2DFC3B24062255E7335 /* Support Files */ = {
