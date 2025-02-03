@@ -71,6 +71,10 @@ Copyright 2016 Google LLC
 
 Copyright 2017 Google LLC
 
+## GoogleMobileAdsMediationMintegral
+
+Copyright 2022 Google LLC
+
 ## GoogleMobileAdsMediationUnity
 
 Copyright 2016 Google LLC
@@ -143,6 +147,11 @@ This EULA and all disputes arising thereof shall be subject to the laws of Singa
 ## IronSourceSDK
 
 https://platform.ironsrc.com/partners/terms-and-conditions-new-user
+
+## MintegralAdSDK
+
+https://raw.githubusercontent.com/Mintegral-official/MintegralAdSDK-iOS-new/master/LICENSE.txt
+
 
 ## UnityAds
 

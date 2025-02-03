@@ -16,10 +16,12 @@ import FBAudienceNetwork
 import ChartboostSDK
 import UnityAds
 import IronSource
+import MTGSDK
+import AppTrackingTransparency
 
 final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
     static let shared = AppConsentAdManager()
-
+    
     var shouldShowPrivacySettingsButton: Bool {
         UMPConsentInformation.sharedInstance.privacyOptionsRequirementStatus == .required
     }
@@ -39,28 +41,95 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         "MT", "NL", "NO", "PL", "PT", "RO", "SK", "SI", "ES", "SE",
         "GB"
     ]
-
-
+    
     private override init() {
         super.init()
         setupLocationManager()
     }
-
+    
     func requestAdConsent(from viewController: UIViewController?) {
-        guard let viewController else { return }
+       guard let viewController else { return }
+       
+       if #available(iOS 14.5, *) {
+           DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+               ATTrackingManager.requestTrackingAuthorization { status in
+                   self?.handleTrackingAuthorization(status, viewController: viewController)
+               }
+           }
+       } else {
+           handleTrackingAuthorization(.authorized, viewController: viewController)
+       }
+    }
+    
+    private func handleTrackingAuthorization(_ status: ATTrackingManager.AuthorizationStatus, viewController: UIViewController) {
+        let isTrackingAllowed = status == .authorized
+        initializeAdSDKs(isTrackingAllowed: isTrackingAllowed)
+        requestUMPConsent(from: viewController)
+    }
+    
+    private func setupLocationManager() {
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.requestWhenInUseAuthorization()
+        locationManager?.startUpdatingLocation()
+    }
+    
+    private func initializeAdSDKs(isTrackingAllowed: Bool) {
+        // Vungle
+        VungleAds.initWithAppId(AppConstants.Vungle.appId) { error in
+            if let error = error {
+                log(.error, "Vungle SDK initialization failed: \(error)")
+            } else {
+                log(.info, "Vungle SDK initialization complete")
+            }
+        }
         
-        // Initialize ad SDKs first
-        initializeAdSDKs()
-
-        // Configure Google UMP
+        VunglePrivacySettings.setGDPRStatus(isInEEARegion && isTrackingAllowed)
+        VunglePrivacySettings.setGDPRMessageVersion("v1.0.0")
+        VunglePrivacySettings.setCCPAStatus(isTrackingAllowed)
+        
+        // InMobi
+        IMSdk.setLogLevel(IMSDKLogLevel.debug)
+        IMUnifiedIdService.enableDebugMode(true)
+        IMSdk.setIsAgeRestricted(!isTrackingAllowed)
+        
+        // Meta
+        FBAdSettings.setAdvertiserTrackingEnabled(isTrackingAllowed)
+        
+        // Chartboost
+        let gdprConsent = CHBDataUseConsent.GDPR(isTrackingAllowed ? .behavioral : .nonBehavioral)
+        let ccpaConsent = CHBDataUseConsent.CCPA(isTrackingAllowed ? .optInSale : .optOutSale)
+        
+        Chartboost.addDataUseConsent(gdprConsent)
+        Chartboost.addDataUseConsent(ccpaConsent)
+        
+        Chartboost.start(withAppID: AppConstants.Chartboost.appId,
+                         appSignature: AppConstants.Chartboost.appSignature) { _ in }
+        
+        // UnityAds
+        let gdprMetaData = UADSMetaData()
+        let ccpaMetaData = UADSMetaData()
+        gdprMetaData.set("gdpr.consent", value: isTrackingAllowed)
+        ccpaMetaData.set("privacy.consent", value: isTrackingAllowed)
+        gdprMetaData.commit()
+        
+        // IronSource
+        IronSource.setConsent(isTrackingAllowed)
+        IronSource.setMetaDataWithKey("do_not_sell", value: isTrackingAllowed ? "NO" : "YES")
+        
+        // Mintegral
+        MTGSDK.sharedInstance().consentStatus = isTrackingAllowed
+        MTGSDK.sharedInstance().doNotTrackStatus = !isTrackingAllowed
+    }
+    
+    private func requestUMPConsent(from viewController: UIViewController) {
         let requestParameters = UMPRequestParameters()
         let debugSettings = UMPDebugSettings()
         debugSettings.geography = .EEA
         debugSettings.testDeviceIdentifiers = [AppConstants.AdMob.umpTestDeviceId]
         requestParameters.debugSettings = debugSettings
         
-        UMPConsentInformation.sharedInstance.requestConsentInfoUpdate(with: requestParameters) { [weak self]
-            requestConsentError in
+        UMPConsentInformation.sharedInstance.requestConsentInfoUpdate(with: requestParameters) { [weak self] requestConsentError in
             guard let self else { return }
             
             if let consentError = requestConsentError {
@@ -80,65 +149,11 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
             }
         }
         
-        
         if UMPConsentInformation.sharedInstance.canRequestAds {
             startMobileAdsSDK()
         }
         
-        self.updateInMobiConsent()
-    }
-    
-    private func setupLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.requestWhenInUseAuthorization()
-        locationManager?.startUpdatingLocation()
-    }
-
-    
-    private func initializeAdSDKs() {
-        // Initialize Vungle
-        VungleAds.initWithAppId(AppConstants.Vungle.appId) { error in
-            if let error = error {
-                log(.error, "Vungle SDK initialization failed: \(error)")
-            } else {
-                log(.info, "Vungle SDK initialization complete")
-            }
-        }
-        
-        VunglePrivacySettings.setGDPRStatus(isInEEARegion)
-        VunglePrivacySettings.setGDPRMessageVersion("v1.0.0")
-        VunglePrivacySettings.setCCPAStatus(true)
-
-        // Initialize InMobi with debug settings
-        IMSdk.setLogLevel(IMSDKLogLevel.debug)
-        IMUnifiedIdService.enableDebugMode(true)
-        
-        // Meta
-        FBAdSettings.setAdvertiserTrackingEnabled(true)
-        
-        // Chartboost
-        let gdprConsent = CHBDataUseConsent.GDPR(CHBDataUseConsent.GDPR.Consent.nonBehavioral)
-        let ccpaConsent = CHBDataUseConsent.CCPA(CHBDataUseConsent.CCPA.Consent.optInSale)
-        
-        Chartboost.addDataUseConsent(gdprConsent)
-        Chartboost.addDataUseConsent(ccpaConsent)
-        
-        Chartboost.start(withAppID: AppConstants.Chartboost.appId,
-                         appSignature: AppConstants.Chartboost.appSignature) { _ in
-
-        }
-        
-        // UnityAds
-        let gdprMetaData = UADSMetaData()
-        let ccpaMetaData = UADSMetaData()
-        gdprMetaData.set("gdpr.consent", value: true)
-        ccpaMetaData.set("privacy.consent", value: true)
-        gdprMetaData.commit()
-        
-        // IronSource
-        IronSource.setConsent(true)
-        IronSource.setMetaDataWithKey("do_not_sell", value: "YES")
+        updateInMobiConsent()
     }
     
     func presentPrivacySettings(from viewController: UIViewController?) {
@@ -161,7 +176,7 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         ]
         
         IMSdk.initWithAccountID(AppConstants.InMobi.appId,
-                              consentDictionary: consentDictionary) { error in
+                                consentDictionary: consentDictionary) { error in
             if let error = error {
                 log(.error, "InMobi initialization error: \(error.localizedDescription)")
             } else {
@@ -169,7 +184,7 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
             }
         }
     }
-
+    
     private func updateInMobiConsent() {
         let hasConsent = UMPConsentInformation.sharedInstance.canRequestAds
         
@@ -187,11 +202,10 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         guard !isMobileAdsStartCalled else { return }
         
         isMobileAdsStartCalled = true
-        
         configureInMobiConsent()
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["d09f1879f31c3d3f0f5bc65a61232a68"]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [AppConstants.AdMob.testDeviceId]
         UserDefaults.hasAdConsent = true
     }
 }
@@ -209,5 +223,4 @@ extension AppConsentAdManager {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         log(.error, "Location manager error: \(error.localizedDescription)")
     }
-
 }

@@ -138,6 +138,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright 2022 Google LLC</string>
+			<key>License</key>
+			<string>Apache 2.0</string>
+			<key>Title</key>
+			<string>GoogleMobileAdsMediationMintegral</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright 2016 Google LLC</string>
 			<key>License</key>
 			<string>Apache 2.0</string>
@@ -236,6 +246,17 @@ This EULA and all disputes arising thereof shall be subject to the laws of Singa
 			<string>Commercial</string>
 			<key>Title</key>
 			<string>IronSourceSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>https://raw.githubusercontent.com/Mintegral-official/MintegralAdSDK-iOS-new/master/LICENSE.txt
+</string>
+			<key>License</key>
+			<string>Mintegral</string>
+			<key>Title</key>
+			<string>MintegralAdSDK</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
