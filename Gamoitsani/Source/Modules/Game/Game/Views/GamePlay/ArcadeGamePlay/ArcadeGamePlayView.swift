@@ -14,7 +14,7 @@ struct ArcadeGamePlayView: View {
     
     @State var shaking: Bool = false
     
-    init(viewModel: ArcadeGamePlayViewModel, onTimerFinished: @escaping (Int) -> Void) {
+    init(viewModel: ArcadeGamePlayViewModel, onTimerFinished: @escaping (RoundStats) -> Void) {
         self.viewModel = viewModel
         self.viewModel.onTimerFinished = onTimerFinished
     }

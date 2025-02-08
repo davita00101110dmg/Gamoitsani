@@ -19,8 +19,9 @@ final class ClassicGamePlayViewModel: BaseGamePlayViewModel {
     }
     
     func wordButtonAction(tag: Int) {
-        playSound(isCorrect: tag == 1)
-        updateScore(points: tag == 1 ? 1 : -1)
+        let isCorrect = tag == 1
+        playSound(isCorrect: isCorrect)
+        updateScore(points: isCorrect ? 1 : -1, wasSkipped: !isCorrect)
         updateCurrentWord()
     }
     

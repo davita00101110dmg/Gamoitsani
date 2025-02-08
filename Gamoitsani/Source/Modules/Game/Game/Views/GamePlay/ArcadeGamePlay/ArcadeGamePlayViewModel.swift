@@ -31,10 +31,10 @@ final class ArcadeGamePlayViewModel: BaseGamePlayViewModel {
             currentWords[index].isGuessed.toggle()
             
             if currentWords[index].isGuessed {
-                updateScore(points: 1)
+                updateScore(points: 1, wasSkipped: false)
                 playSound(isCorrect: true)
             } else {
-                updateScore(points: -1)
+                updateScore(points: -1, wasSkipped: true)
                 playSound(isCorrect: false)
             }
         }
@@ -47,7 +47,9 @@ final class ArcadeGamePlayViewModel: BaseGamePlayViewModel {
     }
     
     func skipCurrentSet() {
-        updateScore(points: GameMode.arcade.skipPenalty)
+        let unguessedCount = currentWords.filter { !$0.isGuessed }.count
+        let penaltyPoints = GameMode.arcade.skipPenalty
+        updateScore(points: penaltyPoints, wasSkipped: true)
         playSound(isCorrect: false)
         updateCurrentWords()
     }

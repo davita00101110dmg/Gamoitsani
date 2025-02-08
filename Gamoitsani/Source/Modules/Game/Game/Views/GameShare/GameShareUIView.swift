@@ -47,9 +47,9 @@ final class GameShareUIView: UIView {
 
     func configure(with winnerTeam: String) {
         topLabel.configure(with: L10n.Screen.Game.GameShareView.title(winnerTeam))
-        
-        let teams: [GameTeamCellItem] = GameStory.shared.teams.sorted { $0.value > $1.value }.map { .init(name: $0.key, score: $0.value) }
 
+        let teams: [GameTeamCellItem] = GameStory.shared.teams.sorted { $0.score > $1.score }.map { .init(name: $0.name, score: $0.score) }
+        
         self.snapshot = GameTeamsSnapshot()
         self.snapshot?.appendSections([0])
         self.snapshot?.appendItems(teams)

@@ -18,7 +18,10 @@ class BaseGamePlayViewModel: ObservableObject {
     // MARK: - Protected Properties
     var words: [Word]
     var audioManager: AudioManager
-    var onTimerFinished: ((Int) -> Void)?
+    var onTimerFinished: ((RoundStats) -> Void)?
+    
+    private(set) var wordsSkipped: Int = 0
+    private(set) var wordsGuessed: Int = 0
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -82,7 +85,12 @@ class BaseGamePlayViewModel: ObservableObject {
     
     private func handleGameEnd() {
         stopGame()
-        onTimerFinished?(score)
+        let stats = RoundStats(
+            score: score,
+            wordsSkipped: wordsSkipped,
+            wordsGuessed: wordsGuessed
+        )
+        onTimerFinished?(stats)
     }
     
     // MARK: - Utility Methods
@@ -107,7 +115,12 @@ class BaseGamePlayViewModel: ObservableObject {
         // Override in subclass if needed
     }
     
-    func updateScore(points: Int) {
+    func updateScore(points: Int, wasSkipped: Bool) {
         score += points
+        if wasSkipped {
+            wordsSkipped += 1
+        } else {
+            wordsGuessed += 1
+        }
     }
 }

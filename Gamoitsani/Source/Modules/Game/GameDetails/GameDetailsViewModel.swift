@@ -126,8 +126,8 @@ final class GameDetailsViewModel: ObservableObject {
         return Set(teamNames).count == teamNames.count
     }
     
-    func getTeamsDictionary() -> OrderedDictionary<String, Int> {
-        .init(uniqueKeysWithValues: teams.map { ($0.name, 0) })
+    func createTeams() -> [Team] {
+        teams.map { Team(name: $0.name) }
     }
     
     func createRandomTeams() {

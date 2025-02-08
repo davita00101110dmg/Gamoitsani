@@ -271,7 +271,7 @@ private extension GameDetailsView {
         gameStory.gameMode = viewModel.selectedGameMode
         gameStory.numberOfRounds = Int(viewModel.roundsAmount)
         gameStory.lengthOfRound = viewModel.roundsLength
-        gameStory.teams = viewModel.getTeamsDictionary()
+        gameStory.setTeams(viewModel.createTeams())
     }
 }
 

@@ -17,6 +17,6 @@ final class GameScoreboardViewModel {
     }
     
     func fetchTeams() {
-        teams = GameStory.shared.teams.map { .init(name: $0.key, score: $0.value) }
+        teams = GameStory.shared.teams.map { .init(name: $0.name, score: $0.score) }
     }
 }

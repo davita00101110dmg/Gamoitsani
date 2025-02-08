@@ -93,16 +93,24 @@ struct GameView: View {
     private var classicGamePlayView: some View {
         ClassicGamePlayView(
             viewModel: viewModel.createClassicViewModel()
-        ) { score in
-            viewModel.handleGamePlayResult(score: score)
+        ) { roundStats in
+            viewModel.handleGamePlayResult(
+                score: roundStats.score,
+                wasSkipped: roundStats.wordsSkipped,
+                wordsGuessed: roundStats.wordsGuessed
+            )
         }
     }
     
     private var arcadeGamePlayView: some View {
         ArcadeGamePlayView(
             viewModel: viewModel.createArcadeViewModel()
-        ) { score in
-            viewModel.handleGamePlayResult(score: score)
+        ) { roundStats in
+            viewModel.handleGamePlayResult(
+                score: roundStats.score,
+                wasSkipped: roundStats.wordsSkipped,
+                wordsGuessed: roundStats.wordsGuessed
+            )
         }
     }
     
@@ -171,7 +179,7 @@ extension GameView {
     
     let teams = ["Team A", "Team B"]
     
-    GameStory.shared.teams = .init(uniqueKeysWithValues: teams.map { ($0, 0) })
+    GameStory.shared.setTeams([.init(name: "Team 1"), .init(name: "Team 2")])
     
     return GameView(viewModel: mockViewModel)
         .environmentObject(mockCoordinator)

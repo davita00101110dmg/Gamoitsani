@@ -134,6 +134,8 @@
 		FFAE1F202C7E3AA6003A554C /* GameShareModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F1F2C7E3AA6003A554C /* GameShareModels.swift */; };
 		FFAE1F222C7E3AAA003A554C /* GameShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F212C7E3AAA003A554C /* GameShareViewModel.swift */; };
 		FFB98EAB2C7534380024A925 /* AppConsentAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB98EAA2C7534380024A925 /* AppConsentAdManager.swift */; };
+		FFBE55A92D575EC400A07B73 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBE55A72D575EC400A07B73 /* Team.swift */; };
+		FFBE55AB2D576D8400A07B73 /* RoundStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBE55AA2D576D8400A07B73 /* RoundStats.swift */; };
 		FFBFB0312C68CC3A00A877D7 /* GameViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFB0302C68CC3A00A877D7 /* GameViewModelTests.swift */; };
 		FFC172B42C6E6EAB0069623F /* GMButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B32C6E6EAB0069623F /* GMButtonView.swift */; };
 		FFC172B62C6E70FA0069623F /* GMLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC172B52C6E70FA0069623F /* GMLabelView.swift */; };
@@ -348,6 +350,8 @@
 		FFAE1F1F2C7E3AA6003A554C /* GameShareModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareModels.swift; sourceTree = "<group>"; };
 		FFAE1F212C7E3AAA003A554C /* GameShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareViewModel.swift; sourceTree = "<group>"; };
 		FFB98EAA2C7534380024A925 /* AppConsentAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConsentAdManager.swift; sourceTree = "<group>"; };
+		FFBE55A72D575EC400A07B73 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		FFBE55AA2D576D8400A07B73 /* RoundStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundStats.swift; sourceTree = "<group>"; };
 		FFBFB0302C68CC3A00A877D7 /* GameViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelTests.swift; sourceTree = "<group>"; };
 		FFC172B32C6E6EAB0069623F /* GMButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMButtonView.swift; sourceTree = "<group>"; };
 		FFC172B52C6E70FA0069623F /* GMLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMLabelView.swift; sourceTree = "<group>"; };
@@ -753,6 +757,7 @@
 				FF67CC7D2C6AD0A10094824E /* GameTeams */,
 				FF3708802BFBD5040056361F /* Word */,
 				FF7F1DA52BE9749900872554 /* Game */,
+				FFBE55A82D575EC400A07B73 /* Team */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -762,6 +767,7 @@
 			children = (
 				FFAA68982D3915EB00F0B2C0 /* GameModeFactory.swift */,
 				FF7F1D9C2BE92F5000872554 /* GameStory.swift */,
+				FFBE55AA2D576D8400A07B73 /* RoundStats.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -950,6 +956,14 @@
 				FF7555872C7F203700EC37A0 /* SocialIconView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		FFBE55A82D575EC400A07B73 /* Team */ = {
+			isa = PBXGroup;
+			children = (
+				FFBE55A72D575EC400A07B73 /* Team.swift */,
+			);
+			path = Team;
 			sourceTree = "<group>";
 		};
 		FFBFB02F2C68CC2700A877D7 /* GamoitsaniTests */ = {
@@ -1524,6 +1538,7 @@
 				FF7F1D7E2BE7A2F700872554 /* GameCoordinator.swift in Sources */,
 				FF8675382C6772230089B52B /* SettingsCoordinator.swift in Sources */,
 				FFA60DC52C7CFCE3005A2660 /* BannerAdManager.swift in Sources */,
+				FFBE55A92D575EC400A07B73 /* Team.swift in Sources */,
 				FFFB4D462BD928B400CDDCB4 /* UIFontExtensions.swift in Sources */,
 				FFFCF38C2C6EC506003458DC /* ConfettiView.swift in Sources */,
 				FFA60DC92C7D01FB005A2660 /* GameView.swift in Sources */,
@@ -1559,6 +1574,7 @@
 				FF86756D2C67E0DA0089B52B /* ActivityView.swift in Sources */,
 				FFA60DB72C7A0288005A2660 /* TransitionViewModifier.swift in Sources */,
 				FFAE1F1B2C7E3A92003A554C /* GameShareView.swift in Sources */,
+				FFBE55AB2D576D8400A07B73 /* RoundStats.swift in Sources */,
 				FFC172B62C6E70FA0069623F /* GMLabelView.swift in Sources */,
 				FF63A4322CD517CF005617E5 /* TeamRowView.swift in Sources */,
 				FFA60DBC2C7A2923005A2660 /* ShakeEffect.swift in Sources */,

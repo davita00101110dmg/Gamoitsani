@@ -14,11 +14,10 @@ import SwiftUI
 final class GameViewModel: ObservableObject {
     @Published var gameState: GameModels.GameState = .info
     
-    var currentTeamName: String { gameStory.teams.keys[gameStory.currentTeamIndex] }
+    var currentTeam: Team? { gameStory.currentTeam }
     var currentRound: Int { gameStory.currentRound }
     var currentExtraRound: Int { gameStory.currentRound - gameStory.numberOfRounds }
-    var currentTeamScore: Int { gameStory.teams.values[gameStory.currentTeamIndex] }
-    var sortedTeams: [(key: String, value: Int)] { gameStory.teams.sorted { $0.value > $1.value } }
+    var sortedTeams: [Team] { gameStory.teams.sorted { $0.score > $1.score } }
 
     var gameMode: GameMode { gameStory.gameMode }
     var gameStory = GameStory.shared
@@ -40,7 +39,7 @@ final class GameViewModel: ObservableObject {
 extension GameViewModel {
     func createGameInfoViewModel() -> GameInfoViewModel {
         GameModeFactory.createInfoViewModel(
-            teamName: currentTeamName,
+            teamName: currentTeam?.name ?? .empty,
             round: currentRound,
             extraRound: currentExtraRound
         )
@@ -49,8 +48,8 @@ extension GameViewModel {
     func createGameOverViewModel() -> GameOverViewModel {
         let winner = getWinnerTeam()
         return GameModeFactory.createGameOverViewModel(
-            teamName: winner?.key,
-            score: winner?.value ?? 0
+            teamName: winner?.name,
+            score: winner?.score ?? 0
         )
     }
     
@@ -73,9 +72,9 @@ extension GameViewModel {
         gameState = .play
     }
     
-    func handleGamePlayResult(score: Int) {
+    func handleGamePlayResult(score: Int, wasSkipped: Int, wordsGuessed: Int) {
         withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
-            updateGameInfo(with: score)
+            updateGameInfo(with: score, wasSkipped: wasSkipped, wordsGuessed: wordsGuessed)
             
             if handleEndOfGame() {
                 gameState = .gameOver
@@ -91,10 +90,10 @@ extension GameViewModel {
         gameState = .info
     }
     
-    func getWinnerTeam() -> (key: String, value: Int)? {
+    func getWinnerTeam() -> Team? {
         guard let firstTeam = sortedTeams.first else { return nil }
         
-        let tiedTeams = sortedTeams.filter { $0.value == firstTeam.value }
+        let tiedTeams = sortedTeams.filter { $0.score == firstTeam.score }
         
         if tiedTeams.count > 1 {
             return nil
@@ -105,14 +104,14 @@ extension GameViewModel {
     
     func generateShareImage() -> UIImage {
         let view = GameShareUIView.loadFromNib()
-        view?.configure(with: sortedTeams[0].key)
+        view?.configure(with: sortedTeams.first?.name ?? .empty)
         
         guard let image = view?.asImage() else { return UIImage() }
         return image
     }
     
     private func isTie() -> Bool {
-        return sortedTeams[0].value == sortedTeams[1].value
+        return sortedTeams.first?.score == sortedTeams[1].score
     }
 
     private func isEndGame() -> Bool {
@@ -132,10 +131,14 @@ extension GameViewModel {
         return true
     }
 
-    private func updateGameInfo(with roundScore: Int) {
-        let currentTeamName = gameStory.teams.keys[gameStory.currentTeamIndex]
-        gameStory.teams[currentTeamName, default: 0] += roundScore
-        log(.info, "Round: \(currentRound) Team: \(currentTeamName) Score: \(gameStory.teams[currentTeamName] ?? 0)")
+    private func updateGameInfo(with roundScore: Int, wasSkipped: Int, wordsGuessed: Int) {
+        gameStory.updateScore(for: gameStory.currentTeamIndex, points: roundScore, wasSkipped: wasSkipped, wordsGuessed: wordsGuessed)
+        log(.info, "Round: \(currentRound) Team: \(currentTeam?.name ?? .empty) Score: \(currentTeam?.score ?? 0)")
+        
+        if handleEndOfGame() {
+            gameStory.updateTeamStats(winner: getWinnerTeam())
+        }
+        
         gameStory.currentTeamIndex = playingSessionCount % numberOfTeams
         gameStory.currentRound = playingSessionCount / numberOfTeams + 1
     }

@@ -17,3 +17,9 @@ extension Array {
         return removedItems
     }
 }
+
+extension Array where Element == Team {
+    mutating func resetAllScores() {
+        self = map { var team = $0; team.resetScore(); return team }
+    }
+}
