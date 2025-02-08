@@ -60,6 +60,7 @@ PODS:
 
 DEPENDENCIES:
   - ChartboostMediationSDK
+  - FBAudienceNetwork
   - Google-Mobile-Ads-SDK
   - GoogleMobileAdsMediationChartboost
   - GoogleMobileAdsMediationFacebook
@@ -112,6 +113,6 @@ SPEC CHECKSUMS:
   UnityAds: a4036ed911b4df2227d8137f4f777fcb86c4a2df
   VungleAds: 15e589a3e1c3a5d1ca4617154bcca3bc0b6c1167
 
-PODFILE CHECKSUM: 1a46ab7953ee1d65100795d688eb6a7257a44736
+PODFILE CHECKSUM: 311aa06157bb61cc2a0f7414d22dc64ac201c818
 
 COCOAPODS: 1.16.2
