@@ -134,11 +134,6 @@ extension GameViewModel {
     private func updateGameInfo(with roundScore: Int, wasSkipped: Int, wordsGuessed: Int) {
         gameStory.updateScore(for: gameStory.currentTeamIndex, points: roundScore, wasSkipped: wasSkipped, wordsGuessed: wordsGuessed)
         log(.info, "Round: \(currentRound) Team: \(currentTeam?.name ?? .empty) Score: \(currentTeam?.score ?? 0)")
-        
-        if handleEndOfGame() {
-            gameStory.updateTeamStats(winner: getWinnerTeam())
-        }
-        
         gameStory.currentTeamIndex = playingSessionCount % numberOfTeams
         gameStory.currentRound = playingSessionCount / numberOfTeams + 1
     }

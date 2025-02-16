@@ -9,14 +9,32 @@
 import Foundation
 import Combine
 
-final class GameScoreboardViewModel {
-    @Published var teams: [GameTeamCellItem] = []
+final class GameScoreboardViewModel: ObservableObject {
+    @Published private(set) var teams: [Team] = []
+    @Published private(set) var winningTeam: Team?
+    @Published private(set) var selectedTeamId: UUID?
     
-    var teamsPublished: AnyPublisher<[GameTeamCellItem], Never> {
-        $teams.eraseToAnyPublisher()
+    private var gameStory = GameStory.shared
+    
+    init() {
+        fetchTeams()
+        if !gameStory.isGameInProgress {
+            winningTeam = findWinningTeam()
+            selectedTeamId = winningTeam?.id ?? teams.first?.id
+        }
     }
     
     func fetchTeams() {
-        teams = GameStory.shared.teams.map { .init(name: $0.name, score: $0.score) }
+        teams = gameStory.teams.sorted { $0.score > $1.score }
+    }
+    
+    private func findWinningTeam() -> Team? {
+        guard let firstTeam = teams.first else { return nil }
+        let tiedTeams = teams.filter { $0.score == firstTeam.score }
+        return tiedTeams.count > 1 ? nil : firstTeam
+    }
+    
+    func selectTeam(_ teamId: UUID) {
+        selectedTeamId = teamId
     }
 }

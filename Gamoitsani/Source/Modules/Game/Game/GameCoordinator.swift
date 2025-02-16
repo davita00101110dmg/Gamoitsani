@@ -49,12 +49,13 @@ final class GameCoordinator: BaseCoordinator, ObservableObject {
         navigationController.popViewController(animated: true)
     }
     
-    func presentGameScoreboard(with detents: [UISheetPresentationController.Detent] = UIDevice.current.userInterfaceIdiom != .pad
-                               ? [.custom(resolver: { context in 250 }), .medium(), .large()]
-                               : [.medium(), .large()]) {
+    func presentGameScoreboard(with detents: [UISheetPresentationController.Detent] = [.medium()]   ) {
         guard let navigationController else { return }
         
-        let gameScoreboardCoordinator = GameScoreboardCoordinator(navigationController: navigationController, detents: detents)
+        let gameScoreboardCoordinator = GameScoreboardCoordinator(
+            navigationController: navigationController,
+            detents: [.medium()]
+        )
         coordinate(to: gameScoreboardCoordinator)
     }
     

@@ -28,6 +28,12 @@ final class GameStory {
     var finishedGamesCountInSession: Int = 0
     var isGameInProgress: Bool = false
     
+    var isGameFinished: Bool {
+        !isGameInProgress &&
+        playingSessionCount > 0 &&
+        currentRound > numberOfRounds
+    }
+    
     var currentTeam: Team? {
         guard currentTeamIndex < teams.count else { return nil }
         return teams[currentTeamIndex]
@@ -37,22 +43,28 @@ final class GameStory {
         self.teams = teams
     }
     
-    func addTeam(_ name: String) {
-        teams.append(Team(name: name))
-    }
-    
     func updateScore(for teamIndex: Int, points: Int, wasSkipped: Int, wordsGuessed: Int) {
         guard teamIndex < teams.count else { return }
-        teams[teamIndex].updateScore(points, skippedWords: wasSkipped, guessedWords: wordsGuessed)
+        
+        teams[teamIndex].updateScore(points)
+        
+        for _ in 0..<wordsGuessed {
+            teams[teamIndex].updateStreak(guessedCorrectly: true)
+        }
+        
+        for _ in 0..<wasSkipped {
+            teams[teamIndex].updateStreak(guessedCorrectly: false)
+        }
     }
     
-    func updateTeamStats(winner: Team?) {
-        for i in 0..<teams.count {
-            var team = teams[i]
-            let didWin = team.id == winner?.id
-            team.incrementGamesPlayed(didWin: didWin)
-            teams[i] = team
-        }
+    func startGuessing() {
+        guard currentTeamIndex < teams.count else { return }
+        teams[currentTeamIndex].startGuessing()
+    }
+    
+    func incrementSkippedSets() {
+        guard currentTeamIndex < teams.count else { return }
+        teams[currentTeamIndex].incrementSkippedSets()
     }
     
     func reset() {

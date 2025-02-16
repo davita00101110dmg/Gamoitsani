@@ -12,10 +12,12 @@ import Combine
 
 final class ClassicGamePlayViewModel: BaseGamePlayViewModel {
     @Published var currentWord: String?
+    private var gameStory = GameStory.shared
     
     override func onGameStart() {
         super.onGameStart()
         updateCurrentWord()
+        gameStory.startGuessing()
     }
     
     func wordButtonAction(tag: Int) {
@@ -23,6 +25,7 @@ final class ClassicGamePlayViewModel: BaseGamePlayViewModel {
         playSound(isCorrect: isCorrect)
         updateScore(points: isCorrect ? 1 : -1, wasSkipped: !isCorrect)
         updateCurrentWord()
+        gameStory.startGuessing()
     }
     
     private func updateCurrentWord() {

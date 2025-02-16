@@ -18,10 +18,12 @@ final class ArcadeGamePlayViewModel: BaseGamePlayViewModel {
     }
     
     @Published var currentWords: [WordItem] = []
+    private var gameStory = GameStory.shared
     
     override func onGameStart() {
         super.onGameStart()
         updateCurrentWords()
+        gameStory.startGuessing()
     }
     
     func wordGuessed(id: UUID) {
@@ -29,29 +31,31 @@ final class ArcadeGamePlayViewModel: BaseGamePlayViewModel {
         
         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
             currentWords[index].isGuessed.toggle()
+            let isCorrect = currentWords[index].isGuessed
             
-            if currentWords[index].isGuessed {
-                updateScore(points: 1, wasSkipped: false)
-                playSound(isCorrect: true)
-            } else {
-                updateScore(points: -1, wasSkipped: true)
-                playSound(isCorrect: false)
-            }
+            // Update score with correct parameters
+            updateScore(points: isCorrect ? 1 : -1, wasSkipped: !isCorrect)
+            playSound(isCorrect: isCorrect)
         }
         
         if currentWords.allSatisfy({ $0.isGuessed }) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                 self?.updateCurrentWords()
+                self?.gameStory.startGuessing()
             }
         }
     }
     
     func skipCurrentSet() {
-        let unguessedCount = currentWords.filter { !$0.isGuessed }.count
         let penaltyPoints = GameMode.arcade.skipPenalty
+        
+        gameStory.incrementSkippedSets()
+        
         updateScore(points: penaltyPoints, wasSkipped: true)
+        
         playSound(isCorrect: false)
         updateCurrentWords()
+        gameStory.startGuessing()
     }
     
     private func updateCurrentWords() {
