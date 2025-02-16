@@ -28,10 +28,13 @@ struct StatCard: View {
                 .font(F.Mersad.regular.swiftUIFont(size: 14))
                 .foregroundColor(.white.opacity(0.8))
                 .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(height: 40)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 20) 
-        .padding(.horizontal, 16)
+        .padding(.horizontal, 8)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(Asset.gmSecondary.swiftUIColor)

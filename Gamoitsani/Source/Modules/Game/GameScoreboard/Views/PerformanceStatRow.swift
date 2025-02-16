@@ -18,6 +18,7 @@ struct PerformanceStatRow: View {
             Image(systemName: icon)
                 .font(.system(size: 18))
                 .foregroundColor(Asset.gmPrimary.swiftUIColor)
+                .frame(width: 24)
             
             GMLabelView(text: title)
                 .font(F.Mersad.regular.swiftUIFont(size: 16))

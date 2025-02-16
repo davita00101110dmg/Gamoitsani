@@ -51,7 +51,7 @@ struct GameScoreboardView: View {
         VStack(spacing: 0) {
             if let selectedTeam = viewModel.teams.first(where: { $0.id == viewModel.selectedTeamId }) {
                 ScrollView(showsIndicators: false) {
-                    PostGameScoreboardView(team: selectedTeam)
+                    PostGameScoreboardView(team: selectedTeam, isWinner: viewModel.winningTeam?.id == selectedTeam.id)
                 }
             }
             

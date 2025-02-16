@@ -29,9 +29,17 @@ final class GameStory {
     var isGameInProgress: Bool = false
     
     var isGameFinished: Bool {
-        !isGameInProgress &&
-        playingSessionCount > 0 &&
-        currentRound > numberOfRounds
+        guard !isGameInProgress && playingSessionCount > 0 else { return false }
+        
+        if currentRound == numberOfRounds && currentTeamIndex == 0 {
+            return !hasEqualTopScores()
+        }
+        
+        if currentRound > numberOfRounds {
+            return !hasEqualTopScores() && currentTeamIndex == 0
+        }
+        
+        return false
     }
     
     var currentTeam: Team? {
@@ -73,5 +81,11 @@ final class GameStory {
         currentExtraRound = 0
         playingSessionCount = 0
         currentTeamIndex = 0
+    }
+    
+    private func hasEqualTopScores() -> Bool {
+        guard teams.count >= 2 else { return false }
+        let sortedTeams = teams.sorted { $0.score > $1.score }
+        return sortedTeams[0].score == sortedTeams[1].score
     }
 }
