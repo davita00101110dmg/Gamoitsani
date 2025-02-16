@@ -14,16 +14,20 @@ import OrderedCollections
 private struct TeamData {
     let name: String
     let score: Int
-    let gamesWon: Int
     let wordsGuessed: Int
     let wordsSkipped: Int
+    let totalGuessTime: TimeInterval
     
-    init(name: String, score: Int, gamesWon: Int = 0, wordsGuessed: Int = 0, wordsSkipped: Int = 0) {
+    init(name: String,
+         score: Int = 0,
+         wordsGuessed: Int = 0,
+         wordsSkipped: Int = 0,
+         totalGuessTime: TimeInterval = 0) {
         self.name = name
         self.score = score
-        self.gamesWon = gamesWon
         self.wordsGuessed = wordsGuessed
         self.wordsSkipped = wordsSkipped
+        self.totalGuessTime = totalGuessTime
     }
 }
 
@@ -240,7 +244,7 @@ final class GameViewModelTests: XCTestCase {
         XCTAssertEqual(sut.getWinnerTeam()?.name, "Team1")
         XCTAssertEqual(sut.getWinnerTeam()?.score, 18)
     }
-
+    
     func testWordStatisticsTracking() {
         // Arrange
         setupGameState(mode: .classic, teams: [
@@ -256,31 +260,12 @@ final class GameViewModelTests: XCTestCase {
         XCTAssertEqual(GameStory.shared.teams[0].wordsSkipped, 2)
         XCTAssertEqual(GameStory.shared.teams[0].totalWordsGuessed, 5)
     }
-
-    func testGameStatisticsTracking() {
-        // Arrange
-        setupGameState(mode: .classic, teams: [
-            TeamData(name: "Team1", score: 10),
-            TeamData(name: "Team2", score: 5)
-        ])
-        setupEndGameState()
-        
-        // Act - Finish game with Team2 as winner
-        sut.handleGamePlayResult(score: 7, wasSkipped: 1, wordsGuessed: 8)
-        
-        // Assert
-        XCTAssertEqual(GameStory.shared.teams[0].gamesPlayed, 1, "All teams should increment games played")
-        XCTAssertEqual(GameStory.shared.teams[1].gamesPlayed, 1, "All teams should increment games played")
-        
-        XCTAssertEqual(GameStory.shared.teams[0].gamesWon, 0, "Losing team should not increment games won")
-        XCTAssertEqual(GameStory.shared.teams[1].gamesWon, 1, "Winning team should increment games won")
-    }
-
+    
     func testStatisticsResetOnNewGame() {
         // Arrange
         setupGameState(mode: .classic, teams: [
-            TeamData(name: "Team1", score: 10, gamesWon: 5, wordsGuessed: 30, wordsSkipped: 10),
-            TeamData(name: "Team2", score: 5, gamesWon: 2, wordsGuessed: 15, wordsSkipped: 5)
+            TeamData(name: "Team1", score: 10, wordsGuessed: 30, wordsSkipped: 10),
+            TeamData(name: "Team2", score: 5,wordsGuessed: 15, wordsSkipped: 5)
         ])
         
         // Act
@@ -290,7 +275,6 @@ final class GameViewModelTests: XCTestCase {
         XCTAssertEqual(GameStory.shared.teams[0].score, 0)
         XCTAssertEqual(GameStory.shared.teams[0].wordsSkipped, 0)
         XCTAssertEqual(GameStory.shared.teams[0].totalWordsGuessed, 0)
-        XCTAssertEqual(GameStory.shared.teams[0].gamesWon, 5, "Games played should not reset")
     }
     
     // MARK: - Helper Methods
@@ -298,9 +282,9 @@ final class GameViewModelTests: XCTestCase {
         teamData.map { data in
             Team(name: data.name,
                  score: data.score,
-                 gamesWon: data.gamesWon,
                  totalWordsGuessed: data.wordsGuessed,
-                 wordsSkipped: data.wordsSkipped)
+                 wordsSkipped: data.wordsSkipped,
+                 totalGuessTime: data.totalGuessTime)
         }
     }
     
@@ -308,7 +292,7 @@ final class GameViewModelTests: XCTestCase {
         GameStory.shared.playingSessionCount += 1
         sut.handleGamePlayResult(score: score, wasSkipped: wasSkipped, wordsGuessed: wordsGuessed)
     }
-
+    
     
     private func setupGameState(mode: GameMode, teams: [TeamData] = [
         TeamData(name: "Team1", score: 0),
@@ -316,11 +300,113 @@ final class GameViewModelTests: XCTestCase {
     ]) {
         GameStory.shared.reset()
         GameStory.shared.gameMode = mode
-        GameStory.shared.setTeams(createTeams(teams))
+        
+        let initialTeams = teams.map { data in
+            Team(name: data.name,
+                 score: data.score,
+                 totalWordsGuessed: data.wordsGuessed,
+                 wordsSkipped: data.wordsSkipped)
+        }
+        
+        GameStory.shared.setTeams(initialTeams)
         GameStory.shared.numberOfRounds = 1
         GameStory.shared.currentTeamIndex = 0
         GameStory.shared.playingSessionCount = 0
     }
+    
+    func testWordTimingCalculation() {
+        // Arrange
+        setupGameState(mode: .classic, teams: [
+            TeamData(name: "Team1", score: 0)
+        ])
+        
+        // Simulate start guessing
+        GameStory.shared.startGuessing()
+        
+        // Wait for 1 second
+        Thread.sleep(forTimeInterval: 1.0)
+        
+        // Act - Complete word with correct guess
+        GameStory.shared.updateScore(for: GameStory.shared.currentTeamIndex, points: 0, wasSkipped: 0, wordsGuessed: 1)
+        
+        // Assert
+        let averageTime = GameStory.shared.currentTeam?.averageGuessTime ?? 0
+        XCTAssertGreaterThan(averageTime, 0.9)
+        XCTAssertLessThan(averageTime, 1.1)
+    }
+    
+    func testMultipleWordTimingCalculation() {
+        // Arrange
+        setupGameState(mode: .classic, teams: [
+            TeamData(name: "Team1", score: 0)
+        ])
+        
+        // Act - Simulate multiple words with different timings
+        for _ in 1...3 {
+            GameStory.shared.startGuessing()
+            Thread.sleep(forTimeInterval: 0.5)
+            GameStory.shared.updateScore(for: GameStory.shared.currentTeamIndex, points: 0, wasSkipped: 0, wordsGuessed: 1)
+        }
+        
+        // Assert
+        let averageTime = GameStory.shared.currentTeam?.averageGuessTime ?? 0
+        XCTAssertGreaterThan(averageTime, 0.4)
+        XCTAssertLessThan(averageTime, 0.6)
+    }
+    
+    func testStreakTracking() {
+        // Arrange
+        setupGameState(mode: .classic, teams: [
+            TeamData(name: "Team1", score: 0)
+        ])
+        
+        // Act - Build up streak
+        for _ in 1...3 {
+            GameStory.shared.updateScore(for: GameStory.shared.currentTeamIndex, points: 0, wasSkipped: 0, wordsGuessed: 1)
+        }
+        
+        // Assert
+        XCTAssertEqual(GameStory.shared.currentTeam?.currentStreak, 3)
+        XCTAssertEqual(GameStory.shared.currentTeam?.bestStreak, 3)
+        
+        // Break streak
+        GameStory.shared.updateScore(for: GameStory.shared.currentTeamIndex, points: 0, wasSkipped: 1, wordsGuessed: 0)
+        XCTAssertEqual(GameStory.shared.currentTeam?.currentStreak, 0)
+        XCTAssertEqual(GameStory.shared.currentTeam?.bestStreak, 3)
+        
+        // Build smaller streak
+        for _ in 1...2 {
+            GameStory.shared.updateScore(for: GameStory.shared.currentTeamIndex, points: 0, wasSkipped: 0, wordsGuessed: 1)
+        }
+        XCTAssertEqual(GameStory.shared.currentTeam?.currentStreak, 2)
+        XCTAssertEqual(GameStory.shared.currentTeam?.bestStreak, 3)
+    }
+    
+    func testWordCountingAccuracy() {
+        // Arrange
+        setupGameState(mode: .classic, teams: [
+            TeamData(name: "Team1", score: 0)
+        ])
+        
+        // Act - Simulate exactly two correct guesses
+        for _ in 1...2 {
+            GameStory.shared.startGuessing()
+            Thread.sleep(forTimeInterval: 0.5)
+            GameStory.shared.updateScore(for: GameStory.shared.currentTeamIndex, points: 0, wasSkipped: 0, wordsGuessed: 1)
+        }
+        
+        // Assert
+        XCTAssertEqual(GameStory.shared.currentTeam?.totalWordsGuessed, 2, "Should have exactly 2 words guessed")
+        
+        // Add an incorrect guess
+        GameStory.shared.startGuessing()
+        Thread.sleep(forTimeInterval: 0.5)
+        GameStory.shared.updateScore(for: GameStory.shared.currentTeamIndex, points: 0, wasSkipped: 1, wordsGuessed: 0)
+        
+        // Assert the count hasn't changed
+        XCTAssertEqual(GameStory.shared.currentTeam?.totalWordsGuessed, 2, "Count should still be 2 after incorrect guess")
+    }
+    
     
     private func setupEndGameState() {
         GameStory.shared.numberOfRounds = 2
