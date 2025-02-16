@@ -252,6 +252,44 @@ public enum L10n {
         }
       }
 
+      public enum GameScoreboard {
+        /// Scoreboard
+        public static var title: String { L10n.tr("Localizable", "screen.game_scoreboard.title") }
+
+        public enum PerformanceStatRow {
+          /// Average Time
+          public static var averageTime: String { L10n.tr("Localizable", "screen.game_scoreboard.performance_stat_row.average_time") }
+          /// Best Streak
+          public static var bestStreak: String { L10n.tr("Localizable", "screen.game_scoreboard.performance_stat_row.best_streak") }
+          /// Sets Skipped
+          public static var setsSkipped: String { L10n.tr("Localizable", "screen.game_scoreboard.performance_stat_row.sets_skipped") }
+        }
+
+        public enum PostGameScoreboard {
+          /// Average Time
+          public static var averageTime: String { L10n.tr("Localizable", "screen.game_scoreboard.post_game_scoreboard.average_time") }
+          /// Best Streak
+          public static var bestStreak: String { L10n.tr("Localizable", "screen.game_scoreboard.post_game_scoreboard.best_streak") }
+          /// Final Score: %@
+          public static func finalScore( _ p1: String) -> String {
+              return L10n.tr("Localizable", "screen.game_scoreboard.post_game_scoreboard.final_score", p1)
+          }
+          /// Sets Skipped
+          public static var setsSkipped: String { L10n.tr("Localizable", "screen.game_scoreboard.post_game_scoreboard.sets_skipped") }
+          /// Words Guessed
+          public static var wordsGuessed: String { L10n.tr("Localizable", "screen.game_scoreboard.post_game_scoreboard.words_guessed") }
+          /// Words Skipped
+          public static var wordsSkipped: String { L10n.tr("Localizable", "screen.game_scoreboard.post_game_scoreboard.words_skipped") }
+        }
+
+        public enum StatCard {
+          /// Words Guessed
+          public static var wordsGuessed: String { L10n.tr("Localizable", "screen.game_scoreboard.stat_card.words_guessed") }
+          /// Words Skipped
+          public static var wordsSkipped: String { L10n.tr("Localizable", "screen.game_scoreboard.stat_card.words_skipped") }
+        }
+      }
+
       public enum GameShare {
         /// Share to
         public static var shareTo: String { L10n.tr("Localizable", "screen.game_share.share_to") }

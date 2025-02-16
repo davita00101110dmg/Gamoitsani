@@ -120,6 +120,20 @@
 "screen.game.game_share_view.title" = "Команда-переможець - %@ 🥳";
 "screen.game.arcade.skipButton" = "Нові слова (-2 бали)";
 
+// MARK: - Game Scoreboard
+"screen.game_scoreboard.title" = "Результати";
+"screen.game_scoreboard.post_game_scoreboard.final_score" = "Підсумковий рахунок: %@";
+"screen.game_scoreboard.post_game_scoreboard.words_guessed" = "Вгадані слова";
+"screen.game_scoreboard.post_game_scoreboard.words_skipped" = "Пропущені слова";
+"screen.game_scoreboard.post_game_scoreboard.best_streak" = "Найкраща серія";
+"screen.game_scoreboard.post_game_scoreboard.average_time" = "Середній час";
+"screen.game_scoreboard.post_game_scoreboard.sets_skipped" = "Сети пропущені";
+"screen.game_scoreboard.stat_card.words_guessed" = "Вгадані слова";
+"screen.game_scoreboard.stat_card.words_skipped" = "Пропущені слова";
+"screen.game_scoreboard.performance_stat_row.best_streak" = "Найкраща серія";
+"screen.game_scoreboard.performance_stat_row.average_time" = "Середній час";
+"screen.game_scoreboard.performance_stat_row.sets_skipped" = "Сети пропущені";
+
 // MARK: - Game Share
 "screen.game_share.title" = "Поділитися результатом!";
 "screen.game_share.share_to" = "Поділитися через";

@@ -120,6 +120,20 @@
 "screen.game.game_share_view.title" = "Kazanan takım %@ 🥳";
 "screen.game.arcade.skipButton" = "Yeni kelimeler (-2 puan)";
 
+// MARK: - Game Scoreboard
+"screen.game_scoreboard.title" = "Sonuçlar";
+"screen.game_scoreboard.post_game_scoreboard.final_score" = "Son Skor: %@";
+"screen.game_scoreboard.post_game_scoreboard.words_guessed" = "Tahmin Edilen Kelimeler";
+"screen.game_scoreboard.post_game_scoreboard.words_skipped" = "Atlanan Kelimeler";
+"screen.game_scoreboard.post_game_scoreboard.best_streak" = "En İyi Seri";
+"screen.game_scoreboard.post_game_scoreboard.average_time" = "Ortalama Süre";
+"screen.game_scoreboard.post_game_scoreboard.sets_skipped" = "Atlanan Setler";
+"screen.game_scoreboard.stat_card.words_guessed" = "Tahmin Edilen Kelimeler";
+"screen.game_scoreboard.stat_card.words_skipped" = "Atlanan Kelimeler";
+"screen.game_scoreboard.performance_stat_row.best_streak" = "En İyi Seri";
+"screen.game_scoreboard.performance_stat_row.average_time" = "Ortalama Süre";
+"screen.game_scoreboard.performance_stat_row.sets_skipped" = "Atlanan Setler";
+
 // MARK: - Game Share
 "screen.game_share.title" = "Skoru paylaş!";
 "screen.game_share.share_to" = "Şuraya paylaş";

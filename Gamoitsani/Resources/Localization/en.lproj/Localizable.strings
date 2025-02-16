@@ -120,6 +120,20 @@
 "screen.game.game_share_view.title" = "The winning team is %@ 🥳";
 "screen.game.arcade.skipButton" = "New words (-2 points)";
 
+// MARK: - Game Scoreboard
+"screen.game_scoreboard.title" = "Scoreboard";
+"screen.game_scoreboard.post_game_scoreboard.final_score" = "Final Score: %@";
+"screen.game_scoreboard.post_game_scoreboard.words_guessed" = "Words Guessed";
+"screen.game_scoreboard.post_game_scoreboard.words_skipped" = "Words Skipped";
+"screen.game_scoreboard.post_game_scoreboard.best_streak" = "Best Streak";
+"screen.game_scoreboard.post_game_scoreboard.average_time" = "Average Time";
+"screen.game_scoreboard.post_game_scoreboard.sets_skipped" = "Sets Skipped";
+"screen.game_scoreboard.stat_card.words_guessed" = "Words Guessed";
+"screen.game_scoreboard.stat_card.words_skipped" = "Words Skipped";
+"screen.game_scoreboard.performance_stat_row.best_streak" = "Best Streak";
+"screen.game_scoreboard.performance_stat_row.average_time" = "Average Time";
+"screen.game_scoreboard.performance_stat_row.sets_skipped" = "Sets Skipped";
+
 // MARK: - Game Share
 "screen.game_share.title" = "Share score!";
 "screen.game_share.share_to" = "Share to";

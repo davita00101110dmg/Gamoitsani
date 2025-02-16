@@ -120,6 +120,21 @@
 "screen.game.game_share_view.title" = "გამარჯვებული გუნდია %@ 🥳";
 "screen.game.arcade.skipButton" = "ახალი სიტყვები (-2 ქულა)";
 
+// MARK: - Game Scoreboard
+"screen.game_scoreboard.title" = "შედეგები";
+"screen.game_scoreboard.post_game_scoreboard.final_score" = "საბოლოო ქულა: %@";
+"screen.game_scoreboard.post_game_scoreboard.words_guessed" = "გამოცნობილი სიტყვები";
+"screen.game_scoreboard.post_game_scoreboard.words_skipped" = "გამოტოვებული სიტყვები";
+"screen.game_scoreboard.post_game_scoreboard.best_streak" = "საუკეთესო სტრაიკი";
+"screen.game_scoreboard.post_game_scoreboard.average_time" = "საშუალო დრო";
+"screen.game_scoreboard.post_game_scoreboard.sets_skipped" = "გამოტოვებული სეტები";
+"screen.game_scoreboard.stat_card.words_guessed" = "გამოცნობილი სიტყვები";
+"screen.game_scoreboard.stat_card.words_skipped" = "გამოტოვებული სიტყვები";
+"screen.game_scoreboard.performance_stat_row.best_streak" = "საუკეთესო სერია";
+"screen.game_scoreboard.performance_stat_row.average_time" = "საშუალო დრო";
+"screen.game_scoreboard.performance_stat_row.sets_skipped" = "გამოტოვებული სეტები";
+
+
 // MARK: - Game Share
 "screen.game_share.title" = "გააზიარე შედეგები!";
 "screen.game_share.share_to" = "გააზიარე";

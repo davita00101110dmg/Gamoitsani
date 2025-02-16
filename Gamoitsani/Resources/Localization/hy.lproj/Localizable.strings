@@ -120,6 +120,20 @@
 "screen.game.game_share_view.title" = "Հաղթող թիմն է %@ 🥳";
 "screen.game.arcade.skipButton" = "Նոր բառեր (-2 միավոր)";
 
+// MARK: - Game Scoreboard
+"screen.game_scoreboard.title" = "Արդյունքներ";
+"screen.game_scoreboard.post_game_scoreboard.final_score" = "Վերջնական միավոր՝ %@";
+"screen.game_scoreboard.post_game_scoreboard.words_guessed" = "Գուշակված բառեր";
+"screen.game_scoreboard.post_game_scoreboard.words_skipped" = "Բառեր բաց թողնված";
+"screen.game_scoreboard.post_game_scoreboard.best_streak" = "Լավագույն շարք";
+"screen.game_scoreboard.post_game_scoreboard.average_time" = "Միջին ժամանակը";
+"screen.game_scoreboard.post_game_scoreboard.sets_skipped" = "Կոմպլեկտները բաց են թողնվել";
+"screen.game_scoreboard.stat_card.words_guessed" = "Գուշակված բառեր";
+"screen.game_scoreboard.stat_card.words_skipped" = "Բառեր բաց թողնված";
+"screen.game_scoreboard.performance_stat_row.best_streak" = "Լավագույն շարք";
+"screen.game_scoreboard.performance_stat_row.average_time" = "Միջին ժամանակը";
+"screen.game_scoreboard.performance_stat_row.sets_skipped" = "Կոմպլեկտները բաց են թողնվել";
+
 // MARK: - Game Share
 "screen.game_share.title" = "Կիսվել միավորով!";
 "screen.game_share.share_to" = "Կիսվել";
