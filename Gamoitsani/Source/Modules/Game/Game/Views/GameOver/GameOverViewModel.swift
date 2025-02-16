@@ -9,6 +9,9 @@
 import Foundation
 
 struct GameOverViewModel {
-    let teamName: String
-    let score: Int
+    let teams: [Team]
+    
+    init(teams: [Team]) {
+        self.teams = teams.sorted { $0.score > $1.score }
+    }
 }

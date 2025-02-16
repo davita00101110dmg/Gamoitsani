@@ -46,12 +46,9 @@ extension GameViewModel {
     }
 
     func createGameOverViewModel() -> GameOverViewModel {
-        let winner = getWinnerTeam()
-        return GameModeFactory.createGameOverViewModel(
-            teamName: winner?.name,
-            score: winner?.score ?? 0
-        )
+        GameModeFactory.createGameOverViewModel(using: gameStory)
     }
+
     
     func createClassicViewModel() -> ClassicGamePlayViewModel {
         GameModeFactory.createClassicViewModel(

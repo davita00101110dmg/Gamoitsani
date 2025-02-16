@@ -13,7 +13,7 @@ enum GameModeFactory {
         case classic
         case arcade
         case info(teamName: String, round: Int, extraRound: Int)
-        case gameOver(teamName: String?, score: Int)
+        case gameOver(teams: [Team])
     }
 }
 
@@ -56,12 +56,8 @@ extension GameModeFactory {
     }
     
     static func createGameOverViewModel(
-        teamName: String?,
-        score: Int
+        using gameStory: GameStory
     ) -> GameOverViewModel {
-        GameOverViewModel(
-            teamName: teamName ?? .empty,
-            score: score
-        )
+        GameOverViewModel(teams: gameStory.teams)
     }
 }

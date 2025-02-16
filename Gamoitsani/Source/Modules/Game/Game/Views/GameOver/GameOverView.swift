@@ -9,14 +9,18 @@
 import SwiftUI
 
 struct GameOverView: View {
-    @State var isDisable: Bool = false
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    
+    @State private var showPodium = false
+
     var viewModel: GameOverViewModel
     var onStartOver: () -> Void
     var onGoBack: () -> Void
     var onShowFullScoreboard: () -> Void
-
+    
+    private var winner: Team? { viewModel.teams.first }
+    private var secondPlace: Team? { viewModel.teams.count > 1 ? viewModel.teams[1] : nil }
+    private var thirdPlace: Team? { viewModel.teams.count > 2 ? viewModel.teams[2] : nil }
+    
     var body: some View {
         DynamicStack(spacing: dynamicStackSpacing) {
             VStack {
@@ -26,14 +30,96 @@ struct GameOverView: View {
                 
                 Spacer()
                 
-                trophyImage
-            
-                Spacer()
-                
-                VStack(spacing: ViewConstants.labelsSpacing) {
-                    teamNameLabel
-                    messageLabel
+                HStack(alignment: .bottom, spacing: 0) {
+                    if let secondPlace {
+                        VStack(spacing: 8) {
+                            Image(systemName: "2.circle.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(.white.opacity(0.8))
+                            
+                            GMLabelView(text: secondPlace.name)
+                                .font(F.Mersad.semiBold.swiftUIFont(size: 14))
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.center)
+                            
+                            GMLabelView(text: secondPlace.score.toString)
+                                .font(F.Mersad.bold.swiftUIFont(size: 18))
+                                .foregroundColor(Asset.gmPrimary.swiftUIColor)
+                            
+                            Rectangle()
+                                .fill(Asset.gmSecondary.swiftUIColor)
+                                .frame(height: 100)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .offset(y: showPodium ? 0 : 100)
+                        .opacity(showPodium ? 1 : 0)
+                        .animation(
+                            .spring(response: 0.6, dampingFraction: 0.8)
+                            .delay(0.6),
+                            value: showPodium
+                        )
+                    }
+                    
+                    if let winner {
+                        VStack(spacing: 8) {
+                            Image(systemName: "crown.fill")
+                                .font(.system(size: 32))
+                                .foregroundColor(Asset.gmPrimary.swiftUIColor)
+                            
+                            GMLabelView(text: winner.name)
+                                .font(F.Mersad.bold.swiftUIFont(size: 16))
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.center)
+                            
+                            GMLabelView(text: winner.score.toString)
+                                .font(F.Mersad.bold.swiftUIFont(size: 24))
+                                .foregroundColor(Asset.gmPrimary.swiftUIColor)
+                            
+                            Rectangle()
+                                .fill(Asset.gmPrimary.swiftUIColor)
+                                .frame(height: 140)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .zIndex(1)
+                        .offset(y: showPodium ? 0 : 100)
+                        .opacity(showPodium ? 1 : 0)
+                        .animation(
+                            .spring(response: 0.6, dampingFraction: 0.8)
+                            .delay(0.3),
+                            value: showPodium
+                        )
+                    }
+                    
+                    if let thirdPlace {
+                        VStack(spacing: 8) {
+                            Image(systemName: "3.circle.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(.white.opacity(0.6))
+                            
+                            GMLabelView(text: thirdPlace.name)
+                                .font(F.Mersad.semiBold.swiftUIFont(size: 14))
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.center)
+                            
+                            GMLabelView(text: thirdPlace.score.toString)
+                                .font(F.Mersad.bold.swiftUIFont(size: 18))
+                                .foregroundColor(Asset.gmPrimary.swiftUIColor)
+                            
+                            Rectangle()
+                                .fill(Asset.gmSecondary.swiftUIColor)
+                                .frame(height: 70)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .offset(y: showPodium ? 0 : 100)
+                        .opacity(showPodium ? 1 : 0)
+                        .animation(
+                            .spring(response: 0.6, dampingFraction: 0.8)
+                            .delay(0.9),
+                            value: showPodium
+                        )
+                    }
                 }
+                .padding(.horizontal)
                 
                 Spacer()
             }
@@ -44,37 +130,17 @@ struct GameOverView: View {
                 showScoreboardButton
             }
         }
+        .onAppear {
+            showPodium = true
+        }
         .transitionHandler(duration: AppConstants.viewTransitionTime)
     }
-
+    
     private var titleLabel: some View {
         GMLabelView(
             text: L10n.Screen.Game.WinningView.title,
             fontSizeForPhone: ViewConstants.winLabelFontSizeForPhone,
             fontSizeForPad: ViewConstants.winLabelFontSizeForPad
-        )
-    }
-    
-    private var trophyImage: some View {
-        Image(.trophy)
-            .resizable()
-            .scaledToFit()
-            .frame(width: trophyIconSize)
-    }
-    
-    private var teamNameLabel: some View {
-        GMLabelView(
-            text: viewModel.teamName,
-            fontSizeForPhone: ViewConstants.teamLabelFontSizeForPhone,
-            fontSizeForPad: ViewConstants.teamLabelFontSizeForPad
-        )
-    }
-    
-    private var messageLabel: some View {
-        GMLabelView(
-            text: L10n.Screen.Game.WinningView.description(viewModel.score.toString),
-            fontSizeForPhone: ViewConstants.descriptionLabelFontSizeForPhone,
-            fontSizeForPad: ViewConstants.descriptionLabelFontSizeForPad
         )
     }
     
@@ -88,7 +154,7 @@ struct GameOverView: View {
             }
         }
     }
-        
+    
     private var goBackButton: some View {
         GMButtonView(
             text: L10n.Screen.Game.WinningView.GameDetails.title,
@@ -107,14 +173,10 @@ struct GameOverView: View {
         }
     }
     
-    private var trophyIconSize: CGFloat {
-        horizontalSizeClass == .compact ? ViewConstants.trophyIconSizeForPhone : ViewConstants.trophyIconSizeForPad
-    }
-
     private var buttonHeight: CGFloat {
         horizontalSizeClass == .compact ? ViewConstants.buttonHeightForPhone : ViewConstants.buttonHeightForPad
     }
-
+    
     private var dynamicStackSpacing: CGFloat {
         horizontalSizeClass == .compact ? ViewConstants.dynamicStackSpacingForPhone : ViewConstants.dynamicStackSpacingForPad
     }
@@ -125,30 +187,27 @@ extension GameOverView {
     enum ViewConstants {
         static let winLabelFontSizeForPhone: CGFloat = 40
         static let winLabelFontSizeForPad: CGFloat = 74
-        static let teamLabelFontSizeForPhone: CGFloat = 22
-        static let teamLabelFontSizeForPad: CGFloat = 40
-        static let descriptionLabelFontSizeForPhone: CGFloat = 18
-        static let descriptionLabelFontSizeForPad: CGFloat = 32
-        static let trophyIconSize: CGFloat = 175
-        static let trophyIconSizeForPhone: CGFloat = 175
-        static let trophyIconSizeForPad: CGFloat = 325
         static let buttonHeightForPhone: CGFloat = 44
         static let buttonHeightForPad: CGFloat = 60
         static let dynamicStackSpacingForPhone: CGFloat = 32
         static let dynamicStackSpacingForPad: CGFloat = 0
-        static let labelsSpacing: CGFloat = 12
         static let buttonsSpacing: CGFloat = 16
     }
 }
 
 #Preview {
-    GameOverView(viewModel: GameOverViewModel(teamName: "გუნდი 1", score: 1)) {
- 
-    } onGoBack: {
-        
-    } onShowFullScoreboard: {
-        
-    }
+    GameOverView(
+        viewModel: GameOverViewModel(
+            teams: [
+                .init(name: "Team 1", score: 10),
+                .init(name: "Team 2", score: 8),
+                .init(name: "Team 3", score: 6)
+            ]
+        ),
+        onStartOver: {},
+        onGoBack: {},
+        onShowFullScoreboard: {}
+    )
     .background(Asset.gmSecondary.swiftUIColor.opacity(0.3))
     .cornerRadius(10)
     .frame(maxHeight: .infinity)
