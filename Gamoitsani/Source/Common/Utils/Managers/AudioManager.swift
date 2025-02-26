@@ -12,13 +12,16 @@ import AVFoundation
 final class AudioManager {
     
     var correctSoundAudioPlayer: AVAudioPlayer?
+    var superCorrectSoundAudioPlayer: AVAudioPlayer?
     var incorrectSoundAudioPlayer: AVAudioPlayer?
     
     func setupSounds() {
         guard let correctSoundUrl = Bundle.main.url(forResource: "correct", withExtension: "wav") else { return }
+        guard let superCorrectSoundUrl = Bundle.main.url(forResource: "super-correct", withExtension: "mp3") else { return }
         guard let incorrectSoundUrl = Bundle.main.url(forResource: "incorrect", withExtension: "mp3") else { return }
         do {
             correctSoundAudioPlayer = try AVAudioPlayer(contentsOf: correctSoundUrl)
+            superCorrectSoundAudioPlayer = try AVAudioPlayer(contentsOf: superCorrectSoundUrl)
             incorrectSoundAudioPlayer = try AVAudioPlayer(contentsOf: incorrectSoundUrl)
             correctSoundAudioPlayer?.prepareToPlay()
             incorrectSoundAudioPlayer?.prepareToPlay()
@@ -39,6 +42,8 @@ final class AudioManager {
             play(audioPlayer: incorrectSoundAudioPlayer)
         case 1:
             play(audioPlayer: correctSoundAudioPlayer)
+        case 2:
+            play(audioPlayer: superCorrectSoundAudioPlayer)
         default:
             return
         }
@@ -46,8 +51,10 @@ final class AudioManager {
     
     deinit {
         correctSoundAudioPlayer?.stop()
+        superCorrectSoundAudioPlayer?.stop()
         incorrectSoundAudioPlayer?.stop()
         correctSoundAudioPlayer = nil
+        superCorrectSoundAudioPlayer = nil
         incorrectSoundAudioPlayer = nil
     }
 }
