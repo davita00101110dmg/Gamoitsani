@@ -18,16 +18,15 @@ final class GameViewModel: ObservableObject {
     var currentRound: Int { gameStory.currentRound }
     var currentExtraRound: Int { gameStory.currentRound - gameStory.numberOfRounds }
     var sortedTeams: [Team] { gameStory.teams.sorted { $0.score > $1.score } }
-
     var gameMode: GameMode { gameStory.gameMode }
     var gameStory = GameStory.shared
     
     private var playingSessionCount: Int { gameStory.playingSessionCount }
     private var numberOfTeams: Int { gameStory.teams.count }
-
-    private lazy var audioManager = AudioManager()
-    
     private let isTestEnvironment: Bool
+    private var cachedClassicViewModel: ClassicGamePlayViewModel?
+    private var cachedArcadeViewModel: ArcadeGamePlayViewModel?
+    private lazy var audioManager = AudioManager()
     
     init(isTestEnvironment: Bool = false) {
         self.isTestEnvironment = isTestEnvironment
@@ -48,20 +47,31 @@ extension GameViewModel {
     func createGameOverViewModel() -> GameOverViewModel {
         GameModeFactory.createGameOverViewModel(using: gameStory)
     }
-
     
     func createClassicViewModel() -> ClassicGamePlayViewModel {
-        GameModeFactory.createClassicViewModel(
+        if let cached = cachedClassicViewModel {
+            return cached
+        }
+        
+        let viewModel = GameModeFactory.createClassicViewModel(
             using: gameStory,
             audioManager: audioManager
         )
+        cachedClassicViewModel = viewModel
+        return viewModel
     }
     
     func createArcadeViewModel() -> ArcadeGamePlayViewModel {
-        GameModeFactory.createArcadeViewModel(
+        if let cached = cachedArcadeViewModel {
+            return cached
+        }
+        
+        let viewModel = GameModeFactory.createArcadeViewModel(
             using: gameStory,
             audioManager: audioManager
         )
+        cachedArcadeViewModel = viewModel
+        return viewModel
     }
     
     func startPlaying() {
@@ -72,6 +82,8 @@ extension GameViewModel {
     func handleGamePlayResult(score: Int, wasSkipped: Int, wordsGuessed: Int) {
         withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
             updateGameInfo(with: score, wasSkipped: wasSkipped, wordsGuessed: wordsGuessed)
+            
+            resetViewModels()
             
             if handleEndOfGame() {
                 gameState = .gameOver
@@ -85,6 +97,12 @@ extension GameViewModel {
     func startNewGame() {
         gameStory.reset()
         gameState = .info
+        resetViewModels()
+    }
+    
+    private func resetViewModels() {
+        cachedClassicViewModel = nil
+        cachedArcadeViewModel = nil
     }
     
     func getWinnerTeam() -> Team? {
