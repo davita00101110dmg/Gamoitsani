@@ -76,6 +76,7 @@
 "screen.game_details.loading_words.message" = "Kelime indirme devam ediyor";
 "screen.game_details.storage_warning.title" = "Yetersiz depolama alanı";
 "screen.game_details.storage_warning.message" = "Kelimeler indirilemedi, lütfen tekrar deneyin";
+"screen.game_details.super_word.description" = "Rastgele süper kelime (3 Puan)";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Oynamaya başlamak için takım ekleyin";

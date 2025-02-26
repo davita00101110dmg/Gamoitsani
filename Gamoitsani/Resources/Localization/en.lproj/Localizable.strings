@@ -76,6 +76,7 @@
 "screen.game_details.loading_words.message" = "Downloading words in progress";
 "screen.game_details.storage_warning.title" = "Insufficient storage";
 "screen.game_details.storage_warning.message" = "Failed to download words, please try again";
+"screen.game_details.super_word.description" = "Random super word (3 Points)";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Add teams to start playing";

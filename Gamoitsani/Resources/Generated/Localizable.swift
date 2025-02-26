@@ -232,6 +232,11 @@ public enum L10n {
           public static var title: String { L10n.tr("Localizable", "screen.game_details.storage_warning.title") }
         }
 
+        public enum SuperWord {
+          /// Random super word (3 Points)
+          public static var description: String { L10n.tr("Localizable", "screen.game_details.super_word.description") }
+        }
+
         public enum Teams {
           /// Add a team
           public static var add: String { L10n.tr("Localizable", "screen.game_details.teams.add") }

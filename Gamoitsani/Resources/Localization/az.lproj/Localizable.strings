@@ -76,6 +76,7 @@
 "screen.game_details.loading_words.message" = "Sözlərin yüklənməsi davam edir";
 "screen.game_details.storage_warning.title" = "Yetərsiz yaddaş";
 "screen.game_details.storage_warning.message" = "Sözləri yükləmək mümkün olmadı, yenidən cəhd edin";
+"screen.game_details.super_word.description" = "Təsadüfi super söz (3 xal)";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Oynamağa başlamaq üçün komanda əlavə edin";

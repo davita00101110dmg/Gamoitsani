@@ -76,6 +76,7 @@
 "screen.game_details.loading_words.message" = "მიმდინარეობს სიტყვების გადმოწერა";
 "screen.game_details.storage_warning.title" = "არასაკმარისი მეხსიერება";
 "screen.game_details.storage_warning.message" = "სიტყვების გადმოწერა ვერ მოხდა, სცადეთ თავიდან";
+"screen.game_details.super_word.description" = "რენდომ სუპერ სიტყვა (3 ქულა)";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "დაამატე გუნდები თამაშის დასაწყებად";
