@@ -300,6 +300,7 @@ final class GameViewModelTests: XCTestCase {
     ]) {
         GameStory.shared.reset()
         GameStory.shared.gameMode = mode
+        GameStory.shared.isSuperWordEnabled = false
         
         let initialTeams = teams.map { data in
             Team(name: data.name,
@@ -407,6 +408,88 @@ final class GameViewModelTests: XCTestCase {
         XCTAssertEqual(GameStory.shared.currentTeam?.totalWordsGuessed, 2, "Count should still be 2 after incorrect guess")
     }
     
+    // MARK: - Super word tests
+    func testSuperWordToggle() {
+        // Arrange
+        setupGameState(mode: .classic)
+        
+        // Test disabled by default
+        XCTAssertFalse(GameStory.shared.isSuperWordEnabled)
+        
+        // Enable super word
+        GameStory.shared.isSuperWordEnabled = true
+        XCTAssertTrue(GameStory.shared.isSuperWordEnabled)
+    }
+
+    func testSuperWordScoring() {
+        // Arrange
+        setupGameState(mode: .classic)
+        GameStory.shared.isSuperWordEnabled = true
+        
+        // Create test words
+        let testWords = createTestWords(count: 10)
+        GameStory.shared.words = testWords
+        
+        // Get a classic view model
+        let classicViewModel = sut.createClassicViewModel()
+        
+        // Initial state check
+        XCTAssertEqual(GameStory.shared.teams[0].score, 0)
+        
+        // Force super word in view model
+        classicViewModel.isSuperWord = true
+        
+        // Simulate a super word correct guess (+3 points)
+        classicViewModel.wordButtonAction(tag: 1)
+        
+        // Create RoundStats as would be created when timer ends
+        let correctStats = RoundStats(
+            score: classicViewModel.score,
+            wordsSkipped: classicViewModel.wordsSkipped,
+            wordsGuessed: classicViewModel.wordsGuessed
+        )
+        
+        // Update game state with round stats (same as when timer ends)
+        sut.handleGamePlayResult(
+            score: correctStats.score,
+            wasSkipped: correctStats.wordsSkipped,
+            wordsGuessed: correctStats.wordsGuessed
+        )
+        
+        // Check score is correctly updated to 3 points
+        XCTAssertEqual(GameStory.shared.teams[0].score, WordItem.Constants.superWordPoints)
+        
+        // Reset for next test
+        setupGameState(mode: .classic)
+        GameStory.shared.isSuperWordEnabled = true
+        GameStory.shared.words = createTestWords(count: 10)
+        
+        // Get a new classic view model
+        let newViewModel = sut.createClassicViewModel()
+        
+        // Force super word in view model
+        newViewModel.isSuperWord = true
+        
+        // Simulate missing a super word (-3 points)
+        newViewModel.wordButtonAction(tag: 0)
+        
+        // Create RoundStats as would be created when timer ends
+        let incorrectStats = RoundStats(
+            score: newViewModel.score,
+            wordsSkipped: newViewModel.wordsSkipped,
+            wordsGuessed: newViewModel.wordsGuessed
+        )
+        
+        // Update game state with round stats (same as when timer ends)
+        sut.handleGamePlayResult(
+            score: incorrectStats.score,
+            wasSkipped: incorrectStats.wordsSkipped,
+            wordsGuessed: incorrectStats.wordsGuessed
+        )
+        
+        // Check score is correctly updated to -3 points
+        XCTAssertEqual(GameStory.shared.teams[0].score, -WordItem.Constants.superWordPoints)
+    }
     
     private func setupEndGameState() {
         GameStory.shared.numberOfRounds = 2
@@ -432,6 +515,11 @@ final class GameViewModelTests: XCTestCase {
     private func testClassicModeViewModel() {
         GameStory.shared.gameMode = .classic
         let viewModel = sut.createClassicViewModel()
+        
+#if DEBUG
+        viewModel.isTestMode = true
+#endif
+        
         viewModel.startGame()
         XCTAssertNotNil(viewModel.currentWord)
         viewModel.stopGame()
