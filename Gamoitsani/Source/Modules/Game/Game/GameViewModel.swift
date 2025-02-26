@@ -133,6 +133,10 @@ extension GameViewModel {
         log(.info, "Round: \(currentRound) Team: \(currentTeam?.name ?? .empty) Score: \(currentTeam?.score ?? 0)")
         gameStory.currentTeamIndex = playingSessionCount % numberOfTeams
         gameStory.currentRound = playingSessionCount / numberOfTeams + 1
+        
+        if playingSessionCount % numberOfTeams == 0 {
+            gameStory.onNewRound()
+        }
     }
 }
 

@@ -17,6 +17,9 @@
 		FF1E92B82BF9017100127FDE /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */; };
 		FF1E92BA2BF91C8C00127FDE /* GMBackBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */; };
 		FF1F14152BF7A897004116A1 /* Mersad.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF1F14132BF7A897004116A1 /* Mersad.ttf */; };
+		FF1F59DD2D6239D90022B0B3 /* CheckToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1F59DC2D6239D90022B0B3 /* CheckToggleStyle.swift */; };
+		FF31C8072D6E441600653F9C /* SuperWordToggleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF31C8062D6E441600653F9C /* SuperWordToggleRow.swift */; };
+		FF31C8092D6E445E00653F9C /* WordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF31C8082D6E445E00653F9C /* WordItem.swift */; };
 		FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37087A2BFBD4280056361F /* CoreDataManager.swift */; };
 		FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */; };
 		FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */; };
@@ -68,6 +71,9 @@
 		FF70699E2C6C0DBA00C3D9EA /* QuestionMark.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70699D2C6C0DBA00C3D9EA /* QuestionMark.png */; };
 		FF7555882C7F203700EC37A0 /* SocialIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7555872C7F203700EC37A0 /* SocialIconView.swift */; };
 		FF75558A2C8358F700EC37A0 /* DisplayConfettiModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7555892C8358F700EC37A0 /* DisplayConfettiModifier.swift */; };
+		FF786D302D6E650A00F3E6BE /* super-correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF786D2F2D6E650A00F3E6BE /* super-correct.mp3 */; };
+		FF786D322D6E664700F3E6BE /* RainbowText.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF786D312D6E664700F3E6BE /* RainbowText.swift */; };
+		FF786D342D6E6BBA00F3E6BE /* RainbowAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF786D332D6E6BBA00F3E6BE /* RainbowAnimation.swift */; };
 		FF7CA15E2C01FCB800E3BEC4 /* StoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7CA15D2C01FCB800E3BEC4 /* StoreReviewManager.swift */; };
 		FF7CA1602C02000900E3BEC4 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7CA15F2C02000900E3BEC4 /* UIApplicationExtensions.swift */; };
 		FF7CA1632C02590700E3BEC4 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7CA1622C02590700E3BEC4 /* GameOverView.swift */; };
@@ -123,12 +129,13 @@
 		FFA60DC52C7CFCE3005A2660 /* BannerAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DC42C7CFCE3005A2660 /* BannerAdManager.swift */; };
 		FFA60DC72C7CFF6C005A2660 /* BaseAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DC62C7CFF6C005A2660 /* BaseAdManager.swift */; };
 		FFA60DC92C7D01FB005A2660 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DC82C7D01FB005A2660 /* GameView.swift */; };
+		FFA61BBF2D6CF8D20062D68B /* RainbowBorderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA61BBE2D6CF8D20062D68B /* RainbowBorderCardView.swift */; };
+		FFA61BC32D6CF9920062D68B /* ClassicGamePlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA61BC12D6CF9920062D68B /* ClassicGamePlayView.swift */; };
 		FFAA68822D3846C400F0B2C0 /* ArcadeGamePlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA687F2D3846C400F0B2C0 /* ArcadeGamePlayView.swift */; };
 		FFAA68832D3846C400F0B2C0 /* ArcadeGamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68802D3846C400F0B2C0 /* ArcadeGamePlayViewModel.swift */; };
 		FFAA68872D3846DB00F0B2C0 /* GameModeOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68862D3846DB00F0B2C0 /* GameModeOptionView.swift */; };
 		FFAA68892D3846E400F0B2C0 /* GameModePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68882D3846E400F0B2C0 /* GameModePickerView.swift */; };
 		FFAA688D2D3852F300F0B2C0 /* WordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA688B2D3852F300F0B2C0 /* WordCardView.swift */; };
-		FFAA68932D39154500F0B2C0 /* ClassicGamePlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68902D39154500F0B2C0 /* ClassicGamePlayView.swift */; };
 		FFAA68942D39154500F0B2C0 /* ClassicGamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68912D39154500F0B2C0 /* ClassicGamePlayViewModel.swift */; };
 		FFAA68972D39156B00F0B2C0 /* BaseGamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68962D39156B00F0B2C0 /* BaseGamePlayViewModel.swift */; };
 		FFAA68992D3915EB00F0B2C0 /* GameModeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAA68982D3915EB00F0B2C0 /* GameModeFactory.swift */; };
@@ -231,6 +238,9 @@
 		FF1E92B72BF9017100127FDE /* UILabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
 		FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMBackBarButtonItem.swift; sourceTree = "<group>"; };
 		FF1F14132BF7A897004116A1 /* Mersad.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mersad.ttf; sourceTree = "<group>"; };
+		FF1F59DC2D6239D90022B0B3 /* CheckToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckToggleStyle.swift; sourceTree = "<group>"; };
+		FF31C8062D6E441600653F9C /* SuperWordToggleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperWordToggleRow.swift; sourceTree = "<group>"; };
+		FF31C8082D6E445E00653F9C /* WordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordItem.swift; sourceTree = "<group>"; };
 		FF37087A2BFBD4280056361F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleTableViewCell.swift; sourceTree = "<group>"; };
 		FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RuleTableViewCell.xib; sourceTree = "<group>"; };
@@ -284,6 +294,9 @@
 		FF70699D2C6C0DBA00C3D9EA /* QuestionMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QuestionMark.png; sourceTree = "<group>"; };
 		FF7555872C7F203700EC37A0 /* SocialIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialIconView.swift; sourceTree = "<group>"; };
 		FF7555892C8358F700EC37A0 /* DisplayConfettiModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayConfettiModifier.swift; sourceTree = "<group>"; };
+		FF786D2F2D6E650A00F3E6BE /* super-correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "super-correct.mp3"; sourceTree = "<group>"; };
+		FF786D312D6E664700F3E6BE /* RainbowText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainbowText.swift; sourceTree = "<group>"; };
+		FF786D332D6E6BBA00F3E6BE /* RainbowAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainbowAnimation.swift; sourceTree = "<group>"; };
 		FF7CA15D2C01FCB800E3BEC4 /* StoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreReviewManager.swift; sourceTree = "<group>"; };
 		FF7CA15F2C02000900E3BEC4 /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
 		FF7CA1622C02590700E3BEC4 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
@@ -341,12 +354,13 @@
 		FFA60DC42C7CFCE3005A2660 /* BannerAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdManager.swift; sourceTree = "<group>"; };
 		FFA60DC62C7CFF6C005A2660 /* BaseAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAdManager.swift; sourceTree = "<group>"; };
 		FFA60DC82C7D01FB005A2660 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		FFA61BBE2D6CF8D20062D68B /* RainbowBorderCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainbowBorderCardView.swift; sourceTree = "<group>"; };
+		FFA61BC12D6CF9920062D68B /* ClassicGamePlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicGamePlayView.swift; sourceTree = "<group>"; };
 		FFAA687F2D3846C400F0B2C0 /* ArcadeGamePlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcadeGamePlayView.swift; sourceTree = "<group>"; };
 		FFAA68802D3846C400F0B2C0 /* ArcadeGamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcadeGamePlayViewModel.swift; sourceTree = "<group>"; };
 		FFAA68862D3846DB00F0B2C0 /* GameModeOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeOptionView.swift; sourceTree = "<group>"; };
 		FFAA68882D3846E400F0B2C0 /* GameModePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModePickerView.swift; sourceTree = "<group>"; };
 		FFAA688B2D3852F300F0B2C0 /* WordCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCardView.swift; sourceTree = "<group>"; };
-		FFAA68902D39154500F0B2C0 /* ClassicGamePlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicGamePlayView.swift; sourceTree = "<group>"; };
 		FFAA68912D39154500F0B2C0 /* ClassicGamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicGamePlayViewModel.swift; sourceTree = "<group>"; };
 		FFAA68962D39156B00F0B2C0 /* BaseGamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGamePlayViewModel.swift; sourceTree = "<group>"; };
 		FFAA68982D3915EB00F0B2C0 /* GameModeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeFactory.swift; sourceTree = "<group>"; };
@@ -672,6 +686,7 @@
 			isa = PBXGroup;
 			children = (
 				FF63A43B2CD517F3005617E5 /* GameDetailsView.swift */,
+				FF31C8062D6E441600653F9C /* SuperWordToggleRow.swift */,
 				FFAA68882D3846E400F0B2C0 /* GameModePickerView.swift */,
 				FFAA68862D3846DB00F0B2C0 /* GameModeOptionView.swift */,
 				FF63A4352CD517E0005617E5 /* PlayerRowView.swift */,
@@ -754,6 +769,7 @@
 			isa = PBXGroup;
 			children = (
 				FFAA68962D39156B00F0B2C0 /* BaseGamePlayViewModel.swift */,
+				FF31C8082D6E445E00653F9C /* WordItem.swift */,
 				FFAA68922D39154500F0B2C0 /* ClassicGamePlay */,
 				FFAA68812D3846C400F0B2C0 /* ArcadeGamePlay */,
 			);
@@ -814,6 +830,7 @@
 			isa = PBXGroup;
 			children = (
 				FF6054FE2CC56A31003C2AA0 /* LanguagePickerRow */,
+				FF786D312D6E664700F3E6BE /* RainbowText.swift */,
 				FF63A4482CD606F4005617E5 /* BannerAdView.swift */,
 				FF86756C2C67E0DA0089B52B /* ActivityView.swift */,
 				FFFCF38B2C6EC506003458DC /* ConfettiView.swift */,
@@ -866,6 +883,7 @@
 		FF8EA7222BEC13F600F098B8 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				FF786D2F2D6E650A00F3E6BE /* super-correct.mp3 */,
 				FF1111872C4FD17500C44F62 /* correct.wav */,
 				FF1111882C4FD17500C44F62 /* incorrect.mp3 */,
 			);
@@ -876,11 +894,13 @@
 			isa = PBXGroup;
 			children = (
 				FF63A4562CD647C4005617E5 /* Animations */,
+				FF786D332D6E6BBA00F3E6BE /* RainbowAnimation.swift */,
 				FF63A4372CD517ED005617E5 /* AlertWithTextFieldModifier.swift */,
 				FF63A4382CD517ED005617E5 /* CustomSegmentedPickerStyle.swift */,
 				FFA60DB62C7A0288005A2660 /* TransitionViewModifier.swift */,
 				FF7555892C8358F700EC37A0 /* DisplayConfettiModifier.swift */,
 				FF6055012CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift */,
+				FF1F59DC2D6239D90022B0B3 /* CheckToggleStyle.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -913,11 +933,18 @@
 			path = Admob;
 			sourceTree = "<group>";
 		};
+		FFA61BC22D6CF9920062D68B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FFA61BC12D6CF9920062D68B /* ClassicGamePlayView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FFAA68812D3846C400F0B2C0 /* ArcadeGamePlay */ = {
 			isa = PBXGroup;
 			children = (
 				FFAA688C2D3852F300F0B2C0 /* Views */,
-				FFAA687F2D3846C400F0B2C0 /* ArcadeGamePlayView.swift */,
 				FFAA68802D3846C400F0B2C0 /* ArcadeGamePlayViewModel.swift */,
 			);
 			path = ArcadeGamePlay;
@@ -926,7 +953,9 @@
 		FFAA688C2D3852F300F0B2C0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FFA61BBE2D6CF8D20062D68B /* RainbowBorderCardView.swift */,
 				FFAA688B2D3852F300F0B2C0 /* WordCardView.swift */,
+				FFAA687F2D3846C400F0B2C0 /* ArcadeGamePlayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -934,7 +963,7 @@
 		FFAA68922D39154500F0B2C0 /* ClassicGamePlay */ = {
 			isa = PBXGroup;
 			children = (
-				FFAA68902D39154500F0B2C0 /* ClassicGamePlayView.swift */,
+				FFA61BC22D6CF9920062D68B /* Views */,
 				FFAA68912D39154500F0B2C0 /* ClassicGamePlayViewModel.swift */,
 			);
 			path = ClassicGamePlay;
@@ -1316,6 +1345,7 @@
 				FF1F14152BF7A897004116A1 /* Mersad.ttf in Resources */,
 				FF7F1D742BE6BCA900872554 /* swiftgen.yml in Resources */,
 				FF70699E2C6C0DBA00C3D9EA /* QuestionMark.png in Resources */,
+				FF786D302D6E650A00F3E6BE /* super-correct.mp3 in Resources */,
 				FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */,
 				FF6054EF2CC550A5003C2AA0 /* Ubuntu-Bold.ttf in Resources */,
 				FF6054F22CC550A5003C2AA0 /* Ubuntu-Medium.ttf in Resources */,
@@ -1522,8 +1552,10 @@
 				FFAA68872D3846DB00F0B2C0 /* GameModeOptionView.swift in Sources */,
 				FFFB4D4C2BD9392D00CDDCB4 /* GameDetailsCoordinator.swift in Sources */,
 				FFF65CC72BE6B0C4008E0352 /* Assets.swift in Sources */,
+				FFA61BBF2D6CF8D20062D68B /* RainbowBorderCardView.swift in Sources */,
 				FF1E92B82BF9017100127FDE /* UILabelExtensions.swift in Sources */,
 				FFA60DAD2C7774D8005A2660 /* NotificationsManager.swift in Sources */,
+				FFA61BC32D6CF9920062D68B /* ClassicGamePlayView.swift in Sources */,
 				FFF65CB22BE61E17008E0352 /* NSObjectExtensions.swift in Sources */,
 				FF7F1D942BE7B10600872554 /* UIViewExtensions.swift in Sources */,
 				FF8EA7562BEC40B100F098B8 /* UIColorExtensions.swift in Sources */,
@@ -1569,6 +1601,7 @@
 				FFC5DE392CA3247900C6600D /* Word+CoreDataClass.swift in Sources */,
 				FF67CC832C6AD0D60094824E /* GameTeamCellItem.swift in Sources */,
 				FF4FA9C02BED917A00F38F98 /* AddWordCoordinator.swift in Sources */,
+				FF786D322D6E664700F3E6BE /* RainbowText.swift in Sources */,
 				FF67CC7F2C6AD0B80094824E /* GameTeamsSnapshot.swift in Sources */,
 				FF7F1D852BE7A8F200872554 /* GMLabel.swift in Sources */,
 				FF7F1D9D2BE92F5000872554 /* GameStory.swift in Sources */,
@@ -1600,6 +1633,7 @@
 				FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */,
 				FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */,
 				FF8289D72D61EA8100E050F0 /* PostGameScoreboardView.swift in Sources */,
+				FF31C8092D6E445E00653F9C /* WordItem.swift in Sources */,
 				FFBE55AF2D57BB8700A07B73 /* GameScoreboardView.swift in Sources */,
 				FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */,
 				FF8289D12D61EA6600E050F0 /* InGameTeamRow.swift in Sources */,
@@ -1609,7 +1643,6 @@
 				FF4D9D7A2BD69BAC0046819D /* HomeViewModel.swift in Sources */,
 				FF7F1D962BE7B9D800872554 /* GameInfoViewModel.swift in Sources */,
 				FF8675682C67A8160089B52B /* GMTableViewButton.swift in Sources */,
-				FFAA68932D39154500F0B2C0 /* ClassicGamePlayView.swift in Sources */,
 				FFAA68942D39154500F0B2C0 /* ClassicGamePlayViewModel.swift in Sources */,
 				FF8623752C6AB27D0044A7D7 /* GameShareUIView.swift in Sources */,
 				FFFB4D362BD9128800CDDCB4 /* NotificationExtensons.swift in Sources */,
@@ -1618,6 +1651,7 @@
 				FFFB4CD72BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift in Sources */,
 				FF8EA7142BEBEB2100F098B8 /* GameScoreboardTeamTableViewModel.swift in Sources */,
 				FFFB4D412BD9155100CDDCB4 /* RulesViewController.swift in Sources */,
+				FF31C8072D6E441600653F9C /* SuperWordToggleRow.swift in Sources */,
 				FFF65CA42BE61514008E0352 /* UINavigationItemExtensions.swift in Sources */,
 				FFF65C9D2BE554B9008E0352 /* BaseCoordinator.swift in Sources */,
 				FFF65CA62BE61746008E0352 /* GMTableView.swift in Sources */,
@@ -1646,8 +1680,10 @@
 				FFF65CC82BE6B0C4008E0352 /* Localizable.swift in Sources */,
 				FFA60DB42C7A0269005A2660 /* ViewExtensions.swift in Sources */,
 				FFA60DC72C7CFF6C005A2660 /* BaseAdManager.swift in Sources */,
+				FF786D342D6E6BBA00F3E6BE /* RainbowAnimation.swift in Sources */,
 				FFA60DC02C7CEBDC005A2660 /* AdManager.swift in Sources */,
 				FF7CA1632C02590700E3BEC4 /* GameOverView.swift in Sources */,
+				FF1F59DD2D6239D90022B0B3 /* CheckToggleStyle.swift in Sources */,
 				FF63A4402CD51800005617E5 /* PlayerListView.swift in Sources */,
 				FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */,
 				FF4FA9D32BEFF30E00F38F98 /* AddWordModels.swift in Sources */,

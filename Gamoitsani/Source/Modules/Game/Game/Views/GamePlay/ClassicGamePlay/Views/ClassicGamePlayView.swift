@@ -51,12 +51,20 @@ struct ClassicGamePlayView: View {
     }
     
     private var currentWordLabel: some View {
-        GMLabelView(
-            text: viewModel.currentWord,
-            fontType: .bold,
-            fontSizeForPhone: ViewConstants.wordLabelFontSizeForPhone,
-            fontSizeForPad: ViewConstants.wordLabelFontSizeForPad
-        )
+        Group {
+            if let word = viewModel.currentWord {
+                if viewModel.isSuperWord {
+                    RainbowText(text: word)
+                } else {
+                    GMLabelView(
+                        text: word,
+                        fontType: .bold,
+                        fontSizeForPhone: ViewConstants.wordLabelFontSizeForPhone,
+                        fontSizeForPad: ViewConstants.wordLabelFontSizeForPad
+                    )
+                }
+            }
+        }
     }
     
     private var timerLabelWithFeedback: some View {

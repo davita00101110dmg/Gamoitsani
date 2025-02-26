@@ -59,7 +59,8 @@ struct ArcadeGamePlayView: View {
                 ForEach(viewModel.currentWords) { wordItem in
                     WordCardView(
                         word: wordItem.translation,
-                        isGuessed: wordItem.isGuessed
+                        isGuessed: wordItem.isGuessed,
+                        isSuperWord: wordItem.isSuperWord
                     ) {
                         viewModel.wordGuessed(id: wordItem.id)
                     }
@@ -78,8 +79,8 @@ struct ArcadeGamePlayView: View {
             fontSizeForPad: ViewConstants.timerLabelFontSizeForPad,
             color: isWarning ? Asset.gmRed.swiftUIColor : .white
         )
-        .contentTransition(.numericText())
-        .animation(.linear, value: viewModel.timeRemaining)
+            .contentTransition(.numericText())
+            .animation(.linear, value: viewModel.timeRemaining)
         
         if #available(iOS 17.0, *) {
             return timerLabelView
@@ -111,7 +112,7 @@ struct ArcadeGamePlayView: View {
     }
     
     private enum ViewConstants {
-        static let mainSpacing: CGFloat = 12 
+        static let mainSpacing: CGFloat = 12
         static let timerLabelFontSizeForPhone: CGFloat = 84
         static let timerLabelFontSizeForPad: CGFloat = 140
         static let skipButtonFontSize: CGFloat = 16

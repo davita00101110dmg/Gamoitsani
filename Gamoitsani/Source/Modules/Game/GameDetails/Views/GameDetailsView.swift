@@ -60,6 +60,7 @@ struct GameDetailsView: View {
             }
             roundsRow
             roundsLengthRow
+            superWordToggleRow
         }
         .padding()
         .background(
@@ -96,6 +97,10 @@ struct GameDetailsView: View {
                     step: GameDetailsConstants.Game.roundsLengthStep)
             .labelsHidden()
         }
+    }
+    
+    private var superWordToggleRow: some View {
+        SuperWordToggleRow(isEnabled: $viewModel.isSuperWordEnabled)
     }
     
     private var teamManagementSection: some View {
@@ -261,17 +266,9 @@ private extension GameDetailsView {
                 message: L10n.Screen.GameDetails.Alert.notUniqueTeams
             )
         } else {
-            updateGameStory()
+            viewModel.updateGameStory()
             coordinator.navigateToGame()
         }
-    }
-    
-    func updateGameStory() {
-        let gameStory = GameStory.shared
-        gameStory.gameMode = viewModel.selectedGameMode
-        gameStory.numberOfRounds = Int(viewModel.roundsAmount)
-        gameStory.lengthOfRound = viewModel.roundsLength
-        gameStory.setTeams(viewModel.createTeams())
     }
 }
 

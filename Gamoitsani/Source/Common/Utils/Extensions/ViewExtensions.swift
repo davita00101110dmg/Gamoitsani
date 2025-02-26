@@ -24,6 +24,10 @@ extension View {
     func customSegmentedPickerStyle() -> some View {
         modifier(CustomSegmentedPickerStyle())
     }
+
+    func rainbowAnimation() -> some View {
+        self.modifier(RainbowAnimation())
+    }
     
     @ViewBuilder
     func applySensoryFeedbackIfAvailable(isActive: Bool) -> some View {

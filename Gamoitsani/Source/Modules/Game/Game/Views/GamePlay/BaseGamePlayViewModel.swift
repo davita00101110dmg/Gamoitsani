@@ -25,6 +25,10 @@ class BaseGamePlayViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
+#if DEBUG
+    var isTestMode: Bool = false
+#endif
+    
     // MARK: - Computed Properties
     var currentLanguage: Language {
         LanguageManager.shared.currentLanguage
@@ -54,6 +58,10 @@ class BaseGamePlayViewModel: ObservableObject {
     // MARK: - Timer Methods
     private func startTimer() {
 #if DEBUG
+        if isTestMode {
+            return
+        }
+        
         let shouldUseQuickTimer = UserDefaults.isQuickGameEnabled
         let timerDuration = shouldUseQuickTimer ? 2.0 : timeRemaining
 #else
@@ -102,8 +110,8 @@ class BaseGamePlayViewModel: ObservableObject {
         return translation.word ?? word.baseWord ?? .empty
     }
     
-    func playSound(isCorrect: Bool) {
-        audioManager.playSound(tag: isCorrect ? 1 : 0)
+    func playSound(isCorrect: Bool, isSuper: Bool = false) {
+        audioManager.playSound(tag: isSuper ? 2 : isCorrect ? 1 : 0)
     }
     
     // MARK: - Template Methods (to be overridden by subclasses)

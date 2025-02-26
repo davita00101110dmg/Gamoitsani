@@ -22,6 +22,8 @@ final class GameDetailsViewModel: ObservableObject {
     @Published var areWordsLoading = false
     @Published private var collection = GameDetailsTeamSectionMode.Collection(teams: [], players: [])
     
+    @Published var isSuperWordEnabled: Bool = false
+    
     var teams: [GameDetailsTeam] { collection.teams }
     var players: [GameDetailsPlayer] { collection.players }
     
@@ -44,6 +46,15 @@ final class GameDetailsViewModel: ObservableObject {
     
     deinit {
         networkMonitor.cancel()
+    }
+    
+    func updateGameStory() {
+        let gameStory = GameStory.shared
+        gameStory.gameMode = selectedGameMode
+        gameStory.numberOfRounds = roundsAmount.toInt
+        gameStory.lengthOfRound = roundsLength
+        gameStory.isSuperWordEnabled = isSuperWordEnabled
+        gameStory.setTeams(createTeams())
     }
     
     func observeNetworkConnection() {

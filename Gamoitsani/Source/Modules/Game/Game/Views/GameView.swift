@@ -170,6 +170,7 @@ extension GameView {
         static let cornerRadius: CGFloat = 10
         static let viewHeightSmall: CGFloat = 400
         static let viewHeightBig: CGFloat = 600
+        static let rainbowBorderWidth: CGFloat = 4
     }
 }
 

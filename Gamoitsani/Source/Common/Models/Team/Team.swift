@@ -19,6 +19,7 @@ struct Team: Identifiable, Equatable {
     private(set) var totalGuessTime: TimeInterval = 0
     private(set) var lastGuessStartTime: Date?
     private(set) var skippedSets: Int = 0
+    private(set) var superWordsGuessed: Int = 0
     
     var averageGuessTime: TimeInterval {
         guard totalWordsGuessed > 0 else { return 0 }
@@ -37,7 +38,8 @@ struct Team: Identifiable, Equatable {
          currentStreak: Int = 0,
          bestStreak: Int = 0,
          totalGuessTime: TimeInterval = 0,
-         skippedSets: Int = 0) {
+         skippedSets: Int = 0,
+         superWordsGuessed: Int = 0) {
         self.id = id
         self.name = name
         self.score = score
@@ -47,6 +49,7 @@ struct Team: Identifiable, Equatable {
         self.bestStreak = bestStreak
         self.totalGuessTime = totalGuessTime
         self.skippedSets = skippedSets
+        self.superWordsGuessed = superWordsGuessed
     }
     
     mutating func startGuessing() {
@@ -81,9 +84,14 @@ struct Team: Identifiable, Equatable {
         bestStreak = 0
         totalGuessTime = 0
         skippedSets = 0
+        superWordsGuessed = 0
     }
     
     mutating func incrementSkippedSets() {
         skippedSets += 1
+    }
+    
+    mutating func incrementSuperWordsGuessed() {
+        superWordsGuessed += 1
     }
 }

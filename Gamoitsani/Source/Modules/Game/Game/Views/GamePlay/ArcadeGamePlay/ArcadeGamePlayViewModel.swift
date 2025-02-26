@@ -10,18 +10,16 @@ import SwiftUI
 import Combine
 
 final class ArcadeGamePlayViewModel: BaseGamePlayViewModel {
-    struct WordItem: Identifiable, Equatable {
-        let id = UUID()
-        let word: Word
-        let translation: String
-        var isGuessed: Bool = false
-    }
     
     @Published var currentWords: [WordItem] = []
     private var gameStory = GameStory.shared
+    private var setsShown: Int = 0
+    private let superWordSetPosition = Int.random(in: 1...2)
+    private let superWordPositionInSet = Int.random(in: 1...5)
     
     override func onGameStart() {
         super.onGameStart()
+        setsShown = 1
         updateCurrentWords()
         gameStory.startGuessing()
     }
@@ -31,11 +29,10 @@ final class ArcadeGamePlayViewModel: BaseGamePlayViewModel {
         
         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
             currentWords[index].isGuessed.toggle()
-            let isCorrect = currentWords[index].isGuessed
+            let wordItem = currentWords[index]
             
-            // Update score with correct parameters
-            updateScore(points: isCorrect ? 1 : -1, wasSkipped: !isCorrect)
-            playSound(isCorrect: isCorrect)
+            updateScore(points: wordItem.points, wasSkipped: !wordItem.isGuessed)
+            playSound(isCorrect: wordItem.isGuessed, isSuper: wordItem.isSuperWord)
         }
         
         if currentWords.allSatisfy({ $0.isGuessed }) {
@@ -59,13 +56,40 @@ final class ArcadeGamePlayViewModel: BaseGamePlayViewModel {
     }
     
     private func updateCurrentWords() {
-        let newWords = (0..<GameDetailsConstants.Game.arcadeWordCount).compactMap { _ -> WordItem? in
+        let newWords = (0..<GameDetailsConstants.Game.arcadeWordCount).compactMap { index -> WordItem? in
             guard let word = words.popLast() else { return nil }
-            return WordItem(word: word, translation: getTranslation(for: word))
+            
+            let isSuperWord = shouldBeSuperWord(wordIndex: index + 1)
+            
+            if isSuperWord {
+                gameStory.markSuperWordEncountered()
+            }
+            
+            return WordItem(
+                word: word,
+                translation: getTranslation(for: word),
+                isSuperWord: isSuperWord
+            )
         }
         
         withAnimation(.easeInOut(duration: 0.3)) {
             currentWords = newWords
         }
+        
+        if !newWords.isEmpty {
+            setsShown += 1
+        }
+    }
+    
+    private func shouldBeSuperWord(wordIndex: Int) -> Bool {
+        if !gameStory.isSuperWordEnabled {
+            return false
+        }
+        
+        if gameStory.hasSuperWordEncountered() {
+            return false
+        }
+        
+        return setsShown == superWordSetPosition && wordIndex == superWordPositionInSet
     }
 }
