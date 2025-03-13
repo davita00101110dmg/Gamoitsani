@@ -32,7 +32,7 @@ class BaseViewController<T: Coordinator>: UIViewController {
     var shouldApplyGradientBackground: Bool = true
     var shouldUseCustomBackBarButtonItem: Bool = false
     
-    private var bannerView: GADBannerView?
+    private var bannerView: BannerView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +91,7 @@ class BaseViewController<T: Coordinator>: UIViewController {
     func setupLocalizedTexts() { }
     
     @objc func presentAdInspector() {
-        GADMobileAds.sharedInstance().presentAdInspector(from: self) { error in
+        MobileAds.shared.presentAdInspector(from: self) { error in
             log(.error, "Inspector error \(error?.localizedDescription ?? .empty)")
         }
     }

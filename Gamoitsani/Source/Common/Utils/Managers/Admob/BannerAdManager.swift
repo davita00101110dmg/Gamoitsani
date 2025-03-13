@@ -13,14 +13,14 @@ final class BannerAdManager: NSObject, ObservableObject {
     static let shared = BannerAdManager()
     
     @Published private(set) var isAdLoaded = false
-    private var bannerView: GADBannerView?
+    private var bannerView: BannerView?
     
     private override init() {
         super.init()
     }
     
-    func prepareBannerView() -> GADBannerView {
-        let bannerView = GADBannerView(adSize: GADAdSizeBanner)
+    func prepareBannerView() -> BannerView {
+        let bannerView = BannerView(adSize: AdSizeBanner)
         bannerView.adUnitID = AppConstants.AdMob.bannerAdId
         bannerView.delegate = self
         self.bannerView = bannerView
@@ -30,7 +30,7 @@ final class BannerAdManager: NSObject, ObservableObject {
     
     private func loadAd() {
         guard AppConstants.shouldShowAdsToUser else { return }
-        bannerView?.load(GADRequest())
+        bannerView?.load(Request())
     }
     
     func cleanup() {
@@ -45,15 +45,15 @@ final class BannerAdManager: NSObject, ObservableObject {
 }
 
 // MARK: - GADBannerViewDelegate Methods
-extension BannerAdManager: GADBannerViewDelegate {
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+extension BannerAdManager: BannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
         log(.info, "Loaded ad")
         withAnimation(.smooth(duration: 0.3)) {
             isAdLoaded = true
         }
     }
     
-    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
         log(.error, "Failed to load - \(error.localizedDescription)")
         withAnimation(.bouncy(duration: 0.3)) {
             isAdLoaded = false

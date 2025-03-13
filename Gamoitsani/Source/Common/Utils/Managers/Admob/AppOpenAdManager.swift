@@ -12,7 +12,7 @@ import GoogleMobileAds
 final class AppOpenAdManager: BaseAdManager {
     static let shared = AppOpenAdManager()
     
-    private var appOpenAd: GADAppOpenAd?
+    private var appOpenAd: AppOpenAd?
     private var loadTime: Date?
     private let fourHoursInSeconds = TimeInterval(3600 * 4)
     
@@ -28,8 +28,8 @@ final class AppOpenAdManager: BaseAdManager {
         isLoadingAd = true
         
         do {
-            appOpenAd = try await GADAppOpenAd.load(
-                withAdUnitID: AppConstants.AdMob.appOpenAdId, request: GADRequest())
+            appOpenAd = try await AppOpenAd.load(
+                with: AppConstants.AdMob.appOpenAdId, request: Request())
             appOpenAd?.fullScreenContentDelegate = self
             loadTime = Date()
         } catch {
@@ -53,7 +53,7 @@ final class AppOpenAdManager: BaseAdManager {
         
         if let ad = appOpenAd {
             isShowingAd = true
-            ad.present(fromRootViewController: nil)
+            ad.present(from: nil)
         }
     }
     
@@ -67,8 +67,8 @@ final class AppOpenAdManager: BaseAdManager {
     }
 }
 
-extension AppOpenAdManager: GADFullScreenContentDelegate {
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+extension AppOpenAdManager: FullScreenContentDelegate {
+    func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         appOpenAd = nil
         isShowingAd = false
 
@@ -78,7 +78,7 @@ extension AppOpenAdManager: GADFullScreenContentDelegate {
     }
     
     func ad(
-        _ ad: GADFullScreenPresentingAd,
+        _ ad: FullScreenPresentingAd,
         didFailToPresentFullScreenContentWithError error: Error
     ) {
         appOpenAd = nil

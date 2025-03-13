@@ -204,8 +204,8 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         isMobileAdsStartCalled = true
         configureInMobiConsent()
         
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [AppConstants.AdMob.testDeviceId]
+        MobileAds.shared.start(completionHandler: nil)
+        MobileAds.shared.requestConfiguration.testDeviceIdentifiers = [AppConstants.AdMob.testDeviceId]
         UserDefaults.hasAdConsent = true
     }
 }

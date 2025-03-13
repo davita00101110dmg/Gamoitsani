@@ -13,7 +13,7 @@ final class InterstitialAdManager: BaseAdManager {
     
     static let shared = InterstitialAdManager()
     
-    private var interstitialAd: GADInterstitialAd?
+    private var interstitialAd: InterstitialAd?
     
     private override init() {
         super.init()
@@ -27,7 +27,7 @@ final class InterstitialAdManager: BaseAdManager {
         isLoadingAd = true
         
         do {
-            interstitialAd = try await GADInterstitialAd.load(withAdUnitID: AppConstants.AdMob.interstitialAdId, request: GADRequest())
+            interstitialAd = try await InterstitialAd.load(with: AppConstants.AdMob.interstitialAdId, request: Request())
             interstitialAd?.fullScreenContentDelegate = self
         } catch {
             log(.error, "Failed to load interstitial ad with error: \(error.localizedDescription)")
@@ -58,8 +58,8 @@ final class InterstitialAdManager: BaseAdManager {
     }
 }
 
-extension InterstitialAdManager: GADFullScreenContentDelegate {
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+extension InterstitialAdManager: FullScreenContentDelegate {
+    func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         interstitialAd = nil
         isShowingAd = false
 
@@ -68,7 +68,7 @@ extension InterstitialAdManager: GADFullScreenContentDelegate {
         }
     }
     
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+    func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         interstitialAd = nil
         isShowingAd = false
         

@@ -11,15 +11,15 @@ import SwiftUI
 import GoogleMobileAds
 
 private struct BannerAdView: UIViewRepresentable {
-    func makeUIView(context: Context) -> GADBannerView {
+    func makeUIView(context: Context) -> BannerView {
         BannerAdManager.shared.prepareBannerView()
     }
     
-    func updateUIView(_ uiView: GADBannerView, context: Context) {
+    func updateUIView(_ uiView: BannerView, context: Context) {
         uiView.frame.size = BannerContainerView.adSize
     }
     
-    static func dismantleUIView(_ uiView: GADBannerView, coordinator: ()) {
+    static func dismantleUIView(_ uiView: BannerView, coordinator: ()) {
         BannerAdManager.shared.cleanup()
     }
 }
