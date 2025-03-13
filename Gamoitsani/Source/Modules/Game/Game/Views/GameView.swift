@@ -28,6 +28,8 @@ struct GameView: View {
                     switch viewModel.gameState {
                     case .info:
                         gameInfoView
+                    case .countdown:
+                        countdownView
                     case .play:
                         gamePlayContent
                     case .gameOver:
@@ -84,10 +86,20 @@ struct GameView: View {
     
     private var gameInfoView: some View {
         GameInfoView(viewModel: viewModel.createGameInfoViewModel()) {
-            viewModel.gameState = .play
+            viewModel.startPlaying()
         } onShowScoreboard: {
             coordinator.presentGameScoreboard()
         }
+    }
+    
+    private var countdownView: some View {
+        CountdownView(
+            currentCount: $viewModel.countdownValue,
+            onComplete: {
+                viewModel.startGameAfterCountdown()
+            },
+            audioManager: viewModel.audioManager
+        )
     }
     
     private var classicGamePlayView: some View {
@@ -143,7 +155,7 @@ struct GameView: View {
                 return ViewConstants.viewHeightBig
             case .play:
                 return viewModel.gameMode == .arcade ? ViewConstants.viewHeightBig : ViewConstants.viewHeightSmall
-            case .info:
+            case .info, .countdown:
                 return ViewConstants.viewHeightSmall
             }
         }

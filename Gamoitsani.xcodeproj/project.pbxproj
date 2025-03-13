@@ -120,6 +120,9 @@
 		FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */; };
 		FF92E2242D8351B40020A803 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF92E2232D8351B40020A803 /* AnalyticsManager.swift */; };
 		FF92E2262D8352490020A803 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FF92E2252D8352490020A803 /* FirebaseAnalytics */; };
+		FF92E22C2D8356C20020A803 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF92E22A2D8356C20020A803 /* CountdownView.swift */; };
+		FF92E22F2D8360560020A803 /* countdown_go.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF92E22D2D8360560020A803 /* countdown_go.wav */; };
+		FF92E2322D8360BD0020A803 /* countdown_tick.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF92E2312D8360BD0020A803 /* countdown_tick.wav */; };
 		FF99230A2CA334EE0088395E /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9923092CA334EE0088395E /* LanguageManager.swift */; };
 		FFA60DAB2C7639D5005A2660 /* AppOpenAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */; };
 		FFA60DAD2C7774D8005A2660 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */; };
@@ -344,6 +347,9 @@
 		FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FF91B8D82BF785B200EB85F1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FF92E2232D8351B40020A803 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		FF92E22A2D8356C20020A803 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+		FF92E22D2D8360560020A803 /* countdown_go.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = countdown_go.wav; sourceTree = "<group>"; };
+		FF92E2312D8360BD0020A803 /* countdown_tick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = countdown_tick.wav; sourceTree = "<group>"; };
 		FF9923092CA334EE0088395E /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		FF99230B2CA33A180088395E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAdManager.swift; sourceTree = "<group>"; };
@@ -752,6 +758,7 @@
 			isa = PBXGroup;
 			children = (
 				FFA60DC82C7D01FB005A2660 /* GameView.swift */,
+				FF92E22B2D8356C20020A803 /* Countdown */,
 				FF7F1D892BE7ADF300872554 /* GameInfo */,
 				FF7F1D8A2BE7ADFA00872554 /* GamePlay */,
 				FF7CA1612C0258F100E3BEC4 /* GameOver */,
@@ -888,11 +895,21 @@
 		FF8EA7222BEC13F600F098B8 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				FF92E2312D8360BD0020A803 /* countdown_tick.wav */,
+				FF92E22D2D8360560020A803 /* countdown_go.wav */,
 				FF786D2F2D6E650A00F3E6BE /* super-correct.mp3 */,
 				FF1111872C4FD17500C44F62 /* correct.wav */,
 				FF1111882C4FD17500C44F62 /* incorrect.mp3 */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		FF92E22B2D8356C20020A803 /* Countdown */ = {
+			isa = PBXGroup;
+			children = (
+				FF92E22A2D8356C20020A803 /* CountdownView.swift */,
+			);
+			path = Countdown;
 			sourceTree = "<group>";
 		};
 		FFA60DB52C7A0281005A2660 /* ViewModifiers */ = {
@@ -1364,7 +1381,9 @@
 				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
 				FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */,
 				FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */,
+				FF92E22F2D8360560020A803 /* countdown_go.wav in Resources */,
 				FF8EA7122BEBEAC400F098B8 /* GameScoreboardTeamTableViewCell.xib in Resources */,
+				FF92E2322D8360BD0020A803 /* countdown_tick.wav in Resources */,
 				FF8675732C6808FE0089B52B /* Gamoitsani.storekit in Resources */,
 				FF8623722C6AAFA50044A7D7 /* GameShareUIView.xib in Resources */,
 				FFFB4CD22BD701E700CDDCB4 /* HomeViewController.xib in Resources */,
@@ -1677,6 +1696,7 @@
 				FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */,
 				FFFB4D2B2BD854F900CDDCB4 /* BaseViewController.swift in Sources */,
 				FF4FA9C92BEF7C5900F38F98 /* ArrayExtensions.swift in Sources */,
+				FF92E22C2D8356C20020A803 /* CountdownView.swift in Sources */,
 				FF8EA70B2BEBBA1E00F098B8 /* GameScoreboardModel.swift in Sources */,
 				FFF65CB62BE62DBB008E0352 /* DoubleExtensions.swift in Sources */,
 				FF8EA7212BEC12BD00F098B8 /* AudioManager.swift in Sources */,

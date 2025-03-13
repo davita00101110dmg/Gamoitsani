@@ -10,9 +10,11 @@
 import Foundation
 import OrderedCollections
 import SwiftUI
+import Combine
 
 final class GameViewModel: ObservableObject {
     @Published var gameState: GameModels.GameState = .info
+    @Published var countdownValue: Int = 3
     
     var currentTeam: Team? { gameStory.currentTeam }
     var currentRound: Int { gameStory.currentRound }
@@ -21,16 +23,25 @@ final class GameViewModel: ObservableObject {
     var gameMode: GameMode { gameStory.gameMode }
     var gameStory = GameStory.shared
     
+    let audioManager = AudioManager()
+    
+    private var cancellables = Set<AnyCancellable>()
+    private var countdownCancellable: AnyCancellable?
+    
     private var playingSessionCount: Int { gameStory.playingSessionCount }
     private var numberOfTeams: Int { gameStory.teams.count }
     private let isTestEnvironment: Bool
     private var cachedClassicViewModel: ClassicGamePlayViewModel?
     private var cachedArcadeViewModel: ArcadeGamePlayViewModel?
-    private lazy var audioManager = AudioManager()
     
     init(isTestEnvironment: Bool = false) {
         self.isTestEnvironment = isTestEnvironment
         configureAudioManager()
+    }
+    
+    deinit {
+        cancellables.forEach { $0.cancel() }
+        countdownCancellable?.cancel()
     }
 }
 
@@ -75,18 +86,27 @@ extension GameViewModel {
     }
     
     func startPlaying() {
+        startCombineCountdown()
+    }
+    
+    func startGameAfterCountdown() {
         GameStory.shared.isGameInProgress = true
-        gameState = .play
         
-        if gameStory.gameStartTime == nil {
-            gameStory.gameStartTime = Date()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            withAnimation(.easeIn(duration: 0.5)) {
+                self.gameState = .play
+            }
+            
+            if self.gameStory.gameStartTime == nil {
+                self.gameStory.gameStartTime = Date()
+            }
+            
+            AnalyticsManager.shared.logGameStart(
+                gameMode: self.gameStory.gameMode.rawValue.lowercased(),
+                teamsCount: self.gameStory.teams.count,
+                roundsCount: self.gameStory.numberOfRounds
+            )
         }
-        
-        AnalyticsManager.shared.logGameStart(
-            gameMode: gameStory.gameMode.rawValue.lowercased(),
-            teamsCount: gameStory.teams.count,
-            roundsCount: gameStory.numberOfRounds
-        )
     }
     
     func handleGamePlayResult(score: Int, wasSkipped: Int, wordsGuessed: Int) {
@@ -190,6 +210,30 @@ extension GameViewModel {
             gameStory.onNewRound()
         }
     }
+    
+    private func startCombineCountdown() {
+        countdownCancellable?.cancel()
+        
+        countdownValue = 3
+        gameState = .countdown
+        
+        let number3 = Just(3).delay(for: 0, scheduler: RunLoop.main)
+        let number2 = Just(2).delay(for: 1.2, scheduler: RunLoop.main)
+        let number1 = Just(1).delay(for: 2.4, scheduler: RunLoop.main)
+        let number0 = Just(0).delay(for: 3.6, scheduler: RunLoop.main)
+        
+        countdownCancellable = Publishers.Merge4(number3, number2, number1, number0)
+            .filter { [weak self] _ in
+                return self?.gameState == .countdown
+            }
+            .sink(receiveCompletion: { _ in
+                
+            }, receiveValue: { [weak self] value in
+                guard let self = self else { return }
+                self.countdownValue = value
+            })
+    }
+    
 }
 
 // MARK: - Audio Manager
