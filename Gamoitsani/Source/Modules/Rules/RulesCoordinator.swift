@@ -21,6 +21,9 @@ final class RulesCoordinator: BaseCoordinator {
         let rulesViewController = RulesViewController.loadFromNib()
         rulesViewController.viewModel = RulesViewModel()
         rulesViewController.coordinator = self
+        
+        AnalyticsManager.shared.logRulesViewed()
+        
         navigationController.pushViewController(rulesViewController, animated: true)
     }
 }

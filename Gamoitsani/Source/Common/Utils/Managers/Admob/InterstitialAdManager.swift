@@ -45,6 +45,14 @@ final class InterstitialAdManager: BaseAdManager {
         }
         
         isShowingAd = true
+        
+        // Log ad impression
+        AnalyticsManager.shared.logAdEngagement(
+            adType: "interstitial",
+            placement: "game_over",
+            action: "shown"
+        )
+        
         interstitialAd.present(fromRootViewController: nil)
 #endif
     }

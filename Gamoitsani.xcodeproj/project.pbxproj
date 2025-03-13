@@ -118,6 +118,8 @@
 		FF8EA7562BEC40B100F098B8 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7552BEC40B100F098B8 /* UIColorExtensions.swift */; };
 		FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */; };
 		FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */; };
+		FF92E2242D8351B40020A803 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF92E2232D8351B40020A803 /* AnalyticsManager.swift */; };
+		FF92E2262D8352490020A803 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FF92E2252D8352490020A803 /* FirebaseAnalytics */; };
 		FF99230A2CA334EE0088395E /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9923092CA334EE0088395E /* LanguageManager.swift */; };
 		FFA60DAB2C7639D5005A2660 /* AppOpenAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */; };
 		FFA60DAD2C7774D8005A2660 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */; };
@@ -341,6 +343,7 @@
 		FF8EA75A2BED600B00F098B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FF91B8D82BF785B200EB85F1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		FF92E2232D8351B40020A803 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		FF9923092CA334EE0088395E /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		FF99230B2CA33A180088395E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAdManager.swift; sourceTree = "<group>"; };
@@ -425,6 +428,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF92E2262D8352490020A803 /* FirebaseAnalytics in Frameworks */,
 				FF7F1DA32BE93DF900872554 /* Collections in Frameworks */,
 				FF4FA9C52BEEB6FD00F38F98 /* FirebaseFirestore in Frameworks */,
 				FF8623782C6AB8A00044A7D7 /* FacebookShare in Frameworks */,
@@ -872,6 +876,7 @@
 				FFA60DC32C7CED9E005A2660 /* Admob */,
 				FF8EA7202BEC12BD00F098B8 /* AudioManager.swift */,
 				FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */,
+				FF92E2232D8351B40020A803 /* AnalyticsManager.swift */,
 				FF37087A2BFBD4280056361F /* CoreDataManager.swift */,
 				FF7CA15D2C01FCB800E3BEC4 /* StoreReviewManager.swift */,
 				FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */,
@@ -1236,6 +1241,7 @@
 				FF4FA9C42BEEB6FD00F38F98 /* FirebaseFirestore */,
 				FF4FA9C62BEEB6FD00F38F98 /* FirebaseFirestoreSwift */,
 				FF8623772C6AB8A00044A7D7 /* FacebookShare */,
+				FF92E2252D8352490020A803 /* FirebaseAnalytics */,
 			);
 			productName = Gamoitsani;
 			productReference = FF4D9D252BD698620046819D /* Gamoitsani.app */;
@@ -1610,6 +1616,7 @@
 				FFAA68972D39156B00F0B2C0 /* BaseGamePlayViewModel.swift in Sources */,
 				FF8289D92D61EA8B00E050F0 /* StatCard.swift in Sources */,
 				FF63A4342CD517D9005617E5 /* PlaceholderView.swift in Sources */,
+				FF92E2242D8351B40020A803 /* AnalyticsManager.swift in Sources */,
 				FF63A4572CD647C4005617E5 /* FloatingAnimation.swift in Sources */,
 				FF63A4582CD647C4005617E5 /* PulseAnimation.swift in Sources */,
 				FFAA688D2D3852F300F0B2C0 /* WordCardView.swift in Sources */,
@@ -2344,6 +2351,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF8623762C6AB8A00044A7D7 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookShare;
+		};
+		FF92E2252D8352490020A803 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 

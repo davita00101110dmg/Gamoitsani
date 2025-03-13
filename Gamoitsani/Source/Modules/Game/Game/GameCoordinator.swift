@@ -65,6 +65,9 @@ final class GameCoordinator: BaseCoordinator, ObservableObject {
     
     func presentGameShareView(with image: UIImage) {
         guard let navigationController else { return }
+        
+        AnalyticsManager.shared.logGameResultsShared()
+        
         let coordinator = GameShareCoordinator(navigationController: navigationController, image: image)
         coordinate(to: coordinator)
     }

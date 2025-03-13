@@ -77,6 +77,16 @@ extension GameViewModel {
     func startPlaying() {
         GameStory.shared.isGameInProgress = true
         gameState = .play
+        
+        if gameStory.gameStartTime == nil {
+            gameStory.gameStartTime = Date()
+        }
+        
+        AnalyticsManager.shared.logGameStart(
+            gameMode: gameStory.gameMode.rawValue.lowercased(),
+            teamsCount: gameStory.teams.count,
+            roundsCount: gameStory.numberOfRounds
+        )
     }
     
     func handleGamePlayResult(score: Int, wasSkipped: Int, wordsGuessed: Int) {
@@ -88,6 +98,18 @@ extension GameViewModel {
             if handleEndOfGame() {
                 gameState = .gameOver
                 GameStory.shared.isGameInProgress = false
+                
+                let gameStartTime = gameStory.gameStartTime ?? Date().addingTimeInterval(-600)
+                let gameDuration = Date().timeIntervalSince(gameStartTime)
+                let winnerTeam = getWinnerTeam()?.name
+                
+                AnalyticsManager.shared.logGameCompleted(
+                    gameMode: gameStory.gameMode.rawValue.lowercased(),
+                    duration: gameDuration,
+                    winnerTeam: winnerTeam,
+                    isTie: isTie(),
+                    roundsPlayed: currentRound
+                )
             } else {
                 gameState = .info
             }
@@ -147,8 +169,20 @@ extension GameViewModel {
     }
 
     private func updateGameInfo(with roundScore: Int, wasSkipped: Int, wordsGuessed: Int) {
+        let currentTeamName = currentTeam?.name ?? .empty
+        let roundNumber = currentRound
+        
         gameStory.updateScore(for: gameStory.currentTeamIndex, points: roundScore, wasSkipped: wasSkipped, wordsGuessed: wordsGuessed)
-        log(.info, "Round: \(currentRound) Team: \(currentTeam?.name ?? .empty) Score: \(currentTeam?.score ?? 0)")
+        log(.info, "Round: \(roundNumber) Team: \(currentTeamName) Score: \(currentTeam?.score ?? 0)")
+        
+        AnalyticsManager.shared.logRoundCompleted(
+            roundNumber: roundNumber,
+            teamName: currentTeamName,
+            score: roundScore,
+            wordsGuessed: wordsGuessed,
+            wordsSkipped: wasSkipped
+        )
+        
         gameStory.currentTeamIndex = playingSessionCount % numberOfTeams
         gameStory.currentRound = playingSessionCount / numberOfTeams + 1
         

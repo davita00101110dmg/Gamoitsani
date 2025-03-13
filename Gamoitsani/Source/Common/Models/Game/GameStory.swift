@@ -28,6 +28,7 @@ final class GameStory {
     var finishedGamesCountInSession: Int = 0
     var isGameInProgress: Bool = false
     var isSuperWordEnabled: Bool = false
+    var gameStartTime: Date? = nil
     
     private var teamSuperWordEncountered: [Bool] = []
     
@@ -85,6 +86,7 @@ final class GameStory {
         currentExtraRound = 0
         playingSessionCount = 0
         currentTeamIndex = 0
+        gameStartTime = nil
         resetSuperWordEncounters()
     }
     

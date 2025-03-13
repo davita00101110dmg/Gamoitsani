@@ -144,6 +144,9 @@ final class FirebaseManager {
                     completion(false)
                 } else {
                     log(.info, "Word suggestion added successfully")
+                    
+                    AnalyticsManager.shared.logWordSuggested(language: language.rawValue)
+                    
                     completion(true)
                 }
             }

@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 import FirebaseCore
 import Firebase
+import FirebaseAnalytics
 import FacebookCore
 import AdSupport
 
@@ -32,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         UserDefaults.isFirstLaunch = true
+        
+        AnalyticsManager.shared.logAppOpen()
 
         return true
     }
