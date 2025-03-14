@@ -44,7 +44,6 @@ struct SettingsLanguagePickerRow: View {
                             LanguageManager.shared.setLanguage(newLanguage)
                         }
                 }
-                .navigationTitle(L10n.Screen.Settings.language)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -53,11 +52,11 @@ struct SettingsLanguagePickerRow: View {
                         } label: {
                             GMLabelView(text: L10n.close)
                         }
-
                     }
                 }
+                .toolbarBackground(.hidden, for: .navigationBar)
             }
-            .presentationDetents([.height(350)])
+            .presentationDetents([.large])
             .presentationDragIndicator(.visible)
         }
         .listRowBackground(Asset.gmSecondary.swiftUIColor)

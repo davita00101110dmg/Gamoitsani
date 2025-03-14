@@ -12,37 +12,25 @@ struct EnhancedLanguagePickerView: View {
     @Binding var selectedLanguage: Language
     @Environment(\.dismiss) private var dismiss
     
-    private let primaryLanguages: [Language] = [.georgian, .english]
-    private var secondaryLanguages: [Language] {
-        Language.allCases.filter { !primaryLanguages.contains($0) }
+    private var sortedLanguages: [Language] {
+        let georgian: [Language] = [.georgian]
+        let otherLanguages = Language.allCases
+            .filter { $0 != .georgian }
+            .sorted { $0.displayName < $1.displayName }
+        
+        return georgian + otherLanguages
     }
     
     var body: some View {
-        VStack(spacing: ViewConstants.mainSpacing) {
-            LazyVGrid(columns: [
-                GridItem(.flexible()),
-                GridItem(.flexible())
-            ], spacing: ViewConstants.gridSpacing) {
-                ForEach(primaryLanguages, id: \.self) { language in
+        ScrollView {
+            LazyVStack(spacing: ViewConstants.buttonSpacing) {
+                ForEach(sortedLanguages, id: \.self) { language in
                     languageButton(for: language)
                 }
             }
-            
-            if !secondaryLanguages.isEmpty {
-                Divider()
-                    .background(Color.white.opacity(0.1))
-                    .padding(.horizontal)
-                
-                ScrollView {
-                    LazyVStack(spacing: ViewConstants.buttonSpacing) {
-                        ForEach(secondaryLanguages, id: \.self) { language in
-                            languageButton(for: language)
-                        }
-                    }
-                }
-            }
+            .padding(ViewConstants.mainPadding)
         }
-        .padding(ViewConstants.mainPadding)
+        .scrollIndicators(.hidden)
     }
     
     private func languageButton(for language: Language) -> some View {
