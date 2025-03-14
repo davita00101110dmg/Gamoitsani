@@ -62,6 +62,11 @@ final class LanguageManagerTests: XCTestCase {
         XCTAssertEqual(Language.turkish.displayName, "Turkish")
         XCTAssertEqual(Language.armenian.displayName, "Armenian")
         XCTAssertEqual(Language.azerbaijani.displayName, "Azerbaijani")
+        XCTAssertEqual(Language.german.displayName, "Deutsch")
+        XCTAssertEqual(Language.spanish.displayName, "Español")
+        XCTAssertEqual(Language.french.displayName, "Français")
+        XCTAssertEqual(Language.japanese.displayName, "日本語")
+        XCTAssertEqual(Language.russian.displayName, "Русский")
     }
     
     // MARK: - Flag Emoji Tests
@@ -73,6 +78,11 @@ final class LanguageManagerTests: XCTestCase {
         XCTAssertEqual(Language.turkish.flagEmoji, "🇹🇷")
         XCTAssertEqual(Language.armenian.flagEmoji, "🇦🇲")
         XCTAssertEqual(Language.azerbaijani.flagEmoji, "🇦🇿")
+        XCTAssertEqual(Language.german.flagEmoji, "🇩🇪")
+        XCTAssertEqual(Language.spanish.flagEmoji, "🇪🇸")
+        XCTAssertEqual(Language.french.flagEmoji, "🇫🇷")
+        XCTAssertEqual(Language.japanese.flagEmoji, "🇯🇵")
+        XCTAssertEqual(Language.russian.flagEmoji, "🇷🇺")
     }
     
     // MARK: - Language State Tests

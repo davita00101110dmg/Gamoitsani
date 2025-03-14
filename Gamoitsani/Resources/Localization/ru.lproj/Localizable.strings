@@ -1,0 +1,141 @@
+/*
+  Localizable.strings
+  Gamoitsani
+
+  Created by Daviti Khvedelidze on 14/03/2025.
+  Copyright © 2025 Daviti Khvedelidze. All rights reserved.
+*/
+
+// MARK: - General
+"app.title" = "Gamoitsani";
+"and" = "и";
+"yesPolite" = "Да";
+"no" = "Нет";
+"ok" = "OK";
+"close" = "Закрыть";
+"add" = "Добавить";
+"add_it" = "Добавить";
+"change" = "Изменить";
+"cancel" = "Отмена";
+"edit" = "Редактировать";
+"delete" = "Удалить";
+"scoreboard" = "Таблица результатов";
+"point" = "Очко";
+"start" = "Начать";
+"thanks" = "Спасибо";
+"back" = "Назад";
+
+// MARK: - Home
+"screen.home.play_button.title" = "Игра";
+"screen.home.rules_button.title" = "Правила";
+"screen.home.add_word_button.title" = "Добавить слово";
+"screen.home.change_language.title" = "Изменить язык";
+
+// MARK: - Settings
+"screen.settings.title" = "Настройки";
+"screen.settings.language" = "Язык";
+"screen.settings.remove_ads" = "Убрать рекламу";
+"screen.settings.restore_purchase" = "Восстановить покупку";
+"screen.settings.feedback" = "Помощь и обратная связь";
+"screen.settings.share_app" = "Поделиться приложением";
+"screen.settings.rate_app" = "Оценить приложение";
+"screen.settings.privacy_settings" = "Настройки конфиденциальности";
+"screen.settings.can_not_write_review.title" = "Невозможно открыть App Store";
+"screen.settings.can_not_write_review.message" = "Пожалуйста, выберите наше приложение в App Store и напишите отзыв. Спасибо!!";
+
+// MARK: - Rules
+"screen.rules.title" = "Правила";
+"screen.rules.rule2" = "При объяснении слова запрещено использовать одно слово";
+"screen.rules.rule3" = "Если член команды угадывает слово, нажмите зеленую кнопку (+1 очко)";
+"screen.rules.rule4" = "Если вы не можете объяснить слово, или какое-то правило было нарушено и вы хотите перейти к следующему слову, нажмите красную кнопку (-1 очко)";
+"screen.rules.rule5" = "Команда, которая набирает больше очков до истечения времени, или первая достигает установленного количества очков в раунде, побеждает";
+"screen.rules.rule6" = "Удачи :)";
+
+// MARK: - Add Word
+"screen.add_word.title" = "Добавить Слово";
+"screen.add_word.send" = "Отправить";
+"screen.add_word.hint" = "Не забудьте добавить правильное слово :)";
+"screen.add_word.language_picker_title" = "На каком языке вы добавляете слово?";
+"screen.add_word.textfield_placeholder" = "Введите слово";
+"screen.add_word.success_message" = "Слово успешно отправлено";
+"screen.add_word.error_message" = "Не удалось отправить слово";
+
+// MARK: - Game Details
+"screen.game_details.title" = "Детали Игры";
+"screen.game_details.rounds_amount.title" = "Количество: %@";
+"screen.game_details.rounds_length.title" = "Длительность: %@ сек";
+"screen.game_details.rounds_settings.title" = "Настройки Раунда";
+"screen.game_details.section.teams" = "Команды";
+"screen.game_details.section.players" = "Игроки";
+"screen.game_details.start_game.title" = "Начать Игру";
+"screen.game_details.create_teams" = "Создать команды";
+"screen.game_details.game_mode.title" = "Режим игры";
+"screen.game_details.classic.title" = "Классический";
+"screen.game_details.classic.description" = "Играть по одному слову за раз";
+"screen.game_details.arcade.title" = "Аркадный";
+"screen.game_details.arcade.description" = "Играть с 5 словами одновременно";
+"screen.game_details.loading_words.message" = "Загрузка слов в процессе";
+"screen.game_details.storage_warning.title" = "Недостаточно памяти";
+"screen.game_details.storage_warning.message" = "Не удалось загрузить слова, пожалуйста, попробуйте еще раз";
+"screen.game_details.super_word.description" = "Случайное супер-слово (3 Очка)";
+
+// Teams
+"screen.game_details.teams.add_placeholder" = "Добавьте команды, чтобы начать игру";
+"screen.game_details.teams.name_placeholder" = "Название команды";
+"screen.game_details.teams.name_exists" = "Команда с таким названием уже существует";
+"screen.game_details.teams.name_too_long" = "Название команды не может быть длиннее %@ символов";
+"screen.game_details.teams.add" = "Добавить команду";
+"screen.game_details.teams.edit" = "Редактировать название команды";
+"screen.game_details.teams.delete_confirmation" = "Вы уверены, что хотите удалить эту команду?";
+
+// Players
+"screen.game_details.players.add_placeholder" = "Добавьте игроков для создания команд";
+"screen.game_details.players.name_placeholder" = "Имя игрока";
+"screen.game_details.players.name_exists" = "Игрок с таким именем уже существует";
+"screen.game_details.players.name_too_long" = "Имя игрока не может быть длиннее %@ символов";
+"screen.game_details.players.add" = "Добавить Игрока";
+"screen.game_details.players.edit" = "Редактировать Игрока";
+"screen.game_details.players.delete_confirmation" = "Вы уверены, что хотите удалить этого игрока?";
+"screen.game_details.players.generate_teams" = "Сгенерировать Команды";
+"screen.game_details.players.not_enough" = "Нужно как минимум 2 игрока для создания команд";
+"screen.game_details.players.odd_count" = "Нужно четное количество игроков для создания команд";
+
+// Alerts
+"screen.game_details.alert.invalid_parameter" = "Недопустимый параметр";
+"screen.game_details.alert.no_internet.title" = "Нет подключения к интернету!";
+"screen.game_details.alert.no_internet.message" = "Для начала игры требуется подключение к интернету";
+"screen.game_details.alert.not_enough_teams" = "Добавьте как минимум 2 команды, чтобы начать!";
+"screen.game_details.alert.not_unique_teams" = "Названия команд должны быть уникальными!";
+"screen.game_details.alert.maximum_teams" = "Невозможно добавить более 5 команд";
+"screen.game_details.alert.empty_name" = "Имя не может быть пустым";
+
+// MARK: - Game
+"screen.game.confirmation_alert.title" = "Вы уверены, что хотите вернуться назад?";
+"screen.game.confirmation_alert.message" = "Очки команд будут потеряны";
+"screen.game.current_round.message" = "Раунд: %@";
+"screen.game.current_extra_round.message" = "(Дополнительный: %@)";
+"screen.game.no_more_words.message" = "Больше нет слов";
+"screen.game.winning_view.title" = "Поздравляем!";
+"screen.game.winning_view.repeat" = "Повторить";
+"screen.game.winning_view.game_details.title" = "Вернуться";
+"screen.game.winning_view.description" = "Вы выиграли с %@ очками";
+"screen.game.game_share_view.title" = "Победившая команда - %@ 🥳";
+"screen.game.arcade.skipButton" = "Новые слова (-2 очка)";
+
+// MARK: - Game Scoreboard
+"screen.game_scoreboard.title" = "Таблица результатов";
+"screen.game_scoreboard.post_game_scoreboard.final_score" = "Итоговый счет: %@";
+"screen.game_scoreboard.post_game_scoreboard.words_guessed" = "Угаданные слова";
+"screen.game_scoreboard.post_game_scoreboard.words_skipped" = "Пропущенные слова";
+"screen.game_scoreboard.post_game_scoreboard.best_streak" = "Лучшая серия";
+"screen.game_scoreboard.post_game_scoreboard.average_time" = "Среднее время";
+"screen.game_scoreboard.post_game_scoreboard.sets_skipped" = "Пропущенные наборы";
+"screen.game_scoreboard.stat_card.words_guessed" = "Угаданные слова";
+"screen.game_scoreboard.stat_card.words_skipped" = "Пропущенные слова";
+"screen.game_scoreboard.performance_stat_row.best_streak" = "Лучшая серия";
+"screen.game_scoreboard.performance_stat_row.average_time" = "Среднее время";
+"screen.game_scoreboard.performance_stat_row.sets_skipped" = "Пропущенные наборы";
+
+// MARK: - Game Share
+"screen.game_share.title" = "Поделиться результатом!";
+"screen.game_share.share_to" = "Поделиться в";

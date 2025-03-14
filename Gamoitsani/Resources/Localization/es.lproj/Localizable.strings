@@ -1,0 +1,141 @@
+/*
+  Localizable.strings
+  Gamoitsani
+
+  Created by Daviti Khvedelidze on 14/03/2025.
+  Copyright © 2025 Daviti Khvedelidze. All rights reserved.
+*/
+
+// MARK: - General
+"app.title" = "Gamoitsani";
+"and" = "y";
+"yesPolite" = "Sí";
+"no" = "No";
+"ok" = "OK";
+"close" = "Cerrar";
+"add" = "Añadir";
+"add_it" = "Añadir";
+"change" = "Cambiar";
+"cancel" = "Cancelar";
+"edit" = "Editar";
+"delete" = "Eliminar";
+"scoreboard" = "Marcador";
+"point" = "Punto";
+"start" = "Comenzar";
+"thanks" = "Gracias";
+"back" = "Atrás";
+
+// MARK: - Home
+"screen.home.play_button.title" = "Jugar";
+"screen.home.rules_button.title" = "Reglas";
+"screen.home.add_word_button.title" = "Añadir palabra";
+"screen.home.change_language.title" = "Cambiar idioma";
+
+// MARK: - Settings
+"screen.settings.title" = "Ajustes";
+"screen.settings.language" = "Idioma";
+"screen.settings.remove_ads" = "Quitar anuncios";
+"screen.settings.restore_purchase" = "Restaurar compra";
+"screen.settings.feedback" = "Ayuda y comentarios";
+"screen.settings.share_app" = "Compartir esta aplicación";
+"screen.settings.rate_app" = "Valorar esta aplicación";
+"screen.settings.privacy_settings" = "Ajustes de privacidad";
+"screen.settings.can_not_write_review.title" = "No se puede abrir la App Store";
+"screen.settings.can_not_write_review.message" = "Por favor, seleccione nuestra aplicación en la App Store y escriba una reseña. ¡Gracias!";
+
+// MARK: - Rules
+"screen.rules.title" = "Reglas";
+"screen.rules.rule2" = "Al explicar la palabra, está prohibido usar una sola palabra";
+"screen.rules.rule3" = "Si un miembro del equipo adivina la palabra, presione el botón verde (+1 punto)";
+"screen.rules.rule4" = "Si no puede explicar la palabra, o se ha roto alguna regla y quiere pasar a la siguiente palabra, presione el botón rojo (-1 punto)";
+"screen.rules.rule5" = "El equipo que consiga más puntos antes de que se acabe el tiempo, o el primero en llegar al número establecido de puntos en la ronda, gana";
+"screen.rules.rule6" = "¡Buena suerte! :)";
+
+// MARK: - Add Word
+"screen.add_word.title" = "Añadir Palabra";
+"screen.add_word.send" = "Enviar";
+"screen.add_word.hint" = "Recuerde añadir una palabra válida :)";
+"screen.add_word.language_picker_title" = "¿En qué idioma está añadiendo la palabra?";
+"screen.add_word.textfield_placeholder" = "Introduzca la palabra";
+"screen.add_word.success_message" = "Palabra enviada con éxito";
+"screen.add_word.error_message" = "No se pudo enviar la palabra";
+
+// MARK: - Game Details
+"screen.game_details.title" = "Detalles del Juego";
+"screen.game_details.rounds_amount.title" = "Cantidad: %@";
+"screen.game_details.rounds_length.title" = "Duración: %@ seg";
+"screen.game_details.rounds_settings.title" = "Ajustes de Ronda";
+"screen.game_details.section.teams" = "Equipos";
+"screen.game_details.section.players" = "Jugadores";
+"screen.game_details.start_game.title" = "Iniciar Juego";
+"screen.game_details.create_teams" = "Crear equipos";
+"screen.game_details.game_mode.title" = "Modo de juego";
+"screen.game_details.classic.title" = "Clásico";
+"screen.game_details.classic.description" = "Jugar una palabra a la vez";
+"screen.game_details.arcade.title" = "Arcade";
+"screen.game_details.arcade.description" = "Jugar con 5 palabras a la vez";
+"screen.game_details.loading_words.message" = "Descarga de palabras en progreso";
+"screen.game_details.storage_warning.title" = "Almacenamiento insuficiente";
+"screen.game_details.storage_warning.message" = "No se pudieron descargar las palabras, inténtelo de nuevo";
+"screen.game_details.super_word.description" = "Palabra super aleatoria (3 Puntos)";
+
+// Teams
+"screen.game_details.teams.add_placeholder" = "Añada equipos para empezar a jugar";
+"screen.game_details.teams.name_placeholder" = "Nombre del equipo";
+"screen.game_details.teams.name_exists" = "Ya existe un equipo con este nombre";
+"screen.game_details.teams.name_too_long" = "El nombre del equipo no puede tener más de %@ caracteres";
+"screen.game_details.teams.add" = "Añadir un equipo";
+"screen.game_details.teams.edit" = "Editar nombre del equipo";
+"screen.game_details.teams.delete_confirmation" = "¿Está seguro de que desea eliminar este equipo?";
+
+// Players
+"screen.game_details.players.add_placeholder" = "Añada jugadores para crear equipos";
+"screen.game_details.players.name_placeholder" = "Nombre del jugador";
+"screen.game_details.players.name_exists" = "Ya existe un jugador con este nombre";
+"screen.game_details.players.name_too_long" = "El nombre del jugador no puede tener más de %@ caracteres";
+"screen.game_details.players.add" = "Añadir Jugador";
+"screen.game_details.players.edit" = "Editar Jugador";
+"screen.game_details.players.delete_confirmation" = "¿Está seguro de que desea eliminar este jugador?";
+"screen.game_details.players.generate_teams" = "Generar Equipos";
+"screen.game_details.players.not_enough" = "Se necesitan al menos 2 jugadores para crear equipos";
+"screen.game_details.players.odd_count" = "Se necesita un número par de jugadores para crear equipos";
+
+// Alerts
+"screen.game_details.alert.invalid_parameter" = "Parámetro inválido";
+"screen.game_details.alert.no_internet.title" = "¡Sin conexión a Internet!";
+"screen.game_details.alert.no_internet.message" = "Se necesita conexión a Internet para iniciar el juego";
+"screen.game_details.alert.not_enough_teams" = "¡Añada al menos 2 equipos para comenzar!";
+"screen.game_details.alert.not_unique_teams" = "¡Los nombres de los equipos deben ser únicos!";
+"screen.game_details.alert.maximum_teams" = "No es posible añadir más de 5 equipos";
+"screen.game_details.alert.empty_name" = "El nombre no puede estar vacío";
+
+// MARK: - Game
+"screen.game.confirmation_alert.title" = "¿Está seguro de que desea volver?";
+"screen.game.confirmation_alert.message" = "Se perderán los puntos de los equipos";
+"screen.game.current_round.message" = "Ronda: %@";
+"screen.game.current_extra_round.message" = "(Extra: %@)";
+"screen.game.no_more_words.message" = "No hay más palabras";
+"screen.game.winning_view.title" = "¡Felicidades!";
+"screen.game.winning_view.repeat" = "Repetir";
+"screen.game.winning_view.game_details.title" = "Volver";
+"screen.game.winning_view.description" = "Ha ganado con %@ puntos";
+"screen.game.game_share_view.title" = "El equipo ganador es %@ 🥳";
+"screen.game.arcade.skipButton" = "Nuevas palabras (-2 puntos)";
+
+// MARK: - Game Scoreboard
+"screen.game_scoreboard.title" = "Marcador";
+"screen.game_scoreboard.post_game_scoreboard.final_score" = "Puntuación Final: %@";
+"screen.game_scoreboard.post_game_scoreboard.words_guessed" = "Palabras Adivinadas";
+"screen.game_scoreboard.post_game_scoreboard.words_skipped" = "Palabras Omitidas";
+"screen.game_scoreboard.post_game_scoreboard.best_streak" = "Mejor Racha";
+"screen.game_scoreboard.post_game_scoreboard.average_time" = "Tiempo Promedio";
+"screen.game_scoreboard.post_game_scoreboard.sets_skipped" = "Conjuntos Omitidos";
+"screen.game_scoreboard.stat_card.words_guessed" = "Palabras Adivinadas";
+"screen.game_scoreboard.stat_card.words_skipped" = "Palabras Omitidas";
+"screen.game_scoreboard.performance_stat_row.best_streak" = "Mejor Racha";
+"screen.game_scoreboard.performance_stat_row.average_time" = "Tiempo Promedio";
+"screen.game_scoreboard.performance_stat_row.sets_skipped" = "Conjuntos Omitidos";
+
+// MARK: - Game Share
+"screen.game_share.title" = "¡Compartir puntuación!";
+"screen.game_share.share_to" = "Compartir en";

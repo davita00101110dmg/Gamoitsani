@@ -1,0 +1,141 @@
+/*
+  Localizable.strings
+  Gamoitsani
+
+  Created by Daviti Khvedelidze on 14/03/2025.
+  Copyright © 2025 Daviti Khvedelidze. All rights reserved.
+*/
+
+// MARK: - General
+"app.title" = "Gamoitsani";
+"and" = "と";
+"yesPolite" = "はい";
+"no" = "いいえ";
+"ok" = "OK";
+"close" = "閉じる";
+"add" = "追加";
+"add_it" = "追加";
+"change" = "変更";
+"cancel" = "キャンセル";
+"edit" = "編集";
+"delete" = "削除";
+"scoreboard" = "スコアボード";
+"point" = "ポイント";
+"start" = "開始";
+"thanks" = "ありがとう";
+"back" = "戻る";
+
+// MARK: - Home
+"screen.home.play_button.title" = "ゲーム";
+"screen.home.rules_button.title" = "ルール";
+"screen.home.add_word_button.title" = "単語を追加";
+"screen.home.change_language.title" = "言語を変更";
+
+// MARK: - Settings
+"screen.settings.title" = "設定";
+"screen.settings.language" = "言語";
+"screen.settings.remove_ads" = "広告を削除";
+"screen.settings.restore_purchase" = "購入を復元";
+"screen.settings.feedback" = "ヘルプとフィードバック";
+"screen.settings.share_app" = "このアプリを共有";
+"screen.settings.rate_app" = "このアプリを評価";
+"screen.settings.privacy_settings" = "プライバシー設定";
+"screen.settings.can_not_write_review.title" = "App Storeを開けません";
+"screen.settings.can_not_write_review.message" = "App Storeから私たちのアプリを選び、レビューを書いてください。ありがとうございます！！";
+
+// MARK: - Rules
+"screen.rules.title" = "ルール";
+"screen.rules.rule2" = "単語を説明する時、一つの単語を使うことは禁止されています";
+"screen.rules.rule3" = "チームメンバーが単語を当てたら、緑のボタンを押してください（+1ポイント）";
+"screen.rules.rule4" = "単語を説明できない場合、またはルールが破られて次の単語に進みたい場合は、赤いボタンを押してください（-1ポイント）";
+"screen.rules.rule5" = "時間切れになる前により多くのポイントを集めたチーム、または設定された数のポイントに最初に達したチームが勝ちます";
+"screen.rules.rule6" = "頑張ってください :)";
+
+// MARK: - Add Word
+"screen.add_word.title" = "単語追加";
+"screen.add_word.send" = "送信";
+"screen.add_word.hint" = "有効な単語を追加することを忘れないでください :)";
+"screen.add_word.language_picker_title" = "どの言語で単語を追加していますか？";
+"screen.add_word.textfield_placeholder" = "単語を入力";
+"screen.add_word.success_message" = "単語が正常に送信されました";
+"screen.add_word.error_message" = "単語を送信できませんでした";
+
+// MARK: - Game Details
+"screen.game_details.title" = "ゲーム詳細";
+"screen.game_details.rounds_amount.title" = "数量: %@";
+"screen.game_details.rounds_length.title" = "長さ: %@ 秒";
+"screen.game_details.rounds_settings.title" = "ラウンド設定";
+"screen.game_details.section.teams" = "チーム";
+"screen.game_details.section.players" = "プレイヤー";
+"screen.game_details.start_game.title" = "ゲーム開始";
+"screen.game_details.create_teams" = "チームを作成";
+"screen.game_details.game_mode.title" = "ゲームモード";
+"screen.game_details.classic.title" = "クラシック";
+"screen.game_details.classic.description" = "一度に一つの単語をプレイ";
+"screen.game_details.arcade.title" = "アーケード";
+"screen.game_details.arcade.description" = "5つの単語を同時にプレイ";
+"screen.game_details.loading_words.message" = "単語をダウンロード中";
+"screen.game_details.storage_warning.title" = "ストレージ不足";
+"screen.game_details.storage_warning.message" = "単語のダウンロードに失敗しました。もう一度お試しください";
+"screen.game_details.super_word.description" = "ランダムなスーパーワード（3ポイント）";
+
+// Teams
+"screen.game_details.teams.add_placeholder" = "プレイを開始するにはチームを追加してください";
+"screen.game_details.teams.name_placeholder" = "チーム名";
+"screen.game_details.teams.name_exists" = "この名前のチームはすでに存在します";
+"screen.game_details.teams.name_too_long" = "チーム名は%@文字以下にしてください";
+"screen.game_details.teams.add" = "チームを追加";
+"screen.game_details.teams.edit" = "チーム名を編集";
+"screen.game_details.teams.delete_confirmation" = "このチームを削除してもよろしいですか？";
+
+// Players
+"screen.game_details.players.add_placeholder" = "チームを作成するにはプレイヤーを追加してください";
+"screen.game_details.players.name_placeholder" = "プレイヤー名";
+"screen.game_details.players.name_exists" = "この名前のプレイヤーはすでに存在します";
+"screen.game_details.players.name_too_long" = "プレイヤー名は%@文字以下にしてください";
+"screen.game_details.players.add" = "プレイヤーを追加";
+"screen.game_details.players.edit" = "プレイヤーを編集";
+"screen.game_details.players.delete_confirmation" = "このプレイヤーを削除してもよろしいですか？";
+"screen.game_details.players.generate_teams" = "チームを生成";
+"screen.game_details.players.not_enough" = "チームを作成するには少なくとも2人のプレイヤーが必要です";
+"screen.game_details.players.odd_count" = "チームを作成するには偶数のプレイヤー数が必要です";
+
+// Alerts
+"screen.game_details.alert.invalid_parameter" = "無効なパラメータ";
+"screen.game_details.alert.no_internet.title" = "インターネット接続がありません！";
+"screen.game_details.alert.no_internet.message" = "ゲームを開始するにはインターネット接続が必要です";
+"screen.game_details.alert.not_enough_teams" = "開始するには少なくとも2つのチームを追加してください！";
+"screen.game_details.alert.not_unique_teams" = "チーム名は一意である必要があります！";
+"screen.game_details.alert.maximum_teams" = "5つ以上のチームを追加することはできません";
+"screen.game_details.alert.empty_name" = "名前を空にすることはできません";
+
+// MARK: - Game
+"screen.game.confirmation_alert.title" = "戻りますか？";
+"screen.game.confirmation_alert.message" = "チームのポイントは失われます";
+"screen.game.current_round.message" = "ラウンド: %@";
+"screen.game.current_extra_round.message" = "（追加: %@）";
+"screen.game.no_more_words.message" = "単語がもうありません";
+"screen.game.winning_view.title" = "おめでとう！";
+"screen.game.winning_view.repeat" = "繰り返す";
+"screen.game.winning_view.game_details.title" = "戻る";
+"screen.game.winning_view.description" = "%@ポイントで勝利しました";
+"screen.game.game_share_view.title" = "勝利したチームは%@です 🥳";
+"screen.game.arcade.skipButton" = "新しい単語（-2ポイント）";
+
+// MARK: - Game Scoreboard
+"screen.game_scoreboard.title" = "スコアボード";
+"screen.game_scoreboard.post_game_scoreboard.final_score" = "最終スコア: %@";
+"screen.game_scoreboard.post_game_scoreboard.words_guessed" = "当てた単語";
+"screen.game_scoreboard.post_game_scoreboard.words_skipped" = "スキップした単語";
+"screen.game_scoreboard.post_game_scoreboard.best_streak" = "最高連続成功";
+"screen.game_scoreboard.post_game_scoreboard.average_time" = "平均時間";
+"screen.game_scoreboard.post_game_scoreboard.sets_skipped" = "スキップしたセット";
+"screen.game_scoreboard.stat_card.words_guessed" = "当てた単語";
+"screen.game_scoreboard.stat_card.words_skipped" = "スキップした単語";
+"screen.game_scoreboard.performance_stat_row.best_streak" = "最高連続成功";
+"screen.game_scoreboard.performance_stat_row.average_time" = "平均時間";
+"screen.game_scoreboard.performance_stat_row.sets_skipped" = "スキップしたセット";
+
+// MARK: - Game Share
+"screen.game_share.title" = "スコアを共有！";
+"screen.game_share.share_to" = "共有先";
