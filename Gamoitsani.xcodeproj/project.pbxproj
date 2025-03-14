@@ -149,6 +149,8 @@
 		FFAE1F1E2C7E3AA0003A554C /* GameShareCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F1D2C7E3AA0003A554C /* GameShareCoordinator.swift */; };
 		FFAE1F202C7E3AA6003A554C /* GameShareModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F1F2C7E3AA6003A554C /* GameShareModels.swift */; };
 		FFAE1F222C7E3AAA003A554C /* GameShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAE1F212C7E3AAA003A554C /* GameShareViewModel.swift */; };
+		FFB3E2F72D4EA50A00FE3D93 /* EnhancedLanguagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3E2F62D4EA50A00FE3D93 /* EnhancedLanguagePickerView.swift */; };
+		FFB3E2F92D4EA55C00FE3D93 /* SettingsLanguagePickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3E2F82D4EA55C00FE3D93 /* SettingsLanguagePickerRow.swift */; };
 		FFB98EAB2C7534380024A925 /* AppConsentAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB98EAA2C7534380024A925 /* AppConsentAdManager.swift */; };
 		FFBE55A92D575EC400A07B73 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBE55A72D575EC400A07B73 /* Team.swift */; };
 		FFBE55AB2D576D8400A07B73 /* RoundStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBE55AA2D576D8400A07B73 /* RoundStats.swift */; };
@@ -381,6 +383,8 @@
 		FFAE1F1D2C7E3AA0003A554C /* GameShareCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareCoordinator.swift; sourceTree = "<group>"; };
 		FFAE1F1F2C7E3AA6003A554C /* GameShareModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareModels.swift; sourceTree = "<group>"; };
 		FFAE1F212C7E3AAA003A554C /* GameShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareViewModel.swift; sourceTree = "<group>"; };
+		FFB3E2F62D4EA50A00FE3D93 /* EnhancedLanguagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedLanguagePickerView.swift; sourceTree = "<group>"; };
+		FFB3E2F82D4EA55C00FE3D93 /* SettingsLanguagePickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguagePickerRow.swift; sourceTree = "<group>"; };
 		FFB98EAA2C7534380024A925 /* AppConsentAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConsentAdManager.swift; sourceTree = "<group>"; };
 		FFBE55A72D575EC400A07B73 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		FFBE55AA2D576D8400A07B73 /* RoundStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundStats.swift; sourceTree = "<group>"; };
@@ -833,6 +837,8 @@
 			isa = PBXGroup;
 			children = (
 				FF8675602C6798680089B52B /* SettingsView.swift */,
+				FFB3E2F82D4EA55C00FE3D93 /* SettingsLanguagePickerRow.swift */,
+				FFB3E2F62D4EA50A00FE3D93 /* EnhancedLanguagePickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1604,6 +1610,7 @@
 				FF99230A2CA334EE0088395E /* LanguageManager.swift in Sources */,
 				FFF65CB02BE61DEA008E0352 /* UITableViewExtensions.swift in Sources */,
 				FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */,
+				FFB3E2F72D4EA50A00FE3D93 /* EnhancedLanguagePickerView.swift in Sources */,
 				FF01C8A82D2AD1FF00BE40D4 /* Logger.swift in Sources */,
 				FF86756A2C67DB270089B52B /* SettingsViewModel.swift in Sources */,
 				FFB98EAB2C7534380024A925 /* AppConsentAdManager.swift in Sources */,
@@ -1695,6 +1702,7 @@
 				FFFB4CDB2BD7CAEE00CDDCB4 /* AppCoordinator.swift in Sources */,
 				FF8EA7602BED613400F098B8 /* FirebaseManager.swift in Sources */,
 				FFFB4D2B2BD854F900CDDCB4 /* BaseViewController.swift in Sources */,
+				FFB3E2F92D4EA55C00FE3D93 /* SettingsLanguagePickerRow.swift in Sources */,
 				FF4FA9C92BEF7C5900F38F98 /* ArrayExtensions.swift in Sources */,
 				FF92E22C2D8356C20020A803 /* CountdownView.swift in Sources */,
 				FF8EA70B2BEBBA1E00F098B8 /* GameScoreboardModel.swift in Sources */,

@@ -25,7 +25,7 @@ struct SettingsView: View {
                 
                 List {
                     Section {
-                        LanguagePickerRow(viewModel: viewModel.languagePickerRowViewModel)
+                        SettingsLanguagePickerRow()
                     }
                     
                     Section {

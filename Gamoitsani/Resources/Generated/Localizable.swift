@@ -19,6 +19,8 @@ public enum L10n {
     public static var cancel: String { L10n.tr("Localizable", "cancel") }
     /// Change
     public static var change: String { L10n.tr("Localizable", "change") }
+    /// Close
+    public static var close: String { L10n.tr("Localizable", "close") }
     /// Delete
     public static var delete: String { L10n.tr("Localizable", "delete") }
     /// Edit

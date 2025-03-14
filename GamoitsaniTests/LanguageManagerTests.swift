@@ -92,21 +92,6 @@ final class LanguageManagerTests: XCTestCase {
         }
     }
     
-    func testIsAppInUkrainian() {
-        // When setting language to Ukrainian
-        sut.setLanguage(.ukrainian)
-        
-        // Then isAppInUkrainian should be true
-        XCTAssertTrue(sut.isAppInUkrainian)
-        
-        // When setting to any other language
-        let nonUkrainianLanguages = Language.allCases.filter { $0 != .ukrainian }
-        nonUkrainianLanguages.forEach { language in
-            sut.setLanguage(language)
-            XCTAssertFalse(sut.isAppInUkrainian)
-        }
-    }
-    
     // MARK: - Notification Tests
     
     func testLanguageChangeNotification() {

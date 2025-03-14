@@ -46,10 +46,6 @@ final class LanguageManager {
         return currentLanguage == .georgian
     }
     
-    var isAppInUkrainian: Bool {
-        return currentLanguage == .ukrainian
-    }
-    
     @Published private(set) var currentLanguage: Language
     
     private init() {
