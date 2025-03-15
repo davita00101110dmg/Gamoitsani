@@ -78,6 +78,7 @@
 "screen.game_details.storage_warning.title" = "ストレージ不足";
 "screen.game_details.storage_warning.message" = "単語のダウンロードに失敗しました。もう一度お試しください";
 "screen.game_details.super_word.description" = "ランダムなスーパーワード（3ポイント）";
+"screen.game_details.random_challenge.description" = "チームのためのランダムチャレンジ";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "プレイを開始するにはチームを追加してください";
@@ -121,6 +122,7 @@
 "screen.game.winning_view.description" = "%@ポイントで勝利しました";
 "screen.game.game_share_view.title" = "勝利したチームは%@です 🥳";
 "screen.game.arcade.skipButton" = "新しい単語（-2ポイント）";
+"screen.game.game_challenge_view.header" = "チームのためのランダムチャレンジ";
 
 // MARK: - Game Scoreboard
 "screen.game_scoreboard.title" = "スコアボード";

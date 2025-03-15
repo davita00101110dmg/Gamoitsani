@@ -78,6 +78,7 @@
 "screen.game_details.storage_warning.title" = "Unzureichender Speicher";
 "screen.game_details.storage_warning.message" = "Wörter konnten nicht heruntergeladen werden, bitte versuchen Sie es erneut";
 "screen.game_details.super_word.description" = "Zufälliges Superwort (3 Punkte)";
+"screen.game_details.random_challenge.description" = "Zufällige Herausforderung für das Team";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Fügen Sie Teams hinzu, um mit dem Spielen zu beginnen";
@@ -121,6 +122,7 @@
 "screen.game.winning_view.description" = "Sie haben mit %@ Punkten gewonnen";
 "screen.game.game_share_view.title" = "Das Gewinner-Team ist %@ 🥳";
 "screen.game.arcade.skipButton" = "Neue Wörter (-2 Punkte)";
+"screen.game.game_challenge_view.header" = "Zufällige Herausforderung für das Team";
 
 // MARK: - Game Scoreboard
 "screen.game_scoreboard.title" = "Anzeigetafel";

@@ -78,6 +78,7 @@
 "screen.game_details.storage_warning.title" = "Անբավարար հիշողություն";
 "screen.game_details.storage_warning.message" = "Չհաջողվեց ներբեռնել բառերը, փորձեք կրկին";
 "screen.game_details.super_word.description" = "Պատահական սուպեր բառ (3 միավոր)";
+"screen.game_details.random_challenge.description" = "Պատահական մարտահրավեր թիմի համար";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Ավելացրեք թիմեր խաղը սկսելու համար";
@@ -121,6 +122,7 @@
 "screen.game.winning_view.description" = "Դուք հաղթեցիք %@ միավորով";
 "screen.game.game_share_view.title" = "Հաղթող թիմն է %@ 🥳";
 "screen.game.arcade.skipButton" = "Նոր բառեր (-2 միավոր)";
+"screen.game.game_challenge_view.header" = "Պատահական մարտահրավեր թիմի համար";
 
 // MARK: - Game Scoreboard
 "screen.game_scoreboard.title" = "Արդյունքներ";

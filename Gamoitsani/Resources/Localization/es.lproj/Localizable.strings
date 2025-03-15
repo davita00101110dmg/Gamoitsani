@@ -78,6 +78,7 @@
 "screen.game_details.storage_warning.title" = "Almacenamiento insuficiente";
 "screen.game_details.storage_warning.message" = "No se pudieron descargar las palabras, inténtelo de nuevo";
 "screen.game_details.super_word.description" = "Palabra super aleatoria (3 Puntos)";
+"screen.game_details.random_challenge.description" = "Desafío aleatorio para el equipo";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Añada equipos para empezar a jugar";
@@ -121,6 +122,7 @@
 "screen.game.winning_view.description" = "Ha ganado con %@ puntos";
 "screen.game.game_share_view.title" = "El equipo ganador es %@ 🥳";
 "screen.game.arcade.skipButton" = "Nuevas palabras (-2 puntos)";
+"screen.game.game_challenge_view.header" = "Desafío aleatorio para el equipo";
 
 // MARK: - Game Scoreboard
 "screen.game_scoreboard.title" = "Marcador";

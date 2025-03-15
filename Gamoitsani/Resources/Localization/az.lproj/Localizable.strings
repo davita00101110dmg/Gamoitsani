@@ -78,6 +78,7 @@
 "screen.game_details.storage_warning.title" = "Yetərsiz yaddaş";
 "screen.game_details.storage_warning.message" = "Sözləri yükləmək mümkün olmadı, yenidən cəhd edin";
 "screen.game_details.super_word.description" = "Təsadüfi super söz (3 xal)";
+"screen.game_details.random_challenge.description" = "Komanda üçün təsadüfi çağırış";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Oynamağa başlamaq üçün komanda əlavə edin";
@@ -121,6 +122,7 @@
 "screen.game.winning_view.description" = "Siz %@ xalla qazandınız";
 "screen.game.game_share_view.title" = "Qalib komanda %@ 🥳";
 "screen.game.arcade.skipButton" = "Yeni sözlər (-2 xal)";
+"screen.game.game_challenge_view.header" = "Komanda üçün təsadüfi çağırış";
 
 // MARK: - Game Scoreboard
 "screen.game_scoreboard.title" = "Nəticələr";

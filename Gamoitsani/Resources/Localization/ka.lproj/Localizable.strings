@@ -77,7 +77,8 @@
 "screen.game_details.loading_words.message" = "მიმდინარეობს სიტყვების გადმოწერა";
 "screen.game_details.storage_warning.title" = "არასაკმარისი მეხსიერება";
 "screen.game_details.storage_warning.message" = "სიტყვების გადმოწერა ვერ მოხდა, სცადეთ თავიდან";
-"screen.game_details.super_word.description" = "რენდომ სუპერ სიტყვა (3 ქულა)";
+"screen.game_details.super_word.description" = "შემთხვევითი სუპერ სიტყვა (3 ქულა)";
+"screen.game_details.random_challenge.description" = "შემთხვევითი გამოწვევა გუნდისთვის";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "დაამატე გუნდები თამაშის დასაწყებად";
@@ -121,6 +122,7 @@
 "screen.game.winning_view.description" = "თქვენ მოიგეთ %@ ქულით";
 "screen.game.game_share_view.title" = "გამარჯვებული გუნდია %@ 🥳";
 "screen.game.arcade.skipButton" = "ახალი სიტყვები (-2 ქულა)";
+"screen.game.game_challenge_view.header" = "შემთხვევითი გამოწვევა გუნდისთვის";
 
 // MARK: - Game Scoreboard
 "screen.game_scoreboard.title" = "შედეგები";
@@ -135,7 +137,6 @@
 "screen.game_scoreboard.performance_stat_row.best_streak" = "საუკეთესო სერია";
 "screen.game_scoreboard.performance_stat_row.average_time" = "საშუალო დრო";
 "screen.game_scoreboard.performance_stat_row.sets_skipped" = "გამოტოვებული სეტები";
-
 
 // MARK: - Game Share
 "screen.game_share.title" = "გააზიარე შედეგები!";

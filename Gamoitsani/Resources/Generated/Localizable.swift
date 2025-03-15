@@ -92,6 +92,11 @@ public enum L10n {
           }
         }
 
+        public enum GameChallengeView {
+          /// Random challenge for team
+          public static var header: String { L10n.tr("Localizable", "screen.game.game_challenge_view.header") }
+        }
+
         public enum GameShareView {
           /// The winning team is %@ 🥳
           public static func title( _ p1: String) -> String {
@@ -194,6 +199,11 @@ public enum L10n {
           public static var notEnough: String { L10n.tr("Localizable", "screen.game_details.players.not_enough") }
           /// Need an even number of players to create teams
           public static var oddCount: String { L10n.tr("Localizable", "screen.game_details.players.odd_count") }
+        }
+
+        public enum RandomChallenge {
+          /// Random challenge for team
+          public static var description: String { L10n.tr("Localizable", "screen.game_details.random_challenge.description") }
         }
 
         public enum RoundsAmount {

@@ -78,6 +78,7 @@
 "screen.game_details.storage_warning.title" = "Yetersiz depolama alanı";
 "screen.game_details.storage_warning.message" = "Kelimeler indirilemedi, lütfen tekrar deneyin";
 "screen.game_details.super_word.description" = "Rastgele süper kelime (3 Puan)";
+"screen.game_details.random_challenge.description" = "Takım için rastgele meydan okuma";
 
 // Teams
 "screen.game_details.teams.add_placeholder" = "Oynamaya başlamak için takım ekleyin";
@@ -121,6 +122,7 @@
 "screen.game.winning_view.description" = "%@ puanla kazandınız";
 "screen.game.game_share_view.title" = "Kazanan takım %@ 🥳";
 "screen.game.arcade.skipButton" = "Yeni kelimeler (-2 puan)";
+"screen.game.game_challenge_view.header" = "Takım için rastgele meydan okuma";
 
 // MARK: - Game Scoreboard
 "screen.game_scoreboard.title" = "Sonuçlar";
