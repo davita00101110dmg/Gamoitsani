@@ -22,6 +22,7 @@ final class GameViewModel: ObservableObject {
     var sortedTeams: [Team] { gameStory.teams.sorted { $0.score > $1.score } }
     var gameMode: GameMode { gameStory.gameMode }
     var gameStory = GameStory.shared
+    var challengesManager = ChallengesManager.shared
     
     let audioManager = AudioManager()
     
@@ -53,6 +54,19 @@ extension GameViewModel {
             round: currentRound,
             extraRound: currentExtraRound
         )
+    }
+    
+    func createGameChallengeViewModel() -> GameChallengeViewModel {
+        let viewModel = GameChallengeViewModel(
+            teamName: currentTeam?.name ?? .empty,
+            teamIndex: gameStory.currentTeamIndex
+        )
+        
+        if gameStory.isRandomChallengeEnabled {
+            log(.info, "Team: \(currentTeam?.name ?? .empty) Index: \(gameStory.currentTeamIndex) Challenge: \(viewModel.challengeText)")
+        }
+        
+        return viewModel
     }
 
     func createGameOverViewModel() -> GameOverViewModel {
@@ -86,6 +100,16 @@ extension GameViewModel {
     }
     
     func startPlaying() {
+        if gameStory.isRandomChallengeEnabled {
+            withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
+                gameState = .challenge
+            }
+        } else {
+            startCombineCountdown()
+        }
+    }
+    
+    func startCountdownAfterChallenge() {
         startCombineCountdown()
     }
     
@@ -138,8 +162,10 @@ extension GameViewModel {
     
     func startNewGame() {
         gameStory.reset()
+        challengesManager.resetUsedChallenges()
         gameState = .info
         resetViewModels()
+        log(.info, "Starting new game, cleared all team challenges")
     }
     
     private func resetViewModels() {

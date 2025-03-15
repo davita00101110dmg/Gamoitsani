@@ -18,6 +18,8 @@
 		FF1E92BA2BF91C8C00127FDE /* GMBackBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */; };
 		FF1F14152BF7A897004116A1 /* Mersad.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF1F14132BF7A897004116A1 /* Mersad.ttf */; };
 		FF1F59DD2D6239D90022B0B3 /* CheckToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1F59DC2D6239D90022B0B3 /* CheckToggleStyle.swift */; };
+		FF27EB422D84A9B9000B8028 /* GameChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27EB3F2D84A9B9000B8028 /* GameChallengeView.swift */; };
+		FF27EB472D84B08B000B8028 /* RandomChallengeToggleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27EB462D84B08B000B8028 /* RandomChallengeToggleRow.swift */; };
 		FF31C8072D6E441600653F9C /* SuperWordToggleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF31C8062D6E441600653F9C /* SuperWordToggleRow.swift */; };
 		FF31C8092D6E445E00653F9C /* WordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF31C8082D6E445E00653F9C /* WordItem.swift */; };
 		FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37087A2BFBD4280056361F /* CoreDataManager.swift */; };
@@ -108,6 +110,10 @@
 		FF8675732C6808FE0089B52B /* Gamoitsani.storekit in Resources */ = {isa = PBXBuildFile; fileRef = FF8675722C6808FE0089B52B /* Gamoitsani.storekit */; };
 		FF8675772C680E1D0089B52B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8675762C680E1D0089B52B /* StoreKit.framework */; };
 		FF86757B2C681A780089B52B /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF86757A2C681A780089B52B /* SettingsModels.swift */; };
+		FF8E7FF12D84F02000C810B8 /* GameRulesManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7FF02D84F02000C810B8 /* GameRulesManagerTests.swift */; };
+		FF8E7FF32D84F02800C810B8 /* GameRuleViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7FF22D84F02800C810B8 /* GameRuleViewModelTests.swift */; };
+		FF8E7FF52D85A46000C810B8 /* ChallengesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7FF42D85A46000C810B8 /* ChallengesManager.swift */; };
+		FF8E7FF72D85B04B00C810B8 /* GameChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7FF62D85B04B00C810B8 /* GameChallengeViewModel.swift */; };
 		FF8EA7092BEBBA1900F098B8 /* GameScoreboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA7082BEBBA1900F098B8 /* GameScoreboardViewModel.swift */; };
 		FF8EA70B2BEBBA1E00F098B8 /* GameScoreboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA70A2BEBBA1E00F098B8 /* GameScoreboardModel.swift */; };
 		FF8EA70D2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EA70C2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift */; };
@@ -251,6 +257,8 @@
 		FF27EB372D84952A000B8028 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FF27EB382D84952A000B8028 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FF27EB392D84952A000B8028 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FF27EB3F2D84A9B9000B8028 /* GameChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChallengeView.swift; sourceTree = "<group>"; };
+		FF27EB462D84B08B000B8028 /* RandomChallengeToggleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomChallengeToggleRow.swift; sourceTree = "<group>"; };
 		FF31C8062D6E441600653F9C /* SuperWordToggleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperWordToggleRow.swift; sourceTree = "<group>"; };
 		FF31C8082D6E445E00653F9C /* WordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordItem.swift; sourceTree = "<group>"; };
 		FF37087A2BFBD4280056361F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -342,6 +350,10 @@
 		FF8675762C680E1D0089B52B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		FF86757A2C681A780089B52B /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 		FF8929C12BD6FC52000C0B9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF8E7FF02D84F02000C810B8 /* GameRulesManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRulesManagerTests.swift; sourceTree = "<group>"; };
+		FF8E7FF22D84F02800C810B8 /* GameRuleViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRuleViewModelTests.swift; sourceTree = "<group>"; };
+		FF8E7FF42D85A46000C810B8 /* ChallengesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesManager.swift; sourceTree = "<group>"; };
+		FF8E7FF62D85B04B00C810B8 /* GameChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChallengeViewModel.swift; sourceTree = "<group>"; };
 		FF8EA7082BEBBA1900F098B8 /* GameScoreboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreboardViewModel.swift; sourceTree = "<group>"; };
 		FF8EA70A2BEBBA1E00F098B8 /* GameScoreboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreboardModel.swift; sourceTree = "<group>"; };
 		FF8EA70C2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreboardCoordinator.swift; sourceTree = "<group>"; };
@@ -491,6 +503,15 @@
 				FF01C8A72D2AD1FF00BE40D4 /* Logger.swift */,
 			);
 			path = Logger;
+			sourceTree = "<group>";
+		};
+		FF27EB412D84A9B9000B8028 /* GameChallenge */ = {
+			isa = PBXGroup;
+			children = (
+				FF27EB3F2D84A9B9000B8028 /* GameChallengeView.swift */,
+				FF8E7FF62D85B04B00C810B8 /* GameChallengeViewModel.swift */,
+			);
+			path = GameChallenge;
 			sourceTree = "<group>";
 		};
 		FF3708802BFBD5040056361F /* Word */ = {
@@ -706,6 +727,7 @@
 			children = (
 				FF63A43B2CD517F3005617E5 /* GameDetailsView.swift */,
 				FF31C8062D6E441600653F9C /* SuperWordToggleRow.swift */,
+				FF27EB462D84B08B000B8028 /* RandomChallengeToggleRow.swift */,
 				FFAA68882D3846E400F0B2C0 /* GameModePickerView.swift */,
 				FFAA68862D3846DB00F0B2C0 /* GameModeOptionView.swift */,
 				FF63A4352CD517E0005617E5 /* PlayerRowView.swift */,
@@ -772,6 +794,7 @@
 				FF7F1D8A2BE7ADFA00872554 /* GamePlay */,
 				FF7CA1612C0258F100E3BEC4 /* GameOver */,
 				FF8623702C6AAF9B0044A7D7 /* GameShare */,
+				FF27EB412D84A9B9000B8028 /* GameChallenge */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -892,6 +915,7 @@
 			isa = PBXGroup;
 			children = (
 				FFA60DC32C7CED9E005A2660 /* Admob */,
+				FF8E7FF42D85A46000C810B8 /* ChallengesManager.swift */,
 				FF8EA7202BEC12BD00F098B8 /* AudioManager.swift */,
 				FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */,
 				FF92E2232D8351B40020A803 /* AnalyticsManager.swift */,
@@ -1048,6 +1072,8 @@
 			isa = PBXGroup;
 			children = (
 				FFBFB0302C68CC3A00A877D7 /* GameViewModelTests.swift */,
+				FF8E7FF02D84F02000C810B8 /* GameRulesManagerTests.swift */,
+				FF8E7FF22D84F02800C810B8 /* GameRuleViewModelTests.swift */,
 				FFFFD25E2CBD3B6400622327 /* CoreDataManagerTests.swift */,
 				FF6054DD2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift */,
 				FFAA68A72D39AD6F00F0B2C0 /* LanguageManagerTests.swift */,
@@ -1593,6 +1619,7 @@
 				FFAA68872D3846DB00F0B2C0 /* GameModeOptionView.swift in Sources */,
 				FFFB4D4C2BD9392D00CDDCB4 /* GameDetailsCoordinator.swift in Sources */,
 				FFF65CC72BE6B0C4008E0352 /* Assets.swift in Sources */,
+				FF8E7FF52D85A46000C810B8 /* ChallengesManager.swift in Sources */,
 				FFA61BBF2D6CF8D20062D68B /* RainbowBorderCardView.swift in Sources */,
 				FF1E92B82BF9017100127FDE /* UILabelExtensions.swift in Sources */,
 				FFA60DAD2C7774D8005A2660 /* NotificationsManager.swift in Sources */,
@@ -1654,6 +1681,7 @@
 				FF63A4342CD517D9005617E5 /* PlaceholderView.swift in Sources */,
 				FF92E2242D8351B40020A803 /* AnalyticsManager.swift in Sources */,
 				FF63A4572CD647C4005617E5 /* FloatingAnimation.swift in Sources */,
+				FF8E7FF72D85B04B00C810B8 /* GameChallengeViewModel.swift in Sources */,
 				FF63A4582CD647C4005617E5 /* PulseAnimation.swift in Sources */,
 				FFAA688D2D3852F300F0B2C0 /* WordCardView.swift in Sources */,
 				FF7CA1652C02591100E3BEC4 /* GameOverViewModel.swift in Sources */,
@@ -1677,6 +1705,7 @@
 				FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */,
 				FF8289D72D61EA8100E050F0 /* PostGameScoreboardView.swift in Sources */,
 				FF31C8092D6E445E00653F9C /* WordItem.swift in Sources */,
+				FF27EB422D84A9B9000B8028 /* GameChallengeView.swift in Sources */,
 				FFBE55AF2D57BB8700A07B73 /* GameScoreboardView.swift in Sources */,
 				FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */,
 				FF8289D12D61EA6600E050F0 /* InGameTeamRow.swift in Sources */,
@@ -1688,6 +1717,7 @@
 				FF8675682C67A8160089B52B /* GMTableViewButton.swift in Sources */,
 				FFAA68942D39154500F0B2C0 /* ClassicGamePlayViewModel.swift in Sources */,
 				FF8623752C6AB27D0044A7D7 /* GameShareUIView.swift in Sources */,
+				FF27EB472D84B08B000B8028 /* RandomChallengeToggleRow.swift in Sources */,
 				FFFB4D362BD9128800CDDCB4 /* NotificationExtensons.swift in Sources */,
 				FFFCF38E2C6FA048003458DC /* DynamicStack.swift in Sources */,
 				FF4FA9D12BEFF30900F38F98 /* AddWordViewModel.swift in Sources */,
@@ -1741,8 +1771,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF8E7FF32D84F02800C810B8 /* GameRuleViewModelTests.swift in Sources */,
 				FFFFD25F2CBD3B6400622327 /* CoreDataManagerTests.swift in Sources */,
 				FF6054DE2CC3EFA0003C2AA0 /* FirebaseManagerTests.swift in Sources */,
+				FF8E7FF12D84F02000C810B8 /* GameRulesManagerTests.swift in Sources */,
 				FFBFB0312C68CC3A00A877D7 /* GameViewModelTests.swift in Sources */,
 				FFAA68A82D39AD6F00F0B2C0 /* LanguageManagerTests.swift in Sources */,
 			);

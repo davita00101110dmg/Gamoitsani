@@ -61,6 +61,7 @@ struct GameDetailsView: View {
             roundsRow
             roundsLengthRow
             superWordToggleRow
+            randomChallengeToggleRow
         }
         .padding()
         .background(
@@ -101,6 +102,10 @@ struct GameDetailsView: View {
     
     private var superWordToggleRow: some View {
         SuperWordToggleRow(isEnabled: $viewModel.isSuperWordEnabled)
+    }
+
+    private var randomChallengeToggleRow: some View {
+        RandomChallengeToggleRow(isEnabled: $viewModel.isRandomChallengeEnabled)
     }
     
     private var teamManagementSection: some View {
@@ -239,6 +244,9 @@ private extension GameDetailsView {
     func handleOnAppear() {
         GameStory.shared.reset()
         viewModel.fetchWordsFromServer()
+        ChallengesManager.shared.fetchChallengesIfNeeded {
+            log(.info, "Challenges fetched successfully")
+        }
         StoreReviewManager.checkAndAskForReview()
     }
     

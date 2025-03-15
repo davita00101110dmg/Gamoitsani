@@ -11,6 +11,7 @@ import Foundation
 enum GameModels {
     enum GameState {
         case info
+        case challenge
         case countdown
         case play
         case gameOver

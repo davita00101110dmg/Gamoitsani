@@ -28,6 +28,8 @@ struct GameView: View {
                     switch viewModel.gameState {
                     case .info:
                         gameInfoView
+                    case .challenge:
+                        challengeView
                     case .countdown:
                         countdownView
                     case .play:
@@ -92,6 +94,12 @@ struct GameView: View {
         }
     }
     
+    private var challengeView: some View {
+        GameChallengeView(viewModel: viewModel.createGameChallengeViewModel()) {
+            viewModel.startCountdownAfterChallenge()
+        }
+    }
+    
     private var countdownView: some View {
         CountdownView(
             currentCount: $viewModel.countdownValue,
@@ -151,7 +159,7 @@ struct GameView: View {
     private var viewMaxHeight: CGFloat {
         if horizontalSizeClass == .compact {
             switch viewModel.gameState {
-            case .gameOver:
+            case .gameOver, .challenge:
                 return ViewConstants.viewHeightBig
             case .play:
                 return viewModel.gameMode == .arcade ? ViewConstants.viewHeightBig : ViewConstants.viewHeightSmall

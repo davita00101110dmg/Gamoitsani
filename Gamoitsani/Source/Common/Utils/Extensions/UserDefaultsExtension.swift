@@ -16,6 +16,8 @@ extension UserDefaults {
         static let IS_APP_FIRST_LAUNCH = "IS_APP_FIRST_LAUNCH"
         static let HAS_AD_CONSENT = "HAS_AD_CONSENT"
         static let LAST_WORD_SYNC_DATE = "LAST_WORD_SYNC_DATE"
+        static let LAST_CHALLENGE_SYNC_DATE = "LAST_CHALLENGE_SYNC_DATE"
+        static let CACHED_CHALLENGES = "CACHED_CHALLENGES"
         static let DEBUG_QUICK_GAME = "DEBUG_QUICK_GAME"
     }
     
@@ -61,6 +63,24 @@ extension UserDefaults {
             return UserDefaults.standard.double(forKey: Keys.LAST_WORD_SYNC_DATE)
         } set {
             UserDefaults.standard.set(newValue, forKey: Keys.LAST_WORD_SYNC_DATE)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var lastChallengeSyncDate: Double {
+        get {
+            return UserDefaults.standard.double(forKey: Keys.LAST_CHALLENGE_SYNC_DATE)
+        } set {
+            UserDefaults.standard.set(newValue, forKey: Keys.LAST_CHALLENGE_SYNC_DATE)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var cachedChallenges: Data? {
+        get {
+            return UserDefaults.standard.data(forKey: Keys.CACHED_CHALLENGES)
+        } set {
+            UserDefaults.standard.set(newValue, forKey: Keys.CACHED_CHALLENGES)
             UserDefaults.standard.synchronize()
         }
     }

@@ -28,9 +28,23 @@ final class GameStory {
     var finishedGamesCountInSession: Int = 0
     var isGameInProgress: Bool = false
     var isSuperWordEnabled: Bool = false
+    var isRandomChallengeEnabled: Bool = false
     var gameStartTime: Date? = nil
     
+    private var teamChallenges: [String] = []
     private var teamSuperWordEncountered: [Bool] = []
+    
+    func getChallengeForTeam(at index: Int) -> String? {
+        guard index < teamChallenges.count else { return nil }
+        return teamChallenges[index]
+    }
+    
+    func setChallengeForTeam(at index: Int, challenge: String) {
+        if index >= teamChallenges.count {
+            teamChallenges.append(contentsOf: Array(repeating: .empty, count: index - teamChallenges.count + 1))
+        }
+        teamChallenges[index] = challenge
+    }
     
     var isGameFinished: Bool {
         guard !isGameInProgress && playingSessionCount > 0 else { return false }
@@ -54,6 +68,7 @@ final class GameStory {
     func setTeams(_ teams: [Team]) {
         self.teams = teams
         self.teamSuperWordEncountered = Array(repeating: false, count: teams.count)
+        self.teamChallenges = Array(repeating: .empty, count: teams.count)
     }
     
     func updateScore(for teamIndex: Int, points: Int, wasSkipped: Int, wordsGuessed: Int) {
@@ -87,6 +102,7 @@ final class GameStory {
         playingSessionCount = 0
         currentTeamIndex = 0
         gameStartTime = nil
+        teamChallenges.removeAll()
         resetSuperWordEncounters()
     }
     

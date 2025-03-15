@@ -23,6 +23,7 @@ final class GameDetailsViewModel: ObservableObject {
     @Published private var collection = GameDetailsTeamSectionMode.Collection(teams: [], players: [])
     
     @Published var isSuperWordEnabled: Bool = false
+    @Published var isRandomChallengeEnabled: Bool = false
     
     var teams: [GameDetailsTeam] { collection.teams }
     var players: [GameDetailsPlayer] { collection.players }
@@ -54,6 +55,7 @@ final class GameDetailsViewModel: ObservableObject {
         gameStory.numberOfRounds = roundsAmount.toInt
         gameStory.lengthOfRound = roundsLength
         gameStory.isSuperWordEnabled = isSuperWordEnabled
+        gameStory.isRandomChallengeEnabled = isRandomChallengeEnabled
         gameStory.setTeams(createTeams())
     }
     
