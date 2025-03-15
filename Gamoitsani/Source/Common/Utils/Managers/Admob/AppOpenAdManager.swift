@@ -41,7 +41,7 @@ final class AppOpenAdManager: BaseAdManager {
     override func showAdIfAvailable() {
         guard !isShowingAd,
               AppConstants.shouldShowAdsToUser,
-              !UserDefaults.isFirstLaunch,
+              !AppSettings.isFirstLaunch,
               !GameStory.shared.isGameInProgress else { return }
 
         if !isAdAvailable() {

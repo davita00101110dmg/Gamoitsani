@@ -42,14 +42,14 @@ final class FirebaseManager {
     
     func fetchWordsIfNeeded(completion: @escaping ([Word]) -> Void, onStorageWarning: @escaping () -> Void) {
         Task {
-            let lastSyncTimestamp = UserDefaults.lastWordSyncDate
+            let lastSyncTimestamp = AppSettings.lastWordSyncDate
             let currentTimestamp = currentDate.timeIntervalSince1970
             
             if currentTimestamp - lastSyncTimestamp >= .week {
                 let firebaseWords = await fetchWordsFromFirebase(since: Date(timeIntervalSince1970: lastSyncTimestamp))
                 do {
                     try await coreDataManager.saveWordsFromFirebase(firebaseWords)
-                    await MainActor.run { UserDefaults.lastWordSyncDate = currentTimestamp }
+                    await MainActor.run { AppSettings.lastWordSyncDate = currentTimestamp }
                     let words = await coreDataManager.fetchWordsFromCoreData(quantity: 1500)
                     await MainActor.run { completion(words) }
                 } catch CoreDataManager.StorageError.insufficientStorage {

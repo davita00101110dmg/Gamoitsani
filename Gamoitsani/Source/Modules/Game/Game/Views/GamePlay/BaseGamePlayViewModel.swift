@@ -62,7 +62,7 @@ class BaseGamePlayViewModel: ObservableObject {
             return
         }
         
-        let shouldUseQuickTimer = UserDefaults.isQuickGameEnabled
+        let shouldUseQuickTimer = AppSettings.isQuickGameEnabled
         let timerDuration = shouldUseQuickTimer ? 2.0 : timeRemaining
 #else
         let timerDuration = timeRemaining

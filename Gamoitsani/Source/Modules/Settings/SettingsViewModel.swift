@@ -12,7 +12,7 @@ import Combine
 
 final class SettingsViewModel: NSObject, ObservableObject {
     @Published var selectedLanguage: Language
-    @AppStorage(UserDefaults.Keys.HAS_REMOVED_ADS) var isRemoveAdsPurchased: Bool = false
+    @AppStorage(AppSettings.HAS_REMOVED_ADS) var isRemoveAdsPurchased: Bool = false
     @Published var showingAlert: Bool = false
     @Published var languageChanged: Bool = false
     @Published var isShareSheetPresented: Bool = false

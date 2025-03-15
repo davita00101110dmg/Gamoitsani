@@ -65,8 +65,8 @@ struct SettingsView: View {
 #if DEBUG
                     Section {
                         Toggle("Quick Game Mode (Debug)", isOn: .init(
-                            get: { UserDefaults.isQuickGameEnabled },
-                            set: { UserDefaults.isQuickGameEnabled = $0 }
+                            get: { AppSettings.isQuickGameEnabled },
+                            set: { AppSettings.isQuickGameEnabled = $0 }
                         ))
                     }.listRowBackground(Asset.gmSecondary.swiftUIColor)
 #endif

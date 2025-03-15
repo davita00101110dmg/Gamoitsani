@@ -11,20 +11,11 @@ import StoreKit
 
 struct StoreReviewManager {
     static func incrementAppOpenedCount() {
-        guard var appOpenCount = UserDefaults.standard.value(forKey: UserDefaults.Keys.APP_OPENED_COUNT) as? Int else {
-            UserDefaults.standard.set(1, forKey: UserDefaults.Keys.APP_OPENED_COUNT)
-            return
-        }
-        appOpenCount += 1
-        UserDefaults.standard.set(appOpenCount, forKey: UserDefaults.Keys.APP_OPENED_COUNT)
+        AppSettings.appOpenCount += 1
     }
     
     static func checkAndAskForReview() {
-        guard let appOpenCount = UserDefaults.standard.value(forKey: UserDefaults.Keys.APP_OPENED_COUNT) as? Int else {
-            UserDefaults.standard.set(1, forKey: UserDefaults.Keys.APP_OPENED_COUNT)
-            return
-        }
-        
+        let appOpenCount = AppSettings.appOpenCount
         let finishedGamesCountInSession = GameStory.shared.finishedGamesCountInSession
         
         if appOpenCount >= 20 && finishedGamesCountInSession >= 3 {

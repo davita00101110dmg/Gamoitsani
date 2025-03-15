@@ -32,7 +32,7 @@ final class FirebaseManagerTests: XCTestCase {
         // Given
         let initialDate = Date()
         sut.currentDate = initialDate
-        UserDefaults.lastWordSyncDate = initialDate.timeIntervalSince1970
+        AppSettings.lastWordSyncDate = initialDate.timeIntervalSince1970
         
         let expectation = self.expectation(description: "Fetch words within one week")
         
@@ -41,7 +41,7 @@ final class FirebaseManagerTests: XCTestCase {
         sut.fetchWordsIfNeeded { words in
             // Then
             XCTAssertFalse(words.isEmpty)
-            XCTAssertEqual(UserDefaults.lastWordSyncDate, initialDate.timeIntervalSince1970)
+            XCTAssertEqual(AppSettings.lastWordSyncDate, initialDate.timeIntervalSince1970)
             XCTAssertFalse(self.mockCoreDataManager.saveWordsFromFirebaseCalled)
             expectation.fulfill()
         } onStorageWarning: { }
@@ -53,7 +53,7 @@ final class FirebaseManagerTests: XCTestCase {
         // Given
         let initialDate = Date()
         sut.currentDate = initialDate
-        UserDefaults.lastWordSyncDate = initialDate.timeIntervalSince1970
+        AppSettings.lastWordSyncDate = initialDate.timeIntervalSince1970
         
         let expectation = self.expectation(description: "Fetch words after one week")
         
@@ -62,7 +62,7 @@ final class FirebaseManagerTests: XCTestCase {
         sut.fetchWordsIfNeeded { words in
             // Then
             XCTAssertFalse(words.isEmpty) // Assuming no words fetched for this test
-            XCTAssertGreaterThan(UserDefaults.lastWordSyncDate, initialDate.timeIntervalSince1970)
+            XCTAssertGreaterThan(AppSettings.lastWordSyncDate, initialDate.timeIntervalSince1970)
             XCTAssertTrue(self.mockCoreDataManager.saveWordsFromFirebaseCalled)
             expectation.fulfill()
         } onStorageWarning: { }
@@ -74,7 +74,7 @@ final class FirebaseManagerTests: XCTestCase {
         // Given
         let initialDate = Date()
         sut.currentDate = initialDate
-        UserDefaults.lastWordSyncDate = initialDate.timeIntervalSince1970
+        AppSettings.lastWordSyncDate = initialDate.timeIntervalSince1970
         
         let expectation = self.expectation(description: "Fetch words exactly one week later")
         
@@ -83,7 +83,7 @@ final class FirebaseManagerTests: XCTestCase {
         sut.fetchWordsIfNeeded { words in
             // Then
             XCTAssertFalse(words.isEmpty) // Assuming no words fetched for this test
-            XCTAssertGreaterThan(UserDefaults.lastWordSyncDate, initialDate.timeIntervalSince1970)
+            XCTAssertGreaterThan(AppSettings.lastWordSyncDate, initialDate.timeIntervalSince1970)
             XCTAssertTrue(self.mockCoreDataManager.saveWordsFromFirebaseCalled)
             expectation.fulfill()
         } onStorageWarning: { }

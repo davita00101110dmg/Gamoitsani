@@ -64,17 +64,17 @@ final class LanguageManager {
     @Published private(set) var currentLanguage: Language
     
     private init() {
-        if let languageCode = UserDefaults.standard.string(forKey: UserDefaults.Keys.APP_LANGUAGE),
-           let language = Language(rawValue: languageCode) {
+        let languageCode = AppSettings.appLanguage
+        if let language = Language(rawValue: languageCode) {
             currentLanguage = language
         } else {
-            currentLanguage = .english
+            currentLanguage = .georgian
         }
     }
     
     func setLanguage(_ language: Language) {
         currentLanguage = language
-        UserDefaults.standard.set(language.rawValue, forKey: UserDefaults.Keys.APP_LANGUAGE)
+        AppSettings.appLanguage = language.rawValue
         NotificationCenter.default.post(name: .languageDidChange, object: nil)
     }
 }

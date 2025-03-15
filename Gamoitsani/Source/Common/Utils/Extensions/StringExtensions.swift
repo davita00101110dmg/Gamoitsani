@@ -13,11 +13,7 @@ extension String {
     static var whitespace: String { " " }
     
     func localized(_ arguments: CVarArg...) -> String {
-        guard let lang = UserDefaults.appLanguage else {
-            UserDefaults.appLanguage = Language.english.rawValue
-            return self
-        }
-        
+        let lang = AppSettings.appLanguage 
         guard let path = Bundle.main.path(forResource: lang, ofType: "lproj"),
               let bundle = Bundle(path: path) else {
             return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: .empty, comment: .empty)

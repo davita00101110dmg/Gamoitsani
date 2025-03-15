@@ -29,11 +29,11 @@ enum AppConstants {
     }
 
     static var hasRemovedAds: Bool {
-        UserDefaults.hasRemovedAds
+        AppSettings.hasRemovedAds
     }
     
     static var shouldShowAdsToUser: Bool {
-        UserDefaults.hasAdConsent && !hasRemovedAds
+        AppSettings.hasAdConsent && !hasRemovedAds
     }
     
     static let randomWords = [

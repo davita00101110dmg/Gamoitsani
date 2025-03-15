@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions
         )
         
-        UserDefaults.isFirstLaunch = true
+        AppSettings.isFirstLaunch = true
         
         AnalyticsManager.shared.logAppOpen()
 
@@ -112,10 +112,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func registerInitialUserDefaultValues() {
         UserDefaults.standard.register(defaults: [
-            UserDefaults.Keys.APP_LANGUAGE: Language.georgian.rawValue,
-            UserDefaults.Keys.IS_APP_FIRST_LAUNCH: true,
-            UserDefaults.Keys.HAS_REMOVED_ADS: false,
-            UserDefaults.Keys.HAS_AD_CONSENT: false,
+            AppSettings.APP_LANGUAGE: Language.georgian.rawValue,
+            AppSettings.IS_APP_FIRST_LAUNCH: true,
+            AppSettings.HAS_REMOVED_ADS: false,
+            AppSettings.HAS_AD_CONSENT: false,
+            AppSettings.APP_OPENED_COUNT: 1,
         ])
     }
 }

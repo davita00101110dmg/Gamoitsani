@@ -39,9 +39,7 @@ class ChallengesManager {
     }
     
     private func loadCachedChallenges() -> [Challenge]? {
-        guard let data = UserDefaults.cachedChallenges else {
-            return nil
-        }
+        let data = AppSettings.cachedChallenges
         
         do {
             let challenges = try JSONDecoder().decode([Challenge].self, from: data)
@@ -55,14 +53,14 @@ class ChallengesManager {
     private func saveChallenges(_ challenges: [Challenge]) {
         do {
             let data = try JSONEncoder().encode(challenges)
-            UserDefaults.cachedChallenges = data
+            AppSettings.cachedChallenges = data
         } catch {
             log(.error, "Failed to encode challenges for caching: \(error)")
         }
     }
     
     func fetchChallengesIfNeeded(completion: @escaping () -> Void) {
-        let lastSyncTimestamp = UserDefaults.lastChallengeSyncDate
+        let lastSyncTimestamp = AppSettings.lastChallengeSyncDate
         let currentTimestamp = Date().timeIntervalSince1970
         let shouldFetch = currentTimestamp - lastSyncTimestamp >= fetchInterval
         
@@ -90,7 +88,7 @@ class ChallengesManager {
             if !fetchedChallenges.isEmpty {
                 self.challenges = fetchedChallenges
                 self.saveChallenges(fetchedChallenges)
-                UserDefaults.lastChallengeSyncDate = currentTimestamp
+                AppSettings.lastChallengeSyncDate = currentTimestamp
                 log(.info, "Fetched \(fetchedChallenges.count) challenges from Firebase")
             }
             

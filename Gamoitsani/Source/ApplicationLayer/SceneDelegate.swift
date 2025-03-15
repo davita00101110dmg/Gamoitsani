@@ -41,7 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func sceneDidBecomeActive(_ scene: UIScene) {
         AppOpenAdManager.shared.showAdIfAvailable()
-        UserDefaults.isFirstLaunch = false
+        AppSettings.isFirstLaunch = false
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
