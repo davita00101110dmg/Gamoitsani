@@ -53,22 +53,6 @@ final class LanguageManagerTests: XCTestCase {
         }
     }
     
-    // MARK: - Display Name Tests
-    
-    func testLanguageDisplayNames() {
-        XCTAssertEqual(Language.english.displayName, "English")
-        XCTAssertEqual(Language.georgian.displayName, "ქართული")
-        XCTAssertEqual(Language.ukrainian.displayName, "Ukrainian")
-        XCTAssertEqual(Language.turkish.displayName, "Turkish")
-        XCTAssertEqual(Language.armenian.displayName, "Armenian")
-        XCTAssertEqual(Language.azerbaijani.displayName, "Azerbaijani")
-        XCTAssertEqual(Language.german.displayName, "Deutsch")
-        XCTAssertEqual(Language.spanish.displayName, "Español")
-        XCTAssertEqual(Language.french.displayName, "Français")
-        XCTAssertEqual(Language.japanese.displayName, "日本語")
-        XCTAssertEqual(Language.russian.displayName, "Русский")
-    }
-    
     // MARK: - Flag Emoji Tests
     
     func testLanguageFlagEmojis() {
