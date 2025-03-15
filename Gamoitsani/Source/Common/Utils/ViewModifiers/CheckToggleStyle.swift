@@ -17,7 +17,7 @@ struct CheckToggleStyle: ToggleStyle {
                 configuration.label
             } icon: {
                 Image(systemName: configuration.isOn ? "checkmark.circle.fill" : "circle")
-                    .foregroundStyle(configuration.isOn ? Asset.gmPrimary.swiftUIColor : .gray)
+                    .foregroundStyle(configuration.isOn ? .white : .gray)
                     .accessibility(label: Text(configuration.isOn ? "Checked" : "Unchecked"))
                     .imageScale(.large)
             }

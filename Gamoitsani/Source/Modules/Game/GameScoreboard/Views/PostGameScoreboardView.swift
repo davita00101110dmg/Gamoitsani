@@ -61,7 +61,7 @@ struct PostGameScoreboardView: View {
                 title: L10n.Screen.GameScoreboard.PostGameScoreboard.wordsGuessed,
                 value: "\(team.totalWordsGuessed)",
                 icon: "checkmark.circle.fill",
-                color: Asset.gmGreen.swiftUIColor
+                color: .white
             )
             
             Divider()

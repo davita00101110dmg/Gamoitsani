@@ -53,7 +53,7 @@ struct EnhancedLanguagePickerView: View {
                 
                 if language == selectedLanguage {
                     Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(Asset.gmPrimary.swiftUIColor)
+                        .foregroundColor(.white)
                         .font(.system(size: ViewConstants.checkmarkSize))
                 }
             }

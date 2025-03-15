@@ -36,7 +36,7 @@ struct GameModeOptionView: View {
                 
                 if isSelected {
                     Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(Asset.gmPrimary.swiftUIColor)
+                        .foregroundColor(.white)
                         .font(.system(size: 20))
                 }
             }
