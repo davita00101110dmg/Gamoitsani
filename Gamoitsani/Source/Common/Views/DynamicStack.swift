@@ -12,10 +12,10 @@ struct DynamicStack<Content: View>: View {
     var horizontalAlignment = HorizontalAlignment.center
     var verticalAlignment = VerticalAlignment.center
     var spacing: CGFloat?
+    var isPortrait: Binding<Bool>?
     @ViewBuilder var content: () -> Content
     @Environment(\.horizontalSizeClass) private var sizeClass
-
-
+    
     var body: some View {
         GeometryReader { proxy in
             Group {
@@ -25,12 +25,18 @@ struct DynamicStack<Content: View>: View {
                         spacing: spacing,
                         content: content
                     )
+                    .onAppear {
+                        isPortrait?.wrappedValue = false
+                    }
                 } else {
                     VStack(
                         alignment: horizontalAlignment,
                         spacing: spacing,
                         content: content
                     )
+                    .onAppear {
+                        isPortrait?.wrappedValue = true
+                    }
                 }
             }
         }
