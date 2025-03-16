@@ -53,7 +53,7 @@ final class InterstitialAdManager: BaseAdManager {
             action: "shown"
         )
         
-        interstitialAd.present(fromRootViewController: nil)
+        interstitialAd.present(from: nil)
 #endif
     }
 }
