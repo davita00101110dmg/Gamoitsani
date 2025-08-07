@@ -16,6 +16,9 @@ struct AddWordView: View {
     
     @State private var word: String = .empty
     @FocusState private var isTextFieldFocused: Bool
+    @State private var tapCount: Int = 0
+    @State private var showWordReview: Bool = false
+    @State private var lastTapTime: Date = Date()
     
     var body: some View {
         ZStack {
@@ -30,6 +33,9 @@ struct AddWordView: View {
                         fontSizeForPhone: Layout.titleFontSize,
                         textAlignment: .center
                     )
+                    .onTapGesture {
+                        handleTitleTap()
+                    }
                     
                     GMLabelView(
                         text: L10n.Screen.AddWord.hint,
@@ -82,6 +88,11 @@ struct AddWordView: View {
                 dismissButton: .default(Text(L10n.ok))
             )
         }
+        .fullScreenCover(isPresented: $showWordReview) {
+            NavigationView {
+                WordReviewView()
+            }
+        }
     }
     
     private func addWord() {
@@ -89,6 +100,27 @@ struct AddWordView: View {
         viewModel.addWord(word.removeExtraSpaces())
         word = .empty
         isTextFieldFocused = false
+    }
+    
+    private func handleTitleTap() {
+        let now = Date()
+        let timeSinceLastTap = now.timeIntervalSince(lastTapTime)
+        
+        if timeSinceLastTap > 2.0 {
+            tapCount = 1
+        } else {
+            tapCount += 1
+        }
+        
+        lastTapTime = now
+        
+        if tapCount >= 5 {
+            tapCount = 0
+            showWordReview = true
+            
+            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+            impactFeedback.impactOccurred()
+        }
     }
 }
 

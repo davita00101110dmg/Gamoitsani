@@ -20,6 +20,10 @@ struct AppSettings {
     static let CACHED_CHALLENGES = "CACHED_CHALLENGES"
     static let DEBUG_QUICK_GAME = "DEBUG_QUICK_GAME"
     
+    static let LAST_REVIEW_DATE = "LAST_REVIEW_DATE"
+    static let TODAY_REVIEWED_COUNT = "TODAY_REVIEWED_COUNT"
+    static let DEVICE_REVIEW_ID = "DEVICE_REVIEW_ID"
+    
     @UserDefault("APP_LANGUAGE", defaultValue: "ka")
     static var appLanguage: String
     
@@ -46,4 +50,28 @@ struct AppSettings {
     
     @UserDefault("DEBUG_QUICK_GAME", defaultValue: false)
     static var isQuickGameEnabled: Bool
+    
+    @UserDefault("LAST_REVIEW_DATE", defaultValue: "")
+    static var lastReviewDate: String
+    
+    @UserDefault("TODAY_REVIEWED_COUNT", defaultValue: 0)
+    static var todayReviewedCount: Int
+    
+    static var reviewDailyGoal: Int { 100 }
+    
+    static func checkAndResetDailyReviewCount() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let today = formatter.string(from: Date())
+        
+        if lastReviewDate != today {
+            lastReviewDate = today
+            todayReviewedCount = 0
+        }
+    }
+    
+    static func incrementTodayReviewCount(by count: Int) {
+        checkAndResetDailyReviewCount()
+        todayReviewedCount += count
+    }
 }

@@ -31,9 +31,9 @@ struct WordFirebase: Codable {
 final class FirebaseManager {
     static let shared = FirebaseManager()
     
-    private let db = Firestore.firestore()
-    private lazy var wordsRef = db.collection(AppConstants.Firebase.wordsCollectionName)
-    private lazy var suggestionsRef = db.collection(AppConstants.Firebase.suggestedWordsCollectionName)
+    let db = Firestore.firestore()
+    lazy var wordsRef = db.collection(AppConstants.Firebase.wordsCollectionName)
+    lazy var suggestionsRef = db.collection(AppConstants.Firebase.suggestedWordsCollectionName)
 
     var coreDataManager: CoreDataManaging = CoreDataManager.shared
     var currentDate: Date = Date()

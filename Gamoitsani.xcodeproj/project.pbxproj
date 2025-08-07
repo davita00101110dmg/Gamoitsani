@@ -168,6 +168,13 @@
 		FFC5DE372CA3247900C6600D /* Translation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5DE322CA3247900C6600D /* Translation+CoreDataClass.swift */; };
 		FFC5DE382CA3247900C6600D /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5DE352CA3247900C6600D /* Word+CoreDataProperties.swift */; };
 		FFC5DE392CA3247900C6600D /* Word+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5DE342CA3247900C6600D /* Word+CoreDataClass.swift */; };
+		FFC794862E45255A0061E5F0 /* DeviceIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC794852E45255A0061E5F0 /* DeviceIDManager.swift */; };
+		FFC7948C2E4526920061E5F0 /* WordReviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC7948A2E4526920061E5F0 /* WordReviewModels.swift */; };
+		FFC7948E2E45269C0061E5F0 /* WordReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC7948D2E45269C0061E5F0 /* WordReviewView.swift */; };
+		FFC794902E4526AE0061E5F0 /* WordReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC7948F2E4526AE0061E5F0 /* WordReviewViewModel.swift */; };
+		FFC794922E452E3B0061E5F0 /* FirebaseAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC794912E452E3B0061E5F0 /* FirebaseAuthHelper.swift */; };
+		FFC794942E452EC30061E5F0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FFC794932E452EC30061E5F0 /* FirebaseAuth */; };
+		FFC794962E4534D90061E5F0 /* FirebaseManager+WordReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC794952E4534D90061E5F0 /* FirebaseManager+WordReview.swift */; };
 		FFCEEAB22D85F1D4003A3BBA /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCEEAB02D85F1D4003A3BBA /* AppSettings.swift */; };
 		FFD386D62C6A500A0027A2C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFD386D12C6A500A0027A2C4 /* LaunchScreen.storyboard */; };
 		FFD8F7FF2D85F921008005A2 /* GamoitsaniMacros in Frameworks */ = {isa = PBXBuildFile; productRef = FFD8F7FE2D85F921008005A2 /* GamoitsaniMacros */; };
@@ -415,6 +422,12 @@
 		FFC5DE332CA3247900C6600D /* Translation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Translation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FFC5DE342CA3247900C6600D /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FFC5DE352CA3247900C6600D /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FFC794852E45255A0061E5F0 /* DeviceIDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceIDManager.swift; sourceTree = "<group>"; };
+		FFC7948A2E4526920061E5F0 /* WordReviewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordReviewModels.swift; sourceTree = "<group>"; };
+		FFC7948D2E45269C0061E5F0 /* WordReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordReviewView.swift; sourceTree = "<group>"; };
+		FFC7948F2E4526AE0061E5F0 /* WordReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordReviewViewModel.swift; sourceTree = "<group>"; };
+		FFC794912E452E3B0061E5F0 /* FirebaseAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthHelper.swift; sourceTree = "<group>"; };
+		FFC794952E4534D90061E5F0 /* FirebaseManager+WordReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+WordReview.swift"; sourceTree = "<group>"; };
 		FFCEEAB02D85F1D4003A3BBA /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		FFD386D12C6A500A0027A2C4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
@@ -461,6 +474,7 @@
 				FFD8F7FF2D85F921008005A2 /* GamoitsaniMacros in Frameworks */,
 				FF7F1DA32BE93DF900872554 /* Collections in Frameworks */,
 				FF4FA9C52BEEB6FD00F38F98 /* FirebaseFirestore in Frameworks */,
+				FFC794942E452EC30061E5F0 /* FirebaseAuth in Frameworks */,
 				FF8623782C6AB8A00044A7D7 /* FacebookShare in Frameworks */,
 				FF8675772C680E1D0089B52B /* StoreKit.framework in Frameworks */,
 				FF4FA9C72BEEB6FD00F38F98 /* FirebaseFirestoreSwift in Frameworks */,
@@ -683,6 +697,7 @@
 		FF4FA9B92BED90B900F38F98 /* AddWord */ = {
 			isa = PBXGroup;
 			children = (
+				FFC7948B2E4526920061E5F0 /* WordReview */,
 				FF6055052CC6DE38003C2AA0 /* Views */,
 				FF4FA9D02BEFF30900F38F98 /* AddWordViewModel.swift */,
 				FF4FA9D22BEFF30E00F38F98 /* AddWordModels.swift */,
@@ -938,11 +953,14 @@
 				FF8E7FF42D85A46000C810B8 /* ChallengesManager.swift */,
 				FF8EA7202BEC12BD00F098B8 /* AudioManager.swift */,
 				FF8EA75F2BED613400F098B8 /* FirebaseManager.swift */,
+				FFC794952E4534D90061E5F0 /* FirebaseManager+WordReview.swift */,
 				FF92E2232D8351B40020A803 /* AnalyticsManager.swift */,
 				FF37087A2BFBD4280056361F /* CoreDataManager.swift */,
 				FF7CA15D2C01FCB800E3BEC4 /* StoreReviewManager.swift */,
 				FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */,
 				FF9923092CA334EE0088395E /* LanguageManager.swift */,
+				FFC794852E45255A0061E5F0 /* DeviceIDManager.swift */,
+				FFC794912E452E3B0061E5F0 /* FirebaseAuthHelper.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1099,6 +1117,24 @@
 				FFAA68A72D39AD6F00F0B2C0 /* LanguageManagerTests.swift */,
 			);
 			path = GamoitsaniTests;
+			sourceTree = "<group>";
+		};
+		FFC7948B2E4526920061E5F0 /* WordReview */ = {
+			isa = PBXGroup;
+			children = (
+				FFC794982E45393C0061E5F0 /* Views */,
+				FFC7948F2E4526AE0061E5F0 /* WordReviewViewModel.swift */,
+				FFC7948A2E4526920061E5F0 /* WordReviewModels.swift */,
+			);
+			path = WordReview;
+			sourceTree = "<group>";
+		};
+		FFC794982E45393C0061E5F0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FFC7948D2E45269C0061E5F0 /* WordReviewView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		FFCEEAB12D85F1D4003A3BBA /* Settings */ = {
@@ -1325,6 +1361,7 @@
 				FF8623772C6AB8A00044A7D7 /* FacebookShare */,
 				FF92E2252D8352490020A803 /* FirebaseAnalytics */,
 				FFD8F7FE2D85F921008005A2 /* GamoitsaniMacros */,
+				FFC794932E452EC30061E5F0 /* FirebaseAuth */,
 			);
 			productName = Gamoitsani;
 			productReference = FF4D9D252BD698620046819D /* Gamoitsani.app */;
@@ -1640,6 +1677,7 @@
 			files = (
 				FFAA68892D3846E400F0B2C0 /* GameModePickerView.swift in Sources */,
 				FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */,
+				FFC7948C2E4526920061E5F0 /* WordReviewModels.swift in Sources */,
 				FF8EA70D2BEBBA2600F098B8 /* GameScoreboardCoordinator.swift in Sources */,
 				FF7CA1602C02000900E3BEC4 /* UIApplicationExtensions.swift in Sources */,
 				FF8675612C6798680089B52B /* SettingsView.swift in Sources */,
@@ -1675,6 +1713,8 @@
 				FF1E92B62BF8FE8E00127FDE /* GMGradientView.swift in Sources */,
 				FFF65CB82BE651C5008E0352 /* IntExtensions.swift in Sources */,
 				FF99230A2CA334EE0088395E /* LanguageManager.swift in Sources */,
+				FFC794922E452E3B0061E5F0 /* FirebaseAuthHelper.swift in Sources */,
+				FFC7948E2E45269C0061E5F0 /* WordReviewView.swift in Sources */,
 				FFF65CB02BE61DEA008E0352 /* UITableViewExtensions.swift in Sources */,
 				FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */,
 				FFB3E2F72D4EA50A00FE3D93 /* EnhancedLanguagePickerView.swift in Sources */,
@@ -1682,6 +1722,7 @@
 				FF86756A2C67DB270089B52B /* SettingsViewModel.swift in Sources */,
 				FFB98EAB2C7534380024A925 /* AppConsentAdManager.swift in Sources */,
 				FF7F1D7E2BE7A2F700872554 /* GameCoordinator.swift in Sources */,
+				FFC794902E4526AE0061E5F0 /* WordReviewViewModel.swift in Sources */,
 				FF8675382C6772230089B52B /* SettingsCoordinator.swift in Sources */,
 				FFA60DC52C7CFCE3005A2660 /* BannerAdManager.swift in Sources */,
 				FFBE55A92D575EC400A07B73 /* Team.swift in Sources */,
@@ -1697,6 +1738,7 @@
 				FFC5DE372CA3247900C6600D /* Translation+CoreDataClass.swift in Sources */,
 				FF63A43E2CD517FB005617E5 /* TeamListView.swift in Sources */,
 				FFC5DE382CA3247900C6600D /* Word+CoreDataProperties.swift in Sources */,
+				FFC794962E4534D90061E5F0 /* FirebaseManager+WordReview.swift in Sources */,
 				FFC5DE392CA3247900C6600D /* Word+CoreDataClass.swift in Sources */,
 				FF67CC832C6AD0D60094824E /* GameTeamCellItem.swift in Sources */,
 				FF4FA9C02BED917A00F38F98 /* AddWordCoordinator.swift in Sources */,
@@ -1758,6 +1800,7 @@
 				FFF65C9D2BE554B9008E0352 /* BaseCoordinator.swift in Sources */,
 				FFF65CA62BE61746008E0352 /* GMTableView.swift in Sources */,
 				FFAE1F222C7E3AAA003A554C /* GameShareViewModel.swift in Sources */,
+				FFC794862E45255A0061E5F0 /* DeviceIDManager.swift in Sources */,
 				FF4D9D7C2BD69BC00046819D /* HomeModels.swift in Sources */,
 				FF6054FF2CC56A31003C2AA0 /* LanguagePickerRow.swift in Sources */,
 				FF6055002CC56A31003C2AA0 /* LanguagePickerRowViewModel.swift in Sources */,
@@ -2457,6 +2500,10 @@
 		FF92E2252D8352490020A803 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseAnalytics;
+		};
+		FFC794932E452EC30061E5F0 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAuth;
 		};
 		FFD8F7FE2D85F921008005A2 /* GamoitsaniMacros */ = {
 			isa = XCSwiftPackageProductDependency;

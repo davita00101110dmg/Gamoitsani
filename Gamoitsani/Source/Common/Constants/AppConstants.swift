@@ -170,6 +170,13 @@ enum AppConstants {
             static let lastUpdated = "last_updated"
             static let categories = "categories"
             static let translations = "translations"
+            static let reviewStats = "review_stats"
+            static let positiveCount = "positive_count"
+            static let negativeCount = "negative_count"
+            static let totalReviews = "total_reviews"
+            static let qualityScore = "quality_score"
+            static let lastReviewed = "last_reviewed"
+            static let reviewedBy = "reviewed_by"
         }
         
         static var wordsCollectionName: String {
