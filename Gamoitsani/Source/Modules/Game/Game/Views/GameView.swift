@@ -62,11 +62,14 @@ struct GameView: View {
                         .padding()
                 }
             }
+            
+            DraggableCameraPreview()
         }
         .displayConfetti(isActive: $showConfetti)
         .navigationBarBackButtonHidden(true)
         .onAppear {
             viewModel.loadAd()
+            GameRecordingManager.shared.startGameRecording()
         }
         .onDisappear {
             viewModel.startNewGame()
@@ -141,7 +144,7 @@ struct GameView: View {
             stopConfetti()
             viewModel.showAd()
             withAnimation(.smooth(duration: AppConstants.viewAnimationTime)) {
-                viewModel.startNewGame()
+                viewModel.startNewGameWithRecording()
             }
         } onGoBack: {
             stopConfetti()

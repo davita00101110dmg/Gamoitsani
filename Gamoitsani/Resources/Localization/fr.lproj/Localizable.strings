@@ -141,3 +141,7 @@
 // MARK: - Game Share
 "screen.game_share.title" = "Partager le score !";
 "screen.game_share.share_to" = "Partager sur";
+
+// MARK: - Game Play
+"screen.game_play.alert.stop_recording.title" = "Arrêter l'enregistrement ?";
+"screen.game_play.alert.stop_recording.message" = "Êtes-vous sûr de vouloir arrêter l'enregistrement en cours ?";

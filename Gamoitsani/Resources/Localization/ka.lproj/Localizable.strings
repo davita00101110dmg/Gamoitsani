@@ -141,3 +141,7 @@
 // MARK: - Game Share
 "screen.game_share.title" = "გააზიარე შედეგები!";
 "screen.game_share.share_to" = "გააზიარე";
+
+// MARK: - Game Play
+"screen.game_play.alert.stop_recording.title" = "გადაღების შეჩერება?";
+"screen.game_play.alert.stop_recording.message" = "დარწმუნებული ხარ, რომ გსურს მიმდინარე გადაღების შეჩერება?";

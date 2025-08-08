@@ -141,3 +141,7 @@
 // MARK: - Game Share
 "screen.game_share.title" = "Skoru paylaş!";
 "screen.game_share.share_to" = "Şuraya paylaş";
+
+// MARK: - Game Play
+"screen.game_play.alert.stop_recording.title" = "Kaydı Durdur?";
+"screen.game_play.alert.stop_recording.message" = "Mevcut kaydı durdurmak istediğinizden emin misiniz?";

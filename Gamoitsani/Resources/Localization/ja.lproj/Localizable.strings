@@ -141,3 +141,7 @@
 // MARK: - Game Share
 "screen.game_share.title" = "スコアを共有！";
 "screen.game_share.share_to" = "共有先";
+
+// MARK: - Game Play
+"screen.game_play.alert.stop_recording.title" = "録画を停止しますか？";
+"screen.game_play.alert.stop_recording.message" = "現在の録画を停止してもよろしいですか？";

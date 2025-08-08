@@ -269,6 +269,19 @@ public enum L10n {
         }
       }
 
+      public enum GamePlay {
+
+        public enum Alert {
+
+          public enum StopRecording {
+            /// Are you sure you want to stop the current recording?
+            public static var message: String { L10n.tr("Localizable", "screen.game_play.alert.stop_recording.message") }
+            /// Stop Recording?
+            public static var title: String { L10n.tr("Localizable", "screen.game_play.alert.stop_recording.title") }
+          }
+        }
+      }
+
       public enum GameScoreboard {
         /// Scoreboard
         public static var title: String { L10n.tr("Localizable", "screen.game_scoreboard.title") }

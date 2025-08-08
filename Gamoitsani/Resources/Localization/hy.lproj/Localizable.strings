@@ -141,3 +141,7 @@
 // MARK: - Game Share
 "screen.game_share.title" = "Կիսվել միավորով!";
 "screen.game_share.share_to" = "Կիսվել";
+
+// MARK: - Game Play
+"screen.game_play.alert.stop_recording.title" = "Դադարեցնել ձայնագրությունը՞";
+"screen.game_play.alert.stop_recording.message" = "Վստա՞հ եք, որ ցանկանում եք դադարեցնել ընթացիկ ձայնագրությունը։";

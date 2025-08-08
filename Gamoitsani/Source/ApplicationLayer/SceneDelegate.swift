@@ -14,6 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var coordinator: AppCoordinator?
+    
+    private var didEnterBackground = false
+    private var sceneActivationTime: Date?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -39,9 +42,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         AppConsentAdManager.shared.requestAdConsent(from: window?.rootViewController)
     }
     
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        didEnterBackground = true
+    }
+    
     func sceneDidBecomeActive(_ scene: UIScene) {
-        AppOpenAdManager.shared.showAdIfAvailable()
+        let currentTime = Date()
+        let shouldShowAd = didEnterBackground &&
+                          !GameRecordingManager.shared.isRecording &&
+                          (sceneActivationTime == nil || currentTime.timeIntervalSince(sceneActivationTime!) > 2.0)
+
+        if shouldShowAd {
+            AppOpenAdManager.shared.showAdIfAvailable()
+        }
+        
         AppSettings.isFirstLaunch = false
+        sceneActivationTime = currentTime
+        didEnterBackground = false
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

@@ -63,6 +63,7 @@ enum AppConstants {
         static let trash = "trash"
         static let photoStack = "photo.stack"
         static let flagCheckeredTwoCrossed = "flag.checkered.2.crossed"
+        static let personCropSquareBadgeVideo = "person.crop.square.badge.video"
     }
     
     enum FontType {

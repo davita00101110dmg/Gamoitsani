@@ -1452,5 +1452,10 @@
 		<string>ka</string>
 		<string>uk</string>
 	</array>
+    <key>NSCameraUsageDescription</key>
+    <string>This app needs camera access to record your reactions during gameplay.</string>
+
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app needs microphone access to record audio with your reaction videos.</string>
 </dict>
 </plist>

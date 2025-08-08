@@ -13,8 +13,6 @@ import SwiftUI
 import Combine
 
 final class GameViewModel: ObservableObject {
-    @Published var gameState: GameModels.GameState = .info
-    @Published var countdownValue: Int = 3
     
     var currentTeam: Team? { gameStory.currentTeam }
     var currentRound: Int { gameStory.currentRound }
@@ -23,6 +21,16 @@ final class GameViewModel: ObservableObject {
     var gameMode: GameMode { gameStory.gameMode }
     var gameStory = GameStory.shared
     var challengesManager = ChallengesManager.shared
+    
+    @Published var gameState: GameModels.GameState = .info {
+        didSet {
+            if oldValue == .gameOver {
+                GameRecordingManager.shared.stopGameRecording()
+            }
+        }
+    }
+    
+    @Published var countdownValue: Int = 3
     
     let audioManager = AudioManager()
     
@@ -165,7 +173,17 @@ extension GameViewModel {
         challengesManager.resetUsedChallenges()
         gameState = .info
         resetViewModels()
+        GameRecordingManager.shared.stopGameRecording()
         log(.info, "Starting new game, cleared all team challenges")
+    }
+
+    func startNewGameWithRecording() {
+        startNewGame()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            GameRecordingManager.shared.startGameRecording()
+            log(.info, "Restarted recording for new game")
+        }
     }
     
     private func resetViewModels() {

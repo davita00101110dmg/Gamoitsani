@@ -175,6 +175,9 @@
 		FFC794922E452E3B0061E5F0 /* FirebaseAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC794912E452E3B0061E5F0 /* FirebaseAuthHelper.swift */; };
 		FFC794942E452EC30061E5F0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FFC794932E452EC30061E5F0 /* FirebaseAuth */; };
 		FFC794962E4534D90061E5F0 /* FirebaseManager+WordReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC794952E4534D90061E5F0 /* FirebaseManager+WordReview.swift */; };
+		FFC7949A2E45D23C0061E5F0 /* GameRecordingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC794992E45D23C0061E5F0 /* GameRecordingManager.swift */; };
+		FFC7949C2E45D30F0061E5F0 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFC7949B2E45D30F0061E5F0 /* ReplayKit.framework */; };
+		FFC7949E2E45D4370061E5F0 /* DraggableCameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC7949D2E45D4370061E5F0 /* DraggableCameraPreview.swift */; };
 		FFCEEAB22D85F1D4003A3BBA /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCEEAB02D85F1D4003A3BBA /* AppSettings.swift */; };
 		FFD386D62C6A500A0027A2C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFD386D12C6A500A0027A2C4 /* LaunchScreen.storyboard */; };
 		FFD8F7FF2D85F921008005A2 /* GamoitsaniMacros in Frameworks */ = {isa = PBXBuildFile; productRef = FFD8F7FE2D85F921008005A2 /* GamoitsaniMacros */; };
@@ -428,6 +431,9 @@
 		FFC7948F2E4526AE0061E5F0 /* WordReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordReviewViewModel.swift; sourceTree = "<group>"; };
 		FFC794912E452E3B0061E5F0 /* FirebaseAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthHelper.swift; sourceTree = "<group>"; };
 		FFC794952E4534D90061E5F0 /* FirebaseManager+WordReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+WordReview.swift"; sourceTree = "<group>"; };
+		FFC794992E45D23C0061E5F0 /* GameRecordingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecordingManager.swift; sourceTree = "<group>"; };
+		FFC7949B2E45D30F0061E5F0 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
+		FFC7949D2E45D4370061E5F0 /* DraggableCameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableCameraPreview.swift; sourceTree = "<group>"; };
 		FFCEEAB02D85F1D4003A3BBA /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		FFD386D12C6A500A0027A2C4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFF65C9C2BE554B9008E0352 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
@@ -476,6 +482,7 @@
 				FF4FA9C52BEEB6FD00F38F98 /* FirebaseFirestore in Frameworks */,
 				FFC794942E452EC30061E5F0 /* FirebaseAuth in Frameworks */,
 				FF8623782C6AB8A00044A7D7 /* FacebookShare in Frameworks */,
+				FFC7949C2E45D30F0061E5F0 /* ReplayKit.framework in Frameworks */,
 				FF8675772C680E1D0089B52B /* StoreKit.framework in Frameworks */,
 				FF4FA9C72BEEB6FD00F38F98 /* FirebaseFirestoreSwift in Frameworks */,
 				6378CF4667AD6DFFBE6F56C9 /* Pods_Gamoitsani.framework in Frameworks */,
@@ -846,6 +853,7 @@
 		FF7F1D8A2BE7ADFA00872554 /* GamePlay */ = {
 			isa = PBXGroup;
 			children = (
+				FFC7949D2E45D4370061E5F0 /* DraggableCameraPreview.swift */,
 				FFAA68962D39156B00F0B2C0 /* BaseGamePlayViewModel.swift */,
 				FF31C8082D6E445E00653F9C /* WordItem.swift */,
 				FFAA68922D39154500F0B2C0 /* ClassicGamePlay */,
@@ -961,6 +969,7 @@
 				FF9923092CA334EE0088395E /* LanguageManager.swift */,
 				FFC794852E45255A0061E5F0 /* DeviceIDManager.swift */,
 				FFC794912E452E3B0061E5F0 /* FirebaseAuthHelper.swift */,
+				FFC794992E45D23C0061E5F0 /* GameRecordingManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1177,6 +1186,7 @@
 		FFF65CD02BE6B2F3008E0352 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FFC7949B2E45D30F0061E5F0 /* ReplayKit.framework */,
 				FF8675762C680E1D0089B52B /* StoreKit.framework */,
 				B107B1D4DD9DAF82511ED49E /* Pods_Gamoitsani.framework */,
 				3729E38FDCE2048D683CBC83 /* Pods_Gamoitsani_GamoitsaniUITests.framework */,
@@ -1700,6 +1710,7 @@
 				FF7F1D812BE7A2F700872554 /* GameViewModel.swift in Sources */,
 				FFAA68822D3846C400F0B2C0 /* ArcadeGamePlayView.swift in Sources */,
 				FFAA68832D3846C400F0B2C0 /* ArcadeGamePlayViewModel.swift in Sources */,
+				FFC7949E2E45D4370061E5F0 /* DraggableCameraPreview.swift in Sources */,
 				FF6054F82CC56759003C2AA0 /* GMTextFieldView.swift in Sources */,
 				FF75558A2C8358F700EC37A0 /* DisplayConfettiModifier.swift in Sources */,
 				FFCEEAB22D85F1D4003A3BBA /* AppSettings.swift in Sources */,
@@ -1742,6 +1753,7 @@
 				FFC5DE392CA3247900C6600D /* Word+CoreDataClass.swift in Sources */,
 				FF67CC832C6AD0D60094824E /* GameTeamCellItem.swift in Sources */,
 				FF4FA9C02BED917A00F38F98 /* AddWordCoordinator.swift in Sources */,
+				FFC7949A2E45D23C0061E5F0 /* GameRecordingManager.swift in Sources */,
 				FF786D322D6E664700F3E6BE /* RainbowText.swift in Sources */,
 				FF67CC7F2C6AD0B80094824E /* GameTeamsSnapshot.swift in Sources */,
 				FF7F1D852BE7A8F200872554 /* GMLabel.swift in Sources */,
