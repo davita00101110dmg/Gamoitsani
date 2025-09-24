@@ -85,7 +85,7 @@ Copyright 2017 Google LLC
 
 ## GoogleUserMessagingPlatform
 
-Copyright 2024 Google LLC
+Copyright 2025 Google LLC
 
 ## InMobiSDK
 
@@ -144,6 +144,10 @@ You represent and warrant that your Children Privacy Compliance setting remains 
 This EULA and all disputes arising thereof shall be subject to the laws of Singapore, where the courts at Singapore shall exclusive jurisdiction.
 
 
+## IronSourceAdQualitySDK
+
+https://platform.ironsrc.com/partners/terms-and-conditions-new-user
+
 ## IronSourceSDK
 
 https://platform.ironsrc.com/partners/terms-and-conditions-new-user
@@ -155,7 +159,7 @@ https://raw.githubusercontent.com/Mintegral-official/MintegralAdSDK-iOS-new/mast
 
 ## UnityAds
 
-Unity Advertisements copyright © 2024 Unity Technologies.
+Unity Advertisements copyright © 2025 Unity Technologies.
 This software is subject to, and made available under, the terms of service for Operate Solutions (see https://unity3d.com/legal/one-operate-services-terms-of-service), and is an "Operate Service" as defined therein.
 
 Your use of the Services constitutes your acceptance of such terms. Unless expressly provided otherwise, the software under this license is made available strictly on an "AS IS" BASIS WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. Please review the terms of service for details on these and other terms and conditions.

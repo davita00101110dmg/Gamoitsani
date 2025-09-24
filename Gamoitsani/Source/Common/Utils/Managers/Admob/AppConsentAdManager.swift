@@ -23,7 +23,7 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
     static let shared = AppConsentAdManager()
     
     var shouldShowPrivacySettingsButton: Bool {
-        UMPConsentInformation.sharedInstance.privacyOptionsRequirementStatus == .required
+        ConsentInformation.shared.privacyOptionsRequirementStatus == .required
     }
     
     var isInEEARegion: Bool {
@@ -123,13 +123,15 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
     }
     
     private func requestUMPConsent(from viewController: UIViewController) {
-        let requestParameters = UMPRequestParameters()
-        let debugSettings = UMPDebugSettings()
-        debugSettings.geography = .EEA
+        let requestParameters = RequestParameters()
+        
+#if DEBUG
+        let debugSettings = DebugSettings()
         debugSettings.testDeviceIdentifiers = [AppConstants.AdMob.umpTestDeviceId]
         requestParameters.debugSettings = debugSettings
+#endif
         
-        UMPConsentInformation.sharedInstance.requestConsentInfoUpdate(with: requestParameters) { [weak self] requestConsentError in
+        ConsentInformation.shared.requestConsentInfoUpdate(with: requestParameters) { [weak self] requestConsentError in
             guard let self else { return }
             
             if let consentError = requestConsentError {
@@ -137,19 +139,19 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
                 return
             }
             
-            UMPConsentForm.loadAndPresentIfRequired(from: viewController) { loadAndPresentError in
+            ConsentForm.loadAndPresentIfRequired(from: viewController) { loadAndPresentError in
                 if let consentError = loadAndPresentError {
                     log(.info, "Error loading or presenting consent form: \(consentError.localizedDescription)")
                     return
                 }
                 
-                if UMPConsentInformation.sharedInstance.canRequestAds {
+                if ConsentInformation.shared.canRequestAds {
                     self.startMobileAdsSDK()
                 }
             }
         }
         
-        if UMPConsentInformation.sharedInstance.canRequestAds {
+        if ConsentInformation.shared.canRequestAds {
             startMobileAdsSDK()
         }
         
@@ -158,7 +160,7 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
     
     func presentPrivacySettings(from viewController: UIViewController?) {
         guard let viewController else { return }
-        UMPConsentForm.presentPrivacyOptionsForm(from: viewController) { [weak self] error in
+        ConsentForm.presentPrivacyOptionsForm(from: viewController) { [weak self] error in
             if let error = error {
                 log(.error, "Privacy form error: \(error.localizedDescription)")
                 return
@@ -186,7 +188,7 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
     }
     
     private func updateInMobiConsent() {
-        let hasConsent = UMPConsentInformation.sharedInstance.canRequestAds
+        let hasConsent = ConsentInformation.shared.canRequestAds
         
         let updatedConsent: [String: String] = [
             IMCommonConstants.IM_GDPR_CONSENT_AVAILABLE: "true",
