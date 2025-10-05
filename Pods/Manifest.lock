@@ -1,41 +1,41 @@
 PODS:
-  - ChartboostCoreSDK (1.0.0)
+  - ChartboostCoreSDK (1.1.0)
   - ChartboostMediationSDK (5.3.0):
     - ChartboostCoreSDK (~> 1.0)
-  - ChartboostSDK (9.9.3)
+  - ChartboostSDK (9.10.0)
   - FBAudienceNetwork (6.20.1)
-  - Google-Mobile-Ads-SDK (12.11.0):
+  - Google-Mobile-Ads-SDK (12.12.0):
     - GoogleUserMessagingPlatform (>= 1.1)
-  - GoogleMobileAdsMediationChartboost (9.9.3.0):
-    - ChartboostSDK (= 9.9.3)
+  - GoogleMobileAdsMediationChartboost (9.10.0.0):
+    - ChartboostSDK (= 9.10.0)
     - Google-Mobile-Ads-SDK (~> 12.0)
   - GoogleMobileAdsMediationFacebook (6.20.1.0):
     - FBAudienceNetwork (= 6.20.1)
     - Google-Mobile-Ads-SDK (~> 12.0)
-  - GoogleMobileAdsMediationInMobi (10.8.6.0):
+  - GoogleMobileAdsMediationInMobi (10.8.8.0):
     - Google-Mobile-Ads-SDK (~> 12.0)
-    - InMobiSDK (= 10.8.6)
-  - GoogleMobileAdsMediationIronSource (8.11.0.0.0):
+    - InMobiSDK (= 10.8.8)
+  - GoogleMobileAdsMediationIronSource (9.0.0.0.0):
     - Google-Mobile-Ads-SDK (~> 12.0)
-    - IronSourceSDK (= 8.11.0.0)
+    - IronSourceSDK (= 9.0.0.0)
   - GoogleMobileAdsMediationMintegral (7.7.9.1):
     - Google-Mobile-Ads-SDK (~> 12.0)
     - MintegralAdSDK/All (= 7.7.9)
   - GoogleMobileAdsMediationUnity (4.16.1.0):
     - Google-Mobile-Ads-SDK (~> 12.0)
     - UnityAds (= 4.16.1)
-  - GoogleMobileAdsMediationVungle (7.5.3.0):
+  - GoogleMobileAdsMediationVungle (7.6.0.0):
     - Google-Mobile-Ads-SDK (~> 12.0)
-    - VungleAds (= 7.5.3)
+    - VungleAds (= 7.6.0)
   - GoogleUserMessagingPlatform (3.0.0)
-  - InMobiSDK (10.8.6)
-  - IronSourceAdQualitySDK (7.26.2)
-  - IronSourceSDK (8.11.0.0):
-    - IronSourceSDK/AdQuality (= 8.11.0.0)
-    - IronSourceSDK/Ads (= 8.11.0.0)
-  - IronSourceSDK/AdQuality (8.11.0.0):
-    - IronSourceAdQualitySDK (~> 7.26.1)
-  - IronSourceSDK/Ads (8.11.0.0)
+  - InMobiSDK (10.8.8)
+  - IronSourceAdQualitySDK (9.0.1)
+  - IronSourceSDK (9.0.0.0):
+    - IronSourceSDK/AdQuality (= 9.0.0.0)
+    - IronSourceSDK/Ads (= 9.0.0.0)
+  - IronSourceSDK/AdQuality (9.0.0.0):
+    - IronSourceAdQualitySDK (~> 9.0.0)
+  - IronSourceSDK/Ads (9.0.0.0)
   - MintegralAdSDK/All (7.7.9):
     - MintegralAdSDK/BannerAd
     - MintegralAdSDK/BidNativeAd
@@ -62,7 +62,7 @@ PODS:
   - MintegralAdSDK/SplashAd (7.7.9):
     - MintegralAdSDK/NativeAd
   - UnityAds (4.16.1)
-  - VungleAds (7.5.3)
+  - VungleAds (7.6.0)
 
 DEPENDENCIES:
   - ChartboostMediationSDK
@@ -101,25 +101,25 @@ SPEC REPOS:
     - VungleAds
 
 SPEC CHECKSUMS:
-  ChartboostCoreSDK: 8f551e6d3d2eb58691b8155da9063cad65152860
+  ChartboostCoreSDK: 8da12d56eeb98fe3a7f3b15f65580c0f85986834
   ChartboostMediationSDK: 2d4d8891b50aed4ff692baa29c362d0e463dd82e
-  ChartboostSDK: b145b4671df894755be0f7811b3e69a912cecbdc
+  ChartboostSDK: 486aea4d9ab63d7700e9296578142010fd686754
   FBAudienceNetwork: 08e86d63a05b3a5a59414af12e4af8d756943c80
-  Google-Mobile-Ads-SDK: b833c723759e32bbaf06edaaf2293f08ed898232
-  GoogleMobileAdsMediationChartboost: f90e498c749990717dcdc848a4747729c0869577
+  Google-Mobile-Ads-SDK: 4dde70a8c18d96b14f9548759b8cec6ecb0bc3e6
+  GoogleMobileAdsMediationChartboost: bb841004669d696ecdb2764f299bbfaa40fbecf7
   GoogleMobileAdsMediationFacebook: b11a92ae3bfdae19853b882252b7e62791c18162
-  GoogleMobileAdsMediationInMobi: 1b9a223c4626924777d2be734e43da5d85fa8a59
-  GoogleMobileAdsMediationIronSource: 38f21bbcf729b208e63f43b757b61b2c8e0c7ad4
+  GoogleMobileAdsMediationInMobi: 35c408065c32f31c7fe8f534a73b3d4fba4adfd8
+  GoogleMobileAdsMediationIronSource: 9bcd7657d1c133ed89f01540cae735eb40352ca3
   GoogleMobileAdsMediationMintegral: 850a80c9cda83b28a12b0bcff690cd7daaaa14a4
   GoogleMobileAdsMediationUnity: 9e788d0fc5517623ff1321c5896608c808d66099
-  GoogleMobileAdsMediationVungle: 15b78a22329c5893234bd9702f11b250b8a0b5fa
+  GoogleMobileAdsMediationVungle: 54bd32b323146a3234c6b844b3055360e434ad83
   GoogleUserMessagingPlatform: f8d0cdad3ca835406755d0a69aa634f00e76d576
-  InMobiSDK: a6e7bfbecb698c83183f42c5a3cfa1ac52f16bff
-  IronSourceAdQualitySDK: 03888a0ac60e1f24ff6277672c3184f00813af64
-  IronSourceSDK: 32eeb199f608b590112a8263028a485e50f8d1b7
+  InMobiSDK: 3772de19a4fa048225857e78d8a466dda0a004a8
+  IronSourceAdQualitySDK: a23d5ad2cc7906c675f4124436a9d8343a661ff8
+  IronSourceSDK: b64660084bc4b162f30a4e846f7b763ce0074664
   MintegralAdSDK: 054814f99bb7e967b8974fe635d9005b225cbe42
   UnityAds: 24cb6536614958aefcd5a44576eb4f3157c781d0
-  VungleAds: 3b273eba0219680dbef90d51e690d165422702d9
+  VungleAds: 9750c739be23a102862bc234a8d789f2d93f43dd
 
 PODFILE CHECKSUM: 311aa06157bb61cc2a0f7414d22dc64ac201c818
 

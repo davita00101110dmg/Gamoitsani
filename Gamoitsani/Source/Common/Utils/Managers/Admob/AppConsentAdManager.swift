@@ -113,10 +113,6 @@ final class AppConsentAdManager: NSObject, CLLocationManagerDelegate {
         ccpaMetaData.set("privacy.consent", value: isTrackingAllowed)
         gdprMetaData.commit()
         
-        // IronSource
-        IronSource.setConsent(isTrackingAllowed)
-        IronSource.setMetaDataWithKey("do_not_sell", value: isTrackingAllowed ? "NO" : "YES")
-        
         // Mintegral
         MTGSDK.sharedInstance().consentStatus = isTrackingAllowed
         MTGSDK.sharedInstance().doNotTrackStatus = !isTrackingAllowed
