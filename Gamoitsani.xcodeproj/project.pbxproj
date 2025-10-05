@@ -25,6 +25,10 @@
 		FF37087B2BFBD4280056361F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37087A2BFBD4280056361F /* CoreDataManager.swift */; };
 		FF38FACA2BF5407F006AD774 /* RuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */; };
 		FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */; };
+		FF3F89372E854161006F1613 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = FF3F89362E854161006F1613 /* Localizable.xcstrings */; };
+		FF3F893B2E854A1F006F1613 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3F893A2E854A1F006F1613 /* Localizable.swift */; };
+		FF3F893C2E854A1F006F1613 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3F89382E854A1F006F1613 /* Assets.swift */; };
+		FF3F893D2E854A1F006F1613 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3F89392E854A1F006F1613 /* Fonts.swift */; };
 		FF4D9D292BD698620046819D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D282BD698620046819D /* AppDelegate.swift */; };
 		FF4D9D2B2BD698620046819D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D2A2BD698620046819D /* SceneDelegate.swift */; };
 		FF4D9D332BD698620046819D /* Gamoitsani.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */; };
@@ -81,8 +85,6 @@
 		FF7CA1632C02590700E3BEC4 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7CA1622C02590700E3BEC4 /* GameOverView.swift */; };
 		FF7CA1652C02591100E3BEC4 /* GameOverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7CA1642C02591100E3BEC4 /* GameOverViewModel.swift */; };
 		FF7F1D742BE6BCA900872554 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D732BE6BCA900872554 /* swiftgen.yml */; };
-		FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D752BE6D08200872554 /* Fonts.swift */; };
-		FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */ = {isa = PBXBuildFile; fileRef = FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */; };
 		FF7F1D7E2BE7A2F700872554 /* GameCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D792BE7A2F700872554 /* GameCoordinator.swift */; };
 		FF7F1D7F2BE7A2F700872554 /* GameModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D7A2BE7A2F700872554 /* GameModels.swift */; };
 		FF7F1D812BE7A2F700872554 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7F1D7C2BE7A2F700872554 /* GameViewModel.swift */; };
@@ -191,13 +193,10 @@
 		FFF65CB42BE61E9C008E0352 /* UINibExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CB32BE61E9C008E0352 /* UINibExtensions.swift */; };
 		FFF65CB62BE62DBB008E0352 /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CB52BE62DBB008E0352 /* DoubleExtensions.swift */; };
 		FFF65CB82BE651C5008E0352 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CB72BE651C5008E0352 /* IntExtensions.swift */; };
-		FFF65CC72BE6B0C4008E0352 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CC52BE6B0C4008E0352 /* Assets.swift */; };
-		FFF65CC82BE6B0C4008E0352 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF65CC62BE6B0C4008E0352 /* Localizable.swift */; };
 		FFFB4CD22BD701E700CDDCB4 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFB4CD12BD701E700CDDCB4 /* HomeViewController.xib */; };
 		FFFB4CD72BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4CD62BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift */; };
 		FFFB4CD92BD7CA9A00CDDCB4 /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4CD82BD7CA9A00CDDCB4 /* BundleExtensions.swift */; };
 		FFFB4CDB2BD7CAEE00CDDCB4 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4CDA2BD7CAEE00CDDCB4 /* AppCoordinator.swift */; };
-		FFFB4D072BD8393A00CDDCB4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FFFB4D092BD8393A00CDDCB4 /* Localizable.strings */; };
 		FFFB4D2B2BD854F900CDDCB4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4D2A2BD854F900CDDCB4 /* BaseViewController.swift */; };
 		FFFB4D302BD861F300CDDCB4 /* GMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4D2F2BD861F300CDDCB4 /* GMButton.swift */; };
 		FFFB4D322BD86DAF00CDDCB4 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFB4D312BD86DAF00CDDCB4 /* AppConstants.swift */; };
@@ -263,11 +262,6 @@
 		FF1E92B92BF91C8C00127FDE /* GMBackBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMBackBarButtonItem.swift; sourceTree = "<group>"; };
 		FF1F14132BF7A897004116A1 /* Mersad.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mersad.ttf; sourceTree = "<group>"; };
 		FF1F59DC2D6239D90022B0B3 /* CheckToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckToggleStyle.swift; sourceTree = "<group>"; };
-		FF27EB352D84952A000B8028 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FF27EB362D84952A000B8028 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FF27EB372D84952A000B8028 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FF27EB382D84952A000B8028 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FF27EB392D84952A000B8028 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FF27EB3F2D84A9B9000B8028 /* GameChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChallengeView.swift; sourceTree = "<group>"; };
 		FF27EB462D84B08B000B8028 /* RandomChallengeToggleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomChallengeToggleRow.swift; sourceTree = "<group>"; };
 		FF31C8062D6E441600653F9C /* SuperWordToggleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperWordToggleRow.swift; sourceTree = "<group>"; };
@@ -275,6 +269,10 @@
 		FF37087A2BFBD4280056361F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FF38FAC82BF5407F006AD774 /* RuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleTableViewCell.swift; sourceTree = "<group>"; };
 		FF38FAC92BF5407F006AD774 /* RuleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RuleTableViewCell.xib; sourceTree = "<group>"; };
+		FF3F89362E854161006F1613 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		FF3F89382E854A1F006F1613 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		FF3F89392E854A1F006F1613 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		FF3F893A2E854A1F006F1613 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		FF4D9D252BD698620046819D /* Gamoitsani.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4D9D282BD698620046819D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF4D9D2A2BD698620046819D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -334,8 +332,6 @@
 		FF7CA1622C02590700E3BEC4 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		FF7CA1642C02591100E3BEC4 /* GameOverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewModel.swift; sourceTree = "<group>"; };
 		FF7F1D732BE6BCA900872554 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = swiftgen.yml; path = Gamoitsani/Resources/Swiftgen/swiftgen.yml; sourceTree = SOURCE_ROOT; };
-		FF7F1D752BE6D08200872554 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "xcassets-swift5.stencil"; sourceTree = "<group>"; };
 		FF7F1D792BE7A2F700872554 /* GameCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCoordinator.swift; sourceTree = "<group>"; };
 		FF7F1D7A2BE7A2F700872554 /* GameModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModels.swift; sourceTree = "<group>"; };
 		FF7F1D7C2BE7A2F700872554 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
@@ -382,7 +378,6 @@
 		FF92E22D2D8360560020A803 /* countdown_go.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = countdown_go.wav; sourceTree = "<group>"; };
 		FF92E2312D8360BD0020A803 /* countdown_tick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = countdown_tick.wav; sourceTree = "<group>"; };
 		FF9923092CA334EE0088395E /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
-		FF99230B2CA33A180088395E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FFA60DAA2C7639D5005A2660 /* AppOpenAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAdManager.swift; sourceTree = "<group>"; };
 		FFA60DAC2C7774D8005A2660 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		FFA60DB32C7A0269005A2660 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -404,9 +399,6 @@
 		FFAA68912D39154500F0B2C0 /* ClassicGamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicGamePlayViewModel.swift; sourceTree = "<group>"; };
 		FFAA68962D39156B00F0B2C0 /* BaseGamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGamePlayViewModel.swift; sourceTree = "<group>"; };
 		FFAA68982D3915EB00F0B2C0 /* GameModeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeFactory.swift; sourceTree = "<group>"; };
-		FFAA68A42D39AAC500F0B2C0 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FFAA68A52D39AC5000F0B2C0 /* hy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hy; path = hy.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FFAA68A62D39ACA700F0B2C0 /* az */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = az; path = az.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FFAA68A72D39AD6F00F0B2C0 /* LanguageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManagerTests.swift; sourceTree = "<group>"; };
 		FFAE1F1A2C7E3A92003A554C /* GameShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareView.swift; sourceTree = "<group>"; };
 		FFAE1F1D2C7E3AA0003A554C /* GameShareCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameShareCoordinator.swift; sourceTree = "<group>"; };
@@ -446,14 +438,10 @@
 		FFF65CB32BE61E9C008E0352 /* UINibExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINibExtensions.swift; sourceTree = "<group>"; };
 		FFF65CB52BE62DBB008E0352 /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
 		FFF65CB72BE651C5008E0352 /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
-		FFF65CC52BE6B0C4008E0352 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
-		FFF65CC62BE6B0C4008E0352 /* Localizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		FFFB4CD12BD701E700CDDCB4 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		FFFB4CD62BD7CA8300CDDCB4 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		FFFB4CD82BD7CA9A00CDDCB4 /* BundleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
 		FFFB4CDA2BD7CAEE00CDDCB4 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		FFFB4D082BD8393A00CDDCB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FFFB4D0A2BD8395000CDDCB4 /* ka */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ka; path = ka.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FFFB4D2A2BD854F900CDDCB4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FFFB4D2F2BD861F300CDDCB4 /* GMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMButton.swift; sourceTree = "<group>"; };
 		FFFB4D312BD86DAF00CDDCB4 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
@@ -726,7 +714,6 @@
 			isa = PBXGroup;
 			children = (
 				FF7F1D732BE6BCA900872554 /* swiftgen.yml */,
-				FF7F1D772BE6E00E00872554 /* xcassets-swift5.stencil */,
 			);
 			path = Swiftgen;
 			sourceTree = "<group>";
@@ -1176,9 +1163,8 @@
 		FFF65CB92BE67146008E0352 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				FFF65CC52BE6B0C4008E0352 /* Assets.swift */,
-				FFF65CC62BE6B0C4008E0352 /* Localizable.swift */,
-				FF7F1D752BE6D08200872554 /* Fonts.swift */,
+				FF3F89382E854A1F006F1613 /* Assets.swift */,
+				FF3F89392E854A1F006F1613 /* Fonts.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -1254,7 +1240,8 @@
 		FFFB4D0B2BD83F0D00CDDCB4 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				FFFB4D092BD8393A00CDDCB4 /* Localizable.strings */,
+				FF3F893A2E854A1F006F1613 /* Localizable.swift */,
+				FF3F89362E854161006F1613 /* Localizable.xcstrings */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -1484,15 +1471,14 @@
 			files = (
 				FF11118A2C4FD17500C44F62 /* incorrect.mp3 in Resources */,
 				FF1F14152BF7A897004116A1 /* Mersad.ttf in Resources */,
+				FF3F89372E854161006F1613 /* Localizable.xcstrings in Resources */,
 				FF7F1D742BE6BCA900872554 /* swiftgen.yml in Resources */,
 				FF70699E2C6C0DBA00C3D9EA /* QuestionMark.png in Resources */,
 				FF786D302D6E650A00F3E6BE /* super-correct.mp3 in Resources */,
-				FF7F1D782BE6E00E00872554 /* xcassets-swift5.stencil in Resources */,
 				FF6054EF2CC550A5003C2AA0 /* Ubuntu-Bold.ttf in Resources */,
 				FF6054F22CC550A5003C2AA0 /* Ubuntu-Medium.ttf in Resources */,
 				FFD386D62C6A500A0027A2C4 /* LaunchScreen.storyboard in Resources */,
 				FF7069972C6C0C1C00C3D9EA /* Landscape.png in Resources */,
-				FFFB4D072BD8393A00CDDCB4 /* Localizable.strings in Resources */,
 				FF1111892C4FD17500C44F62 /* correct.wav in Resources */,
 				FF4D9D352BD698630046819D /* Assets.xcassets in Resources */,
 				FF7069982C6C0C1C00C3D9EA /* Portrait.png in Resources */,
@@ -1533,9 +1519,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1594,9 +1584,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1633,9 +1627,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1650,9 +1648,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1695,7 +1697,6 @@
 				FFAE1F1E2C7E3AA0003A554C /* GameShareCoordinator.swift in Sources */,
 				FFAA68872D3846DB00F0B2C0 /* GameModeOptionView.swift in Sources */,
 				FFFB4D4C2BD9392D00CDDCB4 /* GameDetailsCoordinator.swift in Sources */,
-				FFF65CC72BE6B0C4008E0352 /* Assets.swift in Sources */,
 				FF8E7FF52D85A46000C810B8 /* ChallengesManager.swift in Sources */,
 				FFA61BBF2D6CF8D20062D68B /* RainbowBorderCardView.swift in Sources */,
 				FF1E92B82BF9017100127FDE /* UILabelExtensions.swift in Sources */,
@@ -1716,6 +1717,9 @@
 				FFCEEAB22D85F1D4003A3BBA /* AppSettings.swift in Sources */,
 				FF6055022CC6D6A7003C2AA0 /* RoundedTextFieldStyle.swift in Sources */,
 				FFF65CB42BE61E9C008E0352 /* UINibExtensions.swift in Sources */,
+				FF3F893B2E854A1F006F1613 /* Localizable.swift in Sources */,
+				FF3F893C2E854A1F006F1613 /* Assets.swift in Sources */,
+				FF3F893D2E854A1F006F1613 /* Fonts.swift in Sources */,
 				FFF65CA12BE555CC008E0352 /* GameDetailsModel.swift in Sources */,
 				FF8289D52D61EA7600E050F0 /* TeamScoreRow.swift in Sources */,
 				FFFB4D322BD86DAF00CDDCB4 /* AppConstants.swift in Sources */,
@@ -1836,7 +1840,6 @@
 				FFFB4D302BD861F300CDDCB4 /* GMButton.swift in Sources */,
 				FF8289DB2D61EA9500E050F0 /* PerformanceStatRow.swift in Sources */,
 				FF6B38EE2D4D48E900F8FF3F /* PulsingArrow.swift in Sources */,
-				FFF65CC82BE6B0C4008E0352 /* Localizable.swift in Sources */,
 				FFA60DB42C7A0269005A2660 /* ViewExtensions.swift in Sources */,
 				FFA60DC72C7CFF6C005A2660 /* BaseAdManager.swift in Sources */,
 				FF786D342D6E6BBA00F3E6BE /* RainbowAnimation.swift in Sources */,
@@ -1844,7 +1847,6 @@
 				FF7CA1632C02590700E3BEC4 /* GameOverView.swift in Sources */,
 				FF1F59DD2D6239D90022B0B3 /* CheckToggleStyle.swift in Sources */,
 				FF63A4402CD51800005617E5 /* PlayerListView.swift in Sources */,
-				FF7F1D762BE6D08200872554 /* Fonts.swift in Sources */,
 				FF4FA9D32BEFF30E00F38F98 /* AddWordModels.swift in Sources */,
 				FFFB4CD92BD7CA9A00CDDCB4 /* BundleExtensions.swift in Sources */,
 				FF6B38EC2D4D48BC00F8FF3F /* LoadingView.swift in Sources */,
@@ -1887,27 +1889,6 @@
 			targetProxy = FF4D9D492BD698630046819D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		FFFB4D092BD8393A00CDDCB4 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FFFB4D082BD8393A00CDDCB4 /* en */,
-				FFFB4D0A2BD8395000CDDCB4 /* ka */,
-				FF99230B2CA33A180088395E /* uk */,
-				FFAA68A42D39AAC500F0B2C0 /* tr */,
-				FFAA68A52D39AC5000F0B2C0 /* hy */,
-				FFAA68A62D39ACA700F0B2C0 /* az */,
-				FF27EB352D84952A000B8028 /* de */,
-				FF27EB362D84952A000B8028 /* es */,
-				FF27EB372D84952A000B8028 /* fr */,
-				FF27EB382D84952A000B8028 /* ja */,
-				FF27EB392D84952A000B8028 /* ru */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		FF4D9D502BD698630046819D /* Debug */ = {
@@ -1973,6 +1954,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -2033,6 +2015,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -2404,7 +2387,6 @@
 		};
 		FF4D9D5A2BD698630046819D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07465998325E61C4C8A4B2EC /* Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
