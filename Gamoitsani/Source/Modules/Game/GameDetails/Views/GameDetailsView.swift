@@ -53,7 +53,7 @@ struct GameDetailsView: View {
             HStack {
                 GMLabelView(
                     text: L10n.Screen.GameDetails.RoundsSettings.title,
-                    fontType: .semiBold,
+                    fontType: .bold,
                     textAlignment: .leading
                 )
                 Spacer()
@@ -82,6 +82,7 @@ struct GameDetailsView: View {
                     in: GameDetailsConstants.Game.roundsRange,
                     step: 1)
             .labelsHidden()
+            .foregroundStyle(.white)
         }
     }
     
@@ -97,6 +98,7 @@ struct GameDetailsView: View {
                     in: GameDetailsConstants.Game.roundsLengthRange,
                     step: GameDetailsConstants.Game.roundsLengthStep)
             .labelsHidden()
+            .foregroundStyle(.white)
         }
     }
     
@@ -124,7 +126,7 @@ struct GameDetailsView: View {
         VStack(alignment: .leading, spacing: GameDetailsConstants.Layout.managementSpacing) {
             GMLabelView(
                 text: L10n.Screen.GameDetails.GameMode.title,
-                fontType: .semiBold,
+                fontType: .bold,
                 textAlignment: .leading
             )
             
