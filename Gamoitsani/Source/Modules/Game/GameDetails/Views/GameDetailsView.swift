@@ -9,16 +9,17 @@
 import SwiftUI
 
 struct GameDetailsView: View {
-    @EnvironmentObject private var coordinator: GameDetailsCoordinator
+    @EnvironmentObject private var coordinator: AppCoordinator
     @StateObject var viewModel = GameDetailsViewModel()
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @State private var showStorageAlert = false
+    @State private var isRecordingEnabled = false
     
     var body: some View {
         ZStack {
             GradientBackground()
                 .ignoresSafeArea()
-            
+
             if viewModel.areWordsLoading {
                 LoadingView(text: L10n.Screen.GameDetails.LoadingWords.message)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -37,13 +38,28 @@ struct GameDetailsView: View {
                         }
                         .padding()
                     }
-                    
+
                     bottomSection
+                }
+            }
+        }
+        .navigationBarSetup(title: L10n.Screen.GameDetails.title, displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    toggleRecordingWithFeedback()
+                } label: {
+                    Image(systemName: AppConstants.SFSymbol.personCropSquareBadgeVideo)
+                        .foregroundColor(GameRecordingManager.shared.isRecordingEnabled ? .red : .white)
                 }
             }
         }
         .onAppear {
             handleOnAppear()
+            isRecordingEnabled = GameRecordingManager.shared.isRecordingEnabled
+        }
+        .onReceive(GameRecordingManager.shared.$isRecordingEnabled) { enabled in
+            isRecordingEnabled = enabled
         }
         .gameDetailsAlert(alertType: $viewModel.currentAlert, viewModel: viewModel)
     }
@@ -277,8 +293,15 @@ private extension GameDetailsView {
             )
         } else {
             viewModel.updateGameStory()
-            coordinator.navigateToGame()
+            coordinator.presentFullScreen(.game(GameStory.shared))
         }
+    }
+
+    func toggleRecordingWithFeedback() {
+        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+        impactFeedback.impactOccurred()
+        GameRecordingManager.shared.isRecordingEnabled.toggle()
+        impactFeedback.prepare()
     }
 }
 

@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct GameScoreboardView: View {
-    @EnvironmentObject private var coordinator: GameScoreboardCoordinator
+    @EnvironmentObject private var coordinator: AppCoordinator
     @StateObject private var viewModel = GameScoreboardViewModel()
+    var gameStory: GameStory
     
     private var isGameInProgress: Bool {
         GameStory.shared.isGameInProgress

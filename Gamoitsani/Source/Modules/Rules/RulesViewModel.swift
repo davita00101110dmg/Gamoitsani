@@ -9,12 +9,10 @@
 
 import Foundation
 
-final class RulesViewModel {
-    
-    private let rules: [String]
-    
-    init() {
-        rules = [
+final class RulesViewModel: ObservableObject {
+
+    var rules: [String] {
+        [
             L10n.Screen.Rules.rule2,
             L10n.Screen.Rules.rule3,
             L10n.Screen.Rules.rule4,
@@ -22,11 +20,11 @@ final class RulesViewModel {
             L10n.Screen.Rules.rule6,
         ]
     }
-    
+
     func numberOfItems() -> Int {
         rules.count
     }
-    
+
     func rule(at index: Int) -> String {
         rules[index]
     }

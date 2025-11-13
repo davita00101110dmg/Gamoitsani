@@ -9,12 +9,14 @@
 import SwiftUI
 
 struct GameView: View {
-    @EnvironmentObject private var coordinator: GameCoordinator
+    @EnvironmentObject private var coordinator: AppCoordinator
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    @ObservedObject var viewModel = GameViewModel()
-    
+    var gameStory: GameStory
+    @StateObject private var viewModel = GameViewModel()
+
     @State private var showConfetti = false
+    @State private var isRecordingEnabled = false
     
     var body: some View {
         ZStack {
@@ -39,12 +41,29 @@ struct GameView: View {
                     }
                 }
                 .toolbar {
-                    if viewModel.gameState == .gameOver {
-                        ToolbarItem(placement: .topBarTrailing) {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            presentGoBackAlert()
+                        } label: {
+                            Image(systemName: AppConstants.SFSymbol.flagCheckeredTwoCrossed)
+                                .foregroundColor(.white)
+                        }
+                    }
+
+                    ToolbarItem(placement: .topBarTrailing) {
+                        if viewModel.gameState == .gameOver {
                             Button {
-                                coordinator.presentGameShareView(with: viewModel.generateShareImage())
+                                coordinator.presentSheet(.gameShare(gameStory))
                             } label: {
                                 Image(systemName: AppConstants.SFSymbol.squareAndArrowUp)
+                                    .foregroundColor(.white)
+                            }
+                        } else {
+                            Button {
+                                handleRecordingButtonTap()
+                            } label: {
+                                Image(systemName: AppConstants.SFSymbol.personCropSquareBadgeVideo)
+                                    .foregroundColor(GameRecordingManager.shared.isRecordingEnabled ? .red : .white)
                             }
                         }
                     }
@@ -70,10 +89,13 @@ struct GameView: View {
         .onAppear {
             viewModel.loadAd()
             GameRecordingManager.shared.startGameRecording()
+            isRecordingEnabled = GameRecordingManager.shared.isRecordingEnabled
+        }
+        .onReceive(GameRecordingManager.shared.$isRecordingEnabled) { enabled in
+            isRecordingEnabled = enabled
         }
         .onDisappear {
             viewModel.startNewGame()
-            coordinator.childDidFinish(coordinator)
             stopConfetti()
         }
     }
@@ -93,7 +115,7 @@ struct GameView: View {
         GameInfoView(viewModel: viewModel.createGameInfoViewModel()) {
             viewModel.startPlaying()
         } onShowScoreboard: {
-            coordinator.presentGameScoreboard()
+            coordinator.presentSheet(.gameScoreboard(gameStory))
         }
     }
     
@@ -149,10 +171,10 @@ struct GameView: View {
         } onGoBack: {
             stopConfetti()
             viewModel.showAd()
-            coordinator.pop()
+            coordinator.dismissFullScreen()
             viewModel.startNewGame()
         } onShowFullScoreboard: {
-            coordinator.presentGameScoreboard(with: [.large()])
+            coordinator.presentSheet(.gameScoreboard(gameStory))
         }
         .onAppear {
             startConfetti()
@@ -178,9 +200,66 @@ struct GameView: View {
             showConfetti = true
         }
     }
-    
+
     private func stopConfetti() {
         showConfetti = false
+    }
+
+    private func presentGoBackAlert() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootViewController = windowScene.windows.first?.rootViewController else {
+            return
+        }
+
+        let alert = UIAlertController(
+            title: L10n.Screen.Game.ConfirmationAlert.title,
+            message: L10n.Screen.Game.ConfirmationAlert.message,
+            preferredStyle: .alert
+        )
+
+        alert.addAction(.init(title: L10n.yesPolite, style: .destructive) { [weak coordinator] _ in
+            coordinator?.dismissFullScreen()
+        })
+
+        alert.addAction(.init(title: L10n.no, style: .cancel))
+
+        rootViewController.present(alert, animated: true)
+    }
+
+    private func handleRecordingButtonTap() {
+        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+        impactFeedback.impactOccurred()
+
+        if GameRecordingManager.shared.isRecording {
+            presentStopRecordingAlert()
+        } else {
+            GameRecordingManager.shared.setRecordingEnabled(true)
+            GameRecordingManager.shared.startGameRecording()
+        }
+
+        impactFeedback.prepare()
+    }
+
+    private func presentStopRecordingAlert() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootViewController = windowScene.windows.first?.rootViewController else {
+            return
+        }
+
+        let alert = UIAlertController(
+            title: L10n.Screen.GamePlay.Alert.StopRecording.title,
+            message: L10n.Screen.GamePlay.Alert.StopRecording.message,
+            preferredStyle: .alert
+        )
+
+        alert.addAction(.init(title: L10n.yesPolite, style: .destructive) { _ in
+            GameRecordingManager.shared.stopGameRecording()
+            GameRecordingManager.shared.setRecordingEnabled(false)
+        })
+
+        alert.addAction(.init(title: L10n.cancel, style: .cancel))
+
+        rootViewController.present(alert, animated: true)
     }
 }
 

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject private var coordinator: SettingsCoordinator
+    @EnvironmentObject private var coordinator: AppCoordinator
     @ObservedObject var viewModel = SettingsViewModel()
     
     var body: some View {
@@ -49,7 +49,7 @@ struct SettingsView: View {
                         
                         if viewModel.shouldShowPrivacySettingsButton {
                             GMTableViewButton(title: L10n.Screen.Settings.privacySettings) {
-                                coordinator.presentPrivacySettings()
+                                presentPrivacySettings()
                             }
                         }
                         
@@ -86,6 +86,15 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+
+    private func presentPrivacySettings() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootViewController = windowScene.windows.first?.rootViewController else {
+            return
+        }
+
+        AppConsentAdManager.shared.presentPrivacySettings(from: rootViewController.presentedViewController)
     }
 }
 

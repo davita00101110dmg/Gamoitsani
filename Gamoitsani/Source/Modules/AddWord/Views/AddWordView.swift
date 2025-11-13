@@ -11,7 +11,7 @@ import GoogleMobileAds
 
 struct AddWordView: View {
     @StateObject private var viewModel = AddWordViewModel()
-    @EnvironmentObject private var coordinator: AddWordCoordinator
+    @EnvironmentObject private var coordinator: AppCoordinator
     @Environment(\.dismiss) private var dismiss
     
     @State private var word: String = .empty
