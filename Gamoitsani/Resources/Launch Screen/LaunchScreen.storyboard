@@ -16,9 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Portrait.png" translatesAutoresizingMaskIntoConstraints="NO" id="8zQ-3t-AqR">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Portrait.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8zQ-3t-AqR">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <variation key="heightClass=compact" image="Landscape.png"/>
+                                <variation key="heightClass=compact" image="Landscape.jpg"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QuestionMark.png" translatesAutoresizingMaskIntoConstraints="NO" id="JFQ-f7-sMT">
                                 <rect key="frame" x="124.66666666666669" y="354" width="144" height="144"/>
@@ -47,8 +47,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Landscape.png" width="844" height="390"/>
-        <image name="Portrait.png" width="390" height="844"/>
+        <image name="Landscape.jpg" width="844" height="390"/>
+        <image name="Portrait.jpg" width="390" height="844"/>
         <image name="QuestionMark.png" width="144" height="144"/>
     </resources>
 </document>
