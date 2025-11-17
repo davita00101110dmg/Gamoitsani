@@ -20,11 +20,15 @@ final class CoreDataManager: CoreDataManaging {
         case insufficientStorage
         case saveFailed(Error)
     }
-    
+
     static var shared = CoreDataManager()
     private let persistentContainer: NSPersistentContainer
     private let backgroundContext: NSManagedObjectContext
-    
+
+    var viewContext: NSManagedObjectContext {
+        persistentContainer.viewContext
+    }
+
     private init() {
         persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
         backgroundContext = persistentContainer.newBackgroundContext()
