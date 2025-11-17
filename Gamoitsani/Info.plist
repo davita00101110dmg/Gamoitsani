@@ -35,5 +35,7 @@
 	<false/>
 	<key>WORDS_COLLECTION_NAME</key>
 	<string>${WORDS_COLLECTION_NAME}</string>
+	<key>WORD_PACKS_COLLECTION_NAME</key>
+	<string>${WORD_PACKS_COLLECTION_NAME}</string>
 </dict>
 </plist>

@@ -17,6 +17,7 @@ final class GameStory {
     var numberOfRounds: Int = 1
     var lengthOfRound: Double = 45
     var words: [Word] = []
+    var selectedPack: WordPackFirebase? = nil
     
     var currentRound: Int = 1
     var currentExtraRound: Int = 0
@@ -104,6 +105,7 @@ final class GameStory {
         gameStartTime = nil
         teamChallenges.removeAll()
         resetSuperWordEncounters()
+        selectedPack = nil
     }
     
     private func resetSuperWordEncounters() {

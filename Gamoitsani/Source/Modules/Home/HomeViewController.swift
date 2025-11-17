@@ -17,6 +17,7 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRightBarButtonItem()
+        setupLeftBarButtonItem()
 #if DEBUG
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         view.addGestureRecognizer(longPressGesture)
@@ -36,6 +37,10 @@ final class HomeViewController: BaseViewController<HomeCoordinator> {
     
     private func setupRightBarButtonItem() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: AppConstants.SFSymbol.gear), style: .plain, target: self, action: #selector(rightBarButtonClicked))
+    }
+
+    private func setupLeftBarButtonItem() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: AppConstants.SFSymbol.photoStack), style: .plain, target: self, action: #selector(leftBarButtonClicked))
     }
     
 #if DEBUG
@@ -63,6 +68,10 @@ extension HomeViewController {
     
     @objc private func rightBarButtonClicked() {
         coordinator?.presentSettings()
+    }
+
+    @objc private func leftBarButtonClicked() {
+        coordinator?.navigateToWordPacks()
     }
 }
 

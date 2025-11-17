@@ -164,7 +164,7 @@ enum AppConstants {
     }
     
     enum Firebase {
-        
+
         enum Fields {
             static let baseWord = "base_word"
             static let language = "language"
@@ -178,8 +178,33 @@ enum AppConstants {
             static let qualityScore = "quality_score"
             static let lastReviewed = "last_reviewed"
             static let reviewedBy = "reviewed_by"
+
+            // Word Pack fields
+            static let packId = "pack_id"
+            static let packName = "pack_name"
+            static let description = "description"
+            static let creatorDeviceId = "creator_device_id"
+            static let creatorName = "creator_name"
+            static let createdAt = "created_at"
+            static let words = "words"
+            static let wordCount = "word_count"
+            static let languages = "languages"
+            static let downloadCount = "download_count"
+            static let playCount = "play_count"
+            static let ratingStats = "rating_stats"
+            static let averageRating = "average_rating"
+            static let totalRatings = "total_ratings"
+            static let fiveStar = "five_star"
+            static let fourStar = "four_star"
+            static let threeStar = "three_star"
+            static let twoStar = "two_star"
+            static let oneStar = "one_star"
+            static let isPublic = "is_public"
+            static let isFeatured = "is_featured"
+            static let status = "status"
+            static let reportedCount = "reported_count"
         }
-        
+
         static var wordsCollectionName: String {
             do {
                 return try Configuration.value(for: "WORDS_COLLECTION_NAME")
@@ -188,12 +213,21 @@ enum AppConstants {
                 return .empty
             }
         }
-        
+
         static var suggestedWordsCollectionName: String {
             do {
                 return try Configuration.value(for: "SUGGESTED_WORDS_COLLECTION_NAME")
             } catch {
                 log(.error, "Error retrieving suggested words collection name: \(error)")
+                return .empty
+            }
+        }
+
+        static var wordPacksCollectionName: String {
+            do {
+                return try Configuration.value(for: "WORD_PACKS_COLLECTION_NAME")
+            } catch {
+                log(.error, "Error retrieving word packs collection name: \(error)")
                 return .empty
             }
         }

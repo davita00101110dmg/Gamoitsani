@@ -125,7 +125,85 @@ final class AnalyticsManager {
         Analytics.logEvent("rules_viewed", parameters: nil)
         log(.info, "Analytics: Rules viewed")
     }
-    
+
+    // MARK: - Word Pack Events
+
+    /// Logs when a user creates a word pack
+    /// - Parameters:
+    ///   - packId: Unique identifier of the pack
+    ///   - wordCount: Number of words in the pack
+    ///   - isPublic: Whether the pack is public or private
+    func logPackCreated(packId: String, wordCount: Int, isPublic: Bool) {
+        Analytics.logEvent("pack_created", parameters: [
+            "pack_id": packId,
+            "word_count": wordCount,
+            "is_public": isPublic
+        ])
+        log(.info, "Analytics: Pack created - id: \(packId), words: \(wordCount), public: \(isPublic)")
+    }
+
+    /// Logs when a user downloads a word pack
+    /// - Parameters:
+    ///   - packId: Unique identifier of the pack
+    ///   - packName: Name of the pack
+    func logPackDownloaded(packId: String, packName: String) {
+        Analytics.logEvent("pack_downloaded", parameters: [
+            "pack_id": packId,
+            "pack_name": packName
+        ])
+        log(.info, "Analytics: Pack downloaded - \(packName)")
+    }
+
+    /// Logs when a user plays a game with a custom pack
+    /// - Parameters:
+    ///   - packId: Unique identifier of the pack
+    ///   - packName: Name of the pack
+    func logPackUsedInGame(packId: String, packName: String) {
+        Analytics.logEvent("pack_used_in_game", parameters: [
+            "pack_id": packId,
+            "pack_name": packName
+        ])
+        log(.info, "Analytics: Pack used in game - \(packName)")
+    }
+
+    /// Logs when a user rates a word pack
+    /// - Parameters:
+    ///   - packId: Unique identifier of the pack
+    ///   - rating: Rating given (1-5)
+    func logPackRated(packId: String, rating: Int) {
+        Analytics.logEvent("pack_rated", parameters: [
+            "pack_id": packId,
+            "rating": rating
+        ])
+        log(.info, "Analytics: Pack rated - id: \(packId), rating: \(rating)")
+    }
+
+    /// Logs when a user shares a word pack
+    /// - Parameter packId: Unique identifier of the pack
+    func logPackShared(packId: String) {
+        Analytics.logEvent("pack_shared", parameters: [
+            "pack_id": packId
+        ])
+        log(.info, "Analytics: Pack shared - \(packId)")
+    }
+
+    /// Logs when a user browses word packs
+    /// - Parameter tab: The tab being viewed (my_packs, featured, discover)
+    func logPackBrowsing(tab: String) {
+        Analytics.logEvent("pack_browsing", parameters: [
+            "tab": tab
+        ])
+    }
+
+    /// Logs when a user reports a pack
+    /// - Parameter packId: Unique identifier of the pack
+    func logPackReported(packId: String) {
+        Analytics.logEvent("pack_reported", parameters: [
+            "pack_id": packId
+        ])
+        log(.info, "Analytics: Pack reported - \(packId)")
+    }
+
     // MARK: - App Lifecycle Events
     
     /// Logs when the app is opened

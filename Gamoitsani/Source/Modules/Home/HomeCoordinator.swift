@@ -47,4 +47,10 @@ final class HomeCoordinator: BaseCoordinator {
         let settingsCoordinator = SettingsCoordinator(navigationController: navigationController)
         coordinate(to: settingsCoordinator)
     }
+
+    func navigateToWordPacks() {
+        guard let navigationController else { return }
+        let wordPackCoordinator = WordPackCoordinator(navigationController: navigationController)
+        coordinate(to: wordPackCoordinator)
+    }
 }
