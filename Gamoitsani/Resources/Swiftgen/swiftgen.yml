@@ -1,5 +1,5 @@
-input_dir: ${PROJECT_ROOT}/Gamoitsani/Resources/
-output_dir: ${PROJECT_ROOT}/Gamoitsani/Resources/Generated/
+input_dir: ${PWD}/Gamoitsani/Resources
+output_dir: ${PWD}/Gamoitsani/Resources/Generated
 
 xcassets:
   inputs:
@@ -17,7 +17,8 @@ strings:
         publicAccess: true
         enumName: L10n
 fonts:
-  inputs: SupportingFiles/Fonts
+  inputs:
+    - SupportingFiles/Fonts
   outputs:
     - templateName: swift5
       output: Fonts.swift
