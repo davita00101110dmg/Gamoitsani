@@ -119,7 +119,9 @@ final class GameCoordinator: BaseCoordinator, ObservableObject {
             preferredStyle: .alert)
         
         alert.addAction(.init(title: L10n.yesPolite, style: .destructive) { [weak self] _ in
-            self?.pop()
+            DispatchQueue.main.async {
+                self?.pop()
+            }
         })
         
         alert.addAction(.init(title: L10n.no, style: .cancel))

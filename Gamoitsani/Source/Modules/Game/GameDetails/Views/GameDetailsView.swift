@@ -13,6 +13,7 @@ struct GameDetailsView: View {
     @StateObject var viewModel = GameDetailsViewModel()
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @State private var showStorageAlert = false
+    @State private var hasAppeared = false
     
     var body: some View {
         ZStack {
@@ -43,7 +44,10 @@ struct GameDetailsView: View {
             }
         }
         .onAppear {
-            handleOnAppear()
+            if !hasAppeared {
+                hasAppeared = true
+                handleOnAppear()
+            }
         }
         .gameDetailsAlert(alertType: $viewModel.currentAlert, viewModel: viewModel)
     }

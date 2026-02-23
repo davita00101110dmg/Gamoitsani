@@ -86,7 +86,8 @@ final class GameDetailsCoordinator: BaseCoordinator, ObservableObject {
     }
     
     func navigateToGame() {
-        guard let navigationController else { return }
+        guard let navigationController,
+              navigationController.presentedViewController == nil else { return }
         let gameCoordinator = GameCoordinator(navigationController: navigationController)
         coordinate(to: gameCoordinator)
     }
