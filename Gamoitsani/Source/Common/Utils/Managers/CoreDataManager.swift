@@ -52,6 +52,13 @@ final class CoreDataManager: CoreDataManaging {
                         word.baseWord = firebaseWord.baseWord
                         word.categories = firebaseWord.categories
                         word.last_updated = firebaseWord.lastUpdated
+                        word.isGeorgianOrigin = firebaseWord.isGeorgianOrigin ?? false
+                        word.formalityLevel = Int16(firebaseWord.formalityLevel ?? 2)
+                        word.isProperNoun = firebaseWord.isProperNoun ?? false
+                        word.wordType = firebaseWord.wordType
+                        word.isAbstract = firebaseWord.isAbstract ?? false
+                        word.ageAppropriateness = firebaseWord.ageAppropriateness ?? "all_ages"
+                        word.relatedWords = firebaseWord.relatedWords ?? []
                         
                         if let existingTranslations = word.wordTranslations as? Set<Translation> {
                             for translation in existingTranslations {

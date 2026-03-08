@@ -14,14 +14,28 @@ struct WordFirebase: Codable {
     let categories: [String]
     let translations: [String: TranslationData]
     let lastUpdated: Date
-    
+    let isGeorgianOrigin: Bool?
+    let formalityLevel: Int?
+    let isProperNoun: Bool?
+    let wordType: String?
+    let isAbstract: Bool?
+    let ageAppropriateness: String?
+    let relatedWords: [String]?
+
     enum CodingKeys: String, CodingKey {
         case baseWord = "base_word"
         case categories
         case translations
         case lastUpdated = "last_updated"
+        case isGeorgianOrigin = "is_georgian_origin"
+        case formalityLevel = "formality_level"
+        case isProperNoun = "is_proper_noun"
+        case wordType = "word_type"
+        case isAbstract = "is_abstract"
+        case ageAppropriateness = "age_appropriateness"
+        case relatedWords = "related_words"
     }
-    
+
     struct TranslationData: Codable {
         let word: String
         let difficulty: Int

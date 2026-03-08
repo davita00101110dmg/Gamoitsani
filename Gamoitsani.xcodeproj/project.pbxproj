@@ -253,6 +253,7 @@
 		33F1C5CBF005030EAF45E784 /* Pods_Gamoitsani.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gamoitsani.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8591DBC756783B37A1C2C05 /* Pods_GamoitsaniTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GamoitsaniTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F70DD013A2EADFAFEC8746 /* Pods-GamoitsaniTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.release.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.release.xcconfig"; sourceTree = "<group>"; };
+		C5963B1A2F5D9F6900617CBD /* Gamoitsani Word 2.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Gamoitsani Word 2.0.xcdatamodel"; sourceTree = "<group>"; };
 		F0E7AC92C1E2C28737A902C9 /* Pods-Gamoitsani.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani.release.xcconfig"; path = "Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.release.xcconfig"; sourceTree = "<group>"; };
 		FF01C8A72D2AD1FF00BE40D4 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		FF1111872C4FD17500C44F62 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
@@ -1478,10 +1479,10 @@
 				FF6054EF2CC550A5003C2AA0 /* Ubuntu-Bold.ttf in Resources */,
 				FF6054F22CC550A5003C2AA0 /* Ubuntu-Medium.ttf in Resources */,
 				FFD386D62C6A500A0027A2C4 /* LaunchScreen.storyboard in Resources */,
-				FF7069972C6C0C1C00C3D9EA /* Landscape.png in Resources */,
+				FF7069972C6C0C1C00C3D9EA /* Landscape.jpg in Resources */,
 				FF1111892C4FD17500C44F62 /* correct.wav in Resources */,
 				FF4D9D352BD698630046819D /* Assets.xcassets in Resources */,
-				FF7069982C6C0C1C00C3D9EA /* Portrait.png in Resources */,
+				FF7069982C6C0C1C00C3D9EA /* Portrait.jpg in Resources */,
 				FFFB4D432BD9155100CDDCB4 /* RulesViewController.xib in Resources */,
 				FF8EA75B2BED600B00F098B8 /* GoogleService-Info.plist in Resources */,
 				FF38FACB2BF5407F006AD774 /* RuleTableViewCell.xib in Resources */,
@@ -2510,9 +2511,10 @@
 		FF4D9D312BD698620046819D /* Gamoitsani.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				C5963B1A2F5D9F6900617CBD /* Gamoitsani Word 2.0.xcdatamodel */,
 				FF4D9D322BD698620046819D /* Gamoitsani.xcdatamodel */,
 			);
-			currentVersion = FF4D9D322BD698620046819D /* Gamoitsani.xcdatamodel */;
+			currentVersion = C5963B1A2F5D9F6900617CBD /* Gamoitsani Word 2.0.xcdatamodel */;
 			path = Gamoitsani.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

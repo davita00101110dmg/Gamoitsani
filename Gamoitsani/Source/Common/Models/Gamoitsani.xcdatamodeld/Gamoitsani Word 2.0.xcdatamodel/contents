@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24512" systemVersion="25C56" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Translation" representedClassName="Translation" syncable="YES">
+        <attribute name="difficulty" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="languageCode" optional="YES" attributeType="String"/>
+        <attribute name="word" optional="YES" attributeType="String"/>
+        <relationship name="originalWord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="wordTranslations" inverseEntity="Word"/>
+    </entity>
+    <entity name="Word" representedClassName=".Word" syncable="YES">
+        <attribute name="ageAppropriateness" optional="YES" attributeType="String"/>
+        <attribute name="baseWord" optional="YES" attributeType="String"/>
+        <attribute name="categoriesData" optional="YES" attributeType="Binary" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
+        <attribute name="formalityLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isAbstract" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isGeorgianOrigin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isProperNoun" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="last_updated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="relatedWordsData" optional="YES" attributeType="Binary"/>
+        <attribute name="wordType" optional="YES" attributeType="String"/>
+        <relationship name="wordTranslations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Translation" inverseName="originalWord" inverseEntity="Translation"/>
+    </entity>
+</model>
