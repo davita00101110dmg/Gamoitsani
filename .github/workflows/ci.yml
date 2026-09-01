@@ -62,16 +62,11 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 45
     needs: build
-    # KNOWN FAILING — a green checkmark on this job does NOT mean tests passed.
+    # This job gates the pipeline: 38 passing, 6 skipped, 0 failing.
     #
-    # The GamoitsaniTests target does not compile: CoreDataManagerTests calls
-    # WordFirebase.init with 4 of its 11 required arguments, and LanguageManagerTests
-    # references a nonexistent `UserDefaults.Keys`. The 39 existing cases never run.
-    #
-    # Phase 1 of docs/2.0/PLAN.md repairs those files. When it lands, DELETE the
-    # continue-on-error line below so tests actually gate the pipeline — that is the
-    # entire point of Phase 1.
-    continue-on-error: true
+    # The 6 skips are ChallengesManagerTests and two GameChallengeViewModelTests cases,
+    # which need an injection seam on ChallengesManager that Phase 4 introduces. They
+    # throw XCTSkip with that reason rather than failing silently.
 
     steps:
       - uses: actions/checkout@v4
@@ -105,10 +100,16 @@ jobs:
           echo "udid=$UDID" >> "$GITHUB_OUTPUT"
 
       - name: Test
+        # Scoped to GamoitsaniTests deliberately. The UI test target is stock Xcode
+        # boilerplate that asserts nothing, and running the whole scheme also runs
+        # GamoitsaniUITests — which took over ten minutes and wrote ~4 GB of result
+        # bundles before filling the disk on a dev machine. Add it back when the UI tests
+        # test something.
         run: |
           set -o pipefail
           xcodebuild test \
             -workspace "$WORKSPACE" \
             -scheme "$SCHEME" \
             -destination "id=${{ steps.sim.outputs.udid }}" \
+            -only-testing:GamoitsaniTests \
             CODE_SIGNING_ALLOWED=NO

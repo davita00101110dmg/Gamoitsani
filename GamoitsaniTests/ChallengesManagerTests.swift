@@ -11,46 +11,29 @@ import XCTest
 
 final class ChallengesManagerTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Reset the state before each test
-        GameStory.shared.reset()
-        ChallengesManager.shared.resetUsedChallenges()
-        
-        // Initialize with default challenges if needed
-        setupDefaultChallenges()
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+
+        // These tests cannot run against the current ChallengesManager.
+        //
+        // They were seeding data through `Mirror(reflecting:)`, casting the private
+        // `challenges` property to NSMutableArray. That cast can never succeed —
+        // `challenges` is a Swift `[Challenge]` value array, which does not bridge to
+        // NSMutableArray, and reflection hands back a copy regardless. The seeding loop
+        // silently matched nothing, so every test ran against an empty manager where
+        // getRandomChallengeForTeam returns the same hardcoded fallback string for every
+        // team. That is why all four "challenges should be different" assertions failed:
+        // a defect in the test harness, not in the manager.
+        //
+        // Making them run needs an injection seam on ChallengesManager, which is a
+        // singleton with a private init and private state. Phase 4 of docs/2.0/PLAN.md
+        // replaces this manager with a dependency-injected one; adding a seam now would
+        // be a production change to code that is about to be deleted. The assertions
+        // below are kept as the specification to re-point at the replacement.
+        throw XCTSkip("Needs an injection seam on ChallengesManager — see Phase 4 of docs/2.0/PLAN.md")
     }
-    
-    private func setupDefaultChallenges() {
-        // This simulates the challenges being loaded from cache or Firebase
-        // We're setting up the test data directly for simplicity
-        let challenges: [ChallengesManager.Challenge] = [
-            ChallengesManager.Challenge(id: "1", text: ["en": "Every time you guess correctly, do a little dance"]),
-            ChallengesManager.Challenge(id: "2", text: ["en": "Speak in a funny accent while guessing"]),
-            ChallengesManager.Challenge(id: "3", text: ["en": "Team must high-five after each correct guess"]),
-            ChallengesManager.Challenge(id: "4", text: ["en": "Guesser must stand on one leg"]),
-            ChallengesManager.Challenge(id: "5", text: ["en": "Whisper all your guesses"]),
-        ]
-        
-        // Add the challenges to the manager's cache
-        saveChallengesForTesting(challenges)
-    }
-    
-    private func saveChallengesForTesting(_ challenges: [ChallengesManager.Challenge]) {
-        // Access the internal property using reflection to set up our test data
-        let manager = ChallengesManager.shared
-        let mirror = Mirror(reflecting: manager)
-        for child in mirror.children {
-            if child.label == "challenges", let challengesRef = child.value as? NSMutableArray {
-                challengesRef.removeAllObjects()
-                for challenge in challenges {
-                    challengesRef.add(challenge)
-                }
-                break
-            }
-        }
-    }
-    
+
+
     func testGetRandomChallengeForTeam() {
         // Set up teams in GameStory
         let gameStory = GameStory.shared

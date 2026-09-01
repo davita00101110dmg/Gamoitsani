@@ -30,6 +30,17 @@ final class CoreDataManager: CoreDataManaging {
         backgroundContext = persistentContainer.newBackgroundContext()
         backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
+
+    /// Injects a container so tests can run against an in-memory store.
+    ///
+    /// Without this there is no seam at all: the designated initialiser reaches through
+    /// `UIApplication.shared.delegate` for the app's on-disk container, so any test of
+    /// this type would read and write the user's real word database.
+    init(container: NSPersistentContainer) {
+        persistentContainer = container
+        backgroundContext = container.newBackgroundContext()
+        backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+    }
     
     @discardableResult
     func saveWordsFromFirebase(_ words: [WordFirebase]) async throws -> Int {
@@ -111,18 +122,39 @@ final class CoreDataManager: CoreDataManaging {
         }
     }
     
+    /// Absolute floor of free space required before importing words.
+    ///
+    /// Deliberately an absolute number rather than a fraction of the volume. The previous
+    /// check required `free / total > 0.001`, which means something different on every
+    /// device — 512 MB on a 512 GB disk, 64 MB on a 64 GB phone — and on a nearly-full
+    /// disk it sits close enough to the threshold to flip between consecutive runs. That
+    /// is exactly how it behaved on the dev machine: 0.001094 against a 0.001 threshold,
+    /// so word imports failed intermittently with `insufficientStorage`.
+    private static let minimumFreeBytes = 50_000_000
+
     func checkAvailableStorage() -> Bool {
-        let fileURL = persistentContainer.persistentStoreCoordinator.persistentStores.first?.url
-        let fileManager = FileManager.default
-        
-        guard let path = fileURL?.deletingLastPathComponent().path,
-              let attrs = try? fileManager.attributesOfFileSystem(forPath: path),
-              let freeSize = attrs[FileAttributeKey.systemFreeSize] as? NSNumber,
-              let totalSize = attrs[FileAttributeKey.systemSize] as? NSNumber else {
+        guard let store = persistentContainer.persistentStoreCoordinator.persistentStores.first else {
             return true
         }
-        
-        let freeRatio = Double(freeSize.int64Value) / Double(totalSize.int64Value)
-        return freeRatio > 0.001
+
+        // An in-memory store has no disk footprint, so there is nothing to check. Its URL
+        // is /dev/null, and devfs reports a capacity of 0 rather than nil — which would
+        // otherwise read as "disk full" and reject every save.
+        guard store.type != NSInMemoryStoreType, let storeURL = store.url else {
+            return true
+        }
+
+        // volumeAvailableCapacityForImportantUsage, not systemFreeSize: it accounts for
+        // purgeable space the system will reclaim on demand, so it reflects what is
+        // actually obtainable rather than what is free right now.
+        guard let capacity = try? storeURL
+            .resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
+            .volumeAvailableCapacityForImportantUsage else {
+            // Unavailable on this volume — an in-memory store under test, for instance.
+            // Fail open: refusing to save is worse than trying and handling the error.
+            return true
+        }
+
+        return capacity > Self.minimumFreeBytes
     }
 }
