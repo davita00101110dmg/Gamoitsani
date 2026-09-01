@@ -51,7 +51,16 @@ final class FirebaseManager {
 
     var coreDataManager: CoreDataManaging = CoreDataManager.shared
     var currentDate: Date = Date()
-    
+
+    /// Overridden in tests so the sync path can be exercised without a network call.
+    /// `nil` means "go to Firestore"; returning `nil` from the closure simulates a failed
+    /// fetch, which is the case that must not stamp `lastWordSyncDate`.
+    ///
+    /// This mirrors the existing `coreDataManager` seam. Without it FirebaseManagerTests
+    /// reached the live database, so its results depended on network reachability and on
+    /// whichever collection names the local Config.xcconfig happened to contain.
+    var remoteWordFetcher: ((Date) async -> [WordFirebase]?)?
+
     private init() { }
     
     func fetchWordsIfNeeded(completion: @escaping ([Word]) -> Void, onStorageWarning: @escaping () -> Void) {
@@ -60,7 +69,15 @@ final class FirebaseManager {
             let currentTimestamp = currentDate.timeIntervalSince1970
             
             if currentTimestamp - lastSyncTimestamp >= .week {
-                guard let firebaseWords = await fetchWordsFromFirebase(since: Date(timeIntervalSince1970: lastSyncTimestamp)) else {
+                let since = Date(timeIntervalSince1970: lastSyncTimestamp)
+                let fetched: [WordFirebase]?
+                if let remoteWordFetcher {
+                    fetched = await remoteWordFetcher(since)
+                } else {
+                    fetched = await fetchWordsFromFirebase(since: since)
+                }
+
+                guard let firebaseWords = fetched else {
                     // The fetch failed after its retries. Deliberately do not stamp
                     // lastWordSyncDate — stamping here is what made a failed sync suppress
                     // the next attempt for a full week. Leaving it unstamped means the
