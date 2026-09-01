@@ -1,0 +1,114 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "claude/**", "feature/**", v2]
+  pull_request:
+    branches: [main, v2]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  WORKSPACE: Gamoitsani.xcworkspace
+  SCHEME: Gamoitsani
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-15
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Create Config.xcconfig
+        # The real config is gitignored (ad unit IDs, mediation secrets). The committed
+        # template carries Google's public AdMob *test* IDs and placeholder collection
+        # names, which is all CI needs — it compiles the app, it never serves ads.
+        run: |
+          cp Gamoitsani/Resources/Configuration/Config.xcconfig.template \
+             Gamoitsani/Resources/Configuration/Config.xcconfig
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('Podfile.lock') }}
+          restore-keys: ${{ runner.os }}-pods-
+
+      - name: Install pods
+        run: pod install --repo-update
+
+      - name: Build
+        # `generic/platform=iOS Simulator` avoids pinning a device name that may not
+        # exist on the runner image.
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -workspace "$WORKSPACE" \
+            -scheme "$SCHEME" \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO
+
+  test:
+    name: Test
+    runs-on: macos-15
+    timeout-minutes: 45
+    needs: build
+    # KNOWN FAILING — a green checkmark on this job does NOT mean tests passed.
+    #
+    # The GamoitsaniTests target does not compile: CoreDataManagerTests calls
+    # WordFirebase.init with 4 of its 11 required arguments, and LanguageManagerTests
+    # references a nonexistent `UserDefaults.Keys`. The 39 existing cases never run.
+    #
+    # Phase 1 of docs/2.0/PLAN.md repairs those files. When it lands, DELETE the
+    # continue-on-error line below so tests actually gate the pipeline — that is the
+    # entire point of Phase 1.
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Create Config.xcconfig
+        run: |
+          cp Gamoitsani/Resources/Configuration/Config.xcconfig.template \
+             Gamoitsani/Resources/Configuration/Config.xcconfig
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('Podfile.lock') }}
+          restore-keys: ${{ runner.os }}-pods-
+
+      - name: Install pods
+        run: pod install --repo-update
+
+      - name: Pick a simulator
+        # Resolve whatever iPhone the runner actually has rather than hardcoding a name.
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available --json \
+            | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];print(next(v['udid'] for rt in sorted(d) if 'iOS' in rt for v in d[rt] if 'iPhone' in v['name']))")
+          echo "Using simulator $UDID"
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+
+      - name: Test
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -workspace "$WORKSPACE" \
+            -scheme "$SCHEME" \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            CODE_SIGNING_ALLOWED=NO
