@@ -20,7 +20,12 @@ final class InterstitialAdManager: BaseAdManager {
     }
     
     override func loadAd() async {
-        if isLoadingAd, !AppConstants.shouldShowAdsToUser {
+        // `||`, not `,`. A comma is AND, so this only bailed when a load was *already in
+        // flight* AND the user shouldn't see ads — meaning it fell through and requested
+        // an ad both for users who had paid to remove them and for users who had not
+        // granted consent (`shouldShowAdsToUser` is `hasAdConsent && !hasRemovedAds`),
+        // and it also allowed concurrent loads to stack. AppOpenAdManager has this right.
+        if isLoadingAd || !AppConstants.shouldShowAdsToUser {
             return
         }
         

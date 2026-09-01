@@ -1,0 +1,72 @@
+//
+//  Config.xcconfig.template
+//  Gamoitsani
+//
+//  Template for the gitignored `Config.xcconfig`. Copy it, then fill in real values:
+//
+//      cp Gamoitsani/Resources/Configuration/Config.xcconfig.template \
+//         Gamoitsani/Resources/Configuration/Config.xcconfig
+//
+//  Every key below is substituted into `Gamoitsani/Resources/Info.plist` at build time
+//  and read back at runtime through `Configuration.value(for:)`. A missing key does not
+//  fail the build — it throws at runtime and the call site logs and falls back to an
+//  empty string, so a typo here shows up as a silently broken ad unit or Firestore
+//  query rather than a compile error. Keep this file in sync when adding new keys.
+//
+//  Configuration settings file format documentation can be found at:
+//  https://help.apple.com/xcode/#/dev745c5c974
+//
+
+// CocoaPods. Required — these pull in the pod search paths, linker flags and framework
+// settings. Run `pod install` before building or these files will not exist.
+#include "Pods/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.debug.xcconfig"
+#include "Pods/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.release.xcconfig"
+
+// MARK: - Firestore collections
+// Names of the Firestore collections the app reads words from and writes suggestions to.
+
+WORDS_COLLECTION_NAME = words
+SUGGESTED_WORDS_COLLECTION_NAME = suggested_words
+
+// Defined for forthcoming features; not yet referenced by any Swift code or Info.plist key.
+// Set these to the real collection names from your Firebase console.
+CATEGORIES_COLLECTION_NAME = REPLACE_ME
+WORD_PACKS_COLLECTION_NAME = REPLACE_ME
+
+// MARK: - Project
+
+// Absolute path to this checkout. Machine-specific — set it to wherever you cloned the
+// repo. It is written into the shipped Info.plist but is not read by any Swift code.
+PROJECT_ROOT = $(SRCROOT)
+
+// MARK: - AdMob
+// From the AdMob console. The IDs below are Google's public *test* units, which are safe
+// to build and run against — swap in the real production units for a release build.
+// Never serve test ads in production, and never request production ads in development.
+
+ADMOB_APP_ID = ca-app-pub-3940256099942544~1458002511
+BANNER_AD_ID = ca-app-pub-3940256099942544/2934735716
+INTERSTITIAL_AD_ID = ca-app-pub-3940256099942544/4411468910
+APP_OPEN_AD_ID = ca-app-pub-3940256099942544/5575463023
+
+// Device identifiers that receive test ads / the test consent form. Get yours from the
+// Xcode console on first run — the SDK logs the hash to register. Leave blank if unused.
+ADMOB_TEST_DEVICE_ID =
+UMP_TEST_DEVICE_ID =
+
+// MARK: - In-app purchase
+// Product identifier for the "remove ads" IAP, as configured in App Store Connect.
+
+REMOVE_ADS_IN_APP_PURCHASE_PRODUCT_ID = com.example.gamoitsani.removeads
+
+// MARK: - Ad mediation partners
+// Per-network credentials from each partner's dashboard. The app initialises every
+// mediation SDK at launch, so leaving these blank means those networks simply never
+// fill — the app still builds and runs.
+
+META_APP_ID =
+META_CLIENT_TOKEN =
+VUNGLE_APP_ID =
+INMOBI_APP_ID =
+CHARTBOOST_APP_ID =
+CHARTBOOST_APP_SIGNATURE =
