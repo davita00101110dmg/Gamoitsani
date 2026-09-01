@@ -35,10 +35,7 @@ final class SettingsViewModel: NSObject, ObservableObject {
     override init() {
         selectedLanguage = LanguageManager.shared.currentLanguage
         super.init()
-        
-        fetchProducts()
-        SKPaymentQueue.default().add(self)
-        
+
         LanguageManager.shared.$currentLanguage
             .sink { [weak self] newLanguage in
                 self?.selectedLanguage = newLanguage
@@ -46,18 +43,8 @@ final class SettingsViewModel: NSObject, ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
-    deinit {
-        SKPaymentQueue.default().remove(self)
-    }
-    
-    private func fetchProducts() {
-        let productIdentifiers: Set<String> = [AppConstants.removeAdsInAppPurchaseProductID]
-        let request = SKProductsRequest(productIdentifiers: productIdentifiers)
-        request.delegate = self
-        request.start()
-    }
-    
+
+
     func updateLanguage(_ language: Language) {
         LanguageManager.shared.setLanguage(language)
     }
@@ -84,32 +71,17 @@ final class SettingsViewModel: NSObject, ObservableObject {
         }
     }
     
+    // Both delegate to PurchaseManager, which holds the payment queue observer for the
+    // whole process. This view model used to be the observer itself, so it stopped
+    // listening the moment the Settings screen went away.
+    //
+    // `isRemoveAdsPurchased` is @AppStorage over the same key PurchaseManager writes, so
+    // the entitlement still lands here without this type observing the queue.
     func purchaseProduct() {
-        guard let product = products.first else { return }
-        let payment = SKPayment(product: product)
-        SKPaymentQueue.default().add(payment)
+        PurchaseManager.shared.purchaseRemoveAds()
     }
-    
-    func restoreProduct() {
-        SKPaymentQueue.default().restoreCompletedTransactions()
-    }
-}
 
-// MARK: - SKProductsRequestDelegate
-extension SettingsViewModel: SKProductsRequestDelegate, SKPaymentTransactionObserver {
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        products = response.products
-    }
-    
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        transactions.forEach { transaction in
-            switch transaction.transactionState {
-            case .purchased, .restored:
-                isRemoveAdsPurchased = true
-                SKPaymentQueue.default().finishTransaction(transaction)
-            default:
-                break
-            }
-        }
+    func restoreProduct() {
+        PurchaseManager.shared.restorePurchases()
     }
 }

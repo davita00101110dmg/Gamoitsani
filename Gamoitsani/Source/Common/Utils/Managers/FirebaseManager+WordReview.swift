@@ -234,7 +234,19 @@ extension FirebaseManager {
         db.runTransaction({ [weak self] transaction, errorPointer in
             guard let self else {
                 log(.error, "Self is nil in transaction")
-                completion(false)
+                // Report the failure through errorPointer rather than calling completion
+                // here. Returning nil signals *success* to Firestore, so calling
+                // completion(false) inside the block and then returning nil fired the
+                // completion twice — once false here, once true from the outer handler.
+                // performBatchReview pairs each completion with dispatchGroup.leave()
+                // against a single enter(), so the second call crashed the process with
+                // "group left more times than entered". Firestore also retries this block,
+                // which could multiply the extra calls.
+                errorPointer?.pointee = NSError(
+                    domain: "com.gamoitsani.wordreview",
+                    code: -1,
+                    userInfo: [NSLocalizedDescriptionKey: "FirebaseManager was deallocated during the review transaction"]
+                )
                 return nil
             }
             

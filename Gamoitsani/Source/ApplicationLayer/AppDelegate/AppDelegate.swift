@@ -26,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationsManager.shared.requestAuthorization()
         registerInitialUserDefaultValues()
         StoreReviewManager.incrementAppOpenedCount()
+
+        // Must be registered at launch, not by whichever screen happens to be visible, so
+        // transactions that complete while the app is backgrounded or closed are still
+        // recorded. See PurchaseManager for what this used to cost.
+        PurchaseManager.shared.start()
         
         ApplicationDelegate.shared.application(
             application,

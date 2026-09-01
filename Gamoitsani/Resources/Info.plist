@@ -1446,11 +1446,25 @@
 	<true/>
 	<key>UMP_TEST_DEVICE_ID</key>
 	<string>${UMP_TEST_DEVICE_ID}</string>
+	<!-- All 11 languages that Localizable.xcstrings actually ships and that
+	     LanguageManager.Language offers. This previously declared only en/ka/uk, so the
+	     App Store advertised 3 languages while 8 more were built, translated and
+	     selectable in-app. Every language below is 100% complete for user-facing strings;
+	     the only untranslated keys are junk entries ("", "     ", "%lld", "Checked",
+	     "Unchecked"), a debug toggle, and the hidden Word Review screen. -->
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>
 		<string>ka</string>
 		<string>uk</string>
+		<string>az</string>
+		<string>de</string>
+		<string>es</string>
+		<string>fr</string>
+		<string>hy</string>
+		<string>ja</string>
+		<string>ru</string>
+		<string>tr</string>
 	</array>
     <key>NSCameraUsageDescription</key>
     <string>This app needs camera access to record your reactions during gameplay.</string>

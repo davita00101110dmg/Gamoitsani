@@ -60,7 +60,17 @@ final class FirebaseManager {
             let currentTimestamp = currentDate.timeIntervalSince1970
             
             if currentTimestamp - lastSyncTimestamp >= .week {
-                let firebaseWords = await fetchWordsFromFirebase(since: Date(timeIntervalSince1970: lastSyncTimestamp))
+                guard let firebaseWords = await fetchWordsFromFirebase(since: Date(timeIntervalSince1970: lastSyncTimestamp)) else {
+                    // The fetch failed after its retries. Deliberately do not stamp
+                    // lastWordSyncDate — stamping here is what made a failed sync suppress
+                    // the next attempt for a full week. Leaving it unstamped means the
+                    // next launch tries again.
+                    log(.error, "Word sync failed; leaving lastWordSyncDate unstamped so the next launch retries")
+                    let words = await coreDataManager.fetchWordsFromCoreData(quantity: 1500)
+                    await MainActor.run { completion(words) }
+                    return
+                }
+
                 do {
                     try await coreDataManager.saveWordsFromFirebase(firebaseWords)
                     await MainActor.run { AppSettings.lastWordSyncDate = currentTimestamp }
@@ -82,21 +92,27 @@ final class FirebaseManager {
         }
     }
     
-    private func fetchWordsFromFirebase(since date: Date, retries: Int = 3) async -> [WordFirebase] {
+    /// Returns nil when the fetch failed outright, as distinct from an empty array, which
+    /// means the server had no words newer than `date`.
+    ///
+    /// This used to return `[]` for both. The caller could not tell them apart, so a total
+    /// network failure looked like a successful no-op sync and still stamped
+    /// `lastWordSyncDate` — suppressing any retry for a week.
+    private func fetchWordsFromFirebase(since date: Date, retries: Int = 3) async -> [WordFirebase]? {
         return await withCheckedContinuation { continuation in
             wordsRef
                 .whereField(AppConstants.Firebase.Fields.lastUpdated, isGreaterThan: date)
                 .getDocuments { querySnapshot, error in
                     if let error = error {
                         log(.error, "Error fetching words: \(error.localizedDescription)")
-                        
+
                         if retries > 0 {
                             Task {
                                 let retryResult = await self.fetchWordsFromFirebase(since: date, retries: retries - 1)
                                 continuation.resume(returning: retryResult)
                             }
                         } else {
-                            continuation.resume(returning: [])
+                            continuation.resume(returning: nil)
                         }
                         return
                     }
