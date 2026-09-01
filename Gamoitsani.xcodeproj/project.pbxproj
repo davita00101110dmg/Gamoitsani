@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00B3B83E241C78863E87C3AC /* GamoitsaniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C04D6EDDE9638C7F9C296 /* GamoitsaniApp.swift */; };
 		06ABDE32E8A30934D2D95909 /* Pods_GamoitsaniTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8591DBC756783B37A1C2C05 /* Pods_GamoitsaniTests.framework */; };
 		1054D8A7177E06FE0183B464 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E023802D284EC10E151378E /* PurchaseManager.swift */; };
+		47FD6444178F69C5BBF1C6CD /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB02F97058A700F6375993C /* Route.swift */; };
+		66A4602347998D88A4A8BCFB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227A9A621D7844B4B28356E0 /* Router.swift */; };
 		7424C16E88565CB07DCB61A9 /* Pods_Gamoitsani.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F1C5CBF005030EAF45E784 /* Pods_Gamoitsani.framework */; };
+		924A62BE6EB988DF780416F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FF8B6C753C6F444A7BABEA /* Foundation.framework */; };
 		AA38C41CA0E8D6135DDC8360 /* Pods_Gamoitsani_GamoitsaniUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15021D7C46D4DA69DAB50747 /* Pods_Gamoitsani_GamoitsaniUITests.framework */; };
+		B2EB8ECD2398AB25AD3598B9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D1191097C7560220A39F65 /* HomeView.swift */; };
 		FF01C8A82D2AD1FF00BE40D4 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01C8A72D2AD1FF00BE40D4 /* Logger.swift */; };
 		FF1111892C4FD17500C44F62 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF1111872C4FD17500C44F62 /* correct.wav */; };
 		FF11118A2C4FD17500C44F62 /* incorrect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF1111882C4FD17500C44F62 /* incorrect.mp3 */; };
@@ -250,12 +255,18 @@
 		0ED1415795F78EC52C53201B /* Pods-GamoitsaniTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.debug.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0ED6CAF7DFCF6D389E027034 /* Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig"; path = "Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		15021D7C46D4DA69DAB50747 /* Pods_Gamoitsani_GamoitsaniUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gamoitsani_GamoitsaniUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		227A9A621D7844B4B28356E0 /* Router.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Router.swift; path = Navigation/Router.swift; sourceTree = "<group>"; };
 		2A4F39F1DAD4AF7CEB36AE68 /* Pods-Gamoitsani.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani.debug.xcconfig"; path = "Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.debug.xcconfig"; sourceTree = "<group>"; };
 		33F1C5CBF005030EAF45E784 /* Pods_Gamoitsani.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gamoitsani.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BDE67BC9BFB90A79983B10D /* Gamoitsani2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E023802D284EC10E151378E /* PurchaseManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		466C04D6EDDE9638C7F9C296 /* GamoitsaniApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GamoitsaniApp.swift; sourceTree = "<group>"; };
+		89FF8B6C753C6F444A7BABEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A8591DBC756783B37A1C2C05 /* Pods_GamoitsaniTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GamoitsaniTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F70DD013A2EADFAFEC8746 /* Pods-GamoitsaniTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.release.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.release.xcconfig"; sourceTree = "<group>"; };
+		BDB02F97058A700F6375993C /* Route.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Route.swift; path = Navigation/Route.swift; sourceTree = "<group>"; };
 		C5963B1A2F5D9F6900617CBD /* Gamoitsani Word 2.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Gamoitsani Word 2.0.xcdatamodel"; sourceTree = "<group>"; };
+		D2D1191097C7560220A39F65 /* HomeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = Screens/HomeView.swift; sourceTree = "<group>"; };
 		F0E7AC92C1E2C28737A902C9 /* Pods-Gamoitsani.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani.release.xcconfig"; path = "Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.release.xcconfig"; sourceTree = "<group>"; };
 		FF01C8A72D2AD1FF00BE40D4 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		FF1111872C4FD17500C44F62 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
@@ -462,6 +473,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F957277388173C8102615F4B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				924A62BE6EB988DF780416F5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FF4D9D222BD698620046819D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -509,6 +528,26 @@
 				B7F70DD013A2EADFAFEC8746 /* Pods-GamoitsaniTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		7016F9422072DEA7BED550D3 /* Gamoitsani2 */ = {
+			isa = PBXGroup;
+			children = (
+				466C04D6EDDE9638C7F9C296 /* GamoitsaniApp.swift */,
+				BDB02F97058A700F6375993C /* Route.swift */,
+				227A9A621D7844B4B28356E0 /* Router.swift */,
+				D2D1191097C7560220A39F65 /* HomeView.swift */,
+			);
+			name = Gamoitsani2;
+			path = Gamoitsani2;
+			sourceTree = "<group>";
+		};
+		72DB47A2861A52B979C77B73 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				89FF8B6C753C6F444A7BABEA /* Foundation.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		FF01C8A62D2AD1F300BE40D4 /* Logger */ = {
@@ -566,6 +605,7 @@
 				FF4D9D262BD698620046819D /* Products */,
 				FFF65CD02BE6B2F3008E0352 /* Frameworks */,
 				080C9A0323049673DB476C6E /* Pods */,
+				7016F9422072DEA7BED550D3 /* Gamoitsani2 */,
 			);
 			sourceTree = "<group>";
 		};
@@ -575,6 +615,7 @@
 				FF4D9D252BD698620046819D /* Gamoitsani.app */,
 				FF4D9D3E2BD698630046819D /* GamoitsaniTests.xctest */,
 				FF4D9D482BD698630046819D /* GamoitsaniUITests.xctest */,
+				3BDE67BC9BFB90A79983B10D /* Gamoitsani2.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1179,6 +1220,7 @@
 				33F1C5CBF005030EAF45E784 /* Pods_Gamoitsani.framework */,
 				15021D7C46D4DA69DAB50747 /* Pods_Gamoitsani_GamoitsaniUITests.framework */,
 				A8591DBC756783B37A1C2C05 /* Pods_GamoitsaniTests.framework */,
+				72DB47A2861A52B979C77B73 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1335,6 +1377,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1AD6974620CF18984E0130F9 /* Gamoitsani2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD3DB2C474005E5C2533BE77 /* Build configuration list for PBXNativeTarget "Gamoitsani2" */;
+			buildPhases = (
+				4C010BD51A76218F0F2E0E1E /* Sources */,
+				F957277388173C8102615F4B /* Frameworks */,
+				7E7A4627570C1922525CDA88 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Gamoitsani2;
+			packageProductDependencies = (
+				9A24C52E5DAD4FCEDB822263 /* GamoitsaniCore */,
+				2669DB926C70FF6C738D1496 /* GamoitsaniEngine */,
+				A11A51F8839515E8561ACE3A /* GamoitsaniDesign */,
+				FFC2987BFBE335DA22BCD85F /* GamoitsaniData */,
+				A8C33842198817BC40CD0A2A /* GamoitsaniL10n */,
+			);
+			productName = Gamoitsani2;
+			productReference = 3BDE67BC9BFB90A79983B10D /* Gamoitsani2.app */;
+			productType = "com.apple.product-type.application";
+		};
 		FF4D9D242BD698620046819D /* Gamoitsani */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF4D9D522BD698630046819D /* Build configuration list for PBXNativeTarget "Gamoitsani" */;
@@ -1454,6 +1520,11 @@
 				FF7F1DA12BE93DF900872554 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				FF4FA9C32BEEB6FD00F38F98 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				FF8623762C6AB8A00044A7D7 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				23072511E8200C3340164847 /* XCLocalSwiftPackageReference "GamoitsaniCore" */,
+				F2E45B80498A6B3104F17A42 /* XCLocalSwiftPackageReference "GamoitsaniEngine" */,
+				0E26D0EB59CA1BFF4CF9A227 /* XCLocalSwiftPackageReference "GamoitsaniDesign" */,
+				BF8A57540562EF2EA1DF14BE /* XCLocalSwiftPackageReference "GamoitsaniData" */,
+				6D303C750A733B228CFE80F1 /* XCLocalSwiftPackageReference "GamoitsaniL10n" */,
 			);
 			productRefGroup = FF4D9D262BD698620046819D /* Products */;
 			projectDirPath = "";
@@ -1462,11 +1533,19 @@
 				FF4D9D242BD698620046819D /* Gamoitsani */,
 				FF4D9D3D2BD698630046819D /* GamoitsaniTests */,
 				FF4D9D472BD698630046819D /* GamoitsaniUITests */,
+				1AD6974620CF18984E0130F9 /* Gamoitsani2 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7E7A4627570C1922525CDA88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FF4D9D232BD698620046819D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1521,13 +1600,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1586,13 +1661,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1629,13 +1700,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1650,13 +1717,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1685,6 +1748,17 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4C010BD51A76218F0F2E0E1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00B3B83E241C78863E87C3AC /* GamoitsaniApp.swift in Sources */,
+				47FD6444178F69C5BBF1C6CD /* Route.swift in Sources */,
+				66A4602347998D88A4A8BCFB /* Router.swift in Sources */,
+				B2EB8ECD2398AB25AD3598B9 /* HomeView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FF4D9D212BD698620046819D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1894,6 +1968,63 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		1944C757AF62697EA56CB162 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V9DL6T6A4K;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Gamoitsani;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfacePhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = davitikhvedelidze.Gamoitsani2;
+				PRODUCT_NAME = Gamoitsani;
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_CONCURRENCY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		86E9E9C4771250CC07B5BEF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V9DL6T6A4K;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Gamoitsani;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfacePhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = davitikhvedelidze.Gamoitsani2;
+				PRODUCT_NAME = Gamoitsani;
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_CONCURRENCY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		FF4D9D502BD698630046819D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2391,6 +2522,7 @@
 		};
 		FF4D9D5A2BD698630046819D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07465998325E61C4C8A4B2EC /* Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2409,6 +2541,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FD3DB2C474005E5C2533BE77 /* Build configuration list for PBXNativeTarget "Gamoitsani2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1944C757AF62697EA56CB162 /* Release */,
+				86E9E9C4771250CC07B5BEF9 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FF4D9D202BD698620046819D /* Build configuration list for PBXProject "Gamoitsani" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2447,6 +2588,29 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		0E26D0EB59CA1BFF4CF9A227 /* XCLocalSwiftPackageReference "GamoitsaniDesign" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Libraries/Packages/GamoitsaniDesign;
+		};
+		23072511E8200C3340164847 /* XCLocalSwiftPackageReference "GamoitsaniCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Libraries/Packages/GamoitsaniCore;
+		};
+		6D303C750A733B228CFE80F1 /* XCLocalSwiftPackageReference "GamoitsaniL10n" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Libraries/Packages/GamoitsaniL10n;
+		};
+		BF8A57540562EF2EA1DF14BE /* XCLocalSwiftPackageReference "GamoitsaniData" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Libraries/Packages/GamoitsaniData;
+		};
+		F2E45B80498A6B3104F17A42 /* XCLocalSwiftPackageReference "GamoitsaniEngine" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Libraries/Packages/GamoitsaniEngine;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		FF4FA9C32BEEB6FD00F38F98 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -2475,6 +2639,22 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2669DB926C70FF6C738D1496 /* GamoitsaniEngine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GamoitsaniEngine;
+		};
+		9A24C52E5DAD4FCEDB822263 /* GamoitsaniCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GamoitsaniCore;
+		};
+		A11A51F8839515E8561ACE3A /* GamoitsaniDesign */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GamoitsaniDesign;
+		};
+		A8C33842198817BC40CD0A2A /* GamoitsaniL10n */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GamoitsaniL10n;
+		};
 		FF4FA9C42BEEB6FD00F38F98 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FF4FA9C32BEEB6FD00F38F98 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -2498,6 +2678,10 @@
 		FF92E2252D8352490020A803 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseAnalytics;
+		};
+		FFC2987BFBE335DA22BCD85F /* GamoitsaniData */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GamoitsaniData;
 		};
 		FFC794932E452EC30061E5F0 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

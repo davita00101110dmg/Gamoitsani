@@ -68,6 +68,33 @@ jobs:
           echo "Using simulator $UDID"
           echo "udid=$UDID" >> "$GITHUB_OUTPUT"
 
+      - name: Build and test Gamoitsani2
+        # The 2.0 target and its five local packages. Built first and separately from v1:
+        # it uses SPM only, no CocoaPods, so a failure here is unambiguous. Swift 6
+        # language mode with complete strict concurrency, so a data-race diagnostic fails
+        # the build rather than accumulating.
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -workspace "$WORKSPACE" \
+            -scheme Gamoitsani2 \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Test the 2.0 packages
+        # Each package is independently testable — that is the point of the module split.
+        # The design tokens carry WCAG contrast assertions, so a colour change that breaks
+        # accessibility fails here.
+        run: |
+          set -o pipefail
+          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n; do
+            echo "--- $pkg"
+            ( cd "Libraries/Packages/$pkg" && xcodebuild test \
+                -scheme "$pkg" \
+                -destination "id=${{ steps.sim.outputs.udid }}" \
+                CODE_SIGNING_ALLOWED=NO )
+          done
+
       - name: Build and test
         # Compiles and tests in a single pass. Scoped to GamoitsaniTests deliberately: the
         # UI test target is stock Xcode boilerplate that asserts nothing, and running the

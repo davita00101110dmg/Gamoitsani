@@ -1,0 +1,24 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "home.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Gamoitsani" } },
+        "ka" : { "stringUnit" : { "state" : "translated", "value" : "გამოიცანი" } }
+      }
+    },
+    "home.play" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Play" } },
+        "ka" : { "stringUnit" : { "state" : "translated", "value" : "თამაში" } }
+      }
+    },
+    "home.subtitle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Describe the word. Don't say it." } },
+        "ka" : { "stringUnit" : { "state" : "translated", "value" : "აღწერე სიტყვა. ნუ იტყვი მას." } }
+      }
+    }
+  },
+  "version" : "1.0"
+}
