@@ -91,6 +91,38 @@ xcodebuild test \
 > roadmap — see [`docs/2.0/PLAN.md`](2.0/PLAN.md). Until then CI builds the app but does
 > not gate on tests.
 
+## Firestore security rules
+
+The rules live in `firestore.rules.template` with the collection names redacted, since
+those names are held in the gitignored `Config.xcconfig`. Generate and deploy:
+
+```sh
+./scripts/generate-firestore-rules.sh     # writes firestore.rules (gitignored)
+firebase deploy --only firestore:rules
+```
+
+**Deploying is a production change with a deliberate breaking effect.** The rules make
+the words collection read-only from clients, which closes the hole where any
+unauthenticated caller could delete documents from the live word database — and which
+therefore **disables the in-app word review feature** (the one behind five taps on the
+title), because that feature's writes are the attack path. Reads, challenges and word
+suggestions all keep working, so the shipped v1.7 app is otherwise unaffected.
+
+### Testing the rules
+
+```sh
+cd firestore-tests && npm install
+./run.sh
+```
+
+19 checks against the Firestore emulator: five that the shipped app still works, and
+fourteen that the hole is shut. Requires a JDK — if `java -version` fails and you have
+Android Studio, its bundled runtime works:
+
+```sh
+export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+```
+
 ## Troubleshooting
 
 **`Config.xcconfig not found` / unresolved `$(BANNER_AD_ID)`** — you skipped step 2.

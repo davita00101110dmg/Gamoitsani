@@ -1,0 +1,100 @@
+// Firestore security rules — TEMPLATE
+//
+// The two word collection names live in the gitignored Config.xcconfig, so this file
+// ships with placeholders. Generate the real rules before deploying:
+//
+//     ./scripts/generate-firestore-rules.sh
+//
+// which writes firestore.rules (also gitignored). See docs/SETUP.md.
+//
+// -----------------------------------------------------------------------------------
+// WHAT THIS CHANGES, AND WHAT IT BREAKS ON PURPOSE
+//
+// Before these rules, the database was in default-open mode: any unauthenticated client
+// could read, write and DELETE any document. The app's own word-review feature calls
+// transaction.deleteDocument() on the production words collection after three negative
+// votes, with a client-controlled reviewer identity — so anyone with the app bundle
+// could enumerate and erase the word database.
+//
+// These rules make words read-only from the client. That is the fix, and it also
+// DISABLES the in-app word review feature (the one behind five taps on the title),
+// because that feature's writes are exactly the attack path. Re-home review behind a
+// Cloud Function or an authenticated admin claim before re-enabling any write here.
+//
+// Everything the shipped v1.7 app needs in order to function still works: reading words,
+// reading challenges, and creating word suggestions.
+// -----------------------------------------------------------------------------------
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // A suggestion is exactly three fields. `last_updated` must be the server's clock,
+    // not a client-supplied value — the app sends FieldValue.serverTimestamp(), which
+    // arrives as request.time.
+    function isValidSuggestion() {
+      let d = request.resource.data;
+      // Type-check every field before using its value, so a malformed document is a
+      // clean `false` rather than an evaluation error.
+      //
+      // Verified against the Firestore emulator: a rejected write that carries a
+      // serverTimestamp() transform is still logged by Firestore as "evaluation error"
+      // rather than a plain deny, because the pending transform cannot be resolved for a
+      // write that will not land. The deny itself is correct — this was tested for every
+      // invalid shape below. Expect that log line in production for rejected
+      // suggestions; it is Firestore reporting a denied transform, not a broken rule.
+      return d.keys().hasOnly(['base_word', 'language', 'last_updated'])
+          && d.keys().hasAll(['base_word', 'language', 'last_updated'])
+          && d.base_word is string
+          && d.language is string
+          && d.last_updated is timestamp
+          && d.base_word.size() > 0
+          && d.base_word.size() <= 100
+          && d.language in ['ka', 'en', 'uk', 'tr', 'hy', 'az', 'de', 'es', 'fr', 'ja', 'ru']
+          && d.last_updated == request.time;
+    }
+
+    // Words — read-only.
+    //
+    // Content is curated out of band. No client, authenticated or not, may create,
+    // modify or delete a word. This is the rule that closes the data-loss hole.
+    //
+    // Note: word documents carry review_stats.reviewed_by, an array of pseudonymous
+    // device IDs, which public read exposes. That is pre-existing and the app needs the
+    // read to work at all; removing it is a data-model change, not a rules change.
+    match /__WORDS_COLLECTION__/{wordId} {
+      allow read: if true;
+      allow create, update, delete: if false;
+    }
+
+    // Challenges — read-only. Fetched wholesale at launch by ChallengesManager.
+    match /challenges/{challengeId} {
+      allow read: if true;
+      allow create, update, delete: if false;
+    }
+
+    // Word suggestions — append-only.
+    //
+    // Clients may propose a new word and may read the collection (the app queries it to
+    // avoid submitting a duplicate — denying read would break "add a word" in v1.7).
+    // They may never edit or remove a suggestion.
+    //
+    // NOT solved here: rate limiting. Firestore rules cannot count a client's writes
+    // over time, so a determined caller can still flood this collection with valid
+    // documents. Throttling needs App Check or a Cloud Function; tracked in Phase 3.
+    match /__SUGGESTED_WORDS_COLLECTION__/{suggestionId} {
+      allow read: if true;
+      allow create: if isValidSuggestion();
+      allow update, delete: if false;
+    }
+
+    // Everything else — denied.
+    //
+    // Firestore ORs all matching allow rules, so this cannot override the grants above;
+    // it exists to state the default explicitly and to cover collections added later.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

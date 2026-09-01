@@ -14,6 +14,15 @@
 Config.xcconfig
 !Config.xcconfig.template
 
+## Generated Firestore rules
+#
+# firestore.rules is generated from firestore.rules.template by
+# ./scripts/generate-firestore-rules.sh, substituting the collection names held in
+# Config.xcconfig. Only the template is committed. Deploy the generated file.
+firestore.rules
+!firestore.rules.template
+firestore-debug.log
+
 ## User settings
 xcuserdata/
 
