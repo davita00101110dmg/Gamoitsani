@@ -98,8 +98,15 @@ those names are held in the gitignored `Config.xcconfig`. Generate and deploy:
 
 ```sh
 ./scripts/generate-firestore-rules.sh     # writes firestore.rules (gitignored)
-firebase deploy --only firestore:rules
+
+# npx avoids a global install; .firebaserc pins the target project, so rules cannot be
+# deployed to the wrong one by accident.
+npx -y firebase-tools login
+npx -y firebase-tools deploy --only firestore:rules
 ```
+
+The rules can also be pasted into the Firebase console under Firestore Database → Rules,
+which needs no CLI at all.
 
 **Deploying is a production change with a deliberate breaking effect.** The rules make
 the words collection read-only from clients, which closes the hole where any

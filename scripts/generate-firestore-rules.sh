@@ -43,8 +43,10 @@ fi
 
 echo "wrote $OUTPUT"
 echo
-echo "Review it, then deploy with:"
-echo "    firebase deploy --only firestore:rules"
+echo "Review it, then deploy. If the Firebase CLI is not installed, npx runs it without"
+echo "a global install (the project is pinned in .firebaserc):"
+echo "    npx -y firebase-tools login"
+echo "    npx -y firebase-tools deploy --only firestore:rules"
 echo
 echo "NOTE: deploying disables the in-app word review feature by design — its writes are"
 echo "the vulnerability being closed. See the header of $TEMPLATE."
