@@ -279,7 +279,6 @@
 		FF4D9D2A2BD698620046819D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FF4D9D322BD698620046819D /* Gamoitsani.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Gamoitsani.xcdatamodel; sourceTree = "<group>"; };
 		FF4D9D342BD698630046819D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FF4D9D392BD698630046819D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = ../Gamoitsani/SupportingFiles/Info/Info.plist; sourceTree = "<group>"; };
 		FF4D9D3E2BD698630046819D /* GamoitsaniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamoitsaniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4D9D482BD698630046819D /* GamoitsaniUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamoitsaniUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4D9D4C2BD698630046819D /* GamoitsaniUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamoitsaniUITests.swift; sourceTree = "<group>"; };
@@ -590,7 +589,6 @@
 		FF4D9D4B2BD698630046819D /* GamoitsaniUITests */ = {
 			isa = PBXGroup;
 			children = (
-				FF4D9D392BD698630046819D /* Info.plist */,
 				FF4D9D4C2BD698630046819D /* GamoitsaniUITests.swift */,
 				FF4D9D4E2BD698630046819D /* GamoitsaniUITestsLaunchTests.swift */,
 			);
