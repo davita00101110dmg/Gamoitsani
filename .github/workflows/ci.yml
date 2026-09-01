@@ -16,8 +16,18 @@ env:
   SCHEME: Gamoitsani
 
 jobs:
-  build:
-    name: Build
+  # One job on purpose.
+  #
+  # This was previously split into Build and Test. Separate jobs get separate runners and
+  # separate DerivedData, and `needs:` only orders them — it shares nothing. So the Test
+  # job recompiled the entire app and every pod from scratch before running a suite that
+  # takes under a minute, roughly doubling the runtime and the Actions minutes for no
+  # added signal: `xcodebuild test` already fails the run if compilation fails.
+  #
+  # Handing DerivedData between jobs as an artifact was the alternative, but uploading and
+  # downloading a multi-gigabyte build directory costs more than the rebuild it saves.
+  build-and-test:
+    name: Build & Test
     runs-on: macos-15
     timeout-minutes: 45
 
@@ -44,51 +54,10 @@ jobs:
           restore-keys: ${{ runner.os }}-pods-
 
       - name: Install pods
-        run: pod install --repo-update
-
-      - name: Build
-        # `generic/platform=iOS Simulator` avoids pinning a device name that may not
-        # exist on the runner image.
-        run: |
-          set -o pipefail
-          xcodebuild build \
-            -workspace "$WORKSPACE" \
-            -scheme "$SCHEME" \
-            -destination 'generic/platform=iOS Simulator' \
-            CODE_SIGNING_ALLOWED=NO
-
-  test:
-    name: Test
-    runs-on: macos-15
-    timeout-minutes: 45
-    needs: build
-    # This job gates the pipeline: 38 passing, 6 skipped, 0 failing.
-    #
-    # The 6 skips are ChallengesManagerTests and two GameChallengeViewModelTests cases,
-    # which need an injection seam on ChallengesManager that Phase 4 introduces. They
-    # throw XCTSkip with that reason rather than failing silently.
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: latest-stable
-
-      - name: Create Config.xcconfig
-        run: |
-          cp Gamoitsani/Resources/Configuration/Config.xcconfig.template \
-             Gamoitsani/Resources/Configuration/Config.xcconfig
-
-      - name: Cache CocoaPods
-        uses: actions/cache@v4
-        with:
-          path: Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('Podfile.lock') }}
-          restore-keys: ${{ runner.os }}-pods-
-
-      - name: Install pods
-        run: pod install --repo-update
+        # Plain `pod install` resolves from the CocoaPods CDN and is much faster than
+        # --repo-update, which re-syncs the whole spec repo on every run. Fall back only
+        # if the lockfile references something the CDN lookup cannot satisfy.
+        run: pod install || pod install --repo-update
 
       - name: Pick a simulator
         # Resolve whatever iPhone the runner actually has rather than hardcoding a name.
@@ -99,12 +68,16 @@ jobs:
           echo "Using simulator $UDID"
           echo "udid=$UDID" >> "$GITHUB_OUTPUT"
 
-      - name: Test
-        # Scoped to GamoitsaniTests deliberately. The UI test target is stock Xcode
-        # boilerplate that asserts nothing, and running the whole scheme also runs
-        # GamoitsaniUITests — which took over ten minutes and wrote ~4 GB of result
-        # bundles before filling the disk on a dev machine. Add it back when the UI tests
-        # test something.
+      - name: Build and test
+        # Compiles and tests in a single pass. Scoped to GamoitsaniTests deliberately: the
+        # UI test target is stock Xcode boilerplate that asserts nothing, and running the
+        # whole scheme also runs GamoitsaniUITests — which took over ten minutes and wrote
+        # ~4 GB of result bundles before filling the disk on a dev machine. Add it back
+        # when the UI tests test something.
+        #
+        # 38 pass, 6 skip, 0 fail. The skips are ChallengesManagerTests and two
+        # GameChallengeViewModelTests cases, which need an injection seam on
+        # ChallengesManager that Phase 4 introduces; they throw XCTSkip with that reason.
         run: |
           set -o pipefail
           xcodebuild test \
