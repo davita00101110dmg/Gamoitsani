@@ -3,7 +3,7 @@ import XCTest
 
 final class L10nTests: XCTestCase {
     func testResolvesAKeyFromThePackageCatalogue() {
-        XCTAssertEqual(L10n.string("home.play"), "Play")
+        XCTAssertEqual(L10n.string("home.play"), "Game")
     }
 
     /// A missing key returns the key itself rather than crashing, which is what makes an

@@ -46,6 +46,11 @@ public struct RGB: Sendable, Equatable {
         b = Double(hex & 0xFF) / 255
     }
 
+    /// A fixed colour, for brand marks that must not adapt to appearance.
+    public var color: Color {
+        Color(red: r, green: g, blue: b)
+    }
+
     /// Relative luminance per WCAG 2.1, used by the contrast tests.
     public var relativeLuminance: Double {
         func channel(_ c: Double) -> Double {

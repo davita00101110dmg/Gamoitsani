@@ -7,67 +7,68 @@ import SwiftUI
 
 /// The semantic colour layer.
 ///
-/// Call sites name intent (`surface`, `onSurface`) rather than appearance. The v1 palette
-/// survives as the *values* behind these tokens, which is why the dark column is
-/// recognisably the old app: `#0F0039` was GMPrimary, `#198A24` GMGreen, `#DC3444` GMRed.
-/// Names like `Color 11` do not appear outside this file.
+/// Values come from the 2.0 visual identity handoff. Call sites name intent (`surface`,
+/// `onSurface`) rather than appearance, so a palette revision is a change to this file and
+/// nothing else.
 ///
-/// v1 shipped 23 colorsets whose light and dark entries were byte-identical copies, while
-/// `UIUserInterfaceStyle` was left unset — so the app rendered the same in both
-/// appearances while system chrome followed the device and disagreed with it. Here each
-/// token carries two genuinely different values.
+/// Both appearances are real designs. v1 shipped 23 colorsets whose dark entries were
+/// byte-identical copies of their light ones while `UIUserInterfaceStyle` was left unset,
+/// so the app rendered the same either way while system chrome followed the device and
+/// disagreed with it. The light palette here is cool white paper with a warm card face —
+/// not an inverted dark screen.
 ///
-/// Light values are not tints of the dark ones. Saturated brand colours that read well on
-/// deep indigo are too light on white, so `accent`, `success` and `danger` are darkened
-/// for the light appearance to hold their contrast against text-sized geometry. The
-/// contrast tests enforce this rather than leaving it to taste.
+/// Every ratio below was recomputed from these hex values before they landed; see
+/// `DesignColorContrastTests`, which asserts all nine pairings in both appearances.
 public enum Tokens {
 
     // MARK: - Surfaces
 
     /// The app background.
-    public static let surface = DesignColor(light: RGB(0xF6F4FF), dark: RGB(0x0F0039))
+    public static let surface = DesignColor(light: RGB(0xF6F4FF), dark: RGB(0x10032E))
 
-    /// Raised above `surface`: sheets, bars, grouped rows.
-    public static let surfaceRaised = DesignColor(light: RGB(0xFFFFFF), dark: RGB(0x1B1052))
+    /// Raised above `surface`: sheets, grouped rows, settings cards.
+    ///
+    /// v1 used `gmSecondary` at 30% opacity for page panels, cards *and* list rows
+    /// simultaneously, so nothing read as elevated. That role is split between this and
+    /// `cardFace`.
+    public static let surfaceRaised = DesignColor(light: RGB(0xFFFFFF), dark: RGB(0x1D0F4A))
 
     // MARK: - Content
 
-    /// Primary text and icons on `surface` or `surfaceRaised`.
-    public static let onSurface = DesignColor(light: RGB(0x14093B), dark: RGB(0xF5F3FF))
+    /// Primary text and icons.
+    public static let onSurface = DesignColor(light: RGB(0x170640), dark: RGB(0xF4F0FF))
 
-    /// Secondary text: captions, subtitles, disabled states.
-    public static let onSurfaceMuted = DesignColor(light: RGB(0x554C7A), dark: RGB(0xB3ABDC))
+    /// Secondary text: captions, subtitles, inactive states.
+    public static let onSurfaceMuted = DesignColor(light: RGB(0x574A82), dark: RGB(0xAFA2D6))
 
     // MARK: - Brand and status
 
     /// Primary action and brand emphasis.
-    public static let accent = DesignColor(light: RGB(0xA8005C), dark: RGB(0xF72585))
+    ///
+    /// The two appearances take opposite routes on purpose. Light is a magenta-red deep
+    /// enough that white sits on it at 5.14:1. Dark is a brighter pink that would fail
+    /// under white, so its ink goes dark instead — see `onAccent`.
+    public static let accent = DesignColor(light: RGB(0xD40E6E), dark: RGB(0xFF3D93))
 
-    /// Content drawn on top of `accent`.
-    ///
-    /// Ink, not white, in dark mode. `#F72585` is the palette's signature pink and worth
-    /// keeping, but it is a bright colour: white on it measures 3.78:1, under the 4.5:1
-    /// AA floor for normal text. The contrast tests caught that. Rather than dulling the
-    /// brand colour to accommodate white — the obvious move, and the wrong one — the ink
-    /// flips to the deep indigo, which measures 5.15:1 against the same pink.
-    ///
-    /// In the light appearance `accent` is already dark enough that white reads at 7.45:1.
-    public static let onAccent = DesignColor(light: RGB(0xFFFFFF), dark: RGB(0x0F0039))
+    /// Content drawn on top of `accent`. Not white in dark mode: `#FF3D93` is too bright
+    /// to carry white text, and dulling it to accommodate white would drain the brand
+    /// colour. Dark ink measures 5.72:1 against it.
+    public static let onAccent = DesignColor(light: RGB(0xFFFFFF), dark: RGB(0x2A0014))
 
     /// Correct guesses, positive scores.
-    public static let success = DesignColor(light: RGB(0x11661A), dark: RGB(0x3FD04E))
+    public static let success = DesignColor(light: RGB(0x0E7129), dark: RGB(0x3ED47F))
 
     /// Skips, penalties, destructive actions.
-    public static let danger = DesignColor(light: RGB(0xB01F2D), dark: RGB(0xFF6B79))
+    public static let danger = DesignColor(light: RGB(0xB8112A), dark: RGB(0xFF6B7A))
 
     // MARK: - Cards
 
-    /// The face of a word card — the central metaphor of the redesign.
-    public static let cardFace = DesignColor(light: RGB(0xFFFFFF), dark: RGB(0x241668))
+    /// The face of a word card. Warm cream in light, so a card reads as paper against the
+    /// cool surface rather than as another white panel.
+    public static let cardFace = DesignColor(light: RGB(0xFFFCF5), dark: RGB(0x241356))
 
-    /// Card border and the edges of a fanned stack.
-    public static let cardEdge = DesignColor(light: RGB(0xD9D2F2), dark: RGB(0x3E2E96))
+    /// Card stroke and the edges of a fanned stack.
+    public static let cardEdge = DesignColor(light: RGB(0xC7BEEA), dark: RGB(0x5A6BC4))
 
     /// Every token, for tests and previews. Keep in sync when adding one.
     public static let all: [(name: String, color: DesignColor)] = [
@@ -82,6 +83,39 @@ public enum Tokens {
         ("cardFace", cardFace),
         ("cardEdge", cardEdge)
     ]
+}
+
+/// Fixed brand colours for the identity mark.
+///
+/// Deliberately *not* semantic tokens. The app icon is one artwork with one set of
+/// colours; a mark that recoloured itself between light and dark would stop being a mark.
+/// These are the exact fills from the identity's icon artwork, so the drawn version and
+/// the shipped icon cannot drift apart.
+public enum Brand {
+    /// The icon's field.
+    public static let markField = RGB(0x10032E)
+
+    /// The card behind, on the left.
+    public static let markCardBack = RGB(0x4756A6)
+
+    /// The card behind, on the right.
+    public static let markCardAccent = RGB(0xFF3D93)
+
+    /// The front card's face.
+    public static let markCardFace = RGB(0xFFFCF5)
+
+    /// The question mark on the front card.
+    public static let markInk = RGB(0x170640)
+
+    // Proportions taken from the icon artwork's 1024pt viewBox, so the drawn mark and the
+    // shipped icon stay identical. A word card's radius ratio is different and must not be
+    // reused here — doing so made the fan read as one blob instead of three planes.
+    public static let markCardWidthRatio: CGFloat = 372.0 / 1024.0
+    public static let markCardHeightRatio: CGFloat = 504.0 / 1024.0
+    public static let markCardRadiusRatio: CGFloat = 44.0 / 372.0
+    public static let markFieldRadiusRatio: CGFloat = 0.22
+    public static let markGlyphRatio: CGFloat = 330.0 / 504.0
+    public static let markFanAngle: Double = 19
 }
 
 /// Spacing scale. A 4pt base with a named step per use, so call sites never invent a
@@ -99,25 +133,37 @@ public enum Spacing {
 /// Corner radii, sized to the card metaphor.
 public enum Radius {
     public static let sm: CGFloat = 8
-    public static let md: CGFloat = 14
-    public static let card: CGFloat = 22
+    public static let control: CGFloat = 14
+    public static let panel: CGFloat = 18
+    public static let card: CGFloat = 20
     public static let pill: CGFloat = 999
+
+    /// A card's radius is proportional to its width, never fixed: 18pt at 190pt wide.
+    /// Fixing it makes a small card look over-rounded and a large one look square.
+    public static func card(forWidth width: CGFloat) -> CGFloat {
+        width * (18.0 / 190.0)
+    }
 }
 
-/// Type scale.
+/// Motion. One spring family, three durations — anything outside this set is a bug.
 ///
-/// Every entry is a Dynamic Type text style rather than a fixed point size, so the app
-/// scales with the user's setting. Gameplay text caps its upper bound — an accessibility
-/// size that pushes the current word off-screen makes the game unplayable — while
-/// everything else scales without limit.
-public enum Typography {
-    public static let display = Font.system(.largeTitle, design: .rounded, weight: .bold)
-    public static let title = Font.system(.title, design: .rounded, weight: .bold)
-    public static let headline = Font.system(.headline, design: .rounded, weight: .semibold)
-    public static let body = Font.system(.body, design: .rounded)
-    public static let caption = Font.system(.caption, design: .rounded)
+/// `.linear` is reserved for the timer digits, which must not ease.
+public enum Motion {
+    /// Anything a card does: enter, flip, leave.
+    public static let card = Animation.spring(response: 0.34, dampingFraction: 0.78)
 
-    /// The word under guess. Capped via `.dynamicTypeSize(...DynamicTypeSize.accessibility1)`
-    /// at the call site.
-    public static let word = Font.system(.largeTitle, design: .rounded, weight: .heavy)
+    /// Taps, toggles, score bumps. Nearly no overshoot.
+    public static let control = Animation.spring(response: 0.22, dampingFraction: 0.9)
+
+    /// The podium, the one place a bounce is welcome.
+    public static let celebrate = Animation.spring(response: 0.5, dampingFraction: 0.7)
+
+    /// Reduce Motion replacement: springs collapse to a crossfade, nothing moves or
+    /// scales. Read `\.accessibilityReduceMotion` and substitute this.
+    public static let reduced = Animation.easeInOut(duration: 0.15)
+
+    /// Picks the right animation for the current accessibility setting.
+    public static func card(reduceMotion: Bool) -> Animation { reduceMotion ? reduced : card }
+    public static func control(reduceMotion: Bool) -> Animation { reduceMotion ? reduced : control }
+    public static func celebrate(reduceMotion: Bool) -> Animation { reduceMotion ? reduced : celebrate }
 }

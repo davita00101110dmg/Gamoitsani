@@ -15,4 +15,6 @@ import Foundation
 public enum Route: Hashable {
     case gameSetup
     case rules
+    case addWord
+    case settings
 }

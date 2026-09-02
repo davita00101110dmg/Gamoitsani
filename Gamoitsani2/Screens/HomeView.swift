@@ -7,12 +7,12 @@ import SwiftUI
 import GamoitsaniDesign
 import GamoitsaniL10n
 
-/// The 2.0 home screen.
+/// The 2.0 home screen, built to the visual identity handoff.
 ///
-/// Card-first, per the design direction: the app icon is already a fanned stack of word
-/// cards, and that metaphor drives the layout instead of v1's full-bleed gradient behind
-/// stacked rectangles. Every colour, space and font comes from a token — there are no
-/// literals below, which is the point of the design package.
+/// Icon, then the wordmark with its accent rule, then a primary action in `accent` and
+/// secondary actions in `surfaceRaised`. Every colour, space, radius, font and animation
+/// comes from a token; there is not a literal in this file, which is the point of the
+/// design package.
 struct HomeView: View {
     @Environment(Router.self) private var router
 
@@ -21,46 +21,41 @@ struct HomeView: View {
             Tokens.surface.color.ignoresSafeArea()
 
             VStack(spacing: Spacing.xl) {
-                Spacer(minLength: Spacing.lg)
+                HStack {
+                    Spacer()
+                    Button {
+                        router.push(.settings)
+                    } label: {
+                        Image(systemName: "gearshape")
+                            .font(.title3)
+                            .foregroundStyle(Tokens.onSurfaceMuted.color)
+                    }
+                    .accessibilityLabel("Settings")
+                }
+                .padding(.horizontal, Spacing.md)
 
-                FannedCards()
-                    .frame(height: 190)
-                    .accessibilityHidden(true)
+                Spacer()
 
-                VStack(spacing: Spacing.xs) {
-                    Text(L10n.string("home.title"))
-                        .font(Typography.display)
-                        .foregroundStyle(Tokens.onSurface.color)
+                VStack(spacing: Spacing.lg) {
+                    AppMark()
+                        .frame(width: 76, height: 76)
+                        .accessibilityHidden(true)
 
-                    Text(L10n.string("home.subtitle"))
-                        .font(Typography.body)
-                        .foregroundStyle(Tokens.onSurfaceMuted.color)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, Spacing.lg)
+                    Wordmark()
                 }
 
                 Spacer()
 
                 VStack(spacing: Spacing.sm) {
-                    Button {
+                    HomeButton(title: L10n.string("home.play"), style: .primary) {
                         router.push(.gameSetup)
-                    } label: {
-                        Text(L10n.string("home.play"))
-                            .font(Typography.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, Spacing.md)
                     }
-                    .buttonStyle(PrimaryButtonStyle())
-
-                    Button {
+                    HomeButton(title: L10n.string("home.rules"), style: .secondary) {
                         router.push(.rules)
-                    } label: {
-                        Text("Rules")
-                            .font(Typography.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, Spacing.md)
                     }
-                    .buttonStyle(SecondaryButtonStyle())
+                    HomeButton(title: L10n.string("home.addWord"), style: .secondary) {
+                        router.push(.addWord)
+                    }
                 }
                 .padding(.horizontal, Spacing.lg)
                 .padding(.bottom, Spacing.xl)
@@ -69,51 +64,111 @@ struct HomeView: View {
     }
 }
 
-/// The icon's fanned stack, as layout.
-private struct FannedCards: View {
-    private let angles: [Double] = [-16, -8, 0, 8, 16]
-
+/// The wordmark: the name over a full-width accent rule.
+///
+/// The rule's width is the wordmark's width and its height is ~11% of cap height, per the
+/// identity. Georgian is the primary lockup, so the localised title sets the width and the
+/// rule follows it rather than being a fixed size.
+private struct Wordmark: View {
     var body: some View {
-        ZStack {
-            ForEach(Array(angles.enumerated()), id: \.offset) { index, angle in
-                RoundedRectangle(cornerRadius: Radius.card, style: .continuous)
-                    .fill(Tokens.cardFace.color)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: Radius.card, style: .continuous)
-                            .strokeBorder(Tokens.cardEdge.color, lineWidth: 1.5)
-                    }
-                    .frame(width: 108, height: 152)
-                    .shadow(color: .black.opacity(0.18), radius: 10, y: 6)
-                    .rotationEffect(.degrees(angle))
-                    .offset(x: CGFloat(index - angles.count / 2) * 26)
+        VStack(alignment: .leading, spacing: Spacing.xxs + 3) {
+            Text(L10n.string("home.title"))
+                .font(Typography.display())
+                .foregroundStyle(Tokens.onSurface.color)
+                .tracking(-1)
+
+            Capsule()
+                .fill(Tokens.accent.color)
+                .frame(height: 4)
+        }
+        .fixedSize()
+        .accessibilityElement()
+        .accessibilityLabel(L10n.string("home.title"))
+        .accessibilityAddTraits(.isHeader)
+    }
+}
+
+/// The icon mark, drawn rather than rasterised.
+///
+/// Three cards fanned at ±19° with flat fills and no gradient, matching the app icon. It
+/// is vector geometry either way, so drawing it keeps it crisp at any size and lets it
+/// follow the tokens in both appearances instead of shipping two PNGs.
+struct AppMark: View {
+    var body: some View {
+        GeometryReader { geo in
+            let side = min(geo.size.width, geo.size.height)
+            let cardW = side * Brand.markCardWidthRatio
+            let cardH = side * Brand.markCardHeightRatio
+            let radius = cardW * Brand.markCardRadiusRatio
+
+            ZStack {
+                RoundedRectangle(cornerRadius: side * Brand.markFieldRadiusRatio, style: .continuous)
+                    .fill(Brand.markField.color)
+
+                ZStack {
+                    RoundedRectangle(cornerRadius: radius, style: .continuous)
+                        .fill(Brand.markCardBack.color)
+                        .frame(width: cardW, height: cardH)
+                        .rotationEffect(.degrees(-Brand.markFanAngle))
+
+                    RoundedRectangle(cornerRadius: radius, style: .continuous)
+                        .fill(Brand.markCardAccent.color)
+                        .frame(width: cardW, height: cardH)
+                        .rotationEffect(.degrees(Brand.markFanAngle))
+
+                    RoundedRectangle(cornerRadius: radius, style: .continuous)
+                        .fill(Brand.markCardFace.color)
+                        .frame(width: cardW, height: cardH)
+                        .overlay {
+                            Text(verbatim: "?")
+                                .font(.custom(Typography.displayFamily, size: cardH * Brand.markGlyphRatio).weight(.black))
+                                .foregroundStyle(Brand.markInk.color)
+                        }
+                        .offset(y: -side * 0.0098)
+                }
             }
         }
     }
 }
 
-struct PrimaryButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundStyle(Tokens.onAccent.color)
-            .background(Tokens.accent.color)
-            .clipShape(RoundedRectangle(cornerRadius: Radius.md, style: .continuous))
-            .scaleEffect(configuration.isPressed ? 0.97 : 1)
-            .animation(.snappy(duration: 0.15), value: configuration.isPressed)
+private struct HomeButton: View {
+    enum Style { case primary, secondary }
+
+    let title: String
+    let style: Style
+    let action: () -> Void
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(Typography.headline)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, Spacing.md)
+        }
+        .buttonStyle(HomeButtonStyle(style: style, reduceMotion: reduceMotion))
     }
 }
 
-struct SecondaryButtonStyle: ButtonStyle {
+private struct HomeButtonStyle: ButtonStyle {
+    let style: HomeButton.Style
+    let reduceMotion: Bool
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundStyle(Tokens.onSurface.color)
-            .background(Tokens.surfaceRaised.color)
-            .clipShape(RoundedRectangle(cornerRadius: Radius.md, style: .continuous))
+            .foregroundStyle(style == .primary ? Tokens.onAccent.color : Tokens.onSurface.color)
+            .background(style == .primary ? Tokens.accent.color : Tokens.surfaceRaised.color)
+            .clipShape(RoundedRectangle(cornerRadius: Radius.control, style: .continuous))
             .overlay {
-                RoundedRectangle(cornerRadius: Radius.md, style: .continuous)
-                    .strokeBorder(Tokens.cardEdge.color, lineWidth: 1)
+                if style == .secondary {
+                    RoundedRectangle(cornerRadius: Radius.control, style: .continuous)
+                        .strokeBorder(Tokens.cardEdge.color, lineWidth: 1)
+                }
             }
-            .scaleEffect(configuration.isPressed ? 0.97 : 1)
-            .animation(.snappy(duration: 0.15), value: configuration.isPressed)
+            .scaleEffect(configuration.isPressed && !reduceMotion ? 0.97 : 1)
+            .opacity(configuration.isPressed && reduceMotion ? 0.7 : 1)
+            .animation(Motion.control(reduceMotion: reduceMotion), value: configuration.isPressed)
     }
 }
 

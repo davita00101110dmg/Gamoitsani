@@ -15,6 +15,13 @@ import GamoitsaniDesign
 struct GamoitsaniApp: App {
     @State private var router = Router()
 
+    init() {
+        // The display face ships inside GamoitsaniDesign, so it is not in the app bundle
+        // and cannot be declared in UIAppFonts. Without this every Typography.display call
+        // silently renders in the system font.
+        DesignSystem.registerFonts()
+    }
+
     var body: some Scene {
         WindowGroup {
             RootView()
@@ -38,6 +45,10 @@ struct RootView: View {
                         PlaceholderScreen(title: "Game setup")
                     case .rules:
                         PlaceholderScreen(title: "Rules")
+                    case .addWord:
+                        PlaceholderScreen(title: "Add word")
+                    case .settings:
+                        PlaceholderScreen(title: "Settings")
                     }
                 }
         }

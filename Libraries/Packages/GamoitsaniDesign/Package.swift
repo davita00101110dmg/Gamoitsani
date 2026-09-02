@@ -13,6 +13,7 @@ let package = Package(
         .target(
             name: "GamoitsaniDesign",
             dependencies: [],
+            resources: [.process("Resources")],
             swiftSettings: [.swiftLanguageMode(.v6)]
         ),
         .testTarget(

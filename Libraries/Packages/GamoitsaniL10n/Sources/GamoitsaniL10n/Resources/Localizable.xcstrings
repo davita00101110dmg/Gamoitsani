@@ -3,20 +3,26 @@
   "strings" : {
     "home.title" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Gamoitsani" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "GAMOITSANI" } },
         "ka" : { "stringUnit" : { "state" : "translated", "value" : "გამოიცანი" } }
       }
     },
     "home.play" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Play" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Game" } },
         "ka" : { "stringUnit" : { "state" : "translated", "value" : "თამაში" } }
       }
     },
-    "home.subtitle" : {
+    "home.rules" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Describe the word. Don't say it." } },
-        "ka" : { "stringUnit" : { "state" : "translated", "value" : "აღწერე სიტყვა. ნუ იტყვი მას." } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Rules" } },
+        "ka" : { "stringUnit" : { "state" : "translated", "value" : "წესები" } }
+      }
+    },
+    "home.addWord" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add word" } },
+        "ka" : { "stringUnit" : { "state" : "translated", "value" : "სიტყვის დამატება" } }
       }
     }
   },
