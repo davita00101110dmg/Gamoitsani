@@ -7,15 +7,6 @@ import Foundation
 import Observation
 import GamoitsaniCore
 
-/// Supplies the words for a game.
-///
-/// The engine takes a finished deck and never performs I/O, so every rule test runs
-/// against a fixed set of words with no async and no fake database. Building the deck —
-/// querying, filtering by language, shuffling — belongs to whoever conforms to this.
-public protocol WordProvider: Sendable {
-    func deck(language: String, count: Int) async throws -> Deck
-}
-
 /// Drives a game.
 ///
 /// A thin shell over `GameReducer`: it owns the current state, hands events to the pure
