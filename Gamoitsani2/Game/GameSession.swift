@@ -39,8 +39,10 @@ final class GameSession {
 
     @discardableResult
     func resume() -> GameEngine? {
-        guard let saved else { return nil }
-        let engine = GameEngine(state: saved)
+        guard var state = saved else { return nil }
+        // Restart the clock with whatever was left on it when the game was put down.
+        state.resumeClock(at: Date())
+        let engine = GameEngine(state: state)
         self.engine = engine
         return engine
     }
@@ -48,8 +50,7 @@ final class GameSession {
     /// Leaves the current game, keeping it restorable unless it had finished.
     func leave() {
         if let state = engine?.state, state.phase != .finished {
-            saved = state
-            store.save(state)
+            persist(state)
         } else {
             saved = nil
             store.clear()
@@ -57,11 +58,22 @@ final class GameSession {
         engine = nil
     }
 
-    /// Persists progress as the game moves between phases.
+    /// Persists progress as the game moves between phases, or when the app goes away.
     func checkpoint() {
         guard let state = engine?.state, state.phase != .finished else { return }
-        saved = state
-        store.save(state)
+        persist(state)
+    }
+
+    /// A saved game is a paused game.
+    ///
+    /// The clock is frozen on the way to disk, so a round abandoned at 38 seconds is
+    /// waiting at 38 seconds however long it takes to come back. The live engine keeps its
+    /// wall-clock deadline, so merely suspending the app still costs you the time.
+    private func persist(_ state: GameState) {
+        var paused = state
+        paused.pauseClock(at: Date())
+        saved = paused
+        store.save(paused)
     }
 
     func discardSaved() {

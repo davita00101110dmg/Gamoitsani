@@ -17,7 +17,6 @@ struct GameFlowView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var showRules = false
     @State private var showLeaderboard = false
-    @State private var confirmLeave = false
 
     var body: some View {
         ZStack {
@@ -33,21 +32,13 @@ struct GameFlowView: View {
         }
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(isPlaying)
         // The system bar, not hand-drawn glyphs. Toolbar items get the platform's tap
         // targets, spacing and Dynamic Type for free — the custom ones were visibly small.
         .toolbar {
-            if isPlaying {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button { confirmLeave = true } label: {
-                        Image(systemName: "chevron.backward")
-                    }
-                    .accessibilityLabel(l10n("common.back"))
-                }
-            }
             if session.engine?.state.phase == .turnInfo {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { showRules = true } label: { Image(systemName: "questionmark.circle") }
+                        .tint(Tokens.onSurface.color)
                         .accessibilityLabel(l10n("game.howToPlay"))
                 }
             }
@@ -65,18 +56,9 @@ struct GameFlowView: View {
         .onChange(of: session.engine?.state.phase) { _, _ in
             session.checkpoint()
         }
-        .alert(l10n("game.leave.title"), isPresented: $confirmLeave) {
-            Button(l10n("common.cancel"), role: .cancel) { }
-            Button(l10n("game.leave.confirm")) { leave() }
-        } message: {
-            Text(l10n("game.leave.message"))
-        }
-    }
-
-    /// True until the game is over, which is when leaving costs something.
-    private var isPlaying: Bool {
-        guard let phase = session.engine?.state.phase else { return false }
-        return phase != .finished
+        // The system back button and the swipe gesture both pop without routing through
+        // `leave()`, so the game is saved on the way out either way.
+        .onDisappear { session.leave() }
     }
 
     /// The current team during play, so the name is legible without occupying the screen
@@ -186,36 +168,42 @@ struct RulesSheet: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        // No NavigationStack: its bar and title were most of the sheet's height for four
-        // short lines. A grab handle and the content is enough.
-        VStack(alignment: .leading, spacing: 0) {
-            Text(l10n("game.howToPlay"))
-                .font(Typography.rowTitle)
-                .foregroundStyle(Tokens.onSurfaceMuted.color)
-                .padding(.bottom, Spacing.xs)
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 0) {
+                ForEach(1...4, id: \.self) { index in
+                    HStack(alignment: .top, spacing: Spacing.sm) {
+                        Text("\(index)")
+                            .font(Typography.word(15))
+                            .foregroundStyle(Tokens.accent.color)
+                            .frame(width: 20, alignment: .leading)
+                        Text(l10n("rules.\(index)"))
+                            .font(Typography.body)
+                            .foregroundStyle(Tokens.onSurface.color)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(.vertical, Spacing.xs)
 
-            ForEach(1...4, id: \.self) { index in
-                HStack(alignment: .top, spacing: Spacing.sm) {
-                    Text("\(index)")
-                        .font(Typography.word(15))
-                        .foregroundStyle(Tokens.accent.color)
-                        .frame(width: 20, alignment: .leading)
-                    Text(l10n("rules.\(index)"))
-                        .font(Typography.body)
-                        .foregroundStyle(Tokens.onSurface.color)
-                        .fixedSize(horizontal: false, vertical: true)
+                    // Rules read as one paragraph without these.
+                    if index < 4 {
+                        Divider().overlay(Tokens.cardEdge.color)
+                    }
                 }
-                .padding(.vertical, Spacing.xs)
 
-                // Rules read as one paragraph without these.
-                if index < 4 {
-                    Divider().overlay(Tokens.cardEdge.color)
+                Spacer(minLength: 0)
+            }
+            .padding(Spacing.md)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Tokens.surface.color.ignoresSafeArea())
+            .navigationTitle(l10n("game.howToPlay"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(l10n("common.done")) { dismiss() }
+                        .tint(Tokens.onSurface.color)
                 }
             }
         }
-        .padding(Spacing.md)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .presentationDetents([.fraction(0.34)])
+        .presentationDetents([.fraction(0.42)])
         .presentationDragIndicator(.visible)
         .presentationBackground(Tokens.surface.color)
     }

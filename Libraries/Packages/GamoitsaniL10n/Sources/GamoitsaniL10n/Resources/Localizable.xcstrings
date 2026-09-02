@@ -497,22 +497,6 @@
         }
       }
     },
-    "game.quit": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quit game"
-          }
-        },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "თამაშის დასრულება"
-          }
-        }
-      }
-    },
     "game.howToPlay": {
       "localizations": {
         "en": {
@@ -525,22 +509,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "როგორ ვითამაშოთ"
-          }
-        }
-      }
-    },
-    "game.hint": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Describe the word. Don't say it."
-          }
-        },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "აღწერე სიტყვა. ნუ იტყვი მას."
           }
         }
       }
@@ -881,22 +849,6 @@
         }
       }
     },
-    "common.back": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Back"
-          }
-        },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "უკან"
-          }
-        }
-      }
-    },
     "common.cancel": {
       "localizations": {
         "en": {
@@ -909,54 +861,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "გაუქმება"
-          }
-        }
-      }
-    },
-    "game.leave.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Leave this game?"
-          }
-        },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დატოვებ თამაშს?"
-          }
-        }
-      }
-    },
-    "game.leave.message": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You can pick it up again from the setup screen."
-          }
-        },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "შეგიძლია გააგრძელო მთავარი ეკრანიდან."
-          }
-        }
-      }
-    },
-    "game.leave.confirm": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Leave"
-          }
-        },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დატოვება"
           }
         }
       }

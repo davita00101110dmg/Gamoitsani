@@ -368,3 +368,77 @@ struct UndoTests {
         #expect(s.teams[0].wordsSkipped == 0)
     }
 }
+
+@Suite("Pausing a game that is put down")
+struct PauseTests {
+
+    private let t0 = Date(timeIntervalSince1970: 1_000_000)
+
+    private func playing(roundLength: TimeInterval = 45) throws -> GameState {
+        let state = GameState(
+            settings: GameSettings(roundLength: roundLength),
+            teams: [Team(name: "A"), Team(name: "B")],
+            deck: Deck(words: (0..<20).map { DeckWord(id: "\($0)", text: "w\($0)") })
+        )
+        var s = try GameReducer.reduce(state, .beginTurn, at: t0).get()
+        s = try GameReducer.reduce(s, .countdownFinished, at: t0).get()
+        return s
+    }
+
+    /// Leaving at 38 seconds and coming back later should still show 38, not what the wall
+    /// clock did in between.
+    @Test("a paused clock keeps its remaining time, however long you are away")
+    func pauseHoldsRemainingTime() throws {
+        var s = try playing()
+
+        // Seven seconds in, with 38 left.
+        s.pauseClock(at: t0.addingTimeInterval(7))
+        #expect(s.pausedRemaining == 38)
+        #expect(s.roundEndsAt == nil)
+        #expect(s.isPaused)
+
+        // Back an hour later.
+        s.resumeClock(at: t0.addingTimeInterval(3600))
+        #expect(s.isPaused == false)
+        #expect(s.roundEndsAt == t0.addingTimeInterval(3600 + 38))
+    }
+
+    @Test("pausing outside a round does nothing")
+    func pauseOnlyWhilePlaying() {
+        var s = GameState(settings: GameSettings(),
+                          teams: [Team(name: "A"), Team(name: "B")],
+                          deck: Deck(words: []))
+        s.pauseClock(at: t0)
+        #expect(s.isPaused == false)
+        #expect(s.roundEndsAt == nil)
+    }
+
+    @Test("resuming a game that was never paused leaves the deadline alone")
+    func resumeIsANoOpWhenNotPaused() throws {
+        var s = try playing()
+        let deadline = s.roundEndsAt
+        s.resumeClock(at: t0.addingTimeInterval(500))
+        #expect(s.roundEndsAt == deadline)
+    }
+
+    @Test("a paused clock survives being written to disk")
+    func pauseRoundTrips() throws {
+        var s = try playing()
+        s.pauseClock(at: t0.addingTimeInterval(10))
+
+        let restored = try JSONDecoder().decode(
+            GameState.self, from: try JSONEncoder().encode(s)
+        )
+        #expect(restored.pausedRemaining == 35)
+        #expect(restored == s)
+    }
+
+    /// The clock must not stop just because the app was suspended for a moment.
+    @Test("an unpaused game still loses time to the wall clock")
+    func backgroundingDoesNotPause() throws {
+        let s = try playing()
+        let deadline = try #require(s.roundEndsAt)
+        #expect(deadline.timeIntervalSince(t0.addingTimeInterval(60)) < 0,
+                "a minute later the round is over, as it should be")
+    }
+}

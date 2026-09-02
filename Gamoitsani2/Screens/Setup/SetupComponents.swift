@@ -204,9 +204,9 @@ private struct ModeGlyph: View {
                                 .strokeBorder(tint, lineWidth: 1)
                         }
                         .frame(height: 6)
-                        // The second row reads as already guessed, the way a played word
-                        // dims during a turn.
-                        .opacity(row == 1 ? 0.45 : 1)
+                        // Two dimmed rows read as a turn in progress; one looked like a
+                        // mistake. Alternating keeps the rhythm even.
+                        .opacity(row == 1 || row == 3 ? 0.45 : 1)
                 }
             }
         }

@@ -53,8 +53,11 @@ public struct GameState: Sendable, Hashable, Codable {
     /// Teams that have already had their one super word this round.
     public private(set) var superWordSpentBy: Set<UUID>
 
-    /// When the current round ends. Nil outside `.playing`.
+    /// When the current round ends. Nil outside `.playing`, and nil while paused.
     public private(set) var roundEndsAt: Date?
+
+    /// Seconds left when the game was put down. Set only while paused.
+    public private(set) var pausedRemaining: TimeInterval?
 
     public init(
         settings: GameSettings,
@@ -69,7 +72,8 @@ public struct GameState: Sendable, Hashable, Codable {
         playedOutcomes: [String: PlayOutcome] = [:],
         setIndex: Int = 1,
         superWordSpentBy: Set<UUID> = [],
-        roundEndsAt: Date? = nil
+        roundEndsAt: Date? = nil,
+        pausedRemaining: TimeInterval? = nil
     ) {
         self.settings = settings
         self.teams = teams
@@ -84,6 +88,7 @@ public struct GameState: Sendable, Hashable, Codable {
         self.setIndex = setIndex
         self.superWordSpentBy = superWordSpentBy
         self.roundEndsAt = roundEndsAt
+        self.pausedRemaining = pausedRemaining
     }
 
     // MARK: - Derived
@@ -103,6 +108,26 @@ public struct GameState: Sendable, Hashable, Codable {
     }
 
     public var isExtraRound: Bool { extraRound > 0 }
+
+    public var isPaused: Bool { pausedRemaining != nil }
+
+    /// Freezes the clock, for a game being put away rather than merely backgrounded.
+    ///
+    /// Suspending the app must not stop the round — that would let anyone pause by swiping
+    /// up. Deliberately leaving, or being terminated, is different: the game is set down,
+    /// and it should be waiting where it was.
+    public mutating func pauseClock(at now: Date) {
+        guard phase == .playing, let roundEndsAt else { return }
+        pausedRemaining = max(0, roundEndsAt.timeIntervalSince(now))
+        self.roundEndsAt = nil
+    }
+
+    /// Restarts a frozen clock with the time that was left on it.
+    public mutating func resumeClock(at now: Date) {
+        guard let pausedRemaining else { return }
+        roundEndsAt = now.addingTimeInterval(pausedRemaining)
+        self.pausedRemaining = nil
+    }
 
     // MARK: - Mutation (internal; only GameReducer drives these)
 

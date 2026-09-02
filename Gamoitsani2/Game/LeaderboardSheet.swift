@@ -39,6 +39,7 @@ struct LeaderboardSheet: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(l10n("common.done")) { dismiss() }
+                        .tint(Tokens.onSurface.color)
                 }
             }
         }

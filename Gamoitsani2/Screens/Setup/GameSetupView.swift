@@ -52,7 +52,7 @@ struct GameSetupView: View {
                 Button { router.push(.settings) } label: {
                     Image(systemName: "gearshape")
                 }
-                .tint(Tokens.onSurfaceMuted.color)
+                .tint(Tokens.onSurface.color)
                 .accessibilityLabel(l10n("settings.title"))
             }
         }
@@ -75,27 +75,48 @@ struct GameSetupView: View {
                     Text(saved.currentTeam?.name ?? "")
                         .font(Typography.rowTitle)
                         .foregroundStyle(Tokens.onSurface.color)
-                    Text("\(l10n("game.round")) \(saved.round) / \(saved.settings.rounds)")
-                        .font(Typography.caption)
-                        .foregroundStyle(Tokens.onSurfaceMuted.color)
+                    HStack(spacing: Spacing.xs) {
+                        Text("\(l10n("game.round")) \(saved.round) / \(saved.settings.rounds)")
+                        if let remaining = saved.pausedRemaining, remaining > 0 {
+                            Text("·")
+                            // Where the clock stopped, so it is clear the round is waiting
+                            // rather than starting over.
+                            Text("\(Int(remaining.rounded()))s")
+                                .monospacedDigit()
+                        }
+                    }
+                    .font(Typography.caption)
+                    .foregroundStyle(Tokens.onSurfaceMuted.color)
                 }
 
                 Spacer()
 
-                Button(l10n("setup.discard")) {
+                Button {
                     withAnimation(Motion.card(reduceMotion: reduceMotion)) {
                         session.discardSaved()
                     }
+                } label: {
+                    Image(systemName: "trash")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Tokens.danger.color)
+                        .frame(width: 34, height: 34)
+                        .background(Tokens.surface.color)
+                        .clipShape(Circle())
                 }
-                .font(Typography.caption)
-                .foregroundStyle(Tokens.danger.color)
+                .accessibilityLabel(l10n("setup.discard"))
 
-                Button(l10n("setup.resume")) {
+                Button {
                     session.resume()
                     router.push(.game)
+                } label: {
+                    Image(systemName: "play.fill")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Tokens.onAccent.color)
+                        .frame(width: 34, height: 34)
+                        .background(Tokens.accent.color)
+                        .clipShape(Circle())
                 }
-                .font(Typography.headline)
-                .foregroundStyle(Tokens.accent.color)
+                .accessibilityLabel(l10n("setup.resume"))
             }
             .padding(.vertical, Spacing.sm)
         }
