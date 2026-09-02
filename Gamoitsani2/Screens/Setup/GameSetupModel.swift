@@ -2,18 +2,12 @@
 //  GameSetupModel.swift
 //  Gamoitsani2
 //
-
 import Foundation
 import Observation
 import GamoitsaniCore
 import GamoitsaniL10n
 
 /// State for the setup screen.
-///
-/// Holds Core's real types — `GameSettings`, `[Team]`, `TeamValidator` — rather than a
-/// parallel set of view-layer copies, so what the screen shows and what the engine will
-/// receive cannot disagree. Validation is Core's, which means the rules the setup screen
-/// enforces are the same ones the tests assert.
 @MainActor
 @Observable
 final class GameSetupModel {
@@ -26,11 +20,6 @@ final class GameSetupModel {
     private(set) var draftNames: [UUID: String] = [:]
 
     /// Teams still carrying a generated name the player has not touched.
-    ///
-    /// Tracked explicitly rather than inferred by matching the name against the default
-    /// pattern: a player is perfectly entitled to type "Team 2" themselves, and that name
-    /// must then survive a language change like any other. Editing a name removes its team
-    /// from this set permanently.
     private var untouchedNames: Set<UUID> = []
 
     private var language: AppLanguage
@@ -99,9 +88,6 @@ final class GameSetupModel {
     }
 
     /// Relabels generated names into the new language.
-    ///
-    /// Without this the app switches to Georgian and the teams stay "Team 1" and "Team 2",
-    /// which are the only strings on the screen still in English.
     func applyLanguage(_ language: AppLanguage) {
         guard language != self.language else { return }
         self.language = language
@@ -120,8 +106,6 @@ final class GameSetupModel {
     func addTeam() {
         guard canAddTeam else { return }
         // Smallest unused number, not teams.count + 1. The count stops matching the names
-        // after any deletion: add a third team, remove the second, add again, and a
-        // count-based name hands out a second "Team 3".
         let number = TeamNaming.nextNumber(afterNames: resolvedTeams.map(\.name))
         let team = Team(name: Self.defaultName(number: number, language: language))
         teams.append(team)

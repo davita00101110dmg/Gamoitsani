@@ -2,21 +2,12 @@
 //  WordStoreFactory.swift
 //  GamoitsaniData
 //
-
 import Foundation
 import SwiftData
 
 public enum WordStoreFactory {
 
     /// Opens the on-disk cache, rebuilding it if it cannot be loaded.
-    ///
-    /// The store is a disposable cache of Firestore, so a load failure is recoverable: wipe
-    /// it and re-sync. v1 called `fatalError` in `loadPersistentStores`, which turned any
-    /// non-inferrable model change into an unconditional crash on launch for every
-    /// installed copy — for data that could simply have been downloaded again.
-    ///
-    /// Returns the store and whether a rebuild happened, so the caller can force a full
-    /// sync rather than trusting an empty cache.
     public static func makeOnDisk(
         url: URL? = nil,
         rebuildOnFailure: Bool = true

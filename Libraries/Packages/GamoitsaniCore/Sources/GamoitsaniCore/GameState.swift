@@ -2,14 +2,9 @@
 //  GameState.swift
 //  GamoitsaniCore
 //
-
 import Foundation
 
 /// Where a game is in its lifecycle.
-///
-/// v1 sequenced these with `asyncAfter` delays of 0.2/0.3/0.5/1.5s plus a Combine countdown
-/// chain, so "which screen are we on" was a function of elapsed wall time. Here it is data,
-/// and animation is purely a view concern.
 public enum GamePhase: Sendable, Hashable, Codable {
     /// Between turns: whose turn it is, and the reminder of how to play.
     case turnInfo
@@ -24,10 +19,6 @@ public enum GamePhase: Sendable, Hashable, Codable {
 }
 
 /// The whole of a game, as one value.
-///
-/// `Codable` so an in-progress game survives the app being killed. v1 kept all of this in
-/// `GameStory.shared` and persisted none of it, so a phone call could destroy a session
-/// mid-round.
 public struct GameState: Sendable, Hashable, Codable {
 
     public var settings: GameSettings
@@ -44,23 +35,17 @@ public struct GameState: Sendable, Hashable, Codable {
     public private(set) var phase: GamePhase
 
     /// The words currently on the table: one in classic, five in arcade.
-    ///
-    /// v1 sliced 50 words off a global list per turn and then drew from that slice, which
-    /// is the intermediate that produced its worst bug — `removeFirstNItems(50)` returning
-    /// nil rather than the remainder. There is no such intermediate here: sets are drawn
-    /// from the deck as play proceeds.
     public private(set) var turnWords: [DeckWord]
 
     /// How many words this team has been shown this turn, for classic super-word
     /// placement (v1 put it at a random position among the turn's first five).
     public private(set) var wordsShownThisTurn: Int
 
-    /// Which of `turnWords` have been played, so a card cannot be scored twice.
-    ///
-    /// v1's arcade *toggled* `isGuessed`, so re-tapping a guessed card subtracted the
-    /// points again and incremented `wordsSkipped` — the same word counted as both guessed
-    /// and skipped, inflating every statistic and breaking the streak.
-    public private(set) var playedWordIDs: Set<String>
+    /// How each played word was answered, so a mistaken tap can be reversed exactly.
+    public private(set) var playedOutcomes: [String: PlayOutcome]
+
+    /// Which of `turnWords` have been answered.
+    public var playedWordIDs: Set<String> { Set(playedOutcomes.keys) }
 
     /// 1-based set number within the current turn, for arcade super-word placement.
     public private(set) var setIndex: Int
@@ -81,7 +66,7 @@ public struct GameState: Sendable, Hashable, Codable {
         phase: GamePhase = .turnInfo,
         turnWords: [DeckWord] = [],
         wordsShownThisTurn: Int = 0,
-        playedWordIDs: Set<String> = [],
+        playedOutcomes: [String: PlayOutcome] = [:],
         setIndex: Int = 1,
         superWordSpentBy: Set<UUID> = [],
         roundEndsAt: Date? = nil
@@ -95,7 +80,7 @@ public struct GameState: Sendable, Hashable, Codable {
         self.phase = phase
         self.turnWords = turnWords
         self.wordsShownThisTurn = wordsShownThisTurn
-        self.playedWordIDs = playedWordIDs
+        self.playedOutcomes = playedOutcomes
         self.setIndex = setIndex
         self.superWordSpentBy = superWordSpentBy
         self.roundEndsAt = roundEndsAt
@@ -135,13 +120,6 @@ public struct GameState: Sendable, Hashable, Codable {
     }
 
     /// Draws the next set from the deck and decides which word, if any, is the super
-    /// word.
-    ///
-    /// Assignment happens here because it depends on position — classic on the word's
-    /// index within the turn, arcade on the set and slot — which is not known until the
-    /// word reaches the table. The allowance is only consulted, never spent: it is spent
-    /// when the word is actually played, so a super word the team never reaches does not
-    /// burn their one per round the way v1's arcade did.
     mutating func dealSet() {
         let size = settings.mode.wordsPerSet
         var drawn = deck.deal(size)
@@ -166,19 +144,29 @@ public struct GameState: Sendable, Hashable, Codable {
 
         wordsShownThisTurn += drawn.count
         turnWords = drawn
-        playedWordIDs = []
+        playedOutcomes = [:]
     }
 
     /// Clears the table at the end of a turn.
     mutating func clearTurn() {
         turnWords = []
-        playedWordIDs = []
+        playedOutcomes = [:]
         wordsShownThisTurn = 0
         setIndex = 1
     }
 
-    mutating func markPlayed(_ id: String) {
-        playedWordIDs.insert(id)
+    mutating func markPlayed(_ id: String, as outcome: PlayOutcome) {
+        playedOutcomes[id] = outcome
+    }
+
+    /// Forgets a play, so the word is back on the table.
+    @discardableResult
+    mutating func unmarkPlayed(_ id: String) -> PlayOutcome? {
+        playedOutcomes.removeValue(forKey: id)
+    }
+
+    mutating func returnSuperWord(to teamID: UUID) {
+        superWordSpentBy.remove(teamID)
     }
 
     mutating func advanceSet() {
@@ -205,7 +193,7 @@ public struct GameState: Sendable, Hashable, Codable {
         currentTeamIndex = 0
         phase = .turnInfo
         turnWords = []
-        playedWordIDs = []
+        playedOutcomes = [:]
         wordsShownThisTurn = 0
         setIndex = 1
         superWordSpentBy = []

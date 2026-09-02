@@ -2,23 +2,15 @@
 //  Deck.swift
 //  GamoitsaniCore
 //
-
 import Foundation
 
 /// One playable word, already resolved to the display language.
-///
-/// The engine never sees a database row or a translation dictionary — resolution happens
-/// once, when the deck is built. v1 resolved the language per word at display time by
-/// casting a Core Data relationship to `Set<Translation>` and doing a linear search inside
-/// the view model, on the main thread, firing a fault each time.
 public struct DeckWord: Identifiable, Hashable, Sendable, Codable {
     public let id: String
     /// The text actually shown to the player.
     public let text: String
 
     /// Assigned when the word is dealt, not when the deck is built — whether a given word
-    /// is the super word depends on its position in the turn, which is not known until it
-    /// reaches the table.
     public internal(set) var isSuperWord: Bool
 
     public init(id: String, text: String, isSuperWord: Bool = false) {
@@ -29,19 +21,6 @@ public struct DeckWord: Identifiable, Hashable, Sendable, Codable {
 }
 
 /// The word supply for one game.
-///
-/// Deals are explicit and exhaustion is a state the caller must handle, which is the whole
-/// point of this type. In v1 the pool was sliced with `removeFirstNItems(50)`, which
-/// returns `nil` — not the remainder — when fewer than 50 words are left. So the final
-/// under-50 words were never dealt, and the turn began with an *empty* list. Neither mode
-/// checked for that:
-///
-/// - Classic showed "no more words" but `wordButtonAction` kept awarding **+1 per tap,
-///   indefinitely**.
-/// - Arcade rendered an empty grid while the skip button still charged **−2 per tap**.
-///
-/// With 1500 words at 50 per turn that is 30 turns; five teams over five rounds is 25, and
-/// tie-break rounds are unbounded, so real games reach it.
 public struct Deck: Sendable, Hashable, Codable {
 
     private var remaining: [DeckWord]
@@ -68,17 +47,6 @@ public struct Deck: Sendable, Hashable, Codable {
 }
 
 /// Decides which word in a turn is the super word.
-///
-/// v1 fixed both positions at view-model construction with `Int.random`, which made the
-/// behaviour untestable. The rule is preserved exactly but the randomness is injected:
-///
-/// - **Classic**: a position 1...5, so the super word is always among the turn's first five.
-/// - **Arcade**: set 1 or 2 (50/50), slot 1...5 within it.
-///
-/// One behavioural fix. v1 marked the super word "encountered" at different moments per
-/// mode — arcade at *generation*, classic at *button press* — so an arcade super word the
-/// team never reached still burned their one-per-round allowance. Here the allowance is
-/// spent when the word is actually played.
 public struct SuperWordPlacement: Sendable, Hashable, Codable {
     public let classicPosition: Int
     public let arcadeSet: Int
@@ -104,10 +72,6 @@ public struct SuperWordPlacement: Sendable, Hashable, Codable {
     }
 
     /// Whether the word at this position should be the super word.
-    ///
-    /// - Parameters:
-    ///   - wordIndex: 1-based position within the turn (classic) or within the set (arcade).
-    ///   - setIndex: 1-based set number within the turn. Always 1 in classic.
     public func isSuperWord(mode: GameMode, wordIndex: Int, setIndex: Int) -> Bool {
         switch mode {
         case .classic:

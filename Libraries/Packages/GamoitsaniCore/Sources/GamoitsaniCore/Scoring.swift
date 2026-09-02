@@ -2,7 +2,6 @@
 //  Scoring.swift
 //  GamoitsaniCore
 //
-
 import Foundation
 
 public enum PlayOutcome: String, Sendable, Hashable, Codable, CaseIterable {
@@ -26,13 +25,6 @@ public enum GameMode: String, Sendable, Hashable, Codable, CaseIterable {
 }
 
 /// The single authority on what a play is worth.
-///
-/// v1 spread these numbers across three places that disagreed with each other:
-/// `WordItem.Constants` held the four values; `ClassicGamePlayViewModel.wordButtonAction`
-/// recomputed super-word scoring inline as `isCorrect ? superWordPoints : -superWordPoints`
-/// instead of reading the skipped constant; and `GameMode.skipPenalty` declared `.classic`
-/// as `0` while classic skips actually cost −1, so the property was quietly wrong and only
-/// ever read for arcade. Everything that decides a number now lives here.
 public enum Scoring {
 
     /// A correctly guessed ordinary word.

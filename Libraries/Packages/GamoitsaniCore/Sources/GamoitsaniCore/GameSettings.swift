@@ -2,15 +2,9 @@
 //  GameSettings.swift
 //  GamoitsaniCore
 //
-
 import Foundation
 
 /// Everything chosen on the setup screen before a game starts.
-///
-/// Ranges are enforced here rather than by the stepper that happens to be on screen, so a
-/// value that reaches the engine is always playable. v1 declared `maxTeamNameLength = 30`
-/// and `maxPlayerNameLength = 15`, computed them inside `validateName`, and then never
-/// compared anything against them — the limits existed only as documentation.
 public struct GameSettings: Sendable, Hashable, Codable {
 
     public static let roundsRange = 1...5
@@ -49,10 +43,6 @@ public struct GameSettings: Sendable, Hashable, Codable {
 }
 
 /// Why a proposed set of teams cannot start a game.
-///
-/// An enum rather than a `Bool` because the setup screen has to tell the player which
-/// problem to fix. v1's `add(with:)` computed the error and discarded it, silently dropping
-/// invalid names with no alert.
 public enum TeamValidationError: Error, Sendable, Hashable {
     case tooFewTeams(minimum: Int)
     case tooManyTeams(maximum: Int)

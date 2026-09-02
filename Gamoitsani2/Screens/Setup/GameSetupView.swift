@@ -2,22 +2,16 @@
 //  GameSetupView.swift
 //  Gamoitsani2
 //
-
 import SwiftUI
 import GamoitsaniCore
 import GamoitsaniDesign
 import GamoitsaniL10n
 
 /// The app's front door.
-///
-/// There is no Home screen in 2.0: the app opens here, because setting up is what every
-/// session starts with and a separate Home was one tap in the way. That makes this screen
-/// carry the whole first impression, which is why it is illustrated rather than a form —
-/// a card fan that collapses as you scroll, team colours, springy steppers, sections that
-/// stagger in.
 struct GameSetupView: View {
     @Environment(Router.self) private var router
     @Environment(Localization.self) private var l10n
+    @Environment(GameSession.self) private var session
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var model = GameSetupModel()
     @State private var hasAppeared = false
@@ -25,16 +19,16 @@ struct GameSetupView: View {
     private let headerHeight: CGFloat = 168
 
     /// How far the screen has scrolled, driving the header collapse.
-    ///
-    /// `onScrollGeometryChange` rather than a `GeometryReader` reading a named coordinate
-    /// space: the first attempt did the latter, referenced a space that was never declared,
-    /// and silently collapsed nothing. This reports the real content offset.
     @State private var scrollOffset: CGFloat = 0
 
     var body: some View {
         ScrollView {
             VStack(spacing: Spacing.lg) {
                 CollapsingFanHeader(height: headerHeight, collapse: headerCollapse)
+
+                if let saved = session.saved {
+                    resumeCard(saved)
+                }
 
                 section(index: 0) { roundSection }
                 section(index: 1) { modeSection }
@@ -70,6 +64,56 @@ struct GameSetupView: View {
             withAnimation(Motion.control(reduceMotion: reduceMotion)) {
                 model.applyLanguage(language)
             }
+        }
+    }
+
+    /// An unfinished game, offered before the setup form.
+    private func resumeCard(_ saved: GameState) -> some View {
+        SetupPanel(title: l10n("setup.inProgress")) {
+            HStack(spacing: Spacing.sm) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(saved.currentTeam?.name ?? "")
+                        .font(Typography.rowTitle)
+                        .foregroundStyle(Tokens.onSurface.color)
+                    Text("\(l10n("game.round")) \(saved.round) / \(saved.settings.rounds)")
+                        .font(Typography.caption)
+                        .foregroundStyle(Tokens.onSurfaceMuted.color)
+                }
+
+                Spacer()
+
+                Button(l10n("setup.discard")) {
+                    withAnimation(Motion.card(reduceMotion: reduceMotion)) {
+                        session.discardSaved()
+                    }
+                }
+                .font(Typography.caption)
+                .foregroundStyle(Tokens.danger.color)
+
+                Button(l10n("setup.resume")) {
+                    session.resume()
+                    router.push(.game)
+                }
+                .font(Typography.headline)
+                .foregroundStyle(Tokens.accent.color)
+            }
+            .padding(.vertical, Spacing.sm)
+        }
+    }
+
+    /// Builds the deck and hands the engine a game to run.
+    private func startGame() {
+        let settings = model.settings
+        let teams = model.resolvedTeams
+        let language = l10n.language.rawValue
+
+        Task {
+            let provider = SampleWordProvider()
+            // Enough for the whole game: every team, every round, plus tie-breaks.
+            let wanted = max(60, teams.count * settings.rounds * 40)
+            let deck = (try? await provider.deck(language: language, count: wanted)) ?? Deck(words: [])
+            session.start(settings: settings, teams: teams, deck: deck)
+            router.push(.game)
         }
     }
 
@@ -204,7 +248,7 @@ struct GameSetupView: View {
 
     private var playButton: some View {
         Button {
-            router.push(.game)
+            startGame()
         } label: {
             Text(l10n("setup.play"))
                 .font(Typography.headline)

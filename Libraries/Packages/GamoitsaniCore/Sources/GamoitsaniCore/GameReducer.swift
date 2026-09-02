@@ -2,16 +2,9 @@
 //  GameReducer.swift
 //  GamoitsaniCore
 //
-
 import Foundation
 
 /// Applies events to state. Pure: same inputs, same output, no clock, no I/O, no
-/// randomness beyond what is handed in.
-///
-/// This is the entire game. Everything above it — the `@Observable` engine, the views, the
-/// animations — is presentation. That separation is what lets the rules be tested
-/// exhaustively in milliseconds, and it is the thing v1 most lacked: its rules were spread
-/// across five view models, a singleton, and a handful of `asyncAfter` closures.
 public enum GameReducer {
 
     /// Returns the new state, or the reason the event was refused.
@@ -48,6 +41,10 @@ public enum GameReducer {
             guard state.phase == .playing else { return .failure(.wrongPhase(state.phase)) }
             return answer(next, wordID: wordID, outcome: outcome, at: now)
 
+        case let .undoAnswer(wordID):
+            guard state.phase == .playing else { return .failure(.wrongPhase(state.phase)) }
+            return undo(next, wordID: wordID)
+
         case .skipSet:
             guard state.phase == .playing else { return .failure(.wrongPhase(state.phase)) }
             guard state.settings.mode == .arcade else {
@@ -81,20 +78,15 @@ public enum GameReducer {
         var next = state
 
         // A word must be in the current turn and not already answered. v1's arcade
-        // *toggled* `isGuessed`, so re-tapping a card subtracted the points again and
-        // incremented `wordsSkipped` — the same word counted as both guessed and skipped,
-        // inflating every statistic and breaking the streak. Answering is one-way.
         guard let word = state.turnWords.first(where: { $0.id == wordID }),
               !state.playedWordIDs.contains(wordID) else {
             return .failure(.wordNotInPlay(wordID))
         }
 
-        next.markPlayed(wordID)
+        next.markPlayed(wordID, as: outcome)
         next.updateCurrentTeam { $0.record(outcome, isSuperWord: word.isSuperWord, at: now) }
 
         // The allowance is spent when the word is *played*, not when it is generated. v1
-        // marked it at generation in arcade, so a super word the team never reached still
-        // burned their one per round.
         if word.isSuperWord, let team = next.currentTeam {
             next.spendSuperWord(for: team.id)
         }
@@ -105,6 +97,30 @@ public enum GameReducer {
         }
 
         next.updateCurrentTeam { $0.beginGuessing(at: now) }
+        return .success(next)
+    }
+
+    /// Takes a word back off the scoreboard.
+    private static func undo(
+        _ state: GameState,
+        wordID: String
+    ) -> Result<GameState, GameEventRejection> {
+        var next = state
+
+        guard let word = state.turnWords.first(where: { $0.id == wordID }),
+              let outcome = state.playedOutcomes[wordID] else {
+            return .failure(.wordNotInPlay(wordID))
+        }
+
+        next.unmarkPlayed(wordID)
+        next.updateCurrentTeam { $0.undo(outcome, isSuperWord: word.isSuperWord) }
+
+        // The once-per-round super word allowance is returned too, or a mistaken tap would
+        // silently cost the team their only super word of the round.
+        if word.isSuperWord, outcome == .correct, let team = next.currentTeam {
+            next.returnSuperWord(to: team.id)
+        }
+
         return .success(next)
     }
 
@@ -122,9 +138,6 @@ public enum GameReducer {
             next.setPhase(.finished)
         } else {
             // Covers both a normal next turn and a tie-break round: `needsExtraRound` is
-            // true when every scheduled round is played but the leaders are level, and the
-            // rotation simply continues. v1 expressed the same thing by writing an unread
-            // `currentExtraRound` and falling through to `.info`.
             next.setPhase(.turnInfo)
         }
 

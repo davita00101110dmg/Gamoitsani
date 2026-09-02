@@ -2,25 +2,19 @@
 //  GamoitsaniApp.swift
 //  Gamoitsani2
 //
-
 import SwiftUI
 import GamoitsaniDesign
 import GamoitsaniL10n
 
 /// The 2.0 entry point and composition root.
-///
-/// Dependencies are constructed here and injected downward. v1 reached for `.shared` from
-/// inside view models, which is why its tests needed a real AppDelegate and a real Core
-/// Data stack just to run.
 @main
 struct GamoitsaniApp: App {
     @State private var router = Router()
     @State private var localization = Localization()
+    @State private var session = GameSession()
 
     init() {
         // The display face ships inside GamoitsaniDesign, so it is not in the app bundle
-        // and cannot be declared in UIAppFonts. Without this every Typography.display call
-        // silently renders in the system font.
         DesignSystem.registerFonts()
     }
 
@@ -29,6 +23,7 @@ struct GamoitsaniApp: App {
             RootView()
                 .environment(router)
                 .environment(localization)
+                .environment(session)
                 .tint(Tokens.accent.color)
         }
     }
@@ -47,7 +42,7 @@ struct RootView: View {
                 .navigationDestination(for: Route.self) { route in
                     switch route {
                     case .game:
-                        PlaceholderScreen(title: "Game")
+                        GameFlowView()
                     case .addWord:
                         PlaceholderScreen(title: "Add word")
                     case .settings:

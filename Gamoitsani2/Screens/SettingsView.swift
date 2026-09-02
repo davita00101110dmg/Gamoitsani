@@ -2,16 +2,11 @@
 //  SettingsView.swift
 //  Gamoitsani2
 //
-
 import SwiftUI
 import GamoitsaniDesign
 import GamoitsaniL10n
 
 /// Settings.
-///
-/// Language first, because it is the setting people actually change — Georgian is the
-/// primary audience and the app ships eleven. Add word, remove ads and the rest arrive
-/// with their features.
 struct SettingsView: View {
     @Environment(Localization.self) private var l10n
     @Environment(\.accessibilityReduceMotion) private var reduceMotion

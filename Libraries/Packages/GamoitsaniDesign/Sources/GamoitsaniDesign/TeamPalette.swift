@@ -2,19 +2,9 @@
 //  TeamPalette.swift
 //  GamoitsaniDesign
 //
-
 import SwiftUI
 
 /// Colours that identify a team.
-///
-/// Five, because the game allows two to five teams. Assigned by position and stable for
-/// the whole game, so a team is recognisable at a glance on the setup screen, the turn
-/// card and the podium without reading its name.
-///
-/// The first is `accent`, so a two-team game leads with the brand colour. Every entry
-/// clears WCAG's 3:1 for non-text UI against both surfaces in both appearances — asserted
-/// in `TeamPaletteTests`, because these are used as small dots and bars where a
-/// low-contrast colour simply disappears.
 public enum TeamPalette {
 
     public static let colors: [DesignColor] = [

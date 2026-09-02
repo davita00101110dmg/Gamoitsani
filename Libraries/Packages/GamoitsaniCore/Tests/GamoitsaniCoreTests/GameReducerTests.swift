@@ -273,3 +273,98 @@ struct GameReducerTests {
         #expect(restored == s)
     }
 }
+
+@Suite("Undoing a mistaken answer")
+struct UndoTests {
+
+    private let t0 = Date(timeIntervalSince1970: 1_000_000)
+
+    private func arcadeGame(superWords: Bool = false) -> GameState {
+        GameState(
+            settings: GameSettings(mode: .arcade, superWordsEnabled: superWords),
+            teams: [Team(name: "A"), Team(name: "B")],
+            deck: Deck(words: (0..<40).map { DeckWord(id: "\($0)", text: "w\($0)") }),
+            placement: SuperWordPlacement(classicPosition: 1, arcadeSet: 1, arcadeSlot: 1)
+        )
+    }
+
+    private func started(_ state: GameState) throws -> GameState {
+        var s = try GameReducer.reduce(state, .beginTurn, at: t0).get()
+        s = try GameReducer.reduce(s, .countdownFinished, at: t0).get()
+        return s
+    }
+
+    /// The behaviour v1 got wrong. Re-tapping there scored the word as *skipped*, so one
+    /// word counted as both guessed and skipped and the streak broke on a correct answer.
+    @Test("undo reverses the play instead of applying the opposite one")
+    func undoIsNotAToggle() throws {
+        var s = try started(arcadeGame())
+        let word = try #require(s.turnWords.first)
+
+        s = try GameReducer.reduce(s, .answer(wordID: word.id, outcome: .correct), at: t0).get()
+        #expect(s.teams[0].score == 1)
+        #expect(s.teams[0].wordsGuessed == 1)
+        #expect(s.teams[0].currentStreak == 1)
+
+        s = try GameReducer.reduce(s, .undoAnswer(wordID: word.id), at: t0).get()
+        #expect(s.teams[0].score == 0)
+        #expect(s.teams[0].wordsGuessed == 0)
+        #expect(s.teams[0].wordsSkipped == 0, "undo must not count the word as skipped")
+        #expect(s.teams[0].currentStreak == 0)
+        #expect(s.playedWordIDs.contains(word.id) == false, "the word is back in play")
+    }
+
+    @Test("an undone word can be answered again")
+    func replayAfterUndo() throws {
+        var s = try started(arcadeGame())
+        let word = try #require(s.turnWords.first)
+
+        s = try GameReducer.reduce(s, .answer(wordID: word.id, outcome: .correct), at: t0).get()
+        s = try GameReducer.reduce(s, .undoAnswer(wordID: word.id), at: t0).get()
+        s = try GameReducer.reduce(s, .answer(wordID: word.id, outcome: .correct), at: t0).get()
+
+        #expect(s.teams[0].score == 1, "scored once, not twice")
+        #expect(s.teams[0].wordsGuessed == 1)
+    }
+
+    /// A mistaken tap must not cost the team their one super word for the round.
+    @Test("undoing a super word returns the allowance")
+    func superWordAllowanceReturned() throws {
+        var s = try started(arcadeGame(superWords: true))
+        let superWord = try #require(s.turnWords.first { $0.isSuperWord })
+        let teamID = try #require(s.currentTeam?.id)
+
+        s = try GameReducer.reduce(s, .answer(wordID: superWord.id, outcome: .correct), at: t0).get()
+        #expect(s.teams[0].score == 3)
+        #expect(s.superWordSpentBy.contains(teamID))
+
+        s = try GameReducer.reduce(s, .undoAnswer(wordID: superWord.id), at: t0).get()
+        #expect(s.teams[0].score == 0)
+        #expect(s.teams[0].superWordsGuessed == 0)
+        #expect(s.superWordSpentBy.contains(teamID) == false, "the allowance comes back")
+    }
+
+    @Test("undoing something never played is refused")
+    func undoUnknown() throws {
+        let s = try started(arcadeGame())
+        let word = try #require(s.turnWords.first)
+        #expect(GameReducer.reduce(s, .undoAnswer(wordID: word.id), at: t0)
+                == .failure(.wordNotInPlay(word.id)))
+        #expect(GameReducer.reduce(s, .undoAnswer(wordID: "nope"), at: t0)
+                == .failure(.wordNotInPlay("nope")))
+    }
+
+    @Test("undoing a skip removes the penalty and the skip count")
+    func undoASkip() throws {
+        var s = try started(arcadeGame())
+        let word = try #require(s.turnWords.first)
+
+        s = try GameReducer.reduce(s, .answer(wordID: word.id, outcome: .skipped), at: t0).get()
+        #expect(s.teams[0].score == -1)
+        #expect(s.teams[0].wordsSkipped == 1)
+
+        s = try GameReducer.reduce(s, .undoAnswer(wordID: word.id), at: t0).get()
+        #expect(s.teams[0].score == 0)
+        #expect(s.teams[0].wordsSkipped == 0)
+    }
+}

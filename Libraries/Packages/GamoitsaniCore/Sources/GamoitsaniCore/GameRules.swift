@@ -2,32 +2,17 @@
 //  GameRules.swift
 //  GamoitsaniCore
 //
-
 import Foundation
 
 /// Pure decisions about a `GameState`. No mutation, no clock, no I/O — every rule is a
-/// function of the state you hand it, which is what makes the whole rule set testable
-/// without a simulator.
 public enum GameRules {
 
     /// Whether every scheduled round has been completed by every team.
-    ///
-    /// v1's condition was `currentRound > numberOfRounds && currentTeamIndex == 0`,
-    /// evaluated *after* advancing. Same rule, stated directly.
     public static func hasPlayedAllRounds(_ state: GameState) -> Bool {
         state.round > state.settings.rounds && state.currentTeamIndex == 0
     }
 
     /// Whether the leaders are level and the game therefore cannot end.
-    ///
-    /// **This is where v1 crashes.** `GameViewModel.isTie()` reads `sortedTeams[1]` with no
-    /// bounds check, so a single-team state traps — reachable because `GameStory` was a
-    /// singleton anything could populate, and it is also called unconditionally for
-    /// analytics. Fewer than two teams cannot be tied, so it returns false.
-    ///
-    /// A three-way tie for first counts, because the top two of the sorted list are equal.
-    /// A tie for second does not, which matches v1 and is the right rule: the game ends
-    /// when there is a single winner.
     public static func isTie(_ state: GameState) -> Bool {
         let standings = state.standings
         guard standings.count >= 2 else { return false }
@@ -53,18 +38,11 @@ public enum GameRules {
     }
 
     /// Whether this team may still receive a super word this round.
-    ///
-    /// One per team per round, and only when the setting is on. The allowance is spent when
-    /// a super word is actually *played* — v1 spent it in arcade at generation time, so a
-    /// super word the team never reached still consumed it.
     public static func canReceiveSuperWord(_ state: GameState, teamID: UUID) -> Bool {
         state.settings.superWordsEnabled && !state.superWordSpentBy.contains(teamID)
     }
 
     /// Whether a turn can begin. False when the deck is spent.
-    ///
-    /// v1 had no such check, which is why an exhausted pool let classic award +1 per tap
-    /// forever and arcade charge −2 per tap on an empty grid.
     public static func canStartTurn(_ state: GameState) -> Bool {
         state.deck.canDealTurn
     }

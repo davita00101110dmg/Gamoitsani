@@ -2,15 +2,9 @@
 //  DesignColor.swift
 //  GamoitsaniDesign
 //
-
 import SwiftUI
 
 /// A colour with an explicit value for each appearance.
-///
-/// Tokens are declared in Swift rather than as asset-catalog colorsets so that both
-/// values are visible at the definition site, greppable, and testable — the contrast
-/// checks in `DesignColorContrastTests` read these values directly. An asset catalog
-/// hides one of the two behind Xcode's UI and cannot be asserted on in a unit test.
 public struct DesignColor: Sendable, Equatable {
     public let light: RGB
     public let dark: RGB

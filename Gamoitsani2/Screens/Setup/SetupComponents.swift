@@ -2,17 +2,12 @@
 //  SetupComponents.swift
 //  Gamoitsani2
 //
-
 import SwiftUI
 import GamoitsaniCore
 import GamoitsaniDesign
 import GamoitsaniL10n
 
 /// The card fan, shrinking and fading as the screen scrolls under it.
-///
-/// The identity's central metaphor, used as chrome rather than decoration: it establishes
-/// the brand on launch and then gets out of the way, so the screen does not spend its whole
-/// height on a logo.
 struct CollapsingFanHeader: View {
     let height: CGFloat
     /// 0 fully shown, 1 fully scrolled away. Computed by the screen from the real scroll
@@ -21,10 +16,6 @@ struct CollapsingFanHeader: View {
 
     var body: some View {
         // Scales and fades away rather than being clipped. The first attempt shrank the
-        // frame and clipped the overflow, which cut a hard edge across the mark as it
-        // went — obvious in light mode, where the mark's dark field meets a pale surface.
-        // The mark now scales from its own centre and the frame follows the scaled size,
-        // so it recedes instead of being sliced.
         let scale = 1 - collapse * 0.55
 
         AppMark()
@@ -63,9 +54,6 @@ struct SetupPanel<Content: View>: View {
 }
 
 /// A value with minus and plus, where the number itself reacts.
-///
-/// The bounds come from `GameSettings`, so a control cannot offer a value the domain would
-/// clamp anyway — v1's steppers and its (unenforced) limits were separate ideas.
 struct StepperRow: View {
     let label: String
     let value: String
@@ -99,8 +87,6 @@ struct StepperRow: View {
         }
         .padding(.vertical, Spacing.sm)
         // Fires on the value changing, not on the buttons' enabled state — which only
-        // flips at the bounds, so the previous trigger produced no feedback on a normal
-        // tap. Direction is carried in the haptic itself.
         .sensoryFeedback(trigger: value) { old, new in
             guard old != new else { return nil }
             return numeric(new) > numeric(old) ? .increase : .decrease
@@ -192,10 +178,6 @@ struct ModeCard: View {
 }
 
 /// A miniature of what each mode actually looks like in play.
-///
-/// Classic is a single portrait card. Arcade is a column of word rows — not a stack of
-/// cards, which is what this drew first: arcade puts five words on screen as a list, and a
-/// glyph that shows something else is just decoration.
 private struct ModeGlyph: View {
     let mode: GameMode
     let isSelected: Bool
@@ -313,6 +295,25 @@ struct TeamRow: View {
     }
 }
 
+/// The quieter sibling of `PrimaryButtonStyle`, for the second action on a screen.
+struct SecondaryButtonStyle: ButtonStyle {
+    var reduceMotion: Bool = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundStyle(Tokens.onSurface.color)
+            .background(Tokens.surfaceRaised.color)
+            .clipShape(RoundedRectangle(cornerRadius: Radius.control, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: Radius.control, style: .continuous)
+                    .strokeBorder(Tokens.cardEdge.color, lineWidth: 1)
+            }
+            .scaleEffect(configuration.isPressed && !reduceMotion ? 0.97 : 1)
+            .opacity(configuration.isPressed && reduceMotion ? 0.7 : 1)
+            .animation(Motion.control(reduceMotion: reduceMotion), value: configuration.isPressed)
+    }
+}
+
 struct PrimaryButtonStyle: ButtonStyle {
     var reduceMotion: Bool = false
 
@@ -321,8 +322,6 @@ struct PrimaryButtonStyle: ButtonStyle {
             .foregroundStyle(Tokens.onAccent.color)
             .background(Tokens.accent.color)
             // Matches the mode cards and step controls rather than being a capsule. The
-            // pill shape suited a floating button; inline at the end of the list it read
-            // as a different design language from everything above it.
             .clipShape(RoundedRectangle(cornerRadius: Radius.control, style: .continuous))
             .scaleEffect(configuration.isPressed && !reduceMotion ? 0.97 : 1)
             .opacity(configuration.isPressed && reduceMotion ? 0.7 : 1)

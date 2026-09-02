@@ -2,18 +2,9 @@
 //  AppMark.swift
 //  GamoitsaniDesign
 //
-
 import SwiftUI
 
 /// The identity mark: three cards fanned at ±19° with flat fills and no gradient.
-///
-/// Drawn rather than rasterised, from ratios taken off the icon artwork's 1024pt viewBox,
-/// so the on-screen mark and the shipped app icon cannot drift apart and it stays crisp at
-/// any size. It lives in the design package because it is part of the identity, not part
-/// of any one screen.
-///
-/// Its colours are `Brand`, not semantic tokens: an icon is one artwork with one set of
-/// fills, and a mark that recoloured itself between appearances would stop being a mark.
 public struct AppMark: View {
 
     public init() {}

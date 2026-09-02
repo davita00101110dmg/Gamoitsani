@@ -2,20 +2,11 @@
 //  GameEngine.swift
 //  GamoitsaniEngine
 //
-
 import Foundation
 import Observation
 import GamoitsaniCore
 
 /// Drives a game.
-///
-/// A thin shell over `GameReducer`: it owns the current state, hands events to the pure
-/// function, and publishes the result. All the rules live in the reducer, so this type has
-/// almost nothing in it — which is the point. v1's equivalent responsibilities were spread
-/// across `GameViewModel`, `GameStory.shared`, `BaseGamePlayViewModel` and two subclasses.
-///
-/// `@MainActor` because it drives UI, and under Swift 6 that is enforced rather than
-/// assumed.
 @MainActor
 @Observable
 public final class GameEngine {
@@ -23,8 +14,6 @@ public final class GameEngine {
     public private(set) var state: GameState
 
     /// The last refused event, for debugging and tests. A rejection means the UI offered
-    /// something the rules do not allow, which is a bug worth surfacing rather than
-    /// swallowing.
     public private(set) var lastRejection: GameEventRejection?
 
     /// Injected so tests can control time. Nothing in the engine calls `Date()` directly.
@@ -66,11 +55,6 @@ public final class GameEngine {
     }
 
     /// Ends the turn if the deadline has passed.
-    ///
-    /// Called on every tick and on returning from the background. Because the deadline is
-    /// wall-clock, time spent suspended has genuinely elapsed — v1 used `Timer.publish`,
-    /// which does not fire while suspended, so backgrounding the app silently paused the
-    /// round and handed the time back.
     @discardableResult
     public func checkExpiry() -> Bool {
         guard state.phase == .playing, let timer, timer.hasExpired(at: now()) else { return false }

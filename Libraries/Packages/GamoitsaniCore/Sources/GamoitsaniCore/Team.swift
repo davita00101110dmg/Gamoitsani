@@ -2,18 +2,9 @@
 //  Team.swift
 //  GamoitsaniCore
 //
-
 import Foundation
 
 /// A team and everything it accumulates during a game.
-///
-/// Identity-keyed. v1 kept per-team state in parallel arrays and dictionaries indexed by
-/// position, so anything that reordered teams moved their data with it; here whatever
-/// belongs to a team lives on the team.
-///
-/// No method reads the clock. v1's `Team` called `Date()` inside `startGuessing` and
-/// `updateStreak`, which made guess timing untestable — and, in the end, wrong: classic
-/// never called `startGuessing` at all, so it always reported an average of 0.0s.
 public struct Team: Identifiable, Hashable, Sendable, Codable {
     public let id: UUID
     public var name: String
@@ -57,9 +48,6 @@ public struct Team: Identifiable, Hashable, Sendable, Codable {
     }
 
     /// Mean time to guess a word, or zero when nothing has been guessed.
-    ///
-    /// Zero rather than NaN: an unguarded division would render as "nan" on the
-    /// scoreboard, and a formatter will not save you from it.
     public var averageGuessTime: TimeInterval {
         wordsGuessed > 0 ? totalGuessTime / Double(wordsGuessed) : 0
     }
@@ -72,11 +60,6 @@ public struct Team: Identifiable, Hashable, Sendable, Codable {
     }
 
     /// Records the outcome of one word: score, streak, counters and elapsed time together,
-    /// so they cannot disagree.
-    ///
-    /// v1 replayed these in bulk at the end of a turn — every guess first, then every
-    /// skip — which meant the recorded streak was never the real in-turn sequence and
-    /// `bestStreak` always came out equal to the turn's guess count.
     public mutating func record(_ outcome: PlayOutcome, isSuperWord: Bool, at now: Date) {
         if let guessStartedAt {
             totalGuessTime += now.timeIntervalSince(guessStartedAt)
@@ -94,6 +77,20 @@ public struct Team: Identifiable, Hashable, Sendable, Codable {
         case .skipped:
             wordsSkipped += 1
             currentStreak = 0
+        }
+    }
+
+    /// Reverses a recorded play, for a word tapped by mistake.
+    public mutating func undo(_ outcome: PlayOutcome, isSuperWord: Bool) {
+        score -= Scoring.points(for: outcome, isSuperWord: isSuperWord)
+
+        switch outcome {
+        case .correct:
+            wordsGuessed = max(0, wordsGuessed - 1)
+            currentStreak = max(0, currentStreak - 1)
+            if isSuperWord { superWordsGuessed = max(0, superWordsGuessed - 1) }
+        case .skipped:
+            wordsSkipped = max(0, wordsSkipped - 1)
         }
     }
 

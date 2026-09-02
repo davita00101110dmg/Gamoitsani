@@ -2,23 +2,9 @@
 //  Tokens.swift
 //  GamoitsaniDesign
 //
-
 import SwiftUI
 
 /// The semantic colour layer.
-///
-/// Values come from the 2.0 visual identity handoff. Call sites name intent (`surface`,
-/// `onSurface`) rather than appearance, so a palette revision is a change to this file and
-/// nothing else.
-///
-/// Both appearances are real designs. v1 shipped 23 colorsets whose dark entries were
-/// byte-identical copies of their light ones while `UIUserInterfaceStyle` was left unset,
-/// so the app rendered the same either way while system chrome followed the device and
-/// disagreed with it. The light palette here is cool white paper with a warm card face —
-/// not an inverted dark screen.
-///
-/// Every ratio below was recomputed from these hex values before they landed; see
-/// `DesignColorContrastTests`, which asserts all nine pairings in both appearances.
 public enum Tokens {
 
     // MARK: - Surfaces
@@ -27,10 +13,6 @@ public enum Tokens {
     public static let surface = DesignColor(light: RGB(0xF6F4FF), dark: RGB(0x10032E))
 
     /// Raised above `surface`: sheets, grouped rows, settings cards.
-    ///
-    /// v1 used `gmSecondary` at 30% opacity for page panels, cards *and* list rows
-    /// simultaneously, so nothing read as elevated. That role is split between this and
-    /// `cardFace`.
     public static let surfaceRaised = DesignColor(light: RGB(0xFFFFFF), dark: RGB(0x1D0F4A))
 
     // MARK: - Content
@@ -44,15 +26,9 @@ public enum Tokens {
     // MARK: - Brand and status
 
     /// Primary action and brand emphasis.
-    ///
-    /// The two appearances take opposite routes on purpose. Light is a magenta-red deep
-    /// enough that white sits on it at 5.14:1. Dark is a brighter pink that would fail
-    /// under white, so its ink goes dark instead — see `onAccent`.
     public static let accent = DesignColor(light: RGB(0xD40E6E), dark: RGB(0xFF3D93))
 
     /// Content drawn on top of `accent`. Not white in dark mode: `#FF3D93` is too bright
-    /// to carry white text, and dulling it to accommodate white would drain the brand
-    /// colour. Dark ink measures 5.72:1 against it.
     public static let onAccent = DesignColor(light: RGB(0xFFFFFF), dark: RGB(0x2A0014))
 
     /// Correct guesses, positive scores.
@@ -86,11 +62,6 @@ public enum Tokens {
 }
 
 /// Fixed brand colours for the identity mark.
-///
-/// Deliberately *not* semantic tokens. The app icon is one artwork with one set of
-/// colours; a mark that recoloured itself between light and dark would stop being a mark.
-/// These are the exact fills from the identity's icon artwork, so the drawn version and
-/// the shipped icon cannot drift apart.
 public enum Brand {
     /// The icon's field.
     public static let markField = RGB(0x10032E)
@@ -108,8 +79,6 @@ public enum Brand {
     public static let markInk = RGB(0x170640)
 
     // Proportions taken from the icon artwork's 1024pt viewBox, so the drawn mark and the
-    // shipped icon stay identical. A word card's radius ratio is different and must not be
-    // reused here — doing so made the fan read as one blob instead of three planes.
     public static let markCardWidthRatio: CGFloat = 372.0 / 1024.0
     public static let markCardHeightRatio: CGFloat = 504.0 / 1024.0
     public static let markCardRadiusRatio: CGFloat = 44.0 / 372.0
@@ -146,8 +115,6 @@ public enum Radius {
 }
 
 /// Motion. One spring family, three durations — anything outside this set is a bug.
-///
-/// `.linear` is reserved for the timer digits, which must not ease.
 public enum Motion {
     /// Anything a card does: enter, flip, leave.
     public static let card = Animation.spring(response: 0.34, dampingFraction: 0.78)
