@@ -912,6 +912,22 @@
           }
         }
       }
+    },
+    "game.stats": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stats"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "სტატისტიკა"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

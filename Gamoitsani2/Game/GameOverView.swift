@@ -16,6 +16,7 @@ struct GameOverView: View {
     @Environment(Localization.self) private var l10n
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var barsGrown = false
+    @State private var showStats = false
 
     private var standings: [Team] { engine.standings }
     private var winner: Team? { engine.winner }
@@ -35,24 +36,13 @@ struct GameOverView: View {
             }
             .padding(.top, Spacing.xl)
 
+            Spacer(minLength: 0)
+
             Podium(standings: standings, teams: engine.state.teams, grown: barsGrown)
-                .frame(height: 220)
+                .frame(height: 240)
                 .padding(.horizontal, Spacing.md)
 
-            ScrollView {
-                VStack(spacing: 0) {
-                    ForEach(Array(standings.enumerated()), id: \.element.id) { rank, team in
-                        StatsRow(rank: rank + 1, team: team, teams: engine.state.teams, mode: engine.state.settings.mode)
-                        if rank < standings.count - 1 {
-                            Divider().overlay(Tokens.cardEdge.color)
-                        }
-                    }
-                }
-                .padding(.horizontal, Spacing.md)
-                .background(Tokens.surfaceRaised.color)
-                .clipShape(RoundedRectangle(cornerRadius: Radius.panel, style: .continuous))
-                .padding(.horizontal, Spacing.md)
-            }
+            Spacer(minLength: 0)
 
             VStack(spacing: Spacing.sm) {
                 Button {
@@ -67,12 +57,20 @@ struct GameOverView: View {
                 }
                 .buttonStyle(PrimaryButtonStyle(reduceMotion: reduceMotion))
 
+                Button { showStats = true } label: {
+                    Text(l10n("game.stats"))
+                        .font(Typography.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, Spacing.md)
+                }
+                .buttonStyle(SecondaryButtonStyle(reduceMotion: reduceMotion))
+
                 Button(action: onFinish) {
                     Text(l10n("game.finish"))
                         .font(Typography.headline)
-                        .foregroundStyle(Tokens.onSurface.color)
+                        .foregroundStyle(Tokens.onSurfaceMuted.color)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, Spacing.md)
+                        .padding(.vertical, Spacing.sm)
                 }
             }
             .padding(.horizontal, Spacing.md)
@@ -84,6 +82,53 @@ struct GameOverView: View {
             }
         }
         .sensoryFeedback(.success, trigger: barsGrown)
+        .sheet(isPresented: $showStats) {
+            StatsSheet(engine: engine)
+        }
+    }
+}
+
+/// Per-team detail, out of the way of the result.
+struct StatsSheet: View {
+    let engine: GameEngine
+
+    @Environment(Localization.self) private var l10n
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 0) {
+                    ForEach(Array(engine.standings.enumerated()), id: \.element.id) { rank, team in
+                        StatsRow(
+                            rank: rank + 1,
+                            team: team,
+                            teams: engine.state.teams,
+                            mode: engine.state.settings.mode
+                        )
+                        if rank < engine.standings.count - 1 {
+                            Divider().overlay(Tokens.cardEdge.color)
+                        }
+                    }
+                }
+                .padding(.horizontal, Spacing.md)
+                .background(Tokens.surfaceRaised.color)
+                .clipShape(RoundedRectangle(cornerRadius: Radius.panel, style: .continuous))
+                .padding(Spacing.md)
+            }
+            .background(Tokens.surface.color.ignoresSafeArea())
+            .navigationTitle(l10n("game.stats"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(l10n("common.done")) { dismiss() }
+                        .tint(Tokens.onSurface.color)
+                }
+            }
+        }
+        .presentationDetents([.medium, .large])
+        .presentationDragIndicator(.visible)
+        .presentationBackground(Tokens.surface.color)
     }
 }
 
@@ -140,7 +185,7 @@ private struct Podium: View {
     }
 }
 
-private struct StatsRow: View {
+struct StatsRow: View {
     let rank: Int
     let team: Team
     let teams: [Team]

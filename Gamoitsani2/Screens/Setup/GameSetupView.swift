@@ -12,6 +12,9 @@ struct GameSetupView: View {
     @Environment(Router.self) private var router
     @Environment(Localization.self) private var l10n
     @Environment(GameSession.self) private var session
+    #if DEBUG
+    @Environment(DebugSettings.self) private var debugSettings
+    #endif
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var model = GameSetupModel()
     @State private var hasAppeared = false
@@ -124,7 +127,10 @@ struct GameSetupView: View {
 
     /// Builds the deck and hands the engine a game to run.
     private func startGame() {
-        let settings = model.settings
+        var settings = model.settings
+        #if DEBUG
+        settings = debugSettings.apply(to: settings)
+        #endif
         let teams = model.resolvedTeams
         let language = l10n.language.rawValue
 

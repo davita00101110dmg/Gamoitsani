@@ -12,6 +12,9 @@ struct GamoitsaniApp: App {
     @State private var router = Router()
     @State private var localization = Localization()
     @State private var session = GameSession()
+    #if DEBUG
+    @State private var debugSettings = DebugSettings()
+    #endif
 
     init() {
         // The display face ships inside GamoitsaniDesign, so it is not in the app bundle
@@ -20,12 +23,25 @@ struct GamoitsaniApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environment(router)
-                .environment(localization)
-                .environment(session)
-                .tint(Tokens.accent.color)
+            root
         }
+    }
+
+    @ViewBuilder
+    private var root: some View {
+        let base = RootView()
+            .environment(router)
+            .environment(localization)
+            .environment(session)
+            .tint(Tokens.accent.color)
+
+        #if DEBUG
+        base
+            .environment(debugSettings)
+            .debugMenuOnShake(debug: debugSettings, session: session)
+        #else
+        base
+        #endif
     }
 }
 

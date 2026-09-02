@@ -16,6 +16,7 @@
 		3C580555505E7068514885FB /* GameFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7769D70207AB6403DE0E760 /* GameFlowView.swift */; };
 		47FD6444178F69C5BBF1C6CD /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB02F97058A700F6375993C /* Route.swift */; };
 		49061860A18F78921BBA8CBA /* GameSetupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A884C4B1683D209C8A861 /* GameSetupModel.swift */; };
+		4B27E3FC2F2BC311C29A036A /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3A1A03242578E4715AB6A3 /* DebugMenu.swift */; };
 		66A4602347998D88A4A8BCFB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227A9A621D7844B4B28356E0 /* Router.swift */; };
 		7424C16E88565CB07DCB61A9 /* Pods_Gamoitsani.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F1C5CBF005030EAF45E784 /* Pods_Gamoitsani.framework */; };
 		7E7DB9AC1AE3D56C4A6245A2 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923A8905BC6AA8467F91AF19 /* GameSession.swift */; };
@@ -281,6 +282,7 @@
 		A8591DBC756783B37A1C2C05 /* Pods_GamoitsaniTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GamoitsaniTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0DC5ADB9E2C42FBC354C2D /* SampleWords.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SampleWords.swift; path = Game/SampleWords.swift; sourceTree = "<group>"; };
 		B7F70DD013A2EADFAFEC8746 /* Pods-GamoitsaniTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.release.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.release.xcconfig"; sourceTree = "<group>"; };
+		BB3A1A03242578E4715AB6A3 /* DebugMenu.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DebugMenu.swift; path = Debug/DebugMenu.swift; sourceTree = "<group>"; };
 		BDB02F97058A700F6375993C /* Route.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Route.swift; path = Navigation/Route.swift; sourceTree = "<group>"; };
 		C423FDAAD4A8C93737BC37E6 /* GameOverView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameOverView.swift; path = Game/GameOverView.swift; sourceTree = "<group>"; };
 		C5963B1A2F5D9F6900617CBD /* Gamoitsani Word 2.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Gamoitsani Word 2.0.xcdatamodel"; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 				2237F63704F7B25FFCC53512 /* PlayView.swift */,
 				C423FDAAD4A8C93737BC37E6 /* GameOverView.swift */,
 				72F8CF213E6E24E6647668F8 /* LeaderboardSheet.swift */,
+				BB3A1A03242578E4715AB6A3 /* DebugMenu.swift */,
 			);
 			name = Gamoitsani2;
 			path = Gamoitsani2;
@@ -1792,6 +1795,7 @@
 				F4CF05276636EB2EE2D74BD2 /* PlayView.swift in Sources */,
 				0B8A3303FAA577E33F7DA9EE /* GameOverView.swift in Sources */,
 				90ABDC919AB3CF3A865F82D5 /* LeaderboardSheet.swift in Sources */,
+				4B27E3FC2F2BC311C29A036A /* DebugMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
