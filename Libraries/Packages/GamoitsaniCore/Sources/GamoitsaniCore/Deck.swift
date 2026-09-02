@@ -15,7 +15,11 @@ public struct DeckWord: Identifiable, Hashable, Sendable, Codable {
     public let id: String
     /// The text actually shown to the player.
     public let text: String
-    public let isSuperWord: Bool
+
+    /// Assigned when the word is dealt, not when the deck is built — whether a given word
+    /// is the super word depends on its position in the turn, which is not known until it
+    /// reaches the table.
+    public internal(set) var isSuperWord: Bool
 
     public init(id: String, text: String, isSuperWord: Bool = false) {
         self.id = id
@@ -40,9 +44,6 @@ public struct DeckWord: Identifiable, Hashable, Sendable, Codable {
 /// tie-break rounds are unbounded, so real games reach it.
 public struct Deck: Sendable, Hashable, Codable {
 
-    /// Words dealt per turn. v1's value, preserved.
-    public static let wordsPerTurn = 50
-
     private var remaining: [DeckWord]
 
     public init(words: [DeckWord]) {
@@ -59,11 +60,6 @@ public struct Deck: Sendable, Hashable, Codable {
         let taken = Array(remaining.prefix(count))
         remaining.removeFirst(taken.count)
         return taken
-    }
-
-    /// A turn's worth of words.
-    public mutating func dealTurn() -> [DeckWord] {
-        deal(Self.wordsPerTurn)
     }
 
     /// Whether a turn can still be played. The engine refuses to start a turn on an empty

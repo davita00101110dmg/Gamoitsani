@@ -43,8 +43,17 @@ public struct GameState: Sendable, Hashable, Codable {
 
     public private(set) var phase: GamePhase
 
-    /// Words dealt to the current turn, most recent last.
+    /// The words currently on the table: one in classic, five in arcade.
+    ///
+    /// v1 sliced 50 words off a global list per turn and then drew from that slice, which
+    /// is the intermediate that produced its worst bug — `removeFirstNItems(50)` returning
+    /// nil rather than the remainder. There is no such intermediate here: sets are drawn
+    /// from the deck as play proceeds.
     public private(set) var turnWords: [DeckWord]
+
+    /// How many words this team has been shown this turn, for classic super-word
+    /// placement (v1 put it at a random position among the turn's first five).
+    public private(set) var wordsShownThisTurn: Int
 
     /// Which of `turnWords` have been played, so a card cannot be scored twice.
     ///
@@ -71,6 +80,7 @@ public struct GameState: Sendable, Hashable, Codable {
         currentTeamIndex: Int = 0,
         phase: GamePhase = .turnInfo,
         turnWords: [DeckWord] = [],
+        wordsShownThisTurn: Int = 0,
         playedWordIDs: Set<String> = [],
         setIndex: Int = 1,
         superWordSpentBy: Set<UUID> = [],
@@ -84,6 +94,7 @@ public struct GameState: Sendable, Hashable, Codable {
         self.currentTeamIndex = currentTeamIndex
         self.phase = phase
         self.turnWords = turnWords
+        self.wordsShownThisTurn = wordsShownThisTurn
         self.playedWordIDs = playedWordIDs
         self.setIndex = setIndex
         self.superWordSpentBy = superWordSpentBy
@@ -108,40 +119,77 @@ public struct GameState: Sendable, Hashable, Codable {
 
     public var isExtraRound: Bool { extraRound > 0 }
 
-    // MARK: - Mutation (package-internal; the engine drives these)
+    // MARK: - Mutation (internal; only GameReducer drives these)
 
-    package mutating func setPhase(_ phase: GamePhase) {
+    mutating func setPhase(_ phase: GamePhase) {
         self.phase = phase
     }
 
-    package mutating func setRoundEnd(_ date: Date?) {
+    mutating func setRoundEnd(_ date: Date?) {
         roundEndsAt = date
     }
 
-    package mutating func updateCurrentTeam(_ transform: (inout Team) -> Void) {
+    mutating func updateCurrentTeam(_ transform: (inout Team) -> Void) {
         guard teams.indices.contains(currentTeamIndex) else { return }
         transform(&teams[currentTeamIndex])
     }
 
-    package mutating func dealTurn() {
-        turnWords = deck.dealTurn()
+    /// Draws the next set from the deck and decides which word, if any, is the super
+    /// word.
+    ///
+    /// Assignment happens here because it depends on position — classic on the word's
+    /// index within the turn, arcade on the set and slot — which is not known until the
+    /// word reaches the table. The allowance is only consulted, never spent: it is spent
+    /// when the word is actually played, so a super word the team never reaches does not
+    /// burn their one per round the way v1's arcade did.
+    mutating func dealSet() {
+        let size = settings.mode.wordsPerSet
+        var drawn = deck.deal(size)
+        guard !drawn.isEmpty else {
+            turnWords = []
+            return
+        }
+
+        let eligible = currentTeam.map { GameRules.canReceiveSuperWord(self, teamID: $0.id) } ?? false
+        if eligible {
+            for offset in drawn.indices {
+                // 1-based, and in classic the index continues across the whole turn.
+                let wordIndex = settings.mode == .classic
+                    ? wordsShownThisTurn + offset + 1
+                    : offset + 1
+                if placement.isSuperWord(mode: settings.mode, wordIndex: wordIndex, setIndex: setIndex) {
+                    drawn[offset].isSuperWord = true
+                    break
+                }
+            }
+        }
+
+        wordsShownThisTurn += drawn.count
+        turnWords = drawn
         playedWordIDs = []
+    }
+
+    /// Clears the table at the end of a turn.
+    mutating func clearTurn() {
+        turnWords = []
+        playedWordIDs = []
+        wordsShownThisTurn = 0
         setIndex = 1
     }
 
-    package mutating func markPlayed(_ id: String) {
+    mutating func markPlayed(_ id: String) {
         playedWordIDs.insert(id)
     }
 
-    package mutating func advanceSet() {
+    mutating func advanceSet() {
         setIndex += 1
     }
 
-    package mutating func spendSuperWord(for teamID: UUID) {
+    mutating func spendSuperWord(for teamID: UUID) {
         superWordSpentBy.insert(teamID)
     }
 
-    package mutating func advanceTurn() {
+    mutating func advanceTurn() {
         currentTeamIndex += 1
         if currentTeamIndex >= teams.count {
             currentTeamIndex = 0
@@ -151,13 +199,14 @@ public struct GameState: Sendable, Hashable, Codable {
         }
     }
 
-    package mutating func resetForRematch() {
+    mutating func resetForRematch() {
         for index in teams.indices { teams[index].resetForNewGame() }
         round = 1
         currentTeamIndex = 0
         phase = .turnInfo
         turnWords = []
         playedWordIDs = []
+        wordsShownThisTurn = 0
         setIndex = 1
         superWordSpentBy = []
         roundEndsAt = nil

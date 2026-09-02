@@ -18,11 +18,11 @@ struct DeckTests {
     /// than the remainder, so the last under-50 words were never dealt and the turn began
     /// empty.
     @Test("dealing more than remains returns the remainder, not nothing", arguments: [
-        (60, 50, 50, 10),
-        (50, 50, 50, 0),
-        (30, 50, 30, 0),     // v1 returned nil here and dealt an empty turn
-        (1, 50, 1, 0),
-        (0, 50, 0, 0),
+        (60, 5, 5, 55),
+        (5, 5, 5, 0),
+        (3, 5, 3, 0),        // v1 returned nil here and dealt an empty turn
+        (1, 5, 1, 0),
+        (0, 5, 0, 0),
     ])
     func partialDeal(available: Int, request: Int, dealt: Int, left: Int) {
         var deck = Deck(words: words(available))
@@ -44,16 +44,9 @@ struct DeckTests {
     func exhaustion() {
         var deck = Deck(words: words(1))
         #expect(deck.canDealTurn)
-        _ = deck.dealTurn()
+        _ = deck.deal(1)
         #expect(deck.isEmpty)
         #expect(deck.canDealTurn == false)
-    }
-
-    @Test("a turn deals v1's 50 words")
-    func turnSize() {
-        var deck = Deck(words: words(200))
-        #expect(deck.dealTurn().count == Deck.wordsPerTurn)
-        #expect(Deck.wordsPerTurn == 50)
     }
 }
 

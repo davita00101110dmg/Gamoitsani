@@ -1065,6 +1065,7 @@
       }
     },
     "Quick Game Mode (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "hy" : {
           "stringUnit" : {
