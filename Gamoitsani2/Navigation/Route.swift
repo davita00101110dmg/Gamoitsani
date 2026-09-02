@@ -13,8 +13,8 @@ import Foundation
 /// parent/child coordinator object graph there is nothing to retain — which removes the
 /// entire leak class rather than fixing its instances.
 public enum Route: Hashable {
-    case gameSetup
-    case rules
+    /// The game flow. Setup is the root, so it is not a route.
+    case game
     case addWord
     case settings
 }

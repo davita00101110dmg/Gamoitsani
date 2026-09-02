@@ -51,6 +51,15 @@ public enum Typography {
 
     // MARK: - Body (system face)
 
+    /// The label on a settings or setup row.
+    ///
+    /// Semibold rather than regular, because a row's title sits beside a value set in the
+    /// display face at Black. At regular weight the pairing looks unbalanced, and it is
+    /// worst in scripts the system font does not carry: Georgian falls back to a
+    /// substituted face that renders lighter still, so "რაუნდები" next to a Black "1" read
+    /// as two different designs.
+    public static let rowTitle = Font.body.weight(.semibold)
+
     /// Declared as text styles, never fixed points, so Dynamic Type works for free and
     /// all eleven languages are covered without bundling more files.
     public static let title = Font.title2.weight(.bold)
