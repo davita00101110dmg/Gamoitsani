@@ -45,6 +45,19 @@ public protocol AdServing: AnyObject {
 
     /// Re-opens the consent form so someone can change their mind.
     func presentPrivacyOptions() async
+
+    #if DEBUG
+    /// Why an ad is or is not showing, for the debug menu. Testing this from the outside
+    /// is guesswork otherwise: nothing appearing looks identical whether consent was
+    /// refused, no ad loaded, or the cadence simply said no.
+    var debugSummary: [(String, String)] { get }
+
+    /// Ignores the policy entirely and presents whatever is loaded.
+    func debugShowInterstitial() async -> Bool
+
+    /// Forgets the cadence, so the next game behaves like a fresh install.
+    func debugResetCadence()
+    #endif
 }
 
 /// Ads, switched off.
@@ -66,4 +79,10 @@ public final class NoAds: AdServing {
     public func showAppOpenIfAllowed() async -> Bool { false }
     public func showRewarded() async -> RewardOutcome { .none }
     public func presentPrivacyOptions() async {}
+
+    #if DEBUG
+    public var debugSummary: [(String, String)] { [("ads", "off")] }
+    public func debugShowInterstitial() async -> Bool { false }
+    public func debugResetCadence() {}
+    #endif
 }

@@ -41,6 +41,7 @@ struct DebugMenuSheet: View {
     let session: GameSession
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.adService) private var ads
 
     var body: some View {
         @Bindable var debug = debug
@@ -59,12 +60,28 @@ struct DebugMenuSheet: View {
                     }
 
                     SetupPanel(title: "Ads") {
-                        Toggle("Ignore ad frequency caps", isOn: Binding(
+                        ForEach(ads.debugSummary, id: \.0) { label, value in
+                            info(label, value)
+                        }
+
+                        Divider().overlay(Tokens.cardEdge.color)
+
+                        Toggle("Ignore frequency caps", isOn: Binding(
                             get: { AdDebug.showsAdsInstantly },
                             set: { AdDebug.showsAdsInstantly = $0 }
                         ))
                         .tint(Tokens.accent.color)
                         .padding(.vertical, Spacing.sm)
+
+                        Divider().overlay(Tokens.cardEdge.color)
+                        action("Show interstitial now", enabled: true) {
+                            dismiss()
+                            Task { _ = await ads.debugShowInterstitial() }
+                        }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        action("Reset ad cadence", enabled: true) {
+                            ads.debugResetCadence()
+                        }
                     }
 
                     SetupPanel(title: "Current game") {
@@ -154,11 +171,16 @@ struct DebugMenuSheet: View {
 // MARK: - Shake
 
 extension Notification.Name {
-    static let deviceDidShake = Notification.Name("deviceDidShake")
+    static let debugMenuRequested = Notification.Name("debugMenuRequested")
 }
 
 /// Reports shakes by becoming first responder, rather than overriding `motionEnded` in a
 /// `UIWindow` extension — which is undefined behaviour even though it is the usual recipe.
+///
+/// Shake alone is not enough. `motionEnded` travels up the responder chain from whatever
+/// is focused, and this controller is a sibling of the screen rather than an ancestor of
+/// it — so the moment a text field takes first responder, shaking stops reaching here.
+/// Typing a team name was enough to lose it, which is why the menu stopped opening.
 private struct ShakeDetector: UIViewControllerRepresentable {
     final class Controller: UIViewController {
         override var canBecomeFirstResponder: Bool { true }
@@ -170,12 +192,57 @@ private struct ShakeDetector: UIViewControllerRepresentable {
 
         override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
             guard motion == .motionShake else { return }
-            NotificationCenter.default.post(name: .deviceDidShake, object: nil)
+            NotificationCenter.default.post(name: .debugMenuRequested, object: nil)
         }
     }
 
     func makeUIViewController(context: Context) -> Controller { Controller() }
     func updateUIViewController(_ controller: Controller, context: Context) {}
+}
+
+/// A two-finger double tap, anywhere.
+///
+/// Installed on the window, so unlike shake it does not care what holds first responder.
+/// This is the trigger that always works; shake stays because it is the habit.
+private struct DebugGesture: UIViewRepresentable {
+    final class Coordinator: NSObject, UIGestureRecognizerDelegate {
+        @objc func fire() {
+            NotificationCenter.default.post(name: .debugMenuRequested, object: nil)
+        }
+
+        // Never swallows touches the app wanted.
+        func gestureRecognizer(
+            _ recognizer: UIGestureRecognizer,
+            shouldRecognizeSimultaneouslyWith other: UIGestureRecognizer
+        ) -> Bool { true }
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        // The window does not exist yet during `makeUIView`.
+        DispatchQueue.main.async {
+            guard let window = view.window,
+                  !(window.gestureRecognizers ?? []).contains(where: { $0.name == "debugMenu" })
+            else { return }
+
+            let tap = UITapGestureRecognizer(
+                target: context.coordinator,
+                action: #selector(Coordinator.fire)
+            )
+            tap.name = "debugMenu"
+            tap.numberOfTouchesRequired = 2
+            tap.numberOfTapsRequired = 2
+            tap.cancelsTouchesInView = false
+            tap.delaysTouchesEnded = false
+            tap.delegate = context.coordinator
+            window.addGestureRecognizer(tap)
+        }
+        return view
+    }
+
+    func updateUIView(_ view: UIView, context: Context) {}
 }
 
 extension View {
@@ -194,7 +261,8 @@ private struct DebugMenuOnShake: ViewModifier {
     func body(content: Content) -> some View {
         content
             .background(ShakeDetector().allowsHitTesting(false))
-            .onReceive(NotificationCenter.default.publisher(for: .deviceDidShake)) { _ in
+            .background(DebugGesture().allowsHitTesting(false))
+            .onReceive(NotificationCenter.default.publisher(for: .debugMenuRequested)) { _ in
                 isPresented = true
             }
             .sheet(isPresented: $isPresented) {

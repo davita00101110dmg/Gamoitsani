@@ -189,6 +189,40 @@ final class AdMobAds: AdServing {
         return .earned
     }
 
+    #if DEBUG
+    var debugSummary: [(String, String)] {
+        [
+            ("consent", state.hasConsent ? "granted" : "no"),
+            ("sdk", isReady ? "ready" : "starting"),
+            ("games", "\(state.gamesFinished)"),
+            ("interstitial", interstitial == nil ? "not loaded" : "loaded"),
+            ("app open", appOpen == nil ? "not loaded" : "loaded"),
+            ("rewarded", rewarded == nil ? "not loaded" : "loaded"),
+            ("allowed now", policy.allowsInterstitial(state, at: .now) ? "yes" : "no"),
+        ]
+    }
+
+    func debugShowInterstitial() async -> Bool {
+        guard let ad = interstitial, let root = Self.rootViewController else {
+            preload()
+            return false
+        }
+        interstitial = nil
+        ad.present(from: root)
+        loadInterstitial()
+        return true
+    }
+
+    func debugResetCadence() {
+        state.gamesFinished = 0
+        state.gamesAtLastInterstitial = nil
+        state.lastInterstitialAt = nil
+        state.lastAppOpenAt = nil
+        state.adFreeUntil = nil
+        AdStateStore.save(state)
+    }
+    #endif
+
     // MARK: - Loading
 
     private func preload() {
