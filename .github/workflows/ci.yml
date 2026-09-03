@@ -42,12 +42,18 @@ jobs:
           xcode-version: latest-stable
 
       - name: Create Config.xcconfig
-        # The real config is gitignored (ad unit IDs, mediation secrets). The committed
-        # template carries Google's public AdMob *test* IDs and placeholder collection
+        # The real configs are gitignored (ad unit IDs, mediation secrets). The committed
+        # templates carry Google's public AdMob *test* IDs and placeholder collection
         # names, which is all CI needs — it compiles the app, it never serves ads.
+        #
+        # Both targets. 2.0 has its own, and it is a *base configuration reference*: a
+        # missing file there fails the build outright, before a single file is compiled,
+        # rather than degrading to an empty setting.
         run: |
           cp Gamoitsani/Resources/Configuration/Config.xcconfig.template \
              Gamoitsani/Resources/Configuration/Config.xcconfig
+          cp Gamoitsani2/Config.xcconfig.template \
+             Gamoitsani2/Config.xcconfig
 
       - name: Cache CocoaPods
         uses: actions/cache@v4
@@ -84,10 +90,9 @@ jobs:
         run: ./scripts/verify-localization-keys.py
 
       - name: Build and test Gamoitsani2
-        # The 2.0 target and its five local packages. Built first and separately from v1:
-        # it uses SPM only, no CocoaPods, so a failure here is unambiguous. Swift 6
-        # language mode with complete strict concurrency, so a data-race diagnostic fails
-        # the build rather than accumulating.
+        # The 2.0 target and its local packages, built first and separately from v1 so a
+        # failure here is unambiguous. Swift 6 language mode with complete strict
+        # concurrency, so a data-race diagnostic fails the build rather than accumulating.
         run: |
           set -o pipefail
           xcodebuild build \
@@ -102,13 +107,21 @@ jobs:
         # accessibility fails here.
         run: |
           set -o pipefail
-          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n; do
+          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n GamoitsaniAds; do
             echo "--- $pkg"
             ( cd "Libraries/Packages/$pkg" && xcodebuild test \
                 -scheme "$pkg" \
                 -destination "id=${{ steps.sim.outputs.udid }}" \
                 CODE_SIGNING_ALLOWED=NO )
           done
+
+      - name: Test the macro package
+        # Separate from the loop above: a macro is a compiler plugin, so it builds for the
+        # host toolchain and has no simulator destination to be given. `xcodebuild test`
+        # against a simulator reports "not configured for the test action" here.
+        run: |
+          set -o pipefail
+          ( cd Libraries/Packages/GamoitsaniMacros && swift test )
 
       - name: Build and test
         # Compiles and tests in a single pass. Scoped to GamoitsaniTests deliberately: the
@@ -153,7 +166,7 @@ jobs:
         run: |
           set -o pipefail
           status=0
-          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n; do
+          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n GamoitsaniAds; do
             for flag in ThreadSanitizer AddressSanitizer; do
               echo "--- $pkg / $flag"
               log=$(mktemp)
