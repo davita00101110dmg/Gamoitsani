@@ -68,6 +68,12 @@ jobs:
           echo "Using simulator $UDID"
           echo "udid=$UDID" >> "$GITHUB_OUTPUT"
 
+      - name: Verify the launch background
+        # The launch screen colour cannot reference the design tokens — it is read from the
+        # Info.plist before any code runs — so the value exists in two places. Cheap to
+        # check, and the failure it prevents (a colour flash at launch) is easy to miss.
+        run: ./scripts/verify-launch-background.swift
+
       - name: Build and test Gamoitsani2
         # The 2.0 target and its five local packages. Built first and separately from v1:
         # it uses SPM only, no CocoaPods, so a failure here is unambiguous. Swift 6

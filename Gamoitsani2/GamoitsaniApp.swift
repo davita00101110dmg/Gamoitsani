@@ -16,6 +16,10 @@ struct GamoitsaniApp: App {
     @State private var debugSettings = DebugSettings()
     #endif
 
+    /// Cold start only — `@State` here is created once per process, so resuming never
+    /// replays it. Doubles as the `isLaunching` signal.
+    @State private var showSplash = true
+
     init() {
         // The display face ships inside GamoitsaniDesign, so it is not in the app bundle
         DesignSystem.registerFonts()
@@ -23,7 +27,16 @@ struct GamoitsaniApp: App {
 
     var body: some Scene {
         WindowGroup {
-            root
+            ZStack {
+                root
+
+                if showSplash {
+                    // No transition: the cards have already left, so both sides are a
+                    // bare surface and there is nothing to fade.
+                    SplashView { showSplash = false }
+                        .zIndex(1)
+                }
+            }
         }
     }
 
@@ -33,6 +46,7 @@ struct GamoitsaniApp: App {
             .environment(router)
             .environment(localization)
             .environment(session)
+            .environment(\.isLaunching, showSplash)
             .tint(Tokens.accent.color)
 
         #if DEBUG

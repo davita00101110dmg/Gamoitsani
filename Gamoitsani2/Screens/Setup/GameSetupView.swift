@@ -16,6 +16,7 @@ struct GameSetupView: View {
     @Environment(DebugSettings.self) private var debugSettings
     #endif
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.isLaunching) private var isLaunching
     @State private var model = GameSetupModel()
     @State private var hasAppeared = false
 
@@ -27,17 +28,21 @@ struct GameSetupView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: Spacing.lg) {
-                CollapsingFanHeader(height: headerHeight, collapse: headerCollapse)
-
-                if let saved = session.saved {
-                    resumeCard(saved)
+                // In with the rest, or the mark pops into place while everything below
+                // it is still rising.
+                section(index: 0) {
+                    CollapsingFanHeader(height: headerHeight, collapse: headerCollapse)
                 }
 
-                section(index: 0) { roundSection }
-                section(index: 1) { modeSection }
-                section(index: 2) { extrasSection }
-                section(index: 3) { teamsSection }
-                section(index: 4) { playButton }
+                if let saved = session.saved {
+                    section(index: 1) { resumeCard(saved) }
+                }
+
+                section(index: 1) { roundSection }
+                section(index: 2) { modeSection }
+                section(index: 3) { extrasSection }
+                section(index: 4) { teamsSection }
+                section(index: 5) { playButton }
             }
             .padding(.horizontal, Spacing.md)
             .padding(.bottom, Spacing.lg)
@@ -59,8 +64,10 @@ struct GameSetupView: View {
                 .accessibilityLabel(l10n("settings.title"))
             }
         }
-        .onAppear {
-            guard !hasAppeared else { return }
+        // Not `onAppear` — this is built behind the splash, so the stagger would finish
+        // unseen. `initial: true` keeps it immediate when there is no splash to wait for.
+        .onChange(of: isLaunching, initial: true) { _, launching in
+            guard !launching, !hasAppeared else { return }
             hasAppeared = true
         }
         .onChange(of: l10n.language) { _, language in
