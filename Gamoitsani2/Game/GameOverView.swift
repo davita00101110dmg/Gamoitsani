@@ -15,6 +15,7 @@ struct GameOverView: View {
 
     @Environment(Localization.self) private var l10n
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(SoundPlayer.self) private var sound
     @State private var barsGrown = false
     @State private var showStats = false
 
@@ -77,6 +78,7 @@ struct GameOverView: View {
             .padding(.bottom, Spacing.lg)
         }
         .onAppear {
+            sound.play(.gameOver)
             withAnimation(reduceMotion ? Motion.reduced : Motion.celebrate.delay(0.15)) {
                 barsGrown = true
             }

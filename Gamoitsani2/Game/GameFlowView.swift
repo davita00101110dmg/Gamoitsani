@@ -15,6 +15,7 @@ struct GameFlowView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(Localization.self) private var l10n
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(SoundPlayer.self) private var sound
     @State private var showRules = false
     @State private var showLeaderboard = false
 
@@ -53,8 +54,11 @@ struct GameFlowView: View {
             if phase == .active { session.engine?.checkExpiry() }
             if phase == .background { session.checkpoint() }
         }
-        .onChange(of: session.engine?.state.phase) { _, _ in
+        .onChange(of: session.engine?.state.phase) { was, now in
             session.checkpoint()
+            // The buzzer marks a turn ending on the clock. Reaching .finished plays the
+            // fanfare instead, so the two never stack.
+            if was == .playing, let now, now != .finished { sound.play(.timeUp) }
         }
         // The system back button and the swipe gesture both pop without routing through
         // `leave()`, so the game is saved on the way out either way.
@@ -267,7 +271,12 @@ struct CountdownView: View {
     let engine: GameEngine
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(SoundPlayer.self) private var sound
     @State private var value = 3
+
+    /// Numerals shown, counting the first. Triggering on `value` skipped 3 entirely — it
+    /// is the initial state, so it is never a change.
+    @State private var beats = 0
 
     var body: some View {
         ZStack {
@@ -282,17 +291,25 @@ struct CountdownView: View {
         // Centres on the screen rather than on the area left under the navigation bar,
         // which was pushing the numerals visibly low.
         .ignoresSafeArea(edges: .top)
-        .sensoryFeedback(.impact(weight: .medium), trigger: value)
+        .sensoryFeedback(.impact(weight: .medium), trigger: beats)
         .task {
+            beat()
             for step in stride(from: 2, through: 0, by: -1) {
                 try? await Task.sleep(for: .milliseconds(650))
                 guard !Task.isCancelled else { return }
-                if step == 0 {
+                guard step > 0 else {
                     engine.send(.countdownFinished)
-                } else {
-                    withAnimation(Motion.control(reduceMotion: reduceMotion)) { value = step }
+                    return
                 }
+                withAnimation(Motion.control(reduceMotion: reduceMotion)) { value = step }
+                beat()
             }
         }
+    }
+
+    /// One numeral: its sound and its haptic together.
+    private func beat() {
+        beats += 1
+        sound.play(.tick)
     }
 }

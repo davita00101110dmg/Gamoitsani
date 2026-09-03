@@ -36,6 +36,7 @@ private struct RoundClock: View {
     @Binding var isUrgent: Bool
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(SoundPlayer.self) private var sound
     @State private var remaining: TimeInterval = 0
 
     private var secondsLeft: Int { Int(remaining.rounded(.up)) }
@@ -56,6 +57,9 @@ private struct RoundClock: View {
             .animation(.linear(duration: 0.2), value: secondsLeft)
         // Once per second through the final five, not once when it crosses the threshold.
         .sensoryFeedback(.warning, trigger: urgentTick)
+        .onChange(of: urgentTick) { _, tick in
+            if tick > 0 { sound.play(.warning) }
+        }
         // TimelineView drives the display; the engine owns when the round actually ends.
         .overlay {
             TimelineView(.periodic(from: .now, by: 0.25)) { context in
@@ -79,6 +83,7 @@ struct ClassicPlayView: View {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(Localization.self) private var l10n
+    @Environment(SoundPlayer.self) private var sound
     @State private var lastOutcome: PlayOutcome?
     /// Increments on every answer. `sensoryFeedback` fires on a *change*, so triggering
     /// on the outcome alone missed two identical answers in a row.    /// *other* button, so repeating the same one produced no feedback at all.
@@ -130,6 +135,7 @@ struct ClassicPlayView: View {
             guard let word else { return }
             lastOutcome = outcome
             answerCount += 1
+            sound.play(outcome == .correct ? (word.isSuperWord ? .superWord : .correct) : .skip)
             withAnimation(Motion.card(reduceMotion: reduceMotion)) {
                 _ = engine.send(.answer(wordID: word.id, outcome: outcome))
             }
@@ -156,6 +162,7 @@ struct ArcadePlayView: View {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(Localization.self) private var l10n
+    @Environment(SoundPlayer.self) private var sound
 
     var body: some View {
         VStack(spacing: Spacing.md) {
@@ -167,8 +174,10 @@ struct ArcadePlayView: View {
                         // Tapping a played word takes it back. This is an undo, not v1's
                         if played {
                             _ = engine.send(.undoAnswer(wordID: word.id))
+                            sound.play(.skip)
                         } else {
                             _ = engine.send(.answer(wordID: word.id, outcome: .correct))
+                            sound.play(word.isSuperWord ? .superWord : .correct)
                         }
                     }
                 } label: {
@@ -195,6 +204,7 @@ struct ArcadePlayView: View {
                 withAnimation(Motion.card(reduceMotion: reduceMotion)) {
                     _ = engine.send(.skipSet)
                 }
+                sound.play(.skip)
             } label: {
                 Text("\(l10n("game.newWords"))  \(Scoring.setSkip)")
                     .font(Typography.headline)

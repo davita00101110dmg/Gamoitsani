@@ -1021,6 +1021,38 @@
         }
       }
     },
+    "settings.sound": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sound"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ხმა"
+          }
+        }
+      }
+    },
+    "settings.sound.effects": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sound effects"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ხმოვანი ეფექტები"
+          }
+        }
+      }
+    },
     "settings.title": {
       "localizations": {
         "az": {

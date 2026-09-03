@@ -9,13 +9,23 @@ import GamoitsaniL10n
 /// Settings.
 struct SettingsView: View {
     @Environment(Localization.self) private var l10n
+    @Environment(SoundPlayer.self) private var sound
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         @Bindable var localization = l10n
+        @Bindable var sound = sound
 
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.lg) {
+                SetupPanel(title: l10n("settings.sound")) {
+                    Toggle(l10n("settings.sound.effects"), isOn: $sound.isEnabled)
+                        .tint(Tokens.accent.color)
+                        .font(Typography.rowTitle)
+                        .foregroundStyle(Tokens.onSurface.color)
+                        .padding(.vertical, Spacing.sm)
+                }
+
                 SetupPanel(title: l10n("settings.language")) {
                     ForEach(Array(AppLanguage.allCases.enumerated()), id: \.element) { index, language in
                         Button {

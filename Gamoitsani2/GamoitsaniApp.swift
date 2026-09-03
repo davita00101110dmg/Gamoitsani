@@ -12,6 +12,7 @@ struct GamoitsaniApp: App {
     @State private var router = Router()
     @State private var localization = Localization()
     @State private var session = GameSession()
+    @State private var sound = SoundPlayer()
     #if DEBUG
     @State private var debugSettings = DebugSettings()
     #endif
@@ -46,7 +47,10 @@ struct GamoitsaniApp: App {
             .environment(router)
             .environment(localization)
             .environment(session)
+            .environment(sound)
             .environment(\.isLaunching, showSplash)
+            // Decoding on first play would hitch on the countdown tick.
+            .task { await sound.prepare() }
             .tint(Tokens.accent.color)
 
         #if DEBUG
