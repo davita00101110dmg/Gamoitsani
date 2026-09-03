@@ -121,3 +121,6 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# Real ad units and mediation credentials for the 2.0 target.
+Gamoitsani2/Config.xcconfig

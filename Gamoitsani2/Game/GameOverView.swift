@@ -19,6 +19,9 @@ struct GameOverView: View {
     @State private var barsGrown = false
     @State private var showStats = false
     @State private var card: UIImage?
+    @Environment(\.adService) private var ads
+    /// `onAppear` can fire again; a game is only finished once.
+    @State private var counted = false
 
     private var standings: [Team] { engine.standings }
     private var winner: Team? { engine.winner }
@@ -127,7 +130,17 @@ struct GameOverView: View {
             .padding(.horizontal, Spacing.md)
             .padding(.bottom, Spacing.lg)
         }
+        // The podium is a genuine pause — people read the scores, argue about them, tap
+        // into Stats. The interstitial on Finish only fires about every other game, so
+        // most of the time this is the only ad here rather than a second one.
+        .safeAreaInset(edge: .bottom) {
+            BannerAd()
+        }
         .onAppear {
+            if !counted {
+                counted = true
+                ads.gameFinished()
+            }
             sound.play(.gameOver)
             withAnimation(reduceMotion ? Motion.reduced : Motion.celebrate.delay(0.15)) {
                 barsGrown = true

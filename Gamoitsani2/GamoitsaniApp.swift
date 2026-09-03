@@ -14,6 +14,7 @@ struct GamoitsaniApp: App {
     @State private var session = GameSession()
     @State private var sound = SoundPlayer()
     @State private var haptics = Haptics()
+    @State private var ads = AdMobAds()
     #if DEBUG
     @State private var debugSettings = DebugSettings()
     #endif
@@ -21,6 +22,8 @@ struct GamoitsaniApp: App {
     /// Cold start only — `@State` here is created once per process, so resuming never
     /// replays it. Doubles as the `isLaunching` signal.
     @State private var showSplash = true
+
+    @Environment(\.scenePhase) private var scenePhase
 
     init() {
         // The display face ships inside GamoitsaniDesign, so it is not in the app bundle
@@ -39,7 +42,22 @@ struct GamoitsaniApp: App {
                         .zIndex(1)
                 }
             }
+            .onChange(of: scenePhase) { was, now in
+                guard was != .active, now == .active else { return }
+                Task { await showAppOpenAdIfIdle() }
+            }
         }
+    }
+
+    /// The app-open ad, on returning to the foreground and nowhere else.
+    ///
+    /// Never on a cold launch: the splash is the app's own opening, and an ad on top of it
+    /// is the first thing a new player would see. Not interrupting a live round is the
+    /// policy's job, not this one's.
+    @MainActor
+    private func showAppOpenAdIfIdle() async {
+        guard !showSplash else { return }
+        await ads.showAppOpenIfAllowed()
     }
 
     @ViewBuilder
@@ -50,15 +68,17 @@ struct GamoitsaniApp: App {
             .environment(session)
             .environment(sound)
             .environment(haptics)
+            .environment(\.adService, ads)
             .environment(\.isLaunching, showSplash)
             // Decoding on first play would hitch on the countdown tick.
             .task { await sound.prepare() }
+            .task { await ads.start() }
             .tint(Tokens.accent.color)
 
         #if DEBUG
         base
             .environment(debugSettings)
-            .debugMenuOnShake(debug: debugSettings, session: session)
+            .debugMenuOnShake(debug: debugSettings, session: session, ads: ads)
         #else
         base
         #endif

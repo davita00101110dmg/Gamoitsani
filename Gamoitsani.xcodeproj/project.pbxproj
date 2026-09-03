@@ -13,6 +13,7 @@
 		0B8A3303FAA577E33F7DA9EE /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423FDAAD4A8C93737BC37E6 /* GameOverView.swift */; };
 		0D5E8D592AF157CD1E0A2232 /* GameSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBD3AC5C97E5FBD184ADE7 /* GameSetupView.swift */; };
 		1054D8A7177E06FE0183B464 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E023802D284EC10E151378E /* PurchaseManager.swift */; };
+		2E6B7D36ECAAB4A7AC5005FE /* Pods_Gamoitsani2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC006B6B9C89062317AC7044 /* Pods_Gamoitsani2.framework */; };
 		3C580555505E7068514885FB /* GameFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7769D70207AB6403DE0E760 /* GameFlowView.swift */; };
 		47FD6444178F69C5BBF1C6CD /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB02F97058A700F6375993C /* Route.swift */; };
 		49061860A18F78921BBA8CBA /* GameSetupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A884C4B1683D209C8A861 /* GameSetupModel.swift */; };
@@ -27,10 +28,14 @@
 		98CE2D64A13A15FECBA03047 /* PlayerRoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0B895403DEE2FE77C885B9 /* PlayerRoster.swift */; };
 		A8CC8DF3F1347FAC4DB17E9A /* ShareCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88501753E294F4505B439CD /* ShareCard.swift */; };
 		AA38C41CA0E8D6135DDC8360 /* Pods_Gamoitsani_GamoitsaniUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15021D7C46D4DA69DAB50747 /* Pods_Gamoitsani_GamoitsaniUITests.framework */; };
+		AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30510617BAE33CE79D50131 /* BannerAd.swift */; };
 		B4C89321A831373D1E1223E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */; };
+		B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96668D899010A3A09E42EC99 /* AdEnvironment.swift */; };
 		C9895FC82240F341363A966E /* SampleWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0DC5ADB9E2C42FBC354C2D /* SampleWords.swift */; };
 		D82F8C692FC23FA30BF12D65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F4803685FD8794E19D47296 /* Assets.xcassets */; };
+		F4A6D9FB9DCC3C8D27A6DC13 /* AdUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A46906829AF04DF295A2BED /* AdUnits.swift */; };
 		F4CF05276636EB2EE2D74BD2 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237F63704F7B25FFCC53512 /* PlayView.swift */; };
+		F8AD6CA2387F7BDA5506DA76 /* AdMobAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4EC563CA317EEED5FCA338 /* AdMobAds.swift */; };
 		FF01C8A82D2AD1FF00BE40D4 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01C8A72D2AD1FF00BE40D4 /* Logger.swift */; };
 		FF1111892C4FD17500C44F62 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF1111872C4FD17500C44F62 /* correct.wav */; };
 		FF11118A2C4FD17500C44F62 /* incorrect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF1111882C4FD17500C44F62 /* incorrect.mp3 */; };
@@ -267,6 +272,7 @@
 
 /* Begin PBXFileReference section */
 		01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = Screens/SettingsView.swift; sourceTree = "<group>"; };
+		042A3C7804F325815626C8F9 /* Pods-Gamoitsani2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani2.debug.xcconfig"; path = "Target Support Files/Pods-Gamoitsani2/Pods-Gamoitsani2.debug.xcconfig"; sourceTree = "<group>"; };
 		07465998325E61C4C8A4B2EC /* Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig"; path = "Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig"; sourceTree = "<group>"; };
 		0ED1415795F78EC52C53201B /* Pods-GamoitsaniTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.debug.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0ED6CAF7DFCF6D389E027034 /* Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig"; path = "Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -275,28 +281,35 @@
 		177A884C4B1683D209C8A861 /* GameSetupModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameSetupModel.swift; path = Screens/Setup/GameSetupModel.swift; sourceTree = "<group>"; };
 		2237F63704F7B25FFCC53512 /* PlayView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlayView.swift; path = Game/PlayView.swift; sourceTree = "<group>"; };
 		227A9A621D7844B4B28356E0 /* Router.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Router.swift; path = Navigation/Router.swift; sourceTree = "<group>"; };
+		29AA0C2378FD5C07F5ADCDB7 /* Config.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		2A4F39F1DAD4AF7CEB36AE68 /* Pods-Gamoitsani.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani.debug.xcconfig"; path = "Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.debug.xcconfig"; sourceTree = "<group>"; };
 		33F1C5CBF005030EAF45E784 /* Pods_Gamoitsani.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gamoitsani.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39BBD3AC5C97E5FBD184ADE7 /* GameSetupView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameSetupView.swift; path = Screens/Setup/GameSetupView.swift; sourceTree = "<group>"; };
+		3A46906829AF04DF295A2BED /* AdUnits.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdUnits.swift; path = Ads/AdUnits.swift; sourceTree = "<group>"; };
 		3BDE67BC9BFB90A79983B10D /* Gamoitsani2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E023802D284EC10E151378E /* PurchaseManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		466C04D6EDDE9638C7F9C296 /* GamoitsaniApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GamoitsaniApp.swift; sourceTree = "<group>"; };
 		72F8CF213E6E24E6647668F8 /* LeaderboardSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LeaderboardSheet.swift; path = Game/LeaderboardSheet.swift; sourceTree = "<group>"; };
 		89FF8B6C753C6F444A7BABEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		923A8905BC6AA8467F91AF19 /* GameSession.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameSession.swift; path = Game/GameSession.swift; sourceTree = "<group>"; };
+		96668D899010A3A09E42EC99 /* AdEnvironment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdEnvironment.swift; path = Ads/AdEnvironment.swift; sourceTree = "<group>"; };
 		A7769D70207AB6403DE0E760 /* GameFlowView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameFlowView.swift; path = Game/GameFlowView.swift; sourceTree = "<group>"; };
 		A8591DBC756783B37A1C2C05 /* Pods_GamoitsaniTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GamoitsaniTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0DC5ADB9E2C42FBC354C2D /* SampleWords.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SampleWords.swift; path = Game/SampleWords.swift; sourceTree = "<group>"; };
+		AC006B6B9C89062317AC7044 /* Pods_Gamoitsani2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gamoitsani2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE4EC563CA317EEED5FCA338 /* AdMobAds.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdMobAds.swift; path = Ads/AdMobAds.swift; sourceTree = "<group>"; };
 		B7F70DD013A2EADFAFEC8746 /* Pods-GamoitsaniTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.release.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.release.xcconfig"; sourceTree = "<group>"; };
 		B876C0F14C7E4B2306AD2CD6 /* AppInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		BB3A1A03242578E4715AB6A3 /* DebugMenu.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DebugMenu.swift; path = Debug/DebugMenu.swift; sourceTree = "<group>"; };
 		BDB02F97058A700F6375993C /* Route.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Route.swift; path = Navigation/Route.swift; sourceTree = "<group>"; };
 		C423FDAAD4A8C93737BC37E6 /* GameOverView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameOverView.swift; path = Game/GameOverView.swift; sourceTree = "<group>"; };
 		C5963B1A2F5D9F6900617CBD /* Gamoitsani Word 2.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Gamoitsani Word 2.0.xcdatamodel"; sourceTree = "<group>"; };
+		C781EFEFFE6C30A82A35C740 /* Pods-Gamoitsani2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani2.release.xcconfig"; path = "Target Support Files/Pods-Gamoitsani2/Pods-Gamoitsani2.release.xcconfig"; sourceTree = "<group>"; };
 		C88501753E294F4505B439CD /* ShareCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShareCard.swift; path = Game/ShareCard.swift; sourceTree = "<group>"; };
 		D36CCD79F4764663A3E7BDFD /* SplashView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplashView.swift; path = Screens/SplashView.swift; sourceTree = "<group>"; };
 		DA0B895403DEE2FE77C885B9 /* PlayerRoster.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlayerRoster.swift; path = Screens/Setup/PlayerRoster.swift; sourceTree = "<group>"; };
 		DAC03FE91ECAA969A0956837 /* SetupComponents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SetupComponents.swift; path = Screens/Setup/SetupComponents.swift; sourceTree = "<group>"; };
+		E30510617BAE33CE79D50131 /* BannerAd.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BannerAd.swift; path = Ads/BannerAd.swift; sourceTree = "<group>"; };
 		F0E7AC92C1E2C28737A902C9 /* Pods-Gamoitsani.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani.release.xcconfig"; path = "Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.release.xcconfig"; sourceTree = "<group>"; };
 		FF01C8A72D2AD1FF00BE40D4 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		FF1111872C4FD17500C44F62 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
@@ -508,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				924A62BE6EB988DF780416F5 /* Foundation.framework in Frameworks */,
+				2E6B7D36ECAAB4A7AC5005FE /* Pods_Gamoitsani2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +570,8 @@
 				07465998325E61C4C8A4B2EC /* Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig */,
 				0ED1415795F78EC52C53201B /* Pods-GamoitsaniTests.debug.xcconfig */,
 				B7F70DD013A2EADFAFEC8746 /* Pods-GamoitsaniTests.release.xcconfig */,
+				C781EFEFFE6C30A82A35C740 /* Pods-Gamoitsani2.release.xcconfig */,
+				042A3C7804F325815626C8F9 /* Pods-Gamoitsani2.debug.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -582,6 +598,11 @@
 				C88501753E294F4505B439CD /* ShareCard.swift */,
 				DA0B895403DEE2FE77C885B9 /* PlayerRoster.swift */,
 				B876C0F14C7E4B2306AD2CD6 /* AppInfo.swift */,
+				29AA0C2378FD5C07F5ADCDB7 /* Config.xcconfig */,
+				3A46906829AF04DF295A2BED /* AdUnits.swift */,
+				AE4EC563CA317EEED5FCA338 /* AdMobAds.swift */,
+				E30510617BAE33CE79D50131 /* BannerAd.swift */,
+				96668D899010A3A09E42EC99 /* AdEnvironment.swift */,
 			);
 			name = Gamoitsani2;
 			path = Gamoitsani2;
@@ -1266,6 +1287,7 @@
 				15021D7C46D4DA69DAB50747 /* Pods_Gamoitsani_GamoitsaniUITests.framework */,
 				A8591DBC756783B37A1C2C05 /* Pods_GamoitsaniTests.framework */,
 				72DB47A2861A52B979C77B73 /* iOS */,
+				AC006B6B9C89062317AC7044 /* Pods_Gamoitsani2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1426,9 +1448,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD3DB2C474005E5C2533BE77 /* Build configuration list for PBXNativeTarget "Gamoitsani2" */;
 			buildPhases = (
+				6DCD02E18A2D225DCCA205F2 /* [CP] Check Pods Manifest.lock */,
 				4C010BD51A76218F0F2E0E1E /* Sources */,
 				F957277388173C8102615F4B /* Frameworks */,
 				7E7A4627570C1922525CDA88 /* Resources */,
+				EEF231BBD5D0464EEFB75AF9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1441,6 +1465,7 @@
 				A11A51F8839515E8561ACE3A /* GamoitsaniDesign */,
 				FFC2987BFBE335DA22BCD85F /* GamoitsaniData */,
 				A8C33842198817BC40CD0A2A /* GamoitsaniL10n */,
+				FAADB19BDB8AAFEB53C2961B /* GamoitsaniAds */,
 			);
 			productName = Gamoitsani2;
 			productReference = 3BDE67BC9BFB90A79983B10D /* Gamoitsani2.app */;
@@ -1456,8 +1481,8 @@
 				FF4D9D222BD698620046819D /* Frameworks */,
 				FF4D9D232BD698620046819D /* Resources */,
 				FF425BEF2C526262003068F0 /* Embed Frameworks */,
-				B9BF5AE730EEAD75911D8A4E /* [CP] Embed Pods Frameworks */,
 				7861828E729A114728BAF868 /* [CP] Copy Pods Resources */,
+				E8255396B0973B42E10A2C2B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1504,8 +1529,8 @@
 				FF4D9D442BD698630046819D /* Sources */,
 				FF4D9D452BD698630046819D /* Frameworks */,
 				FF4D9D462BD698630046819D /* Resources */,
-				B840518092539D0A37456064 /* [CP] Embed Pods Frameworks */,
 				16237A76584F1A17511C2EA1 /* [CP] Copy Pods Resources */,
+				4A6D7D25C3E4E33D3D533C96 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1570,6 +1595,7 @@
 				0E26D0EB59CA1BFF4CF9A227 /* XCLocalSwiftPackageReference "GamoitsaniDesign" */,
 				BF8A57540562EF2EA1DF14BE /* XCLocalSwiftPackageReference "GamoitsaniData" */,
 				6D303C750A733B228CFE80F1 /* XCLocalSwiftPackageReference "GamoitsaniL10n" */,
+				88EF648DF6C7BC09CDC82BE3 /* XCLocalSwiftPackageReference "GamoitsaniAds" */,
 			);
 			productRefGroup = FF4D9D262BD698620046819D /* Products */;
 			projectDirPath = "";
@@ -1677,6 +1703,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4A6D7D25C3E4E33D3D533C96 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		54013A2745FB25693EA6A884 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1693,6 +1736,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Gamoitsani-GamoitsaniUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6DCD02E18A2D225DCCA205F2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Gamoitsani2-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1738,24 +1803,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B840518092539D0A37456064 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B9BF5AE730EEAD75911D8A4E /* [CP] Embed Pods Frameworks */ = {
+		E8255396B0973B42E10A2C2B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1770,6 +1818,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEF231BBD5D0464EEFB75AF9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani2/Pods-Gamoitsani2-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani2/Pods-Gamoitsani2-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gamoitsani2/Pods-Gamoitsani2-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FFF65CC42BE67AD8008E0352 /* SwiftGen */ = {
@@ -1816,6 +1881,10 @@
 				A8CC8DF3F1347FAC4DB17E9A /* ShareCard.swift in Sources */,
 				98CE2D64A13A15FECBA03047 /* PlayerRoster.swift in Sources */,
 				7FD58273C58F46FAE98790A6 /* AppInfo.swift in Sources */,
+				F4A6D9FB9DCC3C8D27A6DC13 /* AdUnits.swift in Sources */,
+				F8AD6CA2387F7BDA5506DA76 /* AdMobAds.swift in Sources */,
+				AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */,
+				B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2030,6 +2099,7 @@
 /* Begin XCBuildConfiguration section */
 		1944C757AF62697EA56CB162 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29AA0C2378FD5C07F5ADCDB7 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2060,6 +2130,7 @@
 		};
 		86E9E9C4771250CC07B5BEF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29AA0C2378FD5C07F5ADCDB7 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2663,6 +2734,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Libraries/Packages/GamoitsaniL10n;
 		};
+		88EF648DF6C7BC09CDC82BE3 /* XCLocalSwiftPackageReference "GamoitsaniAds" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Libraries/Packages/GamoitsaniAds;
+		};
 		BF8A57540562EF2EA1DF14BE /* XCLocalSwiftPackageReference "GamoitsaniData" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Libraries/Packages/GamoitsaniData;
@@ -2716,6 +2791,10 @@
 		A8C33842198817BC40CD0A2A /* GamoitsaniL10n */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GamoitsaniL10n;
+		};
+		FAADB19BDB8AAFEB53C2961B /* GamoitsaniAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GamoitsaniAds;
 		};
 		FF4FA9C42BEEB6FD00F38F98 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;

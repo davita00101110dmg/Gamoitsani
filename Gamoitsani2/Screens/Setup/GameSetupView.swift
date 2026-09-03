@@ -54,6 +54,11 @@ struct GameSetupView: View {
         } action: { _, offset in
             scrollOffset = offset
         }
+        .safeAreaInset(edge: .bottom) {
+            // Pinned rather than scrolled with the form: an ad that slides under the Play
+            // button is an ad placed where a mis-tap costs someone the game.
+            BannerAd()
+        }
         .background(Tokens.surface.color.ignoresSafeArea())
         .navigationTitle(l10n("home.title"))
         .navigationBarTitleDisplayMode(.inline)
