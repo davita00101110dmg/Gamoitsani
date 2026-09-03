@@ -36,6 +36,9 @@ struct SettingsView: View {
                             HStack(spacing: Spacing.sm) {
                                 Text(language.flag)
                                     .font(.title3)
+                                    // A flag emoji is announced by name, which is noise
+                                    // before the language it sits beside.
+                                    .accessibilityHidden(true)
 
                                 // The endonym: someone looking for Georgian is looking
                                 // for "ქართული", not for "Georgian".
@@ -49,12 +52,17 @@ struct SettingsView: View {
                                     Image(systemName: "checkmark")
                                         .font(.body.weight(.semibold))
                                         .foregroundStyle(Tokens.accent.color)
+                                        .accessibilityHidden(true)
                                 }
                             }
                             .padding(.vertical, Spacing.sm)
                             .contentShape(Rectangle())
                         }
                         .buttonStyle(.plain)
+                        .accessibilityElement(children: .combine)
+                        .accessibilityAddTraits(
+                            l10n.language == language ? [.isButton, .isSelected] : .isButton
+                        )
                         .sensoryFeedback(.selection, trigger: l10n.language)
 
                         if index < AppLanguage.allCases.count - 1 {

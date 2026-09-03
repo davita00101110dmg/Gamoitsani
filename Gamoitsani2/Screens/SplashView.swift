@@ -61,6 +61,7 @@ struct SplashView: View {
                             )
                     }
                 }
+                .accessibilityHidden(true)
                 // Lifts as one piece. Staggering the exit read as the deal running backwards.
                 .offset(y: swept && !reduceMotion ? -(geo.size.height / 2 + 160) : 0)
                 .opacity(swept && reduceMotion ? 0 : 1)

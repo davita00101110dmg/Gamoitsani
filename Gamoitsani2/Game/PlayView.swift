@@ -37,6 +37,7 @@ private struct RoundClock: View {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(SoundPlayer.self) private var sound
+    @Environment(Localization.self) private var l10n
     @State private var remaining: TimeInterval = 0
 
     private var secondsLeft: Int { Int(remaining.rounded(.up)) }
@@ -55,6 +56,12 @@ private struct RoundClock: View {
             .monospacedDigit()
             .frame(maxWidth: .infinity)
             .animation(.linear(duration: 0.2), value: secondsLeft)
+            // On its own the numeral is announced as a bare number with no idea what it
+            // counts. As a value it also re-announces each second while focused, which is
+            // the one place that is wanted.
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(l10n("a11y.timeRemaining"))
+            .accessibilityValue("\(secondsLeft)")
         // Once per second through the final five, not once when it crosses the threshold.
         .sensoryFeedback(.warning, trigger: urgentTick)
         .onChange(of: urgentTick) { _, tick in
@@ -130,6 +137,12 @@ struct ClassicPlayView: View {
         )
     }
 
+    /// What this answer is about to be worth, so the score is not a surprise.
+    private func points(for outcome: PlayOutcome, isSuperWord: Bool) -> String {
+        let value = isSuperWord ? Scoring.superWord : Scoring.regular
+        return outcome == .correct ? "+\(value)" : "-\(value)"
+    }
+
     private func answerButton(_ outcome: PlayOutcome, symbol: String, color: Color) -> some View {
         Button {
             guard let word else { return }
@@ -151,6 +164,7 @@ struct ClassicPlayView: View {
             lastOutcome == outcome && !suppressHaptics
         }
         .accessibilityLabel(outcome == .correct ? l10n("game.correct") : l10n("game.skip"))
+        .accessibilityValue(word.map { points(for: outcome, isSuperWord: $0.isSuperWord) } ?? "")
     }
 }
 
@@ -184,6 +198,14 @@ struct ArcadePlayView: View {
                     WordRow(text: word.text, isSuperWord: word.isSuperWord, isPlayed: played)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel(word.text)
+                .accessibilityValue(
+                    played
+                        ? l10n("a11y.guessed")
+                        : (word.isSuperWord ? l10n("a11y.superWord") : l10n("a11y.regularWord"))
+                )
+                .accessibilityAddTraits(played ? [.isButton, .isSelected] : .isButton)
+                .accessibilityHint(played ? l10n("a11y.undoHint") : l10n("a11y.guessHint"))
                 .sensoryFeedback(played ? .success : .impact(weight: .light), trigger: played) { _, _ in
                     !suppressHaptics
                 }
@@ -216,6 +238,8 @@ struct ArcadePlayView: View {
                             .strokeBorder(Tokens.danger.color, lineWidth: 1.5)
                     }
             }
+            .accessibilityLabel(l10n("game.newWords"))
+            .accessibilityValue("\(Scoring.setSkip)")
             .sensoryFeedback(.impact(weight: .heavy), trigger: engine.state.setIndex)
         }
     }
@@ -226,6 +250,8 @@ struct ArcadePlayView: View {
 struct WordCard: View {
     let text: String
     let isSuperWord: Bool
+
+    @Environment(Localization.self) private var l10n
 
     var body: some View {
         ZStack {
@@ -262,6 +288,11 @@ struct WordCard: View {
                 .strokeBorder(isSuperWord ? Tokens.accent.color : Tokens.cardEdge.color, lineWidth: 2)
         }
         .shadow(color: isSuperWord ? Tokens.accent.color.opacity(0.25) : .clear, radius: 12)
+        // One element: the badge read out on its own as "3 PT · SUPER", which is a label
+        // written for the eye, not the ear.
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(text)
+        .accessibilityValue(l10n(isSuperWord ? "a11y.superWord" : "a11y.regularWord"))
     }
 }
 

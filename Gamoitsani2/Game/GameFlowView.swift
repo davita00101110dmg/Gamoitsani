@@ -125,6 +125,8 @@ struct TurnInfoView: View {
             }
             .scaleEffect(appeared || reduceMotion ? 1 : 0.94)
             .opacity(appeared ? 1 : 0)
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isHeader)
 
             Spacer()
 
@@ -186,6 +188,7 @@ struct RulesSheet: View {
                             .fixedSize(horizontal: false, vertical: true)
                     }
                     .padding(.vertical, Spacing.xs)
+                    .accessibilityElement(children: .combine)
 
                     // Rules read as one paragraph without these.
                     if index < 4 {
@@ -272,6 +275,7 @@ struct CountdownView: View {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(SoundPlayer.self) private var sound
+    @Environment(Localization.self) private var l10n
     @State private var value = 3
 
     /// Numerals shown, counting the first. Triggering on `value` skipped 3 entirely — it
@@ -287,6 +291,9 @@ struct CountdownView: View {
                 .id(value)
                 .transition(.scale(scale: reduceMotion ? 1 : 1.6).combined(with: .opacity))
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(l10n("a11y.startingIn"))
+        .accessibilityValue("\(value)")
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         // Centres on the screen rather than on the area left under the navigation bar,
         // which was pushing the numerals visibly low.

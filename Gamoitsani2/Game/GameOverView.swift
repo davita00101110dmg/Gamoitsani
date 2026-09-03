@@ -220,6 +220,7 @@ private struct Podium: View {
                     if entry.place == 1 {
                         Image(systemName: "crown.fill")
                             .foregroundStyle(TeamPalette.color(at: index).color)
+                            .accessibilityHidden(true)
                     }
                     Text(entry.team.name)
                         .font(Typography.label)
@@ -234,7 +235,10 @@ private struct Podium: View {
                         .fill(TeamPalette.color(at: index).color)
                         .frame(height: grown ? height(for: entry.team) : 0)
                         .frame(maxWidth: .infinity)
+                        // The bar's length is the score, which is already spoken.
+                        .accessibilityHidden(true)
                 }
+                .accessibilityElement(children: .combine)
             }
         }
     }
@@ -296,5 +300,7 @@ struct StatsRow: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity)
+        // The number and its caption are one fact: "26, guessed", not two stray labels.
+        .accessibilityElement(children: .combine)
     }
 }

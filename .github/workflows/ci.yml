@@ -77,6 +77,12 @@ jobs:
         # check, and the failure it prevents (a colour flash at launch) is easy to miss.
         run: ./scripts/verify-launch-background.swift
 
+      - name: Verify localization keys
+        # `l10n("...")` returns the key when it is missing, so a typo ships as a raw key on
+        # screen instead of failing the build. Also surfaces keys nothing references any
+        # more, which is how the strings from a deleted screen get noticed.
+        run: ./scripts/verify-localization-keys.py
+
       - name: Build and test Gamoitsani2
         # The 2.0 target and its five local packages. Built first and separately from v1:
         # it uses SPM only, no CocoaPods, so a failure here is unambiguous. Swift 6

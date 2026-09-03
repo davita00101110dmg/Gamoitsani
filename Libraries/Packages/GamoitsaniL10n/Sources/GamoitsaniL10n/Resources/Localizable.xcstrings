@@ -1,6 +1,118 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "a11y.guessHint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mark as guessed"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "მონიშნე გამოცნობილად"
+          }
+        }
+      }
+    },
+    "a11y.guessed": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guessed"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "გამოცნობილი"
+          }
+        }
+      }
+    },
+    "a11y.regularWord": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 point"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 ქულა"
+          }
+        }
+      }
+    },
+    "a11y.startingIn": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starting in"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "დაიწყება"
+          }
+        }
+      }
+    },
+    "a11y.superWord": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Super word, 3 points"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "სუპერ სიტყვა, 3 ქულა"
+          }
+        }
+      }
+    },
+    "a11y.timeRemaining": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time remaining"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "დარჩენილი დრო"
+          }
+        }
+      }
+    },
+    "a11y.undoHint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Undo this guess"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "დააბრუნე გამოცნობა"
+          }
+        }
+      }
+    },
     "award.skips": {
       "localizations": {
         "en": {
@@ -1075,38 +1187,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "გუნდები"
-          }
-        }
-      }
-    },
-    "players.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Players"
-          }
-        },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "მოთამაშეები"
-          }
-        }
-      }
-    },
-    "players.use": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Use these teams"
-          }
-        },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ამ გუნდებით თამაში"
           }
         }
       }
