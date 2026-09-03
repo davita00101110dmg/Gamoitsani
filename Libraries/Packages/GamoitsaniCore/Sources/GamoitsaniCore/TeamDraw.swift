@@ -51,19 +51,35 @@ public enum TeamDraw {
         into teamCount: Int,
         using generator: inout some RandomNumberGenerator
     ) -> [[String]] {
-        let people = tidy(players)
-        guard let range = teamCountRange(forPlayers: people.count) else { return [] }
+        guard let plan = plan(players, teamCount) else { return [] }
+        return deal(plan.people.shuffled(using: &generator), into: plan.count)
+    }
 
-        let count = min(max(teamCount, range.lowerBound), range.upperBound)
+    /// The same draw, on the system generator.
+    ///
+    /// Deliberately not `var generator = SystemRandomNumberGenerator()` forwarded to the
+    /// method above: that type is zero-sized, so separate locals on separate threads can
+    /// share an address, and ThreadSanitizer reports the two `inout` accesses as a Swift
+    /// access race. It is a false positive — the system generator holds no state — but it
+    /// aborts the run, and this package cannot be sanitised while it fires.
+    public static func draw(players: [String], into teamCount: Int) -> [[String]] {
+        guard let plan = plan(players, teamCount) else { return [] }
+        return deal(plan.people.shuffled(), into: plan.count)
+    }
+
+    /// Who is playing and how many teams they can fill, or nothing if they cannot.
+    private static func plan(_ players: [String], _ teamCount: Int) -> (people: [String], count: Int)? {
+        let people = tidy(players)
+        guard let range = teamCountRange(forPlayers: people.count) else { return nil }
+        return (people, min(max(teamCount, range.lowerBound), range.upperBound))
+    }
+
+    /// Round the table, one at a time.
+    private static func deal(_ people: [String], into count: Int) -> [[String]] {
         var teams = Array(repeating: [String](), count: count)
-        for (index, player) in people.shuffled(using: &generator).enumerated() {
+        for (index, player) in people.enumerated() {
             teams[index % count].append(player)
         }
         return teams
-    }
-
-    public static func draw(players: [String], into teamCount: Int) -> [[String]] {
-        var generator = SystemRandomNumberGenerator()
-        return draw(players: players, into: teamCount, using: &generator)
     }
 }

@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main, v2]
   workflow_dispatch:
+  schedule:
+    # Sanitisers, weekly. "From time to time" otherwise means never.
+    - cron: "0 4 * * 1"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -119,3 +122,45 @@ jobs:
             -destination "id=${{ steps.sim.outputs.udid }}" \
             -only-testing:GamoitsaniTests \
             CODE_SIGNING_ALLOWED=NO
+
+  # Kept off the push path: the sanitised suites take several times as long, and their
+  # signal does not change commit to commit. Weekly, or on demand.
+  #
+  # This exists because a Swift access race in TeamDraw went unnoticed until the first
+  # manual run — TSan reports that as "Swift access race", not "data race", so it also
+  # slipped a grep looking only for the latter.
+  sanitizers:
+    name: Sanitizers
+    runs-on: macos-15
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pick a simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available --json \
+            | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];print(next(v['udid'] for rt in sorted(d) if 'iOS' in rt for v in d[rt] if 'iPhone' in v['name']))")
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+
+      - name: Thread and address sanitizers
+        run: |
+          set -o pipefail
+          status=0
+          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n; do
+            for flag in ThreadSanitizer AddressSanitizer; do
+              echo "--- $pkg / $flag"
+              log=$(mktemp)
+              ( cd "Libraries/Packages/$pkg" && xcodebuild test \
+                  -scheme "$pkg" \
+                  -destination "id=${{ steps.sim.outputs.udid }}" \
+                  "-enable${flag}" YES ) | tee "$log" || status=1
+              # Both spellings: TSan says "data race" for memory and "Swift access race"
+              # for an exclusivity violation, and the second one is easy to miss.
+              if grep -qE "WARNING: ThreadSanitizer|ERROR: AddressSanitizer" "$log"; then
+                echo "::error::$flag reported an issue in $pkg"
+                status=1
+              fi
+            done
+          done
+          exit $status
