@@ -2421,6 +2421,40 @@
         }
       }
     },
+    "setup.record" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record the game"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "თამაშის ჩაწერა"
+          }
+        }
+      }
+    },
+    "setup.record.detail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Film each turn to Photos"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "თითოეული სვლა ჩაიწერება Photos-ში"
+          }
+        }
+      }
+    },
     "setup.removeTeam" : {
       "extractionState" : "stale",
       "localizations" : {

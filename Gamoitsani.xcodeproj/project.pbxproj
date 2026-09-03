@@ -31,6 +31,12 @@
 		485D31FBA92D4931AD519275 /* RemoveAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29D2CDF3014DE299F00CC8 /* RemoveAds.swift */; };
 		763906B955274C3899942C31 /* Purchasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DBD7AEB19D41F8ABD16E60 /* Purchasing.swift */; };
 		7A8D3C56A06C438FB9F6B87E /* StoreKitPurchases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8AA9DCC2242058FFEA629 /* StoreKitPurchases.swift */; };
+		2E1B431315864ED0BE1D81E2 /* TurnRecording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050866DC6EB04FA4B7E32576 /* TurnRecording.swift */; };
+		7D6A83A186084BD9BF1C5DC3 /* RecordingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BCFE21C90C48D58AD56212 /* RecordingOverlay.swift */; };
+		524CD077DF4344DE834BB32F /* CameraTurnRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4B77DE65E04F2C85D9E569 /* CameraTurnRecorder.swift */; };
+		BD67B4AC6B03422DA2C500D3 /* RecordingExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B12FD4CE3F84BE8BEDC04EB /* RecordingExporter.swift */; };
+		5CF98E7113214DFA8CB51067 /* CaptureSessionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE71DFAC10D42FDBB065851 /* CaptureSessionBox.swift */; };
+		5C44931FFEEB48DC80EBF2EF /* RecordingBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69182A5BA5D34E99B843F08D /* RecordingBridge.swift */; };
 		AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30510617BAE33CE79D50131 /* BannerAd.swift */; };
 		B4C89321A831373D1E1223E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */; };
 		B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96668D899010A3A09E42EC99 /* AdEnvironment.swift */; };
@@ -292,6 +298,12 @@
 		37DBD7AEB19D41F8ABD16E60 /* Purchasing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Purchasing.swift; path = Purchase/Purchasing.swift; sourceTree = "<group>"; };
 		91B8AA9DCC2242058FFEA629 /* StoreKitPurchases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StoreKitPurchases.swift; path = Purchase/StoreKitPurchases.swift; sourceTree = "<group>"; };
 		161CBA5C1A484FE6AB98FC0C /* Gamoitsani2.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; name = Gamoitsani2.storekit; path = Gamoitsani2.storekit; sourceTree = "<group>"; };
+		050866DC6EB04FA4B7E32576 /* TurnRecording.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TurnRecording.swift; path = Recording/TurnRecording.swift; sourceTree = "<group>"; };
+		39BCFE21C90C48D58AD56212 /* RecordingOverlay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordingOverlay.swift; path = Recording/RecordingOverlay.swift; sourceTree = "<group>"; };
+		5B4B77DE65E04F2C85D9E569 /* CameraTurnRecorder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CameraTurnRecorder.swift; path = Recording/CameraTurnRecorder.swift; sourceTree = "<group>"; };
+		4B12FD4CE3F84BE8BEDC04EB /* RecordingExporter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordingExporter.swift; path = Recording/RecordingExporter.swift; sourceTree = "<group>"; };
+		FDE71DFAC10D42FDBB065851 /* CaptureSessionBox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CaptureSessionBox.swift; path = Recording/CaptureSessionBox.swift; sourceTree = "<group>"; };
+		69182A5BA5D34E99B843F08D /* RecordingBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordingBridge.swift; path = Recording/RecordingBridge.swift; sourceTree = "<group>"; };
 		3A46906829AF04DF295A2BED /* AdUnits.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdUnits.swift; path = Ads/AdUnits.swift; sourceTree = "<group>"; };
 		3BDE67BC9BFB90A79983B10D /* Gamoitsani2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E023802D284EC10E151378E /* PurchaseManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
@@ -610,6 +622,12 @@
 				AE4EC563CA317EEED5FCA338 /* AdMobAds.swift */,
 				E30510617BAE33CE79D50131 /* BannerAd.swift */,
 				96668D899010A3A09E42EC99 /* AdEnvironment.swift */,
+				69182A5BA5D34E99B843F08D /* RecordingBridge.swift */,
+				FDE71DFAC10D42FDBB065851 /* CaptureSessionBox.swift */,
+				4B12FD4CE3F84BE8BEDC04EB /* RecordingExporter.swift */,
+				5B4B77DE65E04F2C85D9E569 /* CameraTurnRecorder.swift */,
+				39BCFE21C90C48D58AD56212 /* RecordingOverlay.swift */,
+				050866DC6EB04FA4B7E32576 /* TurnRecording.swift */,
 				161CBA5C1A484FE6AB98FC0C /* Gamoitsani2.storekit */,
 				91B8AA9DCC2242058FFEA629 /* StoreKitPurchases.swift */,
 				37DBD7AEB19D41F8ABD16E60 /* Purchasing.swift */,
@@ -1477,6 +1495,7 @@
 				FFC2987BFBE335DA22BCD85F /* GamoitsaniData */,
 				A8C33842198817BC40CD0A2A /* GamoitsaniL10n */,
 				FAADB19BDB8AAFEB53C2961B /* GamoitsaniAds */,
+				2A6974AB30BD41528AB90EBA /* GamoitsaniCapture */,
 			);
 			productName = Gamoitsani2;
 			productReference = 3BDE67BC9BFB90A79983B10D /* Gamoitsani2.app */;
@@ -1607,6 +1626,7 @@
 				BF8A57540562EF2EA1DF14BE /* XCLocalSwiftPackageReference "GamoitsaniData" */,
 				6D303C750A733B228CFE80F1 /* XCLocalSwiftPackageReference "GamoitsaniL10n" */,
 				88EF648DF6C7BC09CDC82BE3 /* XCLocalSwiftPackageReference "GamoitsaniAds" */,
+				3B90C751DC1E499B9137D268 /* XCLocalSwiftPackageReference "GamoitsaniCapture" */,
 			);
 			productRefGroup = FF4D9D262BD698620046819D /* Products */;
 			projectDirPath = "";
@@ -1896,6 +1916,12 @@
 				F8AD6CA2387F7BDA5506DA76 /* AdMobAds.swift in Sources */,
 				AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */,
 				B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */,
+				5C44931FFEEB48DC80EBF2EF /* RecordingBridge.swift in Sources */,
+				5CF98E7113214DFA8CB51067 /* CaptureSessionBox.swift in Sources */,
+				BD67B4AC6B03422DA2C500D3 /* RecordingExporter.swift in Sources */,
+				524CD077DF4344DE834BB32F /* CameraTurnRecorder.swift in Sources */,
+				7D6A83A186084BD9BF1C5DC3 /* RecordingOverlay.swift in Sources */,
+				2E1B431315864ED0BE1D81E2 /* TurnRecording.swift in Sources */,
 				7A8D3C56A06C438FB9F6B87E /* StoreKitPurchases.swift in Sources */,
 				763906B955274C3899942C31 /* Purchasing.swift in Sources */,
 				485D31FBA92D4931AD519275 /* RemoveAds.swift in Sources */,
@@ -2752,6 +2778,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Libraries/Packages/GamoitsaniAds;
 		};
+		3B90C751DC1E499B9137D268 /* XCLocalSwiftPackageReference "GamoitsaniCapture" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Libraries/Packages/GamoitsaniCapture;
+		};
 		BF8A57540562EF2EA1DF14BE /* XCLocalSwiftPackageReference "GamoitsaniData" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Libraries/Packages/GamoitsaniData;
@@ -2809,6 +2839,10 @@
 		FAADB19BDB8AAFEB53C2961B /* GamoitsaniAds */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GamoitsaniAds;
+		};
+		2A6974AB30BD41528AB90EBA /* GamoitsaniCapture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GamoitsaniCapture;
 		};
 		FF4FA9C42BEEB6FD00F38F98 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;

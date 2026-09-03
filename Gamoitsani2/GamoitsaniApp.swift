@@ -16,6 +16,7 @@ struct GamoitsaniApp: App {
     @State private var haptics = Haptics()
     @State private var ads = AdMobAds()
     @State private var store = StoreKitPurchases()
+    @State private var recorder = CameraTurnRecorder()
     #if DEBUG
     @State private var debugSettings = DebugSettings()
     #endif
@@ -71,6 +72,7 @@ struct GamoitsaniApp: App {
             .environment(haptics)
             .environment(\.adService, ads)
             .environment(\.purchases, store)
+            .environment(\.turnRecording, recorder)
             .environment(\.isLaunching, showSplash)
             // Decoding on first play would hitch on the countdown tick.
             .task { await sound.prepare() }
