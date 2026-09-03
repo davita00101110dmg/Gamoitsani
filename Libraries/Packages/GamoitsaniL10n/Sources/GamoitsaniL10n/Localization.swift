@@ -117,10 +117,20 @@ public enum L10n {
         return result
     }()
 
-    /// Resolves a key in a specific language.
+    /// Marks a lookup that found nothing. Distinguishes a missing key from one whose
+    /// translation legitimately equals the key.
+    private static let missing = "\u{0}missing"
+
+    /// Resolves a key in a specific language, falling back to the source language.
+    ///
+    /// A bundle built from one `.lproj` has no fallback chain, so a partially translated
+    /// language returns raw keys unless the miss is caught here.
     public static func string(_ key: String, language: AppLanguage) -> String {
-        let bundle = bundles[language] ?? .module
-        return bundle.localizedString(forKey: key, value: key, table: nil)
+        if let bundle = bundles[language] {
+            let value = bundle.localizedString(forKey: key, value: missing, table: nil)
+            if value != missing { return value }
+        }
+        return Bundle.module.localizedString(forKey: key, value: key, table: nil)
     }
 
     /// Resolves against the system locale.

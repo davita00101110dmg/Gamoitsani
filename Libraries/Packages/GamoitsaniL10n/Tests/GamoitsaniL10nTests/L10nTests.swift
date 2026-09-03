@@ -26,16 +26,37 @@ struct L10nTests {
         #expect(L10n.string("no.such.key", language: .english) == "no.such.key")
     }
 
-    /// The catalogue currently carries en and ka. Everything else falls back to the source
-    /// language rather than showing raw keys — acceptable while the other nine are being
-    /// translated, and worth knowing rather than discovering.
-    @Test("untranslated languages fall back to English, not to raw keys", arguments: [
-        AppLanguage.german, .french, .japanese, .russian,
-    ])
-    func fallback(language: AppLanguage) {
-        let value = L10n.string("setup.play", language: language)
-        #expect(value == "Play")
-        #expect(value != "setup.play", "a raw key would mean the fallback chain is broken")
+    /// The property that matters while nine languages are part-translated: whatever is
+    /// missing, a user never sees a key. Pinning this to one key instead meant the test
+    /// broke the moment that key was translated.
+    @Test("no language ever shows a raw key")
+    func noRawKeys() throws {
+        let keys = try Self.englishKeys()
+        #expect(keys.count > 50, "catalogue looks empty — did the resource move?")
+
+        for language in AppLanguage.allCases {
+            for key in keys {
+                #expect(
+                    L10n.string(key, language: language) != key,
+                    "\(key) resolves to itself in \(language.rawValue)"
+                )
+            }
+        }
+    }
+
+    /// A partially translated language serves what it has and falls back for the rest.
+    @Test("a part-translated language mixes its own strings with English")
+    func partialLanguage() {
+        #expect(L10n.string("setup.play", language: .german) == "Start")
+        #expect(L10n.string("game.stats", language: .german) == "Stats")
+    }
+
+    private static func englishKeys() throws -> [String] {
+        let path = try #require(Bundle.module.path(forResource: "en", ofType: "lproj"))
+        let bundle = try #require(Bundle(path: path))
+        let url = try #require(bundle.url(forResource: "Localizable", withExtension: "strings"))
+        let table = try #require(NSDictionary(contentsOf: url) as? [String: String])
+        return Array(table.keys)
     }
 
     @Test("every shipped language has an endonym and a flag")
