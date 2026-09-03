@@ -26,7 +26,9 @@ struct GameSetupView: View {
     @State private var scrollOffset: CGFloat = 0
 
     var body: some View {
-        ScrollView {
+        @Bindable var model = model
+
+        return ScrollView {
             VStack(spacing: Spacing.lg) {
                 // In with the rest, or the mark pops into place while everything below
                 // it is still rising.
@@ -239,6 +241,21 @@ struct GameSetupView: View {
 
     private var teamsSection: some View {
         SetupPanel(title: l10n("setup.teams")) {
+            Picker("", selection: $model.buildMode) {
+                ForEach(TeamBuildMode.allCases) { mode in
+                    Text(l10n(mode.titleKey)).tag(mode)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding(.vertical, Spacing.sm)
+
+            Divider().overlay(Tokens.cardEdge.color)
+
+            if model.buildMode == .draw {
+                PlayerRoster(model: model)
+                Divider().overlay(Tokens.cardEdge.color)
+            }
+
             ForEach(Array(model.teams.enumerated()), id: \.element.id) { index, team in
                 TeamRow(
                     index: index,
@@ -248,10 +265,20 @@ struct GameSetupView: View {
                         set: { model.setName($0, for: team) }
                     ),
                     problem: model.problem(for: team),
-                    canRemove: model.canRemoveTeam,
+                    // The draw owns how many teams there are, so removing one by hand
+                    // while in draw mode would just be undone by the next shuffle.
+                    canRemove: model.canRemoveTeam && model.buildMode == .byHand,
                     remove: {
                         withAnimation(Motion.card(reduceMotion: reduceMotion)) {
                             model.removeTeam(team)
+                        }
+                    },
+                    isUsingDefaultName: model.isUsingDefaultName(team),
+                    roster: {
+                        // Only once a team has a line-up. Teams named by hand never gain
+                        // one unless someone starts adding people to it.
+                        if !team.members.isEmpty || model.buildMode == .draw {
+                            TeamRoster(model: model, team: team)
                         }
                     }
                 )
@@ -260,7 +287,7 @@ struct GameSetupView: View {
                 }
             }
 
-            if model.canAddTeam {
+            if model.canAddTeam, model.buildMode == .byHand {
                 Divider().overlay(Tokens.cardEdge.color)
                 Button {
                     withAnimation(Motion.card(reduceMotion: reduceMotion)) { model.addTeam() }
@@ -269,16 +296,16 @@ struct GameSetupView: View {
                         Image(systemName: "plus.circle.fill")
                         Text(l10n("setup.addTeam"))
                     }
-                    .font(Typography.headline)
+                    .font(Typography.rowTitle)
                     .foregroundStyle(Tokens.accent.color)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.vertical, Spacing.sm)
+                    .contentShape(Rectangle())
                 }
             }
         }
+        .animation(Motion.card(reduceMotion: reduceMotion), value: model.buildMode)
     }
-
-    // MARK: - Play
 
     private var playButton: some View {
         Button {

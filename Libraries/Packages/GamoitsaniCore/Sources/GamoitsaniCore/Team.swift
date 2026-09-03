@@ -21,6 +21,9 @@ public struct Team: Identifiable, Hashable, Sendable, Codable {
     /// When the current word was shown. Nil between words.
     public private(set) var guessStartedAt: Date?
 
+    /// Who is playing for this team. Empty when teams were named by hand.
+    public var members: [String]
+
     public init(
         id: UUID = UUID(),
         name: String,
@@ -32,7 +35,8 @@ public struct Team: Identifiable, Hashable, Sendable, Codable {
         totalGuessTime: TimeInterval = 0,
         setsSkipped: Int = 0,
         superWordsGuessed: Int = 0,
-        guessStartedAt: Date? = nil
+        guessStartedAt: Date? = nil,
+        members: [String] = []
     ) {
         self.id = id
         self.name = name
@@ -45,6 +49,26 @@ public struct Team: Identifiable, Hashable, Sendable, Codable {
         self.setsSkipped = setsSkipped
         self.superWordsGuessed = superWordsGuessed
         self.guessStartedAt = guessStartedAt
+        self.members = members
+    }
+
+    /// Decoded by hand only because `members` arrived after games were already being
+    /// saved. The synthesised version throws `keyNotFound` on a payload without it, and
+    /// the store swallows that — an in-progress game would vanish on upgrade.
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        score = try container.decode(Int.self, forKey: .score)
+        wordsGuessed = try container.decode(Int.self, forKey: .wordsGuessed)
+        wordsSkipped = try container.decode(Int.self, forKey: .wordsSkipped)
+        currentStreak = try container.decode(Int.self, forKey: .currentStreak)
+        bestStreak = try container.decode(Int.self, forKey: .bestStreak)
+        totalGuessTime = try container.decode(TimeInterval.self, forKey: .totalGuessTime)
+        setsSkipped = try container.decode(Int.self, forKey: .setsSkipped)
+        superWordsGuessed = try container.decode(Int.self, forKey: .superWordsGuessed)
+        guessStartedAt = try container.decodeIfPresent(Date.self, forKey: .guessStartedAt)
+        members = try container.decodeIfPresent([String].self, forKey: .members) ?? []
     }
 
     /// Mean time to guess a word, or zero when nothing has been guessed.

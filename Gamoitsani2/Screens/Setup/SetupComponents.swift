@@ -238,7 +238,7 @@ struct ToggleRow: View {
 }
 
 /// One team: its colour, its editable name, and whatever is wrong with it.
-struct TeamRow: View {
+struct TeamRow<Roster: View>: View {
     @Environment(Localization.self) private var l10n
     let index: Int
     let team: Team
@@ -246,6 +246,32 @@ struct TeamRow: View {
     let problem: TeamValidationError?
     let canRemove: Bool
     let remove: () -> Void
+    let isUsingDefaultName: Bool
+    /// Who is on this team, editable. Passed in so this row stays a dumb view.
+    private let roster: Roster
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @FocusState private var isEditingName: Bool
+
+    init(
+        index: Int,
+        team: Team,
+        name: Binding<String>,
+        problem: TeamValidationError?,
+        canRemove: Bool,
+        remove: @escaping () -> Void,
+        isUsingDefaultName: Bool,
+        @ViewBuilder roster: () -> Roster
+    ) {
+        self.index = index
+        self.team = team
+        self._name = name
+        self.problem = problem
+        self.canRemove = canRemove
+        self.remove = remove
+        self.isUsingDefaultName = isUsingDefaultName
+        self.roster = roster()
+    }
 
     private var color: Color { TeamPalette.color(at: index).color }
 
@@ -257,11 +283,28 @@ struct TeamRow: View {
                     .frame(width: 12, height: 12)
                     .accessibilityHidden(true)
 
+                // A generated name is drawn like an unfilled field: muted until it is
+                // really the team's name. No well — a bordered field inside an already
+                // bordered panel was heavier than the hint is worth.
                 TextField(l10n("setup.teamName"), text: $name)
                     .font(Typography.rowTitle)
-                    .foregroundStyle(Tokens.onSurface.color)
+                    .foregroundStyle(
+                        isUsingDefaultName && !isEditingName
+                            ? Tokens.onSurfaceMuted.color
+                            : Tokens.onSurface.color
+                    )
                     .textInputAutocapitalization(.words)
                     .submitLabel(.done)
+                    .focused($isEditingName)
+
+                // Steps aside once the caret is there to say it instead.
+                if !isEditingName {
+                    Image(systemName: "pencil")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(Tokens.onSurfaceMuted.color)
+                        .transition(.opacity)
+                        .accessibilityHidden(true)
+                }
 
                 if canRemove {
                     Button(action: remove) {
@@ -272,6 +315,10 @@ struct TeamRow: View {
                 }
             }
 
+            roster
+                .padding(.leading, Spacing.lg)
+                .padding(.top, Spacing.xxs)
+
             if let problem {
                 Text(message(for: problem))
                     .font(Typography.caption)
@@ -280,6 +327,7 @@ struct TeamRow: View {
                     .transition(.opacity)
             }
         }
+        .animation(Motion.control(reduceMotion: reduceMotion), value: isEditingName)
         .padding(.vertical, Spacing.sm)
     }
 
