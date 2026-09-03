@@ -16,6 +16,7 @@ struct GameFlowView: View {
     @Environment(Localization.self) private var l10n
     @Environment(\.scenePhase) private var scenePhase
     @Environment(SoundPlayer.self) private var sound
+    @Environment(\.adService) private var ads
     @State private var showRules = false
     @State private var showLeaderboard = false
 
@@ -88,9 +89,15 @@ struct GameFlowView: View {
         }
     }
 
+    /// Leaving a finished game is the one seam wide enough for a full-screen ad: the
+    /// result has been read and the next thing is the setup form. Never over the podium,
+    /// and never between rounds.
     private func leave() {
         session.leave()
-        router.pop()
+        Task {
+            await ads.showInterstitialIfAllowed()
+            router.pop()
+        }
     }
 }
 

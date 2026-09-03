@@ -19,6 +19,9 @@ struct GameOverView: View {
     @State private var barsGrown = false
     @State private var showStats = false
     @State private var card: UIImage?
+    @Environment(\.adService) private var ads
+    /// `onAppear` can fire again; a game is only finished once.
+    @State private var counted = false
 
     private var standings: [Team] { engine.standings }
     private var winner: Team? { engine.winner }
@@ -128,6 +131,10 @@ struct GameOverView: View {
             .padding(.bottom, Spacing.lg)
         }
         .onAppear {
+            if !counted {
+                counted = true
+                ads.gameFinished()
+            }
             sound.play(.gameOver)
             withAnimation(reduceMotion ? Motion.reduced : Motion.celebrate.delay(0.15)) {
                 barsGrown = true

@@ -58,6 +58,15 @@ struct DebugMenuSheet: View {
                             .padding(.vertical, Spacing.sm)
                     }
 
+                    SetupPanel(title: "Ads") {
+                        Toggle("Ignore ad frequency caps", isOn: Binding(
+                            get: { AdDebug.showsAdsInstantly },
+                            set: { AdDebug.showsAdsInstantly = $0 }
+                        ))
+                        .tint(Tokens.accent.color)
+                        .padding(.vertical, Spacing.sm)
+                    }
+
                     SetupPanel(title: "Current game") {
                         action("End turn now", enabled: session.engine?.state.phase == .playing) {
                             session.engine?.send(.timeExpired)

@@ -1,2834 +1,2923 @@
 {
-  "sourceLanguage": "en",
-  "strings": {
-    "a11y.guessHint": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mark as guessed"
+  "sourceLanguage" : "en",
+  "strings" : {
+    "a11y.guessed" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guessed"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "მონიშნე გამოცნობილად"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გამოცნობილი"
           }
         }
       }
     },
-    "a11y.guessed": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guessed"
+    "a11y.guessHint" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark as guessed"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გამოცნობილი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "მონიშნე გამოცნობილად"
           }
         }
       }
     },
-    "a11y.regularWord": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 point"
+    "a11y.regularWord" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 point"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 ქულა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 ქულა"
           }
         }
       }
     },
-    "a11y.startingIn": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Starting in"
+    "a11y.startingIn" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starting in"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დაიწყება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დაიწყება"
           }
         }
       }
     },
-    "a11y.superWord": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Super word, 3 points"
+    "a11y.superWord" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Super word, 3 points"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "სუპერ სიტყვა, 3 ქულა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "სუპერ სიტყვა, 3 ქულა"
           }
         }
       }
     },
-    "a11y.timeRemaining": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time remaining"
+    "a11y.timeRemaining" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time remaining"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დარჩენილი დრო"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დარჩენილი დრო"
           }
         }
       }
     },
-    "a11y.undoHint": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Undo this guess"
+    "a11y.undoHint" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undo this guess"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დააბრუნე გამოცნობა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დააბრუნე გამოცნობა"
           }
         }
       }
     },
-    "award.skips": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Most skips"
+    "award.skips" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Most skips"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ყველაზე მეტი გამოტოვება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ყველაზე მეტი გამოტოვება"
           }
         }
       }
     },
-    "award.speed": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fastest"
+    "award.speed" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fastest"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ყველაზე სწრაფი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ყველაზე სწრაფი"
           }
         }
       }
     },
-    "award.streak": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Best streak"
+    "award.streak" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Best streak"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "საუკეთესო სერია"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "საუკეთესო სერია"
           }
         }
       }
     },
-    "award.superWords": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Super words"
+    "award.superWords" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Super words"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "სუპერ სიტყვები"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "სუპერ სიტყვები"
           }
         }
       }
     },
-    "award.words": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Most words"
+    "award.words" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Most words"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ყველაზე მეტი სიტყვა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ყველაზე მეტი სიტყვა"
           }
         }
       }
     },
-    "common.cancel": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ləğv et"
+    "common.cancel" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abbrechen"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancel"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancelar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Annuler"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Չեղարկել"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "キャンセル"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キャンセル"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გაუქმება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გაუქმება"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Отмена"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İptal"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İptal"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Скасувати"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасувати"
           }
         }
       }
     },
-    "common.done": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Done"
+    "common.done" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "მზადაა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "მზადაა"
           }
         }
       }
     },
-    "game.challenge": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Challenge"
+    "game.challenge" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Challenge"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გამოწვევა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გამოწვევა"
           }
         }
       }
     },
-    "game.challenge.placeholder": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "High-five your team after every correct guess"
+    "game.challenge.placeholder" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High-five your team after every correct guess"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ყოველი სწორი პასუხის შემდეგ მიეცი გუნდს ხუთი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ყოველი სწორი პასუხის შემდეგ მიეცი გუნდს ხუთი"
           }
         }
       }
     },
-    "game.correct": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Correct"
+    "game.correct" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correct"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "სწორია"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "სწორია"
           }
         }
       }
     },
-    "game.extraRound": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Extra round"
+    "game.extraRound" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extra round"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დამატებითი რაუნდი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დამატებითი რაუნდი"
           }
         }
       }
     },
-    "game.finish": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Finish"
+    "game.finish" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finish"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დასრულება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დასრულება"
           }
         }
       }
     },
-    "game.gotIt": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Got it"
+    "game.gotIt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got it"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გასაგებია"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გასაგებია"
           }
         }
       }
     },
-    "game.howToPlay": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "How to play"
+    "game.howToPlay" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to play"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "როგორ ვითამაშოთ"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "როგორ ვითამაშოთ"
           }
         }
       }
     },
-    "game.leaderboard": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nəticələr"
+    "game.leaderboard" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nəticələr"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Anzeigetafel"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzeigetafel"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Leaderboard"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leaderboard"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Marcador"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcador"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tableau des scores"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tableau des scores"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Արդյունքներ"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Արդյունքներ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "スコアボード"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スコアボード"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ტურნირის ცხრილი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ტურნირის ცხრილი"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Таблица результатов"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Таблица результатов"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sonuçlar"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sonuçlar"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Результати"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Результати"
           }
         }
       }
     },
-    "game.newWords": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New words"
+    "game.newWords" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New words"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ახალი სიტყვები"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ახალი სიტყვები"
           }
         }
       }
     },
-    "game.noWords": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Başqa söz qalmayıb"
+    "game.noWords" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başqa söz qalmayıb"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Keine weiteren Wörter"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine weiteren Wörter"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No words left"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No words left"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No hay más palabras"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay más palabras"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plus de mots"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus de mots"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Այլևս բառեր չկան"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Այլևս բառեր չկան"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "単語がもうありません"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "単語がもうありません"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "სიტყვები ამოიწურა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "სიტყვები ამოიწურა"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Больше нет слов"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Больше нет слов"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Başka kelime kalmadı"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başka kelime kalmadı"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Більше немає слів"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Більше немає слів"
           }
         }
       }
     },
-    "game.over": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Game over"
+    "game.over" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game over"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "თამაში დასრულდა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "თამაში დასრულდა"
           }
         }
       }
     },
-    "game.rematch": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rematch"
+    "game.rematch" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rematch"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "რევანში"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "რევანში"
           }
         }
       }
     },
-    "game.round": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Round"
+    "game.round" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "რაუნდი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "რაუნდი"
           }
         }
       }
     },
-    "game.share": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Share"
+    "game.share" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გაზიარება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გაზიარება"
           }
         }
       }
     },
-    "game.skip": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skip"
+    "game.skip" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გამოტოვება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გამოტოვება"
           }
         }
       }
     },
-    "game.start": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Başla"
+    "game.start" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başla"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Comenzar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comenzar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Commencer"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencer"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Սկսել"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Սկսել"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "開始"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開始"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დაწყება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დაწყება"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Начать"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начать"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Başla"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başla"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Почати"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почати"
           }
         }
       }
     },
-    "game.stats": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stats"
+    "game.stats" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stats"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "სტატისტიკა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "სტატისტიკა"
           }
         }
       }
     },
-    "game.upNow": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "up now"
+    "game.upNow" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "up now"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ახლა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ახლა"
           }
         }
       }
     },
-    "home.title": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gamoitsani"
+    "home.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamoitsani"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gamoitsani"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamoitsani"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "GAMOITSANI"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GAMOITSANI"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gamoitsani"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamoitsani"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gamoitsani"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamoitsani"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gamoitsani"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamoitsani"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gamoitsani"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamoitsani"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გამოიცანი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გამოიცანი"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gamoitsani"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamoitsani"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gamoitsani"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamoitsani"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gamoitsani"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamoitsani"
           }
         }
       }
     },
-    "mode.arcade": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arkada"
+    "mode.arcade" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arkada"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arcade"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arcade"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arcade"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arcade"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arcade"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arcade"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arcade"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arcade"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Արկադ"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Արկադ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "アーケード"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アーケード"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "არკადა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "არკადა"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Аркадный"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аркадный"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arcade"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arcade"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Аркада"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аркада"
           }
         }
       }
     },
-    "mode.arcade.detail": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eyni anda 5 söz oyna"
+    "mode.arcade.detail" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eyni anda 5 söz oyna"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mit 5 Wörtern gleichzeitig spielen"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit 5 Wörtern gleichzeitig spielen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Five words at once"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Five words at once"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jugar con 5 palabras a la vez"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jugar con 5 palabras a la vez"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jouer avec 5 mots à la fois"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jouer avec 5 mots à la fois"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Խաղալ 5 բառով միաժամանակ"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Խաղալ 5 բառով միաժամանակ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "5つの単語を同時にプレイ"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5つの単語を同時にプレイ"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ხუთი სიტყვა ერთდროულად"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ხუთი სიტყვა ერთდროულად"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Играть с 5 словами одновременно"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Играть с 5 словами одновременно"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aynı anda 5 kelime oyna"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aynı anda 5 kelime oyna"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Грайте з 5 словами одночасно"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грайте з 5 словами одночасно"
           }
         }
       }
     },
-    "mode.classic": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Klassik"
+    "mode.classic" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klassik"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Klassisch"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klassisch"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Classic"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Classic"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clásico"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clásico"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Classique"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Classique"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Դասական"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Դասական"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "クラシック"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "クラシック"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "კლასიკური"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "კლასიკური"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Классический"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Классический"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Klasik"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klasik"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Класичний"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Класичний"
           }
         }
       }
     },
-    "mode.classic.detail": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bir dəfədə bir söz oyna"
+    "mode.classic.detail" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir dəfədə bir söz oyna"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein Wort nach dem anderen spielen"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Wort nach dem anderen spielen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One word at a time"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One word at a time"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jugar una palabra a la vez"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jugar una palabra a la vez"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jouer un mot à la fois"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jouer un mot à la fois"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Խաղալ մեկ բառով"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Խաղալ մեկ բառով"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一度に一つの単語をプレイ"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一度に一つの単語をプレイ"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "თითო სიტყვა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "თითო სიტყვა"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Играть по одному слову за раз"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Играть по одному слову за раз"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tek seferde bir kelime oyna"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tek seferde bir kelime oyna"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Грайте одне слово за раз"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грайте одне слово за раз"
           }
         }
       }
     },
-    "players.add": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add player"
+    "players.add" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add player"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "მოთამაშის დამატება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "მოთამაშის დამატება"
           }
         }
       }
     },
-    "players.draw": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Shuffle"
+    "players.draw" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shuffle"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "არევა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "არევა"
           }
         }
       }
     },
-    "players.needMore": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add at least 4 players"
+    "players.needMore" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add at least 4 players"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დაამატე მინიმუმ 4 მოთამაშე"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დაამატე მინიმუმ 4 მოთამაშე"
           }
         }
       }
     },
-    "players.placeholder": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add a player"
+    "players.placeholder" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a player"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დაამატე მოთამაშე"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დაამატე მოთამაშე"
           }
         }
       }
     },
-    "players.redraw": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Shuffle again"
+    "players.redraw" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shuffle again"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "თავიდან არევა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "თავიდან არევა"
           }
         }
       }
     },
-    "players.remove": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remove"
+    "players.remove" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "წაშლა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "წაშლა"
           }
         }
       }
     },
-    "players.teamCount": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Teams"
+    "players.teamCount" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teams"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გუნდები"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გუნდები"
           }
         }
       }
     },
-    "rules.1": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One player describes the word without saying it."
+    "rules.1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One player describes the word without saying it."
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ერთი მოთამაშე აღწერს სიტყვას ისე, რომ არ თქვას იგი."
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ერთი მოთამაშე აღწერს სიტყვას ისე, რომ არ თქვას იგი."
           }
         }
       }
     },
-    "rules.2": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Their team guesses before the timer runs out."
+    "rules.2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Their team guesses before the timer runs out."
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გუნდი უნდა გამოიცნოს დროის ამოწურვამდე."
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გუნდი უნდა გამოიცნოს დროის ამოწურვამდე."
           }
         }
       }
     },
-    "rules.3": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A correct guess is +1. A skip is −1."
+    "rules.3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A correct guess is +1. A skip is −1."
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "სწორი პასუხი +1. გამოტოვება −1."
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "სწორი პასუხი +1. გამოტოვება −1."
           }
         }
       }
     },
-    "rules.4": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Highest score after the last round wins."
+    "rules.4" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Highest score after the last round wins."
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ბოლო რაუნდის შემდეგ იმარჯვებს ყველაზე მაღალი ქულა."
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ბოლო რაუნდის შემდეგ იმარჯვებს ყველაზე მაღალი ქულა."
           }
         }
       }
     },
-    "settings.about": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "About"
+    "settings.about" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "აპლიკაციის შესახებ"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "აპლიკაციის შესახებ"
           }
         }
       }
     },
-    "settings.build": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Build"
+    "settings.build" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Build"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ბილდი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ბილდი"
           }
         }
       }
     },
-    "settings.feedback": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kömək və rəy"
+    "settings.feedback" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kömək və rəy"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hilfe & Feedback"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hilfe & Feedback"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Help & feedback"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help & feedback"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ayuda y comentarios"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayuda y comentarios"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aide et commentaires"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aide et commentaires"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Օգնություն և հետադարձ կապ"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Օգնություն և հետադարձ կապ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ヘルプとフィードバック"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ヘルプとフィードバック"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დახმარება & უკუკავშირი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დახმარება & უკუკავშირი"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Помощь и обратная связь"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помощь и обратная связь"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yardım & Geri Bildirim"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yardım & Geri Bildirim"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Допомога та відгуки"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Допомога та відгуки"
           }
         }
       }
     },
-    "settings.haptics": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Haptics"
+    "settings.haptics" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptics"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ვიბრაცია"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ვიბრაცია"
           }
         }
       }
     },
-    "settings.language": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dil"
+    "settings.language" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dil"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sprache"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sprache"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Language"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Idioma"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Langue"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Լեզու"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Լեզու"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "言語"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "言語"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ენა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ენა"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Язык"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Язык"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dil"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dil"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Мова"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мова"
           }
         }
       }
     },
-    "settings.rate": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tətbiqi qiymətləndir"
+    "settings.rate" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tətbiqi qiymətləndir"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diese App bewerten"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese App bewerten"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rate this app"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rate this app"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Valorar esta aplicación"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valorar esta aplicación"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Évaluer cette application"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Évaluer cette application"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Գնահատել հավելվածը"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Գնահատել հավելվածը"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このアプリを評価"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このアプリを評価"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "შეაფასე აპლიკაცია"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "შეაფასე აპლიკაცია"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Оценить приложение"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оценить приложение"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uygulamayı Değerlendir"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uygulamayı Değerlendir"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Оцінити додаток"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оцінити додаток"
           }
         }
       }
     },
-    "settings.share": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tətbiqi paylaş"
+    "settings.share" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tətbiqi paylaş"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diese App teilen"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese App teilen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Share this app"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share this app"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Compartir esta aplicación"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir esta aplicación"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Partager cette application"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partager cette application"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Կիսվել հավելվածով"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Կիսվել հավելվածով"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このアプリを共有"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このアプリを共有"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გააზიარე აპლიკაცია"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გააზიარე აპლიკაცია"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Поделиться приложением"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поделиться приложением"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu Uygulamayı Paylaş"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu Uygulamayı Paylaş"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Поділитися додатком"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поділитися додатком"
           }
         }
       }
     },
-    "settings.sound": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sound"
+    "settings.sound" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sound"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ხმა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ხმა"
           }
         }
       }
     },
-    "settings.sound.effects": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sound effects"
+    "settings.sound.effects" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sound effects"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ხმოვანი ეფექტები"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ხმოვანი ეფექტები"
           }
         }
       }
     },
-    "settings.support": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Support"
+    "settings.support" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დახმარება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დახმარება"
           }
         }
       }
     },
-    "settings.title": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tənzimləmələr"
+    "settings.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tənzimləmələr"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Einstellungen"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustes"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Paramètres"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paramètres"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Կարգավորումներ"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Կարգավորումներ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "設定"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "პარამეტრები"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "პარამეტრები"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Настройки"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настройки"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ayarlar"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayarlar"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Налаштування"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштування"
           }
         }
       }
     },
-    "settings.version": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Version"
+    "settings.version" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ვერსია"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ვერსია"
           }
         }
       }
     },
-    "setup.addTeam": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Komanda əlavə et"
+    "setup.addTeam" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Komanda əlavə et"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Team hinzufügen"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team hinzufügen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add a team"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a team"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añadir un equipo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir un equipo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajouter une équipe"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter une équipe"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ավելացնել թիմ"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ավելացնել թիմ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "チームを追加"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "チームを追加"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გუნდის დამატება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გუნდის დამატება"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Добавить команду"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить команду"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Takım ekle"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takım ekle"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Додати команду"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Додати команду"
           }
         }
       }
     },
-    "setup.challenge": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Team challenge"
+    "setup.challenge" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team challenge"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გუნდის გამოწვევა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გუნდის გამოწვევა"
           }
         }
       }
     },
-    "setup.challenge.detail": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Each team gets a silly rule"
+    "setup.challenge.detail" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each team gets a silly rule"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "თითოეული გუნდი იღებს წესს"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "თითოეული გუნდი იღებს წესს"
           }
         }
       }
     },
-    "setup.discard": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Discard"
+    "setup.discard" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discard"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "წაშლა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "წაშლა"
           }
         }
       }
     },
-    "setup.error.count": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You need 2 to 5 teams"
+    "setup.error.count" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need 2 to 5 teams"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "საჭიროა 2-დან 5 გუნდამდე"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "საჭიროა 2-დან 5 გუნდამდე"
           }
         }
       }
     },
-    "setup.error.duplicate": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu adda komanda artıq mövcuddur"
+    "setup.error.duplicate" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu adda komanda artıq mövcuddur"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein Team mit diesem Namen existiert bereits"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Team mit diesem Namen existiert bereits"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Two teams share this name"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Two teams share this name"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ya existe un equipo con este nombre"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya existe un equipo con este nombre"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une équipe avec ce nom existe déjà"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une équipe avec ce nom existe déjà"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Այս անունով թիմ արդեն գոյություն ունի"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Այս անունով թիմ արդեն գոյություն ունի"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "この名前のチームはすでに存在します"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "この名前のチームはすでに存在します"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "სახელი მეორდება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "სახელი მეორდება"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Команда с таким названием уже существует"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Команда с таким названием уже существует"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu isimde bir takım zaten var"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu isimde bir takım zaten var"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Команда з такою назвою вже існує"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Команда з такою назвою вже існує"
           }
         }
       }
     },
-    "setup.error.empty": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ad boş ola bilməz"
+    "setup.error.empty" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad boş ola bilməz"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Name darf nicht leer sein"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name darf nicht leer sein"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Give this team a name"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Give this team a name"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El nombre no puede estar vacío"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El nombre no puede estar vacío"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le nom ne peut pas être vide"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le nom ne peut pas être vide"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Անունը չի կարող դատարկ լինել"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Անունը չի կարող դատարկ լինել"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "名前を空にすることはできません"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名前を空にすることはできません"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დაარქვით სახელი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დაარქვით სახელი"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Имя не может быть пустым"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имя не может быть пустым"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İsim boş olamaz"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İsim boş olamaz"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Назва не може бути пустою"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назва не може бути пустою"
           }
         }
       }
     },
-    "setup.error.tooLong": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "That name is too long"
+    "setup.error.tooLong" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That name is too long"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "სახელი ძალიან გრძელია"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "სახელი ძალიან გრძელია"
           }
         }
       }
     },
-    "setup.extras": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Extras"
+    "setup.extras" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extras"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "დამატებით"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "დამატებით"
           }
         }
       }
     },
-    "setup.inProgress": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Game in progress"
+    "setup.inProgress" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game in progress"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "მიმდინარე თამაში"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "მიმდინარე თამაში"
           }
         }
       }
     },
-    "setup.length": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Length"
+    "setup.length" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Length"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ხანგრძლივობა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ხანგრძლივობა"
           }
         }
       }
     },
-    "setup.mode": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oyun rejimi"
+    "setup.mode" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oyun rejimi"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Spielmodus"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spielmodus"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mode"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modo de juego"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modo de juego"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mode de jeu"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode de jeu"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Խաղի ռեժիմ"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Խաղի ռեժիմ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ゲームモード"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ゲームモード"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "რეჟიმი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "რეჟიმი"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Режим игры"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Режим игры"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oyun modu"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oyun modu"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Режим гри"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Режим гри"
           }
         }
       }
     },
-    "setup.play": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Başla"
+    "setup.play" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başla"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Play"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Comenzar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comenzar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Commencer"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencer"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Սկսել"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Սկսել"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "開始"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開始"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "თამაში"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "თამაში"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Начать"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начать"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Başla"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başla"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Почати"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почати"
           }
         }
       }
     },
-    "setup.removeTeam": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remove team"
+    "setup.removeTeam" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove team"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გუნდის წაშლა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გუნდის წაშლა"
           }
         }
       }
     },
-    "setup.resume": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Resume game"
+    "setup.resume" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume game"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "თამაშის გაგრძელება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "თამაშის გაგრძელება"
           }
         }
       }
     },
-    "setup.round": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Round"
+    "setup.round" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "რაუნდი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "რაუნდი"
           }
         }
       }
     },
-    "setup.rounds": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rounds"
+    "setup.rounds" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rounds"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "რაუნდები"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "რაუნდები"
           }
         }
       }
     },
-    "setup.superWord": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Super word"
+    "setup.superWord" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Super word"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "სუპერ სიტყვა"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "სუპერ სიტყვა"
           }
         }
       }
     },
-    "setup.superWord.detail": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Təsadüfi super söz (3 xal)"
+    "setup.superWord.detail" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Təsadüfi super söz (3 xal)"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zufälliges Superwort (3 Punkte)"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zufälliges Superwort (3 Punkte)"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One word per round is worth 3"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One word per round is worth 3"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Palabra super aleatoria (3 Puntos)"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palabra super aleatoria (3 Puntos)"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mot super aléatoire (3 Points)"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mot super aléatoire (3 Points)"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Պատահական սուպեր բառ (3 միավոր)"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Պատահական սուպեր բառ (3 միավոր)"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランダムなスーパーワード（3ポイント）"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランダムなスーパーワード（3ポイント）"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "რაუნდში ერთი სიტყვა ღირს 3"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "რაუნდში ერთი სიტყვა ღირს 3"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Случайное супер-слово (3 Очка)"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Случайное супер-слово (3 Очка)"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rastgele süper kelime (3 Puan)"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rastgele süper kelime (3 Puan)"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Випадкове супер слово (3 бали)"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Випадкове супер слово (3 бали)"
           }
         }
       }
     },
-    "setup.teamDefault": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Team"
+    "setup.teamDefault" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გუნდი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გუნდი"
           }
         }
       }
     },
-    "setup.teamName": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Komanda adı"
+    "setup.teamName" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Komanda adı"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Teamname"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teamname"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Team name"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team name"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nombre del equipo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre del equipo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nom de l'équipe"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom de l'équipe"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Թիմի անուն"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Թիմի անուն"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "チーム名"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "チーム名"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გუნდის სახელი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გუნდის სახელი"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Название команды"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Название команды"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Takım adı"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takım adı"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Назва команди"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назва команди"
           }
         }
       }
     },
-    "setup.teams": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Komandalar"
+    "setup.teams" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Komandalar"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Teams"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teams"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Teams"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teams"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Equipos"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Equipos"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Équipes"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Équipes"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Թիմեր"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Թիմեր"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "チーム"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "チーム"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გუნდები"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გუნდები"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Команды"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Команды"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Takımlar"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takımlar"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Команди"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Команди"
           }
         }
       }
     },
-    "share.preview": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Game result"
+    "share.preview" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game result"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "თამაშის შედეგი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "თამაშის შედეგი"
           }
         }
       }
     },
-    "stats.guessed": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Təxmin edilən sözlər"
+    "stats.guessed" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Təxmin edilən sözlər"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Erratene Wörter"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erratene Wörter"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "guessed"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "guessed"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Palabras Adivinadas"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palabras Adivinadas"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mots Devinés"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mots Devinés"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Գուշակված բառեր"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Գուշակված բառեր"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "当てた単語"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当てた単語"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გამოცნობილი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გამოცნობილი"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Угаданные слова"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Угаданные слова"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tahmin Edilen Kelimeler"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tahmin Edilen Kelimeler"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Вгадані слова"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вгадані слова"
           }
         }
       }
     },
-    "stats.sets": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dəstlər Atlandı"
+    "stats.sets" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dəstlər Atlandı"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Übersprungene Sets"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übersprungene Sets"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "sets skipped"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sets skipped"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Conjuntos Omitidos"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conjuntos Omitidos"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ensembles Passés"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ensembles Passés"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Կոմպլեկտները բաց են թողնվել"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Կոմպլեկտները բաց են թողնվել"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "スキップしたセット"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スキップしたセット"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გამოტოვებული სეტი"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გამოტოვებული სეტი"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Пропущенные наборы"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пропущенные наборы"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atlanan Setler"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atlanan Setler"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сети пропущені"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сети пропущені"
           }
         }
       }
     },
-    "stats.skipped": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sözlər Atlandı"
+    "stats.skipped" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sözlər Atlandı"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Übersprungene Wörter"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übersprungene Wörter"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "skipped"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "skipped"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Palabras Omitidas"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palabras Omitidas"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mots Passés"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mots Passés"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Բառեր բաց թողնված"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Բառեր բաց թողնված"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "スキップした単語"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スキップした単語"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გამოტოვებული"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გამოტოვებული"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Пропущенные слова"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пропущенные слова"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atlanan Kelimeler"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atlanan Kelimeler"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Пропущені слова"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пропущені слова"
           }
         }
       }
     },
-    "stats.streak": {
-      "localizations": {
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ən yaxşı zolaq"
+    "stats.streak" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ən yaxşı zolaq"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beste Serie"
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beste Serie"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "best streak"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "best streak"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mejor Racha"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mejor Racha"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meilleure Série"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meilleure Série"
           }
         },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Լավագույն շարք"
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Լավագույն շարք"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "最高連続成功"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最高連続成功"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "საუკეთესო სერია"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "საუკეთესო სერია"
           }
         },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Лучшая серия"
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лучшая серия"
           }
         },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En İyi Seri"
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En İyi Seri"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Найкраща серія"
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Найкраща серія"
           }
         }
       }
     },
-    "teams.mode.byHand": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "By hand"
+    "teams.mode.byHand" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By hand"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ხელით"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ხელით"
           }
         }
       }
     },
-    "teams.mode.draw": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Draw"
+    "teams.mode.draw" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Draw"
           }
         },
-        "ka": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "გათამაშება"
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გათამაშება"
           }
         }
       }
     }
   },
-  "version": "1.0"
+  "version" : "1.0"
 }

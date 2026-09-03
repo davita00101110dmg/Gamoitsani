@@ -14,6 +14,7 @@ struct GamoitsaniApp: App {
     @State private var session = GameSession()
     @State private var sound = SoundPlayer()
     @State private var haptics = Haptics()
+    @State private var ads = AdMobAds()
     #if DEBUG
     @State private var debugSettings = DebugSettings()
     #endif
@@ -50,9 +51,11 @@ struct GamoitsaniApp: App {
             .environment(session)
             .environment(sound)
             .environment(haptics)
+            .environment(\.adService, ads)
             .environment(\.isLaunching, showSplash)
             // Decoding on first play would hitch on the countdown tick.
             .task { await sound.prepare() }
+            .task { await ads.start() }
             .tint(Tokens.accent.color)
 
         #if DEBUG
