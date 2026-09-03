@@ -78,6 +78,8 @@ struct GamoitsaniApp: App {
             .task { await sound.prepare() }
             .task { await ads.start() }
             .task { await store.start() }
+            // Finishes anything a previous launch was killed part-way through.
+            .task { await recorder.resumePendingClips() }
             // The store owns the entitlement; ads are told about it. `initial: true`
             // covers the ordinary case, where ownership is already known from
             // `currentEntitlements` before anything has changed.

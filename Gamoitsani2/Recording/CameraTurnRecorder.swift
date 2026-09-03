@@ -4,6 +4,7 @@
 //
 import AVFoundation
 import Observation
+import UIKit
 import Photos
 import GamoitsaniCapture
 
@@ -24,6 +25,19 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
 
     @ObservationIgnored private var timeline: RecordingTimeline?
     @ObservationIgnored private var clipStart: CFTimeInterval?
+    /// Held for the life of the recording.
+    ///
+    /// `AVCaptureMovieFileOutput` does not keep its recording delegate alive, so an
+    /// inline-constructed one is deallocated before the file is written and
+    /// `didFinishRecordingTo` never arrives. Everything downstream of that callback —
+    /// stopping the session, the export, the Photos save — then silently never happens.
+    @ObservationIgnored private var delegateProxy: RecordingDelegateProxy?
+
+    /// Set the instant a turn starts filming, cleared only when the file has been dealt
+    /// with. Stopping is gated on this rather than on `state`, which is published a moment
+    /// later from the session queue — a turn ended inside that window used to leave the
+    /// camera running for the rest of the game.
+    @ObservationIgnored private var isFilming = false
 
     // MARK: - Permissions
 
@@ -67,7 +81,11 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
     // MARK: - A turn
 
     func startTurn(teamName: String, roundLength: TimeInterval) {
-        guard state == .idle else { return }
+        guard !isFilming, state != .exporting else { return }
+
+        // Cleared rather than inspected: a refusal on one turn — a full disk that has
+        // since been emptied — must not disable filming for the rest of the game.
+        state = .idle
 
         if let refusal = policy.refusalToRecord(conditions, roundLength: roundLength) {
             // `.disabled` is the ordinary case — most games are not filmed — and is not
@@ -76,18 +94,25 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
             return
         }
 
+        isFilming = true
         timeline = RecordingTimeline(teamName: teamName)
-        let url = FileManager.default.temporaryDirectory
-            .appendingPathComponent("turn-\(UUID().uuidString).mov")
+        // Durable storage, not `temporaryDirectory`: a clip has to survive the app being
+        // killed between filming and saving.
+        let url = PendingClipStore.newClipURL()
+
+        let proxy = RecordingDelegateProxy(recorder: self)
+        delegateProxy = proxy
 
         capture.start { [weak self, capture, policy] in
             capture.beginRecording(
                 to: url,
                 maximumDuration: policy.maximumDuration,
-                delegate: RecordingDelegateProxy(recorder: self)
+                delegate: proxy
             )
             Task { @MainActor in
-                guard let self, self.state == .idle else { return }
+                // `isFilming` rather than the state: a turn that ended before the session
+                // finished starting must not be marked as recording afterwards.
+                guard let self, self.isFilming else { return }
                 // The clip's clock starts here rather than at its first frame. The gap is a
                 // few frames, and the timeline clamps anything arriving early rather than
                 // producing a negative interval.
@@ -113,15 +138,27 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
     }
 
     func finishTurn() {
-        guard state == .recording else { return }
+        guard isFilming else { return }
         timeline?.finish(at: elapsed ?? 0)
         state = .exporting
         capture.stopRecording()
     }
 
+    /// Finishes any clip left behind by a previous launch.
+    ///
+    /// Called at startup. A force-quit during an export used to lose the clip outright;
+    /// now the footage and its timeline are both on disk, so it can simply be finished.
+    func resumePendingClips() async {
+        for pending in PendingClipStore.pending() {
+            await export(pending.clip, timeline: pending.timeline)
+        }
+    }
+
     /// The player left mid-turn. The footage exists but describes nothing, so it goes.
     func cancelTurn() {
-        guard state == .recording else { return }
+        guard isFilming else { return }
+        // Cleared before the callback arrives, so `handleFinishedClip` finds no timeline
+        // and deletes the footage instead of exporting a turn nobody finished.
         timeline = nil
         state = .idle
         capture.stopRecording()
@@ -137,6 +174,8 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         let finished = timeline
         timeline = nil
         clipStart = nil
+        delegateProxy = nil
+        isFilming = false
         // Releases the camera. A party game is put down constantly, and holding the device
         // between turns keeps the orange indicator lit for no reason.
         capture.stop()
@@ -146,21 +185,36 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         let exists = FileManager.default.fileExists(atPath: url.path)
 
         guard let finished, exists, policy.isWorthKeeping(finished) else {
-            Self.delete(url)
+            PendingClipStore.discard(url)
             state = .idle
             return
         }
 
-        let exported = await RecordingExporter.export(clip: url, timeline: finished)
-        Self.delete(url)
-
-        if let exported {
-            await Self.saveToPhotos(exported)
-            // Both copies go. v1 left every recording in Documents forever, invisible to
-            // the player, on top of the copy it had already put in Photos.
-            Self.delete(exported)
-        }
+        // Written before the export starts, so being killed mid-export costs time rather
+        // than the clip.
+        PendingClipStore.write(finished, for: url)
+        await export(url, timeline: finished)
         state = .idle
+    }
+
+    /// Composes the overlay and saves the result, then removes both copies.
+    private func export(_ clip: URL, timeline: RecordingTimeline) async {
+        // The export outlives the turn-info screen if the player backgrounds the app, and
+        // without this iOS suspends it part-written.
+        let task = await UIApplication.shared.beginBackgroundTask(withName: "gamoitsani.export")
+        defer { Task { @MainActor in UIApplication.shared.endBackgroundTask(task) } }
+
+        guard let exported = await RecordingExporter.export(clip: clip, timeline: timeline) else {
+            // Leave the pair in place. The next launch tries again rather than throwing
+            // away footage that may only have failed because the device was busy.
+            return
+        }
+
+        await Self.saveToPhotos(exported)
+        // Both copies go. v1 left every recording in Documents forever, invisible to the
+        // player, on top of the copy it had already put in Photos.
+        Self.delete(exported)
+        PendingClipStore.discard(clip)
     }
 
     private static func saveToPhotos(_ url: URL) async {

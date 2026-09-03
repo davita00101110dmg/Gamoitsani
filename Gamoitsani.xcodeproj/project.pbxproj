@@ -37,6 +37,7 @@
 		BD67B4AC6B03422DA2C500D3 /* RecordingExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B12FD4CE3F84BE8BEDC04EB /* RecordingExporter.swift */; };
 		5CF98E7113214DFA8CB51067 /* CaptureSessionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE71DFAC10D42FDBB065851 /* CaptureSessionBox.swift */; };
 		5C44931FFEEB48DC80EBF2EF /* RecordingBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69182A5BA5D34E99B843F08D /* RecordingBridge.swift */; };
+		DA1088826889463689CFC04B /* PendingClipStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B29778570B142499EC08496 /* PendingClipStore.swift */; };
 		AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30510617BAE33CE79D50131 /* BannerAd.swift */; };
 		B4C89321A831373D1E1223E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */; };
 		B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96668D899010A3A09E42EC99 /* AdEnvironment.swift */; };
@@ -304,6 +305,7 @@
 		4B12FD4CE3F84BE8BEDC04EB /* RecordingExporter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordingExporter.swift; path = Recording/RecordingExporter.swift; sourceTree = "<group>"; };
 		FDE71DFAC10D42FDBB065851 /* CaptureSessionBox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CaptureSessionBox.swift; path = Recording/CaptureSessionBox.swift; sourceTree = "<group>"; };
 		69182A5BA5D34E99B843F08D /* RecordingBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordingBridge.swift; path = Recording/RecordingBridge.swift; sourceTree = "<group>"; };
+		6B29778570B142499EC08496 /* PendingClipStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PendingClipStore.swift; path = Recording/PendingClipStore.swift; sourceTree = "<group>"; };
 		3A46906829AF04DF295A2BED /* AdUnits.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdUnits.swift; path = Ads/AdUnits.swift; sourceTree = "<group>"; };
 		3BDE67BC9BFB90A79983B10D /* Gamoitsani2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E023802D284EC10E151378E /* PurchaseManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				AE4EC563CA317EEED5FCA338 /* AdMobAds.swift */,
 				E30510617BAE33CE79D50131 /* BannerAd.swift */,
 				96668D899010A3A09E42EC99 /* AdEnvironment.swift */,
+				6B29778570B142499EC08496 /* PendingClipStore.swift */,
 				69182A5BA5D34E99B843F08D /* RecordingBridge.swift */,
 				FDE71DFAC10D42FDBB065851 /* CaptureSessionBox.swift */,
 				4B12FD4CE3F84BE8BEDC04EB /* RecordingExporter.swift */,
@@ -1916,6 +1919,7 @@
 				F8AD6CA2387F7BDA5506DA76 /* AdMobAds.swift in Sources */,
 				AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */,
 				B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */,
+				DA1088826889463689CFC04B /* PendingClipStore.swift in Sources */,
 				5C44931FFEEB48DC80EBF2EF /* RecordingBridge.swift in Sources */,
 				5CF98E7113214DFA8CB51067 /* CaptureSessionBox.swift in Sources */,
 				BD67B4AC6B03422DA2C500D3 /* RecordingExporter.swift in Sources */,
