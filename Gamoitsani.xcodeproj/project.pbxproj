@@ -23,6 +23,7 @@
 		7E7DB9AC1AE3D56C4A6245A2 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923A8905BC6AA8467F91AF19 /* GameSession.swift */; };
 		90ABDC919AB3CF3A865F82D5 /* LeaderboardSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8CF213E6E24E6647668F8 /* LeaderboardSheet.swift */; };
 		924A62BE6EB988DF780416F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FF8B6C753C6F444A7BABEA /* Foundation.framework */; };
+		A8CC8DF3F1347FAC4DB17E9A /* ShareCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88501753E294F4505B439CD /* ShareCard.swift */; };
 		AA38C41CA0E8D6135DDC8360 /* Pods_Gamoitsani_GamoitsaniUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15021D7C46D4DA69DAB50747 /* Pods_Gamoitsani_GamoitsaniUITests.framework */; };
 		B4C89321A831373D1E1223E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */; };
 		C9895FC82240F341363A966E /* SampleWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0DC5ADB9E2C42FBC354C2D /* SampleWords.swift */; };
@@ -289,6 +290,7 @@
 		BDB02F97058A700F6375993C /* Route.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Route.swift; path = Navigation/Route.swift; sourceTree = "<group>"; };
 		C423FDAAD4A8C93737BC37E6 /* GameOverView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameOverView.swift; path = Game/GameOverView.swift; sourceTree = "<group>"; };
 		C5963B1A2F5D9F6900617CBD /* Gamoitsani Word 2.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Gamoitsani Word 2.0.xcdatamodel"; sourceTree = "<group>"; };
+		C88501753E294F4505B439CD /* ShareCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShareCard.swift; path = Game/ShareCard.swift; sourceTree = "<group>"; };
 		D36CCD79F4764663A3E7BDFD /* SplashView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplashView.swift; path = Screens/SplashView.swift; sourceTree = "<group>"; };
 		DAC03FE91ECAA969A0956837 /* SetupComponents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SetupComponents.swift; path = Screens/Setup/SetupComponents.swift; sourceTree = "<group>"; };
 		F0E7AC92C1E2C28737A902C9 /* Pods-Gamoitsani.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani.release.xcconfig"; path = "Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.release.xcconfig"; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 				BB3A1A03242578E4715AB6A3 /* DebugMenu.swift */,
 				D36CCD79F4764663A3E7BDFD /* SplashView.swift */,
 				0F4803685FD8794E19D47296 /* Assets.xcassets */,
+				C88501753E294F4505B439CD /* ShareCard.swift */,
 			);
 			name = Gamoitsani2;
 			path = Gamoitsani2;
@@ -1804,6 +1807,7 @@
 				90ABDC919AB3CF3A865F82D5 /* LeaderboardSheet.swift in Sources */,
 				4B27E3FC2F2BC311C29A036A /* DebugMenu.swift in Sources */,
 				55CC02AC07EED22D5BF9025A /* SplashView.swift in Sources */,
+				A8CC8DF3F1347FAC4DB17E9A /* ShareCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

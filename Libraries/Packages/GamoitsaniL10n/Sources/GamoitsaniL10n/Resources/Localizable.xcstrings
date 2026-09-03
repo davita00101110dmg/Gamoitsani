@@ -1,6 +1,86 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "award.skips": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most skips"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ყველაზე მეტი გამოტოვება"
+          }
+        }
+      }
+    },
+    "award.speed": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fastest"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ყველაზე სწრაფი"
+          }
+        }
+      }
+    },
+    "award.streak": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Best streak"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "საუკეთესო სერია"
+          }
+        }
+      }
+    },
+    "award.superWords": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Super words"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "სუპერ სიტყვები"
+          }
+        }
+      }
+    },
+    "award.words": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most words"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ყველაზე მეტი სიტყვა"
+          }
+        }
+      }
+    },
     "common.cancel": {
       "localizations": {
         "az": {
@@ -399,6 +479,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "რაუნდი"
+          }
+        }
+      }
+    },
+    "game.share": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "გაზიარება"
           }
         }
       }
@@ -1919,6 +2015,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Команди"
+          }
+        }
+      }
+    },
+    "share.preview": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game result"
+          }
+        },
+        "ka": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "თამაშის შედეგი"
           }
         }
       }

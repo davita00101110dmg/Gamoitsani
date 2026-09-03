@@ -18,9 +18,55 @@ struct GameOverView: View {
     @Environment(SoundPlayer.self) private var sound
     @State private var barsGrown = false
     @State private var showStats = false
+    @State private var card: UIImage?
 
     private var standings: [Team] { engine.standings }
     private var winner: Team? { engine.winner }
+    /// Three at most, spread across teams — past that the card stops reading at
+    /// thumbnail size.
+    private var awards: [Award] { Awards.featured(for: engine.state.teams, limit: 3) }
+
+    @ViewBuilder
+    private var shareButton: some View {
+        if let card {
+            ShareLink(
+                item: ShareableCard(image: card),
+                preview: SharePreview(l10n("share.preview"), image: Image(uiImage: card))
+            ) {
+                Label(l10n("game.share"), systemImage: "square.and.arrow.up")
+                    .font(Typography.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, Spacing.md)
+            }
+            .buttonStyle(SecondaryButtonStyle(reduceMotion: reduceMotion))
+        } else {
+            // Placeholder holds the row's shape while the card renders.
+            Text(l10n("game.share"))
+                .font(Typography.headline)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, Spacing.md)
+                .opacity(0.4)
+        }
+    }
+
+    /// Renders the card off-screen at 3x.
+    @MainActor
+    private func renderCard() -> UIImage? {
+        let renderer = ImageRenderer(
+            content: ShareCard(
+                standings: standings,
+                teams: engine.state.teams,
+                awards: awards,
+                mode: engine.state.settings.mode,
+                rounds: engine.state.settings.rounds
+            )
+            // Nothing is inherited here — the card is rendered outside the view tree, so
+            // anything it reads from the environment has to be handed to it.
+            .environment(l10n)
+        )
+        renderer.scale = 3
+        return renderer.uiImage
+    }
 
     var body: some View {
         VStack(spacing: Spacing.lg) {
@@ -58,13 +104,17 @@ struct GameOverView: View {
                 }
                 .buttonStyle(PrimaryButtonStyle(reduceMotion: reduceMotion))
 
-                Button { showStats = true } label: {
-                    Text(l10n("game.stats"))
-                        .font(Typography.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, Spacing.md)
+                HStack(spacing: Spacing.sm) {
+                    Button { showStats = true } label: {
+                        Text(l10n("game.stats"))
+                            .font(Typography.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, Spacing.md)
+                    }
+                    .buttonStyle(SecondaryButtonStyle(reduceMotion: reduceMotion))
+
+                    shareButton
                 }
-                .buttonStyle(SecondaryButtonStyle(reduceMotion: reduceMotion))
 
                 Button(action: onFinish) {
                     Text(l10n("game.finish"))
@@ -87,6 +137,9 @@ struct GameOverView: View {
         .sheet(isPresented: $showStats) {
             StatsSheet(engine: engine)
         }
+        // Rendered up front so ShareLink has something to hand over the moment it is
+        // tapped. It costs one frame here and would cost a visible stall there.
+        .task { card = renderCard() }
     }
 }
 
