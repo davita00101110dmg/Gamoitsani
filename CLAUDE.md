@@ -1,5 +1,9 @@
 # Gamoitsani — CLAUDE.md
 
+> **Working on 2.0? Read `docs/2.0/HANDOFF.md` first.** It has current state, settled
+> decisions, and the traps this codebase has already hit. `docs/2.0/PLAN.md` is the
+> architecture behind it.
+
 Georgian party word-guessing game (Taboo/Alias-style). iOS app in production on the App Store; Android port in progress (separate repo/target).
 
 ## Tech stack
