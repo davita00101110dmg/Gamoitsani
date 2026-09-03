@@ -40,6 +40,13 @@ protocol Purchasing: AnyObject {
     /// Re-syncs with the App Store. Returns whether anything was owned afterwards.
     @discardableResult
     func restore() async -> Bool
+
+    #if DEBUG
+    /// Why the store is in the state it is. "Not available" looks identical whether the
+    /// identifier is wrong, the product did not load, or StoreKit had no configuration to
+    /// answer from — and the first time it happened, telling them apart took a rebuild.
+    var debugSummary: [(String, String)] { get }
+    #endif
 }
 
 /// A store that sells nothing.
@@ -58,6 +65,10 @@ final class NoPurchases: Purchasing {
     func start() async {}
     func buyRemoveAds() async -> PurchaseOutcome { .cancelled }
     func restore() async -> Bool { false }
+
+    #if DEBUG
+    var debugSummary: [(String, String)] { [("store", "off")] }
+    #endif
 }
 
 extension EnvironmentValues {

@@ -138,6 +138,18 @@ final class StoreKitPurchases: Purchasing {
         }
     }
 
+    #if DEBUG
+    var debugSummary: [(String, String)] {
+        [
+            ("product id", ProductID.removeAds.isEmpty ? "missing from Info.plist" : ProductID.removeAds),
+            ("product", product == nil ? "not loaded" : "loaded"),
+            ("price", displayPrice ?? "—"),
+            ("owned", hasRemovedAds ? "yes" : "no"),
+            ("busy", isBusy ? "yes" : "no"),
+        ]
+    }
+    #endif
+
     // MARK: - Product
 
     private func loadProduct() async {
@@ -159,7 +171,18 @@ enum ProductID {
     /// be no way to give it back.
     static let removeAds = value("REMOVE_ADS_PRODUCT_ID")
 
+    #if DEBUG
+    /// Debug builds say why. Release keeps the plain sentence — a player does not need to
+    /// hear about StoreKit configurations.
+    static let missingProductMessage = """
+        No product for "\(removeAds)".
+
+        StoreKit test configurations are injected by Xcode at launch, so this always \
+        fails when the app is started any other way. Run from Xcode (⌘R) to test buying.
+        """
+    #else
     static let missingProductMessage = "That upgrade is not available right now."
+    #endif
 
     private static func value(_ key: String) -> String {
         let raw = Bundle.main.object(forInfoDictionaryKey: key) as? String ?? ""

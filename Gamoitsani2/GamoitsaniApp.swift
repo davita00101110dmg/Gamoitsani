@@ -87,7 +87,12 @@ struct GamoitsaniApp: App {
         #if DEBUG
         base
             .environment(debugSettings)
-            .debugMenuOnShake(debug: debugSettings, session: session, ads: ads)
+            .debugMenuOnShake(
+                debug: debugSettings,
+                session: session,
+                ads: ads,
+                purchases: store
+            )
         #else
         base
         #endif

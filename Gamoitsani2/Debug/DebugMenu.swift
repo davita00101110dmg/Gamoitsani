@@ -41,6 +41,7 @@ struct DebugMenuSheet: View {
     let debug: DebugSettings
     let session: GameSession
     let ads: any AdServing
+    let purchases: any Purchasing
 
     @Environment(\.dismiss) private var dismiss
 
@@ -93,6 +94,12 @@ struct DebugMenuSheet: View {
                         // schedule, this one un-refuses the card.
                         action("Reset remove-ads offer", enabled: true) {
                             ads.debugResetRemoveAdsOffer()
+                        }
+                    }
+
+                    SetupPanel(title: "Purchases") {
+                        ForEach(purchases.debugSummary, id: \.0) { label, value in
+                            info(label, value)
                         }
                     }
 
@@ -262,9 +269,15 @@ extension View {
     func debugMenuOnShake(
         debug: DebugSettings,
         session: GameSession,
-        ads: any AdServing
+        ads: any AdServing,
+        purchases: any Purchasing
     ) -> some View {
-        modifier(DebugMenuOnShake(debug: debug, session: session, ads: ads))
+        modifier(DebugMenuOnShake(
+            debug: debug,
+            session: session,
+            ads: ads,
+            purchases: purchases
+        ))
     }
 }
 
@@ -272,6 +285,7 @@ private struct DebugMenuOnShake: ViewModifier {
     let debug: DebugSettings
     let session: GameSession
     let ads: any AdServing
+    let purchases: any Purchasing
 
     @State private var isPresented = false
 
@@ -283,7 +297,12 @@ private struct DebugMenuOnShake: ViewModifier {
                 isPresented = true
             }
             .sheet(isPresented: $isPresented) {
-                DebugMenuSheet(debug: debug, session: session, ads: ads)
+                DebugMenuSheet(
+                    debug: debug,
+                    session: session,
+                    ads: ads,
+                    purchases: purchases
+                )
             }
     }
 }
