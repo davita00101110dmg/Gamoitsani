@@ -5,14 +5,15 @@
 # are here because the mediation stack has no SPM equivalent that is worth re-solving, and
 # the versions below are already proven in the shipping app.
 #
-# Trimmed from eight networks to four on the numbers. Over the measured period InMobi,
-# Chartboost, ironSource and Mintegral each earned exactly $0.00 while costing 59.7 MB of
-# linked binary between them — ironSource brings AdQuality with it, 10.8 MB that serves no
-# ads at all. AdMob and Vungle alone are 96.4% of revenue.
+# Trimmed from eight networks to three on the numbers. InMobi, Chartboost, ironSource and
+# Mintegral each earned exactly $0.00 over the measured period — ironSource brings
+# AdQuality with it, 10.8 MB that serves no ads at all. Unity earned $0.33 across twenty
+# months while being the largest SDK here, and its waterfall entry took 2,428 impressions
+# in ninety days for none of it. AdMob and Vungle are 96.4% of revenue.
 #
 # Removing an adapter here does not stop AdMob requesting from it: disable those networks
 # in the mediation groups too, or the app keeps making requests nothing can fill.
-# What 2.0 ships: the four networks that earn something.
+# What 2.0 ships: the three networks that earn something.
 def ad_sdks
   pod 'Google-Mobile-Ads-SDK'
   pod 'FBAudienceNetwork'
@@ -21,7 +22,6 @@ def ad_sdks
 
   pod 'GoogleMobileAdsMediationVungle'    # Liftoff — $3.69, 41.9%
   pod 'GoogleMobileAdsMediationFacebook'  # Meta    — $0.28,  3.2%
-  pod 'GoogleMobileAdsMediationUnity'     # Unity   — $0.03,  0.3%
 end
 
 # v1 keeps all eight. Not because they earn anything — they do not — but because
@@ -29,6 +29,7 @@ end
 # has to keep building until 2.0 replaces it. These leave with v1 at cutover.
 def legacy_ad_sdks
   ad_sdks
+  pod 'GoogleMobileAdsMediationUnity'
   pod 'InMobiSDK'
   pod 'ChartboostMediationSDK'
   pod 'GoogleMobileAdsMediationInMobi'
