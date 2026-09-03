@@ -37,7 +37,7 @@ struct RemoveAdsCard: View {
 
                     Spacer(minLength: Spacing.xs)
 
-                    if purchases.isBusy {
+                    if purchases.activity == .purchasing {
                         ProgressView().tint(Tokens.accent.color)
                     } else if let price = purchases.displayPrice {
                         Text(price)
@@ -48,7 +48,7 @@ struct RemoveAdsCard: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .disabled(purchases.isBusy)
+            .disabled(purchases.activity.isBusy)
 
             // Its own button, outside the buy target. A dismiss nested inside a tappable
             // card is a purchase one mis-tap away.
@@ -109,9 +109,19 @@ struct RemoveAdsSettingsRows: View {
                 }
                 .padding(.vertical, Spacing.sm)
             } else {
-                row(l10n("iap.removeAds"), trailing: purchases.displayPrice, action: buy)
+                row(
+                    l10n("iap.removeAds"),
+                    trailing: purchases.displayPrice,
+                    spinsFor: .purchasing,
+                    action: buy
+                )
                 Divider().overlay(Tokens.cardEdge.color)
-                row(l10n("iap.restore"), trailing: nil, action: restore)
+                row(
+                    l10n("iap.restore"),
+                    trailing: nil,
+                    spinsFor: .restoring,
+                    action: restore
+                )
             }
         }
         .purchaseFailureAlert($failure, l10n: l10n)
@@ -122,9 +132,12 @@ struct RemoveAdsSettingsRows: View {
         }
     }
 
+    /// `spinsFor` is the activity this row owns. Buying must not spin the Restore row —
+    /// that read as the app restoring and purchasing at the same time.
     private func row(
         _ title: String,
         trailing: String?,
+        spinsFor activity: PurchaseActivity,
         action: @escaping () -> Void
     ) -> some View {
         Button(action: action) {
@@ -133,7 +146,7 @@ struct RemoveAdsSettingsRows: View {
                     .font(Typography.rowTitle)
                     .foregroundStyle(Tokens.onSurface.color)
                 Spacer()
-                if purchases.isBusy {
+                if purchases.activity == activity {
                     ProgressView().tint(Tokens.accent.color)
                 } else if let trailing {
                     Text(trailing)
@@ -148,7 +161,9 @@ struct RemoveAdsSettingsRows: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .disabled(purchases.isBusy)
+        // Both rows still go inert while either is running — starting a restore in the
+        // middle of a purchase is not something to allow, only something not to advertise.
+        .disabled(purchases.activity.isBusy)
     }
 
     private func buy() {

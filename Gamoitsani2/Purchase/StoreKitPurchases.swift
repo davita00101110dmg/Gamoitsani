@@ -19,7 +19,7 @@ final class StoreKitPurchases: Purchasing {
 
     private(set) var hasRemovedAds = false
     private(set) var displayPrice: String?
-    private(set) var isBusy = false
+    private(set) var activity: PurchaseActivity = .idle
 
     @ObservationIgnored private var product: Product?
     @ObservationIgnored private var listener: Task<Void, Never>?
@@ -43,15 +43,15 @@ final class StoreKitPurchases: Purchasing {
     // MARK: - Buying
 
     func buyRemoveAds() async -> PurchaseOutcome {
-        guard !isBusy else { return .cancelled }
+        guard !activity.isBusy else { return .cancelled }
 
         // Products can fail to load on a cold, offline launch; retry rather than making
         // the button permanently dead.
         if product == nil { await loadProduct() }
         guard let product else { return .failed(ProductID.missingProductMessage) }
 
-        isBusy = true
-        defer { isBusy = false }
+        activity = .purchasing
+        defer { activity = .idle }
 
         do {
             switch try await product.purchase() {
@@ -84,9 +84,9 @@ final class StoreKitPurchases: Purchasing {
 
     @discardableResult
     func restore() async -> Bool {
-        guard !isBusy else { return hasRemovedAds }
-        isBusy = true
-        defer { isBusy = false }
+        guard !activity.isBusy else { return hasRemovedAds }
+        activity = .restoring
+        defer { activity = .idle }
 
         // `AppStore.sync()` prompts for a password, so it is only correct behind an
         // explicit Restore button. Ordinary ownership comes from `currentEntitlements`,
@@ -145,7 +145,7 @@ final class StoreKitPurchases: Purchasing {
             ("product", product == nil ? "not loaded" : "loaded"),
             ("price", displayPrice ?? "—"),
             ("owned", hasRemovedAds ? "yes" : "no"),
-            ("busy", isBusy ? "yes" : "no"),
+            ("activity", "\(activity)"),
         ]
     }
     #endif

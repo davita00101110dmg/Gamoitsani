@@ -16,6 +16,18 @@ enum PurchaseOutcome: Sendable, Equatable {
     case failed(String)
 }
 
+/// What the store is doing, if anything.
+///
+/// Not a single `isBusy` flag: the buy row and the Restore row read the same state, so one
+/// flag put a spinner on both and buying looked like it was also restoring.
+enum PurchaseActivity: Sendable, Equatable {
+    case idle
+    case purchasing
+    case restoring
+
+    var isBusy: Bool { self != .idle }
+}
+
 /// The app's whole view of buying things.
 ///
 /// Screens talk to this and never import StoreKit, so they stay previewable and the
@@ -29,8 +41,8 @@ protocol Purchasing: AnyObject {
     /// loading or if the product could not be fetched.
     var displayPrice: String? { get }
 
-    /// Whether a purchase or restore is currently in flight.
-    var isBusy: Bool { get }
+    /// What is in flight, so each row can show a spinner only for its own action.
+    var activity: PurchaseActivity { get }
 
     /// Loads products and starts listening for transactions. Safe to call twice.
     func start() async
@@ -60,7 +72,7 @@ final class NoPurchases: Purchasing {
 
     var hasRemovedAds: Bool { false }
     var displayPrice: String? { nil }
-    var isBusy: Bool { false }
+    var activity: PurchaseActivity { .idle }
 
     func start() async {}
     func buyRemoveAds() async -> PurchaseOutcome { .cancelled }
