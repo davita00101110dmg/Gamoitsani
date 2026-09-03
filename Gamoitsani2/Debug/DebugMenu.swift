@@ -108,6 +108,14 @@ struct DebugMenuSheet: View {
                         ForEach(recorder.debugSummary, id: \.0) { label, value in
                             info(label, value)
                         }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        action("Copy log", enabled: true) {
+                            UIPasteboard.general.string = RecordingLog.contents()
+                        }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        action("Clear log", enabled: true) {
+                            RecordingLog.clear()
+                        }
                     }
 
                     SetupPanel(title: "Current game") {

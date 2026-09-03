@@ -25,6 +25,8 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
 
     @ObservationIgnored private var timeline: RecordingTimeline?
     @ObservationIgnored private var clipStart: CFTimeInterval?
+    /// The file currently being written. Nothing may delete this.
+    @ObservationIgnored private var currentClip: URL?
     /// Held for the life of the recording.
     ///
     /// `AVCaptureMovieFileOutput` does not keep its recording delegate alive, so an
@@ -95,7 +97,10 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         // since been emptied — must not disable filming for the rest of the game.
         state = .idle
 
+        RecordingLog.note("startTurn team=\(teamName) round=\(Int(roundLength))s enabled=\(isEnabled)")
+
         if let refusal = policy.refusalToRecord(conditions, roundLength: roundLength) {
+            RecordingLog.note("  refused: \(refusal)")
             // `.disabled` is the ordinary case — most games are not filmed — and is not
             // worth telling anyone about.
             state = refusal == .disabled ? .idle : .failed(refusal)
@@ -107,11 +112,13 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         // Durable storage, not `temporaryDirectory`: a clip has to survive the app being
         // killed between filming and saving.
         let url = PendingClipStore.newClipURL()
+        currentClip = url
 
         let proxy = RecordingDelegateProxy(recorder: self)
         delegateProxy = proxy
 
         capture.start { [weak self, capture, policy] in
+            RecordingLog.note("  session started, beginning recording")
             capture.beginRecording(
                 to: url,
                 maximumDuration: policy.maximumDuration,
@@ -126,6 +133,7 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
                 // producing a negative interval.
                 self.clipStart = CACurrentMediaTime()
                 self.state = .recording
+                RecordingLog.note("  state = recording")
             }
         }
     }
@@ -155,8 +163,14 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
     }
 
     func finishTurn() {
-        guard isFilming else { return }
+        guard isFilming else {
+            RecordingLog.note("finishTurn ignored (not filming)")
+            return
+        }
         timeline?.finish(at: elapsed)
+        RecordingLog.note(
+            "finishTurn \(Int(timeline?.duration ?? 0))s words=\(timeline?.entries.count ?? 0)"
+        )
         state = .exporting
         capture.stopRecording()
     }
@@ -168,6 +182,9 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
     func resumePendingClips() async {
         guard !didResume else { return }
         didResume = true
+
+        // The only sweep, and only at startup, when nothing is being written.
+        PendingClipStore.removeOrphans(excluding: currentClip)
 
         for pending in PendingClipStore.pending() {
             // Counted on disk before the attempt, so a clip that kills the process runs
@@ -195,12 +212,14 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
 
     // MARK: - Finishing
 
-    fileprivate func handleFinishedClip(at url: URL) async {
+    fileprivate func handleFinishedClip(at url: URL, error: (any Error)?) async {
+        RecordingLog.note("delegate fired for \(url.lastPathComponent) error=\(error.map { "\($0)" } ?? "none")")
         let finished = timeline
         timeline = nil
         clipStart = nil
         delegateProxy = nil
         isFilming = false
+        currentClip = nil
         // Releases the camera. A party game is put down constantly, and holding the device
         // between turns keeps the orange indicator lit for no reason.
         capture.stop()
@@ -216,12 +235,20 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
             return
         }
         guard exists else {
+            let listing = (try? FileManager.default.contentsOfDirectory(
+                atPath: PendingClipStore.directory.path
+            )) ?? []
+            RecordingLog.note("  no file at \(url.path)")
+            RecordingLog.note("  directory holds: \(listing)")
             noteExportFailure("no file was written")
             PendingClipStore.discard(url)
             state = .idle
             return
         }
         guard policy.isWorthKeeping(finished) else {
+            RecordingLog.note(
+                "  discarded: \(finished.duration ?? 0)s, \(finished.entries.count) words"
+            )
             noteExportFailure(
                 "not kept: \(Int(finished.duration ?? 0))s, \(finished.entries.count) words"
             )
@@ -233,6 +260,8 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         // Written before the export starts, so being killed mid-export costs time rather
         // than the clip.
         PendingClipStore.write(finished, for: url)
+        let size = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? Int) ?? 0
+        RecordingLog.note("  keeping, \((size ?? 0) / 1024)KB, exporting")
         await export(url, timeline: finished)
         state = .idle
     }
@@ -246,6 +275,7 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         // `.invalid` when the app is not in a state to take one — during launch, which is
         // exactly when pending clips are resumed — and ending an invalid identifier traps.
         let task = UIApplication.shared.beginBackgroundTask(withName: "gamoitsani.export")
+        RecordingLog.note("  export begins (bg task \(task == .invalid ? "invalid" : "ok"))")
         defer {
             if task != .invalid {
                 UIApplication.shared.endBackgroundTask(task)
@@ -255,13 +285,19 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         guard let exported = await RecordingExporter.export(clip: clip, timeline: timeline) else {
             // Leave the pair in place. The next launch tries again rather than throwing
             // away footage that may only have lost to a locked screen or a busy device.
+            RecordingLog.note("  EXPORT FAILED")
             noteExportFailure("export returned no file")
             return
         }
 
+        let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+        RecordingLog.note("  saving to photos (auth=\(status.rawValue))")
+
         do {
             try await Self.saveToPhotos(exported)
+            RecordingLog.note("  SAVED TO PHOTOS")
         } catch {
+            RecordingLog.note("  PHOTOS FAILED: \(error)")
             // Not swallowed, and the footage is kept. A clip that failed to save used to
             // vanish along with the recording that produced it, leaving no trace of
             // something the player had watched being made.
@@ -276,14 +312,18 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         PendingClipStore.discard(clip)
     }
 
-    private static func saveToPhotos(_ url: URL) async throws {
+    /// `nonisolated`, and that is the whole point.
+    ///
+    /// A static method on a `@MainActor` type is main-actor isolated, and so is the change
+    /// block it hands to Photos. Photos runs that block on its own queue and waits for it,
+    /// while the main actor waits for `performChanges` — a deadlock, with no error and no
+    /// timeout. The clip exported, reached this call, and the app simply stopped here.
+    private nonisolated static func saveToPhotos(_ url: URL) async throws {
+        // Copies rather than moves. `shouldMoveFile` saves a few megabytes of I/O and is
+        // not worth handing Photos a move of a file the export has just written.
         try await PHPhotoLibrary.shared().performChanges {
             let request = PHAssetCreationRequest.forAsset()
-            let options = PHAssetResourceCreationOptions()
-            // The file is deleted straight after either way; moving it saves a copy of
-            // several megabytes.
-            options.shouldMoveFile = true
-            request.addResource(with: .video, fileURL: url, options: options)
+            request.addResource(with: .video, fileURL: url, options: nil)
         }
     }
 
@@ -328,12 +368,20 @@ private final class RecordingDelegateProxy: NSObject, AVCaptureFileOutputRecordi
 
     func fileOutput(
         _ output: AVCaptureFileOutput,
+        didStartRecordingTo fileURL: URL,
+        from connections: [AVCaptureConnection]
+    ) {
+        RecordingLog.note("  delegate: started writing \(fileURL.lastPathComponent)")
+    }
+
+    func fileOutput(
+        _ output: AVCaptureFileOutput,
         didFinishRecordingTo outputFileURL: URL,
         from connections: [AVCaptureConnection],
         error: (any Error)?
     ) {
         Task { @MainActor [recorder] in
-            await recorder?.handleFinishedClip(at: outputFileURL)
+            await recorder?.handleFinishedClip(at: outputFileURL, error: error)
         }
     }
 }

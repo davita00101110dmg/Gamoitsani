@@ -27,6 +27,10 @@ final class CaptureSessionBox: @unchecked Sendable {
         queue.async { [self] in
             configureIfNeeded()
             if !session.isRunning { session.startRunning() }
+            let audio = AVAudioSession.sharedInstance()
+            RecordingLog.note(
+                "  session running=\(session.isRunning) audioCategory=\(audio.category.rawValue)"
+            )
             ready()
         }
     }
@@ -37,15 +41,23 @@ final class CaptureSessionBox: @unchecked Sendable {
         delegate: any AVCaptureFileOutputRecordingDelegate & Sendable
     ) {
         queue.async { [self] in
-            guard session.isRunning, !output.isRecording else { return }
+            guard session.isRunning, !output.isRecording else {
+                RecordingLog.note("  beginRecording skipped (running=\(session.isRunning) recording=\(output.isRecording))")
+                return
+            }
             output.maxRecordedDuration = CMTime(seconds: maximumDuration, preferredTimescale: 600)
+            RecordingLog.note("  output.startRecording -> \(url.lastPathComponent)")
             output.startRecording(to: url, recordingDelegate: delegate)
         }
     }
 
     func stopRecording() {
         queue.async { [self] in
-            guard output.isRecording else { return }
+            guard output.isRecording else {
+                RecordingLog.note("  stopRecording skipped (not recording)")
+                return
+            }
+            RecordingLog.note("  output.stopRecording")
             output.stopRecording()
         }
     }
@@ -99,6 +111,9 @@ final class CaptureSessionBox: @unchecked Sendable {
             }
         }
 
+        RecordingLog.note(
+            "  session configured inputs=\(session.inputs.count) outputs=\(session.outputs.count)"
+        )
         isConfigured = true
     }
 }

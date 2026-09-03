@@ -30,6 +30,7 @@ final class RecordingBridge {
 
         if !isRecordingTurn {
             isRecordingTurn = true
+            RecordingLog.note("bridge: turn begins")
             shown = []
             outcomes = [:]
             recorder.startTurn(
@@ -42,6 +43,7 @@ final class RecordingBridge {
         // word; in arcade it is the whole set at the start of each one.
         for word in GameRules.unplayedWords(state) where !shown.contains(word.id) {
             shown.insert(word.id)
+            RecordingLog.note("bridge: shown \(word.text)")
             recorder.wordShown(word.text)
         }
 
@@ -56,6 +58,7 @@ final class RecordingBridge {
                 shown.insert(id)
                 recorder.wordShown(text)
             }
+            RecordingLog.note("bridge: answered \(text) \(outcome)")
             recorder.wordAnswered(text, outcome: outcome == .correct ? .correct : .skipped)
         }
 
@@ -72,6 +75,7 @@ final class RecordingBridge {
     /// The game was left, or the screen went away, mid-turn.
     func abandon(_ recorder: any TurnRecording) {
         guard isRecordingTurn else { return }
+        RecordingLog.note("bridge: abandoned")
         isRecordingTurn = false
         shown = []
         outcomes = [:]
@@ -79,6 +83,7 @@ final class RecordingBridge {
     }
 
     private func finish(_ recorder: any TurnRecording) {
+        RecordingLog.note("bridge: turn ends")
         isRecordingTurn = false
         shown = []
         outcomes = [:]

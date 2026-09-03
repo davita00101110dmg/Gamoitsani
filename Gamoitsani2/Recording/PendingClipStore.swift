@@ -78,24 +78,38 @@ enum PendingClipStore {
 
     /// Every clip with a timeline beside it, oldest first so a backlog is cleared in the
     /// order it was filmed.
+    ///
+    /// Pure. It used to delete footage it could not pair with a timeline, and a clip being
+    /// recorded *right now* has no timeline yet — the sidecar is written when the turn
+    /// ends. So every call during a turn destroyed the file being written, including the
+    /// one behind the debug menu's "pending clips" count. A query does not delete.
     static func pending() -> [Pending] {
+        clips().compactMap { clip in
+            guard let record = read(clip) else { return nil }
+            return Pending(clip: clip, timeline: record.timeline)
+        }
+    }
+
+    /// Footage with no timeline beside it: a turn that never finished, from a previous
+    /// launch. It has no words to overlay and nobody is waiting for it.
+    ///
+    /// Only safe when nothing is being recorded, which is why it is called once at startup
+    /// and nowhere else. `inProgress` is belt and braces for the case where a turn begins
+    /// before startup finishes.
+    static func removeOrphans(excluding inProgress: URL?) {
+        for clip in clips() where clip != inProgress && read(clip) == nil {
+            discard(clip)
+        }
+    }
+
+    private static func clips() -> [URL] {
         let contents = (try? FileManager.default.contentsOfDirectory(
             at: directory,
             includingPropertiesForKeys: [.creationDateKey]
         )) ?? []
-
         return contents
             .filter { $0.pathExtension == "mov" }
-            .compactMap { clip in
-                guard let record = read(clip) else {
-                    // Footage with no timeline is from a turn that never finished. It has
-                    // no words to overlay and nobody is waiting for it.
-                    discard(clip)
-                    return nil
-                }
-                return Pending(clip: clip, timeline: record.timeline)
-            }
-            .sorted { created($0.clip) < created($1.clip) }
+            .sorted { created($0) < created($1) }
     }
 
     /// Removes the footage and its timeline together.
