@@ -130,24 +130,33 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         }
     }
 
+    // These gate on `isFilming`, which is set synchronously, and never on `state`.
+    //
+    // `state` becomes `.recording` only once the capture session has finished starting,
+    // which takes a moment — and the words on the table are announced the instant the
+    // phase becomes `.playing`. Gating on the published state dropped those calls, and
+    // because the bridge records what it has already announced, they were never retried.
+    // A turn could end with an empty timeline, fail `isWorthKeeping`, and be discarded
+    // with nothing reaching Photos.
+
     func wordShown(_ word: String) {
-        guard state == .recording, let elapsed else { return }
+        guard isFilming else { return }
         timeline?.wordShown(word, at: elapsed)
     }
 
     func wordAnswered(_ word: String, outcome: RecordingOutcome) {
-        guard state == .recording, let elapsed else { return }
+        guard isFilming else { return }
         timeline?.wordAnswered(word, outcome: outcome, at: elapsed)
     }
 
     func undoAnswer(_ word: String) {
-        guard state == .recording else { return }
+        guard isFilming else { return }
         timeline?.undoAnswer(word)
     }
 
     func finishTurn() {
         guard isFilming else { return }
-        timeline?.finish(at: elapsed ?? 0)
+        timeline?.finish(at: elapsed)
         state = .exporting
         capture.stopRecording()
     }
@@ -178,8 +187,10 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         capture.stopRecording()
     }
 
-    private var elapsed: TimeInterval? {
-        clipStart.map { CACurrentMediaTime() - $0 }
+    /// Seconds into the clip. Zero until the camera has actually started, which is right:
+    /// anything announced before the first frame was on screen from the beginning.
+    private var elapsed: TimeInterval {
+        clipStart.map { CACurrentMediaTime() - $0 } ?? 0
     }
 
     // MARK: - Finishing
@@ -198,7 +209,22 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         // usable file, so the file's existence decides this, not the error.
         let exists = FileManager.default.fileExists(atPath: url.path)
 
-        guard let finished, exists, policy.isWorthKeeping(finished) else {
+        guard let finished else {
+            // Cancelled: the player left mid-turn.
+            PendingClipStore.discard(url)
+            state = .idle
+            return
+        }
+        guard exists else {
+            noteExportFailure("no file was written")
+            PendingClipStore.discard(url)
+            state = .idle
+            return
+        }
+        guard policy.isWorthKeeping(finished) else {
+            noteExportFailure(
+                "not kept: \(Int(finished.duration ?? 0))s, \(finished.entries.count) words"
+            )
             PendingClipStore.discard(url)
             state = .idle
             return
@@ -233,16 +259,31 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
             return
         }
 
-        await Self.saveToPhotos(exported)
+        do {
+            try await Self.saveToPhotos(exported)
+        } catch {
+            // Not swallowed, and the footage is kept. A clip that failed to save used to
+            // vanish along with the recording that produced it, leaving no trace of
+            // something the player had watched being made.
+            noteExportFailure("photos: \(error.localizedDescription)")
+            Self.delete(exported)
+            return
+        }
+
         // Both copies go. v1 left every recording in Documents forever, invisible to the
         // player, on top of the copy it had already put in Photos.
         Self.delete(exported)
         PendingClipStore.discard(clip)
     }
 
-    private static func saveToPhotos(_ url: URL) async {
-        try? await PHPhotoLibrary.shared().performChanges {
-            PHAssetCreationRequest.forAsset().addResource(with: .video, fileURL: url, options: nil)
+    private static func saveToPhotos(_ url: URL) async throws {
+        try await PHPhotoLibrary.shared().performChanges {
+            let request = PHAssetCreationRequest.forAsset()
+            let options = PHAssetResourceCreationOptions()
+            // The file is deleted straight after either way; moving it saves a copy of
+            // several megabytes.
+            options.shouldMoveFile = true
+            request.addResource(with: .video, fileURL: url, options: options)
         }
     }
 
