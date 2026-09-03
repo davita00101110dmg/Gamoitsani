@@ -47,6 +47,10 @@ struct GamoitsaniApp: App {
             .onChange(of: scenePhase) { was, now in
                 guard was != .active, now == .active else { return }
                 Task { await showAppOpenAdIfIdle() }
+                // Finishes anything a previous launch was killed part-way through. Once
+                // active, not during launch: an export needs a background task assertion,
+                // and the app cannot take one before it is running.
+                Task { await recorder.resumePendingClips() }
             }
         }
     }
@@ -78,8 +82,6 @@ struct GamoitsaniApp: App {
             .task { await sound.prepare() }
             .task { await ads.start() }
             .task { await store.start() }
-            // Finishes anything a previous launch was killed part-way through.
-            .task { await recorder.resumePendingClips() }
             // The store owns the entitlement; ads are told about it. `initial: true`
             // covers the ordinary case, where ownership is already known from
             // `currentEntitlements` before anything has changed.
@@ -95,7 +97,8 @@ struct GamoitsaniApp: App {
                 debug: debugSettings,
                 session: session,
                 ads: ads,
-                purchases: store
+                purchases: store,
+                recorder: recorder
             )
         #else
         base

@@ -42,6 +42,7 @@ struct DebugMenuSheet: View {
     let session: GameSession
     let ads: any AdServing
     let purchases: any Purchasing
+    let recorder: CameraTurnRecorder
 
     @Environment(\.dismiss) private var dismiss
 
@@ -99,6 +100,12 @@ struct DebugMenuSheet: View {
 
                     SetupPanel(title: "Purchases") {
                         ForEach(purchases.debugSummary, id: \.0) { label, value in
+                            info(label, value)
+                        }
+                    }
+
+                    SetupPanel(title: "Recording") {
+                        ForEach(recorder.debugSummary, id: \.0) { label, value in
                             info(label, value)
                         }
                     }
@@ -270,13 +277,15 @@ extension View {
         debug: DebugSettings,
         session: GameSession,
         ads: any AdServing,
-        purchases: any Purchasing
+        purchases: any Purchasing,
+        recorder: CameraTurnRecorder
     ) -> some View {
         modifier(DebugMenuOnShake(
             debug: debug,
             session: session,
             ads: ads,
-            purchases: purchases
+            purchases: purchases,
+            recorder: recorder
         ))
     }
 }
@@ -286,6 +295,7 @@ private struct DebugMenuOnShake: ViewModifier {
     let session: GameSession
     let ads: any AdServing
     let purchases: any Purchasing
+    let recorder: CameraTurnRecorder
 
     @State private var isPresented = false
 
@@ -301,7 +311,8 @@ private struct DebugMenuOnShake: ViewModifier {
                     debug: debug,
                     session: session,
                     ads: ads,
-                    purchases: purchases
+                    purchases: purchases,
+                    recorder: recorder
                 )
             }
     }

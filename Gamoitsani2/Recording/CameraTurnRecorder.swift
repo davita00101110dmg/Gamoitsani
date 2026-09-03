@@ -39,6 +39,14 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
     /// camera running for the rest of the game.
     @ObservationIgnored private var isFilming = false
 
+    /// Recovery runs once per process.
+    ///
+    /// It is triggered by the scene becoming active, and that happens more than once per
+    /// launch — a full-screen ad, the app switcher, an interruption. Without this the same
+    /// clip is retried several times in one session, which burned every attempt it had
+    /// before the first export even finished.
+    @ObservationIgnored private var didResume = false
+
     // MARK: - Permissions
 
     /// Asked from the setup screen, so the prompts never land on a running clock the way
@@ -149,7 +157,13 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
     /// Called at startup. A force-quit during an export used to lose the clip outright;
     /// now the footage and its timeline are both on disk, so it can simply be finished.
     func resumePendingClips() async {
+        guard !didResume else { return }
+        didResume = true
+
         for pending in PendingClipStore.pending() {
+            // Counted on disk before the attempt, so a clip that kills the process runs
+            // out of chances instead of killing every future launch.
+            guard PendingClipStore.beginAttempt(for: pending.clip) else { continue }
             await export(pending.clip, timeline: pending.timeline)
         }
     }
@@ -201,12 +215,21 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
     private func export(_ clip: URL, timeline: RecordingTimeline) async {
         // The export outlives the turn-info screen if the player backgrounds the app, and
         // without this iOS suspends it part-written.
-        let task = await UIApplication.shared.beginBackgroundTask(withName: "gamoitsani.export")
-        defer { Task { @MainActor in UIApplication.shared.endBackgroundTask(task) } }
+        //
+        // The identifier is checked before it is ended. `beginBackgroundTask` returns
+        // `.invalid` when the app is not in a state to take one — during launch, which is
+        // exactly when pending clips are resumed — and ending an invalid identifier traps.
+        let task = UIApplication.shared.beginBackgroundTask(withName: "gamoitsani.export")
+        defer {
+            if task != .invalid {
+                UIApplication.shared.endBackgroundTask(task)
+            }
+        }
 
         guard let exported = await RecordingExporter.export(clip: clip, timeline: timeline) else {
             // Leave the pair in place. The next launch tries again rather than throwing
-            // away footage that may only have failed because the device was busy.
+            // away footage that may only have lost to a locked screen or a busy device.
+            noteExportFailure("export returned no file")
             return
         }
 
@@ -226,6 +249,27 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
     private static func delete(_ url: URL) {
         try? FileManager.default.removeItem(at: url)
     }
+
+    private func noteExportFailure(_ reason: String) {
+        #if DEBUG
+        lastExportFailure = reason
+        #endif
+    }
+
+    #if DEBUG
+    /// Why the last clip did not reach Photos. An export that quietly does nothing looks
+    /// identical to one that was never asked for.
+    @ObservationIgnored private(set) var lastExportFailure: String?
+
+    var debugSummary: [(String, String)] {
+        [
+            ("enabled", isEnabled ? "yes" : "no"),
+            ("state", "\(state)"),
+            ("pending clips", "\(PendingClipStore.pending().count)"),
+            ("last failure", lastExportFailure ?? "—"),
+        ]
+    }
+    #endif
 }
 
 /// Receives the capture callbacks off the main actor and hands them back to the recorder.

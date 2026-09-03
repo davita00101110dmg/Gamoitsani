@@ -18,7 +18,10 @@ enum RecordingExporter {
     static func export(clip url: URL, timeline: RecordingTimeline) async -> URL? {
         let asset = AVURLAsset(url: url)
 
-        guard let track = try? await asset.loadTracks(withMediaType: .video).first,
+        // An asset from a process that died mid-write can still be opened and then fail
+        // everything after, so this is asked first rather than inferred from a throw.
+        guard (try? await asset.load(.isReadable)) == true,
+              let track = try? await asset.loadTracks(withMediaType: .video).first,
               let duration = try? await asset.load(.duration),
               let naturalSize = try? await track.load(.naturalSize),
               let transform = try? await track.load(.preferredTransform)
@@ -29,15 +32,20 @@ enum RecordingExporter {
         // a sideways video with the overlay in the wrong place.
         let rendered = naturalSize.applying(transform)
         let size = CGSize(width: abs(rendered.width), height: abs(rendered.height))
-        guard size.width > 0, size.height > 0 else { return nil }
+        guard size.width > 0, size.height > 0, duration.seconds > 0 else { return nil }
 
-        let composition = AVMutableVideoComposition(propertiesOf: asset)
+        guard let composition = try? await AVMutableVideoComposition.videoComposition(withPropertiesOf: asset) else {
+            return nil
+        }
         composition.renderSize = size
         composition.animationTool = animationTool(for: timeline, size: size)
 
+        // `highestQuality` rather than a fixed 1920x1080 preset: a dimensioned preset
+        // constrains the output box, and the render size here is portrait. The video
+        // composition is what decides the frame.
         guard let session = AVAssetExportSession(
             asset: asset,
-            presetName: AVAssetExportPreset1920x1080
+            presetName: AVAssetExportPresetHighestQuality
         ) else { return nil }
 
         let output = FileManager.default.temporaryDirectory
