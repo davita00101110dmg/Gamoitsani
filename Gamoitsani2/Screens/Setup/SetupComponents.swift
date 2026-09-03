@@ -87,7 +87,7 @@ struct StepperRow: View {
         }
         .padding(.vertical, Spacing.sm)
         // Fires on the value changing, not on the buttons' enabled state — which only
-        .sensoryFeedback(trigger: value) { old, new in
+        .haptics(trigger: value) { old, new in
             guard old != new else { return nil }
             return numeric(new) > numeric(old) ? .increase : .decrease
         }
@@ -171,7 +171,7 @@ struct ModeCard: View {
         }
         .buttonStyle(.plain)
         .animation(Motion.control(reduceMotion: reduceMotion), value: isSelected)
-        .sensoryFeedback(.selection, trigger: isSelected)
+        .haptics(.selection, trigger: isSelected)
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
     }
@@ -232,7 +232,7 @@ struct ToggleRow: View {
         }
         .tint(Tokens.accent.color)
         .padding(.vertical, Spacing.sm)
-        .sensoryFeedback(.selection, trigger: isOn)
+        .haptics(.selection, trigger: isOn)
         .animation(Motion.control(reduceMotion: reduceMotion), value: isOn)
     }
 }

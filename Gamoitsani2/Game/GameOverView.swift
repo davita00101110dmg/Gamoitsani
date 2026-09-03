@@ -133,7 +133,7 @@ struct GameOverView: View {
                 barsGrown = true
             }
         }
-        .sensoryFeedback(.success, trigger: barsGrown)
+        .haptics(.success, trigger: barsGrown)
         .sheet(isPresented: $showStats) {
             StatsSheet(engine: engine)
         }

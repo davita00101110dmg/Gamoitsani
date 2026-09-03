@@ -21,6 +21,7 @@
 		66A4602347998D88A4A8BCFB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227A9A621D7844B4B28356E0 /* Router.swift */; };
 		7424C16E88565CB07DCB61A9 /* Pods_Gamoitsani.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F1C5CBF005030EAF45E784 /* Pods_Gamoitsani.framework */; };
 		7E7DB9AC1AE3D56C4A6245A2 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923A8905BC6AA8467F91AF19 /* GameSession.swift */; };
+		7FD58273C58F46FAE98790A6 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876C0F14C7E4B2306AD2CD6 /* AppInfo.swift */; };
 		90ABDC919AB3CF3A865F82D5 /* LeaderboardSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8CF213E6E24E6647668F8 /* LeaderboardSheet.swift */; };
 		924A62BE6EB988DF780416F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FF8B6C753C6F444A7BABEA /* Foundation.framework */; };
 		98CE2D64A13A15FECBA03047 /* PlayerRoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0B895403DEE2FE77C885B9 /* PlayerRoster.swift */; };
@@ -287,6 +288,7 @@
 		A8591DBC756783B37A1C2C05 /* Pods_GamoitsaniTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GamoitsaniTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0DC5ADB9E2C42FBC354C2D /* SampleWords.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SampleWords.swift; path = Game/SampleWords.swift; sourceTree = "<group>"; };
 		B7F70DD013A2EADFAFEC8746 /* Pods-GamoitsaniTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.release.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.release.xcconfig"; sourceTree = "<group>"; };
+		B876C0F14C7E4B2306AD2CD6 /* AppInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		BB3A1A03242578E4715AB6A3 /* DebugMenu.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DebugMenu.swift; path = Debug/DebugMenu.swift; sourceTree = "<group>"; };
 		BDB02F97058A700F6375993C /* Route.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Route.swift; path = Navigation/Route.swift; sourceTree = "<group>"; };
 		C423FDAAD4A8C93737BC37E6 /* GameOverView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameOverView.swift; path = Game/GameOverView.swift; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 				0F4803685FD8794E19D47296 /* Assets.xcassets */,
 				C88501753E294F4505B439CD /* ShareCard.swift */,
 				DA0B895403DEE2FE77C885B9 /* PlayerRoster.swift */,
+				B876C0F14C7E4B2306AD2CD6 /* AppInfo.swift */,
 			);
 			name = Gamoitsani2;
 			path = Gamoitsani2;
@@ -1812,6 +1815,7 @@
 				55CC02AC07EED22D5BF9025A /* SplashView.swift in Sources */,
 				A8CC8DF3F1347FAC4DB17E9A /* ShareCard.swift in Sources */,
 				98CE2D64A13A15FECBA03047 /* PlayerRoster.swift in Sources */,
+				7FD58273C58F46FAE98790A6 /* AppInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

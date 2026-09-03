@@ -298,7 +298,7 @@ struct CountdownView: View {
         // Centres on the screen rather than on the area left under the navigation bar,
         // which was pushing the numerals visibly low.
         .ignoresSafeArea(edges: .top)
-        .sensoryFeedback(.impact(weight: .medium), trigger: beats)
+        .haptics(.impact(weight: .medium), trigger: beats)
         .task {
             beat()
             for step in stride(from: 2, through: 0, by: -1) {

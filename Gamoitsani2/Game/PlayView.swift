@@ -63,7 +63,7 @@ private struct RoundClock: View {
             .accessibilityLabel(l10n("a11y.timeRemaining"))
             .accessibilityValue("\(secondsLeft)")
         // Once per second through the final five, not once when it crosses the threshold.
-        .sensoryFeedback(.warning, trigger: urgentTick)
+        .haptics(.warning, trigger: urgentTick)
         .onChange(of: urgentTick) { _, tick in
             if tick > 0 { sound.play(.warning) }
         }
@@ -160,8 +160,9 @@ struct ClassicPlayView: View {
                 .background(color)
                 .clipShape(Circle())
         }
-        .sensoryFeedback(outcome == .correct ? .success : .impact(weight: .heavy), trigger: answerCount) { _, _ in
-            lastOutcome == outcome && !suppressHaptics
+        .haptics(trigger: answerCount) { _, _ in
+            guard lastOutcome == outcome, !suppressHaptics else { return nil }
+            return outcome == .correct ? .success : .impact(weight: .heavy)
         }
         .accessibilityLabel(outcome == .correct ? l10n("game.correct") : l10n("game.skip"))
         .accessibilityValue(word.map { points(for: outcome, isSuperWord: $0.isSuperWord) } ?? "")
@@ -206,8 +207,9 @@ struct ArcadePlayView: View {
                 )
                 .accessibilityAddTraits(played ? [.isButton, .isSelected] : .isButton)
                 .accessibilityHint(played ? l10n("a11y.undoHint") : l10n("a11y.guessHint"))
-                .sensoryFeedback(played ? .success : .impact(weight: .light), trigger: played) { _, _ in
-                    !suppressHaptics
+                .haptics(trigger: played) { _, _ in
+                    guard !suppressHaptics else { return nil }
+                    return played ? .success : .impact(weight: .light)
                 }
                 .transition(
                     reduceMotion
@@ -240,7 +242,7 @@ struct ArcadePlayView: View {
             }
             .accessibilityLabel(l10n("game.newWords"))
             .accessibilityValue("\(Scoring.setSkip)")
-            .sensoryFeedback(.impact(weight: .heavy), trigger: engine.state.setIndex)
+            .haptics(.impact(weight: .heavy), trigger: engine.state.setIndex)
         }
     }
 }
