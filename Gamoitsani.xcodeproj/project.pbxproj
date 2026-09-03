@@ -28,6 +28,9 @@
 		98CE2D64A13A15FECBA03047 /* PlayerRoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0B895403DEE2FE77C885B9 /* PlayerRoster.swift */; };
 		A8CC8DF3F1347FAC4DB17E9A /* ShareCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88501753E294F4505B439CD /* ShareCard.swift */; };
 		AA38C41CA0E8D6135DDC8360 /* Pods_Gamoitsani_GamoitsaniUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15021D7C46D4DA69DAB50747 /* Pods_Gamoitsani_GamoitsaniUITests.framework */; };
+		485D31FBA92D4931AD519275 /* RemoveAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29D2CDF3014DE299F00CC8 /* RemoveAds.swift */; };
+		763906B955274C3899942C31 /* Purchasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DBD7AEB19D41F8ABD16E60 /* Purchasing.swift */; };
+		7A8D3C56A06C438FB9F6B87E /* StoreKitPurchases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8AA9DCC2242058FFEA629 /* StoreKitPurchases.swift */; };
 		AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30510617BAE33CE79D50131 /* BannerAd.swift */; };
 		B4C89321A831373D1E1223E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */; };
 		B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96668D899010A3A09E42EC99 /* AdEnvironment.swift */; };
@@ -285,6 +288,10 @@
 		2A4F39F1DAD4AF7CEB36AE68 /* Pods-Gamoitsani.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani.debug.xcconfig"; path = "Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.debug.xcconfig"; sourceTree = "<group>"; };
 		33F1C5CBF005030EAF45E784 /* Pods_Gamoitsani.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gamoitsani.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39BBD3AC5C97E5FBD184ADE7 /* GameSetupView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameSetupView.swift; path = Screens/Setup/GameSetupView.swift; sourceTree = "<group>"; };
+		BC29D2CDF3014DE299F00CC8 /* RemoveAds.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RemoveAds.swift; path = Purchase/RemoveAds.swift; sourceTree = "<group>"; };
+		37DBD7AEB19D41F8ABD16E60 /* Purchasing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Purchasing.swift; path = Purchase/Purchasing.swift; sourceTree = "<group>"; };
+		91B8AA9DCC2242058FFEA629 /* StoreKitPurchases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StoreKitPurchases.swift; path = Purchase/StoreKitPurchases.swift; sourceTree = "<group>"; };
+		161CBA5C1A484FE6AB98FC0C /* Gamoitsani2.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; name = Gamoitsani2.storekit; path = Gamoitsani2.storekit; sourceTree = "<group>"; };
 		3A46906829AF04DF295A2BED /* AdUnits.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdUnits.swift; path = Ads/AdUnits.swift; sourceTree = "<group>"; };
 		3BDE67BC9BFB90A79983B10D /* Gamoitsani2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E023802D284EC10E151378E /* PurchaseManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
@@ -603,6 +610,10 @@
 				AE4EC563CA317EEED5FCA338 /* AdMobAds.swift */,
 				E30510617BAE33CE79D50131 /* BannerAd.swift */,
 				96668D899010A3A09E42EC99 /* AdEnvironment.swift */,
+				161CBA5C1A484FE6AB98FC0C /* Gamoitsani2.storekit */,
+				91B8AA9DCC2242058FFEA629 /* StoreKitPurchases.swift */,
+				37DBD7AEB19D41F8ABD16E60 /* Purchasing.swift */,
+				BC29D2CDF3014DE299F00CC8 /* RemoveAds.swift */,
 			);
 			name = Gamoitsani2;
 			path = Gamoitsani2;
@@ -1885,6 +1896,9 @@
 				F8AD6CA2387F7BDA5506DA76 /* AdMobAds.swift in Sources */,
 				AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */,
 				B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */,
+				7A8D3C56A06C438FB9F6B87E /* StoreKitPurchases.swift in Sources */,
+				763906B955274C3899942C31 /* Purchasing.swift in Sources */,
+				485D31FBA92D4931AD519275 /* RemoveAds.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

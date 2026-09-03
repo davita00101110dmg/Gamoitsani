@@ -28,7 +28,20 @@ final class AdMobAds: AdServing {
         #endif
     }
 
+    /// Same treatment as `policy`: read each time, so the debug switch that removes the
+    /// ad caps removes the offer's gates too and the card can be seen on demand.
+    private var offerPolicy: RemoveAdsOfferPolicy {
+        #if DEBUG
+        UserDefaults.standard.bool(forKey: AdDebug.instantKey)
+            ? .unrestricted
+            : RemoveAdsOfferPolicy()
+        #else
+        RemoveAdsOfferPolicy()
+        #endif
+    }
+
     private var state: AdState
+    private var offer: RemoveAdsOfferState
     private var didStart = false
 
     @ObservationIgnored private var interstitial: InterstitialAd?
@@ -41,8 +54,17 @@ final class AdMobAds: AdServing {
         isReady && !AdUnits.banner.isEmpty && policy.allowsBanner(state, at: .now)
     }
 
+    var isRemoveAdsOfferAllowed: Bool {
+        var current = offer
+        // One source of truth for the purchase. The offer store persists counters only —
+        // duplicating `adsRemoved` is how the two copies end up disagreeing.
+        current.adsRemoved = state.adsRemoved
+        return offerPolicy.allowsOffer(current, at: .now)
+    }
+
     init() {
         state = AdStateStore.load()
+        offer = RemoveAdsOfferStore.load()
     }
 
     // MARK: - Lifecycle
@@ -128,6 +150,20 @@ final class AdMobAds: AdServing {
 
     // MARK: - Counting
 
+    func setAdsRemoved(_ removed: Bool) {
+        guard state.adsRemoved != removed else { return }
+        state.adsRemoved = removed
+        AdStateStore.save(state)
+        // Anything already in hand would otherwise still present once.
+        if removed {
+            interstitial = nil
+            appOpen = nil
+            rewarded = nil
+        } else {
+            preload()
+        }
+    }
+
     func gameFinished() {
         state.gamesFinished += 1
         AdStateStore.save(state)
@@ -135,6 +171,18 @@ final class AdMobAds: AdServing {
 
     func setMidGame(_ isMidGame: Bool) {
         state.isMidGame = isMidGame
+    }
+
+    /// One more interruption on the record. Only called where an ad actually presented —
+    /// counting attempts would earn the offer on a run of no-fills nobody ever saw.
+    private func fullScreenAdShown() {
+        offer.fullScreenAdsSeen += 1
+        RemoveAdsOfferStore.save(offer)
+    }
+
+    func removeAdsOfferDismissed() {
+        offer = offerPolicy.dismissed(offer, at: .now)
+        RemoveAdsOfferStore.save(offer)
     }
 
     // MARK: - Formats
@@ -152,6 +200,7 @@ final class AdMobAds: AdServing {
         state.lastInterstitialAt = .now
         state.gamesAtLastInterstitial = state.gamesFinished
         AdStateStore.save(state)
+        fullScreenAdShown()
 
         loadInterstitial()
         return true
@@ -169,6 +218,7 @@ final class AdMobAds: AdServing {
 
         state.lastAppOpenAt = .now
         AdStateStore.save(state)
+        fullScreenAdShown()
 
         loadAppOpen()
         return true
@@ -203,7 +253,16 @@ final class AdMobAds: AdServing {
             ("app open", appOpen == nil ? "not loaded" : "loaded"),
             ("rewarded", rewarded == nil ? "not loaded" : "loaded"),
             ("allowed now", policy.allowsInterstitial(state, at: .now) ? "yes" : "no"),
+            ("ads seen", "\(offer.fullScreenAdsSeen)"),
+            ("offer refused", "\(offer.dismissals) / \(offerPolicy.maximumDismissals)"),
+            ("offer showing", isRemoveAdsOfferAllowed ? "yes" : "no"),
         ]
+    }
+
+    /// Back to never having seen an ad or refused the card.
+    func debugResetRemoveAdsOffer() {
+        offer = RemoveAdsOfferState()
+        RemoveAdsOfferStore.save(offer)
     }
 
     func debugShowInterstitial() async -> Bool {
@@ -341,5 +400,29 @@ private enum AdStateStore {
         var lastAppOpenAt: Date?
         var adsRemoved: Bool
         var adFreeUntil: Date?
+    }
+}
+
+/// How many ads have been sat through, and how often the offer has been turned down.
+///
+/// Separate from `AdStateStore` because it outlives the ad cadence: "reset the cadence" in
+/// the debug menu should hand back a fresh-feeling ad schedule without also un-refusing a
+/// purchase the player has already declined three times.
+///
+/// `RemoveAdsOfferState` is itself `Codable`, so this stores it whole. There is no
+/// second `Stored` mirror to drift out of step with it.
+private enum RemoveAdsOfferStore {
+    private static let key = "ads.removeAdsOffer"
+
+    static func load() -> RemoveAdsOfferState {
+        guard let data = UserDefaults.standard.data(forKey: key),
+              let stored = try? JSONDecoder().decode(RemoveAdsOfferState.self, from: data)
+        else { return RemoveAdsOfferState() }
+        return stored
+    }
+
+    static func save(_ state: RemoveAdsOfferState) {
+        guard let data = try? JSONEncoder().encode(state) else { return }
+        UserDefaults.standard.set(data, forKey: key)
     }
 }

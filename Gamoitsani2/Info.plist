@@ -19,6 +19,8 @@
 	<!-- Ad units, substituted from Gamoitsani2/Config.xcconfig at build time and read back
 	     through AdUnits. A missing one is empty at runtime rather than a build error, so
 	     it shows up as a format that never fills. -->
+	<key>REMOVE_ADS_PRODUCT_ID</key>
+	<string>$(REMOVE_ADS_PRODUCT_ID)</string>
 	<key>BANNER_AD_ID</key>
 	<string>$(BANNER_AD_ID)</string>
 	<key>INTERSTITIAL_AD_ID</key>

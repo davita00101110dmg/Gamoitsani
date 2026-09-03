@@ -15,6 +15,7 @@ struct GamoitsaniApp: App {
     @State private var sound = SoundPlayer()
     @State private var haptics = Haptics()
     @State private var ads = AdMobAds()
+    @State private var store = StoreKitPurchases()
     #if DEBUG
     @State private var debugSettings = DebugSettings()
     #endif
@@ -69,10 +70,18 @@ struct GamoitsaniApp: App {
             .environment(sound)
             .environment(haptics)
             .environment(\.adService, ads)
+            .environment(\.purchases, store)
             .environment(\.isLaunching, showSplash)
             // Decoding on first play would hitch on the countdown tick.
             .task { await sound.prepare() }
             .task { await ads.start() }
+            .task { await store.start() }
+            // The store owns the entitlement; ads are told about it. `initial: true`
+            // covers the ordinary case, where ownership is already known from
+            // `currentEntitlements` before anything has changed.
+            .onChange(of: store.hasRemovedAds, initial: true) { _, removed in
+                ads.setAdsRemoved(removed)
+            }
             .tint(Tokens.accent.color)
 
         #if DEBUG

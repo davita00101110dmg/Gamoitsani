@@ -88,6 +88,12 @@ struct DebugMenuSheet: View {
                         action("Reset ad cadence", enabled: true) {
                             ads.debugResetCadence()
                         }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        // Separate from the cadence reset: that one hands back a fresh ad
+                        // schedule, this one un-refuses the card.
+                        action("Reset remove-ads offer", enabled: true) {
+                            ads.debugResetRemoveAdsOffer()
+                        }
                     }
 
                     SetupPanel(title: "Current game") {
