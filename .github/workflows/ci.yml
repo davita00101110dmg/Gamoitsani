@@ -107,7 +107,7 @@ jobs:
         # accessibility fails here.
         run: |
           set -o pipefail
-          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n GamoitsaniAds; do
+          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n GamoitsaniAds GamoitsaniCapture; do
             echo "--- $pkg"
             ( cd "Libraries/Packages/$pkg" && xcodebuild test \
                 -scheme "$pkg" \
@@ -166,7 +166,7 @@ jobs:
         run: |
           set -o pipefail
           status=0
-          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n GamoitsaniAds; do
+          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n GamoitsaniAds GamoitsaniCapture; do
             for flag in ThreadSanitizer AddressSanitizer; do
               echo "--- $pkg / $flag"
               log=$(mktemp)
