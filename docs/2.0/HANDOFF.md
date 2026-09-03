@@ -1,6 +1,7 @@
 # Gamoitsani 2.0 — where things stand
 
-Written 3 September 2026, at the end of the session that built Phase 8's ad layer.
+Written 3 September 2026, at the end of the session that built Phase 8's ad layer and
+the remove-ads purchase.
 Read this with `docs/2.0/PLAN.md`, which is the architecture and still accurate.
 
 ---
@@ -9,26 +10,27 @@ Read this with `docs/2.0/PLAN.md`, which is the architecture and still accurate.
 
 `Gamoitsani2` is a complete, playable rewrite living beside v1 as a separate bundle id
 (`davitikhvedelidze.Gamoitsani2`). Six local SPM packages, Swift 6 strict concurrency,
-iOS 18, 162 tests. Setup, both game modes, scoreboard, sharing, settings, sound, launch
-animation and the full ad stack all work. **It plays on 60 hardcoded sample words** — the
-data layer is built and tested but not connected, because the word source is still an open
-decision. v1 still builds and must keep building until cutover.
+iOS 18, 170 tests. Setup, both game modes, scoreboard, sharing, settings, sound, launch
+animation, the full ad stack and the remove-ads purchase all work. **It plays on 60
+hardcoded sample words** — the data layer is built and tested but not connected, because
+the word source is still an open decision. v1 still builds and must keep building until cutover.
 
 ---
 
 ## Immediate state
 
-**5 commits sit unpushed on local `main`.** They must not be pushed to `main` directly —
-the owner's rule is that work reaches main through a PR they merge. Branch, push the
-branch, open the PR.
+Work is on branch `ads/phase-8-ad-layer`, open as **PR #24**. The CI fix is pushed and the
+PR is green; three commits after it are local only.
 
 ```
-7bfa991  app-open ad + banner placements + debug tooling
-a89a157  banner infinite-request loop fix + anchored adaptive sizing
-f1e348e  drop Unity from mediation
-f2330a9  trim mediation to four networks
-f6ff226  ads: consent, banner, interstitial, policy
+892484a  spin only the row that is working          (local)
+c50f1b5  say why a purchase is unavailable          (local)
+7e0d0e6  StoreKit 2 + the remove-ads offer policy   (local)
+b64b926  CI xcconfig fix + two skipped suites       (pushed)
 ```
+
+Never push to `main` directly — the owner's rule is that work reaches main through a PR
+they merge.
 
 **Never put a `claude.ai/code/session_...` link in a commit trailer or PR body.** The repo
 is public. Keep `Co-Authored-By`; drop `Claude-Session`.
@@ -48,7 +50,8 @@ Gamoitsani2 (app)          composition root, navigation, screens, AdMob adapter
    └── GamoitsaniAds       ad policy only — no SDK dependency
 ```
 
-Tests: Core 89, Data 21, Design 23, Ads 12, Engine 11, L10n 6.
+Tests: Core 89, Data 21, Design 23, Ads 20, Engine 11, L10n 6. Plus GamoitsaniMacros 2,
+which needs `swift test` — it is a compiler plugin with no simulator destination.
 
 ---
 
@@ -73,14 +76,19 @@ Tests: Core 89, Data 21, Design 23, Ads 12, Engine 11, L10n 6.
 
 | | |
 |---|---|
-| **Word source** | The decision. Bundled DB vs Firestore. Owner is building a word DB in parallel and wants this decided last. |
-| **`GamoitsaniData` wiring** | Zero imports in the app. `SampleWordProvider` (60 words) feeds the deck. |
-| **Add word screen** | Still `PlaceholderScreen`. Depends on the word source. |
+| **Word source** | The decision, and the only thing blocking anything else. Bundled DB vs Firestore. Owner is building a word DB in parallel and wants this decided last. |
+| **`GamoitsaniData` wiring** | Zero imports in the app. `SampleWordProvider` (60 words) feeds the deck. Blocked on the word source. |
+| **Add word screen** | Still `PlaceholderScreen`. Blocked on the word source. |
+| **Crashlytics** | Not started, and **cutover-blocking** by the owner's decision. A ground-up rewrite meeting real devices is exactly when crash reports matter. |
+| **Analytics** | Not started. v1 has an `AnalyticsManager`; 2.0 has nothing. |
+| **Game recording** | v1's `GameRecordingManager` + draggable camera preview. **Being ported.** The largest of the four: camera permission, AVFoundation capture, file handling, a share path. |
+| **Notifications** | v1's `NotificationsManager`. **Being ported.** v1's copy is hardcoded English, so this needs new copy in 11 languages and lands inside the translation pass. |
+| **Word review** | The hidden five-taps-on-title screen. **Being ported, but not as it was** — `firestore.rules` made words read-only because those unauthenticated writes were the attack path. It needs a Cloud Function or an authenticated admin claim first. Server work, not UI work. |
+| **Automatic review prompt** | **Being ported.** v1's never fired: its counter was read but never written. Cheapest of the four. |
 | **Rewarded ads** | Implemented and tested, deliberately no trigger. See below. |
-| **Translations** | 89 keys. Only `en` and `ka` are complete; the other nine have 26 each. `docs/2.0/LOCALIZATION.md` lists what is missing. |
-| **StoreKit 2** | Remove-ads IAP. `AdState.adsRemoved` exists and is honoured by the policy; nothing sets it. |
-| **Analytics, Crashlytics** | Not started. |
-| **Cutover (Phase 9)** | Flip bundle id, delete v1 and its six extra pods. |
+| **Translations** | 94 keys. Only `en` and `ka` are complete. `docs/2.0/LOCALIZATION.md` lists what is missing. Owner wants this done last, after the copy settles. |
+| **iPad** | Both targets declare `TARGETED_DEVICE_FAMILY = "1,2"`, so nothing regresses — but every 2.0 screen has only ever run on the owner's iPhone. App Store review tests on iPad. Run it there before cutover. |
+| **Cutover (Phase 9)** | See the checklist below. |
 
 ---
 
@@ -98,6 +106,39 @@ Tests: Core 89, Data 21, Design 23, Ads 12, Engine 11, L10n 6.
   description, so iOS never showed the prompt — it never collected anything.
 - **Mediation is AdMob + Vungle + Meta.** InMobi, Chartboost, ironSource, Mintegral and
   Unity each earned ~$0 and cost 78 MB. Release build went 53 MB → 16 MB.
+- **There is no 1.8, and no further v1 release.** The next thing on the App Store is 2.0.
+  Phase 2's hotfixes stay committed and unreleased, which means the shipping 1.7 keeps
+  its StoreKit 1 observer bug and its hardcoded IAB TCF consent string until 2.0 replaces
+  it. That is an accepted cost — do not propose shipping v1 again to fix them.
+- **The remove-ads offer lives in the setup form and in Settings.** Four other placements
+  were built and looked at on a device first — a chip above the banner, two toolbar
+  variants, a row on the podium, and a toast after the interstitial — and all were
+  rejected. Do not re-propose them.
+- **The IAP product identifier is v1's**, `davitikhvedelidze.Gamoitsani.removeAds`.
+  Identifiers belong to the App Store Connect app record, not to a bundle id, so reusing
+  it is what lets existing customers keep the upgrade at cutover.
+- **All four remaining v1 features are being ported** — recording, notifications, word
+  review, automatic review prompt. This was an explicit call, not an omission.
+
+---
+
+## Cutover checklist (Phase 9)
+
+Flipping the bundle id to `davitikhvedelidze.Gamoitsani` also inherits **v1's
+`UserDefaults` container**, and the two key schemes do not line up.
+
+- **`APP_LANGUAGE` → `app.language`.** v1 wrote the first, 2.0 reads the second. Without a
+  one-time read of the old key at first launch, every existing user who deliberately chose
+  a language gets silently reset to the system default on upgrade.
+- **`HAS_REMOVED_ADS` stays ignored, deliberately.** It is tempting to honour it so nobody
+  loses a purchase, but that device-local flag is exactly the unreliable thing 2.0
+  replaced, and v1 could set it without a verified transaction.
+  `Transaction.currentEntitlements` is authoritative and already covers anyone who really
+  bought it, on any device, forever. Do not add a fallback.
+- **Delete the orphaned v1 Core Data store.** It is a disposable word cache and will
+  otherwise sit on disk forever.
+- Delete v1 sources, its target, storyboards/XIBs, and its six extra pods. CocoaPods
+  itself stays — 2.0 uses it for the ad SDKs.
 
 ---
 
@@ -130,6 +171,16 @@ latter reported zero while the run was failing.
 
 **`INFOPLIST_KEY_UILaunchScreen_Generation` emits a `UILaunchScreen` dict nested inside
 itself and drops `UIColorName`.** The launch colour comes from a partial `Info.plist`.
+
+**`StoreKitConfigurationFileReference` is a child element, not an attribute.** Xcode
+writes it as `<StoreKitConfigurationFileReference identifier = "...">` inside
+`LaunchAction`, with the path relative to the `.xcodeproj` rather than to the scheme file.
+Hand-written as an attribute it is silently ignored, the purchase finds no product, and
+the failure looks like a broken product id.
+
+**StoreKit test configurations only exist when Xcode launches the app.** A `devicectl`
+install, or tapping the icon, has none — and 2.0's separate bundle id means the real App
+Store has no products for it either. Buying only works under ⌘R until cutover.
 
 **Package resources do not always rebuild incrementally.** Added sound files were missing
 from the `.app` while the build succeeded and the app ran silently. Check the bundle, not
@@ -167,9 +218,15 @@ The ad-free hour is the shape already implemented.
 
 ## Suggested next steps
 
-1. **Push the 5 commits** via a PR.
-2. **Translations** — 63 keys × 9 languages. `docs/2.0/LOCALIZATION.md` has the table. The
-   owner wants to review the English and Georgian copy before translating.
-3. **StoreKit 2 remove-ads.** Self-contained, the policy already honours `adsRemoved`, and
-   it monetises the people most annoyed by ads.
-4. **Word source**, when the owner's DB is ready. This unblocks Add word and the real deck.
+1. **Push the three local commits** to PR #24.
+2. **Crashlytics.** Cutover-blocking, self-contained, and depends on nothing.
+3. **The four ported features** — automatic review prompt is the cheapest, word review is
+   the one with server work in front of it, recording is the largest.
+4. **Analytics.**
+5. **Run 2.0 on an iPad** before anyone plans a submission.
+6. **Word source**, when the owner's DB is ready. Unblocks `GamoitsaniData`, Add word and
+   the real deck.
+7. **Translations, last.** Notification copy lands here too.
+
+The Georgian strings added for the purchase UI (`iap.*`, `common.ok`) were written by
+Claude and have not been reviewed by the owner, who is the native speaker.
