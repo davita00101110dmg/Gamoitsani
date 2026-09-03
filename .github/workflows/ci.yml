@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main, v2]
   workflow_dispatch:
+  schedule:
+    # Sanitisers, weekly. "From time to time" otherwise means never.
+    - cron: "0 4 * * 1"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -68,6 +71,45 @@ jobs:
           echo "Using simulator $UDID"
           echo "udid=$UDID" >> "$GITHUB_OUTPUT"
 
+      - name: Verify the launch background
+        # The launch screen colour cannot reference the design tokens — it is read from the
+        # Info.plist before any code runs — so the value exists in two places. Cheap to
+        # check, and the failure it prevents (a colour flash at launch) is easy to miss.
+        run: ./scripts/verify-launch-background.swift
+
+      - name: Verify localization keys
+        # `l10n("...")` returns the key when it is missing, so a typo ships as a raw key on
+        # screen instead of failing the build. Also surfaces keys nothing references any
+        # more, which is how the strings from a deleted screen get noticed.
+        run: ./scripts/verify-localization-keys.py
+
+      - name: Build and test Gamoitsani2
+        # The 2.0 target and its five local packages. Built first and separately from v1:
+        # it uses SPM only, no CocoaPods, so a failure here is unambiguous. Swift 6
+        # language mode with complete strict concurrency, so a data-race diagnostic fails
+        # the build rather than accumulating.
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -workspace "$WORKSPACE" \
+            -scheme Gamoitsani2 \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Test the 2.0 packages
+        # Each package is independently testable — that is the point of the module split.
+        # The design tokens carry WCAG contrast assertions, so a colour change that breaks
+        # accessibility fails here.
+        run: |
+          set -o pipefail
+          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n; do
+            echo "--- $pkg"
+            ( cd "Libraries/Packages/$pkg" && xcodebuild test \
+                -scheme "$pkg" \
+                -destination "id=${{ steps.sim.outputs.udid }}" \
+                CODE_SIGNING_ALLOWED=NO )
+          done
+
       - name: Build and test
         # Compiles and tests in a single pass. Scoped to GamoitsaniTests deliberately: the
         # UI test target is stock Xcode boilerplate that asserts nothing, and running the
@@ -86,3 +128,45 @@ jobs:
             -destination "id=${{ steps.sim.outputs.udid }}" \
             -only-testing:GamoitsaniTests \
             CODE_SIGNING_ALLOWED=NO
+
+  # Kept off the push path: the sanitised suites take several times as long, and their
+  # signal does not change commit to commit. Weekly, or on demand.
+  #
+  # This exists because a Swift access race in TeamDraw went unnoticed until the first
+  # manual run — TSan reports that as "Swift access race", not "data race", so it also
+  # slipped a grep looking only for the latter.
+  sanitizers:
+    name: Sanitizers
+    runs-on: macos-15
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pick a simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available --json \
+            | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];print(next(v['udid'] for rt in sorted(d) if 'iOS' in rt for v in d[rt] if 'iPhone' in v['name']))")
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+
+      - name: Thread and address sanitizers
+        run: |
+          set -o pipefail
+          status=0
+          for pkg in GamoitsaniCore GamoitsaniEngine GamoitsaniDesign GamoitsaniData GamoitsaniL10n; do
+            for flag in ThreadSanitizer AddressSanitizer; do
+              echo "--- $pkg / $flag"
+              log=$(mktemp)
+              ( cd "Libraries/Packages/$pkg" && xcodebuild test \
+                  -scheme "$pkg" \
+                  -destination "id=${{ steps.sim.outputs.udid }}" \
+                  "-enable${flag}" YES ) | tee "$log" || status=1
+              # Both spellings: TSan says "data race" for memory and "Swift access race"
+              # for an exclusivity violation, and the second one is easy to miss.
+              if grep -qE "WARNING: ThreadSanitizer|ERROR: AddressSanitizer" "$log"; then
+                echo "::error::$flag reported an issue in $pkg"
+                status=1
+              fi
+            done
+          done
+          exit $status
