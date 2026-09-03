@@ -20,6 +20,9 @@ public struct AdState: Sendable, Equatable {
     /// Earned by watching a rewarded ad. Nothing interrupts until it passes.
     public var adFreeUntil: Date?
 
+    /// A game is on screen. Deliberately not persisted — it is true only while playing.
+    public var isMidGame: Bool
+
     public init(
         gamesFinished: Int = 0,
         gamesAtLastInterstitial: Int? = nil,
@@ -27,7 +30,8 @@ public struct AdState: Sendable, Equatable {
         lastAppOpenAt: Date? = nil,
         adsRemoved: Bool = false,
         hasConsent: Bool = false,
-        adFreeUntil: Date? = nil
+        adFreeUntil: Date? = nil,
+        isMidGame: Bool = false
     ) {
         self.gamesFinished = gamesFinished
         self.gamesAtLastInterstitial = gamesAtLastInterstitial
@@ -36,6 +40,7 @@ public struct AdState: Sendable, Equatable {
         self.adsRemoved = adsRemoved
         self.hasConsent = hasConsent
         self.adFreeUntil = adFreeUntil
+        self.isMidGame = isMidGame
     }
 }
 
@@ -109,6 +114,11 @@ public struct AdPolicy: Sendable, Equatable {
 
     public func allowsAppOpen(_ state: AdState, at now: Date) -> Bool {
         guard allowsAds(state, at: now) else { return false }
+        // A party game gets backgrounded mid-round to answer a message. Returning to a
+        // full-screen ad while the clock is running is the worst thing this can do, so
+        // the rule lives here rather than at the call site where a second trigger could
+        // forget it.
+        guard !state.isMidGame else { return false }
         // Never as the very first thing someone sees: the app has to be worth opening
         // before it is worth interrupting.
         guard state.gamesFinished >= gamesBeforeFirstInterstitial else { return false }

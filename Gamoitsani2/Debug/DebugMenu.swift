@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Observation
+import GamoitsaniAds
 import GamoitsaniCore
 import GamoitsaniDesign
 
@@ -39,9 +40,9 @@ struct DebugMenuSheet: View {
     // the modifier chain that happened — a debug tool should not be.
     let debug: DebugSettings
     let session: GameSession
+    let ads: any AdServing
 
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.adService) private var ads
 
     var body: some View {
         @Bindable var debug = debug
@@ -77,6 +78,11 @@ struct DebugMenuSheet: View {
                         action("Show interstitial now", enabled: true) {
                             dismiss()
                             Task { _ = await ads.debugShowInterstitial() }
+                        }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        action("Show app open now", enabled: true) {
+                            dismiss()
+                            Task { _ = await ads.debugShowAppOpen() }
                         }
                         Divider().overlay(Tokens.cardEdge.color)
                         action("Reset ad cadence", enabled: true) {
@@ -247,14 +253,19 @@ private struct DebugGesture: UIViewRepresentable {
 
 extension View {
     /// Presents the debug menu when the device is shaken.
-    func debugMenuOnShake(debug: DebugSettings, session: GameSession) -> some View {
-        modifier(DebugMenuOnShake(debug: debug, session: session))
+    func debugMenuOnShake(
+        debug: DebugSettings,
+        session: GameSession,
+        ads: any AdServing
+    ) -> some View {
+        modifier(DebugMenuOnShake(debug: debug, session: session, ads: ads))
     }
 }
 
 private struct DebugMenuOnShake: ViewModifier {
     let debug: DebugSettings
     let session: GameSession
+    let ads: any AdServing
 
     @State private var isPresented = false
 
@@ -266,7 +277,7 @@ private struct DebugMenuOnShake: ViewModifier {
                 isPresented = true
             }
             .sheet(isPresented: $isPresented) {
-                DebugMenuSheet(debug: debug, session: session)
+                DebugMenuSheet(debug: debug, session: session, ads: ads)
             }
     }
 }

@@ -133,6 +133,10 @@ final class AdMobAds: AdServing {
         AdStateStore.save(state)
     }
 
+    func setMidGame(_ isMidGame: Bool) {
+        state.isMidGame = isMidGame
+    }
+
     // MARK: - Formats
 
     func showInterstitialIfAllowed() async -> Bool {
@@ -210,6 +214,17 @@ final class AdMobAds: AdServing {
         interstitial = nil
         ad.present(from: root)
         loadInterstitial()
+        return true
+    }
+
+    func debugShowAppOpen() async -> Bool {
+        guard let ad = appOpen, let root = Self.rootViewController else {
+            preload()
+            return false
+        }
+        appOpen = nil
+        ad.present(from: root)
+        loadAppOpen()
         return true
     }
 

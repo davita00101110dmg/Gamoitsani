@@ -23,6 +23,8 @@ struct GamoitsaniApp: App {
     /// replays it. Doubles as the `isLaunching` signal.
     @State private var showSplash = true
 
+    @Environment(\.scenePhase) private var scenePhase
+
     init() {
         // The display face ships inside GamoitsaniDesign, so it is not in the app bundle
         DesignSystem.registerFonts()
@@ -40,7 +42,22 @@ struct GamoitsaniApp: App {
                         .zIndex(1)
                 }
             }
+            .onChange(of: scenePhase) { was, now in
+                guard was != .active, now == .active else { return }
+                Task { await showAppOpenAdIfIdle() }
+            }
         }
+    }
+
+    /// The app-open ad, on returning to the foreground and nowhere else.
+    ///
+    /// Never on a cold launch: the splash is the app's own opening, and an ad on top of it
+    /// is the first thing a new player would see. Not interrupting a live round is the
+    /// policy's job, not this one's.
+    @MainActor
+    private func showAppOpenAdIfIdle() async {
+        guard !showSplash else { return }
+        await ads.showAppOpenIfAllowed()
     }
 
     @ViewBuilder
@@ -61,7 +78,7 @@ struct GamoitsaniApp: App {
         #if DEBUG
         base
             .environment(debugSettings)
-            .debugMenuOnShake(debug: debugSettings, session: session)
+            .debugMenuOnShake(debug: debugSettings, session: session, ads: ads)
         #else
         base
         #endif

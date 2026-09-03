@@ -32,6 +32,9 @@ public protocol AdServing: AnyObject {
     /// Records a finished game. Interstitial cadence is counted in games, not minutes.
     func gameFinished()
 
+    /// Whether a game is on screen. Nothing full-screen interrupts while it is true.
+    func setMidGame(_ isMidGame: Bool)
+
     /// Shows an interstitial if the policy allows one. Returns whether it did.
     @discardableResult
     func showInterstitialIfAllowed() async -> Bool
@@ -52,8 +55,9 @@ public protocol AdServing: AnyObject {
     /// refused, no ad loaded, or the cadence simply said no.
     var debugSummary: [(String, String)] { get }
 
-    /// Ignores the policy entirely and presents whatever is loaded.
+    /// Ignore the policy entirely and present whatever is loaded.
     func debugShowInterstitial() async -> Bool
+    func debugShowAppOpen() async -> Bool
 
     /// Forgets the cadence, so the next game behaves like a fresh install.
     func debugResetCadence()
@@ -75,6 +79,7 @@ public final class NoAds: AdServing {
 
     public func start() async {}
     public func gameFinished() {}
+    public func setMidGame(_ isMidGame: Bool) {}
     public func showInterstitialIfAllowed() async -> Bool { false }
     public func showAppOpenIfAllowed() async -> Bool { false }
     public func showRewarded() async -> RewardOutcome { .none }
@@ -83,6 +88,7 @@ public final class NoAds: AdServing {
     #if DEBUG
     public var debugSummary: [(String, String)] { [("ads", "off")] }
     public func debugShowInterstitial() async -> Bool { false }
+    public func debugShowAppOpen() async -> Bool { false }
     public func debugResetCadence() {}
     #endif
 }

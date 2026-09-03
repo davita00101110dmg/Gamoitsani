@@ -114,3 +114,38 @@ struct AdPolicyTests {
         #expect(policy.allowsRewarded(state))
     }
 }
+
+@Suite("App open during a game")
+struct AppOpenMidGameTests {
+
+    private let now = Date(timeIntervalSince1970: 2_000_000)
+    private let policy = AdPolicy()
+
+    /// The worst thing this feature can do: someone backgrounds the app mid-round to
+    /// answer a message and comes back to a full-screen ad over a running clock.
+    @Test("no app-open ad while a game is on screen")
+    func neverMidGame() {
+        var state = AdState(gamesFinished: 50, hasConsent: true)
+        #expect(policy.allowsAppOpen(state, at: now), "precondition: otherwise allowed")
+
+        state.isMidGame = true
+        #expect(!policy.allowsAppOpen(state, at: now))
+    }
+
+    /// Interstitials are only ever shown on leaving a finished game, so this flag has no
+    /// business gating them — and gating them would silently break that flow.
+    @Test("being in a game does not block the other formats")
+    func onlyAppOpenIsGated() {
+        let state = AdState(gamesFinished: 50, hasConsent: true, isMidGame: true)
+        #expect(policy.allowsInterstitial(state, at: now))
+        #expect(policy.allowsBanner(state, at: now))
+        #expect(policy.allowsRewarded(state))
+    }
+
+    @Test("the flag clears with the game")
+    func clearsAgain() {
+        var state = AdState(gamesFinished: 50, hasConsent: true, isMidGame: true)
+        state.isMidGame = false
+        #expect(policy.allowsAppOpen(state, at: now))
+    }
+}

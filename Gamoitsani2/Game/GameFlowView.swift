@@ -61,9 +61,13 @@ struct GameFlowView: View {
             // fanfare instead, so the two never stack.
             if was == .playing, let now, now != .finished { sound.play(.timeUp) }
         }
+        .onAppear { ads.setMidGame(true) }
         // The system back button and the swipe gesture both pop without routing through
         // `leave()`, so the game is saved on the way out either way.
-        .onDisappear { session.leave() }
+        .onDisappear {
+            ads.setMidGame(false)
+            session.leave()
+        }
     }
 
     /// The current team during play, so the name is legible without occupying the screen
@@ -160,6 +164,15 @@ struct TurnInfoView: View {
             }
             .padding(.horizontal, Spacing.lg)
             .padding(.bottom, Spacing.xl)
+        }
+        // Between turns, and only here. The phone is being handed to the next player,
+        // nothing is timed, and there is nothing to mis-tap — unlike the play screen,
+        // where a banner sits under fast repeated taps on a running clock.
+        //
+        // Six of these a game against one on setup, which is where the inventory actually
+        // is: setup is over in seconds.
+        .safeAreaInset(edge: .bottom) {
+            BannerAd()
         }
         .onAppear {
             withAnimation(Motion.card(reduceMotion: reduceMotion)) { appeared = true }
