@@ -24,9 +24,12 @@ enum RecordingOverlay {
         // Flipping it once here means every position below reads like the rest of the app.
         overlay.isGeometryFlipped = true
 
+        // Every animation spans the whole clip. See `visibility`.
+        let clip = max(timeline.duration ?? 0, timeline.entries.map(\.start).max() ?? 0) + 0.5
+
         for entry in timeline.entries {
-            overlay.addSublayer(card(for: entry, size: size))
-            if let flash = flash(for: entry, size: size) {
+            overlay.addSublayer(card(for: entry, size: size, clip: clip))
+            if let flash = flash(for: entry, size: size, clip: clip) {
                 overlay.addSublayer(flash)
             }
         }
@@ -35,7 +38,7 @@ enum RecordingOverlay {
 
     // MARK: - Word card
 
-    private static func card(for entry: RecordingEntry, size: CGSize) -> CALayer {
+    private static func card(for entry: RecordingEntry, size: CGSize, clip: TimeInterval) -> CALayer {
         let scale = size.width / 1080
 
         let card = CALayer()
@@ -78,7 +81,7 @@ enum RecordingOverlay {
         card.addSublayer(label)
 
         card.opacity = 0
-        card.add(visibility(from: entry.start, to: cardEnd(of: entry)), forKey: "visibility")
+        card.add(visibility(from: entry.start, to: cardEnd(of: entry), clip: clip), forKey: "visibility")
         return card
     }
 
@@ -128,7 +131,7 @@ enum RecordingOverlay {
 
     // MARK: - Outcome flash
 
-    private static func flash(for entry: RecordingEntry, size: CGSize) -> CALayer? {
+    private static func flash(for entry: RecordingEntry, size: CGSize, clip: TimeInterval) -> CALayer? {
         guard let outcome = entry.outcome, let end = entry.end else { return nil }
         // Nothing to celebrate when the clock simply ran out.
         guard outcome != .unanswered else { return nil }
@@ -152,7 +155,7 @@ enum RecordingOverlay {
         mark.shadowRadius = 14 * scale
 
         mark.opacity = 0
-        mark.add(visibility(from: end, to: end + flashDuration), forKey: "visibility")
+        mark.add(visibility(from: end, to: end + flashDuration, clip: clip), forKey: "visibility")
         mark.add(pop(at: end), forKey: "pop")
         return mark
     }
@@ -174,20 +177,34 @@ enum RecordingOverlay {
     //   · `isRemovedOnCompletion` is false, or the layer snaps back after its first pass.
     //   · `fillMode` is `.both`, so the value holds before and after the animation.
 
-    /// A hard cut in, and a hard cut out.
+    /// A hard cut in, and a hard cut out, over the length of the whole clip.
     ///
-    /// No fade. In the game a word is simply there the moment it is dealt, and the clip is
-    /// meant to mirror what was on screen — a quarter-second ramp meant the word was never
-    /// up when the player first saw it.
-    private static func visibility(from start: TimeInterval, to end: TimeInterval) -> CAAnimation {
-        let step = CAKeyframeAnimation(keyPath: "opacity")
-        let visible = max(0.01, end - start)
+    /// The span matters as much as the cut. An animation that ran only for the card's own
+    /// window needed `fillMode = .both` to hold its value, and fill applies the *first*
+    /// value to all time before `beginTime` — so every card was opaque from the first
+    /// frame. Stacked in one place, that renders as a single word for the entire clip: the
+    /// last one added, never changing. Verified by exporting a three-word clip and
+    /// sampling frames.
+    ///
+    /// So each card gets one animation covering the clip, off until its start and off
+    /// again after its end. No fill can leak it in early.
+    ///
+    /// No fade either. In the game a word is simply there the moment it is dealt.
+    private static func visibility(
+        from start: TimeInterval,
+        to end: TimeInterval,
+        clip: TimeInterval
+    ) -> CAAnimation {
+        let total = max(clip, end + 0.01)
+        let onAt = min(max(start / total, 0), 1)
+        let offAt = min(max(end / total, onAt + 0.0001), 1)
 
-        step.values = [1, 1, 0]
-        step.keyTimes = [0, 1, 1]
+        let step = CAKeyframeAnimation(keyPath: "opacity")
+        step.values = [0, 1, 0]
+        step.keyTimes = [0, NSNumber(value: onAt), NSNumber(value: offAt)]
         step.calculationMode = .discrete
-        step.duration = visible
-        return configured(step, at: start)
+        step.duration = total
+        return configured(step, at: 0)
     }
 
     private static func pop(at time: TimeInterval) -> CAAnimation {
