@@ -38,19 +38,6 @@ enum RecordingOverlay {
     private static func card(for entry: RecordingEntry, size: CGSize) -> CALayer {
         let scale = size.width / 1080
 
-        let text = CATextLayer()
-        text.string = entry.word
-        let pointSize = 64 * scale
-        text.font = displayFont(pointSize)
-        text.fontSize = pointSize
-        text.alignmentMode = .center
-        text.foregroundColor = cgColor(Tokens.onSurface)
-        text.truncationMode = .end
-        text.isWrapped = true
-        // Rasterises at export resolution rather than at 1x, which is what makes Georgian
-        // render crisply instead of as soft bitmaps.
-        text.contentsScale = 3
-
         let card = CALayer()
         let width = size.width * 0.82
         let height = 150 * scale
@@ -70,12 +57,66 @@ enum RecordingOverlay {
         card.shadowRadius = 18 * scale
         card.shadowOffset = CGSize(width: 0, height: 6 * scale)
 
-        text.frame = card.bounds.insetBy(dx: 24 * scale, dy: (height - 78 * scale) / 2)
-        card.addSublayer(text)
+        // The word is drawn into an image rather than given to a `CATextLayer`.
+        //
+        // `CATextLayer` does not render at all inside
+        // `AVVideoCompositionCoreAnimationTool` — the card, its border and its shadow all
+        // composite correctly and the text is simply absent, with no error anywhere. That
+        // was verified by exporting one clip carrying three variants of this layer: plain
+        // `CATextLayer`, `CATextLayer` with an explicit `CTFont`, and this. Only this one
+        // appears.
+        let inset = CGRect(
+            x: 24 * scale,
+            y: (height - 78 * scale) / 2,
+            width: width - 48 * scale,
+            height: 78 * scale
+        )
+        let label = CALayer()
+        label.frame = inset
+        label.contents = wordImage(entry.word, size: inset.size, pointSize: 64 * scale)?.cgImage
+        label.contentsGravity = .resizeAspect
+        card.addSublayer(label)
 
         card.opacity = 0
         card.add(visibility(from: entry.start, to: cardEnd(of: entry)), forKey: "visibility")
         return card
+    }
+
+    /// The word, drawn once at export resolution.
+    ///
+    /// Shrinks to fit rather than truncating: a long Georgian compound is still the whole
+    /// joke, and a clipped one is worse than a small one.
+    private static func wordImage(_ word: String, size: CGSize, pointSize: CGFloat) -> UIImage? {
+        guard size.width > 0, size.height > 0 else { return nil }
+
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 3
+        format.opaque = false
+
+        return UIGraphicsImageRenderer(size: size, format: format).image { _ in
+            var attributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: uiColor(Tokens.onSurface)
+            ]
+
+            var point = pointSize
+            var bounds = CGSize.zero
+            // Six steps is enough to get from the design size down to something that fits
+            // the longest word in the deck.
+            for _ in 0..<6 {
+                attributes[.font] = displayFont(point)
+                bounds = (word as NSString).size(withAttributes: attributes)
+                if bounds.width <= size.width && bounds.height <= size.height { break }
+                point *= 0.85
+            }
+
+            (word as NSString).draw(
+                at: CGPoint(
+                    x: (size.width - bounds.width) / 2,
+                    y: (size.height - bounds.height) / 2
+                ),
+                withAttributes: attributes
+            )
+        }
     }
 
     /// A zero-length entry — a word answered on the frame it appeared — would otherwise
@@ -133,20 +174,20 @@ enum RecordingOverlay {
     //   · `isRemovedOnCompletion` is false, or the layer snaps back after its first pass.
     //   · `fillMode` is `.both`, so the value holds before and after the animation.
 
+    /// A hard cut in, and a hard cut out.
+    ///
+    /// No fade. In the game a word is simply there the moment it is dealt, and the clip is
+    /// meant to mirror what was on screen — a quarter-second ramp meant the word was never
+    /// up when the player first saw it.
     private static func visibility(from start: TimeInterval, to end: TimeInterval) -> CAAnimation {
-        let fade = CAKeyframeAnimation(keyPath: "opacity")
+        let step = CAKeyframeAnimation(keyPath: "opacity")
         let visible = max(0.01, end - start)
-        let ramp = min(fadeDuration, visible / 3)
 
-        fade.values = [0, 1, 1, 0]
-        fade.keyTimes = [
-            0,
-            NSNumber(value: ramp / visible),
-            NSNumber(value: 1 - ramp / visible),
-            1
-        ]
-        fade.duration = visible
-        return configured(fade, at: start)
+        step.values = [1, 1, 0]
+        step.keyTimes = [0, 1, 1]
+        step.calculationMode = .discrete
+        step.duration = visible
+        return configured(step, at: start)
     }
 
     private static func pop(at time: TimeInterval) -> CAAnimation {
@@ -188,7 +229,6 @@ enum RecordingOverlay {
 
     // MARK: - Constants
 
-    private static let fadeDuration: TimeInterval = 0.25
     private static let flashDuration: TimeInterval = 0.9
     private static let minimumCardDuration: TimeInterval = 0.6
 }

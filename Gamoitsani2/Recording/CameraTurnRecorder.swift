@@ -49,6 +49,14 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
     /// before the first export even finished.
     @ObservationIgnored private var didResume = false
 
+    /// Exports run one at a time, behind the game rather than in front of it.
+    ///
+    /// They used to hold the recorder in `.exporting`, and `startTurn` refused while it
+    /// was — so every turn that began before the previous clip finished composing was
+    /// silently not filmed. A 44s clip takes 16s to export and a turn transition takes
+    /// three, so in practice only the first turn of a game was ever kept.
+    @ObservationIgnored private var exportChain: Task<Void, Never>?
+
     // MARK: - Permissions
 
     /// Asked from the setup screen, so the prompts never land on a running clock the way
@@ -91,7 +99,9 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
     // MARK: - A turn
 
     func startTurn(teamName: String, roundLength: TimeInterval) {
-        guard !isFilming, state != .exporting else { return }
+        // Only whether a camera is already running. An export in flight belongs to the
+        // previous turn and must not cost this one.
+        guard !isFilming else { return }
 
         // Cleared rather than inspected: a refusal on one turn — a full disk that has
         // since been emptied — must not disable filming for the rest of the game.
@@ -190,7 +200,7 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
             // Counted on disk before the attempt, so a clip that kills the process runs
             // out of chances instead of killing every future launch.
             guard PendingClipStore.beginAttempt(for: pending.clip) else { continue }
-            await export(pending.clip, timeline: pending.timeline)
+            enqueueExport(pending.clip, timeline: pending.timeline)
         }
     }
 
@@ -261,9 +271,23 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         // than the clip.
         PendingClipStore.write(finished, for: url)
         let size = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? Int) ?? 0
-        RecordingLog.note("  keeping, \((size ?? 0) / 1024)KB, exporting")
-        await export(url, timeline: finished)
+        RecordingLog.note("  keeping, \((size ?? 0) / 1024)KB, queued for export")
+
+        // Idle immediately: the clip is on disk with its timeline beside it, so the next
+        // turn can start filming while this one composes. If the app dies mid-export the
+        // pair is picked up at the next launch.
         state = .idle
+        enqueueExport(url, timeline: finished)
+    }
+
+    /// Chains exports so several never run at once — each is a full-resolution video
+    /// composition, and three in parallel on a phone mid-game is how a round drops frames.
+    private func enqueueExport(_ clip: URL, timeline: RecordingTimeline) {
+        let previous = exportChain
+        exportChain = Task { [weak self] in
+            await previous?.value
+            await self?.export(clip, timeline: timeline)
+        }
     }
 
     /// Composes the overlay and saves the result, then removes both copies.
