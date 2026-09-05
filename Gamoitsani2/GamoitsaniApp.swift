@@ -120,33 +120,10 @@ struct RootView: View {
                     switch route {
                     case .game:
                         GameFlowView()
-                    case .addWord:
-                        PlaceholderScreen(title: "Add word")
                     case .settings:
                         SettingsView()
                     }
                 }
         }
-    }
-}
-
-/// Phase 7 replaces these with the real screens, in dependency order.
-struct PlaceholderScreen: View {
-    let title: String
-
-    var body: some View {
-        ZStack {
-            Tokens.surface.color.ignoresSafeArea()
-            VStack(spacing: Spacing.sm) {
-                Text(title)
-                    .font(Typography.title)
-                    .foregroundStyle(Tokens.onSurface.color)
-                Text("Coming next")
-                    .font(Typography.caption)
-                    .foregroundStyle(Tokens.onSurfaceMuted.color)
-            }
-        }
-        .navigationTitle(title)
-        .navigationBarTitleDisplayMode(.inline)
     }
 }

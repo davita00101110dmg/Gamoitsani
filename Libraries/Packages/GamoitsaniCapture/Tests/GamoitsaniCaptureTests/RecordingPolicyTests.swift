@@ -51,11 +51,15 @@ struct RecordingPolicyTests {
 
     @Test("a full disk refuses before the camera starts")
     func notEnoughDisk() {
-        let state = conditions(free: 10 * 1024 * 1024)
+        // Typed, not an inline literal. Inside the `#expect` macro expansion the literal
+        // loses its context and defaults to `Int`, which fails to convert to `Int64` —
+        // under `xcodebuild` only, so `swift test` passes and CI does not.
+        let free: Int64 = 10 * 1024 * 1024
+        let state = conditions(free: free)
         let needed = policy.requiredBytes(forRoundLength: 60)
         #expect(
             policy.refusalToRecord(state, roundLength: 60)
-                == .notEnoughDisk(freeBytes: 10 * 1024 * 1024, needsBytes: needed)
+                == .notEnoughDisk(freeBytes: free, needsBytes: needed)
         )
     }
 
