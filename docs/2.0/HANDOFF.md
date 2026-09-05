@@ -10,7 +10,7 @@ Read this with `docs/2.0/PLAN.md`, which is the architecture and still accurate.
 
 `Gamoitsani2` is a complete, playable rewrite living beside v1 as a separate bundle id
 (`davitikhvedelidze.Gamoitsani2`). Six local SPM packages, Swift 6 strict concurrency,
-iOS 18, 170 tests. Setup, both game modes, scoreboard, sharing, settings, sound, launch
+iOS 18, 193 tests. Setup, both game modes, scoreboard, sharing, settings, sound, launch
 animation, the full ad stack and the remove-ads purchase all work. **It plays on 60
 hardcoded sample words** — the data layer is built and tested but not connected, because
 the word source is still an open decision. v1 still builds and must keep building until cutover.
@@ -50,8 +50,9 @@ Gamoitsani2 (app)          composition root, navigation, screens, AdMob adapter
    └── GamoitsaniAds       ad policy only — no SDK dependency
 ```
 
-Tests: Core 89, Data 21, Design 23, Ads 20, Engine 11, L10n 6. Plus GamoitsaniMacros 2,
-which needs `swift test` — it is a compiler plugin with no simulator destination.
+Tests: Core 89, Data 21, Design 23, Ads 20, Capture 21, Engine 11, L10n 6. Plus
+GamoitsaniMacros 2, which needs `swift test` — it is a compiler plugin with no simulator
+destination.
 
 ---
 
@@ -81,7 +82,7 @@ which needs `swift test` — it is a compiler plugin with no simulator destinati
 | **Add word screen** | Still `PlaceholderScreen`. Blocked on the word source. |
 | **Crashlytics** | Not started, and **cutover-blocking** by the owner's decision. A ground-up rewrite meeting real devices is exactly when crash reports matter. |
 | **Analytics** | Not started. v1 has an `AnalyticsManager`; 2.0 has nothing. |
-| **Game recording** | v1's `GameRecordingManager` + draggable camera preview. **Being ported.** The largest of the four: camera permission, AVFoundation capture, file handling, a share path. |
+| ~~**Game recording**~~ | **Done, on a different premise.** Front camera at 1080p for the play phase only, word overlaid at export from the engine's timeline, saved to Photos. The screen is never captured, so no ad can appear in a clip. `GamoitsaniCapture` + `Gamoitsani2/Recording/`. |
 | **Notifications** | v1's `NotificationsManager`. **Being ported.** v1's copy is hardcoded English, so this needs new copy in 11 languages and lands inside the translation pass. |
 | **Word review** | The hidden five-taps-on-title screen. **Being ported, but not as it was** — `firestore.rules` made words read-only because those unauthenticated writes were the attack path. It needs a Cloud Function or an authenticated admin claim first. Server work, not UI work. |
 | **Automatic review prompt** | **Being ported.** v1's never fired: its counter was read but never written. Cheapest of the four. |
@@ -182,6 +183,34 @@ the failure looks like a broken product id.
 install, or tapping the icon, has none — and 2.0's separate bundle id means the real App
 Store has no products for it either. Buying only works under ⌘R until cutover.
 
+**`CATextLayer` does not render inside `AVVideoCompositionCoreAnimationTool`.** The layer
+behind it, its border and its shadow all composite correctly and the text is simply absent,
+with no error. Draw text into an image with `UIGraphicsImageRenderer` and set it as
+`contents`. An explicit `CTFont` does not help — that was tested.
+
+**`fillMode = .both` makes a layer visible before its animation begins.** Fill applies the
+first value to all time before `beginTime`, so per-window animations stacked in one place
+render as a single element for the whole clip. Give each layer one animation spanning the
+entire clip instead.
+
+**Verify video composition by exporting a clip and looking at a frame.** Both of the above
+are invisible in code and obvious in a single frame. `AVAssetImageGenerator` on the export
+output, written to a PNG, finds in one run what a build-deploy-play cycle does not find in
+several.
+
+**`PHPhotoLibrary.performChanges` deadlocks if its change block is main-actor isolated.**
+A `static func` on a `@MainActor` type is isolated too, and so is the block it passes.
+Photos waits for the block while the main actor waits for `performChanges` — no error, no
+timeout. Mark the wrapper `nonisolated`.
+
+**`AVCaptureMovieFileOutput` does not retain its recording delegate.** An
+inline-constructed one is deallocated before the file is written, `didFinishRecordingTo`
+never arrives, and everything downstream silently never happens.
+
+**A query must not delete.** `PendingClipStore.pending()` used to remove footage it could
+not pair with a timeline — and a clip being recorded has no timeline yet, so any call
+during a turn destroyed the file being written, including the one behind a debug panel.
+
 **Package resources do not always rebuild incrementally.** Added sound files were missing
 from the `.app` while the build succeeded and the app ran silently. Check the bundle, not
 the exit code.
@@ -220,8 +249,8 @@ The ad-free hour is the shape already implemented.
 
 1. **Push the three local commits** to PR #24.
 2. **Crashlytics.** Cutover-blocking, self-contained, and depends on nothing.
-3. **The four ported features** — automatic review prompt is the cheapest, word review is
-   the one with server work in front of it, recording is the largest.
+3. **The remaining ported features** — automatic review prompt is next and the cheapest;
+   word review has server work in front of it; notifications need copy in 11 languages.
 4. **Analytics.**
 5. **Run 2.0 on an iPad** before anyone plans a submission.
 6. **Word source**, when the owner's DB is ready. Unblocks `GamoitsaniData`, Add word and
