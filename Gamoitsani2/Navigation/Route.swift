@@ -8,6 +8,5 @@ import Foundation
 public enum Route: Hashable {
     /// The game flow. Setup is the root, so it is not a route.
     case game
-    case addWord
     case settings
 }

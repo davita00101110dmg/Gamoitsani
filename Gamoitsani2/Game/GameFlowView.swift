@@ -17,6 +17,8 @@ struct GameFlowView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(SoundPlayer.self) private var sound
     @Environment(\.adService) private var ads
+    @Environment(\.turnRecording) private var recording
+    @State private var bridge = RecordingBridge()
     @State private var showRules = false
     @State private var showLeaderboard = false
 
@@ -62,10 +64,19 @@ struct GameFlowView: View {
             if was == .playing, let now, now != .finished { sound.play(.timeUp) }
         }
         .onAppear { ads.setMidGame(true) }
+        // The recorder is driven entirely from state, so there is nothing for the play
+        // screens to remember to call. `initial: true` covers resuming into a live round.
+        .onChange(of: session.engine?.state, initial: true) { _, state in
+            guard let state else { return }
+            bridge.sync(state, to: recording)
+        }
         // The system back button and the swipe gesture both pop without routing through
         // `leave()`, so the game is saved on the way out either way.
         .onDisappear {
             ads.setMidGame(false)
+            // Footage of a turn nobody finished describes nothing, so it is thrown away
+            // rather than exported.
+            bridge.abandon(recording)
             session.leave()
         }
     }

@@ -15,6 +15,8 @@ struct GamoitsaniApp: App {
     @State private var sound = SoundPlayer()
     @State private var haptics = Haptics()
     @State private var ads = AdMobAds()
+    @State private var store = StoreKitPurchases()
+    @State private var recorder = CameraTurnRecorder()
     #if DEBUG
     @State private var debugSettings = DebugSettings()
     #endif
@@ -45,6 +47,10 @@ struct GamoitsaniApp: App {
             .onChange(of: scenePhase) { was, now in
                 guard was != .active, now == .active else { return }
                 Task { await showAppOpenAdIfIdle() }
+                // Finishes anything a previous launch was killed part-way through. Once
+                // active, not during launch: an export needs a background task assertion,
+                // and the app cannot take one before it is running.
+                Task { await recorder.resumePendingClips() }
             }
         }
     }
@@ -69,16 +75,31 @@ struct GamoitsaniApp: App {
             .environment(sound)
             .environment(haptics)
             .environment(\.adService, ads)
+            .environment(\.purchases, store)
+            .environment(\.turnRecording, recorder)
             .environment(\.isLaunching, showSplash)
             // Decoding on first play would hitch on the countdown tick.
             .task { await sound.prepare() }
             .task { await ads.start() }
+            .task { await store.start() }
+            // The store owns the entitlement; ads are told about it. `initial: true`
+            // covers the ordinary case, where ownership is already known from
+            // `currentEntitlements` before anything has changed.
+            .onChange(of: store.hasRemovedAds, initial: true) { _, removed in
+                ads.setAdsRemoved(removed)
+            }
             .tint(Tokens.accent.color)
 
         #if DEBUG
         base
             .environment(debugSettings)
-            .debugMenuOnShake(debug: debugSettings, session: session, ads: ads)
+            .debugMenuOnShake(
+                debug: debugSettings,
+                session: session,
+                ads: ads,
+                purchases: store,
+                recorder: recorder
+            )
         #else
         base
         #endif
@@ -99,33 +120,10 @@ struct RootView: View {
                     switch route {
                     case .game:
                         GameFlowView()
-                    case .addWord:
-                        PlaceholderScreen(title: "Add word")
                     case .settings:
                         SettingsView()
                     }
                 }
         }
-    }
-}
-
-/// Phase 7 replaces these with the real screens, in dependency order.
-struct PlaceholderScreen: View {
-    let title: String
-
-    var body: some View {
-        ZStack {
-            Tokens.surface.color.ignoresSafeArea()
-            VStack(spacing: Spacing.sm) {
-                Text(title)
-                    .font(Typography.title)
-                    .foregroundStyle(Tokens.onSurface.color)
-                Text("Coming next")
-                    .font(Typography.caption)
-                    .foregroundStyle(Tokens.onSurfaceMuted.color)
-            }
-        }
-        .navigationTitle(title)
-        .navigationBarTitleDisplayMode(.inline)
     }
 }

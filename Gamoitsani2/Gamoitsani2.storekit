@@ -1,0 +1,30 @@
+{
+  "identifier": "7DF1A6C1-BCB5-412D-9701-5988A4CF1B8D",
+  "nonRenewingSubscriptions": [],
+  "products": [
+    {
+      "displayPrice": "1.99",
+      "familyShareable": false,
+      "internalID": "3C527E67-9CF8-4462-B9ED-055E5420ED29",
+      "localizations": [
+        {
+          "description": "Play without banners or interruptions.",
+          "displayName": "Remove ads",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "davitikhvedelidze.Gamoitsani.removeAds",
+      "referenceName": "Remove ads",
+      "type": "NonConsumable"
+    }
+  ],
+  "settings": {
+    "_askToBuyEnabled": false,
+    "_storeKitErrors": []
+  },
+  "subscriptionGroups": [],
+  "version": {
+    "major": 3,
+    "minor": 0
+  }
+}

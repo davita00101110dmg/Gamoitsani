@@ -19,6 +19,14 @@
 	<!-- Ad units, substituted from Gamoitsani2/Config.xcconfig at build time and read back
 	     through AdUnits. A missing one is empty at runtime rather than a build error, so
 	     it shows up as a format that never fills. -->
+	<key>NSCameraUsageDescription</key>
+	<string>Gamoitsani films your turn with the front camera when you switch recording on, so you can keep the clip.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Gamoitsani records the room's audio with your turn, so the clip has the shouting in it.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Gamoitsani saves each recorded turn to your photo library. It never reads your library.</string>
+	<key>REMOVE_ADS_PRODUCT_ID</key>
+	<string>$(REMOVE_ADS_PRODUCT_ID)</string>
 	<key>BANNER_AD_ID</key>
 	<string>$(BANNER_AD_ID)</string>
 	<key>INTERSTITIAL_AD_ID</key>

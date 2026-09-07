@@ -26,8 +26,22 @@ public protocol AdServing: AnyObject {
     /// Whether a banner should currently be given space.
     var isBannerAllowed: Bool { get }
 
+    /// Whether the remove-ads card has earned its place on the setup screen.
+    ///
+    /// Here rather than on a screen because the count it depends on — full-screen ads
+    /// actually shown — is only known in here.
+    var isRemoveAdsOfferAllowed: Bool { get }
+
+    /// Records the card being dismissed, which buys a quiet period and counts towards
+    /// giving up on offering it at all.
+    func removeAdsOfferDismissed()
+
     /// Requests consent if needed, then starts the SDKs. Safe to call more than once.
     func start() async
+
+    /// Records the ad-free upgrade being owned or revoked. The purchase is the store's to
+    /// know; this is how ads are told about it.
+    func setAdsRemoved(_ removed: Bool)
 
     /// Records a finished game. Interstitial cadence is counted in games, not minutes.
     func gameFinished()
@@ -61,6 +75,9 @@ public protocol AdServing: AnyObject {
 
     /// Forgets the cadence, so the next game behaves like a fresh install.
     func debugResetCadence()
+
+    /// Forgets the ads-seen count and every refusal, so the card can be earned again.
+    func debugResetRemoveAdsOffer()
     #endif
 }
 
@@ -76,8 +93,13 @@ public final class NoAds: AdServing {
 
     public var isReady: Bool { true }
     public var isBannerAllowed: Bool { false }
+    /// No ads means nothing to remove, so there is nothing to sell either.
+    public var isRemoveAdsOfferAllowed: Bool { false }
+
+    public func removeAdsOfferDismissed() {}
 
     public func start() async {}
+    public func setAdsRemoved(_ removed: Bool) {}
     public func gameFinished() {}
     public func setMidGame(_ isMidGame: Bool) {}
     public func showInterstitialIfAllowed() async -> Bool { false }
@@ -90,5 +112,6 @@ public final class NoAds: AdServing {
     public func debugShowInterstitial() async -> Bool { false }
     public func debugShowAppOpen() async -> Bool { false }
     public func debugResetCadence() {}
+    public func debugResetRemoveAdsOffer() {}
     #endif
 }

@@ -41,6 +41,8 @@ struct DebugMenuSheet: View {
     let debug: DebugSettings
     let session: GameSession
     let ads: any AdServing
+    let purchases: any Purchasing
+    let recorder: CameraTurnRecorder
 
     @Environment(\.dismiss) private var dismiss
 
@@ -87,6 +89,32 @@ struct DebugMenuSheet: View {
                         Divider().overlay(Tokens.cardEdge.color)
                         action("Reset ad cadence", enabled: true) {
                             ads.debugResetCadence()
+                        }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        // Separate from the cadence reset: that one hands back a fresh ad
+                        // schedule, this one un-refuses the card.
+                        action("Reset remove-ads offer", enabled: true) {
+                            ads.debugResetRemoveAdsOffer()
+                        }
+                    }
+
+                    SetupPanel(title: "Purchases") {
+                        ForEach(purchases.debugSummary, id: \.0) { label, value in
+                            info(label, value)
+                        }
+                    }
+
+                    SetupPanel(title: "Recording") {
+                        ForEach(recorder.debugSummary, id: \.0) { label, value in
+                            info(label, value)
+                        }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        action("Copy log", enabled: true) {
+                            UIPasteboard.general.string = RecordingLog.contents()
+                        }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        action("Clear log", enabled: true) {
+                            RecordingLog.clear()
                         }
                     }
 
@@ -256,9 +284,17 @@ extension View {
     func debugMenuOnShake(
         debug: DebugSettings,
         session: GameSession,
-        ads: any AdServing
+        ads: any AdServing,
+        purchases: any Purchasing,
+        recorder: CameraTurnRecorder
     ) -> some View {
-        modifier(DebugMenuOnShake(debug: debug, session: session, ads: ads))
+        modifier(DebugMenuOnShake(
+            debug: debug,
+            session: session,
+            ads: ads,
+            purchases: purchases,
+            recorder: recorder
+        ))
     }
 }
 
@@ -266,6 +302,8 @@ private struct DebugMenuOnShake: ViewModifier {
     let debug: DebugSettings
     let session: GameSession
     let ads: any AdServing
+    let purchases: any Purchasing
+    let recorder: CameraTurnRecorder
 
     @State private var isPresented = false
 
@@ -277,7 +315,13 @@ private struct DebugMenuOnShake: ViewModifier {
                 isPresented = true
             }
             .sheet(isPresented: $isPresented) {
-                DebugMenuSheet(debug: debug, session: session, ads: ads)
+                DebugMenuSheet(
+                    debug: debug,
+                    session: session,
+                    ads: ads,
+                    purchases: purchases,
+                    recorder: recorder
+                )
             }
     }
 }

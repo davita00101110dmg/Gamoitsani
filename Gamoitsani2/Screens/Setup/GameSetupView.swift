@@ -17,6 +17,8 @@ struct GameSetupView: View {
     #endif
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.isLaunching) private var isLaunching
+    @Environment(\.adService) private var ads
+    @Environment(\.turnRecording) private var recording
     @State private var model = GameSetupModel()
     @State private var hasAppeared = false
 
@@ -44,6 +46,19 @@ struct GameSetupView: View {
                 section(index: 2) { modeSection }
                 section(index: 3) { extrasSection }
                 section(index: 4) { teamsSection }
+
+                // Above Play rather than below it: everything under the Play button is
+                // read as part of pressing it.
+                if ads.isRemoveAdsOfferAllowed {
+                    section(index: 5) {
+                        RemoveAdsCard {
+                            withAnimation(Motion.card(reduceMotion: reduceMotion)) {
+                                ads.removeAdsOfferDismissed()
+                            }
+                        }
+                    }
+                }
+
                 section(index: 5) { playButton }
             }
             .padding(.horizontal, Spacing.md)
@@ -237,6 +252,28 @@ struct GameSetupView: View {
                 title: l10n("setup.challenge"),
                 subtitle: l10n("setup.challenge.detail"),
                 isOn: $model.settings.challengesEnabled,
+                reduceMotion: reduceMotion
+            )
+            Divider().overlay(Tokens.cardEdge.color)
+            // Not a `GameSettings` field. Filming is not a rule of the game, and adding a
+            // property to that persisted struct throws `keyNotFound` on any game saved
+            // before it — which `GameStateStore.load` swallows with `try?`, losing the
+            // game silently on upgrade.
+            ToggleRow(
+                title: l10n("setup.record"),
+                subtitle: l10n("setup.record.detail"),
+                isOn: Binding(
+                    get: { recording.isEnabled },
+                    set: { wanted in
+                        guard wanted else {
+                            recording.isEnabled = false
+                            return
+                        }
+                        // Asked here, once, so the camera and microphone prompts never
+                        // land on a running clock the way v1's did.
+                        Task { recording.isEnabled = await recording.requestPermissions() }
+                    }
+                ),
                 reduceMotion: reduceMotion
             )
         }

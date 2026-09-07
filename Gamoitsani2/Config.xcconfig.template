@@ -32,6 +32,13 @@ REWARDED_AD_ID = ca-app-pub-3940256099942544/1712485313
 ADMOB_TEST_DEVICE_ID =
 UMP_TEST_DEVICE_ID =
 
+// MARK: - In-app purchase
+// The remove-ads upgrade. This must match the product identifier in App Store Connect
+// *and* the one v1 already sells — identifiers belong to the app record, so reusing it is
+// what lets existing customers keep the upgrade at cutover.
+
+REMOVE_ADS_PRODUCT_ID = com.example.gamoitsani.removeads
+
 // MARK: - Ad mediation partners
 // Per-network credentials from each partner's dashboard. Blank means that network simply
 // never fills; the app still builds and runs.

@@ -27,6 +27,12 @@ struct SettingsView: View {
                     toggle(l10n("settings.haptics"), isOn: $haptics.isEnabled)
                 }
 
+                // Here whatever else is chosen: Restore Purchases has to live somewhere
+                // fixed, and this is where people go looking for it.
+                SetupPanel(title: l10n("iap.title")) {
+                    RemoveAdsSettingsRows()
+                }
+
                 SetupPanel(title: l10n("settings.language")) {
                     ForEach(Array(AppLanguage.allCases.enumerated()), id: \.element) { index, language in
                         Button {
