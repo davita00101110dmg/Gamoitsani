@@ -17,6 +17,7 @@ struct GamoitsaniApp: App {
     @State private var ads = AdMobAds()
     @State private var store = StoreKitPurchases()
     @State private var recorder = CameraTurnRecorder()
+    @State private var reviewPrompter = ReviewPrompter()
     #if DEBUG
     @State private var debugSettings = DebugSettings()
     #endif
@@ -77,6 +78,7 @@ struct GamoitsaniApp: App {
             .environment(\.adService, ads)
             .environment(\.purchases, store)
             .environment(\.turnRecording, recorder)
+            .environment(reviewPrompter)
             .environment(\.isLaunching, showSplash)
             // Decoding on first play would hitch on the countdown tick.
             .task { await sound.prepare() }
@@ -98,7 +100,8 @@ struct GamoitsaniApp: App {
                 session: session,
                 ads: ads,
                 purchases: store,
-                recorder: recorder
+                recorder: recorder,
+                reviewPrompter: reviewPrompter
             )
         #else
         base

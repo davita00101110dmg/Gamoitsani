@@ -3,6 +3,7 @@
 //  Gamoitsani2
 //
 import SwiftUI
+import StoreKit
 import GamoitsaniCore
 import GamoitsaniDesign
 import GamoitsaniEngine
@@ -20,6 +21,8 @@ struct GameOverView: View {
     @State private var showStats = false
     @State private var card: UIImage?
     @Environment(\.adService) private var ads
+    @Environment(ReviewPrompter.self) private var reviewPrompter
+    @Environment(\.requestReview) private var requestReview
     /// `onAppear` can fire again; a game is only finished once.
     @State private var counted = false
 
@@ -140,11 +143,23 @@ struct GameOverView: View {
             if !counted {
                 counted = true
                 ads.gameFinished()
+                reviewPrompter.gameFinished()
             }
             sound.play(.gameOver)
             withAnimation(reduceMotion ? Motion.reduced : Motion.celebrate.delay(0.15)) {
                 barsGrown = true
             }
+        }
+        // Asked here rather than on the way out, where the interstitial plays: the scores
+        // are on screen, the game went well, and nothing is waiting on the player. The
+        // delay lets the podium finish arriving first — a system sheet over a running
+        // animation reads as a glitch.
+        .task {
+            guard reviewPrompter.shouldPrompt else { return }
+            try? await Task.sleep(for: .seconds(1.2))
+            guard !Task.isCancelled else { return }
+            reviewPrompter.prompted()
+            requestReview()
         }
         .haptics(.success, trigger: barsGrown)
         .sheet(isPresented: $showStats) {
