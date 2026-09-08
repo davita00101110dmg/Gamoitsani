@@ -43,6 +43,7 @@ struct DebugMenuSheet: View {
     let ads: any AdServing
     let purchases: any Purchasing
     let recorder: CameraTurnRecorder
+    let reviewPrompter: ReviewPrompter
 
     @Environment(\.dismiss) private var dismiss
 
@@ -115,6 +116,25 @@ struct DebugMenuSheet: View {
                         Divider().overlay(Tokens.cardEdge.color)
                         action("Clear log", enabled: true) {
                             RecordingLog.clear()
+                        }
+                    }
+
+                    SetupPanel(title: "Review prompt") {
+                        ForEach(reviewPrompter.debugSummary, id: \.0) { label, value in
+                            info(label, value)
+                        }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        Toggle("Ignore limits", isOn: Binding(
+                            get: { UserDefaults.standard.bool(forKey: ReviewPrompter.instantKey) },
+                            set: { UserDefaults.standard.set($0, forKey: ReviewPrompter.instantKey) }
+                        ))
+                        .tint(Tokens.accent.color)
+                        .padding(.vertical, Spacing.sm)
+                        Divider().overlay(Tokens.cardEdge.color)
+                        // iOS shows the sheet at most three times a year whatever the app
+                        // asks, so a build that has used them up will look inert here.
+                        action("Forget that it asked", enabled: true) {
+                            reviewPrompter.debugReset()
                         }
                     }
 
@@ -286,14 +306,16 @@ extension View {
         session: GameSession,
         ads: any AdServing,
         purchases: any Purchasing,
-        recorder: CameraTurnRecorder
+        recorder: CameraTurnRecorder,
+        reviewPrompter: ReviewPrompter
     ) -> some View {
         modifier(DebugMenuOnShake(
             debug: debug,
             session: session,
             ads: ads,
             purchases: purchases,
-            recorder: recorder
+            recorder: recorder,
+            reviewPrompter: reviewPrompter
         ))
     }
 }
@@ -304,6 +326,7 @@ private struct DebugMenuOnShake: ViewModifier {
     let ads: any AdServing
     let purchases: any Purchasing
     let recorder: CameraTurnRecorder
+    let reviewPrompter: ReviewPrompter
 
     @State private var isPresented = false
 
@@ -320,7 +343,8 @@ private struct DebugMenuOnShake: ViewModifier {
                     session: session,
                     ads: ads,
                     purchases: purchases,
-                    recorder: recorder
+                    recorder: recorder,
+                    reviewPrompter: reviewPrompter
                 )
             }
     }

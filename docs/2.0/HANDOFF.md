@@ -10,7 +10,7 @@ Read this with `docs/2.0/PLAN.md`, which is the architecture and still accurate.
 
 `Gamoitsani2` is a complete, playable rewrite living beside v1 as a separate bundle id
 (`davitikhvedelidze.Gamoitsani2`). Six local SPM packages, Swift 6 strict concurrency,
-iOS 18, 193 tests. Setup, both game modes, scoreboard, sharing, settings, sound, launch
+iOS 18, 200 tests. Setup, both game modes, scoreboard, sharing, settings, sound, launch
 animation, the full ad stack and the remove-ads purchase all work. **It plays on 60
 hardcoded sample words** — the data layer is built and tested but not connected, because
 the word source is still an open decision. v1 still builds and must keep building until cutover.
@@ -50,7 +50,7 @@ Gamoitsani2 (app)          composition root, navigation, screens, AdMob adapter
    └── GamoitsaniAds       ad policy only — no SDK dependency
 ```
 
-Tests: Core 89, Data 21, Design 23, Ads 20, Capture 21, Engine 11, L10n 6. Plus
+Tests: Core 96, Data 21, Design 23, Ads 20, Capture 21, Engine 11, L10n 6. Plus
 GamoitsaniMacros 2, which needs `swift test` — it is a compiler plugin with no simulator
 destination.
 
@@ -80,8 +80,10 @@ destination.
 | **Word source** | The decision, and the only thing blocking anything else. Bundled DB vs Firestore. Owner is building a word DB in parallel and wants this decided last. |
 | **`GamoitsaniData` wiring** | Zero imports in the app. `SampleWordProvider` (60 words) feeds the deck. Blocked on the word source. |
 | **Add word screen** | Still `PlaceholderScreen`. Blocked on the word source. |
-| **Crashlytics** | Not started, and **cutover-blocking** by the owner's decision. A ground-up rewrite meeting real devices is exactly when crash reports matter. |
-| **Analytics** | Not started. v1 has an `AnalyticsManager`; 2.0 has nothing. |
+| ~~**Crashlytics**~~ | **Dropped.** Crashes come from Xcode Organizer / App Store Connect instead — free, no SDK, and 2.0 currently has no Firebase at all. Adding Crashlytics would mean pulling Firebase back into a clean build. Revisit only for a bug that needs non-fatal logging or breadcrumbs. |
+| ~~**Analytics**~~ | **Dropped** for the same reason. App Store Connect covers downloads and retention. Add only when there is a specific question worth an SDK. |
+| **Challenge content** | 2.0 has a single `game.challenge.placeholder` string — v1 fetched challenges from Firestore, which is going. Decided: challenges ship in the same bundled SQLite DB as the words. |
+| ~~**Automatic review prompt**~~ | **Done.** `ReviewPromptPolicy` in `GamoitsaniCore`, asked on the podium a second after it settles. v1's never fired once: it was gated on a counter that was read but never written. |
 | ~~**Game recording**~~ | **Done, on a different premise.** Front camera at 1080p for the play phase only, word overlaid at export from the engine's timeline, saved to Photos. The screen is never captured, so no ad can appear in a clip. `GamoitsaniCapture` + `Gamoitsani2/Recording/`. |
 | **Notifications** | v1's `NotificationsManager`. **Being ported.** v1's copy is hardcoded English, so this needs new copy in 11 languages and lands inside the translation pass. |
 | **Word review** | The hidden five-taps-on-title screen. **Being ported, but not as it was** — `firestore.rules` made words read-only because those unauthenticated writes were the attack path. It needs a Cloud Function or an authenticated admin claim first. Server work, not UI work. |
@@ -118,8 +120,14 @@ destination.
 - **The IAP product identifier is v1's**, `davitikhvedelidze.Gamoitsani.removeAds`.
   Identifiers belong to the App Store Connect app record, not to a bundle id, so reusing
   it is what lets existing customers keep the upgrade at cutover.
-- **All four remaining v1 features are being ported** — recording, notifications, word
-  review, automatic review prompt. This was an explicit call, not an omission.
+- **Words ship as a read-only SQLite database in the bundle.** Not Firestore. The owner is
+  building it. Challenges go in the same file. **Add word is dropped entirely** — the route
+  and the last `PlaceholderScreen` are deleted, and every route in 2.0 is a real screen.
+- **No Firebase in 2.0, and no Crashlytics.** 2.0 already has none; v1 still imports it in
+  six files and must keep building, so "remove Firebase" *is* the cutover step. Crash
+  reports come from Xcode Organizer, which costs nothing and needs no SDK.
+- **Recording and the review prompt are done.** Notifications and word review remain, and
+  word review needs a Cloud Function or an admin claim before any UI.
 
 ---
 
@@ -249,13 +257,11 @@ The ad-free hour is the shape already implemented.
 
 1. **Push the three local commits** to PR #24.
 2. **Crashlytics.** Cutover-blocking, self-contained, and depends on nothing.
-3. **The remaining ported features** — automatic review prompt is next and the cheapest;
-   word review has server work in front of it; notifications need copy in 11 languages.
-4. **Analytics.**
-5. **Run 2.0 on an iPad** before anyone plans a submission.
-6. **Word source**, when the owner's DB is ready. Unblocks `GamoitsaniData`, Add word and
-   the real deck.
-7. **Translations, last.** Notification copy lands here too.
+3. **The word DB**, when the owner's file arrives — the SQLite `WordProvider`, then
+   challenges from the same file. This is what gets 2.0 off 60 hardcoded words.
+4. **Notifications** (copy in 11 languages) and **word review** (server work first).
+5. **Run 2.0 on an iPad.** No 2.0 screen has ever rendered on one.
+6. **Translations, last.** Notification copy lands here too.
 
 The Georgian strings added for the purchase UI (`iap.*`, `common.ok`) were written by
 Claude and have not been reviewed by the owner, who is the native speaker.
