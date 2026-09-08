@@ -85,8 +85,8 @@ destination.
 | **Challenge content** | 2.0 has a single `game.challenge.placeholder` string — v1 fetched challenges from Firestore, which is going. Decided: challenges ship in the same bundled SQLite DB as the words. |
 | ~~**Automatic review prompt**~~ | **Done.** `ReviewPromptPolicy` in `GamoitsaniCore`, asked on the podium a second after it settles. v1's never fired once: it was gated on a counter that was read but never written. |
 | ~~**Game recording**~~ | **Done, on a different premise.** Front camera at 1080p for the play phase only, word overlaid at export from the engine's timeline, saved to Photos. The screen is never captured, so no ad can appear in a clip. `GamoitsaniCapture` + `Gamoitsani2/Recording/`. |
-| **Notifications** | v1's `NotificationsManager`. **Being ported.** v1's copy is hardcoded English, so this needs new copy in 11 languages and lands inside the translation pass. |
-| **Word review** | The hidden five-taps-on-title screen. **Being ported, but not as it was** — `firestore.rules` made words read-only because those unauthenticated writes were the attack path. It needs a Cloud Function or an authenticated admin claim first. Server work, not UI work. |
+| ~~**Notifications**~~ | **Done.** Weekly reminder, Saturday evening, rotating copy, English only. No in-app toggle — iOS Settings owns the permission. Asked once on the podium after a first game. |
+| ~~**Word review**~~ | **Dropped.** v1's hidden five-taps-on-title screen let any client delete words from the production database after three downvotes, unauthenticated, with a client-controlled reviewer id. `firestore.rules` already disabled it. 2.0 ships a curated SQLite file the owner builds, so there is nothing to crowd-moderate — quality control belongs in the tooling that produces the DB, not in the shipped app. |
 | **Automatic review prompt** | **Being ported.** v1's never fired: its counter was read but never written. Cheapest of the four. |
 | **Rewarded ads** | Implemented and tested, deliberately no trigger. See below. |
 | **Translations** | 94 keys. Only `en` and `ka` are complete. `docs/2.0/LOCALIZATION.md` lists what is missing. Owner wants this done last, after the copy settles. |
@@ -126,8 +126,9 @@ destination.
 - **No Firebase in 2.0, and no Crashlytics.** 2.0 already has none; v1 still imports it in
   six files and must keep building, so "remove Firebase" *is* the cutover step. Crash
   reports come from Xcode Organizer, which costs nothing and needs no SDK.
-- **Recording and the review prompt are done.** Notifications and word review remain, and
-  word review needs a Cloud Function or an admin claim before any UI.
+- **All four v1 features are settled.** Recording, the review prompt and notifications are
+  done. **Word review is dropped** — it existed to crowd-moderate a database anyone could
+  write to, and 2.0 ships a curated file instead. Do not rebuild it.
 
 ---
 
@@ -259,8 +260,8 @@ The ad-free hour is the shape already implemented.
 2. **Crashlytics.** Cutover-blocking, self-contained, and depends on nothing.
 3. **The word DB**, when the owner's file arrives — the SQLite `WordProvider`, then
    challenges from the same file. This is what gets 2.0 off 60 hardcoded words.
-4. **Notifications** (copy in 11 languages) and **word review** (server work first).
-5. **Run 2.0 on an iPad.** No 2.0 screen has ever rendered on one.
+4. **Run 2.0 on an iPad.** No 2.0 screen has ever rendered on one, and both targets
+   declare `TARGETED_DEVICE_FAMILY = "1,2"`. App Store review tests on iPad.
 6. **Translations, last.** Notification copy lands here too.
 
 The Georgian strings added for the purchase UI (`iap.*`, `common.ok`) were written by
