@@ -46,6 +46,7 @@ struct DebugMenuSheet: View {
     let recorder: CameraTurnRecorder
     let reviewPrompter: ReviewPrompter
     let reminders: Reminders
+    let players: PlayerBook
 
     @Environment(\.dismiss) private var dismiss
 
@@ -118,6 +119,16 @@ struct DebugMenuSheet: View {
                         Divider().overlay(Tokens.cardEdge.color)
                         action("Clear log", enabled: true) {
                             RecordingLog.clear()
+                        }
+                    }
+
+                    SetupPanel(title: "Players") {
+                        ForEach(players.debugSummary, id: \.0) { label, value in
+                            info(label, value)
+                        }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        action("Forget every player", enabled: true) {
+                            players.debugClear()
                         }
                     }
 
@@ -327,7 +338,8 @@ extension View {
         purchases: any Purchasing,
         recorder: CameraTurnRecorder,
         reviewPrompter: ReviewPrompter,
-        reminders: Reminders
+        reminders: Reminders,
+        players: PlayerBook
     ) -> some View {
         modifier(DebugMenuOnShake(
             debug: debug,
@@ -336,7 +348,8 @@ extension View {
             purchases: purchases,
             recorder: recorder,
             reviewPrompter: reviewPrompter,
-            reminders: reminders
+            reminders: reminders,
+            players: players
         ))
     }
 }
@@ -349,6 +362,7 @@ private struct DebugMenuOnShake: ViewModifier {
     let recorder: CameraTurnRecorder
     let reviewPrompter: ReviewPrompter
     let reminders: Reminders
+    let players: PlayerBook
 
     @State private var isPresented = false
 
@@ -367,7 +381,8 @@ private struct DebugMenuOnShake: ViewModifier {
                     purchases: purchases,
                     recorder: recorder,
                     reviewPrompter: reviewPrompter,
-                    reminders: reminders
+                    reminders: reminders,
+                    players: players
                 )
             }
     }

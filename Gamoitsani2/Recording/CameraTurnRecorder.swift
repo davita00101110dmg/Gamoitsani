@@ -49,6 +49,10 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
     /// before the first export even finished.
     @ObservationIgnored private var didResume = false
 
+    /// The game the current turns belong to, so an abandoned evening is never spliced into
+    /// the next one's reel.
+    @ObservationIgnored private var gameID = UUID().uuidString
+
     /// Exports run one at a time, behind the game rather than in front of it.
     ///
     /// They used to hold the recorder in `.exporting`, and `startTurn` refused while it
@@ -196,11 +200,19 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
         // The only sweep, and only at startup, when nothing is being written.
         PendingClipStore.removeOrphans(excluding: currentClip)
 
-        for pending in PendingClipStore.pending() {
-            // Counted on disk before the attempt, so a clip that kills the process runs
+        // Turns left by a launch that ended before the podium, grouped so each game gets
+        // its own reel. No end card: the scores went with the session that had them.
+        for (game, pending) in Dictionary(grouping: PendingClipStore.pending(), by: \.gameID)
+        where game != gameID && !game.isEmpty {
+            // Counted on disk before the attempt, so footage that kills the process runs
             // out of chances instead of killing every future launch.
-            guard PendingClipStore.beginAttempt(for: pending.clip) else { continue }
-            enqueueExport(pending.clip, timeline: pending.timeline)
+            guard let first = pending.first,
+                  PendingClipStore.beginAttempt(for: first.clip) else { continue }
+            enqueueReel(
+                pending.map { HighlightReel.Source(clip: $0.clip, timeline: $0.timeline) },
+                endCard: nil,
+                gameID: game
+            )
         }
     }
 
@@ -267,81 +279,81 @@ final class CameraTurnRecorder: NSObject, TurnRecording {
             return
         }
 
-        // Written before the export starts, so being killed mid-export costs time rather
-        // than the clip.
-        PendingClipStore.write(finished, for: url)
+        // Kept, not exported. A turn clip is a working file until the game ends and the
+        // whole evening is cut into one reel — six videos of one game is a folder nobody
+        // opens. Written before anything else so being killed costs time, not footage.
+        PendingClipStore.write(finished, gameID: gameID, for: url)
         let size = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? Int) ?? 0
-        RecordingLog.note("  keeping, \((size ?? 0) / 1024)KB, queued for export")
-
-        // Idle immediately: the clip is on disk with its timeline beside it, so the next
-        // turn can start filming while this one composes. If the app dies mid-export the
-        // pair is picked up at the next launch.
+        RecordingLog.note("  kept for the reel, \((size ?? 0) / 1024)KB")
         state = .idle
-        enqueueExport(url, timeline: finished)
     }
 
-    /// Chains exports so several never run at once — each is a full-resolution video
-    /// composition, and three in parallel on a phone mid-game is how a round drops frames.
-    private func enqueueExport(_ clip: URL, timeline: RecordingTimeline) {
+    // MARK: - The reel
+
+    /// The game reached the podium: cut everything filmed into one reel and save that.
+    ///
+    /// `endCard` is the share card the podium has already rendered, reused as the closing
+    /// frame so the reel explains itself to someone who was not in the room.
+    func finishGame(endCard: UIImage?) {
+        let sources = PendingClipStore.pending()
+            .filter { $0.gameID == gameID }
+            .map { HighlightReel.Source(clip: $0.clip, timeline: $0.timeline) }
+
+        // Whatever happens next, this game's clips belong to it and not to the next one.
+        let finished = gameID
+        gameID = UUID().uuidString
+
+        guard !sources.isEmpty else { return }
+        state = .exporting
+        enqueueReel(sources, endCard: endCard, gameID: finished)
+    }
+
+    /// Chains reels so two never run at once — each is a full-resolution video
+    /// composition, and one on top of another mid-game is how a round drops frames.
+    private func enqueueReel(
+        _ sources: [HighlightReel.Source],
+        endCard: UIImage?,
+        gameID: String
+    ) {
         let previous = exportChain
         exportChain = Task { [weak self] in
             await previous?.value
-            await self?.export(clip, timeline: timeline)
+            await self?.buildReel(sources, endCard: endCard)
         }
     }
 
-    /// Composes the overlay and saves the result, then removes both copies.
-    private func export(_ clip: URL, timeline: RecordingTimeline) async {
-        // The export outlives the turn-info screen if the player backgrounds the app, and
-        // without this iOS suspends it part-written.
-        //
+    private func buildReel(_ sources: [HighlightReel.Source], endCard: UIImage?) async {
         // The identifier is checked before it is ended. `beginBackgroundTask` returns
-        // `.invalid` when the app is not in a state to take one — during launch, which is
-        // exactly when pending clips are resumed — and ending an invalid identifier traps.
-        let task = UIApplication.shared.beginBackgroundTask(withName: "gamoitsani.export")
-        RecordingLog.note("  export begins (bg task \(task == .invalid ? "invalid" : "ok"))")
+        // `.invalid` when the app is not in a state to take one, and ending an invalid
+        // identifier traps.
+        let task = UIApplication.shared.beginBackgroundTask(withName: "gamoitsani.reel")
         defer {
-            if task != .invalid {
-                UIApplication.shared.endBackgroundTask(task)
-            }
+            if task != .invalid { UIApplication.shared.endBackgroundTask(task) }
+            state = .idle
         }
 
-        guard let exported = await RecordingExporter.export(clip: clip, timeline: timeline) else {
-            // Leave the pair in place. The next launch tries again rather than throwing
-            // away footage that may only have lost to a locked screen or a busy device.
-            RecordingLog.note("  EXPORT FAILED")
-            noteExportFailure("export returned no file")
+        RecordingLog.note("reel: cutting \(sources.count) turns")
+        guard let reel = await HighlightReel.build(from: sources, endCard: endCard) else {
+            // The footage stays. The next launch tries again rather than throwing away an
+            // evening because the device was busy.
+            noteExportFailure("reel could not be built")
             return
         }
-
-        let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
-        RecordingLog.note("  saving to photos (auth=\(status.rawValue))")
 
         do {
-            try await Self.saveToPhotos(exported)
-            RecordingLog.note("  SAVED TO PHOTOS")
+            try await Self.saveToPhotos(reel)
+            RecordingLog.note("  reel: SAVED TO PHOTOS")
         } catch {
-            RecordingLog.note("  PHOTOS FAILED: \(error)")
-            // Not swallowed, and the footage is kept. A clip that failed to save used to
-            // vanish along with the recording that produced it, leaving no trace of
-            // something the player had watched being made.
+            RecordingLog.note("  reel: PHOTOS FAILED: \(error)")
             noteExportFailure("photos: \(error.localizedDescription)")
-            Self.delete(exported)
+            Self.delete(reel)
             return
         }
 
-        // Both copies go. v1 left every recording in Documents forever, invisible to the
-        // player, on top of the copy it had already put in Photos.
-        Self.delete(exported)
-        PendingClipStore.discard(clip)
+        Self.delete(reel)
+        for source in sources { PendingClipStore.discard(source.clip) }
     }
 
-    /// `nonisolated`, and that is the whole point.
-    ///
-    /// A static method on a `@MainActor` type is main-actor isolated, and so is the change
-    /// block it hands to Photos. Photos runs that block on its own queue and waits for it,
-    /// while the main actor waits for `performChanges` — a deadlock, with no error and no
-    /// timeout. The clip exported, reached this call, and the app simply stopped here.
     private nonisolated static func saveToPhotos(_ url: URL) async throws {
         // Copies rather than moves. `shouldMoveFile` saves a few megabytes of I/O and is
         // not worth handing Photos a move of a file the export has just written.

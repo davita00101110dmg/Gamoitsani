@@ -751,7 +751,7 @@
       }
     },
     "common.done" : {
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -970,6 +970,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ახალი სიტყვები"
+          }
+        }
+      }
+    },
+    "game.nextUp" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next:"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "შემდეგი:"
           }
         }
       }
@@ -1743,6 +1760,57 @@
         }
       }
     },
+    "players.all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All players"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ყველა მოთამაშე"
+          }
+        }
+      }
+    },
+    "players.bestTurn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Best turn"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "საუკეთესო სვლა"
+          }
+        }
+      }
+    },
+    "players.described" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Words described"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ახსნილი სიტყვები"
+          }
+        }
+      }
+    },
     "players.draw" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1756,6 +1824,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "არევა"
+          }
+        }
+      }
+    },
+    "players.games" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Games"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "თამაშები"
           }
         }
       }
@@ -1777,6 +1862,23 @@
         }
       }
     },
+    "players.none" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing yet. Finish a game and it shows up here."
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ჯერ არაფერია. დაასრულე თამაში და აქ გამოჩნდება."
+          }
+        }
+      }
+    },
     "players.placeholder" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1790,6 +1892,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "დაამატე მოთამაშე"
+          }
+        }
+      }
+    },
+    "players.record" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "სტატისტიკა"
           }
         }
       }
@@ -1841,6 +1960,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "გუნდები"
+          }
+        }
+      }
+    },
+    "players.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Players"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "მოთამაშეები"
+          }
+        }
+      }
+    },
+    "players.won" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Won"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "მოგებული"
           }
         }
       }

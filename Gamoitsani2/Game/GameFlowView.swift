@@ -18,6 +18,7 @@ struct GameFlowView: View {
     @Environment(SoundPlayer.self) private var sound
     @Environment(\.adService) private var ads
     @Environment(\.turnRecording) private var recording
+    @Environment(PlayerBook.self) private var players
     @State private var bridge = RecordingBridge()
     @State private var showRules = false
     @State private var showLeaderboard = false
@@ -71,9 +72,10 @@ struct GameFlowView: View {
         .onAppear { ads.setMidGame(true) }
         // The recorder is driven entirely from state, so there is nothing for the play
         // screens to remember to call. `initial: true` covers resuming into a live round.
-        .onChange(of: session.engine?.state, initial: true) { _, state in
+        .onChange(of: session.engine?.state, initial: true) { was, state in
             guard let state else { return }
             bridge.sync(state, to: recording)
+            creditTurn(from: was, to: state)
         }
         // The system back button and the swipe gesture both pop without routing through
         // `leave()`, so the game is saved on the way out either way.
@@ -107,6 +109,25 @@ struct GameFlowView: View {
         case .finished:
             GameOverView(engine: engine, onFinish: leave)
         }
+    }
+
+    /// Credits the turn that just ended to whoever described it.
+    ///
+    /// Read off the phase change rather than counted anywhere: the score for a turn is only
+    /// final once the clock stops, and this is the moment it does.
+    private func creditTurn(from was: GameState?, to state: GameState) {
+        guard was?.phase == .playing, state.phase != .playing,
+              let previous = was,
+              let team = previous.currentTeam
+        else { return }
+
+        let describer = Describer.name(
+            for: team,
+            round: previous.round,
+            extraRound: previous.extraRound
+        )
+        let guessed = previous.playedOutcomes.values.count { $0 == .correct }
+        players.turnEnded(describer: describer, wordsGuessed: guessed)
     }
 
     /// Leaving a finished game is the one seam wide enough for a full-screen ad: the
@@ -149,6 +170,20 @@ struct TurnInfoView: View {
                     .multilineTextAlignment(.center)
                     .minimumScaleFactor(0.6)
                     .lineLimit(2)
+
+                // Whose turn it is, which the room otherwise has to work out aloud.
+                if let describer {
+                    Text(describer)
+                        .font(Typography.rowTitle)
+                        .foregroundStyle(Tokens.onSurface.color)
+                        .padding(.top, Spacing.xs)
+
+                    if let next {
+                        Text("\(l10n("game.nextUp")) \(next)")
+                            .font(Typography.caption)
+                            .foregroundStyle(Tokens.onSurfaceMuted.color)
+                    }
+                }
             }
             .scaleEffect(appeared || reduceMotion ? 1 : 0.94)
             .opacity(appeared ? 1 : 0)
@@ -193,6 +228,25 @@ struct TurnInfoView: View {
         .onAppear {
             withAnimation(Motion.card(reduceMotion: reduceMotion)) { appeared = true }
         }
+    }
+
+    /// Rotated through the team, derived rather than stored — see `Describer`.
+    private var describer: String? {
+        guard let team = engine.currentTeam else { return nil }
+        return Describer.name(
+            for: team,
+            round: engine.state.round,
+            extraRound: engine.state.extraRound
+        )
+    }
+
+    private var next: String? {
+        guard let team = engine.currentTeam else { return nil }
+        return Describer.next(
+            for: team,
+            round: engine.state.round,
+            extraRound: engine.state.extraRound
+        )
     }
 
     private var roundLabel: String {

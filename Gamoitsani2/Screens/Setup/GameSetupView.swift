@@ -20,6 +20,7 @@ struct GameSetupView: View {
     @Environment(\.isLaunching) private var isLaunching
     @Environment(\.adService) private var ads
     @Environment(\.turnRecording) private var recording
+    @Environment(PlayerBook.self) private var players
     @State private var model = GameSetupModel()
     @State private var hasAppeared = false
 
@@ -193,6 +194,9 @@ struct GameSetupView: View {
         #endif
         let teams = model.resolvedTeams
         let language = l10n.language.rawValue
+
+        // Anything gathered for a game that was abandoned rather than finished.
+        players.reset()
 
         Task {
             defer { isStarting = false }

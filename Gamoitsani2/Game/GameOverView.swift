@@ -23,6 +23,8 @@ struct GameOverView: View {
     @Environment(\.adService) private var ads
     @Environment(ReviewPrompter.self) private var reviewPrompter
     @Environment(Reminders.self) private var reminders
+    @Environment(\.turnRecording) private var recording
+    @Environment(PlayerBook.self) private var players
     @Environment(\.requestReview) private var requestReview
     /// `onAppear` can fire again; a game is only finished once.
     @State private var counted = false
@@ -145,6 +147,7 @@ struct GameOverView: View {
                 counted = true
                 ads.gameFinished()
                 reviewPrompter.gameFinished()
+                players.gameFinished(engine.state)
             }
             sound.play(.gameOver)
             withAnimation(reduceMotion ? Motion.reduced : Motion.celebrate.delay(0.15)) {
@@ -177,7 +180,13 @@ struct GameOverView: View {
         }
         // Rendered up front so ShareLink has something to hand over the moment it is
         // tapped. It costs one frame here and would cost a visible stall there.
-        .task { card = renderCard() }
+        //
+        // The reel waits for it: the same card closes the video, so someone who was not in
+        // the room can see how it ended.
+        .task {
+            card = renderCard()
+            recording.finishGame(endCard: card)
+        }
     }
 }
 

@@ -17,6 +17,9 @@ enum PendingClipStore {
     struct Pending {
         let clip: URL
         let timeline: RecordingTimeline
+        /// Which game it belongs to. Clips are cut into one reel per game, so a turn from
+        /// an abandoned game must not end up in the next game's reel.
+        let gameID: String
     }
 
     /// After this many failed attempts a clip is thrown away.
@@ -31,6 +34,7 @@ enum PendingClipStore {
     private struct Record: Codable {
         var timeline: RecordingTimeline
         var attempts: Int
+        var gameID: String?
     }
 
     /// Not `temporaryDirectory`, which the system may purge, and not Documents, which the
@@ -48,8 +52,8 @@ enum PendingClipStore {
 
     /// Records what the clip contains, so an interrupted export can be resumed without the
     /// running game that produced it.
-    static func write(_ timeline: RecordingTimeline, for clip: URL) {
-        write(Record(timeline: timeline, attempts: 0), for: clip)
+    static func write(_ timeline: RecordingTimeline, gameID: String, for clip: URL) {
+        write(Record(timeline: timeline, attempts: 0, gameID: gameID), for: clip)
     }
 
     private static func write(_ record: Record, for clip: URL) {
@@ -76,17 +80,23 @@ enum PendingClipStore {
         return true
     }
 
-    /// Every clip with a timeline beside it, oldest first so a backlog is cleared in the
-    /// order it was filmed.
+    /// Every clip with a timeline beside it, oldest first — which is also the order the
+    /// turns were played, and therefore the order a reel should replay them.
     ///
     /// Pure. It used to delete footage it could not pair with a timeline, and a clip being
     /// recorded *right now* has no timeline yet — the sidecar is written when the turn
     /// ends. So every call during a turn destroyed the file being written, including the
     /// one behind the debug menu's "pending clips" count. A query does not delete.
     static func pending() -> [Pending] {
-        clips().compactMap { clip in
+        clips().compactMap { clip -> Pending? in
             guard let record = read(clip) else { return nil }
-            return Pending(clip: clip, timeline: record.timeline)
+            // A clip written before games were identified belongs to no game, and is left
+            // to the orphan sweep rather than folded into an unrelated reel.
+            return Pending(
+                clip: clip,
+                timeline: record.timeline,
+                gameID: record.gameID ?? ""
+            )
         }
     }
 
@@ -125,7 +135,7 @@ enum PendingClipStore {
         guard let timeline = try? JSONDecoder().decode(RecordingTimeline.self, from: data) else {
             return nil
         }
-        return Record(timeline: timeline, attempts: 0)
+        return Record(timeline: timeline, attempts: 0, gameID: nil)
     }
 
     private static func sidecar(for clip: URL) -> URL {
