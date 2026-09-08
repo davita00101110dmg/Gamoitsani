@@ -10,6 +10,7 @@ import Observation
 import GamoitsaniAds
 import GamoitsaniCore
 import GamoitsaniDesign
+import GamoitsaniL10n
 
 /// Debug-only switches. Compiled out of release entirely.
 @MainActor
@@ -44,6 +45,7 @@ struct DebugMenuSheet: View {
     let purchases: any Purchasing
     let recorder: CameraTurnRecorder
     let reviewPrompter: ReviewPrompter
+    let reminders: Reminders
 
     @Environment(\.dismiss) private var dismiss
 
@@ -116,6 +118,23 @@ struct DebugMenuSheet: View {
                         Divider().overlay(Tokens.cardEdge.color)
                         action("Clear log", enabled: true) {
                             RecordingLog.clear()
+                        }
+                    }
+
+                    SetupPanel(title: "Reminders") {
+                        ForEach(reminders.debugSummary, id: \.0) { label, value in
+                            info(label, value)
+                        }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        // The real one lands on a Saturday evening; nobody is waiting
+                        // that long to check the copy.
+                        action("Deliver one in 5s", enabled: true) {
+                            dismiss()
+                            Task { await reminders.debugFireSoon() }
+                        }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        action("Forget that it asked", enabled: true) {
+                            reminders.debugForgetAsked()
                         }
                     }
 
@@ -307,7 +326,8 @@ extension View {
         ads: any AdServing,
         purchases: any Purchasing,
         recorder: CameraTurnRecorder,
-        reviewPrompter: ReviewPrompter
+        reviewPrompter: ReviewPrompter,
+        reminders: Reminders
     ) -> some View {
         modifier(DebugMenuOnShake(
             debug: debug,
@@ -315,7 +335,8 @@ extension View {
             ads: ads,
             purchases: purchases,
             recorder: recorder,
-            reviewPrompter: reviewPrompter
+            reviewPrompter: reviewPrompter,
+            reminders: reminders
         ))
     }
 }
@@ -327,6 +348,7 @@ private struct DebugMenuOnShake: ViewModifier {
     let purchases: any Purchasing
     let recorder: CameraTurnRecorder
     let reviewPrompter: ReviewPrompter
+    let reminders: Reminders
 
     @State private var isPresented = false
 
@@ -344,7 +366,8 @@ private struct DebugMenuOnShake: ViewModifier {
                     ads: ads,
                     purchases: purchases,
                     recorder: recorder,
-                    reviewPrompter: reviewPrompter
+                    reviewPrompter: reviewPrompter,
+                    reminders: reminders
                 )
             }
     }

@@ -22,6 +22,7 @@ struct GameOverView: View {
     @State private var card: UIImage?
     @Environment(\.adService) private var ads
     @Environment(ReviewPrompter.self) private var reviewPrompter
+    @Environment(Reminders.self) private var reminders
     @Environment(\.requestReview) private var requestReview
     /// `onAppear` can fire again; a game is only finished once.
     @State private var counted = false
@@ -154,6 +155,15 @@ struct GameOverView: View {
         // are on screen, the game went well, and nothing is waiting on the player. The
         // delay lets the podium finish arriving first — a system sheet over a running
         // animation reads as a glitch.
+        // Permission is asked here rather than at launch, and only once. It cannot
+        // collide with the review sheet: that needs three finished games, this fires on
+        // the first.
+        .task {
+            guard reviewPrompter.state.gamesFinished <= 1 else { return }
+            try? await Task.sleep(for: .seconds(1.5))
+            guard !Task.isCancelled else { return }
+            await reminders.askIfNeeded()
+        }
         .task {
             guard reviewPrompter.shouldPrompt else { return }
             try? await Task.sleep(for: .seconds(1.2))

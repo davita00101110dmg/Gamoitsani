@@ -18,6 +18,7 @@ struct GamoitsaniApp: App {
     @State private var store = StoreKitPurchases()
     @State private var recorder = CameraTurnRecorder()
     @State private var reviewPrompter = ReviewPrompter()
+    @State private var reminders = Reminders()
     #if DEBUG
     @State private var debugSettings = DebugSettings()
     #endif
@@ -79,11 +80,15 @@ struct GamoitsaniApp: App {
             .environment(\.purchases, store)
             .environment(\.turnRecording, recorder)
             .environment(reviewPrompter)
+            .environment(reminders)
             .environment(\.isLaunching, showSplash)
             // Decoding on first play would hitch on the countdown tick.
             .task { await sound.prepare() }
             .task { await ads.start() }
             .task { await store.start() }
+            // Permission can be revoked from iOS Settings while the app is closed, and the
+            // schedule needs topping up long before eight weeks of reminders run out.
+            .task { await reminders.refresh() }
             // The store owns the entitlement; ads are told about it. `initial: true`
             // covers the ordinary case, where ownership is already known from
             // `currentEntitlements` before anything has changed.
@@ -101,7 +106,8 @@ struct GamoitsaniApp: App {
                 ads: ads,
                 purchases: store,
                 recorder: recorder,
-                reviewPrompter: reviewPrompter
+                reviewPrompter: reviewPrompter,
+                reminders: reminders
             )
         #else
         base

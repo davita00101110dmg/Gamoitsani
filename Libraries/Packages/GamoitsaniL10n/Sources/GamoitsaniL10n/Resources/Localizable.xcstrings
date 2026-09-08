@@ -1388,6 +1388,94 @@
         }
       }
     },
+    "reminder.body.0" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round up the room and play a round."
+          }
+        }
+      }
+    },
+    "reminder.body.1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last game needs settling."
+          }
+        }
+      }
+    },
+    "reminder.body.2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That is a whole game."
+          }
+        }
+      }
+    },
+    "reminder.body.3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A few words, a lot of shouting."
+          }
+        }
+      }
+    },
+    "reminder.title.0" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Whose turn is it?"
+          }
+        }
+      }
+    },
+    "reminder.title.1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ready for a rematch?"
+          }
+        }
+      }
+    },
+    "reminder.title.2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got five minutes?"
+          }
+        }
+      }
+    },
+    "reminder.title.3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamoitsani"
+          }
+        }
+      }
+    },
     "rules.1" : {
       "extractionState" : "stale",
       "localizations" : {
