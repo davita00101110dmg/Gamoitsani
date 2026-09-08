@@ -1396,12 +1396,6 @@
             "state" : "translated",
             "value" : "Round up the room and play a round."
           }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "შეკრიბე ხალხი და ითამაშეთ."
-          }
         }
       }
     },
@@ -1412,12 +1406,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Last game needs settling."
-          }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "წინა თამაში დაუმთავრებელია."
           }
         }
       }
@@ -1430,12 +1418,6 @@
             "state" : "translated",
             "value" : "That is a whole game."
           }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ეს მთელი თამაშია."
-          }
         }
       }
     },
@@ -1446,12 +1428,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A few words, a lot of shouting."
-          }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "რამდენიმე სიტყვა, ბევრი ყვირილი."
           }
         }
       }
@@ -1464,12 +1440,6 @@
             "state" : "translated",
             "value" : "Whose turn is it?"
           }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ვისი ჯერია?"
-          }
         }
       }
     },
@@ -1480,12 +1450,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ready for a rematch?"
-          }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "რევანში?"
           }
         }
       }
@@ -1498,12 +1462,6 @@
             "state" : "translated",
             "value" : "Got five minutes?"
           }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "გაქვს ხუთი წუთი?"
-          }
         }
       }
     },
@@ -1514,12 +1472,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gamoitsani"
-          }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "გამოიცანი"
           }
         }
       }
@@ -1785,23 +1737,6 @@
         }
       }
     },
-    "settings.notifications" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notifications"
-          }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "შეტყობინებები"
-          }
-        }
-      }
-    },
     "settings.rate" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1869,57 +1804,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Оцінити додаток"
-          }
-        }
-      }
-    },
-    "settings.reminders" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weekly reminder"
-          }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ყოველკვირეული შეხსენება"
-          }
-        }
-      }
-    },
-    "settings.reminders.denied" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turn notifications on in iOS Settings"
-          }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ჩართე შეტყობინებები iOS-ის პარამეტრებში"
-          }
-        }
-      }
-    },
-    "settings.reminders.detail" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A nudge to play, once a week"
-          }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "შეხსენება კვირაში ერთხელ"
           }
         }
       }

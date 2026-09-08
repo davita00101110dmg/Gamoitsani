@@ -9,7 +9,6 @@ import GamoitsaniL10n
 /// Settings.
 struct SettingsView: View {
     @Environment(Localization.self) private var l10n
-    @Environment(Reminders.self) private var reminders
     @Environment(SoundPlayer.self) private var sound
     @Environment(Haptics.self) private var haptics
     @Environment(\.openURL) private var openURL
@@ -26,25 +25,6 @@ struct SettingsView: View {
                     toggle(l10n("settings.sound.effects"), isOn: $sound.isEnabled)
                     Divider().overlay(Tokens.cardEdge.color)
                     toggle(l10n("settings.haptics"), isOn: $haptics.isEnabled)
-                }
-
-                SetupPanel(title: l10n("settings.notifications")) {
-                    ToggleRow(
-                        title: l10n("settings.reminders"),
-                        subtitle: reminders.isDenied
-                            ? l10n("settings.reminders.denied")
-                            : l10n("settings.reminders.detail"),
-                        isOn: Binding(
-                            get: { reminders.isOn },
-                            set: { wanted in
-                                Task { await reminders.setOn(wanted, language: l10n.language) }
-                            }
-                        ),
-                        reduceMotion: reduceMotion
-                    )
-                    // Refused permission cannot be undone from inside the app, so the row
-                    // says where to go rather than pretending to work.
-                    .disabled(reminders.isDenied)
                 }
 
                 // Here whatever else is chosen: Restore Purchases has to live somewhere

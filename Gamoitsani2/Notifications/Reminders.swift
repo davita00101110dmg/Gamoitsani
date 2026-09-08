@@ -10,19 +10,27 @@ import GamoitsaniL10n
 
 /// The weekly "come back and play" reminder.
 ///
-/// Off until switched on, and the system prompt is asked at that moment rather than at
-/// launch — v1 asked on first run, before anyone knew what the app was, which is the
-/// surest way to be refused permanently.
+/// **English only, deliberately.** The copy lives in the catalogue with an `en` value and
+/// is always resolved as English, so a reminder reads the same whatever the in-app
+/// language is. Adding the other ten is a translation job, not a code change.
+///
+/// There is no in-app switch: iOS Settings already owns per-app notification permission,
+/// and a second toggle would only be able to disagree with it. Permission is asked once,
+/// after a first finished game — v1 asked at first launch, before anyone knew what the app
+/// was, which is the surest way to be refused permanently.
 @MainActor
 @Observable
 final class Reminders {
 
-    /// Whether the player asked for reminders. The switch in Settings.
-    private(set) var isOn: Bool
+    /// Whether the system has granted permission.
+    private(set) var isOn = false
 
-    /// True once the system has refused. The toggle explains itself instead of silently
-    /// doing nothing.
-    private(set) var isDenied = false
+    /// Whether permission has ever been requested. Asking twice is not possible — iOS
+    /// shows the sheet once — so this stops the app trying and silently failing.
+    private var hasAsked: Bool {
+        get { UserDefaults.standard.bool(forKey: Self.askedKey) }
+        set { UserDefaults.standard.set(newValue, forKey: Self.askedKey) }
+    }
 
     @ObservationIgnored private let nudge = WeeklyNudge()
     @ObservationIgnored private let center = UNUserNotificationCenter.current()
@@ -30,56 +38,49 @@ final class Reminders {
     /// How many lines the catalogue holds. Rotation is over these.
     @ObservationIgnored private let copyCount = 4
 
-    init() {
-        isOn = UserDefaults.standard.bool(forKey: Self.key)
-    }
+    init() {}
 
     /// Refreshes what the system thinks, then tops up the schedule.
     ///
     /// Called at launch. Permission can be revoked in Settings while the app is closed, and
     /// the schedule needs extending long before eight weeks of reminders run out.
-    func refresh(language: AppLanguage) async {
+    func refresh() async {
         let settings = await center.notificationSettings()
-        isDenied = settings.authorizationStatus == .denied
-
-        guard isOn, settings.authorizationStatus == .authorized else {
-            if isDenied { isOn = false }
-            return
-        }
-        await reschedule(language: language)
-    }
-
-    /// Turns reminders on or off, asking the system the first time.
-    func setOn(_ wanted: Bool, language: AppLanguage) async {
-        guard wanted else {
-            isOn = false
-            UserDefaults.standard.set(false, forKey: Self.key)
+        isOn = settings.authorizationStatus == .authorized
+        // Permission can be revoked from iOS Settings while the app is closed. Anything
+        // still queued would then never arrive, and would fire the day it is restored.
+        guard isOn else {
             cancel()
             return
         }
+        await reschedule()
+    }
+
+    /// Asks for permission, once, and schedules if it is granted.
+    ///
+    /// Called after a first finished game: the player has seen what the app is, and the
+    /// podium is a pause rather than an interruption.
+    func askIfNeeded() async {
+        guard !hasAsked else { return }
+        hasAsked = true
 
         let granted = (try? await center.requestAuthorization(options: [.alert, .sound])) ?? false
-        isDenied = !granted
         isOn = granted
-        UserDefaults.standard.set(granted, forKey: Self.key)
-        if granted { await reschedule(language: language) }
+        if granted { await reschedule() }
     }
 
     // MARK: - Scheduling
 
-    /// Rebuilt whenever the language changes, so a reminder never arrives in the language
-    /// the player switched away from. The copy is baked into each request when it is
-    /// scheduled — iOS does not re-resolve it at delivery.
-    private func reschedule(language: AppLanguage) async {
+    private func reschedule() async {
         cancel()
 
         for occurrence in nudge.occurrences(after: .now, copyCount: copyCount) {
             let content = UNMutableNotificationContent()
-            // The app's language, not the system's. `L10n.string(_:)` without a language
-            // reads the system locale, which is the whole reason this app has its own
-            // switch.
-            content.title = L10n.string("reminder.title.\(occurrence.copyIndex)", language: language)
-            content.body = L10n.string("reminder.body.\(occurrence.copyIndex)", language: language)
+            // Always English. Asked for explicitly rather than left to
+            // `L10n.string(_:)`, which resolves against the *system* locale and would
+            // hand back whatever that happens to be.
+            content.title = L10n.string("reminder.title.\(occurrence.copyIndex)", language: .english)
+            content.body = L10n.string("reminder.body.\(occurrence.copyIndex)", language: .english)
             content.sound = .default
 
             // One request per occurrence, each with its own line. v1 used a single
@@ -107,20 +108,26 @@ final class Reminders {
         }
     }
 
-    private static let key = "reminders.enabled"
+    private static let askedKey = "reminders.asked"
     private static let prefix = "weekly-nudge-"
 
     #if DEBUG
     var debugSummary: [(String, String)] {
-        [("on", isOn ? "yes" : "no"), ("denied", isDenied ? "yes" : "no")]
+        [("granted", isOn ? "yes" : "no"), ("asked", hasAsked ? "yes" : "no")]
+    }
+
+    /// Forgets that permission was ever requested. iOS still only shows its sheet once
+    /// per install, so this mostly exercises the scheduling path.
+    func debugForgetAsked() {
+        UserDefaults.standard.set(false, forKey: Self.askedKey)
     }
 
     /// Delivers one in a few seconds, so the copy and sound can be seen without waiting
     /// for Saturday.
-    func debugFireSoon(language: AppLanguage) async {
+    func debugFireSoon() async {
         let content = UNMutableNotificationContent()
-        content.title = L10n.string("reminder.title.0", language: language)
-        content.body = L10n.string("reminder.body.0", language: language)
+        content.title = L10n.string("reminder.title.0", language: .english)
+        content.body = L10n.string("reminder.body.0", language: .english)
         content.sound = .default
         let request = UNNotificationRequest(
             identifier: "\(Self.prefix)debug",

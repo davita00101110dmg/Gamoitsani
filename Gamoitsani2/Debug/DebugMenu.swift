@@ -46,7 +46,6 @@ struct DebugMenuSheet: View {
     let recorder: CameraTurnRecorder
     let reviewPrompter: ReviewPrompter
     let reminders: Reminders
-    let language: AppLanguage
 
     @Environment(\.dismiss) private var dismiss
 
@@ -131,7 +130,11 @@ struct DebugMenuSheet: View {
                         // that long to check the copy.
                         action("Deliver one in 5s", enabled: true) {
                             dismiss()
-                            Task { await reminders.debugFireSoon(language: language) }
+                            Task { await reminders.debugFireSoon() }
+                        }
+                        Divider().overlay(Tokens.cardEdge.color)
+                        action("Forget that it asked", enabled: true) {
+                            reminders.debugForgetAsked()
                         }
                     }
 
@@ -324,8 +327,7 @@ extension View {
         purchases: any Purchasing,
         recorder: CameraTurnRecorder,
         reviewPrompter: ReviewPrompter,
-        reminders: Reminders,
-        language: AppLanguage
+        reminders: Reminders
     ) -> some View {
         modifier(DebugMenuOnShake(
             debug: debug,
@@ -334,8 +336,7 @@ extension View {
             purchases: purchases,
             recorder: recorder,
             reviewPrompter: reviewPrompter,
-            reminders: reminders,
-            language: language
+            reminders: reminders
         ))
     }
 }
@@ -348,7 +349,6 @@ private struct DebugMenuOnShake: ViewModifier {
     let recorder: CameraTurnRecorder
     let reviewPrompter: ReviewPrompter
     let reminders: Reminders
-    let language: AppLanguage
 
     @State private var isPresented = false
 
@@ -367,8 +367,7 @@ private struct DebugMenuOnShake: ViewModifier {
                     purchases: purchases,
                     recorder: recorder,
                     reviewPrompter: reviewPrompter,
-                    reminders: reminders,
-                    language: language
+                    reminders: reminders
                 )
             }
     }

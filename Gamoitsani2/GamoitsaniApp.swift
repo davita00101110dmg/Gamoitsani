@@ -88,12 +88,7 @@ struct GamoitsaniApp: App {
             .task { await store.start() }
             // Permission can be revoked from iOS Settings while the app is closed, and the
             // schedule needs topping up long before eight weeks of reminders run out.
-            .task { await reminders.refresh(language: localization.language) }
-            // Rebuilt on a language change: the copy is baked into each request when it is
-            // scheduled, so a switch would otherwise leave old-language reminders queued.
-            .onChange(of: localization.language) { _, language in
-                Task { await reminders.refresh(language: language) }
-            }
+            .task { await reminders.refresh() }
             // The store owns the entitlement; ads are told about it. `initial: true`
             // covers the ordinary case, where ownership is already known from
             // `currentEntitlements` before anything has changed.
@@ -112,8 +107,7 @@ struct GamoitsaniApp: App {
                 purchases: store,
                 recorder: recorder,
                 reviewPrompter: reviewPrompter,
-                reminders: reminders,
-                language: localization.language
+                reminders: reminders
             )
         #else
         base
