@@ -533,14 +533,20 @@ final class GameViewModelTests: XCTestCase {
         let viewModel = sut.createArcadeViewModel()
         viewModel.startGame()
         
-        let expectation = XCTestExpectation(description: "Wait for words update")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            XCTAssertFalse(viewModel.currentWords.isEmpty)
-            XCTAssertEqual(viewModel.currentWords.count, 5)
-            viewModel.stopGame()
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 1)
+        // Waits for the words to arrive rather than assuming half a second is enough.
+        //
+        // This used to assert inside a `DispatchQueue.main.asyncAfter(0.5)` with a one
+        // second timeout, which leaves 500ms of headroom — fine on a developer's machine
+        // and not fine on a loaded CI runner, where the main queue can be later than the
+        // timeout. It failed at random and passed on re-run, which is worse than failing.
+        let populated = XCTNSPredicateExpectation(
+            predicate: NSPredicate { _, _ in !viewModel.currentWords.isEmpty },
+            object: nil
+        )
+        wait(for: [populated], timeout: 10)
+
+        XCTAssertEqual(viewModel.currentWords.count, 5)
+        viewModel.stopGame()
     }
     
     private func createTestWords(count: Int) -> [Word] {
