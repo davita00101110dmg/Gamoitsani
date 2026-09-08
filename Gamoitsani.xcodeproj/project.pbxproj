@@ -40,6 +40,7 @@
 		DA1088826889463689CFC04B /* PendingClipStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B29778570B142499EC08496 /* PendingClipStore.swift */; };
 		B557C8084D9B4211B9F34994 /* RecordingLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73551AAF3DD0489F8BF604A6 /* RecordingLog.swift */; };
 		ED51713510234A39AB2985C2 /* ReviewPrompter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E83EA912A645D5BF9C783E /* ReviewPrompter.swift */; };
+		6281EE2FAB4241C1BBAACCD5 /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F185BFEDBA0347EF89980511 /* Reminders.swift */; };
 		AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30510617BAE33CE79D50131 /* BannerAd.swift */; };
 		B4C89321A831373D1E1223E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */; };
 		B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96668D899010A3A09E42EC99 /* AdEnvironment.swift */; };
@@ -310,6 +311,7 @@
 		6B29778570B142499EC08496 /* PendingClipStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PendingClipStore.swift; path = Recording/PendingClipStore.swift; sourceTree = "<group>"; };
 		73551AAF3DD0489F8BF604A6 /* RecordingLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordingLog.swift; path = Recording/RecordingLog.swift; sourceTree = "<group>"; };
 		88E83EA912A645D5BF9C783E /* ReviewPrompter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReviewPrompter.swift; path = Review/ReviewPrompter.swift; sourceTree = "<group>"; };
+		F185BFEDBA0347EF89980511 /* Reminders.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reminders.swift; path = Notifications/Reminders.swift; sourceTree = "<group>"; };
 		3A46906829AF04DF295A2BED /* AdUnits.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdUnits.swift; path = Ads/AdUnits.swift; sourceTree = "<group>"; };
 		3BDE67BC9BFB90A79983B10D /* Gamoitsani2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E023802D284EC10E151378E /* PurchaseManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 				AE4EC563CA317EEED5FCA338 /* AdMobAds.swift */,
 				E30510617BAE33CE79D50131 /* BannerAd.swift */,
 				96668D899010A3A09E42EC99 /* AdEnvironment.swift */,
+				F185BFEDBA0347EF89980511 /* Reminders.swift */,
 				88E83EA912A645D5BF9C783E /* ReviewPrompter.swift */,
 				73551AAF3DD0489F8BF604A6 /* RecordingLog.swift */,
 				6B29778570B142499EC08496 /* PendingClipStore.swift */,
@@ -1925,6 +1928,7 @@
 				F8AD6CA2387F7BDA5506DA76 /* AdMobAds.swift in Sources */,
 				AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */,
 				B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */,
+				6281EE2FAB4241C1BBAACCD5 /* Reminders.swift in Sources */,
 				ED51713510234A39AB2985C2 /* ReviewPrompter.swift in Sources */,
 				B557C8084D9B4211B9F34994 /* RecordingLog.swift in Sources */,
 				DA1088826889463689CFC04B /* PendingClipStore.swift in Sources */,
