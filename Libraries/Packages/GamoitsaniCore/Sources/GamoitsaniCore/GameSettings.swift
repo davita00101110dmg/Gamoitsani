@@ -18,19 +18,36 @@ public struct GameSettings: Sendable, Hashable, Codable {
     public var mode: GameMode
     public var superWordsEnabled: Bool
     public var challengesEnabled: Bool
+    public var difficulty: WordDifficulty
 
     public init(
         rounds: Int = 1,
         roundLength: TimeInterval = 45,
         mode: GameMode = .classic,
         superWordsEnabled: Bool = false,
-        challengesEnabled: Bool = false
+        challengesEnabled: Bool = false,
+        difficulty: WordDifficulty = .mixed
     ) {
         self.rounds = Self.roundsRange.clamping(rounds)
         self.roundLength = TimeInterval(Self.roundLengthRange.clamping(Int(roundLength)))
         self.mode = mode
         self.superWordsEnabled = superWordsEnabled
         self.challengesEnabled = challengesEnabled
+        self.difficulty = difficulty
+    }
+
+    /// Decoded by hand only because `difficulty` arrived after games were already being
+    /// saved. The synthesised version throws `keyNotFound` on a payload without it, and
+    /// `GameStateStore.load` swallows that with `try?` — an in-progress game would vanish
+    /// silently on upgrade. Any further property needs the same treatment.
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        rounds = try container.decode(Int.self, forKey: .rounds)
+        roundLength = try container.decode(TimeInterval.self, forKey: .roundLength)
+        mode = try container.decode(GameMode.self, forKey: .mode)
+        superWordsEnabled = try container.decode(Bool.self, forKey: .superWordsEnabled)
+        challengesEnabled = try container.decode(Bool.self, forKey: .challengesEnabled)
+        difficulty = try container.decodeIfPresent(WordDifficulty.self, forKey: .difficulty) ?? .mixed
     }
 
     public mutating func setRounds(_ value: Int) {

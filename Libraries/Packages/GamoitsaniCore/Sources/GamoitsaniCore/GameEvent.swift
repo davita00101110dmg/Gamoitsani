@@ -29,6 +29,10 @@ public enum GameEvent: Sendable, Hashable {
     /// The round clock reached zero.
     case timeExpired
 
+    /// More words arrived while the game was being played, so a long game does not
+    /// dead-end on an empty deck.
+    case deckRefilled([DeckWord])
+
     /// Play again with the same teams and settings.
     case rematch
 }
