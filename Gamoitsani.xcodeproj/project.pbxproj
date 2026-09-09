@@ -44,7 +44,6 @@
 		AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30510617BAE33CE79D50131 /* BannerAd.swift */; };
 		B4C89321A831373D1E1223E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */; };
 		B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96668D899010A3A09E42EC99 /* AdEnvironment.swift */; };
-		C9895FC82240F341363A966E /* SampleWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0DC5ADB9E2C42FBC354C2D /* SampleWords.swift */; };
 		D82F8C692FC23FA30BF12D65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F4803685FD8794E19D47296 /* Assets.xcassets */; };
 		F4A6D9FB9DCC3C8D27A6DC13 /* AdUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A46906829AF04DF295A2BED /* AdUnits.swift */; };
 		F4CF05276636EB2EE2D74BD2 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237F63704F7B25FFCC53512 /* PlayView.swift */; };
@@ -322,7 +321,6 @@
 		96668D899010A3A09E42EC99 /* AdEnvironment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdEnvironment.swift; path = Ads/AdEnvironment.swift; sourceTree = "<group>"; };
 		A7769D70207AB6403DE0E760 /* GameFlowView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameFlowView.swift; path = Game/GameFlowView.swift; sourceTree = "<group>"; };
 		A8591DBC756783B37A1C2C05 /* Pods_GamoitsaniTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GamoitsaniTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB0DC5ADB9E2C42FBC354C2D /* SampleWords.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SampleWords.swift; path = Game/SampleWords.swift; sourceTree = "<group>"; };
 		AC006B6B9C89062317AC7044 /* Pods_Gamoitsani2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gamoitsani2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE4EC563CA317EEED5FCA338 /* AdMobAds.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdMobAds.swift; path = Ads/AdMobAds.swift; sourceTree = "<group>"; };
 		B7F70DD013A2EADFAFEC8746 /* Pods-GamoitsaniTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.release.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -614,7 +612,6 @@
 				DAC03FE91ECAA969A0956837 /* SetupComponents.swift */,
 				01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */,
 				923A8905BC6AA8467F91AF19 /* GameSession.swift */,
-				AB0DC5ADB9E2C42FBC354C2D /* SampleWords.swift */,
 				A7769D70207AB6403DE0E760 /* GameFlowView.swift */,
 				2237F63704F7B25FFCC53512 /* PlayView.swift */,
 				C423FDAAD4A8C93737BC37E6 /* GameOverView.swift */,
@@ -1914,7 +1911,6 @@
 				087C6573A75E236631EFDB36 /* SetupComponents.swift in Sources */,
 				B4C89321A831373D1E1223E7 /* SettingsView.swift in Sources */,
 				7E7DB9AC1AE3D56C4A6245A2 /* GameSession.swift in Sources */,
-				C9895FC82240F341363A966E /* SampleWords.swift in Sources */,
 				3C580555505E7068514885FB /* GameFlowView.swift in Sources */,
 				F4CF05276636EB2EE2D74BD2 /* PlayView.swift in Sources */,
 				0B8A3303FAA577E33F7DA9EE /* GameOverView.swift in Sources */,

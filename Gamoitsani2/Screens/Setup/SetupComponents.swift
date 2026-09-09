@@ -213,6 +213,89 @@ private struct ModeGlyph: View {
     }
 }
 
+/// A compact pill that fills when it is on.
+///
+/// Used for both the difficulty tiers, where exactly one is on, and the extras, where any
+/// number can be. The two read as the same kind of control because they are.
+struct SetupChip<Glyph: View>: View {
+    let title: String
+    let isOn: Bool
+    let reduceMotion: Bool
+    let select: () -> Void
+    @ViewBuilder var glyph: Glyph
+
+    var body: some View {
+        Button(action: select) {
+            // Glyph above the label rather than beside it: four Georgian words across one
+            // row have no width to spare, and side-by-side truncated every one of them.
+            VStack(spacing: 3) {
+                glyph
+                Text(title)
+                    .font(Typography.caption)
+                    .foregroundStyle(isOn ? Tokens.onAccent.color : Tokens.onSurface.color)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.7)
+                    .multilineTextAlignment(.center)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, Spacing.xs)
+            .padding(.horizontal, 4)
+            // Every chip in a row is as tall as the tallest, so one label wrapping to two
+            // lines does not leave its neighbours short.
+            .frame(maxHeight: .infinity)
+            .background(isOn ? Tokens.accent.color : Tokens.surface.color)
+            .clipShape(RoundedRectangle(cornerRadius: Radius.control, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: Radius.control, style: .continuous)
+                    .strokeBorder(
+                        isOn ? Color.clear : Tokens.cardEdge.color.opacity(0.7),
+                        lineWidth: 1
+                    )
+            }
+        }
+        .buttonStyle(.plain)
+        .animation(Motion.control(reduceMotion: reduceMotion), value: isOn)
+        .haptics(.selection, trigger: isOn)
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(isOn ? [.isButton, .isSelected] : .isButton)
+    }
+}
+
+extension SetupChip where Glyph == EmptyView {
+    init(title: String, isOn: Bool, reduceMotion: Bool, select: @escaping () -> Void) {
+        self.init(title: title, isOn: isOn, reduceMotion: reduceMotion, select: select) {
+            EmptyView()
+        }
+    }
+}
+
+/// Which slice of the 1–5 difficulty range a tier draws from.
+///
+/// A flat track with one segment lit, deliberately not bars of rising height — those read
+/// as signal strength, which is a quantity, and this is a range. Hard lights the top end
+/// only, which is what says the tiers are caps rather than a ladder.
+struct DifficultyGlyph: View {
+    let difficulty: WordDifficulty
+    let isOn: Bool
+
+    var body: some View {
+        HStack(spacing: 1.5) {
+            ForEach(1...5, id: \.self) { step in
+                Capsule(style: .continuous)
+                    .fill(fill(included: difficulty.range.contains(step)))
+                    .frame(width: 6, height: 4)
+            }
+        }
+        .frame(height: 10)
+        .accessibilityHidden(true)
+    }
+
+    private func fill(included: Bool) -> Color {
+        if isOn { return included ? Tokens.onAccent.color : Tokens.onAccent.color.opacity(0.3) }
+        return included ? Tokens.accent.color : Tokens.cardEdge.color
+    }
+}
+
 struct ToggleRow: View {
     let title: String
     let subtitle: String

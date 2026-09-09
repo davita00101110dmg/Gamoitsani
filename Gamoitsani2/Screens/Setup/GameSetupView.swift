@@ -4,6 +4,7 @@
 //
 import SwiftUI
 import GamoitsaniCore
+import GamoitsaniData
 import GamoitsaniDesign
 import GamoitsaniL10n
 
@@ -21,6 +22,13 @@ struct GameSetupView: View {
     @Environment(\.turnRecording) private var recording
     @State private var model = GameSetupModel()
     @State private var hasAppeared = false
+
+    /// Whether this language's word file has a difficulty spread worth selecting on.
+    ///
+    /// True for Georgian, which is curated. False for the languages exported from v1's
+    /// Firestore, where 99.9% of every file sits at `<= 3` — four tiers there would deal
+    /// the same deck three times and call the fourth one Hard.
+    @State private var canChooseDifficulty = false
 
     private let headerHeight: CGFloat = 168
 
@@ -44,13 +52,16 @@ struct GameSetupView: View {
 
                 section(index: 1) { roundSection }
                 section(index: 2) { modeSection }
-                section(index: 3) { extrasSection }
-                section(index: 4) { teamsSection }
+                if canChooseDifficulty {
+                    section(index: 3) { difficultySection }
+                }
+                section(index: 4) { extrasSection }
+                section(index: 5) { teamsSection }
 
                 // Above Play rather than below it: everything under the Play button is
                 // read as part of pressing it.
                 if ads.isRemoveAdsOfferAllowed {
-                    section(index: 5) {
+                    section(index: 6) {
                         RemoveAdsCard {
                             withAnimation(Motion.card(reduceMotion: reduceMotion)) {
                                 ads.removeAdsOfferDismissed()
@@ -59,7 +70,7 @@ struct GameSetupView: View {
                     }
                 }
 
-                section(index: 5) { playButton }
+                section(index: 6) { playButton }
             }
             .padding(.horizontal, Spacing.md)
             .padding(.bottom, Spacing.lg)
@@ -73,6 +84,15 @@ struct GameSetupView: View {
             // Pinned rather than scrolled with the form: an ad that slides under the Play
             // button is an ad placed where a mis-tap costs someone the game.
             BannerAd()
+        }
+        // Re-asked when the language changes, because the answer is a property of that
+        // language's word file, not of the app.
+        .task(id: l10n.language) {
+            let language = l10n.language.rawValue
+            canChooseDifficulty = await BundledWordProvider.hasUsableDifficulty(language: language)
+            // Otherwise a tier chosen under Georgian would silently follow you into a
+            // language whose file cannot honour it.
+            if !canChooseDifficulty { model.settings.difficulty = .mixed }
         }
         .background(Tokens.surface.color.ignoresSafeArea())
         .navigationTitle(l10n("home.title"))
@@ -164,11 +184,22 @@ struct GameSetupView: View {
         let language = l10n.language.rawValue
 
         Task {
-            let provider = SampleWordProvider()
-            // Enough for the whole game: every team, every round, plus tie-breaks.
-            let wanted = max(60, teams.count * settings.rounds * 40)
+            // Sized from the clock rather than a flat per-turn guess. Whatever this misses
+            // by, the deck is topped up during play, so it only has to be a good opening
+            // hand rather than the whole game's supply.
+            let perTurn = GameSession.wordsPerTurn(roundLength: settings.roundLength)
+            let wanted = max(80, teams.count * settings.rounds * perTurn)
+            let provider = BundledWordProvider(
+                difficulty: settings.difficulty.range,
+                seen: session.seenWords
+            )
             let deck = (try? await provider.deck(language: language, count: wanted)) ?? Deck(words: [])
-            session.start(settings: settings, teams: teams, deck: deck)
+            session.start(
+                settings: settings,
+                teams: teams,
+                deck: deck,
+                language: BundledWordProvider.resolvedLanguage(for: language)
+            )
             router.push(.game)
         }
     }
@@ -237,35 +268,71 @@ struct GameSetupView: View {
         }
     }
 
+    // MARK: - Difficulty
+
+    private var difficultySection: some View {
+        SetupPanel(title: l10n("setup.difficulty")) {
+            VStack(alignment: .leading, spacing: Spacing.xs) {
+                HStack(spacing: Spacing.xs) {
+                    ForEach(WordDifficulty.allCases) { difficulty in
+                        let isOn = model.settings.difficulty == difficulty
+                        SetupChip(
+                            title: l10n("setup.difficulty.\(difficulty.rawValue)"),
+                            isOn: isOn,
+                            reduceMotion: reduceMotion
+                        ) {
+                            withAnimation(Motion.control(reduceMotion: reduceMotion)) {
+                                model.settings.difficulty = difficulty
+                            }
+                        } glyph: {
+                            DifficultyGlyph(difficulty: difficulty, isOn: isOn)
+                        }
+                    }
+                }
+
+                // The tiers are caps rather than bands — Normal contains every Easy word —
+                // so which slice each one draws is worth the line a chip cannot say.
+                Text(l10n("setup.difficulty.\(model.settings.difficulty.rawValue).detail"))
+                    .font(Typography.caption)
+                    .foregroundStyle(Tokens.onSurfaceMuted.color)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .animation(
+                        Motion.control(reduceMotion: reduceMotion),
+                        value: model.settings.difficulty
+                    )
+            }
+            .padding(.vertical, Spacing.sm)
+        }
+    }
+
     // MARK: - Extras
 
     private var extrasSection: some View {
         SetupPanel(title: l10n("setup.extras")) {
-            ToggleRow(
-                title: l10n("setup.superWord"),
-                subtitle: l10n("setup.superWord.detail"),
-                isOn: $model.settings.superWordsEnabled,
-                reduceMotion: reduceMotion
-            )
-            Divider().overlay(Tokens.cardEdge.color)
-            ToggleRow(
-                title: l10n("setup.challenge"),
-                subtitle: l10n("setup.challenge.detail"),
-                isOn: $model.settings.challengesEnabled,
-                reduceMotion: reduceMotion
-            )
-            Divider().overlay(Tokens.cardEdge.color)
-            // Not a `GameSettings` field. Filming is not a rule of the game, and adding a
-            // property to that persisted struct throws `keyNotFound` on any game saved
-            // before it — which `GameStateStore.load` swallows with `try?`, losing the
-            // game silently on upgrade.
-            ToggleRow(
-                title: l10n("setup.record"),
-                subtitle: l10n("setup.record.detail"),
-                isOn: Binding(
-                    get: { recording.isEnabled },
-                    set: { wanted in
-                        guard wanted else {
+            VStack(alignment: .leading, spacing: Spacing.xs) {
+                HStack(spacing: Spacing.xs) {
+                    extraChip(
+                        key: "setup.superWord",
+                        symbol: "star.fill",
+                        isOn: model.settings.superWordsEnabled
+                    ) { model.settings.superWordsEnabled.toggle() }
+
+                    extraChip(
+                        key: "setup.challenge",
+                        symbol: "bolt.fill",
+                        isOn: model.settings.challengesEnabled
+                    ) { model.settings.challengesEnabled.toggle() }
+
+                    // Not a `GameSettings` field. Filming is not a rule of the game, and
+                    // adding a property to that persisted struct throws `keyNotFound` on any
+                    // game saved before it — which `GameStateStore.load` swallows with
+                    // `try?`, losing the game silently on upgrade.
+                    extraChip(
+                        key: "setup.record",
+                        symbol: "record.circle",
+                        isOn: recording.isEnabled
+                    ) {
+                        guard !recording.isEnabled else {
                             recording.isEnabled = false
                             return
                         }
@@ -273,10 +340,46 @@ struct GameSetupView: View {
                         // land on a running clock the way v1's did.
                         Task { recording.isEnabled = await recording.requestPermissions() }
                     }
-                ),
-                reduceMotion: reduceMotion
-            )
+                }
+
+                // One line for whichever extras are on, so switching three subtitles for
+                // three chips does not lose the explanation of what they actually do.
+                Text(activeExtrasDetail)
+                    .font(Typography.caption)
+                    .foregroundStyle(Tokens.onSurfaceMuted.color)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .animation(Motion.control(reduceMotion: reduceMotion), value: activeExtrasDetail)
+            }
+            .padding(.vertical, Spacing.sm)
         }
+    }
+
+    private func extraChip(
+        key: String,
+        symbol: String,
+        isOn: Bool,
+        toggle: @escaping () -> Void
+    ) -> some View {
+        SetupChip(
+            title: l10n(key),
+            isOn: isOn,
+            reduceMotion: reduceMotion
+        ) {
+            withAnimation(Motion.control(reduceMotion: reduceMotion)) { toggle() }
+        } glyph: {
+            Image(systemName: symbol)
+                .font(.caption2.weight(.bold))
+                .foregroundStyle(isOn ? Tokens.onAccent.color : Tokens.accent.color)
+        }
+    }
+
+    /// What the chips that are on actually do, or a prompt when none are.
+    private var activeExtrasDetail: String {
+        var parts: [String] = []
+        if model.settings.superWordsEnabled { parts.append(l10n("setup.superWord.detail")) }
+        if model.settings.challengesEnabled { parts.append(l10n("setup.challenge.detail")) }
+        if recording.isEnabled { parts.append(l10n("setup.record.detail")) }
+        return parts.isEmpty ? l10n("setup.extras.none") : parts.joined(separator: " · ")
     }
 
     // MARK: - Teams

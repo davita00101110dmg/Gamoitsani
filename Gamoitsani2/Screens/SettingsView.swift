@@ -3,6 +3,7 @@
 //  Gamoitsani2
 //
 import SwiftUI
+import GamoitsaniData
 import GamoitsaniDesign
 import GamoitsaniL10n
 
@@ -13,6 +14,16 @@ struct SettingsView: View {
     @Environment(Haptics.self) private var haptics
     @Environment(\.openURL) private var openURL
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    /// Only languages the app actually has words for.
+    ///
+    /// All eleven ship one today, so this changes nothing on screen — it is here so that
+    /// removing a word file removes the language, rather than leaving a option that
+    /// silently deals Georgian cards.
+    private var playableLanguages: [AppLanguage] {
+        let available = BundledWordProvider.availableLanguages
+        return AppLanguage.allCases.filter { available.contains($0.rawValue) }
+    }
 
     var body: some View {
         @Bindable var localization = l10n
@@ -34,7 +45,7 @@ struct SettingsView: View {
                 }
 
                 SetupPanel(title: l10n("settings.language")) {
-                    ForEach(Array(AppLanguage.allCases.enumerated()), id: \.element) { index, language in
+                    ForEach(Array(playableLanguages.enumerated()), id: \.element) { index, language in
                         Button {
                             withAnimation(Motion.control(reduceMotion: reduceMotion)) {
                                 localization.language = language
@@ -72,7 +83,7 @@ struct SettingsView: View {
                         )
                         .haptics(.selection, trigger: l10n.language)
 
-                        if index < AppLanguage.allCases.count - 1 {
+                        if index < playableLanguages.count - 1 {
                             Divider().overlay(Tokens.cardEdge.color)
                         }
                     }
