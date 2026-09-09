@@ -213,7 +213,9 @@ def main() -> None:
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--key", help="service account JSON for Firestore")
     source.add_argument("--from-json", help="a dump of the words collection")
-    parser.add_argument("--collection", default="words")
+    # The multilingual data lives in `new_words`. The older `words` collection is a flat
+    # word_ka/word_en pair with no translations map, no difficulty and no word type.
+    parser.add_argument("--collection", default="new_words")
     parser.add_argument("--out", default="build/words", help="where the .db files go")
     parser.add_argument("--languages", help="comma separated; default is everything found")
     parser.add_argument("--minimum", type=int, default=200,
@@ -224,11 +226,15 @@ def main() -> None:
                  else read_from_firestore(arguments.key, arguments.collection))
     print(f"read {len(documents)} documents")
 
+    # Georgian is built by the word project's own pipeline, from a reviewed database with
+    # a real difficulty spread, `is_actable` and categories. What comes out of here is
+    # strictly worse for Georgian, so it is not produced unless asked for by name.
     wanted = (set(arguments.languages.split(",")) if arguments.languages
-              else set(KNOWN_LANGUAGES))
+              else set(KNOWN_LANGUAGES) - {"ka"})
 
     by_language: dict[str, list[tuple]] = {}
     seen_ids: dict[str, set[int]] = {}
+    seen_lemmas: dict[str, set[str]] = {}
     counters: Counter = Counter()
 
     for document in documents:
@@ -265,8 +271,18 @@ def main() -> None:
                 continue
             bucket.add(identifier)
 
+            # Distinct Georgian words often share one translation — 402 of Japanese's
+            # 3,470 rows were repeats. The engine tells cards apart by id, not by text, so
+            # without this the same word can be dealt twice in a single game.
+            lemma = word.strip()
+            lemmas = seen_lemmas.setdefault(language, set())
+            if lemma.casefold() in lemmas:
+                counters[f"duplicate:{language}"] += 1
+                continue
+            lemmas.add(lemma.casefold())
+
             by_language.setdefault(language, []).append(
-                (identifier, word.strip(), pos, difficulty, concreteness, safe)
+                (identifier, lemma, pos, difficulty, concreteness, safe)
             )
 
     out_dir = Path(arguments.out)

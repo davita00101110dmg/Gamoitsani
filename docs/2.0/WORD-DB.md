@@ -11,8 +11,8 @@ Words ship as a **read-only SQLite file bundled with the app**. Not Firestore. T
 builds it from a working database with a review pipeline; only `status='approved'` words
 are exported.
 
-`words_ka.db` — 2,964 words, 405 KB today, roughly 6,000 and ~1 MB when review finishes.
-The schema is frozen; only the row count changes.
+`words_ka.db` — 6,374 words, 790 KB. This is the reviewed file: the earlier 2,964-word
+copy has been replaced. The schema is frozen; only the row count changes.
 
 ---
 
@@ -22,11 +22,11 @@ Verified by querying the real thing, not read off the documentation:
 
 | | |
 |---|---|
-| Words | 2,964, all Georgian |
+| Words | 6,374, all Georgian |
 | Nulls | none in `difficulty`, `concreteness`, `familiarity`, `is_actable` |
-| Difficulty | 1:225 · 2:927 · 3:1374 · 4:431 · 5:7 |
-| Tiers | easy `<=2` **1,152** · normal `<=3` **2,526** · hard `>=4` **438** |
-| `is_actable` | 1,917 (65%) — charades is viable whenever it is wanted |
+| Difficulty | 1:662 · 2:2108 · 3:2771 · 4:818 · 5:15 |
+| Tiers | easy `<=2` **2,770** · normal `<=3` **5,541** · hard `>=4` **833** |
+| `is_actable` | 3,869 (61%) — charades is viable whenever it is wanted |
 | `is_family_safe` | all 1 — the filter is a no-op today |
 | `is_describable` | all 1 — likewise |
 | `taboo_terms` | empty — Taboo mode cannot ship yet |
@@ -42,14 +42,17 @@ Verified by querying the real thing, not read off the documentation:
 
 ## Settled with the owner
 
-- **Difficulty is the only filter in 2.0.** Three tiers — easy / normal / hard — on the
-  setup screen. No category picker: one control, and it maps to a column populated for
-  every word.
+- **Difficulty is the only filter in 2.0.** Four tiers — easy `<=2` / medium `<=3` /
+  hard `>=4` / mixed — as chips on the setup screen, defaulting to mixed. No category
+  picker. The control is shown only for files whose difficulty column has a real spread,
+  which today means Georgian alone.
 - **Seen words are remembered.** Ids already played are excluded, so a group works
   through the database instead of meeting the same cards every few evenings. The list
   clears when the remaining pool drops below a game's worth.
-- **Georgian is the only language with words today**, and the picker offers only languages
-  that have a word file. Adding `words_en.db` brings English back with **no code change**.
+- **All eleven languages ship a word file.** Georgian is curated (6,374 words); the other
+  ten were exported from v1's Firestore on 9 September 2026. The picker is built from the
+  files actually present, so removing one removes the language rather than leaving an option
+  that silently deals Georgian cards.
 - **The other ten languages come from a one-time export, not from Firebase.** v1's
   Firestore holds `translations: [String: TranslationData]` per word, and that data is
   exported into bundled files rather than fetched at runtime. See below.
@@ -80,47 +83,78 @@ This was asked directly and argued through. Exporting wins because:
 
 ## The exporter
 
-`scripts/export_firestore_words.py` — written, tested against a fixture, **never run
-against the real Firestore** because it needs the owner's credentials.
+`scripts/export_firestore_words.py` — **run against the real Firestore on 9 September 2026.**
+All ten non-Georgian languages are exported and bundled.
 
 ```sh
 pip install firebase-admin
 ./scripts/export_firestore_words.py --key serviceAccount.json --out build/words
-# or, without handing a script credentials:
-./scripts/export_firestore_words.py --from-json words.json --out build/words
 ```
 
-It emits one `words_XX.db` per language in a schema verified byte-identical to
-`words_ka.db`, and reports per-language coverage so it is obvious which are worth
-shipping.
+### What the run actually found
+
+**The data is in `new_words`, not `words`.** The `words` collection is the old flat
+`word_ka` / `word_en` pair — no `translations` map, no difficulty, no word type. Running
+against it yields nothing at all, silently, because a document with no `translations` is
+skipped before any counter is incremented. `--collection` now defaults to `new_words`.
+
+3,470 documents, and every one carries all eleven translations — so before de-duplication
+each language came out at exactly 3,470 words.
+
+**Firestore's per-language difficulty is unusable.** This is the finding that mattered:
+
+| | d1 | d2 | d3 | d4 | d5 | hard tier |
+|---|---|---|---|---|---|---|
+| en | 1794 | 1476 | 192 | 8 | 0 | **8 words** |
+| ru | 1742 | 1528 | 198 | 2 | 0 | **2 words** |
+| ja | 825 | 2336 | 295 | 12 | 2 | **14 words** |
+| ka *(curated)* | 662 | 2108 | 2771 | 818 | 15 | *833 words* |
+
+`<= 3` covers 99.9% of every exported file, so Easy, Normal and Mixed would all deal the
+same deck and Hard would deal two cards. **The app therefore asks each file whether its
+difficulty is worth a selector** — `WordDatabase.hasUsableDifficulty()`, which wants at
+least 200 words in both the easy and hard tiers — and the setup screen simply omits the
+control where it is not. Georgian keeps all four tiers; the other ten play the whole file.
+
+That check reads the data rather than a `meta` flag on purpose: the curated Georgian file
+comes from the word project's own pipeline, not from this script, so a flag written here
+would only ever exist in ten of the eleven files.
+
+**Duplicates had to be removed.** Distinct Georgian words often share one translation —
+Japanese lost 402 of 3,470, Turkish 348, Azerbaijani 347, English only 4. The engine tells
+cards apart by id, not by text, so without the de-duplication pass the same word could be
+dealt twice in one game. Final counts run 3,068 (ja) to 3,466 (en).
+
+**Casing is deliberately left alone.** Every exported lemma is capitalised — `Slippers`,
+`Статуя`. Lowercasing was considered and rejected: it would break German nouns, which must
+be capitalised, and proper nouns like `Google` and `Alps`. Capitalised words read fine on a
+card.
+
+**Georgian is not exported by default.** The curated file has 6,374 words, a real spread,
+`is_actable` and the category tree; the export would have been 3,470 flat words with none
+of that. `--languages ka` still forces it if ever needed.
 
 What survives the trip:
 
 | Column | From | |
 |---|---|---|
-| `lemma` | `translations[lang].word` | clean |
-| `difficulty` | `translations[lang].difficulty` | per language, already there |
-| `pos` | `wordType`, mapped | `noun` when unmappable, counted in the report |
-| `is_family_safe` | `ageAppropriateness` | adult markers → 0 |
-| `concreteness` | `isAbstract` | a boolean flattened onto 1–5, crude |
+| `lemma` | `translations[lang].word` | clean, de-duplicated |
+| `difficulty` | `translations[lang].difficulty` | present but flat — see above |
+| `pos` | `word_type`, mapped | only 8 of 3,470 needed the `noun` default |
+| `is_family_safe` | `age_appropriateness` | adult markers → 0 |
+| `concreteness` | `is_abstract` | a boolean flattened onto 1–5, crude |
 | `familiarity` | — | absent from Firestore, left NULL |
-| `is_actable` | — | absent, left NULL, so **charades stays off** for these languages |
+| `is_actable` | — | absent, left NULL, so **charades stays Georgian-only** |
 | categories | — | deliberately not exported |
 
-v1 stores categories as free text on the word; the curated database has a 181-row tree
-with slugs. They do not line up, and inventing a second vocabulary only these files use
-would be worse than having none. 2.0 ships a difficulty selector, not a category picker,
-so nothing is lost today.
+v1 stores categories as free text on the word; the curated database has a 181-row tree with
+slugs. They do not line up, and inventing a second vocabulary only these files use would be
+worse than having none.
 
 **Ids are hashed from the Firestore document id**, not counted. `words.id` is promised
 stable forever, and a sequential number would shift every time an earlier document was
-deleted — silently invalidating every "already seen" record on every device.
-
-**Two things worth checking before shipping an exported file:** whether the translations
-are good enough to ship at all, and whether all eleven languages actually have entries —
-`translations` is a map and may well be sparse.
-
----
+deleted — silently invalidating every "already seen" record on every device. Zero
+collisions across all ten languages.
 
 ## The implementation, as designed
 
@@ -164,10 +198,10 @@ the deck mid-play.
 
 ## Still open
 
-- **Is the current file final enough to bundle?** The schema is frozen and only rows
-  change, so bundling this copy and treating a newer one as a drop-in is the plan unless
-  the owner says otherwise.
+- **The exported languages have never been read by a native speaker.** The words sample
+  well, but nobody has checked 3,000 of them. Some are weak party words — `Will`, `Free`,
+  `Born`, `Outlined` — and 105 English entries are multi-word.
 - **Charades.** `is_actable` covers 1,917 words. A real new game mode, not scoped.
 - **Taboo.** `taboo_terms` exists and is empty. Blocked on content, not code.
-- **`CFBundleLocalizations`** should become `ka` for 2.0 while Georgian is the only word
-  file, and the App Store listing drops to one language at cutover.
+- **`CFBundleLocalizations`** — no longer forced to `ka`, since every language now has
+  words. Still needs setting to the eleven the app actually ships.
