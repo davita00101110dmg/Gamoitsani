@@ -1,69 +1,44 @@
 # Gamoitsani 2.0 — where things stand
 
-Written 3 September 2026, at the end of the session that built Phase 8's ad layer and
-the remove-ads purchase.
-Read this with `docs/2.0/PLAN.md` (the architecture, still accurate) and
-`docs/2.0/WORD-DB.md` (the word database: decided, designed, not yet built).
+Written 10 September 2026, at the end of the session that connected the word database,
+brought the other ten languages over from Firestore, and ran architecture, formatting and
+accessibility passes over the whole target.
+Read this with `docs/2.0/PLAN.md` (the architecture, still accurate),
+`docs/2.0/WORD-DB.md` (the word database, now built) and
+`docs/2.0/ACCESSIBILITY.md`.
 
 ---
 
 ## The one-paragraph version
 
 `Gamoitsani2` is a complete, playable rewrite living beside v1 as a separate bundle id
-(`davitikhvedelidze.Gamoitsani2`). Six local SPM packages, Swift 6 strict concurrency,
-iOS 18, 235 tests. Setup, both game modes, scoreboard, sharing, settings, sound, launch
-animation, the full ad stack and the remove-ads purchase all work. **It plays on 60
-hardcoded sample words** — the data layer is built and tested but not connected, because
-the word source is still an open decision. v1 still builds and must keep building until cutover.
+(`davitikhvedelidze.Gamoitsani2`). Eight local SPM packages, Swift 6 strict concurrency,
+iOS 18, 223 tests. Setup, both game modes, scoreboard, sharing, settings, sound, launch
+animation, the full ad stack and the remove-ads purchase all work. **It plays on a real
+word database** — 6,374 curated Georgian words plus ten more languages exported from v1's
+Firestore, bundled as read-only SQLite, no network and no SDK. v1 still builds and must
+keep building until cutover.
 
 ---
 
 ## Immediate state
 
-**Two things are waiting, in this order.**
+`main` carries everything through PR #31. Nothing is open.
 
-**1. Test the highlight reel and player records.** Branch `feature/reel-and-profiles`,
-one PR. Both are built, unit-tested and installed on the owner's phone, but **neither has
-been exercised in a real game**. See "What needs testing" below. Nothing else should start
-until this is either merged or fixed.
+**The one thing outstanding is that nobody has played a game.** Four PRs landed in a day —
+the word database, the dead-cache removal, the effect-lifecycle fixes and the formatting
+pass — every one of them verified by tests, builds and a device install, and not one of
+them by playing. What that leaves unproven: real words on screen, seen-word exclusion
+across two games, the mid-game deck top-up, the double-tap guard on Play, and the rematch
+placement.
 
-**2. Then the word database.** Design is settled and written down in `WORD-DB.md`; no code
-exists. **Start it on its own branch** once the reel work is merged.
-
-`main` carries everything through PR #27 — ads, the remove-ads purchase, recording, the
-review prompt and the weekly reminder.
+**`feature/reel-and-profiles` is drifting.** One commit, never pushed, and now seventeen
+behind `main`. The highlight reel and player records are built and unit-tested but have
+never been exercised in a real game. Every merge makes that rebase worse.
 
 Never push to `main` directly; work reaches it through a PR the owner merges. And never
 put a `claude.ai/code/session_...` link in a commit trailer or PR body — the repo is
 public. Keep `Co-Authored-By`; drop `Claude-Session`.
-
----
-
-## What needs testing
-
-Both landed in one commit and have only ever been built, never played.
-
-**The highlight reel.** Turn recording on in Extras, play a **full game with at least two
-turns**, reach the podium. A few seconds later one video should appear in Photos: the
-picked moments with the word over each, ending on the share card. Per-turn clips no longer
-save — the reel replaces them.
-
-The composition was verified locally by exporting one and looking at frames, so slices
-stitch and the card renders. What has *not* been seen is the real path: whether the
-moments chosen are the funny ones, whether ~25s feels right, and whether a 3s lead-in is
-enough run-up.
-
-If nothing appears, **Debug → Recording → Copy log** traces the reel
-(`reel: cutting N turns`, `reel: exported …KB`, `reel: SAVED TO PHOTOS`). That names the
-failing step directly — do not guess, this feature cost five rounds of guessing already.
-
-**Player records.** The turn-info screen should name who is describing and who is next,
-rotating through the team. Tapping a name in the setup roster opens their record; a
-"Players" link there lists everyone. Records only accumulate for teams built with the
-player draw — teams typed in by hand have no members to credit.
-
-Two judgement calls worth a look: whether the describer line reads well on turn info, and
-whether the reel's pacing is right.
 
 ---
 
@@ -73,15 +48,19 @@ whether the reel's pacing is right.
 Gamoitsani2 (app)          composition root, navigation, screens, AdMob adapter
    ├── GamoitsaniEngine    @Observable GameEngine over a pure reducer
    │      └── GamoitsaniCore
-   ├── GamoitsaniData      SwiftData cache + Firestore sync   ← BUILT, NOT WIRED
+   ├── GamoitsaniData      bundled read-only SQLite, one file per language
    │      └── GamoitsaniCore
+   ├── GamoitsaniCapture   what a recording contains
    ├── GamoitsaniDesign    tokens, type, motion, sound, haptics
    ├── GamoitsaniL10n      catalogue + per-language bundle lookup
-   └── GamoitsaniAds       ad policy only — no SDK dependency
+   ├── GamoitsaniAds       ad policy only — no SDK dependency
+   └── GamoitsaniMacros    the UserDefault macro
 ```
 
-Tests: Core 119, Data 21, Design 23, Ads 20, Capture 34, Engine 11, L10n 6. Plus
-GamoitsaniMacros 2, which needs `swift test` — it is a compiler plugin with no simulator
+A strict DAG — `Core` is a leaf, nothing imports upward, no cycles.
+
+Tests: Core 116, Data 24, Design 23, Capture 21, Ads 20, Engine 11, L10n 6 — 221. Plus
+GamoitsaniMacros 2, which needs `swift test`: it is a compiler plugin with no simulator
 destination.
 
 ---
@@ -107,20 +86,19 @@ destination.
 
 | | |
 |---|---|
-| **The word database** | **Decided, designed, not built. See `WORD-DB.md`.** The file exists (2,964 Georgian words). The app still plays on 60 hardcoded sample words. This is the next piece of work and the only thing standing between 2.0 and being a real game. |
+| ~~**The word database**~~ | **Done.** 6,374 curated Georgian words plus ten languages exported once from v1's Firestore, all bundled as read-only SQLite in `GamoitsaniData/WordFiles`. Four difficulty tiers, shown only where a file's difficulty column can support them — which today means Georgian alone. Seen words are remembered and the deck tops up mid-game. See `WORD-DB.md`. |
 | ~~**Crashlytics**~~ | **Dropped.** Crashes come from Xcode Organizer / App Store Connect instead — free, no SDK, and 2.0 currently has no Firebase at all. Adding Crashlytics would mean pulling Firebase back into a clean build. Revisit only for a bug that needs non-fatal logging or breadcrumbs. |
 | ~~**Analytics**~~ | **Dropped** for the same reason. App Store Connect covers downloads and retention. Add only when there is a specific question worth an SDK. |
-| **Challenge content** | 2.0 has a single `game.challenge.placeholder` string — v1 fetched challenges from Firestore, which is going. Decided: challenges ship in the same bundled SQLite DB as the words. |
+| **Challenge content** | **Exported, not wired.** 17 challenges, complete in all eleven languages, pulled out of v1's Firestore and saved to `~/Desktop/gamoitsani-words/export/challenges.json`. The app still shows one hardcoded `game.challenge.placeholder` to every team. Needs a home and a selection rule — see below. |
 | ~~**Highlight reel**~~ | **Built, untested in a real game.** One video per game instead of six clips. `HighlightPolicy` in `GamoitsaniCapture`. |
 | ~~**Player records**~~ | **Built, untested in a real game.** Describer rotation on turn info, records in the roster. `Describer` and `PlayerLedger` in `GamoitsaniCore`. |
 | ~~**Automatic review prompt**~~ | **Done.** `ReviewPromptPolicy` in `GamoitsaniCore`, asked on the podium a second after it settles. v1's never fired once: it was gated on a counter that was read but never written. |
 | ~~**Game recording**~~ | **Done, on a different premise.** Front camera at 1080p for the play phase only, word overlaid at export from the engine's timeline, saved to Photos. The screen is never captured, so no ad can appear in a clip. `GamoitsaniCapture` + `Gamoitsani2/Recording/`. |
 | ~~**Notifications**~~ | **Done.** Weekly reminder, Saturday evening, rotating copy, English only. No in-app toggle — iOS Settings owns the permission. Asked once on the podium after a first game. |
 | ~~**Word review**~~ | **Dropped.** v1's hidden five-taps-on-title screen let any client delete words from the production database after three downvotes, unauthenticated, with a client-controlled reviewer id. `firestore.rules` already disabled it. 2.0 ships a curated SQLite file the owner builds, so there is nothing to crowd-moderate — quality control belongs in the tooling that produces the DB, not in the shipped app. |
-| **Automatic review prompt** | **Being ported.** v1's never fired: its counter was read but never written. Cheapest of the four. |
 | **Rewarded ads** | Implemented and tested, deliberately no trigger. See below. |
-| **Translations** | 94 keys. Only `en` and `ka` are complete. `docs/2.0/LOCALIZATION.md` lists what is missing. Owner wants this done last, after the copy settles. |
-| **iPad** | Both targets declare `TARGETED_DEVICE_FAMILY = "1,2"`, so nothing regresses — but every 2.0 screen has only ever run on the owner's iPhone. App Store review tests on iPad. Run it there before cutover. |
+| **Translations** | 118 keys. `en` complete, `ka` 110/118 — the eight gaps are the weekly-reminder copy, left in English on purpose. The other nine sit at 26/118 and fall back to English. `docs/2.0/LOCALIZATION.md` is stale: it still says 58 keys. |
+| **iPad** | First render happened this session and it works, including dark mode. The setup form stretches the full width and reads sparse, so it wants a max-width pass before App Store review. |
 | **Cutover (Phase 9)** | See the checklist below. |
 
 ---
@@ -185,6 +163,45 @@ Flipping the bundle id to `davitikhvedelidze.Gamoitsani` also inherits **v1's
 ## Traps this codebase has already hit
 
 Each of these cost real time. They are all fixed; do not reintroduce them.
+
+**`GameState` and `GameSettings` both have hand-written `Codable` inits, and must keep
+them.** `GameState` is what reaches disk, and `GameStateStore.load` decodes it with `try?`.
+A synthesised decoder throws `keyNotFound` on any game saved before a new property existed
+and the `try?` swallows it, so an in-progress game vanishes silently on upgrade. Every
+property in both is optional-decoded with a default. Adding a field without doing the same
+is the single easiest way to lose players' games.
+
+**`.accessibilityElement(children: .combine)` hides child buttons behind the actions
+rotor.** It reads a row nicely — "Rounds, 1" — but VoiceOver's swipe up and down stop
+working. A combined row that holds a value needs `accessibilityAdjustableAction`.
+
+**Effect results must not travel through `GameEvent`.** Words arriving from a mid-game
+draw go through `GameEffect` and `GameEngine.apply`, not `send`, so a view cannot inject
+them. The split is what stops a screen reaching into a running game.
+
+**Anything async that re-enters the game must be generation-stamped.** `GameSession` bumps
+a counter on start, resume and leave; a draw that returns to a different game is dropped.
+Without it a top-up begun in a Hard Georgian game landed in the Easy English one that
+replaced it.
+
+**Firestore's word data lives in `new_words`, not `words`.** The older collection is a flat
+`word_ka`/`word_en` pair with no translations map, and documents without one are skipped
+before any counter increments — so a run against it reports nothing at all, silently.
+
+**Both targets build a product called `Gamoitsani.app` into the same directory.** Running
+v1's tests overwrites 2.0's app bundle. If a `simctl install` seems to install the wrong
+thing, that is why — build 2.0 with its own `-derivedDataPath`.
+
+**A resource directory named `Resources` breaks codesigning.** `.copy("Resources")` puts a
+`Resources/` folder inside the resource bundle, which collides with bundle layout and is
+rejected as malformed. The word files live in `WordFiles/` for that reason.
+
+**SwiftUI already owns the name `Layout`.** `PlayerRoster` implements that protocol, so a
+design token called `Layout` makes the type ambiguous. It is `Sizing`.
+
+**`zsh` does not word-split unquoted variables.** A loop over `$FILES` or `$BRANCHES` hands
+the whole list to the command as one argument and reports a single confusing failure. Use
+an array, or `while read`.
 
 **`Team` has a hand-written `Codable` init.** The synthesised one throws `keyNotFound` on
 payloads saved before `members` existed, and `GameStateStore.load` swallows that with
@@ -286,18 +303,26 @@ The ad-free hour is the shape already implemented.
 
 ## Suggested next steps
 
-1. **Test the reel and player records**, merge `feature/reel-and-profiles` or fix what it
-   shows. Nothing else should start first.
-2. **Build the word database layer** on its own branch. `WORD-DB.md` has the design, the
-   decisions and the two traps waiting in it.
-3. **Run 2.0 on an iPad.** No 2.0 screen has ever rendered on one, and both targets
-   declare `TARGETED_DEVICE_FAMILY = "1,2"`. App Store review tests on iPad, so this is
-   the one remaining item that can become a rejection rather than a to-do.
-4. **Export the other languages** when the owner has checked whether v1's translations are
-   good enough to ship. `scripts/export_firestore_words.py` is written and tested against
-   a fixture; it needs their Firestore credentials to run.
-5. **Cutover.** The checklist above.
+1. **Play a game.** Everything below is guesswork until someone does. Four PRs of word-
+   database work landed without a single game being played, and the reel and player
+   records have never run in one either.
+2. **Rebase `feature/reel-and-profiles`** before it drifts further. One commit, seventeen
+   behind, never pushed.
+3. **Wire the challenges.** The content is exported and complete in eleven languages; what
+   is missing is where it lives and how one gets chosen. `setup.challenge.detail` promises
+   "each team gets a silly rule", which implies one per team for the game — and that means
+   the choice is persisted state, so it needs the same decoder treatment as everything else
+   in `GameState`.
+4. **Give the iPad a max-width pass.** It renders correctly but the form is stretched.
+   App Store review tests on iPad, so this is the item that can become a rejection rather
+   than a to-do.
+5. **Cutover.** The checklist above. Note that removing Firebase *is* cutover — 2.0 has
+   none, and v1's six imports go when v1 does.
+
+The Firebase project is no longer needed by any 2.0 pipeline: the words and the challenges
+have both been exported. The service account key used for that should be rotated.
 
 Georgian copy written by Claude and not yet reviewed by the owner, who is the native
-speaker: the `iap.*` keys, `common.ok`, `common.done`, and the `players.*` keys. The
+speaker: the `iap.*` keys, `common.ok`, `common.done`, the `players.*` keys, and the
+difficulty tier names and their details (`setup.difficulty.*`, `setup.extras.none`). The
 weekly reminder copy is English only by decision, so it needs nothing.
