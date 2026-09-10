@@ -92,8 +92,8 @@ struct ClassicPlayView: View {
     @Environment(Localization.self) private var l10n
     @Environment(SoundPlayer.self) private var sound
     @State private var lastOutcome: PlayOutcome?
-    /// Increments on every answer. `sensoryFeedback` fires on a *change*, so triggering
-    /// on the outcome alone missed two identical answers in a row.    /// *other* button, so repeating the same one produced no feedback at all.
+    /// Increments on every answer. `sensoryFeedback` fires on a *change*, so triggering on
+    /// the outcome alone produced nothing when the same button was tapped twice in a row.
     @State private var answerCount = 0
 
     private var word: DeckWord? { engine.wordsInPlay.first }

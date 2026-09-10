@@ -2,8 +2,6 @@
 //  main.swift
 //  GamoitsaniMacros
 //
-//  Created by Daviti Khvedelidze on 15/03/2025.
-//
 
 import Foundation
 import GamoitsaniMacros

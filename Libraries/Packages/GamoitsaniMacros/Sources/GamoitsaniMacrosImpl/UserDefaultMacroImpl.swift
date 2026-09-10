@@ -2,8 +2,6 @@
 //  UserDefaultMacroImpl.swift
 //  GamoitsaniMacros
 //
-//  Created by Daviti Khvedelidze on 15/03/2025.
-//
 
 import SwiftSyntax
 import SwiftSyntaxBuilder
@@ -22,7 +20,7 @@ public struct UserDefaultMacroImpl: AccessorMacro {
               let type = binding.typeAnnotation?.type else {
             throw MacroError.message("@UserDefault can only be applied to a variable with a type annotation")
         }
-        
+
         guard let arguments = node.arguments?.as(LabeledExprListSyntax.self),
               arguments.count >= 2,
               let keyExpr = arguments.first?.expression.as(StringLiteralExprSyntax.self),
@@ -30,7 +28,7 @@ public struct UserDefaultMacroImpl: AccessorMacro {
               let defaultValueExpr = arguments.dropFirst().first?.expression else {
             throw MacroError.message("@UserDefault requires a string key and default value")
         }
-        
+
         return [
             """
             get {
