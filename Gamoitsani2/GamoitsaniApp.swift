@@ -10,7 +10,7 @@ import GamoitsaniL10n
 @main
 struct GamoitsaniApp: App {
     @State private var router = Router()
-    @State private var localization = Localization()
+    @State private var localization: Localization
     @State private var session = GameSession()
     @State private var sound = SoundPlayer()
     @State private var haptics = Haptics()
@@ -32,6 +32,11 @@ struct GamoitsaniApp: App {
     init() {
         // The display face ships inside GamoitsaniDesign, so it is not in the app bundle
         DesignSystem.registerFonts()
+
+        // Before the first `Localization`, which reads the key this writes. A property
+        // default would be evaluated ahead of this body, so it is assigned here instead.
+        Localization.migrateLegacyLanguage()
+        _localization = State(wrappedValue: Localization())
     }
 
     var body: some Scene {

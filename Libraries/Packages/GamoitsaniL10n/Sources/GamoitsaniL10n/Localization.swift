@@ -83,6 +83,9 @@ public final class Localization {
 
     private static let storageKey = "app.language"
 
+    /// v1's key for the same setting. Only read, and only once — see `migrateLegacyLanguage`.
+    private static let legacyStorageKey = "APP_LANGUAGE"
+
     /// The persisted choice, or the system default. Exposed because types constructed
     public static var storedLanguage: AppLanguage {
         if let raw = UserDefaults.standard.string(forKey: storageKey),
@@ -90,6 +93,34 @@ public final class Localization {
             return language
         }
         return .systemDefault
+    }
+
+    /// Carries a language chosen in v1 across to the key 2.0 reads.
+    ///
+    /// Cutover hands 2.0 v1's bundle id, and with it v1's `UserDefaults`. v1 stored the
+    /// choice under `APP_LANGUAGE` and wrote it only when someone picked one from the
+    /// menu, so the key's presence *is* the choice — nothing is inferred. Without this,
+    /// everyone who deliberately set a language is reset to the system default on
+    /// upgrade, silently.
+    ///
+    /// Anyone who never picked keeps falling through to `systemDefault`, deliberately:
+    /// v1 defaulted them to Georgian regardless of their phone, and 2.0 does better.
+    ///
+    /// Call before the first `Localization` is built. The old key is removed either way,
+    /// so this can happen at most once and leaves no v1 residue behind.
+    @discardableResult
+    public static func migrateLegacyLanguage(in defaults: UserDefaults = .standard) -> AppLanguage? {
+        guard defaults.string(forKey: storageKey) == nil,
+              let raw = defaults.string(forKey: legacyStorageKey)
+        else { return nil }
+
+        defaults.removeObject(forKey: legacyStorageKey)
+        // An unreadable code is dropped rather than carried over: the system default beats
+        // a value nothing can resolve.
+        guard let language = AppLanguage(rawValue: raw) else { return nil }
+
+        defaults.set(language.rawValue, forKey: storageKey)
+        return language
     }
 
     public init(language: AppLanguage? = nil) {
