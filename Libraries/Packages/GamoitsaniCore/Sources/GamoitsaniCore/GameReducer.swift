@@ -8,10 +8,14 @@ import Foundation
 public enum GameReducer {
 
     /// Returns the new state, or the reason the event was refused.
+    ///
+    /// `nextPlacement` is supplied rather than drawn, for the same reason `now` is: the
+    /// reducer must give the same answer for the same inputs. Only `.rematch` reads it.
     public static func reduce(
         _ state: GameState,
         _ event: GameEvent,
-        at now: Date
+        at now: Date,
+        nextPlacement: SuperWordPlacement = .random()
     ) -> Result<GameState, GameEventRejection> {
         var next = state
 
@@ -35,13 +39,6 @@ public enum GameReducer {
             next.setRoundEnd(now.addingTimeInterval(state.settings.roundLength))
             next.setPhase(.playing)
             next.updateCurrentTeam { $0.beginGuessing(at: now) }
-            return .success(next)
-
-        case let .deckRefilled(words):
-            // Allowed in any phase but `.finished`, because the draw is asynchronous and
-            // the game will usually have moved on by the time the words arrive.
-            guard state.phase != .finished else { return .failure(.wrongPhase(state.phase)) }
-            next.refillDeck(with: words)
             return .success(next)
 
         case let .answer(wordID, outcome):
@@ -69,7 +66,26 @@ public enum GameReducer {
 
         case .rematch:
             guard state.phase == .finished else { return .failure(.wrongPhase(state.phase)) }
-            next.resetForRematch()
+            next.resetForRematch(placement: nextPlacement)
+            return .success(next)
+        }
+    }
+
+    /// Folds the result of outside work into the game.
+    ///
+    /// Separate from `reduce` so that effect results cannot arrive by the same door as
+    /// user intent. Accepted in any phase but `.finished`, because the work is
+    /// asynchronous and the game will usually have moved on by the time it lands.
+    public static func apply(
+        _ state: GameState,
+        _ effect: GameEffect
+    ) -> Result<GameState, GameEventRejection> {
+        var next = state
+
+        switch effect {
+        case let .deckRefilled(words):
+            guard state.phase != .finished else { return .failure(.wrongPhase(state.phase)) }
+            next.refillDeck(with: words)
             return .success(next)
         }
     }

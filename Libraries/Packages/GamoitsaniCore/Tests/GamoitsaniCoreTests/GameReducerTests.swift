@@ -261,6 +261,26 @@ struct GameReducerTests {
         #expect(s.teams.map(\.id) == ids, "same teams, same identities")
     }
 
+    /// The super word used to sit in exactly the same slot in every rematch, because the
+    /// reset cleared the scores but not the placement.
+    @Test("a rematch moves the super word")
+    func rematchRedrawsPlacement() throws {
+        var s = game(rounds: 1, teams: 2)
+        // A team has to actually score, or 0-0 goes to a tie-break instead of finishing.
+        s = try apply(s, [.beginTurn, .countdownFinished], at: t0)
+        let word = try #require(s.turnWords.first)
+        s = try apply(s, [.answer(wordID: word.id, outcome: .correct), .timeExpired], at: t0)
+        s = try apply(s, [.beginTurn, .countdownFinished, .timeExpired], at: t0)
+        #expect(s.phase == .finished)
+
+        let before = s.placement
+        let fresh = SuperWordPlacement(classicPosition: 4, arcadeSet: 2, arcadeSlot: 3)
+        s = try GameReducer.reduce(s, .rematch, at: t0, nextPlacement: fresh).get()
+
+        #expect(s.placement == fresh)
+        #expect(s.placement != before || before == fresh)
+    }
+
     // MARK: - Persistence
 
     /// An in-progress game survives being killed. v1 held everything in a singleton and

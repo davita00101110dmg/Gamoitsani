@@ -8,7 +8,6 @@ import Observation
 import GamoitsaniCore
 import GamoitsaniData
 import GamoitsaniEngine
-import GamoitsaniL10n
 
 /// Holds the engine for the game currently being played, and remembers it across launches.
 @MainActor
@@ -26,10 +25,15 @@ final class GameSession {
     /// than meeting the same cards every few evenings.
     let seenWords: SeenWords
 
-    /// The ids the current deck started with, and the language they came from. Kept because
-    /// the deck only knows what is left, and what was played is the difference.
+    /// The ids the current deck started with. Kept because the deck only knows what is
+    /// left, and what was played is the difference.
     private var deckIDs: Set<String> = []
-    private var deckLanguage = ""
+
+    /// Bumped whenever the game changes. A draw started for one game carries the number it
+    /// began under and is discarded if it comes back to a different one — otherwise words
+    /// fetched for a Hard Georgian game could land in the Easy English game that replaced
+    /// it while the draw was still in flight.
+    private var generation = 0
 
     /// One top-up at a time, so a burst of deals cannot fire several overlapping draws.
     private var isToppingUp = false
@@ -50,10 +54,14 @@ final class GameSession {
         deck: Deck,
         language: String = "ka"
     ) -> GameEngine {
-        let engine = GameEngine(state: GameState(settings: settings, teams: teams, deck: deck))
+        let engine = GameEngine(
+            state: GameState(
+                settings: settings, teams: teams, deck: deck, deckLanguage: language
+            )
+        )
         self.engine = engine
         deckIDs = Set(deck.remainingIDs)
-        deckLanguage = language
+        generation += 1
         saved = nil
         store.clear()
         return engine
@@ -68,9 +76,11 @@ final class GameSession {
         self.engine = engine
 
         // Tracking restarts from what is left, not from the original deck — anything played
-        // before the last checkpoint was already recorded as seen.
+        // before the last checkpoint was already recorded as seen. The deck's language
+        // comes back with the saved state, so switching language mid-game no longer files
+        // the words under whatever is on screen now.
         deckIDs = Set(state.deck.remainingIDs)
-        deckLanguage = BundledWordProvider.resolvedLanguage(for: Localization.storedLanguage.rawValue)
+        generation += 1
         return engine
     }
 
@@ -86,6 +96,8 @@ final class GameSession {
             }
         }
         engine = nil
+        // Nothing in flight belongs to a game that has been left.
+        generation += 1
     }
 
     /// Persists progress as the game moves between phases, or when the app goes away.
@@ -117,9 +129,10 @@ final class GameSession {
         guard engine.state.deck.count < perTurn else { return }
 
         isToppingUp = true
-        let language = deckLanguage
+        let language = engine.state.deckLanguage
         let difficulty = settings.difficulty.range
         let excluded = Set(deckIDs.compactMap(Int.init))
+        let startedUnder = generation
 
         Task {
             defer { isToppingUp = false }
@@ -128,8 +141,13 @@ final class GameSession {
                 language: language, count: perTurn * 2, excluding: excluded
             )) ?? []
 
-            guard !words.isEmpty, let engine = self.engine else { return }
-            if engine.send(.deckRefilled(words)) {
+            // The game that asked for these may be over, or replaced, by now.
+            guard !words.isEmpty,
+                  startedUnder == generation,
+                  let engine = self.engine
+            else { return }
+
+            if engine.apply(.deckRefilled(words)) {
                 deckIDs.formUnion(words.map(\.id))
             }
         }
@@ -142,7 +160,9 @@ final class GameSession {
     private func recordSeenWords(from state: GameState) {
         let played = deckIDs.subtracting(state.deck.remainingIDs).compactMap(Int.init)
         guard !played.isEmpty else { return }
-        let language = deckLanguage
+        // The deck's own language, not the one on screen — they differ after a fallback,
+        // and after switching language mid-game.
+        let language = state.deckLanguage
         Task { await seenWords.record(played, language: language) }
     }
 

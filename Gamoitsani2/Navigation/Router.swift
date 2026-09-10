@@ -11,7 +11,11 @@ import SwiftUI
 final class Router {
     var path: [Route] = []
 
+    /// Ignores a repeat of whatever is already on top. Two taps landing either side of an
+    /// await would otherwise stack the same screen twice, and popping once would leave the
+    /// player on a second copy of it.
     func push(_ route: Route) {
+        guard path.last != route else { return }
         path.append(route)
     }
 

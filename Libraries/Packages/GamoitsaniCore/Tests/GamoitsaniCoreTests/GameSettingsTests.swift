@@ -99,6 +99,46 @@ struct GameSettingsTests {
         let data = try JSONEncoder().encode(settings)
         #expect(try JSONDecoder().decode(GameSettings.self, from: data) == settings)
     }
+
+    /// `GameState` is the type that actually reaches disk, so it carries the same guard.
+    /// Stripping the newest key must not cost the player their game.
+    @Test("a saved game from before deckLanguage still loads")
+    func legacyDeckLanguageDecodes() throws {
+        let state = GameState(
+            settings: GameSettings(rounds: 2),
+            teams: [Team(name: "Team 1"), Team(name: "Team 2")],
+            deck: Deck(words: [DeckWord(id: "4711", text: "ბროწეული")]),
+            deckLanguage: "en"
+        )
+
+        var object = try #require(
+            JSONSerialization.jsonObject(with: try JSONEncoder().encode(state)) as? [String: Any]
+        )
+        #expect(object["deckLanguage"] != nil, "nothing was stripped, so this proves nothing")
+        object.removeValue(forKey: "deckLanguage")
+
+        let data = try JSONSerialization.data(withJSONObject: object)
+        let restored = try JSONDecoder().decode(GameState.self, from: data)
+
+        // Georgian, because it was the only language with words when saves began.
+        #expect(restored.deckLanguage == "ka")
+        #expect(restored.teams.count == 2)
+        #expect(restored.deck.count == 1)
+    }
+
+    @Test("the deck's language survives a round trip and a resume")
+    func deckLanguageRoundTrips() throws {
+        let state = GameState(
+            settings: GameSettings(),
+            teams: [Team(name: "A"), Team(name: "B")],
+            deck: Deck(words: [DeckWord(id: "1", text: "word")]),
+            deckLanguage: "ja"
+        )
+        let restored = try JSONDecoder().decode(
+            GameState.self, from: try JSONEncoder().encode(state)
+        )
+        #expect(restored.deckLanguage == "ja")
+    }
 }
 
 @Suite("Team validation")

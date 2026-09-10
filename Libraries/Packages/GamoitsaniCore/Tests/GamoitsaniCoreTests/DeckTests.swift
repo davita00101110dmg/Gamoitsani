@@ -108,7 +108,7 @@ struct DeckRefillTests {
         #expect(deck.remainingIDs == ["3", "4"])
     }
 
-    /// The event exists so a long game does not dead-end on an empty deck, which is the
+    /// The effect exists so a long game does not dead-end on an empty deck, which is the
     /// only way the "no words left" card can be reached.
     @Test("refilling mid-game lets the next turn start")
     func refillReopensPlay() throws {
@@ -117,7 +117,7 @@ struct DeckRefillTests {
             teams: [Team(name: "A"), Team(name: "B")],
             deck: Deck(words: [])
         )
-        state = try GameReducer.reduce(state, .deckRefilled(words(1...5)), at: Date()).get()
+        state = try GameReducer.apply(state, .deckRefilled(words(1...5))).get()
         #expect(state.deck.count == 5)
         #expect(GameRules.canStartTurn(state))
     }
@@ -130,7 +130,7 @@ struct DeckRefillTests {
             deck: Deck(words: []),
             phase: .finished
         )
-        let result = GameReducer.reduce(state, .deckRefilled(words(1...5)), at: Date())
+        let result = GameReducer.apply(state, .deckRefilled(words(1...5)))
         #expect(throws: GameEventRejection.wrongPhase(.finished)) { try result.get() }
     }
 }

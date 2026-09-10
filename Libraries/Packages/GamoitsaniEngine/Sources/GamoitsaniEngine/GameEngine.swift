@@ -19,16 +19,36 @@ public final class GameEngine {
     /// Injected so tests can control time. Nothing in the engine calls `Date()` directly.
     private let now: @Sendable () -> Date
 
-    public init(state: GameState, now: @escaping @Sendable () -> Date = { Date() }) {
+    /// Injected for the same reason as `now`: a rematch needs a fresh super-word position,
+    /// and the reducer must not draw one itself.
+    private let nextPlacement: @Sendable () -> SuperWordPlacement
+
+    public init(
+        state: GameState,
+        now: @escaping @Sendable () -> Date = { Date() },
+        nextPlacement: @escaping @Sendable () -> SuperWordPlacement = { .random() }
+    ) {
         self.state = state
         self.now = now
+        self.nextPlacement = nextPlacement
     }
 
     // MARK: - Events
 
     @discardableResult
     public func send(_ event: GameEvent) -> Bool {
-        switch GameReducer.reduce(state, event, at: now()) {
+        resolve(GameReducer.reduce(state, event, at: now(), nextPlacement: nextPlacement()))
+    }
+
+    /// Reports the result of work started elsewhere — words drawn while a game is running.
+    /// Deliberately a different method from `send`, so screens cannot reach it.
+    @discardableResult
+    public func apply(_ effect: GameEffect) -> Bool {
+        resolve(GameReducer.apply(state, effect))
+    }
+
+    private func resolve(_ result: Result<GameState, GameEventRejection>) -> Bool {
+        switch result {
         case let .success(next):
             state = next
             lastRejection = nil
