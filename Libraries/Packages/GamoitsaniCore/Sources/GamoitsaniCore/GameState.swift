@@ -59,6 +59,12 @@ public struct GameState: Sendable, Hashable, Codable {
     /// Seconds left when the game was put down. Set only while paused.
     public private(set) var pausedRemaining: TimeInterval?
 
+    /// The language the deck was drawn from, which is not always the language being
+    /// displayed — a language with no word file falls back. Carried in state because
+    /// anything recording what was played has to key it the same way, and after a resume
+    /// there is nowhere else to learn it from.
+    public private(set) var deckLanguage: String
+
     public init(
         settings: GameSettings,
         teams: [Team],
@@ -73,7 +79,8 @@ public struct GameState: Sendable, Hashable, Codable {
         setIndex: Int = 1,
         superWordSpentBy: Set<UUID> = [],
         roundEndsAt: Date? = nil,
-        pausedRemaining: TimeInterval? = nil
+        pausedRemaining: TimeInterval? = nil,
+        deckLanguage: String = "ka"
     ) {
         self.settings = settings
         self.teams = teams
@@ -89,6 +96,32 @@ public struct GameState: Sendable, Hashable, Codable {
         self.superWordSpentBy = superWordSpentBy
         self.roundEndsAt = roundEndsAt
         self.pausedRemaining = pausedRemaining
+        self.deckLanguage = deckLanguage
+    }
+
+    /// Decoded by hand because this is the type that actually goes to disk, and
+    /// `GameStateStore.load` swallows a decode failure with `try?` — a synthesised decoder
+    /// throws `keyNotFound` on any game saved before a new property existed, and the game
+    /// would vanish silently on upgrade. Every property here is optional-decoded with a
+    /// default for that reason. Add new ones the same way.
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        settings = try container.decode(GameSettings.self, forKey: .settings)
+        teams = try container.decode([Team].self, forKey: .teams)
+        deck = try container.decode(Deck.self, forKey: .deck)
+        placement = try container.decode(SuperWordPlacement.self, forKey: .placement)
+        round = try container.decode(Int.self, forKey: .round)
+        currentTeamIndex = try container.decode(Int.self, forKey: .currentTeamIndex)
+        phase = try container.decode(GamePhase.self, forKey: .phase)
+        turnWords = try container.decode([DeckWord].self, forKey: .turnWords)
+        wordsShownThisTurn = try container.decode(Int.self, forKey: .wordsShownThisTurn)
+        playedOutcomes = try container.decode([String: PlayOutcome].self, forKey: .playedOutcomes)
+        setIndex = try container.decode(Int.self, forKey: .setIndex)
+        superWordSpentBy = try container.decode(Set<UUID>.self, forKey: .superWordSpentBy)
+        roundEndsAt = try container.decodeIfPresent(Date.self, forKey: .roundEndsAt)
+        pausedRemaining = try container.decodeIfPresent(TimeInterval.self, forKey: .pausedRemaining)
+        // Georgian, because it was the only language with words when games were first saved.
+        deckLanguage = try container.decodeIfPresent(String.self, forKey: .deckLanguage) ?? "ka"
     }
 
     // MARK: - Derived
@@ -217,7 +250,11 @@ public struct GameState: Sendable, Hashable, Codable {
         }
     }
 
-    mutating func resetForRematch() {
+    /// Takes a fresh placement rather than drawing one: the super word sat in exactly the
+    /// same slot every rematch otherwise, and a group that noticed could see it coming.
+    /// Passed in so the reducer stays pure.
+    mutating func resetForRematch(placement newPlacement: SuperWordPlacement) {
+        placement = newPlacement
         for index in teams.indices { teams[index].resetForNewGame() }
         round = 1
         currentTeamIndex = 0

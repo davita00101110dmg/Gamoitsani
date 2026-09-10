@@ -23,6 +23,10 @@ struct GameSetupView: View {
     @State private var model = GameSetupModel()
     @State private var hasAppeared = false
 
+    /// True while the opening deck is being drawn. The Play button is a `Button`, not a
+    /// gate — without this a second tap during the draw starts a second game.
+    @State private var isStarting = false
+
     /// Whether this language's word file has a difficulty spread worth selecting on.
     ///
     /// True for Georgian, which is curated. False for the languages exported from v1's
@@ -176,6 +180,9 @@ struct GameSetupView: View {
 
     /// Builds the deck and hands the engine a game to run.
     private func startGame() {
+        guard !isStarting else { return }
+        isStarting = true
+
         var settings = model.settings
         #if DEBUG
         settings = debugSettings.apply(to: settings)
@@ -184,6 +191,7 @@ struct GameSetupView: View {
         let language = l10n.language.rawValue
 
         Task {
+            defer { isStarting = false }
             // Sized from the clock rather than a flat per-turn guess. Whatever this misses
             // by, the deck is topped up during play, so it only has to be a good opening
             // hand rather than the whole game's supply.
@@ -462,7 +470,7 @@ struct GameSetupView: View {
                 .padding(.vertical, Spacing.md)
         }
         .buttonStyle(PrimaryButtonStyle(reduceMotion: reduceMotion))
-        .disabled(!model.canStart)
+        .disabled(!model.canStart || isStarting)
         .opacity(model.canStart ? 1 : 0.5)
         .animation(Motion.control(reduceMotion: reduceMotion), value: model.canStart)
         .padding(.top, Spacing.xs)

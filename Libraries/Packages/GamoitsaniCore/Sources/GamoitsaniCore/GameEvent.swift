@@ -29,12 +29,19 @@ public enum GameEvent: Sendable, Hashable {
     /// The round clock reached zero.
     case timeExpired
 
+    /// Play again with the same teams and settings.
+    case rematch
+}
+
+/// Something that happened outside the game and now has to be folded into it.
+///
+/// Kept apart from `GameEvent` because these are results, not intentions. A screen sends
+/// events; only the layer that started the work reports back with one of these, so a view
+/// cannot inject words into a running game.
+public enum GameEffect: Sendable, Hashable {
     /// More words arrived while the game was being played, so a long game does not
     /// dead-end on an empty deck.
     case deckRefilled([DeckWord])
-
-    /// Play again with the same teams and settings.
-    case rematch
 }
 
 /// Why an event was refused.
