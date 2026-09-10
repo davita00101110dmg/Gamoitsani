@@ -93,6 +93,16 @@ struct StepperRow: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityValue(value)
+        // Combining the row hides the two buttons behind the actions rotor. An adjustable
+        // action puts the value back on VoiceOver's swipe up and down, which is how every
+        // other stepper on the system behaves.
+        .accessibilityAdjustableAction { direction in
+            switch direction {
+            case .increment: if canIncrease { increase() }
+            case .decrement: if canDecrease { decrease() }
+            @unknown default: break
+            }
+        }
     }
 
     /// Leading digits of the displayed value, so "45s" and "3" both compare numerically.
@@ -108,6 +118,10 @@ struct StepperRow: View {
                 .frame(width: 34, height: 34)
                 .background(Tokens.surface.color)
                 .clipShape(Circle())
+                // The circle stays 34pt; the target around it is 44, the smallest a
+                // control should be to hit reliably.
+                .frame(width: Sizing.minimumTarget, height: Sizing.minimumTarget)
+                .contentShape(Circle())
         }
         .disabled(!enabled)
     }
