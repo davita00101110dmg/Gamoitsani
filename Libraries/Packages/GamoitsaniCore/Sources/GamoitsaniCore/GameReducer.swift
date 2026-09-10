@@ -15,7 +15,8 @@ public enum GameReducer {
         _ state: GameState,
         _ event: GameEvent,
         at now: Date,
-        nextPlacement: SuperWordPlacement = .random()
+        nextPlacement: SuperWordPlacement = .random(),
+        nextChallenges: [Team.ID: Challenge] = [:]
     ) -> Result<GameState, GameEventRejection> {
         var next = state
 
@@ -66,7 +67,7 @@ public enum GameReducer {
 
         case .rematch:
             guard state.phase == .finished else { return .failure(.wrongPhase(state.phase)) }
-            next.resetForRematch(placement: nextPlacement)
+            next.resetForRematch(placement: nextPlacement, challenges: nextChallenges)
             return .success(next)
         }
     }

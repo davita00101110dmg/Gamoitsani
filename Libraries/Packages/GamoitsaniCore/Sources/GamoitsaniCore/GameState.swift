@@ -65,6 +65,10 @@ public struct GameState: Sendable, Hashable, Codable {
     /// there is nowhere else to learn it from.
     public private(set) var deckLanguage: String
 
+    /// The rule each team is playing under, when challenges are on. Empty otherwise.
+    /// Drawn once at the start and kept, so a team's rule is theirs for the game.
+    public private(set) var challenges: [Team.ID: Challenge]
+
     public init(
         settings: GameSettings,
         teams: [Team],
@@ -80,7 +84,8 @@ public struct GameState: Sendable, Hashable, Codable {
         superWordSpentBy: Set<UUID> = [],
         roundEndsAt: Date? = nil,
         pausedRemaining: TimeInterval? = nil,
-        deckLanguage: String = "ka"
+        deckLanguage: String = "ka",
+        challenges: [Team.ID: Challenge] = [:]
     ) {
         self.settings = settings
         self.teams = teams
@@ -97,6 +102,7 @@ public struct GameState: Sendable, Hashable, Codable {
         self.roundEndsAt = roundEndsAt
         self.pausedRemaining = pausedRemaining
         self.deckLanguage = deckLanguage
+        self.challenges = challenges
     }
 
     /// Decoded by hand because this is the type that actually goes to disk, and
@@ -122,6 +128,24 @@ public struct GameState: Sendable, Hashable, Codable {
         pausedRemaining = try container.decodeIfPresent(TimeInterval.self, forKey: .pausedRemaining)
         // Georgian, because it was the only language with words when games were first saved.
         deckLanguage = try container.decodeIfPresent(String.self, forKey: .deckLanguage) ?? "ka"
+        challenges = try container.decodeIfPresent(
+            [Team.ID: Challenge].self, forKey: .challenges
+        ) ?? [:]
+    }
+
+    /// Fills in rules for a game that has none — a save from before challenges existed,
+    /// resumed with the setting still on.
+    public mutating func assignChallenges(_ drawn: [Team.ID: Challenge]) {
+        guard challenges.isEmpty else { return }
+        challenges = drawn
+    }
+
+    /// The rule the given team is playing under, if challenges are on.
+    public func challenge(for teamID: Team.ID) -> Challenge? { challenges[teamID] }
+
+    /// The rule the team currently playing is under.
+    public var currentChallenge: Challenge? {
+        currentTeam.flatMap { challenges[$0.id] }
     }
 
     // MARK: - Derived
@@ -253,8 +277,13 @@ public struct GameState: Sendable, Hashable, Codable {
     /// Takes a fresh placement rather than drawing one: the super word sat in exactly the
     /// same slot every rematch otherwise, and a group that noticed could see it coming.
     /// Passed in so the reducer stays pure.
-    mutating func resetForRematch(placement newPlacement: SuperWordPlacement) {
+    mutating func resetForRematch(
+        placement newPlacement: SuperWordPlacement,
+        challenges newChallenges: [Team.ID: Challenge]
+    ) {
         placement = newPlacement
+        // A rematch is a new game, so the rules are dealt again.
+        if !challenges.isEmpty { challenges = newChallenges }
         for index in teams.indices { teams[index].resetForNewGame() }
         round = 1
         currentTeamIndex = 0
