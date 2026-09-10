@@ -59,6 +59,8 @@ struct RemoveAdsCard: View {
                     .frame(width: 34, height: 34)
                     .background(Tokens.surface.color)
                     .clipShape(Circle())
+                    .frame(width: Sizing.minimumTarget, height: Sizing.minimumTarget)
+                    .contentShape(Circle())
             }
             .accessibilityLabel(l10n("iap.dismiss"))
         }

@@ -99,6 +99,13 @@ public enum Spacing {
     public static let xxl: CGFloat = 48
 }
 
+/// Control sizing.
+public enum Sizing {
+    /// The smallest a control should be to hit reliably, from the Human Interface
+    /// Guidelines. A glyph may be drawn smaller — the target around it may not.
+    public static let minimumTarget: CGFloat = 44
+}
+
 /// Corner radii, sized to the card metaphor.
 public enum Radius {
     public static let sm: CGFloat = 8
