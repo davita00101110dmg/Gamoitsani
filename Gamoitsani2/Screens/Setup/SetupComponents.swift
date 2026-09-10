@@ -164,7 +164,7 @@ struct ModeCard: View {
             .overlay {
                 RoundedRectangle(cornerRadius: Radius.control, style: .continuous)
                     .strokeBorder(
-                        isSelected ? Tokens.accent.color : Tokens.cardEdge.color.opacity(0.7),
+                        isSelected ? Tokens.accent.color : Tokens.cardEdge.color.opacity(0.6),
                         lineWidth: isSelected ? 1.5 : 1
                     )
             }
@@ -248,7 +248,7 @@ struct SetupChip<Glyph: View>: View {
             .overlay {
                 RoundedRectangle(cornerRadius: Radius.control, style: .continuous)
                     .strokeBorder(
-                        isOn ? Color.clear : Tokens.cardEdge.color.opacity(0.7),
+                        isOn ? Color.clear : Tokens.cardEdge.color.opacity(0.6),
                         lineWidth: 1
                     )
             }

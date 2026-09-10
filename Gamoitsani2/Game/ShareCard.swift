@@ -44,7 +44,7 @@ struct ShareCard: View {
                 Text(l10n("home.title"))
                     .font(Typography.label)
                     .tracking(2)
-                    .foregroundStyle(Brand.markCardFace.color.opacity(0.55))
+                    .foregroundStyle(Brand.markCardFace.color.opacity(CardInk.quiet))
             }
             .padding(.top, Spacing.md)
 
@@ -77,7 +77,7 @@ struct ShareCard: View {
                         HStack(spacing: Spacing.xs) {
                             Text("\(index + 2)")
                                 .font(Typography.label)
-                                .foregroundStyle(Brand.markCardFace.color.opacity(0.4))
+                                .foregroundStyle(Brand.markCardFace.color.opacity(CardInk.faint))
                                 .frame(width: 14, alignment: .leading)
 
                             Circle()
@@ -86,14 +86,14 @@ struct ShareCard: View {
 
                             Text(team.name)
                                 .font(Typography.label)
-                                .foregroundStyle(Brand.markCardFace.color.opacity(0.85))
+                                .foregroundStyle(Brand.markCardFace.color.opacity(CardInk.strong))
                                 .lineLimit(1)
 
                             Spacer(minLength: Spacing.xs)
 
                             Text("\(team.score)")
                                 .font(Typography.numeral(15))
-                                .foregroundStyle(Brand.markCardFace.color.opacity(0.85))
+                                .foregroundStyle(Brand.markCardFace.color.opacity(CardInk.strong))
                         }
                     }
                 }
@@ -115,7 +115,7 @@ struct ShareCard: View {
 
             Text(footer)
                 .font(Typography.caption)
-                .foregroundStyle(Brand.markCardFace.color.opacity(0.5))
+                .foregroundStyle(Brand.markCardFace.color.opacity(CardInk.quiet))
                 .padding(.bottom, Spacing.md)
         }
         .frame(width: Self.size.width, height: Self.size.height)
@@ -137,6 +137,25 @@ struct ShareCard: View {
     }
 }
 
+/// The card's own ink levels.
+///
+/// It sits on a fixed dark field in both appearances — it leaves the app and lands in
+/// someone else's feed — so it cannot use the surface tokens, which follow the phone's
+/// appearance. Named rather than written inline so the hierarchy is a decision, and the
+/// next value added has somewhere to belong.
+private enum CardInk {
+    /// Runner-up names and scores. Headline figures take the colour undimmed.
+    static let strong: Double = 0.85
+    /// Award titles.
+    static let regular: Double = 0.75
+    /// Wordmark and footer chrome.
+    static let quiet: Double = 0.5
+    /// Rank numbers beside the runners-up.
+    static let faint: Double = 0.4
+    /// The tint behind an award chip.
+    static let fill: Double = 0.07
+}
+
 /// One earned title.
 private struct AwardChip: View {
     let award: Award
@@ -154,7 +173,7 @@ private struct AwardChip: View {
 
             Text(l10n(award.kind.titleKey))
                 .font(Typography.caption)
-                .foregroundStyle(Brand.markCardFace.color.opacity(0.75))
+                .foregroundStyle(Brand.markCardFace.color.opacity(CardInk.regular))
 
             Spacer(minLength: Spacing.xxs)
 
@@ -169,8 +188,8 @@ private struct AwardChip: View {
                 .frame(maxWidth: 96, alignment: .trailing)
         }
         .padding(.horizontal, Spacing.sm)
-        .padding(.vertical, 5)
-        .background(Brand.markCardFace.color.opacity(0.07))
+        .padding(.vertical, Spacing.xxs)
+        .background(Brand.markCardFace.color.opacity(CardInk.fill))
         .clipShape(Capsule())
     }
 }
