@@ -56,7 +56,12 @@ final class GameSession {
     ) -> GameEngine {
         let engine = GameEngine(
             state: GameState(
-                settings: settings, teams: teams, deck: deck, deckLanguage: language
+                settings: settings,
+                teams: teams,
+                deck: deck,
+                deckLanguage: language,
+                // Dealt once, here, so each team keeps its rule for the whole game.
+                challenges: settings.challengesEnabled ? Challenge.draw(for: teams) : [:]
             )
         )
         self.engine = engine
@@ -72,6 +77,11 @@ final class GameSession {
         guard var state = saved else { return nil }
         // Restart the clock with whatever was left on it when the game was put down.
         state.resumeClock(at: Date())
+        // A game saved before challenges existed has the setting on and no rules, which
+        // would put an empty card on the challenge screen. Deal them now instead.
+        if state.settings.challengesEnabled && state.challenges.isEmpty {
+            state.assignChallenges(Challenge.draw(for: state.teams))
+        }
         let engine = GameEngine(state: state)
         self.engine = engine
 

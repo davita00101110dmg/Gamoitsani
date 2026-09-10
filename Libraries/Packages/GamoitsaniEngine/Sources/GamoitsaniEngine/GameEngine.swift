@@ -23,21 +23,37 @@ public final class GameEngine {
     /// and the reducer must not draw one itself.
     private let nextPlacement: @Sendable () -> SuperWordPlacement
 
+    /// Injected alongside `now` and `nextPlacement`, so a rematch's rules are as
+    /// controllable in a test as its clock.
+    private let drawChallenges: @Sendable ([Team]) -> [Team.ID: Challenge]
+
     public init(
         state: GameState,
         now: @escaping @Sendable () -> Date = { Date() },
-        nextPlacement: @escaping @Sendable () -> SuperWordPlacement = { .random() }
+        nextPlacement: @escaping @Sendable () -> SuperWordPlacement = { .random() },
+        drawChallenges: @escaping @Sendable ([Team]) -> [Team.ID: Challenge] = {
+            Challenge.draw(for: $0)
+        }
     ) {
         self.state = state
         self.now = now
         self.nextPlacement = nextPlacement
+        self.drawChallenges = drawChallenges
     }
 
     // MARK: - Events
 
     @discardableResult
     public func send(_ event: GameEvent) -> Bool {
-        resolve(GameReducer.reduce(state, event, at: now(), nextPlacement: nextPlacement()))
+        // Only a rematch deals rules again, so only a rematch pays for the draw.
+        let challenges = event == .rematch ? drawChallenges(state.teams) : [:]
+        return resolve(
+            GameReducer.reduce(
+                state, event, at: now(),
+                nextPlacement: nextPlacement(),
+                nextChallenges: challenges
+            )
+        )
     }
 
     /// Reports the result of work started elsewhere — words drawn while a game is running.

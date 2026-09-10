@@ -269,7 +269,9 @@ struct ChallengeView: View {
                     .font(Typography.label)
                     .foregroundStyle(Tokens.onSurfaceMuted.color)
 
-                Text(l10n("game.challenge.placeholder"))
+                // The rule this team drew at the start of the game, not a placeholder
+                // every team shared.
+                Text(engine.state.currentChallenge.map { l10n($0.textKey) } ?? "")
                     .font(Typography.word(26))
                     .foregroundStyle(Tokens.onSurface.color)
                     .multilineTextAlignment(.center)

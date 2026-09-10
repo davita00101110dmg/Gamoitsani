@@ -205,6 +205,480 @@
         }
       }
     },
+    "challenge.accent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The explaining player must keep a foreign accent throughout the round."
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ამხსნელმა მოთამაშემ უცხოური აქცენტით უნდა ისაუბროს მთელი რაუნდის განმავლობაში."
+          }
+        }
+      }
+    },
+    "challenge.commentator" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The explaining player must explain like a sports commentator."
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ამხსნელმა მოთამაშემ სპორტული კომენტატორივით უნდა ახსნას სიტყვები."
+          }
+        }
+      }
+    },
+    "challenge.handOnHead" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sözləri izah edən oyunçu həmişə bir əlini başında saxlamalıdır."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Spieler, der die Wörter erklärt, muss immer eine Hand auf dem Kopf behalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The player explaining the words must always keep one hand on their head."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El jugador que explica las palabras debe mantener siempre una mano en su cabeza."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le joueur qui explique les mots doit toujours garder une main sur sa tête."
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Բառերը բացատրող խաղացողը միշտ պետք է մեկ ձեռքը գլխին պահի:"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "単語を説明するプレイヤーは、常に片手を頭に置いておかなければなりません。"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "მოთამაშემ, რომელიც ხსნის სიტყვებს, მუდამ ერთი ხელი თავზე უნდა ჰქონდეს."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Игрок, объясняющий слова, должен всегда держать одну руку на голове."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kelimeleri açıklayan oyuncu, her zaman bir elini kafasında tutmalıdır."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Гравець, який пояснює слова, завжди повинен тримати одну руку на голові."
+          }
+        }
+      }
+    },
+    "challenge.lookAway" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The explaining player must face away from their team."
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ამხსნელი მოთამაშე ზურგით უნდა იდგეს თავისი გუნდისკენ."
+          }
+        }
+      }
+    },
+    "challenge.onlyQuestions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The explaining player may only speak in questions."
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ამხსნელს მხოლოდ კითხვების დასმა შეუძლია."
+          }
+        }
+      }
+    },
+    "challenge.questionForm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Təxmin edən 'Bu [söz] dir?' formasında cavab verməlidir."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Ratende muss in der Form antworten: 'Ist es [Wort]?'"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The guesser must answer in the form of: 'Is it [word]?'"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El que adivina debe responder en la forma: '¿Es [palabra]?'"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le devin doit répondre sous la forme : 'Est-ce [mot] ?'"
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Գուշակողը պետք է պատասխանի հետևյալ ձևով. 'Դա [բառ] է?':"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "推測する人は「それは[単語]ですか？」という形式で答えなければなりません。"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გამომცნობმა უნდა უპასუხოს შემდეგი ფორმით: 'ეს არის [სიტყვა]?'"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отгадывающий должен отвечать в форме: 'Это [слово]?'"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tahmin eden, 'Bu [kelime] mi?' şeklinde cevap vermelidir."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Той, хто вгадує, має відповідати у формі: 'Це [слово]?'"
+          }
+        }
+      }
+    },
+    "challenge.robotVoice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İzah edən oyunçu bütün raund ərzində robot səsi ilə danışmalıdır."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der erklärende Spieler muss während der ganzen Runde mit Roboterstimme sprechen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The explaining player must speak in a robot voice throughout the round."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El jugador que explica debe hablar con voz de robot durante toda la ronda."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le joueur qui explique doit parler avec une voix de robot tout au long de la manche."
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Բացատրող խաղացողը պետք է խոսի ռոբոտի ձայնով ողջ փուլի ընթացքում:"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "説明するプレイヤーはラウンド中、ロボットの声で話さなければなりません。"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ამხსნელმა მოთამაშემ უნდა ისაუბროს რობოტის ხმით მთელი რაუნდის განმავლობაში."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Объясняющий игрок должен говорить голосом робота на протяжении всего раунда."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Açıklayan oyuncu, tur boyunca robot sesiyle konuşmalıdır."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Гравець, який пояснює, повинен говорити голосом робота протягом усього раунду."
+          }
+        }
+      }
+    },
+    "challenge.royalTitles" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Komanda üzvləri bir-birinə kral titullarından istifadə edərək müraciət etməlidir (Əlahəzrət)."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teammitglieder müssen sich gegenseitig mit königlichen Titeln ansprechen (Eure Majestät)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team members must address each other using royal titles (Your Majesty)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los miembros del equipo deben dirigirse entre sí usando títulos reales (Su Majestad)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les membres de l'équipe doivent s'adresser les uns aux autres en utilisant des titres royaux (Votre Majesté)."
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Թիմի անդամները պետք է դիմեն միմյանց՝ օգտագործելով արքայական տիտղոսներ (Ձերդ Մեծություն):"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "チームメンバーは互いに王族の敬称（陛下）を使って呼びかけなければなりません。"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გუნდის წევრებმა უნდა მიმართონ ერთმანეთს სამეფო ტიტულების გამოყენებით (თქვენო უდიდებულესობავ)."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Члены команды должны обращаться друг к другу, используя королевские титулы (Ваше Величество)."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takım üyeleri birbirlerine kraliyet unvanları kullanarak hitap etmelidir (Majesteleri)."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Члени команди повинні звертатися один до одного, використовуючи королівські титули (Ваша Величносте)."
+          }
+        }
+      }
+    },
+    "challenge.shoutIt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The guessers must shout every answer."
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გამომცნობებმა ყველა პასუხი ხმამაღლა უნდა დაიყვიროს."
+          }
+        }
+      }
+    },
+    "challenge.singIt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every clue must be sung."
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ამხსნელმა მოთამაშემ ყველა მინიშნება უნდა იმღეროს."
+          }
+        }
+      }
+    },
+    "challenge.thirdPerson" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team members must refer to themselves in the third person."
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გუნდის წევრებმა საკუთარ თავზე მესამე პირში უნდა ისაუბრონ."
+          }
+        }
+      }
+    },
+    "challenge.whisper" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bütün komanda üzvləri bütün raund boyu pıçıldamalıdır."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Teammitglieder müssen während der gesamten Runde flüstern."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All team members must whisper throughout the entire round."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos los miembros del equipo deben susurrar durante toda la ronda."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tous les membres de l'équipe doivent chuchoter pendant toute la manche."
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Թիմի բոլոր անդամները պետք է շշնջան ողջ փուլի ընթացքում:"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "チームメンバー全員がラウンド全体を通して囁かなければなりません。"
+          }
+        },
+        "ka" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გუნდის ყველა წევრმა უნდა იჩურჩულოს მთელი რაუნდის განმავლობაში."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все члены команды должны шептать на протяжении всего раунда."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tüm takım üyeleri, tüm tur boyunca fısıldamalıdır."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Всі члени команди повинні шепотіти протягом усього раунду."
+          }
+        }
+      }
+    },
     "common.cancel" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -323,23 +797,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "გამოწვევა"
-          }
-        }
-      }
-    },
-    "game.challenge.placeholder" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "High-five your team after every correct guess"
-          }
-        },
-        "ka" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ყოველი სწორი პასუხის შემდეგ მიეცი გუნდს ხუთი"
           }
         }
       }
