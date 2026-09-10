@@ -143,6 +143,7 @@ private struct AwardChip: View {
     let tint: Color
 
     @Environment(Localization.self) private var l10n
+    @Environment(\.locale) private var locale
 
     var body: some View {
         HStack(spacing: Spacing.xs) {
@@ -157,7 +158,7 @@ private struct AwardChip: View {
 
             Spacer(minLength: Spacing.xxs)
 
-            Text(award.formattedValue)
+            Text(award.formattedValue(in: locale))
                 .font(Typography.numeral(13))
                 .foregroundStyle(Brand.markCardFace.color)
 
@@ -190,10 +191,14 @@ extension Award.Kind {
 
 extension Award {
     /// Seconds read as "2.1s"; everything else is a plain count.
-    var formattedValue: String {
+    ///
+    /// Formatted against the locale it is given rather than `String(format:)`, which is
+    /// always English — a card in Georgian on a French phone had an English decimal point
+    /// in the middle of it, and large counts never grouped their digits.
+    func formattedValue(in locale: Locale) -> String {
         kind == .speed
-            ? String(format: "%.1fs", value)
-            : String(Int(value))
+            ? "\(value.formatted(.number.precision(.fractionLength(1)).locale(locale)))s"
+            : Int(value).formatted(.number.locale(locale))
     }
 }
 
