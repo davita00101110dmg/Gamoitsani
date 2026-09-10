@@ -186,13 +186,14 @@ holds and more than twice the hard tier. It was written against 60 sample words.
 roughly 15 per team-round and clamp to what the query can return, or a Hard game exhausts
 the deck mid-play.
 
-### Suggested order
+### The order it was built in — all done
 
-1. `WordDatabase` + `BundledWordProvider`, real file bundled — replaces `SampleWordProvider`
-2. Difficulty in `GameSettings`, with the legacy-decode guard
-3. Seen-word exclusion
-4. Gate the language picker on available word files
-5. Delete `WordSync` and `CachedWord`
+1. ~~`WordDatabase` + `BundledWordProvider`, real file bundled~~ — `SampleWordProvider` deleted
+2. ~~Difficulty in `GameSettings`, with the legacy-decode guard~~
+3. ~~Seen-word exclusion~~ — plus a mid-game top-up, which the sizing work turned out to need
+4. ~~Gate the language picker on available word files~~ — all eleven have one
+5. ~~Delete `WordSync` and `CachedWord`~~ — `WordStore`, `WordStoreFactory` and `WordRecord`
+   went too, and SwiftData left `GamoitsaniData` with them
 
 ---
 

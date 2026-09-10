@@ -47,6 +47,30 @@ Georgian party word-guessing game (Taboo/Alias-style). iOS app in production on 
 - Run UI tests: `GamoitsaniUITests` target
 - After any edit, prefer building the relevant target before declaring a task done
 
+## Skills
+Skills are discovered automatically from their descriptions — they do not need listing
+here. This section exists only where a general-purpose skill would otherwise contradict a
+decision this repo has already made.
+
+- **`run-on-device`** (in `.claude/skills/`) — use it before any commit that changes
+  something visible. The owner reviews UI on their paired iPhone, not in the simulator.
+- **The SwiftData skills do not apply.** `swiftdata-pro`, `swiftdata-expert-skill` and
+  `swiftdata-testing` are all live on this machine, and 2.0 contains no SwiftData at all —
+  `WordSync`/`CachedWord`/`WordStore` were deleted once words moved to a bundled read-only
+  SQLite file. Do not reintroduce it.
+- **`core-data-expert` applies to v1 only**, which is deleted at cutover. 2.0 has no Core
+  Data. See `docs/2.0/HANDOFF.md`.
+- **`swift-architecture-skill` offers MVVM, TCA, VIPER and Clean.** 2.0's architecture is
+  settled: pure value types over a reducer (`GameReducer`), with an `@Observable`
+  `GameEngine` on top. Do not propose restructuring it.
+- **SwiftUI skills should defer to the design system.** `GamoitsaniDesign` owns `Tokens`,
+  `Typography`, `Spacing`, `Radius` and `Motion`; every `sensoryFeedback` goes through the
+  `haptics` modifier so the setting can silence all of it. Prefer those over raw colours,
+  fonts and animations.
+- Skill installers sometimes drop copies into the repo root (`.agents/`,
+  `skills-lock.json`, a cloned skill repo). These are duplicates of what is already in
+  `~/.claude/skills` and are gitignored — do not commit them. The repo is public.
+
 ## Working conventions
 - Keep changes scoped and reviewable — this is a shipped, live production app
 - Don't touch `Pods/` directly; change the `Podfile` and re-run `pod install`
