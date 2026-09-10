@@ -37,6 +37,13 @@ public enum GameReducer {
             next.updateCurrentTeam { $0.beginGuessing(at: now) }
             return .success(next)
 
+        case let .deckRefilled(words):
+            // Allowed in any phase but `.finished`, because the draw is asynchronous and
+            // the game will usually have moved on by the time the words arrive.
+            guard state.phase != .finished else { return .failure(.wrongPhase(state.phase)) }
+            next.refillDeck(with: words)
+            return .success(next)
+
         case let .answer(wordID, outcome):
             guard state.phase == .playing else { return .failure(.wrongPhase(state.phase)) }
             return answer(next, wordID: wordID, outcome: outcome, at: now)

@@ -172,6 +172,11 @@ public struct GameState: Sendable, Hashable, Codable {
         playedOutcomes = [:]
     }
 
+    /// Adds words to a deck that is running low, mid-game.
+    mutating func refillDeck(with words: [DeckWord]) {
+        deck.add(words)
+    }
+
     /// Clears the table at the end of a turn.
     mutating func clearTurn() {
         turnWords = []

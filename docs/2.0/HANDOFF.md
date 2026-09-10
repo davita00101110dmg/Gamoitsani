@@ -2,7 +2,8 @@
 
 Written 3 September 2026, at the end of the session that built Phase 8's ad layer and
 the remove-ads purchase.
-Read this with `docs/2.0/PLAN.md`, which is the architecture and still accurate.
+Read this with `docs/2.0/PLAN.md` (the architecture, still accurate) and
+`docs/2.0/WORD-DB.md` (the word database: decided, designed, not yet built).
 
 ---
 
@@ -10,7 +11,7 @@ Read this with `docs/2.0/PLAN.md`, which is the architecture and still accurate.
 
 `Gamoitsani2` is a complete, playable rewrite living beside v1 as a separate bundle id
 (`davitikhvedelidze.Gamoitsani2`). Six local SPM packages, Swift 6 strict concurrency,
-iOS 18, 200 tests. Setup, both game modes, scoreboard, sharing, settings, sound, launch
+iOS 18, 235 tests. Setup, both game modes, scoreboard, sharing, settings, sound, launch
 animation, the full ad stack and the remove-ads purchase all work. **It plays on 60
 hardcoded sample words** — the data layer is built and tested but not connected, because
 the word source is still an open decision. v1 still builds and must keep building until cutover.
@@ -19,21 +20,50 @@ the word source is still an open decision. v1 still builds and must keep buildin
 
 ## Immediate state
 
-Work is on branch `ads/phase-8-ad-layer`, open as **PR #24**. The CI fix is pushed and the
-PR is green; three commits after it are local only.
+**Two things are waiting, in this order.**
 
-```
-892484a  spin only the row that is working          (local)
-c50f1b5  say why a purchase is unavailable          (local)
-7e0d0e6  StoreKit 2 + the remove-ads offer policy   (local)
-b64b926  CI xcconfig fix + two skipped suites       (pushed)
-```
+**1. Test the highlight reel and player records.** Branch `feature/reel-and-profiles`,
+one PR. Both are built, unit-tested and installed on the owner's phone, but **neither has
+been exercised in a real game**. See "What needs testing" below. Nothing else should start
+until this is either merged or fixed.
 
-Never push to `main` directly — the owner's rule is that work reaches main through a PR
-they merge.
+**2. Then the word database.** Design is settled and written down in `WORD-DB.md`; no code
+exists. **Start it on its own branch** once the reel work is merged.
 
-**Never put a `claude.ai/code/session_...` link in a commit trailer or PR body.** The repo
-is public. Keep `Co-Authored-By`; drop `Claude-Session`.
+`main` carries everything through PR #27 — ads, the remove-ads purchase, recording, the
+review prompt and the weekly reminder.
+
+Never push to `main` directly; work reaches it through a PR the owner merges. And never
+put a `claude.ai/code/session_...` link in a commit trailer or PR body — the repo is
+public. Keep `Co-Authored-By`; drop `Claude-Session`.
+
+---
+
+## What needs testing
+
+Both landed in one commit and have only ever been built, never played.
+
+**The highlight reel.** Turn recording on in Extras, play a **full game with at least two
+turns**, reach the podium. A few seconds later one video should appear in Photos: the
+picked moments with the word over each, ending on the share card. Per-turn clips no longer
+save — the reel replaces them.
+
+The composition was verified locally by exporting one and looking at frames, so slices
+stitch and the card renders. What has *not* been seen is the real path: whether the
+moments chosen are the funny ones, whether ~25s feels right, and whether a 3s lead-in is
+enough run-up.
+
+If nothing appears, **Debug → Recording → Copy log** traces the reel
+(`reel: cutting N turns`, `reel: exported …KB`, `reel: SAVED TO PHOTOS`). That names the
+failing step directly — do not guess, this feature cost five rounds of guessing already.
+
+**Player records.** The turn-info screen should name who is describing and who is next,
+rotating through the team. Tapping a name in the setup roster opens their record; a
+"Players" link there lists everyone. Records only accumulate for teams built with the
+player draw — teams typed in by hand have no members to credit.
+
+Two judgement calls worth a look: whether the describer line reads well on turn info, and
+whether the reel's pacing is right.
 
 ---
 
@@ -50,7 +80,7 @@ Gamoitsani2 (app)          composition root, navigation, screens, AdMob adapter
    └── GamoitsaniAds       ad policy only — no SDK dependency
 ```
 
-Tests: Core 96, Data 21, Design 23, Ads 20, Capture 21, Engine 11, L10n 6. Plus
+Tests: Core 119, Data 21, Design 23, Ads 20, Capture 34, Engine 11, L10n 6. Plus
 GamoitsaniMacros 2, which needs `swift test` — it is a compiler plugin with no simulator
 destination.
 
@@ -77,16 +107,16 @@ destination.
 
 | | |
 |---|---|
-| **Word source** | The decision, and the only thing blocking anything else. Bundled DB vs Firestore. Owner is building a word DB in parallel and wants this decided last. |
-| **`GamoitsaniData` wiring** | Zero imports in the app. `SampleWordProvider` (60 words) feeds the deck. Blocked on the word source. |
-| **Add word screen** | Still `PlaceholderScreen`. Blocked on the word source. |
+| **The word database** | **Decided, designed, not built. See `WORD-DB.md`.** The file exists (2,964 Georgian words). The app still plays on 60 hardcoded sample words. This is the next piece of work and the only thing standing between 2.0 and being a real game. |
 | ~~**Crashlytics**~~ | **Dropped.** Crashes come from Xcode Organizer / App Store Connect instead — free, no SDK, and 2.0 currently has no Firebase at all. Adding Crashlytics would mean pulling Firebase back into a clean build. Revisit only for a bug that needs non-fatal logging or breadcrumbs. |
 | ~~**Analytics**~~ | **Dropped** for the same reason. App Store Connect covers downloads and retention. Add only when there is a specific question worth an SDK. |
 | **Challenge content** | 2.0 has a single `game.challenge.placeholder` string — v1 fetched challenges from Firestore, which is going. Decided: challenges ship in the same bundled SQLite DB as the words. |
+| ~~**Highlight reel**~~ | **Built, untested in a real game.** One video per game instead of six clips. `HighlightPolicy` in `GamoitsaniCapture`. |
+| ~~**Player records**~~ | **Built, untested in a real game.** Describer rotation on turn info, records in the roster. `Describer` and `PlayerLedger` in `GamoitsaniCore`. |
 | ~~**Automatic review prompt**~~ | **Done.** `ReviewPromptPolicy` in `GamoitsaniCore`, asked on the podium a second after it settles. v1's never fired once: it was gated on a counter that was read but never written. |
 | ~~**Game recording**~~ | **Done, on a different premise.** Front camera at 1080p for the play phase only, word overlaid at export from the engine's timeline, saved to Photos. The screen is never captured, so no ad can appear in a clip. `GamoitsaniCapture` + `Gamoitsani2/Recording/`. |
-| **Notifications** | v1's `NotificationsManager`. **Being ported.** v1's copy is hardcoded English, so this needs new copy in 11 languages and lands inside the translation pass. |
-| **Word review** | The hidden five-taps-on-title screen. **Being ported, but not as it was** — `firestore.rules` made words read-only because those unauthenticated writes were the attack path. It needs a Cloud Function or an authenticated admin claim first. Server work, not UI work. |
+| ~~**Notifications**~~ | **Done.** Weekly reminder, Saturday evening, rotating copy, English only. No in-app toggle — iOS Settings owns the permission. Asked once on the podium after a first game. |
+| ~~**Word review**~~ | **Dropped.** v1's hidden five-taps-on-title screen let any client delete words from the production database after three downvotes, unauthenticated, with a client-controlled reviewer id. `firestore.rules` already disabled it. 2.0 ships a curated SQLite file the owner builds, so there is nothing to crowd-moderate — quality control belongs in the tooling that produces the DB, not in the shipped app. |
 | **Automatic review prompt** | **Being ported.** v1's never fired: its counter was read but never written. Cheapest of the four. |
 | **Rewarded ads** | Implemented and tested, deliberately no trigger. See below. |
 | **Translations** | 94 keys. Only `en` and `ka` are complete. `docs/2.0/LOCALIZATION.md` lists what is missing. Owner wants this done last, after the copy settles. |
@@ -126,8 +156,9 @@ destination.
 - **No Firebase in 2.0, and no Crashlytics.** 2.0 already has none; v1 still imports it in
   six files and must keep building, so "remove Firebase" *is* the cutover step. Crash
   reports come from Xcode Organizer, which costs nothing and needs no SDK.
-- **Recording and the review prompt are done.** Notifications and word review remain, and
-  word review needs a Cloud Function or an admin claim before any UI.
+- **All four v1 features are settled.** Recording, the review prompt and notifications are
+  done. **Word review is dropped** — it existed to crowd-moderate a database anyone could
+  write to, and 2.0 ships a curated file instead. Do not rebuild it.
 
 ---
 
@@ -255,13 +286,18 @@ The ad-free hour is the shape already implemented.
 
 ## Suggested next steps
 
-1. **Push the three local commits** to PR #24.
-2. **Crashlytics.** Cutover-blocking, self-contained, and depends on nothing.
-3. **The word DB**, when the owner's file arrives — the SQLite `WordProvider`, then
-   challenges from the same file. This is what gets 2.0 off 60 hardcoded words.
-4. **Notifications** (copy in 11 languages) and **word review** (server work first).
-5. **Run 2.0 on an iPad.** No 2.0 screen has ever rendered on one.
-6. **Translations, last.** Notification copy lands here too.
+1. **Test the reel and player records**, merge `feature/reel-and-profiles` or fix what it
+   shows. Nothing else should start first.
+2. **Build the word database layer** on its own branch. `WORD-DB.md` has the design, the
+   decisions and the two traps waiting in it.
+3. **Run 2.0 on an iPad.** No 2.0 screen has ever rendered on one, and both targets
+   declare `TARGETED_DEVICE_FAMILY = "1,2"`. App Store review tests on iPad, so this is
+   the one remaining item that can become a rejection rather than a to-do.
+4. **Export the other languages** when the owner has checked whether v1's translations are
+   good enough to ship. `scripts/export_firestore_words.py` is written and tested against
+   a fixture; it needs their Firestore credentials to run.
+5. **Cutover.** The checklist above.
 
-The Georgian strings added for the purchase UI (`iap.*`, `common.ok`) were written by
-Claude and have not been reviewed by the owner, who is the native speaker.
+Georgian copy written by Claude and not yet reviewed by the owner, who is the native
+speaker: the `iap.*` keys, `common.ok`, `common.done`, and the `players.*` keys. The
+weekly reminder copy is English only by decision, so it needs nothing.

@@ -33,6 +33,72 @@ struct GameSettingsTests {
         #expect(s.superWordsEnabled == false)
         #expect(s.challengesEnabled == false)
     }
+
+    @Test("a game with no tier chosen plays the whole database")
+    func difficultyDefaultsToMixed() {
+        #expect(GameSettings().difficulty == .mixed)
+        #expect(WordDifficulty.mixed.range == 1...5)
+    }
+
+    // MARK: - Surviving the upgrade
+
+    /// The synthesised decoder throws `keyNotFound` on a payload saved before `difficulty`
+    /// existed, and `GameStateStore.load` swallows that with `try?` — the in-progress game
+    /// would disappear on upgrade with no error anywhere. This is the guard.
+    @Test("settings saved before difficulty existed decode instead of throwing")
+    func legacySettingsDecode() throws {
+        let legacy = """
+        {
+          "rounds": 3,
+          "roundLength": 60,
+          "mode": "arcade",
+          "superWordsEnabled": true,
+          "challengesEnabled": false
+        }
+        """
+        let settings = try JSONDecoder().decode(GameSettings.self, from: Data(legacy.utf8))
+        #expect(settings.difficulty == .mixed)
+        #expect(settings.rounds == 3)
+        #expect(settings.roundLength == 60)
+        #expect(settings.mode == .arcade)
+        #expect(settings.superWordsEnabled)
+    }
+
+    /// The same thing through the type that is actually persisted. Built by stripping the
+    /// key from real encoded output rather than hand-writing a payload, so it stays honest
+    /// as `GameState` gains properties.
+    @Test("a whole saved game from before the field still loads")
+    func legacyGameStateDecodes() throws {
+        let state = GameState(
+            settings: GameSettings(rounds: 3, roundLength: 60, mode: .arcade, difficulty: .hard),
+            teams: [Team(name: "Team 1"), Team(name: "Team 2")],
+            deck: Deck(words: [DeckWord(id: "4711", text: "ბროწეული")])
+        )
+
+        var object = try #require(
+            JSONSerialization.jsonObject(with: try JSONEncoder().encode(state)) as? [String: Any]
+        )
+        var settings = try #require(object["settings"] as? [String: Any])
+        #expect(settings["difficulty"] != nil, "nothing was stripped, so the test proves nothing")
+        settings.removeValue(forKey: "difficulty")
+        object["settings"] = settings
+
+        let data = try JSONSerialization.data(withJSONObject: object)
+        let restored = try JSONDecoder().decode(GameState.self, from: data)
+
+        #expect(restored.settings.difficulty == .mixed)
+        #expect(restored.settings.rounds == 3)
+        #expect(restored.settings.mode == .arcade)
+        #expect(restored.teams.count == 2)
+        #expect(restored.deck.count == 1)
+    }
+
+    @Test("difficulty survives a round trip", arguments: WordDifficulty.allCases)
+    func roundTrip(difficulty: WordDifficulty) throws {
+        let settings = GameSettings(rounds: 2, difficulty: difficulty)
+        let data = try JSONEncoder().encode(settings)
+        #expect(try JSONDecoder().decode(GameSettings.self, from: data) == settings)
+    }
 }
 
 @Suite("Team validation")

@@ -82,6 +82,59 @@ struct SuperWordPlacementTests {
     }
 }
 
+@Suite("Topping up a deck")
+struct DeckRefillTests {
+
+    private func words(_ range: ClosedRange<Int>) -> [DeckWord] {
+        range.map { DeckWord(id: "\($0)", text: "w\($0)") }
+    }
+
+    @Test("added words go to the bottom, behind what is already there")
+    func addsToTheBottom() {
+        var deck = Deck(words: words(1...3))
+        deck.add(words(4...6))
+        #expect(deck.count == 6)
+        #expect(deck.deal(6).map(\.id) == ["1", "2", "3", "4", "5", "6"])
+    }
+
+    @Test("a spent deck can be brought back to life")
+    func revivesAnEmptyDeck() {
+        var deck = Deck(words: words(1...2))
+        _ = deck.deal(2)
+        #expect(deck.canDealTurn == false)
+
+        deck.add(words(3...4))
+        #expect(deck.canDealTurn)
+        #expect(deck.remainingIDs == ["3", "4"])
+    }
+
+    /// The event exists so a long game does not dead-end on an empty deck, which is the
+    /// only way the "no words left" card can be reached.
+    @Test("refilling mid-game lets the next turn start")
+    func refillReopensPlay() throws {
+        var state = GameState(
+            settings: GameSettings(),
+            teams: [Team(name: "A"), Team(name: "B")],
+            deck: Deck(words: [])
+        )
+        state = try GameReducer.reduce(state, .deckRefilled(words(1...5)), at: Date()).get()
+        #expect(state.deck.count == 5)
+        #expect(GameRules.canStartTurn(state))
+    }
+
+    @Test("a finished game refuses more words")
+    func refusedWhenFinished() {
+        let state = GameState(
+            settings: GameSettings(),
+            teams: [Team(name: "A"), Team(name: "B")],
+            deck: Deck(words: []),
+            phase: .finished
+        )
+        let result = GameReducer.reduce(state, .deckRefilled(words(1...5)), at: Date())
+        #expect(throws: GameEventRejection.wrongPhase(.finished)) { try result.get() }
+    }
+}
+
 /// Deterministic generator so placement tests are reproducible.
 struct SeededGenerator: RandomNumberGenerator {
     private var state: UInt64

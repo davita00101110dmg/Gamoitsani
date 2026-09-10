@@ -32,6 +32,16 @@ public struct Deck: Sendable, Hashable, Codable {
     public var count: Int { remaining.count }
     public var isEmpty: Bool { remaining.isEmpty }
 
+    /// What has not been dealt yet. Computed, so nothing about the persisted shape changes.
+    /// Diffing this against the ids the deck started with is what tells the app which words
+    /// a group actually saw, rather than which ones were merely put in the deck.
+    public var remainingIDs: [String] { remaining.map(\.id) }
+
+    /// Adds more words to the bottom, for a game topped up while it is being played.
+    public mutating func add(_ words: [DeckWord]) {
+        remaining.append(contentsOf: words)
+    }
+
     /// Takes up to `count` words, returning however many are left when there are not
     /// enough — never nil, never silently empty.
     public mutating func deal(_ count: Int) -> [DeckWord] {

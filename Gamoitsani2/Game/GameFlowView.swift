@@ -57,6 +57,11 @@ struct GameFlowView: View {
             if phase == .active { session.engine?.checkExpiry() }
             if phase == .background { session.checkpoint() }
         }
+        // Watching the count rather than the phase, so a single long turn that burns
+        // through the deck is topped up too, not just the gaps between turns.
+        .onChange(of: session.engine?.state.deck.count, initial: true) { _, _ in
+            session.topUpDeckIfNeeded()
+        }
         .onChange(of: session.engine?.state.phase) { was, now in
             session.checkpoint()
             // The buzzer marks a turn ending on the clock. Reaching .finished plays the
