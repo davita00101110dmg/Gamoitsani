@@ -134,6 +134,7 @@ struct GameOverView: View {
             .padding(.horizontal, Spacing.md)
             .padding(.bottom, Spacing.lg)
         }
+        .contentColumn()
         // The podium is a genuine pause — people read the scores, argue about them, tap
         // into Stats. The interstitial on Finish only fires about every other game, so
         // most of the time this is the only ad here rather than a second one.

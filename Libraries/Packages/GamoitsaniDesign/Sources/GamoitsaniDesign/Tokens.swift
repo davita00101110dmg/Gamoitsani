@@ -99,11 +99,15 @@ public enum Spacing {
     public static let xxl: CGFloat = 48
 }
 
-/// Control sizing.
+/// Control and layout sizing.
 public enum Sizing {
     /// The smallest a control should be to hit reliably, from the Human Interface
     /// Guidelines. A glyph may be drawn smaller — the target around it may not.
     public static let minimumTarget: CGFloat = 44
+
+    /// The widest a scrolling column of content should get. Below an iPad's width, so it
+    /// only ever applies there; an iPhone is already narrower than this.
+    public static let contentColumn: CGFloat = 560
 }
 
 /// Corner radii, sized to the card metaphor.

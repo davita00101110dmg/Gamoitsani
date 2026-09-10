@@ -78,6 +78,7 @@ struct GameSetupView: View {
             }
             .padding(.horizontal, Spacing.md)
             .padding(.bottom, Spacing.lg)
+            .contentColumn()
         }
         .onScrollGeometryChange(for: CGFloat.self) { geometry in
             geometry.contentOffset.y + geometry.contentInsets.top

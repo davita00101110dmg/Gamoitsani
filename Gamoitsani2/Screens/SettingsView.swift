@@ -114,6 +114,7 @@ struct SettingsView: View {
                 }
             }
             .padding(Spacing.md)
+            .contentColumn()
         }
         .background(Tokens.surface.color.ignoresSafeArea())
         .navigationTitle(l10n("settings.title"))
