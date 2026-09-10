@@ -21,6 +21,13 @@ public enum AppLanguage: String, CaseIterable, Sendable, Hashable, Identifiable 
 
     public var id: String { rawValue }
 
+    /// The locale to format numbers and dates against.
+    ///
+    /// The app's language is chosen in Settings, not taken from the device, so anything
+    /// that formats a value has to be told which one — otherwise a Georgian screen on a
+    /// German phone renders Georgian words around German decimal separators.
+    public var locale: Locale { Locale(identifier: rawValue) }
+
     /// The language's name in itself — the only sensible way to label a language picker,
     /// since someone looking for Georgian is looking for "ქართული".
     public var endonym: String {

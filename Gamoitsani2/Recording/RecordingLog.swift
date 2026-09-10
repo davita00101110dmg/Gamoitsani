@@ -60,10 +60,20 @@ enum RecordingLog {
         queue.async { try? FileManager.default.removeItem(at: fileURL) }
     }
 
+    /// Deliberately verbatim and not localised: a log is read against wall-clock time, and
+    /// the format should not change with the phone's region. Built once — a `DateFormatter`
+    /// per line is an expensive way to stamp something written on every camera event.
+    private static let stampStyle = Date.VerbatimFormatStyle(
+        format: """
+            \(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\
+            \(minute: .twoDigits):\(second: .twoDigits).\(secondFraction: .fractional(3))
+            """,
+        timeZone: .current,
+        calendar: .current
+    )
+
     private static func stamp() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss.SSS"
-        return formatter.string(from: Date())
+        Date().formatted(stampStyle)
     }
     #endif
 }

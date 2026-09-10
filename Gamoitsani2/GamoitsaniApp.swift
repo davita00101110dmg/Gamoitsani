@@ -82,6 +82,10 @@ struct GamoitsaniApp: App {
             .environment(reviewPrompter)
             .environment(reminders)
             .environment(\.isLaunching, showSplash)
+            // Formatting follows the language chosen in Settings, not the device's. Without
+            // this, `format:` and `.formatted()` would quietly use whatever locale the phone
+            // is set to, in an app whose every other string comes from its own picker.
+            .environment(\.locale, localization.language.locale)
             // Decoding on first play would hitch on the countdown tick.
             .task { await sound.prepare() }
             .task { await ads.start() }

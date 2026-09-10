@@ -3,8 +3,8 @@
 //  Gamoitsani2
 //
 import SwiftUI
-import GamoitsaniCore
 import GamoitsaniCapture
+import GamoitsaniCore
 import GamoitsaniEngine
 
 /// Turns engine state into recorder calls.
