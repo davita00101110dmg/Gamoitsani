@@ -124,3 +124,10 @@ iOSInjectionProject/
 
 # Real ad units and mediation credentials for the 2.0 target.
 Gamoitsani2/Config.xcconfig
+
+# Skill installers drop copies into the repo root. The skills themselves live in
+# ~/.claude/skills (every project on the machine) or .claude/skills (this repo,
+# tracked) — these are duplicates and must not reach a public repo.
+.agents/
+skills-lock.json
+ios-swiftdata-testing-agent-skill/
