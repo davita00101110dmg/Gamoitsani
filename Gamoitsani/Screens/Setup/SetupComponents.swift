@@ -245,21 +245,20 @@ struct SetupChip<Glyph: View>: View {
             VStack(spacing: Spacing.xxs) {
                 glyph
                 Text(title)
-                    .font(Typography.caption)
+                    .font(Typography.chipTitle)
                     .foregroundStyle(isOn ? Tokens.onAccent.color : Tokens.onSurface.color)
-                    .lineLimit(2)
+                    // Two lines always, whether or not this label needs them. Reserving
+                    // the space is what makes a row of chips the same height and keeps a
+                    // one-word label from sitting higher than its neighbours.
+                    .lineLimit(2, reservesSpace: true)
                     .minimumScaleFactor(0.75)
                     .multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity)
-            // Taller rather than wider. Vertical space is free here and horizontal is not:
-            // three Georgian labels share one row, so every point of side padding comes
-            // straight out of the text and is paid for in shrink.
             .padding(.vertical, Spacing.sm)
-            .padding(.horizontal, Spacing.xxs)
-            // Every chip in a row is as tall as the tallest, so one label wrapping to two
-            // lines does not leave its neighbours short.
-            .frame(maxHeight: .infinity)
+            // Affordable now the second line is always there: wrapping is the expected
+            // shape rather than something to be squeezed out of.
+            .padding(.horizontal, Spacing.xs)
             .background(isOn ? Tokens.accent.color : Tokens.surface.color)
             .clipShape(RoundedRectangle(cornerRadius: Radius.control, style: .continuous))
             .overlay {
@@ -399,9 +398,15 @@ struct TeamRow<Roster: View>: View {
 
                 // Steps aside once the caret is there to say it instead.
                 if !isEditingName {
+                    // A text style rather than a fixed 11pt: it was small enough to read
+                    // as a smudge, and a fixed size does not answer Dynamic Type at all.
                     Image(systemName: "pencil")
-                        .font(.system(size: 11, weight: .semibold))
+                        .font(.footnote.weight(.semibold))
                         .foregroundStyle(Tokens.onSurfaceMuted.color)
+                        // Off the panel's edge. With two teams there is no remove button
+                        // after it, so this is the last thing in the row and sat hard
+                        // against the border.
+                        .padding(.trailing, Spacing.xxs)
                         .transition(.opacity)
                         .accessibilityHidden(true)
                 }

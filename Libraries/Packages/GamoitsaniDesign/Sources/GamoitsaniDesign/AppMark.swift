@@ -47,6 +47,12 @@ public struct AppMark: View {
                     }
                     .offset(y: -side * 0.0098)
             }
+            // Sized and centred explicitly, because the field used to do both by accident:
+            // with no frame of its own it filled the reader, which made the stack
+            // full-size. Without it the stack shrank to one card, and a GeometryReader
+            // pins its content to the top-leading corner — so the mark moved into it.
+            .frame(width: side, height: side)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 
