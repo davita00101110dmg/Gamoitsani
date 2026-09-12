@@ -67,8 +67,18 @@ final class GameSession {
         self.engine = engine
         deckIDs = Set(deck.remainingIDs)
         generation += 1
-        saved = nil
-        store.clear()
+        // Restorable from the moment it exists, rather than from the first phase change.
+        //
+        // This is a layout fix as much as a safety one. `saved` drives the resume card at
+        // the top of the setup form, and the setup screen is the navigation root — it
+        // stays alive behind the game. Persisting only on the way out meant the card was
+        // inserted while that screen was already back on display, shoving the whole form
+        // down by its height. Doing it here settles the layout while the game is covering
+        // it, so coming back moves nothing.
+        //
+        // It also means a force-quit between Play and the first turn no longer loses the
+        // game it just dealt.
+        persist(engine.state)
         return engine
     }
 

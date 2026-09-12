@@ -106,7 +106,6 @@ struct ChallengeTests {
         #expect(state.currentChallenge == drawn[roster[0].id])
         let t0 = Date(timeIntervalSince1970: 1_000_000)
         state = try GameReducer.reduce(state, .beginTurn, at: t0).get()
-        state = try GameReducer.reduce(state, .acknowledgeChallenge, at: t0).get()
         state = try GameReducer.reduce(state, .countdownFinished, at: t0).get()
         state = try GameReducer.reduce(state, .timeExpired, at: t0).get()
 

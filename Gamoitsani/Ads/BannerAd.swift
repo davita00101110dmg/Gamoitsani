@@ -18,15 +18,26 @@ struct BannerAd: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     /// Whether an ad actually loaded.
-    ///
-    /// Nothing is drawn until one arrives. Reserving the space up front left an empty
-    /// bordered card whenever the request did not fill — and it usually does not: the
-    /// observed match rate is around 9%, so no-fill is the common case, not the edge one.
     @State private var hasAd = false
+
+    /// The height this screen committed to when it appeared, fixed for as long as it is up.
+    ///
+    /// The previous attempt recomputed the slot from `ads.lastBannerHeight` on every pass,
+    /// which still let the inset move while the screen was visible — and the whole view
+    /// was behind an `isBannerAllowed` guard, so when that flipped the inset went to zero
+    /// and back regardless of any height being reserved. A safe-area inset that changes
+    /// height relays out everything above it, which is the jump.
+    ///
+    /// Deciding once, on appear, means nothing this view learns afterwards can move the
+    /// layout. The one exception is the first fill of a session, when there is no height
+    /// to inherit yet.
+    @State private var committedHeight: CGFloat?
 
     /// The card's real width, measured. This sits inside a safe-area inset, so it is not
     /// the screen's width.
     @State private var width: CGFloat = 0
+
+    private var isAllowed: Bool { ads.isBannerAllowed && !AdUnits.banner.isEmpty }
 
     /// Anchored adaptive, which is what Google recommends for a banner pinned to the top
     /// or bottom of the screen. The inline form is documented as being for banners inside
@@ -41,16 +52,26 @@ struct BannerAd: View {
     /// The width has been measured, so a request would be for the size actually shown.
     private var isMeasured: Bool { width > 0 }
 
-    var body: some View {
-        if ads.isBannerAllowed, !AdUnits.banner.isEmpty {
-            VStack(spacing: 0) {
-                if hasAd {
-                    // Full width, unlike the card below it. This is the line between what
-                    // scrolls and what does not — content passing under the footer is cut
-                    // by it instead of just disappearing.
-                    Divider().overlay(Tokens.cardEdge.color)
-                }
+    /// What the slot occupies. Held at whatever was committed on appear; only grows from
+    /// nothing, and only when this is the first banner of the session.
+    private var slotHeight: CGFloat {
+        guard isAllowed else { return 0 }
+        if let committed = committedHeight, committed > 0 { return committed }
+        return hasAd ? adSize.size.height : 0
+    }
 
+    private var isOccupied: Bool { slotHeight > 0 }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            if isOccupied {
+                // Full width, unlike the card below it. This is the line between what
+                // scrolls and what does not — content passing under the footer is cut
+                // by it instead of just disappearing.
+                Divider().overlay(Tokens.cardEdge.color)
+            }
+
+            if isAllowed {
                 // The same radius, border and margins as Round, Mode and Extras. Edge to
                 // edge it read as something bolted to the app; inset it reads as part of
                 // the screen.
@@ -58,15 +79,14 @@ struct BannerAd: View {
                     // The size asked for, not the size that came back. Anchored adaptive
                     // is a fixed aspect ratio, so a well-behaved creative matches it —
                     // and framing by the creative instead let a short one shrink the bar.
-                    .frame(
-                        width: adSize.size.width,
-                        height: hasAd ? adSize.size.height : 0
-                    )
+                    .frame(width: adSize.size.width, height: slotHeight)
                     // A creative larger than the slot is not hypothetical: Google's own
                     // test unit answers a 320x50 request with 468x60, 320x100 and 728x90
                     // at random, and mediation partners are no more disciplined.
                     .clipped()
                     .frame(maxWidth: .infinity)
+                    // Chrome follows the ad, not the reservation: a slot holding space for
+                    // a request in flight is blank surface, never an empty bordered card.
                     .background(hasAd ? Tokens.surfaceRaised.color : .clear)
                     .clipShape(RoundedRectangle(cornerRadius: Radius.panel, style: .continuous))
                     .overlay {
@@ -75,17 +95,31 @@ struct BannerAd: View {
                                 .strokeBorder(Tokens.cardEdge.color.opacity(0.6), lineWidth: 1)
                         }
                     }
-                    .padding(.horizontal, hasAd ? Spacing.md : 0)
-                    .padding(.top, hasAd ? Spacing.sm : 0)
-                    .padding(.bottom, hasAd ? Spacing.xs : 0)
+                    .padding(.horizontal, isOccupied ? Spacing.md : 0)
+                    .padding(.top, isOccupied ? Spacing.sm : 0)
+                    .padding(.bottom, isOccupied ? Spacing.xs : 0)
             }
-            .background(Tokens.surface.color)
-            .animation(Motion.card(reduceMotion: reduceMotion), value: hasAd)
-            .onGeometryChange(for: CGFloat.self) { $0.size.width - Spacing.md * 2 } action: {
-                width = max(0, $0)
-            }
-            .accessibilityHidden(true)
         }
+        .background(Tokens.surface.color)
+        // `control` rather than `card`: this inset moves everything above it, and card's
+        // spring overshoots by design — on a whole screen's worth of content that
+        // overshoot reads as the bounce being fixed.
+        .animation(Motion.control(reduceMotion: reduceMotion), value: slotHeight)
+        .onGeometryChange(for: CGFloat.self) { $0.size.width - Spacing.md * 2 } action: {
+            width = max(0, $0)
+        }
+        // Once, on appear. Reading it later would put the inset back under the control of
+        // something that changes while the screen is up.
+        .onAppear {
+            if committedHeight == nil { committedHeight = isAllowed ? ads.lastBannerHeight : 0 }
+        }
+        // Only fills are recorded. A failure that wrote zero here would drop the
+        // reservation and hand the next screen its jump back.
+        .onChange(of: hasAd) { _, filled in
+            guard filled else { return }
+            ads.setLastBannerHeight(adSize.size.height)
+        }
+        .accessibilityHidden(true)
     }
 }
 

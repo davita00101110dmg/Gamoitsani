@@ -105,6 +105,11 @@ public enum Sizing {
     /// Guidelines. A glyph may be drawn smaller — the target around it may not.
     public static let minimumTarget: CGFloat = 44
 
+    /// The drawn circle behind a small round control: the two steppers, the saved-game
+    /// card's discard and resume, and the remove-ads dismiss. Smaller than
+    /// `minimumTarget`, which is the tappable area around it.
+    public static let controlGlyph: CGFloat = 34
+
     /// The widest a scrolling column of content should get. Below an iPad's width, so it
     /// only ever applies there; an iPhone is already narrower than this.
     public static let contentColumn: CGFloat = 560

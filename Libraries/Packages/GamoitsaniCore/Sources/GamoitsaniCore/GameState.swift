@@ -8,7 +8,12 @@ import Foundation
 public enum GamePhase: Sendable, Hashable, Codable {
     /// Between turns: whose turn it is, and the reminder of how to play.
     case turnInfo
-    /// The optional per-team challenge, shown only when enabled.
+    /// The per-team challenge on a screen of its own.
+    ///
+    /// No longer entered — the rule is shown on the turn-info screen instead, which saved
+    /// a tap on every single turn. Kept so a game saved while this phase still existed
+    /// still decodes; `GameStateStore.load` uses `try?`, so a removed case would lose the
+    /// game silently rather than loudly.
     case challenge
     /// 3-2-1 before the clock starts.
     case countdown
@@ -272,6 +277,16 @@ public struct GameState: Sendable, Hashable, Codable {
             // One super word per team per round, so the ledger clears with the round.
             superWordSpentBy = []
         }
+    }
+
+    /// Moves the super word for the turn about to start.
+    ///
+    /// Drawn per turn, not per game. Held for a whole game it landed on the same word
+    /// number for every team in every round, so after the first turn the table knew
+    /// exactly which word was worth three — and a super word nobody is surprised by is
+    /// just a word. Each team still gets exactly one per round; only where it sits moves.
+    mutating func movePlacement(to newPlacement: SuperWordPlacement) {
+        placement = newPlacement
     }
 
     /// Takes a fresh placement rather than drawing one: the super word sat in exactly the

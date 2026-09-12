@@ -205,6 +205,19 @@ console or from a copy of the old config.
 
 Each of these cost real time. They are all fixed; do not reintroduce them.
 
+**The target's base configuration must stay `Gamoitsani/Config.xcconfig`.** It is the file
+that carries the ad units and `#include`s the Pods xcconfigs; the Pods ones do not include
+it. Anything that destroys its file reference — converting the group to a synchronized
+folder did exactly this — leaves the slot empty, and the next `pod install` helpfully fills
+it with `Pods-Gamoitsani.debug.xcconfig`. Every `$(AD_UNIT)` in `Info.plist` then resolves
+to nothing, `GADApplicationIdentifier` ships empty, and the Google Mobile Ads SDK throws
+`GADInvalidInitializationException` from its initialiser.
+
+Nothing catches this on the way. The build succeeds, the tests pass, the guard scripts pass,
+and it installs on a phone — the app dies on launch. `scripts/verify-ad-config.py` exists
+because of it and runs in CI against the built `.app`, checking the outcome rather than the
+project, so it catches any cause rather than this one.
+
 **`GameState` and `GameSettings` both have hand-written `Codable` inits, and must keep
 them.** `GameState` is what reaches disk, and `GameStateStore.load` decodes it with `try?`.
 A synthesised decoder throws `keyNotFound` on any game saved before a new property existed

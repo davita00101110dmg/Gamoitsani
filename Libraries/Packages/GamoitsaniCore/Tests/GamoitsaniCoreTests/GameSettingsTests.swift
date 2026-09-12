@@ -17,18 +17,23 @@ struct GameSettingsTests {
         #expect(GameSettings(rounds: input).rounds == expected)
     }
 
-    @Test("round length is clamped to v1's range", arguments: [
-        (5.0, 15.0), (15.0, 15.0), (45.0, 45.0), (75.0, 75.0), (600.0, 75.0),
+    /// 30 to 90, not v1's 15 to 75. Fifteen seconds is not a turn, and the top end moved
+    /// with it so the slider still has somewhere generous to go.
+    @Test("round length is clamped to its range", arguments: [
+        (5.0, 30.0), (30.0, 30.0), (60.0, 60.0), (90.0, 90.0), (600.0, 90.0),
     ])
     func roundLength(input: TimeInterval, expected: TimeInterval) {
         #expect(GameSettings(roundLength: input).roundLength == expected)
     }
 
-    @Test("defaults match v1")
+    /// Neither the round count nor the length is v1's any more. One round hands the game
+    /// to whoever drew the kinder words, and forty-five seconds was tight for a turn that
+    /// starts with reading the word.
+    @Test("defaults")
     func defaults() {
         let s = GameSettings()
-        #expect(s.rounds == 1)
-        #expect(s.roundLength == 45)
+        #expect(s.rounds == 3)
+        #expect(s.roundLength == 60)
         #expect(s.mode == .classic)
         #expect(s.superWordsEnabled == false)
         #expect(s.challengesEnabled == false)

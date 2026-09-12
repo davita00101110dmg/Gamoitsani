@@ -56,7 +56,7 @@ struct RemoveAdsCard: View {
                 Image(systemName: "xmark")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(Tokens.onSurfaceMuted.color)
-                    .frame(width: 34, height: 34)
+                    .frame(width: Sizing.controlGlyph, height: Sizing.controlGlyph)
                     .background(Tokens.surface.color)
                     .clipShape(Circle())
                     .frame(width: Sizing.minimumTarget, height: Sizing.minimumTarget)

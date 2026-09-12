@@ -40,6 +40,13 @@ public enum Typography {
     public static let body = Font.body
     public static let caption = Font.caption
 
+    /// The label under a chip's glyph.
+    ///
+    /// Caption's size, because three of these share a row and Georgian is not a short
+    /// language, but `rowTitle`'s weight — at regular weight beside a glyph the chip read
+    /// as two lines of small text rather than an icon with a name under it.
+    public static let chipTitle = Font.caption.weight(.semibold)
+
     /// Small monospaced labels — point values, language codes, section headers.
     public static let label = Font.system(.caption, design: .monospaced).weight(.semibold)
 }

@@ -115,7 +115,7 @@ struct StepperRow: View {
             Image(systemName: symbol)
                 .font(.body.weight(.bold))
                 .foregroundStyle(enabled ? Tokens.accent.color : Tokens.onSurfaceMuted.color.opacity(0.4))
-                .frame(width: 34, height: 34)
+                .frame(width: Sizing.controlGlyph, height: Sizing.controlGlyph)
                 .background(Tokens.surface.color)
                 .clipShape(Circle())
                 // The circle stays 34pt; the target around it is 44, the smallest a
@@ -242,21 +242,23 @@ struct SetupChip<Glyph: View>: View {
         Button(action: select) {
             // Glyph above the label rather than beside it: four Georgian words across one
             // row have no width to spare, and side-by-side truncated every one of them.
-            VStack(spacing: 3) {
+            VStack(spacing: Spacing.xxs) {
                 glyph
                 Text(title)
-                    .font(Typography.caption)
+                    .font(Typography.chipTitle)
                     .foregroundStyle(isOn ? Tokens.onAccent.color : Tokens.onSurface.color)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.7)
+                    // Two lines always, whether or not this label needs them. Reserving
+                    // the space is what makes a row of chips the same height and keeps a
+                    // one-word label from sitting higher than its neighbours.
+                    .lineLimit(2, reservesSpace: true)
+                    .minimumScaleFactor(0.75)
                     .multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, Spacing.xs)
-            .padding(.horizontal, 4)
-            // Every chip in a row is as tall as the tallest, so one label wrapping to two
-            // lines does not leave its neighbours short.
-            .frame(maxHeight: .infinity)
+            .padding(.vertical, Spacing.sm)
+            // Affordable now the second line is always there: wrapping is the expected
+            // shape rather than something to be squeezed out of.
+            .padding(.horizontal, Spacing.xs)
             .background(isOn ? Tokens.accent.color : Tokens.surface.color)
             .clipShape(RoundedRectangle(cornerRadius: Radius.control, style: .continuous))
             .overlay {
@@ -396,9 +398,15 @@ struct TeamRow<Roster: View>: View {
 
                 // Steps aside once the caret is there to say it instead.
                 if !isEditingName {
+                    // A text style rather than a fixed 11pt: it was small enough to read
+                    // as a smudge, and a fixed size does not answer Dynamic Type at all.
                     Image(systemName: "pencil")
-                        .font(.system(size: 11, weight: .semibold))
+                        .font(.footnote.weight(.semibold))
                         .foregroundStyle(Tokens.onSurfaceMuted.color)
+                        // Off the panel's edge. With two teams there is no remove button
+                        // after it, so this is the last thing in the row and sat hard
+                        // against the border.
+                        .padding(.trailing, Spacing.xxs)
                         .transition(.opacity)
                         .accessibilityHidden(true)
                 }
