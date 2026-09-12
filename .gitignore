@@ -123,7 +123,7 @@ fastlane/test_output
 iOSInjectionProject/
 
 # Real ad units and mediation credentials for the 2.0 target.
-Gamoitsani2/Config.xcconfig
+Gamoitsani/Config.xcconfig
 
 # Skill installers drop copies into the repo root. The skills themselves live in
 # ~/.claude/skills (every project on the machine) or .claude/skills (this repo,

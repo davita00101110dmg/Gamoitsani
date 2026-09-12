@@ -11,9 +11,9 @@ Read this with `docs/2.0/PLAN.md` (the architecture, still accurate),
 
 ## The one-paragraph version
 
-`Gamoitsani2` is a complete, playable rewrite, and as of cutover Phase A it is the **only**
+`Gamoitsani` is a complete, playable rewrite, and as of cutover Phase A it is the **only**
 thing in this repo — v1's target and sources are deleted. It still ships under a separate
-bundle id (`davitikhvedelidze.Gamoitsani2`) until Phase B flips it. Eight local SPM
+bundle id (`davitikhvedelidze.Gamoitsani`) until Phase B flips it. Eight local SPM
 packages, Swift 6 strict concurrency, iOS 18. Setup, both game modes, scoreboard, sharing,
 settings, sound, launch animation, the full ad stack and the remove-ads purchase all work.
 **It plays on a real word database** — 6,374 curated Georgian words plus ten more languages
@@ -48,7 +48,7 @@ public. Keep `Co-Authored-By`; drop `Claude-Session`.
 ## Package graph
 
 ```
-Gamoitsani2 (app)          composition root, navigation, screens, AdMob adapter
+Gamoitsani (app)           composition root, navigation, screens, AdMob adapter
    ├── GamoitsaniEngine    @Observable GameEngine over a pure reducer
    │      └── GamoitsaniCore
    ├── GamoitsaniData      bundled read-only SQLite, one file per language
@@ -96,7 +96,7 @@ destination.
 | ~~**Highlight reel**~~ | **Built, untested in a real game.** One video per game instead of six clips. `HighlightPolicy` in `GamoitsaniCapture`. |
 | ~~**Player records**~~ | **Built, untested in a real game.** Describer rotation on turn info, records in the roster. `Describer` and `PlayerLedger` in `GamoitsaniCore`. |
 | ~~**Automatic review prompt**~~ | **Done.** `ReviewPromptPolicy` in `GamoitsaniCore`, asked on the podium a second after it settles. v1's never fired once: it was gated on a counter that was read but never written. |
-| ~~**Game recording**~~ | **Done, on a different premise.** Front camera at 1080p for the play phase only, word overlaid at export from the engine's timeline, saved to Photos. The screen is never captured, so no ad can appear in a clip. `GamoitsaniCapture` + `Gamoitsani2/Recording/`. |
+| ~~**Game recording**~~ | **Done, on a different premise.** Front camera at 1080p for the play phase only, word overlaid at export from the engine's timeline, saved to Photos. The screen is never captured, so no ad can appear in a clip. `GamoitsaniCapture` + `Gamoitsani/Recording/`. |
 | ~~**Notifications**~~ | **Done.** Weekly reminder, Saturday evening, rotating copy, English only. No in-app toggle — iOS Settings owns the permission. Asked once on the podium after a first game. |
 | ~~**Word review**~~ | **Dropped.** v1's hidden five-taps-on-title screen let any client delete words from the production database after three downvotes, unauthenticated, with a client-controlled reviewer id. `firestore.rules` already disabled it. 2.0 ships a curated SQLite file the owner builds, so there is nothing to crowd-moderate — quality control belongs in the tooling that produces the DB, not in the shipped app. |
 | **Rewarded ads** | Implemented and tested, deliberately no trigger. See below. |
@@ -155,18 +155,31 @@ comes up.
 bundle id. `Localization.migrateLegacyLanguage` copies the key across once and deletes the
 old one.
 
-### Phase B — the rename, not yet done
+### Phase B — done
 
-- Rename the `Gamoitsani2` target, scheme and directory to `Gamoitsani`, and flip
-  `PRODUCT_BUNDLE_IDENTIFIER` to `davitikhvedelidze.Gamoitsani`.
-- **Delete the orphaned v1 Core Data store at first launch.** Flipping the bundle id
-  inherits v1's container, and that store is a disposable word cache that will otherwise
-  sit on disk forever.
-- **`HAS_REMOVED_ADS` stays ignored, deliberately.** It is tempting to honour it so nobody
-  loses a purchase, but that device-local flag is exactly the unreliable thing 2.0
-  replaced, and v1 could set it without a verified transaction.
-  `Transaction.currentEntitlements` is authoritative and already covers anyone who really
-  bought it, on any device, forever. Do not add a fallback.
+The target, scheme, directory and `.storekit` file are all called `Gamoitsani`, and
+`PRODUCT_BUNDLE_IDENTIFIER` is `davitikhvedelidze.Gamoitsani`. **The app now inherits v1's
+`UserDefaults` container on upgrade**, which is what makes the language migration load-
+bearing rather than theoretical.
+
+`LegacyStoreCleanup` deletes the orphaned v1 Core Data store — `Gamoitsani.sqlite` plus
+its `-wal` and `-shm` sidecars, in Application Support — on launch. It is self-terminating
+rather than flag-guarded: once the files are gone the existence checks find nothing. Both
+it and the language migration were verified by planting state in a real simulator
+container and reading it back after launch, because neither can fail visibly.
+
+**`HAS_REMOVED_ADS` stays ignored, deliberately.** It is tempting to honour it so nobody
+loses a purchase, but that device-local flag is exactly the unreliable thing 2.0 replaced,
+and v1 could set it without a verified transaction. `Transaction.currentEntitlements` is
+authoritative and already covers anyone who really bought it, on any device, forever. Do
+not add a fallback.
+
+A target rename leaves bookkeeping the rename API does not reach: `productName`, the
+product reference, the `.storekit` file reference and the abandoned `Pods-Gamoitsani2`
+xcconfig references all had to be fixed separately. `PRODUCT_NAME` was already
+`Gamoitsani`, so the built artefact was right the whole time and none of it showed up as a
+build failure — the dangling `.storekit` reference would have shown up as a purchase that
+finds no product.
 
 ### Phase C — after 2.0 is actually on the App Store
 
@@ -317,9 +330,9 @@ The ad-free hour is the shape already implemented.
 
 ## How to work here
 
-- **Build:** `xcodebuild -workspace Gamoitsani.xcworkspace -scheme Gamoitsani2`. Never the
+- **Build:** `xcodebuild -workspace Gamoitsani.xcworkspace -scheme Gamoitsani`. Never the
   `.xcodeproj`. `pod install` is required — 2.0 uses CocoaPods for the ad SDKs only.
-- **Config:** `Gamoitsani2/Config.xcconfig` is gitignored. Copy the template. It carries
+- **Config:** `Gamoitsani/Config.xcconfig` is gitignored. Copy the template. It carries
   Google's test ad units; production units are the owner's to add.
 - **Run on the owner's iPhone** for anything visible — there is a `run-on-device` skill.
   The simulator is fine for screenshots and was flaky in the last session.

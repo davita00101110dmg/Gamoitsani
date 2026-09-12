@@ -26,7 +26,7 @@ The real config holds ad unit IDs and mediation SDK credentials, so it is not co
 Copy the template:
 
 ```sh
-cp Gamoitsani2/Config.xcconfig.template Gamoitsani2/Config.xcconfig
+cp Gamoitsani/Config.xcconfig.template Gamoitsani/Config.xcconfig
 ```
 
 The template is **buildable and runnable as-is** — it ships Google's public AdMob *test*
@@ -73,7 +73,7 @@ resolves them automatically on first open.
 ```sh
 xcodebuild build \
   -workspace Gamoitsani.xcworkspace \
-  -scheme Gamoitsani2 \
+  -scheme Gamoitsani \
   -destination 'platform=iOS Simulator,name=iPhone 17,OS=latest'
 ```
 
@@ -81,7 +81,7 @@ Or ⌘B in Xcode.
 
 ## Running tests
 
-The tests live in the packages, not in an app target — the `Gamoitsani2` scheme has no
+The tests live in the packages, not in an app target — the `Gamoitsani` scheme has no
 test action at all, and asking for one reports "not currently configured for the test
 action".
 
@@ -110,7 +110,7 @@ thing worth knowing up front: the `-destination` UDID is **not** the identifier
 `xcrun devicectl list devices` prints. Get the right one from:
 
 ```sh
-xcodebuild -showdestinations -workspace Gamoitsani.xcworkspace -scheme Gamoitsani2 \
+xcodebuild -showdestinations -workspace Gamoitsani.xcworkspace -scheme Gamoitsani \
   | grep -i 'platform:iOS,' | grep -v Simulator
 ```
 
@@ -118,14 +118,14 @@ xcodebuild -showdestinations -workspace Gamoitsani.xcworkspace -scheme Gamoitsan
 
 **`Config.xcconfig not found` / unresolved `$(BANNER_AD_ID)`** — you skipped step 2.
 
-**`Pods-Gamoitsani2.debug.xcconfig` missing** — you skipped step 3. `Config.xcconfig`
+**`Pods-Gamoitsani.debug.xcconfig` missing** — you skipped step 3. `Config.xcconfig`
 `#include`s the pod xcconfigs, so `pod install` must run before the first build.
 
 **`pod install` fails with a UTF-8 / encoding error** — set `LANG=en_US.UTF-8`.
 
 **Build works from Xcode but not the CLI** — check you passed `-workspace`, not `-project`.
 
-**"Scheme Gamoitsani2 is not currently configured for the test action"** — expected. See
+**"Scheme Gamoitsani is not currently configured for the test action"** — expected. See
 "Running tests" above.
 
 **A sound or word file is missing at runtime while the build succeeds** — package

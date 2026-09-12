@@ -1,0 +1,51 @@
+//
+//  Config.xcconfig.template
+//  Gamoitsani
+//
+//  Template for the gitignored `Gamoitsani/Config.xcconfig`. Copy it, then fill in real
+//  values:
+//
+//      cp Gamoitsani/Config.xcconfig.template Gamoitsani/Config.xcconfig
+//
+//  Separate from v1's config because the CocoaPods includes below are per-target. When v1
+//  is deleted at cutover this becomes the only one.
+//
+
+// CocoaPods. Required — these pull in the pod search paths, linker flags and framework
+// settings. Run `pod install` before building or these files will not exist.
+#include "../Pods/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.debug.xcconfig"
+#include "../Pods/Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.release.xcconfig"
+
+// MARK: - AdMob
+// Google's public *test* units, safe to build and run against. Swap in the real
+// production units for a release build. Never serve test ads in production, and never
+// request production ads in development.
+
+ADMOB_APP_ID = ca-app-pub-3940256099942544~1458002511
+BANNER_AD_ID = ca-app-pub-3940256099942544/2934735716
+INTERSTITIAL_AD_ID = ca-app-pub-3940256099942544/4411468910
+APP_OPEN_AD_ID = ca-app-pub-3940256099942544/5575463023
+REWARDED_AD_ID = ca-app-pub-3940256099942544/1712485313
+
+// Device identifiers that receive test ads and the test consent form. The SDK logs the
+// hash to register on first run. Leave blank if unused.
+ADMOB_TEST_DEVICE_ID =
+UMP_TEST_DEVICE_ID =
+
+// MARK: - In-app purchase
+// The remove-ads upgrade. This must match the product identifier in App Store Connect
+// *and* the one v1 already sells — identifiers belong to the app record, so reusing it is
+// what lets existing customers keep the upgrade at cutover.
+
+REMOVE_ADS_PRODUCT_ID = com.example.gamoitsani.removeads
+
+// MARK: - Ad mediation partners
+// Per-network credentials from each partner's dashboard. Blank means that network simply
+// never fills; the app still builds and runs.
+
+META_APP_ID =
+META_CLIENT_TOKEN =
+VUNGLE_APP_ID =
+INMOBI_APP_ID =
+CHARTBOOST_APP_ID =
+CHARTBOOST_APP_SIGNATURE =

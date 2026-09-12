@@ -14,7 +14,7 @@ from pathlib import Path
 CATALOGUE = Path(
     "Libraries/Packages/GamoitsaniL10n/Sources/GamoitsaniL10n/Resources/Localizable.xcstrings"
 )
-SOURCES = [Path("Gamoitsani2")]
+SOURCES = [Path("Gamoitsani")]
 
 # l10n("key") and L10n.string("key", ...). Interpolated keys are skipped deliberately —
 # `l10n("rules.\(index)")` cannot be checked without evaluating it.

@@ -77,7 +77,7 @@ let bounds = CTLineGetBoundsWithOptions(line, .useGlyphPathBounds)
 ctx.textPosition = CGPoint(x: side / 2 - bounds.midX, y: side / 2 + faceLift - bounds.midY)
 CTLineDraw(line, ctx)
 
-let output = "Gamoitsani2/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon1024.png"
+let output = "Gamoitsani/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon1024.png"
 guard let image = ctx.makeImage(),
       let dest = CGImageDestinationCreateWithURL(
         URL(fileURLWithPath: output) as CFURL, UTType.png.identifier as CFString, 1, nil)
