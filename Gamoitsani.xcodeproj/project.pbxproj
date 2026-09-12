@@ -12,6 +12,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		066B4CD4323E963E068BB4D3 /* Config.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Gamoitsani/Config.xcconfig; sourceTree = "<group>"; };
 		07465998325E61C4C8A4B2EC /* Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig"; path = "Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig"; sourceTree = "<group>"; };
 		0ED1415795F78EC52C53201B /* Pods-GamoitsaniTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.debug.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0ED6CAF7DFCF6D389E027034 /* Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig"; path = "Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 				FFF65CD02BE6B2F3008E0352 /* Frameworks */,
 				080C9A0323049673DB476C6E /* Pods */,
 				40165E3036256CF0365B4597 /* Gamoitsani */,
+				066B4CD4323E963E068BB4D3 /* Config.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -301,7 +303,7 @@
 /* Begin XCBuildConfiguration section */
 		1944C757AF62697EA56CB162 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0E7AC92C1E2C28737A902C9 /* Pods-Gamoitsani.release.xcconfig */;
+			baseConfigurationReference = 066B4CD4323E963E068BB4D3 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -332,7 +334,7 @@
 		};
 		86E9E9C4771250CC07B5BEF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A4F39F1DAD4AF7CEB36AE68 /* Pods-Gamoitsani.debug.xcconfig */;
+			baseConfigurationReference = 066B4CD4323E963E068BB4D3 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

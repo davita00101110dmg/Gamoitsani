@@ -90,13 +90,28 @@ jobs:
         # Swift 6 language mode with complete strict concurrency, so a data-race
         # diagnostic fails the build rather than accumulating. The tests live in the
         # packages and run in the step below.
+        #
+        # Into a known path so the next step can read the built Info.plist.
         run: |
           set -o pipefail
           xcodebuild build \
             -workspace "$WORKSPACE" \
             -scheme Gamoitsani \
             -destination "id=${{ steps.sim.outputs.udid }}" \
+            -derivedDataPath build/DerivedData \
             CODE_SIGNING_ALLOWED=NO
+
+      - name: Verify the ad configuration reached the app
+        # A missing GADApplicationIdentifier is a launch crash, not a build error, so
+        # every step before this one stays green. That is not hypothetical: a base
+        # configuration was silently replaced by the Pods xcconfig once, every ad unit
+        # resolved to nothing, and the build went all the way onto a phone before the
+        # SDK threw on init.
+        run: |
+          set -o pipefail
+          APP=$(find build/DerivedData/Build/Products -maxdepth 3 -name "Gamoitsani.app" | head -1)
+          test -n "$APP" || { echo "no built app found"; exit 1; }
+          ./scripts/verify-ad-config.py "$APP"
 
       - name: Test the 2.0 packages
         # Each package is independently testable — that is the point of the module split.
