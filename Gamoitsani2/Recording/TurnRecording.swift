@@ -3,6 +3,7 @@
 //  Gamoitsani2
 //
 import SwiftUI
+import UIKit
 import GamoitsaniCapture
 
 /// What the recorder is doing.
@@ -47,6 +48,11 @@ protocol TurnRecording: AnyObject {
 
     /// Abandons the current clip without exporting — the player left mid-turn.
     func cancelTurn()
+
+    /// The game is over: cut every turn filmed into one reel and save it.
+    ///
+    /// `endCard` closes the video with the final scores.
+    func finishGame(endCard: UIImage?)
 }
 
 /// A recorder that never touches the camera.
@@ -71,6 +77,7 @@ final class NoRecording: TurnRecording {
     func undoAnswer(_ word: String) {}
     func finishTurn() {}
     func cancelTurn() {}
+    func finishGame(endCard: UIImage?) {}
 }
 
 extension EnvironmentValues {

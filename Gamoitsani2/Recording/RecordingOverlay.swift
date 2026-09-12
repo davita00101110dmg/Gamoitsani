@@ -36,9 +36,106 @@ enum RecordingOverlay {
         return overlay
     }
 
+    /// The overlay for a highlight reel.
+    ///
+    /// Each slice was cut from a different point in a different turn, so a word is drawn at
+    /// the moment its slice plays rather than at the time it happened. `clipLength` is the
+    /// whole reel, because every animation spans it — see `visibility`.
+    static func reelLayer(
+        placed: [(highlight: Highlight, start: TimeInterval)],
+        size: CGSize,
+        clipLength: TimeInterval
+    ) -> CALayer {
+        let overlay = CALayer()
+        overlay.frame = CGRect(origin: .zero, size: size)
+        overlay.isGeometryFlipped = true
+
+        for (highlight, start) in placed {
+            // One card for the slice, naming what was being guessed. A streak carries
+            // several words and they are shown together — splitting them across the few
+            // seconds they occupy would flicker.
+            let text = highlight.words.joined(separator: " · ")
+            guard !text.isEmpty else { continue }
+
+            let card = card(
+                text: text,
+                size: size,
+                from: start,
+                to: start + highlight.duration,
+                clip: clipLength
+            )
+            overlay.addSublayer(card)
+        }
+        return overlay
+    }
+
+    /// The score card, held over the last seconds of a reel.
+    ///
+    /// Full frame and opaque. The footage underneath is only there because a composition
+    /// has to have media to have duration — none of it should be visible.
+    static func endCardLayer(
+        _ image: UIImage,
+        size: CGSize,
+        start: TimeInterval,
+        clipLength: TimeInterval
+    ) -> CALayer {
+        let holder = CALayer()
+        holder.frame = CGRect(origin: .zero, size: size)
+        holder.isGeometryFlipped = true
+
+        let card = CALayer()
+        card.frame = holder.frame
+        card.contents = fullFrameCard(image, size: size)?.cgImage
+        card.opacity = 0
+        card.add(visibility(from: start, to: clipLength, clip: clipLength), forKey: "visibility")
+
+        holder.addSublayer(card)
+        return holder
+    }
+
+    /// The share card centred on the app's own surface, filling the video's frame.
+    private static func fullFrameCard(_ image: UIImage, size: CGSize) -> UIImage? {
+        guard size.width > 0, size.height > 0 else { return nil }
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        format.opaque = true
+
+        return UIGraphicsImageRenderer(size: size, format: format).image { context in
+            uiColor(Tokens.surface).setFill()
+            context.fill(CGRect(origin: .zero, size: size))
+
+            // Inset, so the card reads as a card rather than as the whole screen.
+            let available = CGSize(width: size.width * 0.86, height: size.height * 0.86)
+            let scale = min(available.width / image.size.width, available.height / image.size.height)
+            let fitted = CGSize(width: image.size.width * scale, height: image.size.height * scale)
+            image.draw(in: CGRect(
+                x: (size.width - fitted.width) / 2,
+                y: (size.height - fitted.height) / 2,
+                width: fitted.width,
+                height: fitted.height
+            ))
+        }
+    }
+
     // MARK: - Word card
 
     private static func card(for entry: RecordingEntry, size: CGSize, clip: TimeInterval) -> CALayer {
+        card(
+            text: entry.word,
+            size: size,
+            from: entry.start,
+            to: cardEnd(of: entry),
+            clip: clip
+        )
+    }
+
+    private static func card(
+        text word: String,
+        size: CGSize,
+        from start: TimeInterval,
+        to end: TimeInterval,
+        clip: TimeInterval
+    ) -> CALayer {
         let scale = size.width / 1080
 
         let card = CALayer()
@@ -76,12 +173,12 @@ enum RecordingOverlay {
         )
         let label = CALayer()
         label.frame = inset
-        label.contents = wordImage(entry.word, size: inset.size, pointSize: 64 * scale)?.cgImage
+        label.contents = wordImage(word, size: inset.size, pointSize: 64 * scale)?.cgImage
         label.contentsGravity = .resizeAspect
         card.addSublayer(label)
 
         card.opacity = 0
-        card.add(visibility(from: entry.start, to: cardEnd(of: entry), clip: clip), forKey: "visibility")
+        card.add(visibility(from: start, to: end, clip: clip), forKey: "visibility")
         return card
     }
 

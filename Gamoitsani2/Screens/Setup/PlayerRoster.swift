@@ -17,9 +17,12 @@ struct PlayerRoster: View {
     @Environment(Localization.self) private var l10n
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(SoundPlayer.self) private var sound
+    @Environment(PlayerBook.self) private var players
 
     @State private var entry = ""
     @FocusState private var entryFocused: Bool
+    @State private var profiled: String?
+    @State private var showAllPlayers = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -49,15 +52,36 @@ struct PlayerRoster: View {
 
                 FlowLayout(spacing: Spacing.xs) {
                     ForEach(model.players, id: \.self) { name in
-                        PlayerChip(name: name) {
-                            withAnimation(Motion.control(reduceMotion: reduceMotion)) {
-                                model.removePlayer(name)
+                        PlayerChip(
+                            name: name,
+                            open: { profiled = name },
+                            remove: {
+                                withAnimation(Motion.control(reduceMotion: reduceMotion)) {
+                                    model.removePlayer(name)
+                                }
                             }
-                        }
+                        )
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, Spacing.sm)
+
+                Divider().overlay(Tokens.cardEdge.color)
+
+                Button { showAllPlayers = true } label: {
+                    HStack {
+                        Text(l10n("players.all"))
+                            .font(Typography.label)
+                            .foregroundStyle(Tokens.accent.color)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundStyle(Tokens.onSurfaceMuted.color)
+                    }
+                    .padding(.vertical, Spacing.sm)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
             }
 
             if model.canDraw {
@@ -95,6 +119,18 @@ struct PlayerRoster: View {
                     .padding(.bottom, Spacing.sm)
             }
         }
+        // Handed the environment explicitly. Presented content takes it from wherever the
+        // sheet was attached, which this codebase has been caught by twice.
+        .sheet(item: $profiled) { name in
+            PlayerProfileSheet(name: name)
+                .environment(players)
+                .environment(l10n)
+        }
+        .sheet(isPresented: $showAllPlayers) {
+            PlayersSheet()
+                .environment(players)
+                .environment(l10n)
+        }
     }
 
     private var hasDrawn: Bool { model.teams.contains { !$0.members.isEmpty } }
@@ -117,27 +153,37 @@ struct PlayerRoster: View {
 
 private struct PlayerChip: View {
     let name: String
+    let open: () -> Void
     let remove: () -> Void
 
     var body: some View {
-        Button(action: remove) {
-            HStack(spacing: Spacing.xxs) {
+        // Two targets, not one. The name opens the record and the cross removes the
+        // player — nesting them meant every look at someone's stats deleted them.
+        HStack(spacing: Spacing.xxs) {
+            Button(action: open) {
                 Text(name)
                     .font(Typography.label)
                     .foregroundStyle(Tokens.onSurface.color)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(name)
+            .accessibilityHint(Text(verbatim: "Show record"))
+
+            Button(action: remove) {
                 Image(systemName: "xmark")
                     .font(.system(size: 9, weight: .bold))
                     .foregroundStyle(Tokens.onSurfaceMuted.color)
+                    .contentShape(Rectangle())
             }
-            .padding(.horizontal, Spacing.sm)
-            .padding(.vertical, Spacing.xs)
-            .background(Tokens.surface.color)
-            .clipShape(Capsule())
-            .overlay { Capsule().strokeBorder(Tokens.cardEdge.color, lineWidth: 1) }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text(verbatim: "Remove \(name)"))
         }
-        .buttonStyle(.plain)
-        .accessibilityLabel(name)
-        .accessibilityHint(Text(verbatim: "Remove"))
+        .padding(.horizontal, Spacing.sm)
+        .padding(.vertical, Spacing.xs)
+        .background(Tokens.surface.color)
+        .clipShape(Capsule())
+        .overlay { Capsule().strokeBorder(Tokens.cardEdge.color, lineWidth: 1) }
     }
 }
 

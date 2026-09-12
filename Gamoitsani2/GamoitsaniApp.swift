@@ -19,6 +19,7 @@ struct GamoitsaniApp: App {
     @State private var recorder = CameraTurnRecorder()
     @State private var reviewPrompter = ReviewPrompter()
     @State private var reminders = Reminders()
+    @State private var players = PlayerBook()
     #if DEBUG
     @State private var debugSettings = DebugSettings()
     #endif
@@ -86,6 +87,7 @@ struct GamoitsaniApp: App {
             .environment(\.turnRecording, recorder)
             .environment(reviewPrompter)
             .environment(reminders)
+            .environment(players)
             .environment(\.isLaunching, showSplash)
             // Formatting follows the language chosen in Settings, not the device's. Without
             // this, `format:` and `.formatted()` would quietly use whatever locale the phone
@@ -116,7 +118,8 @@ struct GamoitsaniApp: App {
                 purchases: store,
                 recorder: recorder,
                 reviewPrompter: reviewPrompter,
-                reminders: reminders
+                reminders: reminders,
+                players: players
             )
         #else
         base
