@@ -3,106 +3,26 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00B3B83E241C78863E87C3AC /* GamoitsaniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C04D6EDDE9638C7F9C296 /* GamoitsaniApp.swift */; };
-		087C6573A75E236631EFDB36 /* SetupComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC03FE91ECAA969A0956837 /* SetupComponents.swift */; };
-		0B8A3303FAA577E33F7DA9EE /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423FDAAD4A8C93737BC37E6 /* GameOverView.swift */; };
-		0D5E8D592AF157CD1E0A2232 /* GameSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBD3AC5C97E5FBD184ADE7 /* GameSetupView.swift */; };
-		0FECA4CAE51A44DA9853DF9F /* HighlightReel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E579D183CDCA434080377DE7 /* HighlightReel.swift */; };
-		2E1B431315864ED0BE1D81E2 /* TurnRecording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050866DC6EB04FA4B7E32576 /* TurnRecording.swift */; };
-		3C580555505E7068514885FB /* GameFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7769D70207AB6403DE0E760 /* GameFlowView.swift */; };
-		47FD6444178F69C5BBF1C6CD /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB02F97058A700F6375993C /* Route.swift */; };
-		485D31FBA92D4931AD519275 /* RemoveAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29D2CDF3014DE299F00CC8 /* RemoveAds.swift */; };
-		49061860A18F78921BBA8CBA /* GameSetupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A884C4B1683D209C8A861 /* GameSetupModel.swift */; };
-		4B27E3FC2F2BC311C29A036A /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3A1A03242578E4715AB6A3 /* DebugMenu.swift */; };
-		524CD077DF4344DE834BB32F /* CameraTurnRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4B77DE65E04F2C85D9E569 /* CameraTurnRecorder.swift */; };
-		55CC02AC07EED22D5BF9025A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36CCD79F4764663A3E7BDFD /* SplashView.swift */; };
-		5C44931FFEEB48DC80EBF2EF /* RecordingBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69182A5BA5D34E99B843F08D /* RecordingBridge.swift */; };
-		5CF98E7113214DFA8CB51067 /* CaptureSessionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE71DFAC10D42FDBB065851 /* CaptureSessionBox.swift */; };
-		6281EE2FAB4241C1BBAACCD5 /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F185BFEDBA0347EF89980511 /* Reminders.swift */; };
-		66A4602347998D88A4A8BCFB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227A9A621D7844B4B28356E0 /* Router.swift */; };
-		763906B955274C3899942C31 /* Purchasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DBD7AEB19D41F8ABD16E60 /* Purchasing.swift */; };
-		7A8D3C56A06C438FB9F6B87E /* StoreKitPurchases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8AA9DCC2242058FFEA629 /* StoreKitPurchases.swift */; };
-		7D6A83A186084BD9BF1C5DC3 /* RecordingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BCFE21C90C48D58AD56212 /* RecordingOverlay.swift */; };
-		7E7DB9AC1AE3D56C4A6245A2 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923A8905BC6AA8467F91AF19 /* GameSession.swift */; };
-		7FD58273C58F46FAE98790A6 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876C0F14C7E4B2306AD2CD6 /* AppInfo.swift */; };
 		89E5D361A833FBD007E95BCA /* Pods_Gamoitsani.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F1C5CBF005030EAF45E784 /* Pods_Gamoitsani.framework */; };
-		90ABDC919AB3CF3A865F82D5 /* LeaderboardSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8CF213E6E24E6647668F8 /* LeaderboardSheet.swift */; };
 		924A62BE6EB988DF780416F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FF8B6C753C6F444A7BABEA /* Foundation.framework */; };
-		98CE2D64A13A15FECBA03047 /* PlayerRoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0B895403DEE2FE77C885B9 /* PlayerRoster.swift */; };
-		A8CC8DF3F1347FAC4DB17E9A /* ShareCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88501753E294F4505B439CD /* ShareCard.swift */; };
-		AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30510617BAE33CE79D50131 /* BannerAd.swift */; };
-		B15DF6F4457CB4DAA83FF647 /* LegacyStoreCleanup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2033B7C9E478D89C8C8B932 /* LegacyStoreCleanup.swift */; };
-		B4C89321A831373D1E1223E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */; };
-		B557C8084D9B4211B9F34994 /* RecordingLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73551AAF3DD0489F8BF604A6 /* RecordingLog.swift */; };
-		B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96668D899010A3A09E42EC99 /* AdEnvironment.swift */; };
-		BD67B4AC6B03422DA2C500D3 /* RecordingExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B12FD4CE3F84BE8BEDC04EB /* RecordingExporter.swift */; };
-		D82F8C692FC23FA30BF12D65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F4803685FD8794E19D47296 /* Assets.xcassets */; };
-		DA1088826889463689CFC04B /* PendingClipStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B29778570B142499EC08496 /* PendingClipStore.swift */; };
-		ED51713510234A39AB2985C2 /* ReviewPrompter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E83EA912A645D5BF9C783E /* ReviewPrompter.swift */; };
-		F4A6D9FB9DCC3C8D27A6DC13 /* AdUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A46906829AF04DF295A2BED /* AdUnits.swift */; };
-		F4CF05276636EB2EE2D74BD2 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237F63704F7B25FFCC53512 /* PlayView.swift */; };
-		F4DB2F566E074577B101B318 /* PlayerProfileSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91A801160444A918C9DFD53 /* PlayerProfileSheet.swift */; };
-		F6CCB3228CE44F1898A426B2 /* PlayerBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276F1ACBD5FD4B49B2CE9AAC /* PlayerBook.swift */; };
-		F8AD6CA2387F7BDA5506DA76 /* AdMobAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4EC563CA317EEED5FCA338 /* AdMobAds.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = Screens/SettingsView.swift; sourceTree = "<group>"; };
-		050866DC6EB04FA4B7E32576 /* TurnRecording.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TurnRecording.swift; path = Recording/TurnRecording.swift; sourceTree = "<group>"; };
 		07465998325E61C4C8A4B2EC /* Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig"; path = "Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests.release.xcconfig"; sourceTree = "<group>"; };
 		0ED1415795F78EC52C53201B /* Pods-GamoitsaniTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.debug.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0ED6CAF7DFCF6D389E027034 /* Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig"; path = "Target Support Files/Pods-Gamoitsani-GamoitsaniUITests/Pods-Gamoitsani-GamoitsaniUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		0F4803685FD8794E19D47296 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		15021D7C46D4DA69DAB50747 /* Pods_Gamoitsani_GamoitsaniUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gamoitsani_GamoitsaniUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		161CBA5C1A484FE6AB98FC0C /* Gamoitsani.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; name = Gamoitsani.storekit; path = Gamoitsani.storekit; sourceTree = "<group>"; };
-		177A884C4B1683D209C8A861 /* GameSetupModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameSetupModel.swift; path = Screens/Setup/GameSetupModel.swift; sourceTree = "<group>"; };
-		2237F63704F7B25FFCC53512 /* PlayView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlayView.swift; path = Game/PlayView.swift; sourceTree = "<group>"; };
-		227A9A621D7844B4B28356E0 /* Router.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Router.swift; path = Navigation/Router.swift; sourceTree = "<group>"; };
-		276F1ACBD5FD4B49B2CE9AAC /* PlayerBook.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlayerBook.swift; path = Players/PlayerBook.swift; sourceTree = "<group>"; };
-		29AA0C2378FD5C07F5ADCDB7 /* Config.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		2A4F39F1DAD4AF7CEB36AE68 /* Pods-Gamoitsani.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani.debug.xcconfig"; path = "Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.debug.xcconfig"; sourceTree = "<group>"; };
 		33F1C5CBF005030EAF45E784 /* Pods_Gamoitsani.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gamoitsani.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		37DBD7AEB19D41F8ABD16E60 /* Purchasing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Purchasing.swift; path = Purchase/Purchasing.swift; sourceTree = "<group>"; };
-		39BBD3AC5C97E5FBD184ADE7 /* GameSetupView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameSetupView.swift; path = Screens/Setup/GameSetupView.swift; sourceTree = "<group>"; };
-		39BCFE21C90C48D58AD56212 /* RecordingOverlay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordingOverlay.swift; path = Recording/RecordingOverlay.swift; sourceTree = "<group>"; };
-		3A46906829AF04DF295A2BED /* AdUnits.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdUnits.swift; path = Ads/AdUnits.swift; sourceTree = "<group>"; };
 		3BDE67BC9BFB90A79983B10D /* Gamoitsani.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		466C04D6EDDE9638C7F9C296 /* GamoitsaniApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GamoitsaniApp.swift; sourceTree = "<group>"; };
-		4B12FD4CE3F84BE8BEDC04EB /* RecordingExporter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordingExporter.swift; path = Recording/RecordingExporter.swift; sourceTree = "<group>"; };
-		5B4B77DE65E04F2C85D9E569 /* CameraTurnRecorder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CameraTurnRecorder.swift; path = Recording/CameraTurnRecorder.swift; sourceTree = "<group>"; };
-		69182A5BA5D34E99B843F08D /* RecordingBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordingBridge.swift; path = Recording/RecordingBridge.swift; sourceTree = "<group>"; };
-		6B29778570B142499EC08496 /* PendingClipStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PendingClipStore.swift; path = Recording/PendingClipStore.swift; sourceTree = "<group>"; };
-		72F8CF213E6E24E6647668F8 /* LeaderboardSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LeaderboardSheet.swift; path = Game/LeaderboardSheet.swift; sourceTree = "<group>"; };
-		73551AAF3DD0489F8BF604A6 /* RecordingLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordingLog.swift; path = Recording/RecordingLog.swift; sourceTree = "<group>"; };
-		88E83EA912A645D5BF9C783E /* ReviewPrompter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReviewPrompter.swift; path = Review/ReviewPrompter.swift; sourceTree = "<group>"; };
 		89FF8B6C753C6F444A7BABEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		91B8AA9DCC2242058FFEA629 /* StoreKitPurchases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StoreKitPurchases.swift; path = Purchase/StoreKitPurchases.swift; sourceTree = "<group>"; };
-		923A8905BC6AA8467F91AF19 /* GameSession.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameSession.swift; path = Game/GameSession.swift; sourceTree = "<group>"; };
-		96668D899010A3A09E42EC99 /* AdEnvironment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdEnvironment.swift; path = Ads/AdEnvironment.swift; sourceTree = "<group>"; };
-		A7769D70207AB6403DE0E760 /* GameFlowView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameFlowView.swift; path = Game/GameFlowView.swift; sourceTree = "<group>"; };
 		A8591DBC756783B37A1C2C05 /* Pods_GamoitsaniTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GamoitsaniTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE4EC563CA317EEED5FCA338 /* AdMobAds.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdMobAds.swift; path = Ads/AdMobAds.swift; sourceTree = "<group>"; };
 		B7F70DD013A2EADFAFEC8746 /* Pods-GamoitsaniTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GamoitsaniTests.release.xcconfig"; path = "Target Support Files/Pods-GamoitsaniTests/Pods-GamoitsaniTests.release.xcconfig"; sourceTree = "<group>"; };
-		B876C0F14C7E4B2306AD2CD6 /* AppInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
-		BB3A1A03242578E4715AB6A3 /* DebugMenu.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DebugMenu.swift; path = Debug/DebugMenu.swift; sourceTree = "<group>"; };
-		BC29D2CDF3014DE299F00CC8 /* RemoveAds.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RemoveAds.swift; path = Purchase/RemoveAds.swift; sourceTree = "<group>"; };
-		BDB02F97058A700F6375993C /* Route.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Route.swift; path = Navigation/Route.swift; sourceTree = "<group>"; };
-		C423FDAAD4A8C93737BC37E6 /* GameOverView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameOverView.swift; path = Game/GameOverView.swift; sourceTree = "<group>"; };
-		C88501753E294F4505B439CD /* ShareCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShareCard.swift; path = Game/ShareCard.swift; sourceTree = "<group>"; };
-		C91A801160444A918C9DFD53 /* PlayerProfileSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlayerProfileSheet.swift; path = Players/PlayerProfileSheet.swift; sourceTree = "<group>"; };
-		D36CCD79F4764663A3E7BDFD /* SplashView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplashView.swift; path = Screens/SplashView.swift; sourceTree = "<group>"; };
-		DA0B895403DEE2FE77C885B9 /* PlayerRoster.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlayerRoster.swift; path = Screens/Setup/PlayerRoster.swift; sourceTree = "<group>"; };
-		DAC03FE91ECAA969A0956837 /* SetupComponents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SetupComponents.swift; path = Screens/Setup/SetupComponents.swift; sourceTree = "<group>"; };
-		E30510617BAE33CE79D50131 /* BannerAd.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BannerAd.swift; path = Ads/BannerAd.swift; sourceTree = "<group>"; };
-		E579D183CDCA434080377DE7 /* HighlightReel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HighlightReel.swift; path = Recording/HighlightReel.swift; sourceTree = "<group>"; };
 		F0E7AC92C1E2C28737A902C9 /* Pods-Gamoitsani.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gamoitsani.release.xcconfig"; path = "Target Support Files/Pods-Gamoitsani/Pods-Gamoitsani.release.xcconfig"; sourceTree = "<group>"; };
-		F185BFEDBA0347EF89980511 /* Reminders.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reminders.swift; path = Notifications/Reminders.swift; sourceTree = "<group>"; };
-		F2033B7C9E478D89C8C8B932 /* LegacyStoreCleanup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LegacyStoreCleanup.swift; sourceTree = "<group>"; };
-		FDE71DFAC10D42FDBB065851 /* CaptureSessionBox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CaptureSessionBox.swift; path = Recording/CaptureSessionBox.swift; sourceTree = "<group>"; };
 		FF4D9D252BD698620046819D /* Gamoitsani.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gamoitsani.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4D9D3E2BD698630046819D /* GamoitsaniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamoitsaniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4D9D482BD698630046819D /* GamoitsaniUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamoitsaniUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +30,30 @@
 		FF8675762C680E1D0089B52B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		FFC7949B2E45D30F0061E5F0 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		05E3D31AD3AEF54B9F9DD60C /* Exceptions for "Gamoitsani" folder in "Gamoitsani" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				Config.xcconfig,
+				Config.xcconfig.template,
+				Gamoitsani.storekit,
+			);
+			target = 1AD6974620CF18984E0130F9 /* Gamoitsani */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		40165E3036256CF0365B4597 /* Gamoitsani */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				05E3D31AD3AEF54B9F9DD60C /* Exceptions for "Gamoitsani" folder in "Gamoitsani" target */,
+			);
+			path = Gamoitsani;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		F957277388173C8102615F4B /* Frameworks */ = {
@@ -137,54 +81,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		7016F9422072DEA7BED550D3 /* Gamoitsani */ = {
-			isa = PBXGroup;
-			children = (
-				466C04D6EDDE9638C7F9C296 /* GamoitsaniApp.swift */,
-				BDB02F97058A700F6375993C /* Route.swift */,
-				227A9A621D7844B4B28356E0 /* Router.swift */,
-				177A884C4B1683D209C8A861 /* GameSetupModel.swift */,
-				39BBD3AC5C97E5FBD184ADE7 /* GameSetupView.swift */,
-				DAC03FE91ECAA969A0956837 /* SetupComponents.swift */,
-				01ABABF355DAA2F1D8E6B2E1 /* SettingsView.swift */,
-				923A8905BC6AA8467F91AF19 /* GameSession.swift */,
-				A7769D70207AB6403DE0E760 /* GameFlowView.swift */,
-				2237F63704F7B25FFCC53512 /* PlayView.swift */,
-				C423FDAAD4A8C93737BC37E6 /* GameOverView.swift */,
-				72F8CF213E6E24E6647668F8 /* LeaderboardSheet.swift */,
-				BB3A1A03242578E4715AB6A3 /* DebugMenu.swift */,
-				D36CCD79F4764663A3E7BDFD /* SplashView.swift */,
-				0F4803685FD8794E19D47296 /* Assets.xcassets */,
-				C88501753E294F4505B439CD /* ShareCard.swift */,
-				DA0B895403DEE2FE77C885B9 /* PlayerRoster.swift */,
-				B876C0F14C7E4B2306AD2CD6 /* AppInfo.swift */,
-				29AA0C2378FD5C07F5ADCDB7 /* Config.xcconfig */,
-				3A46906829AF04DF295A2BED /* AdUnits.swift */,
-				AE4EC563CA317EEED5FCA338 /* AdMobAds.swift */,
-				E30510617BAE33CE79D50131 /* BannerAd.swift */,
-				96668D899010A3A09E42EC99 /* AdEnvironment.swift */,
-				C91A801160444A918C9DFD53 /* PlayerProfileSheet.swift */,
-				276F1ACBD5FD4B49B2CE9AAC /* PlayerBook.swift */,
-				E579D183CDCA434080377DE7 /* HighlightReel.swift */,
-				F185BFEDBA0347EF89980511 /* Reminders.swift */,
-				88E83EA912A645D5BF9C783E /* ReviewPrompter.swift */,
-				73551AAF3DD0489F8BF604A6 /* RecordingLog.swift */,
-				6B29778570B142499EC08496 /* PendingClipStore.swift */,
-				69182A5BA5D34E99B843F08D /* RecordingBridge.swift */,
-				FDE71DFAC10D42FDBB065851 /* CaptureSessionBox.swift */,
-				4B12FD4CE3F84BE8BEDC04EB /* RecordingExporter.swift */,
-				5B4B77DE65E04F2C85D9E569 /* CameraTurnRecorder.swift */,
-				39BCFE21C90C48D58AD56212 /* RecordingOverlay.swift */,
-				050866DC6EB04FA4B7E32576 /* TurnRecording.swift */,
-				161CBA5C1A484FE6AB98FC0C /* Gamoitsani.storekit */,
-				91B8AA9DCC2242058FFEA629 /* StoreKitPurchases.swift */,
-				37DBD7AEB19D41F8ABD16E60 /* Purchasing.swift */,
-				BC29D2CDF3014DE299F00CC8 /* RemoveAds.swift */,
-				F2033B7C9E478D89C8C8B932 /* LegacyStoreCleanup.swift */,
-			);
-			path = Gamoitsani;
-			sourceTree = "<group>";
-		};
 		72DB47A2861A52B979C77B73 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,7 +96,7 @@
 				FF4D9D262BD698620046819D /* Products */,
 				FFF65CD02BE6B2F3008E0352 /* Frameworks */,
 				080C9A0323049673DB476C6E /* Pods */,
-				7016F9422072DEA7BED550D3 /* Gamoitsani */,
+				40165E3036256CF0365B4597 /* Gamoitsani */,
 			);
 			sourceTree = "<group>";
 		};
@@ -261,6 +157,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				40165E3036256CF0365B4597 /* Gamoitsani */,
+			);
 			name = Gamoitsani;
 			packageProductDependencies = (
 				9A24C52E5DAD4FCEDB822263 /* GamoitsaniCore */,
@@ -301,7 +200,7 @@
 				};
 			};
 			buildConfigurationList = FF4D9D202BD698620046819D /* Build configuration list for PBXProject "Gamoitsani" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 16.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -342,7 +241,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D82F8C692FC23FA30BF12D65 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,44 +293,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00B3B83E241C78863E87C3AC /* GamoitsaniApp.swift in Sources */,
-				47FD6444178F69C5BBF1C6CD /* Route.swift in Sources */,
-				66A4602347998D88A4A8BCFB /* Router.swift in Sources */,
-				49061860A18F78921BBA8CBA /* GameSetupModel.swift in Sources */,
-				0D5E8D592AF157CD1E0A2232 /* GameSetupView.swift in Sources */,
-				087C6573A75E236631EFDB36 /* SetupComponents.swift in Sources */,
-				B4C89321A831373D1E1223E7 /* SettingsView.swift in Sources */,
-				7E7DB9AC1AE3D56C4A6245A2 /* GameSession.swift in Sources */,
-				3C580555505E7068514885FB /* GameFlowView.swift in Sources */,
-				F4CF05276636EB2EE2D74BD2 /* PlayView.swift in Sources */,
-				0B8A3303FAA577E33F7DA9EE /* GameOverView.swift in Sources */,
-				90ABDC919AB3CF3A865F82D5 /* LeaderboardSheet.swift in Sources */,
-				4B27E3FC2F2BC311C29A036A /* DebugMenu.swift in Sources */,
-				55CC02AC07EED22D5BF9025A /* SplashView.swift in Sources */,
-				A8CC8DF3F1347FAC4DB17E9A /* ShareCard.swift in Sources */,
-				98CE2D64A13A15FECBA03047 /* PlayerRoster.swift in Sources */,
-				7FD58273C58F46FAE98790A6 /* AppInfo.swift in Sources */,
-				F4A6D9FB9DCC3C8D27A6DC13 /* AdUnits.swift in Sources */,
-				F8AD6CA2387F7BDA5506DA76 /* AdMobAds.swift in Sources */,
-				AB316F418AFE9DBD69C1637A /* BannerAd.swift in Sources */,
-				B62BA07BD997F77799F72B2F /* AdEnvironment.swift in Sources */,
-				F4DB2F566E074577B101B318 /* PlayerProfileSheet.swift in Sources */,
-				F6CCB3228CE44F1898A426B2 /* PlayerBook.swift in Sources */,
-				0FECA4CAE51A44DA9853DF9F /* HighlightReel.swift in Sources */,
-				6281EE2FAB4241C1BBAACCD5 /* Reminders.swift in Sources */,
-				ED51713510234A39AB2985C2 /* ReviewPrompter.swift in Sources */,
-				B557C8084D9B4211B9F34994 /* RecordingLog.swift in Sources */,
-				DA1088826889463689CFC04B /* PendingClipStore.swift in Sources */,
-				5C44931FFEEB48DC80EBF2EF /* RecordingBridge.swift in Sources */,
-				5CF98E7113214DFA8CB51067 /* CaptureSessionBox.swift in Sources */,
-				BD67B4AC6B03422DA2C500D3 /* RecordingExporter.swift in Sources */,
-				524CD077DF4344DE834BB32F /* CameraTurnRecorder.swift in Sources */,
-				7D6A83A186084BD9BF1C5DC3 /* RecordingOverlay.swift in Sources */,
-				2E1B431315864ED0BE1D81E2 /* TurnRecording.swift in Sources */,
-				7A8D3C56A06C438FB9F6B87E /* StoreKitPurchases.swift in Sources */,
-				763906B955274C3899942C31 /* Purchasing.swift in Sources */,
-				485D31FBA92D4931AD519275 /* RemoveAds.swift in Sources */,
-				B15DF6F4457CB4DAA83FF647 /* LegacyStoreCleanup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,7 +301,7 @@
 /* Begin XCBuildConfiguration section */
 		1944C757AF62697EA56CB162 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29AA0C2378FD5C07F5ADCDB7 /* Config.xcconfig */;
+			baseConfigurationReference = F0E7AC92C1E2C28737A902C9 /* Pods-Gamoitsani.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -472,7 +332,7 @@
 		};
 		86E9E9C4771250CC07B5BEF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29AA0C2378FD5C07F5ADCDB7 /* Config.xcconfig */;
+			baseConfigurationReference = 2A4F39F1DAD4AF7CEB36AE68 /* Pods-Gamoitsani.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
