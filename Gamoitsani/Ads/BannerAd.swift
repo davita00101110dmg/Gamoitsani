@@ -24,6 +24,19 @@ struct BannerAd: View {
     /// observed match rate is around 9%, so no-fill is the common case, not the edge one.
     @State private var hasAd = false
 
+    /// Space held open while a request is in flight, so returning to a screen that had a
+    /// banner does not collapse and re-open the layout.
+    ///
+    /// Only ever non-zero once something has filled in this session, so a run where no ad
+    /// ever arrives reserves nothing and looks exactly as it did before.
+    private var reservedHeight: CGFloat {
+        hasAd ? adSize.size.height : ads.lastBannerHeight
+    }
+
+    /// Whether the slot occupies space at all — either showing an ad or holding the place
+    /// of one that filled a moment ago.
+    private var isOccupied: Bool { reservedHeight > 0 }
+
     /// The card's real width, measured. This sits inside a safe-area inset, so it is not
     /// the screen's width.
     @State private var width: CGFloat = 0
@@ -44,7 +57,7 @@ struct BannerAd: View {
     var body: some View {
         if ads.isBannerAllowed, !AdUnits.banner.isEmpty {
             VStack(spacing: 0) {
-                if hasAd {
+                if isOccupied {
                     // Full width, unlike the card below it. This is the line between what
                     // scrolls and what does not — content passing under the footer is cut
                     // by it instead of just disappearing.
@@ -60,13 +73,15 @@ struct BannerAd: View {
                     // and framing by the creative instead let a short one shrink the bar.
                     .frame(
                         width: adSize.size.width,
-                        height: hasAd ? adSize.size.height : 0
+                        height: reservedHeight
                     )
                     // A creative larger than the slot is not hypothetical: Google's own
                     // test unit answers a 320x50 request with 468x60, 320x100 and 728x90
                     // at random, and mediation partners are no more disciplined.
                     .clipped()
                     .frame(maxWidth: .infinity)
+                    // Chrome follows the ad, not the reservation: a slot holding space for
+                    // a request in flight is blank surface, never an empty bordered card.
                     .background(hasAd ? Tokens.surfaceRaised.color : .clear)
                     .clipShape(RoundedRectangle(cornerRadius: Radius.panel, style: .continuous))
                     .overlay {
@@ -75,14 +90,25 @@ struct BannerAd: View {
                                 .strokeBorder(Tokens.cardEdge.color.opacity(0.6), lineWidth: 1)
                         }
                     }
-                    .padding(.horizontal, hasAd ? Spacing.md : 0)
-                    .padding(.top, hasAd ? Spacing.sm : 0)
-                    .padding(.bottom, hasAd ? Spacing.xs : 0)
+                    .padding(.horizontal, isOccupied ? Spacing.md : 0)
+                    .padding(.top, isOccupied ? Spacing.sm : 0)
+                    .padding(.bottom, isOccupied ? Spacing.xs : 0)
             }
             .background(Tokens.surface.color)
-            .animation(Motion.card(reduceMotion: reduceMotion), value: hasAd)
+            // Keyed on the height rather than on `hasAd`, so the first fill of a session
+            // eases the safe-area inset open instead of cutting to it.
+            //
+            // `control` rather than `card`: this inset moves everything above it, and
+            // card's spring overshoots by design — on a whole screen's worth of content
+            // that overshoot is read as a bounce, which is the thing being fixed.
+            .animation(Motion.control(reduceMotion: reduceMotion), value: reservedHeight)
             .onGeometryChange(for: CGFloat.self) { $0.size.width - Spacing.md * 2 } action: {
                 width = max(0, $0)
+            }
+            // Remembered for the next screen that shows a banner, so only the first fill
+            // moves any layout.
+            .onChange(of: hasAd) { _, filled in
+                ads.setLastBannerHeight(filled ? adSize.size.height : 0)
             }
             .accessibilityHidden(true)
         }
