@@ -6,10 +6,20 @@
 
 Georgian party word-guessing game (Taboo/Alias-style). iOS app in production on the App Store; Android port in progress (separate repo/target).
 
-**v1 is deleted.** Its target, its 164 sources, its storyboards and its two test targets
-were removed at cutover; the shipping 1.7 stays on the App Store until 2.0 replaces it,
-but nothing in this repo builds it any more. Anything below describes 2.0. v1 is
-recoverable from git history if a question about old behaviour comes up.
+**Cutover is done.** v1's target, its 164 sources, its storyboards and its two test targets
+are deleted, and the rewrite has taken its name and its bundle id — one target,
+`Gamoitsani`, shipping as `davitikhvedelidze.Gamoitsani`. There is no "2.0 target" any
+more; there is just the app. v1 is recoverable from git history if a question about old
+behaviour comes up.
+
+The shipping 1.7 on the App Store is still v1 and still reads from Firestore. That backend
+keeps running until this replaces it — which is why the Firestore rules config is still in
+the repo. See the Phase C note in `docs/2.0/HANDOFF.md`.
+
+Because the bundle id is now v1's, **an upgrade inherits v1's `UserDefaults` container**.
+Two pieces of cutover code depend on that and both are load-bearing:
+`Localization.migrateLegacyLanguage` and `LegacyStoreCleanup`. Neither can fail visibly —
+do not "simplify" either without reading why they exist.
 
 ## Tech stack
 - Swift 6, strict concurrency, iOS 18. SwiftUI only — no UIKit, no coordinators, no storyboards
@@ -21,7 +31,7 @@ recoverable from git history if a question about old behaviour comes up.
 
 ## Project structure
 - `Gamoitsani.xcworkspace` — open this in Xcode, not the `.xcodeproj`
-- `Gamoitsani2/` — the app: composition root, navigation, screens, AdMob adapter
+- `Gamoitsani/` — the app: composition root, navigation, screens, AdMob adapter
 - `Libraries/Packages/` — the eight SPM packages, where nearly all tests live
 - `Pods/` — CocoaPods dependencies (do not hand-edit)
 - `Podfile` / `Podfile.lock` — dependency manifest
@@ -37,11 +47,11 @@ recoverable from git history if a question about old behaviour comes up.
 - Flat string keys, e.g. `setup.play`. `scripts/verify-localization-keys.py` fails CI on a key the catalogue lacks
 
 ## Build & verify
-- Build: `xcodebuild build -workspace Gamoitsani.xcworkspace -scheme Gamoitsani2`
+- Build: `xcodebuild build -workspace Gamoitsani.xcworkspace -scheme Gamoitsani`
 - Tests live in the packages, one scheme each: `cd Libraries/Packages/<name> && xcodebuild
   test -scheme <name> -destination "id=<sim udid>"`. `GamoitsaniMacros` needs `swift test`
   instead — it is a compiler plugin with no simulator destination
-- There is no app-level test target, and the `Gamoitsani2` scheme has no test action
+- There is no app-level test target, and the `Gamoitsani` scheme has no test action
 - After any edit, prefer building before declaring a task done
 
 ## Skills

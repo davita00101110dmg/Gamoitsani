@@ -1,6 +1,6 @@
 ---
 name: run-on-device
-description: Build, install and launch Gamoitsani2 on the paired physical iPhone over the network. Use before every commit that changes anything the user can see, and whenever asked to "run it on my device", "show me on my phone", or to verify UI on real hardware.
+description: Build, install and launch Gamoitsani on the paired physical iPhone over the network. Use before every commit that changes anything the user can see, and whenever asked to "run it on my device", "show me on my phone", or to verify UI on real hardware.
 ---
 
 # Run on device
@@ -23,7 +23,7 @@ needed — but it must be awake and on the same network.
 one is a CoreDevice UUID. Using it in `-destination` fails with an unhelpful error.
 
 ```sh
-xcodebuild -showdestinations -workspace Gamoitsani.xcworkspace -scheme Gamoitsani2 \
+xcodebuild -showdestinations -workspace Gamoitsani.xcworkspace -scheme Gamoitsani \
   | grep -i "platform:iOS," | grep -v Simulator
 ```
 
@@ -36,7 +36,7 @@ than assuming — it changes if they use a different device.
 UDID=00008140-001A682611E2801C
 DD=<scratchpad>/DDdev
 
-xcodebuild build -workspace Gamoitsani.xcworkspace -scheme Gamoitsani2 \
+xcodebuild build -workspace Gamoitsani.xcworkspace -scheme Gamoitsani \
   -destination "platform=iOS,id=$UDID" \
   -derivedDataPath "$DD" -allowProvisioningUpdates
 
@@ -53,7 +53,7 @@ profile has not been generated yet.
 - Signing uses the existing team `V9DL6T6A4K` and the wildcard
   "iOS Team Provisioning Profile: *". Nothing new is registered in the developer account.
 - Builds are Debug, so slower than release, and the profile expires in about a week.
-- `Gamoitsani2` installs as bundle id `davitikhvedelidze.Gamoitsani2`, separate from the
+- `Gamoitsani` installs as bundle id `davitikhvedelidze.Gamoitsani`, separate from the
   shipping v1 app, so both live on the phone at once. Do not "fix" this by reusing v1's
   bundle id — it would overwrite the real app.
 - There is no `simctl`-style tap primitive for physical devices. To verify interaction

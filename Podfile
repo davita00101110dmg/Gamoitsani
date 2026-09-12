@@ -23,7 +23,7 @@ def ad_sdks
   pod 'GoogleMobileAdsMediationFacebook'  # Meta    — $0.28,  3.2%
 end
 
-target 'Gamoitsani2' do
+target 'Gamoitsani' do
   use_frameworks!
   ad_sdks
 end

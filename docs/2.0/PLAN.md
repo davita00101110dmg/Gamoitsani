@@ -275,7 +275,7 @@ What's broken is the *system* around it:
 ```
 Gamoitsani.xcworkspace
 ├── Gamoitsani            (v1 target — frozen, hotfixes only, deleted at cutover)
-├── Gamoitsani2           (new app target: @main App, DI composition root, ~thin)
+├── Gamoitsani            (app target: @main App, DI composition root, ~thin)
 └── Packages/             (local SPM — real module boundaries, fast previews, testable)
     ├── GamoitsaniCore        domain: Team, GameState, GameRules, scoring. No UIKit/SwiftUI.
     ├── GamoitsaniEngine      @Observable @MainActor GameEngine + deadline-based RoundTimer
@@ -361,7 +361,7 @@ Wire up anonymous auth, commit `firestore.rules`, remove client-side document de
 drop the hardcoded TCF consent string, stop requesting location for ad targeting.
 
 **Phase 4 — Skeleton of the new target**
-`Gamoitsani2` + the five local packages, SwiftUI `App`, `NavigationStack` + `Router`,
+`Gamoitsani` + the five local packages, SwiftUI `App`, `NavigationStack` + `Router`,
 Swift 6 mode, design tokens, and a working Home screen. Nothing else. First runnable 2.0.
 
 **Phase 5 — `GamoitsaniCore` + `GamoitsaniEngine`**

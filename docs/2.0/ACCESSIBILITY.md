@@ -1,7 +1,7 @@
 # Accessibility — 2.0
 
 What has been checked, what was fixed, and how to verify it by hand. The audit that
-produced this ran over every SwiftUI file in `Gamoitsani2` and `GamoitsaniDesign`.
+produced this ran over every SwiftUI file in `Gamoitsani` and `GamoitsaniDesign`.
 
 ## Where 2.0 already stood
 

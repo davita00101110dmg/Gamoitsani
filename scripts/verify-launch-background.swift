@@ -7,7 +7,7 @@
 
 import Foundation
 
-let colorset = "Gamoitsani2/Resources/Assets.xcassets/LaunchBackground.colorset/Contents.json"
+let colorset = "Gamoitsani/Resources/Assets.xcassets/LaunchBackground.colorset/Contents.json"
 let tokens = "Libraries/Packages/GamoitsaniDesign/Sources/GamoitsaniDesign/Tokens.swift"
 
 func fail(_ message: String) -> Never {
