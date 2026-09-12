@@ -115,7 +115,7 @@ struct StepperRow: View {
             Image(systemName: symbol)
                 .font(.body.weight(.bold))
                 .foregroundStyle(enabled ? Tokens.accent.color : Tokens.onSurfaceMuted.color.opacity(0.4))
-                .frame(width: 34, height: 34)
+                .frame(width: Sizing.controlGlyph, height: Sizing.controlGlyph)
                 .background(Tokens.surface.color)
                 .clipShape(Circle())
                 // The circle stays 34pt; the target around it is 44, the smallest a
@@ -242,18 +242,21 @@ struct SetupChip<Glyph: View>: View {
         Button(action: select) {
             // Glyph above the label rather than beside it: four Georgian words across one
             // row have no width to spare, and side-by-side truncated every one of them.
-            VStack(spacing: 3) {
+            VStack(spacing: Spacing.xxs) {
                 glyph
                 Text(title)
                     .font(Typography.caption)
                     .foregroundStyle(isOn ? Tokens.onAccent.color : Tokens.onSurface.color)
                     .lineLimit(2)
-                    .minimumScaleFactor(0.7)
+                    .minimumScaleFactor(0.75)
                     .multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, Spacing.xs)
-            .padding(.horizontal, 4)
+            // Taller rather than wider. Vertical space is free here and horizontal is not:
+            // three Georgian labels share one row, so every point of side padding comes
+            // straight out of the text and is paid for in shrink.
+            .padding(.vertical, Spacing.sm)
+            .padding(.horizontal, Spacing.xxs)
             // Every chip in a row is as tall as the tallest, so one label wrapping to two
             // lines does not leave its neighbours short.
             .frame(maxHeight: .infinity)

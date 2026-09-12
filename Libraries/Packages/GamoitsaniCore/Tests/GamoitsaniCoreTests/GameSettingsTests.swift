@@ -24,10 +24,12 @@ struct GameSettingsTests {
         #expect(GameSettings(roundLength: input).roundLength == expected)
     }
 
-    @Test("defaults match v1")
+    /// v1's defaults, except the round count. v1 opened on one round, which gives every
+    /// team a single turn and hands the game to whoever drew the kinder words.
+    @Test("defaults are v1's, apart from the round count")
     func defaults() {
         let s = GameSettings()
-        #expect(s.rounds == 1)
+        #expect(s.rounds == 3)
         #expect(s.roundLength == 45)
         #expect(s.mode == .classic)
         #expect(s.superWordsEnabled == false)

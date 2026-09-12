@@ -151,6 +151,9 @@ struct TurnInfoView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var appeared = false
 
+    /// Whether this screen has been up long enough to own the taps landing on it.
+    @State private var settled = false
+
     private var teamColor: Color {
         TeamPalette.color(at: engine.state.currentTeamIndex).color
     }
@@ -190,6 +193,19 @@ struct TurnInfoView: View {
             .accessibilityElement(children: .combine)
             .accessibilityAddTraits(.isHeader)
 
+            // The team's rule, here rather than on a screen of its own. It belongs with
+            // the name of the team it applies to — each team draws a different one, so
+            // "the challenge" with no owner was ambiguous the moment there were two.
+            if let challenge = engine.state.currentChallenge {
+                ChallengeCard(
+                    teamName: engine.currentTeam?.name ?? "",
+                    text: l10n(challenge.textKey),
+                    tint: teamColor
+                )
+                .scaleEffect(appeared || reduceMotion ? 1 : 0.92)
+                .opacity(appeared ? 1 : 0)
+            }
+
             Spacer()
 
             VStack(spacing: Spacing.sm) {
@@ -215,6 +231,16 @@ struct TurnInfoView: View {
             }
             .padding(.horizontal, Spacing.lg)
             .padding(.bottom, Spacing.xl)
+            // Deaf until the screen has settled. Play on setup and Leaderboard here land
+            // within about three points of each other, so an impatient double-tap on Play
+            // pushed this screen and then hit whatever had arrived under the thumb. The
+            // guard on Play stops a second game; it cannot stop a tap meant for the
+            // previous screen.
+            .disabled(!settled)
+        }
+        .task {
+            try? await Task.sleep(for: .milliseconds(350))
+            settled = true
         }
         // Between turns, and only here. The phone is being handed to the next player,
         // nothing is timed, and there is nothing to mis-tap — unlike the play screen,
@@ -307,6 +333,48 @@ struct RulesSheet: View {
 }
 
 /// The optional per-team challenge.
+/// A team's rule, on the turn-info screen beside the name it belongs to.
+///
+/// Titled with the team rather than just "Challenge": every team draws a different rule,
+/// so an unowned one reads as a rule for the room.
+struct ChallengeCard: View {
+    let teamName: String
+    let text: String
+    let tint: Color
+
+    @Environment(Localization.self) private var l10n
+
+    var body: some View {
+        VStack(spacing: Spacing.xs) {
+            Text("\(teamName) · \(l10n("game.challenge"))".uppercased())
+                .font(Typography.label)
+                .foregroundStyle(tint)
+                .multilineTextAlignment(.center)
+
+            Text(text)
+                .font(Typography.word(20))
+                .foregroundStyle(Tokens.onSurface.color)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(Spacing.md)
+        .frame(maxWidth: .infinity)
+        .background(Tokens.cardFace.color)
+        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: Radius.card, style: .continuous)
+                .strokeBorder(tint.opacity(0.5), lineWidth: 2)
+        }
+        .padding(.horizontal, Spacing.lg)
+        .accessibilityElement(children: .combine)
+    }
+}
+
+/// The challenge on a screen of its own.
+///
+/// No longer reached by a new turn — `ChallengeCard` shows the rule on turn info instead.
+/// This stays for one case only: a game saved while `.challenge` was still a phase it
+/// could stop in. Those resume here, acknowledge, and carry on into the countdown.
 struct ChallengeView: View {
     let engine: GameEngine
 

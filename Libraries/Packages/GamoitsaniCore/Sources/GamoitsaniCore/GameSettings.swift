@@ -21,7 +21,11 @@ public struct GameSettings: Sendable, Hashable, Codable {
     public var difficulty: WordDifficulty
 
     public init(
-        rounds: Int = 1,
+        // Three, not one. At one round every team takes a single turn and the game is
+        // decided by whoever drew the kinder words — there is no chance to come back from
+        // a bad forty-five seconds, which is most of what makes this fun to play twice.
+        // The stepper is right there for anyone who wants it shorter.
+        rounds: Int = 3,
         roundLength: TimeInterval = 45,
         mode: GameMode = .classic,
         superWordsEnabled: Bool = false,
