@@ -11,13 +11,16 @@ Read this with `docs/2.0/PLAN.md` (the architecture, still accurate),
 
 ## The one-paragraph version
 
-`Gamoitsani2` is a complete, playable rewrite living beside v1 as a separate bundle id
-(`davitikhvedelidze.Gamoitsani2`). Eight local SPM packages, Swift 6 strict concurrency,
-iOS 18, 223 tests. Setup, both game modes, scoreboard, sharing, settings, sound, launch
-animation, the full ad stack and the remove-ads purchase all work. **It plays on a real
-word database** — 6,374 curated Georgian words plus ten more languages exported from v1's
-Firestore, bundled as read-only SQLite, no network and no SDK. v1 still builds and must
-keep building until cutover.
+`Gamoitsani2` is a complete, playable rewrite, and as of cutover Phase A it is the **only**
+thing in this repo — v1's target and sources are deleted. It still ships under a separate
+bundle id (`davitikhvedelidze.Gamoitsani2`) until Phase B flips it. Eight local SPM
+packages, Swift 6 strict concurrency, iOS 18. Setup, both game modes, scoreboard, sharing,
+settings, sound, launch animation, the full ad stack and the remove-ads purchase all work.
+**It plays on a real word database** — 6,374 curated Georgian words plus ten more languages
+exported from v1's Firestore, bundled as read-only SQLite, no network and no SDK.
+
+The shipping 1.7 on the App Store is still v1 and still reads from Firestore. That backend
+keeps running until 2.0 replaces it.
 
 ---
 
@@ -131,9 +134,10 @@ destination.
 - **Words ship as a read-only SQLite database in the bundle.** Not Firestore. The owner is
   building it. Challenges go in the same file. **Add word is dropped entirely** — the route
   and the last `PlaceholderScreen` are deleted, and every route in 2.0 is a real screen.
-- **No Firebase in 2.0, and no Crashlytics.** 2.0 already has none; v1 still imports it in
-  six files and must keep building, so "remove Firebase" *is* the cutover step. Crash
-  reports come from Xcode Organizer, which costs nothing and needs no SDK.
+- **No Firebase, and no Crashlytics.** The six files that imported it were v1's and went
+  with v1 in Phase A, so there is no Firebase SDK in this repo at all. The Firestore
+  *backend* still serves the shipping 1.7 — see Phase C. Crash reports come from Xcode
+  Organizer, which costs nothing and needs no SDK.
 - **All four v1 features are settled.** Recording, the review prompt and notifications are
   done. **Word review is dropped** — it existed to crowd-moderate a database anyone could
   write to, and 2.0 ships a curated file instead. Do not rebuild it.
@@ -142,21 +146,45 @@ destination.
 
 ## Cutover checklist (Phase 9)
 
-Flipping the bundle id to `davitikhvedelidze.Gamoitsani` also inherits **v1's
-`UserDefaults` container**, and the two key schemes do not line up.
+**Phase A is done.** v1's three targets, its 164 sources, its storyboards, its scheme and
+its five extra pods are deleted; `Pods/` went 389 MB → 116 MB. All eight package suites
+pass without it. v1 is recoverable from git history if a question about old behaviour
+comes up.
 
-- **`APP_LANGUAGE` → `app.language`.** v1 wrote the first, 2.0 reads the second. Without a
-  one-time read of the old key at first launch, every existing user who deliberately chose
-  a language gets silently reset to the system default on upgrade.
+**`APP_LANGUAGE` → `app.language` is done** and must ship in the same build that flips the
+bundle id. `Localization.migrateLegacyLanguage` copies the key across once and deletes the
+old one.
+
+### Phase B — the rename, not yet done
+
+- Rename the `Gamoitsani2` target, scheme and directory to `Gamoitsani`, and flip
+  `PRODUCT_BUNDLE_IDENTIFIER` to `davitikhvedelidze.Gamoitsani`.
+- **Delete the orphaned v1 Core Data store at first launch.** Flipping the bundle id
+  inherits v1's container, and that store is a disposable word cache that will otherwise
+  sit on disk forever.
 - **`HAS_REMOVED_ADS` stays ignored, deliberately.** It is tempting to honour it so nobody
   loses a purchase, but that device-local flag is exactly the unreliable thing 2.0
   replaced, and v1 could set it without a verified transaction.
   `Transaction.currentEntitlements` is authoritative and already covers anyone who really
   bought it, on any device, forever. Do not add a fallback.
-- **Delete the orphaned v1 Core Data store.** It is a disposable word cache and will
-  otherwise sit on disk forever.
-- Delete v1 sources, its target, storyboards/XIBs, and its six extra pods. CocoaPods
-  itself stays — 2.0 uses it for the ad SDKs.
+
+### Phase C — after 2.0 is actually on the App Store
+
+**The Firestore backend config deliberately stays for now.** `firestore.rules.template`,
+`firestore-tests/`, `firebase.json`, `.firebaserc` and `scripts/generate-firestore-rules.sh`
+govern rules for a database **the shipping 1.7 still reads from**. Deleting them changes
+nothing deployed, but it throws away the source of truth for a live service while that
+service is still serving. They go once 2.0 has replaced 1.7 on the App Store — not before.
+
+`scripts/export_firestore_words.py` stays regardless: it is the record of how the bundled
+word data was produced.
+
+**`scripts/generate-firestore-rules.sh` is broken as of Phase A** and this is deliberate
+rather than overlooked. It read the Firestore collection names out of v1's
+`Config.xcconfig`, which was gitignored and went with v1 — so the names exist nowhere in
+this repo any more, by design, since that is why they were gitignored. If the live 1.7's
+rules ever need redeploying before Phase C, the names have to come from the Firebase
+console or from a copy of the old config.
 
 ---
 

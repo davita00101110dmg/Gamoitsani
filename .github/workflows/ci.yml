@@ -16,7 +16,6 @@ concurrency:
 
 env:
   WORKSPACE: Gamoitsani.xcworkspace
-  SCHEME: Gamoitsani
 
 jobs:
   # One job on purpose.
@@ -42,16 +41,14 @@ jobs:
           xcode-version: latest-stable
 
       - name: Create Config.xcconfig
-        # The real configs are gitignored (ad unit IDs, mediation secrets). The committed
-        # templates carry Google's public AdMob *test* IDs and placeholder collection
-        # names, which is all CI needs — it compiles the app, it never serves ads.
+        # The real config is gitignored (ad unit IDs, mediation secrets). The committed
+        # template carries Google's public AdMob *test* IDs, which is all CI needs — it
+        # compiles the app, it never serves ads.
         #
-        # Both targets. 2.0 has its own, and it is a *base configuration reference*: a
-        # missing file there fails the build outright, before a single file is compiled,
-        # rather than degrading to an empty setting.
+        # It is a *base configuration reference*, so a missing file fails the build
+        # outright, before a single file is compiled, rather than degrading to an empty
+        # setting.
         run: |
-          cp Gamoitsani/Resources/Configuration/Config.xcconfig.template \
-             Gamoitsani/Resources/Configuration/Config.xcconfig
           cp Gamoitsani2/Config.xcconfig.template \
              Gamoitsani2/Config.xcconfig
 
@@ -89,10 +86,10 @@ jobs:
         # more, which is how the strings from a deleted screen get noticed.
         run: ./scripts/verify-localization-keys.py
 
-      - name: Build and test Gamoitsani2
-        # The 2.0 target and its local packages, built first and separately from v1 so a
-        # failure here is unambiguous. Swift 6 language mode with complete strict
-        # concurrency, so a data-race diagnostic fails the build rather than accumulating.
+      - name: Build Gamoitsani2
+        # Swift 6 language mode with complete strict concurrency, so a data-race
+        # diagnostic fails the build rather than accumulating. The tests live in the
+        # packages and run in the step below.
         run: |
           set -o pipefail
           xcodebuild build \
@@ -122,25 +119,6 @@ jobs:
         run: |
           set -o pipefail
           ( cd Libraries/Packages/GamoitsaniMacros && swift test )
-
-      - name: Build and test
-        # Compiles and tests in a single pass. Scoped to GamoitsaniTests deliberately: the
-        # UI test target is stock Xcode boilerplate that asserts nothing, and running the
-        # whole scheme also runs GamoitsaniUITests — which took over ten minutes and wrote
-        # ~4 GB of result bundles before filling the disk on a dev machine. Add it back
-        # when the UI tests test something.
-        #
-        # 38 pass, 6 skip, 0 fail. The skips are ChallengesManagerTests and two
-        # GameChallengeViewModelTests cases, which need an injection seam on
-        # ChallengesManager that Phase 4 introduces; they throw XCTSkip with that reason.
-        run: |
-          set -o pipefail
-          xcodebuild test \
-            -workspace "$WORKSPACE" \
-            -scheme "$SCHEME" \
-            -destination "id=${{ steps.sim.outputs.udid }}" \
-            -only-testing:GamoitsaniTests \
-            CODE_SIGNING_ALLOWED=NO
 
   # Kept off the push path: the sanitised suites take several times as long, and their
   # signal does not change commit to commit. Weekly, or on demand.

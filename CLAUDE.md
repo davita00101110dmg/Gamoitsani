@@ -6,46 +6,43 @@
 
 Georgian party word-guessing game (Taboo/Alias-style). iOS app in production on the App Store; Android port in progress (separate repo/target).
 
+**v1 is deleted.** Its target, its 164 sources, its storyboards and its two test targets
+were removed at cutover; the shipping 1.7 stays on the App Store until 2.0 replaces it,
+but nothing in this repo builds it any more. Anything below describes 2.0. v1 is
+recoverable from git history if a question about old behaviour comes up.
+
 ## Tech stack
-- Swift, SwiftUI + UIKit (coordinator pattern for UIKit screens)
-- CoreData for local storage (model version 2.0)
-- Firebase Firestore for word data backend
-- CocoaPods for dependency management — **always open `Gamoitsani.xcworkspace`, never the `.xcodeproj`**
-- Custom font: Mersad (variable typeface)
-- Ad mediation: IronSource, Google Mobile Ads, Vungle, InMobi, Facebook Audience Network, Chartboost, Unity Ads, MTGSDK
+- Swift 6, strict concurrency, iOS 18. SwiftUI only — no UIKit, no coordinators, no storyboards
+- Eight local SPM packages under `Libraries/Packages/`
+- Words ship as a bundled read-only SQLite file. **No Firestore, no Firebase, no Core Data**
+- CocoaPods for the ad SDKs only — **always open `Gamoitsani.xcworkspace`, never the `.xcodeproj`**
+- Custom font: Mersad (variable typeface), shipped inside `GamoitsaniDesign`
+- Ad mediation: AdMob + Vungle + Meta. The other five networks left with v1
 
 ## Project structure
 - `Gamoitsani.xcworkspace` — open this in Xcode, not the `.xcodeproj`
-- `Gamoitsani/` — app source
-- `GamoitsaniTests/` — unit tests
-- `GamoitsaniUITests/` — UI tests
+- `Gamoitsani2/` — the app: composition root, navigation, screens, AdMob adapter
+- `Libraries/Packages/` — the eight SPM packages, where nearly all tests live
 - `Pods/` — CocoaPods dependencies (do not hand-edit)
 - `Podfile` / `Podfile.lock` — dependency manifest
 
 ## Architecture & conventions
-- MVVM-leaning; ViewModels follow a consistent state machine pattern: `INFO → CHALLENGE → COUNTDOWN → PLAY → GAME_OVER`
-- `GameStory` acts as shared game state across the app
+- Pure value types over a reducer (`GameReducer`), with an `@Observable` `GameEngine` on top
+- Phases: `INFO → CHALLENGE → COUNTDOWN → PLAY → GAME_OVER`
 - Two game modes: **Classic** (one word at a time) and **Arcade** (five simultaneous words, swipe mechanics, skip penalty)
-- Localization: String Catalogs (`.xcstrings`), NOT `.strings` files. Uses a custom `LanguageManager` + `LocaleEnvironment` modifier + `.localized()` helper — **do not use `String(localized:)` directly**, it reads system locale, not the app's in-app language switch. Force view reconstruction with `.id()` modifiers when language changes.
+- Localization: String Catalogs (`.xcstrings`). `Localization` + the `l10n(_:)` environment
+  callable — **do not use `String(localized:)`**, it reads the system locale rather than the
+  app's own picker
 - Supported languages: Georgian, English, Ukrainian, Turkish, Armenian, Azerbaijani, German, Spanish, French, Japanese, Russian
-- Localization keys organized as nested enums, e.g. `L10n.Screen.Settings.title`, in `Localizable.swift`
-
-## CoreData
-- Model is on version 2.0. Key metadata fields on word entities: `isGeorgianOrigin`, `formalityLevel`, `isProperNoun`, `wordType`, `isAbstract`, `ageAppropriateness`, `relatedWordsData`
-- Migrations: always confirm `shouldMigrateStoreAutomatically` and `shouldInferMappingModelAutomatically` are set **before** `loadPersistentStores` for lightweight migrations
-- `CoreDataManager` handles fetches/predicates — new filter features (category, difficulty, word type, Georgian origin, family mode, abstract round) build on `NSPredicate` logic here plus `GameStory` filter state
-
-## Known gotchas
-- Replacing a form with `LoadingView` inside a `UIHostingController` can silently break touch handling — verify view hierarchy swaps carefully
-- Navigation pops inside `UIAlertController` action handlers can corrupt `UINavigationController` state — always wrap in `DispatchQueue.main.async` and guard against in-flight transitions
-- Storage checks: use `volumeAvailableCapacityForImportantUsage`, not `systemFreeSize` ratio-based checks (unreliable on simulator, not production-safe)
-- `ChallengesManager.swift` — guard against empty data before JSON decoding to avoid `dataCorrupted` errors
+- Flat string keys, e.g. `setup.play`. `scripts/verify-localization-keys.py` fails CI on a key the catalogue lacks
 
 ## Build & verify
-- Build: standard `xcodebuild` against `Gamoitsani.xcworkspace` (fill in scheme name)
-- Run unit tests: `GamoitsaniTests` target
-- Run UI tests: `GamoitsaniUITests` target
-- After any edit, prefer building the relevant target before declaring a task done
+- Build: `xcodebuild build -workspace Gamoitsani.xcworkspace -scheme Gamoitsani2`
+- Tests live in the packages, one scheme each: `cd Libraries/Packages/<name> && xcodebuild
+  test -scheme <name> -destination "id=<sim udid>"`. `GamoitsaniMacros` needs `swift test`
+  instead — it is a compiler plugin with no simulator destination
+- There is no app-level test target, and the `Gamoitsani2` scheme has no test action
+- After any edit, prefer building before declaring a task done
 
 ## Skills
 Skills are discovered automatically from their descriptions — they do not need listing
@@ -58,8 +55,8 @@ decision this repo has already made.
   `swiftdata-testing` are all live on this machine, and 2.0 contains no SwiftData at all —
   `WordSync`/`CachedWord`/`WordStore` were deleted once words moved to a bundled read-only
   SQLite file. Do not reintroduce it.
-- **`core-data-expert` applies to v1 only**, which is deleted at cutover. 2.0 has no Core
-  Data. See `docs/2.0/HANDOFF.md`.
+- **`core-data-expert` does not apply.** It was v1's, and v1 is gone. There is no Core Data
+  in this repo.
 - **`swift-architecture-skill` offers MVVM, TCA, VIPER and Clean.** 2.0's architecture is
   settled: pure value types over a reducer (`GameReducer`), with an `@Observable`
   `GameEngine` on top. Do not propose restructuring it.
