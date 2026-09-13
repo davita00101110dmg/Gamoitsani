@@ -157,7 +157,7 @@ struct GameSetupView: View {
                     Image(systemName: "trash")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Tokens.danger.color)
-                        .frame(width: 34, height: 34)
+                        .frame(width: Sizing.controlGlyph, height: Sizing.controlGlyph)
                         .background(Tokens.surface.color)
                         .clipShape(Circle())
                         .frame(width: Sizing.minimumTarget, height: Sizing.minimumTarget)
@@ -172,7 +172,7 @@ struct GameSetupView: View {
                     Image(systemName: "play.fill")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Tokens.onAccent.color)
-                        .frame(width: 34, height: 34)
+                        .frame(width: Sizing.controlGlyph, height: Sizing.controlGlyph)
                         .background(Tokens.accent.color)
                         .clipShape(Circle())
                         .frame(width: Sizing.minimumTarget, height: Sizing.minimumTarget)
@@ -384,8 +384,11 @@ struct GameSetupView: View {
         ) {
             withAnimation(Motion.control(reduceMotion: reduceMotion)) { toggle() }
         } glyph: {
+            // Bigger than the label it sits above. At caption2 the two were the same
+            // weight on screen and the chip read as two lines of small text rather than
+            // an icon with a name under it.
             Image(systemName: symbol)
-                .font(.caption2.weight(.bold))
+                .font(.footnote.weight(.bold))
                 .foregroundStyle(isOn ? Tokens.onAccent.color : Tokens.accent.color)
         }
     }

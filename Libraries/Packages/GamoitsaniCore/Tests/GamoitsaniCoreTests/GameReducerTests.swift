@@ -12,6 +12,10 @@ struct GameReducerTests {
 
     private let t0 = Date(timeIntervalSince1970: 1_000_000)
 
+    /// The super word on the turn's very first word, so a test can assert on it without
+    /// playing through to wherever a random draw put it.
+    private let first = SuperWordPlacement(classicPosition: 1, arcadeSet: 1, arcadeSlot: 1)
+
     private func words(_ n: Int) -> [DeckWord] {
         (0..<n).map { DeckWord(id: "\($0)", text: "w\($0)") }
     }
@@ -35,10 +39,18 @@ struct GameReducerTests {
     }
 
     /// Drives the reducer, failing the test on any rejection.
-    private func apply(_ state: GameState, _ events: [GameEvent], at now: Date) throws -> GameState {
+    /// `placement` is passed through because `beginTurn` redraws it — the super word moves
+    /// every turn so no two teams get it in the same slot. A test that needs to know where
+    /// it landed has to say so; the rest get a random one, which is the real behaviour.
+    private func apply(
+        _ state: GameState,
+        _ events: [GameEvent],
+        at now: Date,
+        placement: SuperWordPlacement = .random()
+    ) throws -> GameState {
         var s = state
         for event in events {
-            s = try GameReducer.reduce(s, event, at: now).get()
+            s = try GameReducer.reduce(s, event, at: now, nextPlacement: placement).get()
         }
         return s
     }
@@ -56,11 +68,14 @@ struct GameReducerTests {
         #expect(s.turnWords.count == 1, "classic puts one word on the table")
     }
 
-    @Test("the challenge phase appears only when enabled")
+    /// The rule is shown on the turn-info screen the player presses Start from, so there
+    /// is no separate phase to walk through even with challenges on. The `.challenge` case
+    /// survives only so games saved while it existed still decode.
+    @Test("challenges do not add a phase")
     func phaseWalkWithChallenge() throws {
         var s = try apply(game(challenges: true), [.beginTurn], at: t0)
-        #expect(s.phase == .challenge)
-        s = try apply(s, [.acknowledgeChallenge, .countdownFinished], at: t0)
+        #expect(s.phase == .countdown, "straight past the old challenge screen")
+        s = try apply(s, [.countdownFinished], at: t0)
         #expect(s.phase == .playing)
     }
 
@@ -148,8 +163,8 @@ struct GameReducerTests {
     func superWordScoring() throws {
         // Classic, super word at position 1, so the very first word is it.
         var s = try apply(
-            game(superWords: true, placement: SuperWordPlacement(classicPosition: 1, arcadeSet: 1, arcadeSlot: 1)),
-            [.beginTurn, .countdownFinished], at: t0)
+            game(superWords: true, placement: first),
+            [.beginTurn, .countdownFinished], at: t0, placement: first)
 
         let word = try #require(s.turnWords.first)
         #expect(word.isSuperWord)
@@ -165,8 +180,8 @@ struct GameReducerTests {
     @Test("a skipped super word costs three")
     func superWordSkipped() throws {
         var s = try apply(
-            game(superWords: true, placement: SuperWordPlacement(classicPosition: 1, arcadeSet: 1, arcadeSlot: 1)),
-            [.beginTurn, .countdownFinished], at: t0)
+            game(superWords: true, placement: first),
+            [.beginTurn, .countdownFinished], at: t0, placement: first)
         let word = try #require(s.turnWords.first)
         s = try apply(s, [.answer(wordID: word.id, outcome: .skipped)], at: t0)
         #expect(s.teams[0].score == -3)
@@ -175,8 +190,8 @@ struct GameReducerTests {
     @Test("no super word appears when the setting is off")
     func superWordsOff() throws {
         let s = try apply(
-            game(superWords: false, placement: SuperWordPlacement(classicPosition: 1, arcadeSet: 1, arcadeSlot: 1)),
-            [.beginTurn, .countdownFinished], at: t0)
+            game(superWords: false, placement: first),
+            [.beginTurn, .countdownFinished], at: t0, placement: first)
         #expect(s.turnWords.contains { $0.isSuperWord } == false)
     }
 
@@ -299,6 +314,9 @@ struct UndoTests {
 
     private let t0 = Date(timeIntervalSince1970: 1_000_000)
 
+    /// The super word on the turn's first word, so these tests can find it.
+    private let first = SuperWordPlacement(classicPosition: 1, arcadeSet: 1, arcadeSlot: 1)
+
     private func arcadeGame(superWords: Bool = false) -> GameState {
         GameState(
             settings: GameSettings(mode: .arcade, superWordsEnabled: superWords),
@@ -308,8 +326,10 @@ struct UndoTests {
         )
     }
 
+    /// Pins the placement, because `beginTurn` redraws it — a test that needs to find the
+    /// super word cannot have it land somewhere random.
     private func started(_ state: GameState) throws -> GameState {
-        var s = try GameReducer.reduce(state, .beginTurn, at: t0).get()
+        var s = try GameReducer.reduce(state, .beginTurn, at: t0, nextPlacement: first).get()
         s = try GameReducer.reduce(s, .countdownFinished, at: t0).get()
         return s
     }

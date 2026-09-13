@@ -7,7 +7,18 @@ import SwiftUI
 /// The identity mark: three cards fanned at ±19° with flat fills and no gradient.
 public struct AppMark: View {
 
-    public init() {}
+    /// Whether to draw the dark rounded tile the cards sit on.
+    ///
+    /// The field is a fixed dark colour, because an app icon cannot be transparent and
+    /// cannot vary by theme. On a dark screen it disappears into the surface and you see
+    /// only the cards, which is the intent — but in light mode the same tile is a dark
+    /// slab behind them. Anywhere inside the app the cards can simply sit on whatever is
+    /// already there, so the field is off by default and the icon asks for it.
+    private let drawsField: Bool
+
+    public init(drawsField: Bool = false) {
+        self.drawsField = drawsField
+    }
 
     public var body: some View {
         GeometryReader { geo in
@@ -17,8 +28,10 @@ public struct AppMark: View {
             let radius = cardW * Brand.markCardRadiusRatio
 
             ZStack {
-                RoundedRectangle(cornerRadius: side * Brand.markFieldRadiusRatio, style: .continuous)
-                    .fill(Brand.markField.color)
+                if drawsField {
+                    RoundedRectangle(cornerRadius: side * Brand.markFieldRadiusRatio, style: .continuous)
+                        .fill(Brand.markField.color)
+                }
 
                 card(radius: radius, w: cardW, h: cardH, fill: Brand.markCardBack.color)
                     .rotationEffect(.degrees(-Brand.markFanAngle))
@@ -34,6 +47,12 @@ public struct AppMark: View {
                     }
                     .offset(y: -side * 0.0098)
             }
+            // Sized and centred explicitly, because the field used to do both by accident:
+            // with no frame of its own it filled the reader, which made the stack
+            // full-size. Without it the stack shrank to one card, and a GeometryReader
+            // pins its content to the top-leading corner — so the mark moved into it.
+            .frame(width: side, height: side)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 

@@ -54,6 +54,16 @@ final class AdMobAds: AdServing {
         isReady && !AdUnits.banner.isEmpty && policy.allowsBanner(state, at: .now)
     }
 
+    /// Deliberately not persisted across launches. A cold start has no ad loaded and no
+    /// way to know one will fill, so reserving the space then would show an empty strip
+    /// on the first screen of every session.
+    private(set) var lastBannerHeight: Double = 0
+
+    func setLastBannerHeight(_ height: Double) {
+        guard height != lastBannerHeight else { return }
+        lastBannerHeight = height
+    }
+
     var isRemoveAdsOfferAllowed: Bool {
         var current = offer
         // One source of truth for the purchase. The offer store persists counters only —

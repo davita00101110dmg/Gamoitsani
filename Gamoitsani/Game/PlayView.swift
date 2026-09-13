@@ -255,12 +255,27 @@ struct WordCard: View {
 
     @Environment(Localization.self) private var l10n
 
+    /// The card's measured width, which its height follows from the aspect ratio.
+    @State private var width: CGFloat = 0
+
+    /// Sized from the card rather than fixed.
+    ///
+    /// At a flat 38pt the word was the same size on a 393pt phone and a 1024pt iPad — on
+    /// the iPad that is a very large card with small text marooned in the middle of it.
+    /// This is a game read across a room, so the word should grow with the space it has.
+    /// Clamped at the bottom so a narrow phone stays legible, and at the top so a long
+    /// Georgian compound does not start at a size it will only shrink from.
+    private var wordSize: CGFloat {
+        guard width > 0 else { return 38 }
+        return min(max(width * 0.13, 32), 88)
+    }
+
     var body: some View {
         ZStack {
             // The word is the point of the screen, so it sits in the optical centre rather
             // than being pushed around by the labels.
             Text(text)
-                .font(Typography.word(38))
+                .font(Typography.word(wordSize))
                 .foregroundStyle(Tokens.onSurface.color)
                 .multilineTextAlignment(.center)
                 .minimumScaleFactor(0.4)
@@ -282,6 +297,7 @@ struct WordCard: View {
         // 280pt height that read as a short panel.
         .frame(maxWidth: .infinity)
         .aspectRatio(3.0 / 4.0, contentMode: .fit)
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
         .padding(Spacing.md)
         .background(Tokens.cardFace.color)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))

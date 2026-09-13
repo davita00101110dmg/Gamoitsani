@@ -25,7 +25,14 @@ public enum GameReducer {
         case .beginTurn:
             guard state.phase == .turnInfo else { return .failure(.wrongPhase(state.phase)) }
             guard GameRules.canStartTurn(state) else { return .failure(.deckExhausted) }
-            next.setPhase(state.settings.challengesEnabled ? .challenge : .countdown)
+            // Before the deal, and once per turn, so no two teams get the super word in
+            // the same slot. It is set here rather than at `countdownFinished` because a
+            // game resumed mid-turn must keep the placement it was already playing.
+            next.movePlacement(to: nextPlacement)
+            // Straight to the countdown whether or not challenges are on: the rule is on
+            // the turn-info screen the player just pressed Start from, so a screen of its
+            // own was a tap between them and every single turn.
+            next.setPhase(.countdown)
             return .success(next)
 
         case .acknowledgeChallenge:

@@ -26,6 +26,18 @@ public protocol AdServing: AnyObject {
     /// Whether a banner should currently be given space.
     var isBannerAllowed: Bool { get }
 
+    /// The height a filled banner last occupied, or zero if one has never filled.
+    ///
+    /// Lives here rather than in the view because every banner is a *new* view: leaving
+    /// setup and coming back builds one from scratch with no ad, so the slot collapses to
+    /// zero and then jumps open again when the request fills. Every single time. Keeping
+    /// the height on the service lets the slot be the right size before the ad arrives,
+    /// so only the first fill of a session moves anything.
+    var lastBannerHeight: Double { get }
+
+    /// Records the height a banner filled at, or zero when a request failed to fill.
+    func setLastBannerHeight(_ height: Double)
+
     /// Whether the remove-ads card has earned its place on the setup screen.
     ///
     /// Here rather than on a screen because the count it depends on — full-screen ads
@@ -93,9 +105,12 @@ public final class NoAds: AdServing {
 
     public var isReady: Bool { true }
     public var isBannerAllowed: Bool { false }
+    /// Nothing ever fills, so nothing is ever reserved.
+    public var lastBannerHeight: Double { 0 }
     /// No ads means nothing to remove, so there is nothing to sell either.
     public var isRemoveAdsOfferAllowed: Bool { false }
 
+    public func setLastBannerHeight(_ height: Double) {}
     public func removeAdsOfferDismissed() {}
 
     public func start() async {}
