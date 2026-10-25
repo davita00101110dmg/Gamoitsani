@@ -27,3 +27,18 @@ target 'Gamoitsani' do
   use_frameworks!
   ad_sdks
 end
+
+# The ad SDK podspecs still declare iOS 12.0, and CocoaPods takes them at their word.
+# Xcode 27 refuses to build anything below 15.0, so pull every pod target up to the
+# platform this Podfile already declares.
+post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.0'
+  end
+
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.0'
+    end
+  end
+end
