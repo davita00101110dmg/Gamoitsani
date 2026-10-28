@@ -17,9 +17,12 @@ works fully offline.
 
 ## Screenshots
 
-| Setup | Classic | Arcade | Podium |
-|:---:|:---:|:---:|:---:|
-| [SCREENSHOT: gamoitsani-setup] | [SCREENSHOT: gamoitsani-play-classic] | [SCREENSHOT: gamoitsani-play-arcade] | [SCREENSHOT: gamoitsani-podium] |
+<!-- 2.0 screenshots to add when available: gamoitsani-setup, gamoitsani-play-classic, gamoitsani-play-arcade, gamoitsani-podium -->
+<p align="center">
+  <img src="docs/images/gamoitsani-v1-screens.webp" width="520" alt="Three iPhones showing Gamoitsani version 1 in Georgian: game details with team names, the home screen with word cards, and a winner screen with a trophy">
+</p>
+
+<p align="center"><sub>Version 1, the build currently on the App Store: game setup, home and winner screens. 2.0 rebuilds every screen in SwiftUI.</sub></p>
 
 ## Architecture
 
