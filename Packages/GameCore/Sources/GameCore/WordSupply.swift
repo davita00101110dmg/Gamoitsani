@@ -9,7 +9,7 @@ public enum WordSupply {
 
     /// How many words one turn can plausibly get through: about one every two seconds for a
     /// quick pair, and never fewer than 20.
-    public static func wordsPerTurn(roundLength: TimeInterval) -> Int {
+    static func wordsPerTurn(roundLength: TimeInterval) -> Int {
         max(20, Int((roundLength / 2).rounded(.up)))
     }
 

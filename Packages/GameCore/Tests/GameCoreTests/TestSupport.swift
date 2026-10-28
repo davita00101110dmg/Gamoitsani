@@ -38,7 +38,7 @@ enum Fixture {
     static func teams(_ count: Int, members: [String] = []) -> [Team] {
         (0..<count).map { index in
             Team(
-                id: UUID(uuidString: String(format: "00000000-0000-0000-0000-%012d", index))!,
+                id: UUID(uuidString: String(format: "00000000-0000-0000-0000-%012ld", index))!,
                 name: "T\(index)",
                 members: members
             )
