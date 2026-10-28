@@ -131,3 +131,7 @@ Gamoitsani/Config.xcconfig
 .agents/
 skills-lock.json
 ios-swiftdata-testing-agent-skill/
+
+## Python tooling (tools/)
+__pycache__/
+.pytest_cache/

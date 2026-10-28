@@ -18,6 +18,15 @@ Welcome to Gamoitsani, the ultimate word-guessing game that brings fun and excit
   <li>The app uses the font <a href="https://www.behance.net/gallery/145150505/Mersad-Free-Variable-Typeface">Mersad</a> as its main font.</li>
 </ul>
 
+## Word list quality report 📋
+Checks the bundled Georgian word database and rewrites `docs/words-report.md` and `tools/words/suggested-removals.csv`. It never edits a word:
+
+```sh
+python3 tools/words/words_report.py
+```
+
+Tests: `python3 -m pytest tools/words` (needs `pip install pytest`).
+
 ## Spread the word! 📢
 If you want to say thank you and/or support active development of the Gamoitsani app:
 
