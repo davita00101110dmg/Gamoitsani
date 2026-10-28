@@ -127,6 +127,16 @@ jobs:
                 CODE_SIGNING_ALLOWED=NO )
           done
 
+      - name: Test GameCore
+        # Outside the loop above because it lives in Packages/, not Libraries/Packages/.
+        # Foundation only, so `swift test` also runs it on Linux.
+        run: |
+          set -o pipefail
+          ( cd Packages/GameCore && xcodebuild test \
+              -scheme GameCore \
+              -destination "id=${{ steps.sim.outputs.udid }}" \
+              CODE_SIGNING_ALLOWED=NO )
+
       - name: Test the macro package
         # Separate from the loop above: a macro is a compiler plugin, so it builds for the
         # host toolchain and has no simulator destination to be given. `xcodebuild test`
