@@ -114,25 +114,32 @@ the switch.
 - `GameClock` protocol with `SystemClock`: the one place time is read.
 - `GameRunner`: `GameEngine`'s logic without `Observation` or `@MainActor`, plus the rule
   parts of `GameSession` (start, resume, save). It reads time from a `GameClock` and
-  draws placements and challenges from an injected `RandomNumberGenerator`.
+  draws placements and challenges from an injected `RandomNumberGenerator`. Its
+  `isOutOfTime` answers "is the round over?" without mutating, for the reason under
+  Findings.
 - `WordSupply` and `DeckLedger`: the deck sizing, top-up threshold and no-repeat
   accounting that now live in `GameSession` and `GameSetupView`.
 
-Nothing in the app or the existing packages is edited. The owner switches over in Xcode
-(steps at the end of this document).
+No app source and no existing package is edited. The owner switches over in Xcode, with
+the steps and a ready, verified patch at the end of this document.
 
-**Tests**, Swift Testing (the toolchain supports it):
+**Tests**, Swift Testing (the toolchain supports it). `swiftd test` in `Packages/GameCore`:
+**151 tests in 28 suites pass, with 1 known issue recorded on purpose** (see Findings).
 
-- The existing suites for every copied type, ported, so the copy is held to the same 140
-  or so expectations as the original.
-- New suites for: team rotation; a round ending when the clock runs out; scoring for
-  guessed and skipped words; no repeated word within one game, including across top-ups;
-  the game ending correctly, ties included; one team; the word list running out; a
-  zero-length round; same seed and same clock giving the same game; and a save written
-  by today's `GamoitsaniCore` decoding in `GameCore`.
+- 95 tests in 15 suites are the existing suites for every copied type, unchanged apart
+  from the import, so the copy is held to the same expectations as the original.
+- `GameEngine`'s own suite, ported to `GameRunner`.
+- New suites that drive whole games through `GameRunner` with a manual clock and a seeded
+  generator: team rotation; a round ending when the clock runs out; saving and resuming
+  with time left; scoring for guessed, skipped and super words and arcade set skips; no
+  word shown twice in a game, across rematches and top-ups too; the game ending, ties
+  included; one team; the deck running dry; a zero-length round; same seed and same
+  clock giving the same game, and a different seed a different one.
+- A save written by today's `GamoitsaniCore` encoder, checked in as a fixture. `GameCore`
+  decodes it field for field and resumes it mid-turn, so the switch cannot lose a game.
 
-Test helpers (a manual clock, a seeded generator) stay in the test target. Only what the
-app needs is public.
+Test helpers (a manual clock; the seeded generator the ported `DeckTests` already had) stay
+in the test target. Only what the app needs is public.
 
 ## Decisions
 
@@ -148,7 +155,157 @@ app needs is public.
   today. A state that has one anyway (only a hand-edited save could) ends on the first
   expiry check in `GameRunner`. `GameEngine` would hit `RoundTimer`'s precondition there
   instead. That is the one behaviour difference, and nothing in the app can reach it.
+- **Copies stay byte-identical** apart from the file header, including a handful of doc
+  comments in the originals that stop mid-sentence (`GameReducer`, `GameRules`, `Deck`,
+  `Team.record`, `RoundTimer.isUrgent`). Fix them in whichever copy survives.
+- **Behaviour bugs found on the way are pinned, not fixed** (see Findings), so the switch
+  itself changes nothing a player can see. Fixing them is a separate, reviewable change.
+- **`.gitignore` narrowed.** `/Packages/` was ignored wholesale as SwiftPM's old
+  edit-checkout folder. It is now `/Packages/*` with `!/Packages/GameCore/`, so anything
+  else SwiftPM drops there is still ignored. Otherwise every new file in the package would
+  need `git add -f`.
+- **CI runs `GameCore` now**, as its own step: the package loop only walks
+  `Libraries/Packages/`. This is also the first run of these tests on Apple's Foundation.
+- **The switch re-exports instead of re-importing.** `GamoitsaniCore` gets one
+  `@_exported import GameCore`, so the 13 app files and the data package that
+  `import GamoitsaniCore` compile unchanged. The alternative is an `import GameCore` line
+  in each of them.
+
+## Findings — noticed, not changed
+
+1. **A tie-break can give the same player two describing turns running.** In a live game
+   `GameState.round` already includes tie-break rounds, and `Describer.index` adds
+   `extraRound` on top. With two members and the default three rounds, the member who
+   described round 3 describes the first tie-break too: exactly what its comment says it
+   prevents. The original test passes only because it calls `round: 3, extraRound: 1`, a
+   pair real state never produces. Likely fix: `turnsTaken = max(0, round - 1)`. Recorded
+   in `TeamRotationTests` with `withKnownIssue`, which fails once the bug is fixed, as a
+   reminder to unwrap it.
+2. **Arcade "New words −2" on an empty table costs two points and deals nothing.** The
+   button is always enabled, and the reducer accepts `.skipSet` with an empty deck. This
+   is reachable only if a top-up fails mid-turn. Pinned in `EdgeCaseTests`. Fix by
+   rejecting `.skipSet` with `.deckExhausted`, or disabling the button.
+3. **After a resume, a word from earlier in the same game can come back**, narrowly. The
+   top-up exclusion restarts from what is left in the deck. Once a language's unseen pool
+   is exhausted, `BundledWordProvider.more` stops excluding seen words, so a word played
+   before the save can be drawn again. This is in `GamoitsaniData`, outside this package.
+4. **Wrapping `GameRunner` in the `@Observable` engine would re-render the play screen
+   four times a second.** `RoundClock` calls `engine.checkExpiry()` on every 0.25 s tick,
+   and a mutating call on a stored property of an `@Observable` class notifies every
+   reader of it, even when nothing changes. This came out of rehearsing the switch with
+   `withObservationTracking`. The fix is in this branch (`isOutOfTime`, read first), and
+   the patch adds an engine test that fails without it.
 
 ## Switching the app over in Xcode
 
-To be completed at the end of the work.
+Everything here was rehearsed on Linux before being written down.
+`docs/gamecore-switchover.patch` was applied to a clean checkout of this branch.
+`GameCore` (151), `GamoitsaniCore` (52) and `GamoitsaniEngine` (8) passed there, and the
+patched `GameSession.swift` compiled against them with `GamoitsaniData` stubbed (SQLite3
+is not on Linux). The app target, `GameSetupView.swift` and actually playing a game could
+not be checked here; steps 4 and 5 cover them.
+
+### 1. Add GameCore to the project (the app is unchanged after this step)
+
+1. Open `Gamoitsani.xcworkspace`, not the `.xcodeproj`.
+2. **File ▸ Add Package Dependencies… ▸ Add Local…**, choose the `Packages/GameCore`
+   folder, then **Add Package**.
+3. In **Choose Package Products**, set the `GameCore` row's target to **None** and confirm.
+   The app reaches it through `GamoitsaniCore` after step 2, so nothing links it directly.
+4. Pick the **GameCore** scheme and an iOS 18 simulator, then **⌘U**. Expect 151 tests
+   passing, one of them with a known issue (Finding 1).
+
+### 2. Move the rules out of the old packages
+
+From the repo root, on a new branch:
+
+```bash
+git rm \
+  Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/{Challenge,Deck,Describer,GameEvent,GameReducer,GameRules,GameSettings,GameState,Scoring,Team,WordDifficulty}.swift \
+  Libraries/Packages/GamoitsaniCore/Tests/GamoitsaniCoreTests/{Challenge,Deck,GameReducer,GameRules,GameSettings,MovingSuperWord,Scoring}Tests.swift \
+  Libraries/Packages/GamoitsaniEngine/Sources/GamoitsaniEngine/RoundTimer.swift \
+  Libraries/Packages/GamoitsaniEngine/Tests/GamoitsaniEngineTests/RoundTimerTests.swift
+```
+
+```bash
+git apply docs/gamecore-switchover.patch
+```
+
+If the patch no longer applies because `main` has moved, the edits it makes are listed
+under "Files that change" below and are small enough to make by hand.
+
+Back in Xcode, **File ▸ Packages ▸ Resolve Package Versions**, so it sees that
+`GamoitsaniCore` now depends on `GameCore`.
+
+### 3. Test the packages
+
+| Scheme | Expect |
+|---|---|
+| GameCore | 151 tests, 1 known issue |
+| GamoitsaniCore | 52 tests in 6 suites (was 143; the other 91 now run in GameCore) |
+| GamoitsaniEngine | 8 tests (was 11: 4 timer tests moved, 1 observation test added) |
+| GamoitsaniData | unchanged |
+
+### 4. Build the app
+
+**Gamoitsani** scheme, **⌘B**. Only `GameSession.swift` and `GameSetupView.swift` change in
+the app. Every other `import GamoitsaniCore` keeps compiling through the re-export.
+
+### 5. Play it on the phone (the `run-on-device` skill)
+
+1. **Saves survive the switch.** Install a build of the current `main`, start a game, and
+   leave it mid-turn with time on the clock. Then install the switched build over it. The
+   resume card should appear and resume with the same time left.
+2. **Classic to the end**: guess and skip words, let the clock run out, and get a
+   tie-break if you can.
+3. **Arcade** with super words on: a set skip costs 2, and a super word ±3.
+4. **Challenges on**: each team keeps its rule; a rematch deals new ones.
+5. **Background mid-turn** past the deadline and come back: the turn has ended.
+
+### 6. CI
+
+Nothing more to do. This branch already adds the **Test GameCore** step, and the existing
+loop keeps testing `GamoitsaniCore` and `GamoitsaniEngine`.
+
+### Files that change
+
+| File | Change |
+|---|---|
+| `Libraries/Packages/GamoitsaniCore/Package.swift` | Depends on `../../../Packages/GameCore`. |
+| `Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/GameCoreExport.swift` | **New.** `@_exported import GameCore`. |
+| `.../GamoitsaniCore/{Awards,PlayerRecord,TeamDraw,WordProvider}.swift` | `import GameCore`, so they don't rely on another file's import. |
+| `.../GamoitsaniCoreTests/PlayerRecordTests.swift` | The `Describer` suite removed (it is in GameCore). |
+| `.../GamoitsaniCoreTests/TeamDrawTests.swift` | The `Team persistence` suite removed (it is in GameCore). |
+| `Libraries/Packages/GamoitsaniEngine/Sources/GamoitsaniEngine/GameEngine.swift` | A thin `@Observable` wrapper over `GameRunner`. `init(state:now:nextPlacement:drawChallenges:)` becomes `init(state:clock:random:)` and `init(runner:)`. Adds `stateForSaving()`. Same public surface otherwise. |
+| `.../GamoitsaniEngineTests/GameEngineTests.swift` | The test clock conforms to `GameClock`; adds "checkExpiry does not notify observers while time remains". |
+| `Gamoitsani/Game/GameSession.swift` | Builds engines from `GameRunner`, so no `Date()` or system RNG of its own. `deckIDs` becomes `DeckLedger`, and `wordsPerTurn` moves to `WordSupply`. |
+| `Gamoitsani/Screens/Setup/GameSetupView.swift` | The opening deck size comes from `WordSupply.openingDeckSize`. |
+
+### Files deleted
+
+- `Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/`: `Challenge`, `Deck`,
+  `Describer`, `GameEvent`, `GameReducer`, `GameRules`, `GameSettings`, `GameState`,
+  `Scoring`, `Team`, `WordDifficulty` (`.swift`).
+- `Libraries/Packages/GamoitsaniCore/Tests/GamoitsaniCoreTests/`: `ChallengeTests`,
+  `DeckTests`, `GameReducerTests`, `GameRulesTests`, `GameSettingsTests`,
+  `MovingSuperWordTests`, `ScoringTests` (`.swift`).
+- `Libraries/Packages/GamoitsaniEngine/Sources/GamoitsaniEngine/RoundTimer.swift` and
+  `Tests/GamoitsaniEngineTests/RoundTimerTests.swift`.
+- After the switch has shipped: `docs/gamecore-switchover.patch`.
+
+### Until you switch: check the copies have not drifted
+
+A fix made to the rules in `GamoitsaniCore` before the switch has to be made in `GameCore`
+too. This prints nothing while they match:
+
+```bash
+for f in Challenge Deck Describer GameEvent GameReducer GameRules GameSettings GameState Scoring Team WordDifficulty; do diff -I '^//  ' Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/$f.swift Packages/GameCore/Sources/GameCore/$f.swift; done; diff -I '^//  ' Libraries/Packages/GamoitsaniEngine/Sources/GamoitsaniEngine/RoundTimer.swift Packages/GameCore/Sources/GameCore/RoundTimer.swift
+```
+
+### If you would rather keep it in `Libraries/Packages/`
+
+1. Move the folder to `Libraries/Packages/GameCore`.
+2. Change the dependency path in `GamoitsaniCore`'s manifest to `../GameCore`.
+3. Remove and re-add the local package in Xcode.
+4. Point the CI step at the new path.
+5. Drop the two `.gitignore` lines for `/Packages/`.

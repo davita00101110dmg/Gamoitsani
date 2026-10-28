@@ -1,0 +1,596 @@
+diff --git a/Gamoitsani/Game/GameSession.swift b/Gamoitsani/Game/GameSession.swift
+index 13805c2..4290474 100644
+--- a/Gamoitsani/Game/GameSession.swift
++++ b/Gamoitsani/Game/GameSession.swift
+@@ -25,9 +25,9 @@ final class GameSession {
+     /// than meeting the same cards every few evenings.
+     let seenWords: SeenWords
+ 
+-    /// The ids the current deck started with. Kept because the deck only knows what is
+-    /// left, and what was played is the difference.
+-    private var deckIDs: Set<String> = []
++    /// Every word put into the current game's deck, so a top-up never repeats one and what
++    /// was played can be told from what is left.
++    private var ledger = DeckLedger(deck: Deck(words: []))
+ 
+     /// Bumped whenever the game changes. A draw started for one game carries the number it
+     /// began under and is discarded if it comes back to a different one — otherwise words
+@@ -54,18 +54,12 @@ final class GameSession {
+         deck: Deck,
+         language: String = "ka"
+     ) -> GameEngine {
++        // GameRunner deals the challenges once, here, so each team keeps its rule.
+         let engine = GameEngine(
+-            state: GameState(
+-                settings: settings,
+-                teams: teams,
+-                deck: deck,
+-                deckLanguage: language,
+-                // Dealt once, here, so each team keeps its rule for the whole game.
+-                challenges: settings.challengesEnabled ? Challenge.draw(for: teams) : [:]
+-            )
++            runner: GameRunner(settings: settings, teams: teams, deck: deck, language: language)
+         )
+         self.engine = engine
+-        deckIDs = Set(deck.remainingIDs)
++        ledger = DeckLedger(deck: deck)
+         generation += 1
+         // Restorable from the moment it exists, rather than from the first phase change.
+         //
+@@ -78,38 +72,34 @@ final class GameSession {
+         //
+         // It also means a force-quit between Play and the first turn no longer loses the
+         // game it just dealt.
+-        persist(engine.state)
++        persist(engine)
+         return engine
+     }
+ 
+     @discardableResult
+     func resume() -> GameEngine? {
+-        guard var state = saved else { return nil }
+-        // Restart the clock with whatever was left on it when the game was put down.
+-        state.resumeClock(at: Date())
+-        // A game saved before challenges existed has the setting on and no rules, which
+-        // would put an empty card on the challenge screen. Deal them now instead.
+-        if state.settings.challengesEnabled && state.challenges.isEmpty {
+-            state.assignChallenges(Challenge.draw(for: state.teams))
+-        }
+-        let engine = GameEngine(state: state)
++        guard let saved else { return nil }
++        // Restarts the clock with what was left on it, and deals rules to a save from before
++        // challenges existed.
++        let engine = GameEngine(runner: GameRunner(resuming: saved))
+         self.engine = engine
+ 
+         // Tracking restarts from what is left, not from the original deck — anything played
+         // before the last checkpoint was already recorded as seen. The deck's language
+         // comes back with the saved state, so switching language mid-game no longer files
+         // the words under whatever is on screen now.
+-        deckIDs = Set(state.deck.remainingIDs)
++        ledger = DeckLedger(deck: engine.state.deck)
+         generation += 1
+         return engine
+     }
+ 
+     /// Leaves the current game, keeping it restorable unless it had finished.
+     func leave() {
+-        if let state = engine?.state {
++        if let engine {
++            let state = engine.state
+             recordSeenWords(from: state)
+             if state.phase != .finished {
+-                persist(state)
++                persist(engine)
+             } else {
+                 saved = nil
+                 store.clear()
+@@ -122,19 +112,10 @@ final class GameSession {
+ 
+     /// Persists progress as the game moves between phases, or when the app goes away.
+     func checkpoint() {
+-        guard let state = engine?.state, state.phase != .finished else { return }
+-        persist(state)
++        guard let engine, engine.state.phase != .finished else { return }
++        persist(engine)
+         // Here too, so a force-quit costs at most the current turn's words.
+-        recordSeenWords(from: state)
+-    }
+-
+-    /// How many words one turn can plausibly get through.
+-    ///
+-    /// A quick pair answers about one word every two seconds, which is the ceiling worth
+-    /// planning for — the old figure was a flat 15 a turn, and a 2-team game ran dry
+-    /// part-way through the first round.
+-    static func wordsPerTurn(roundLength: TimeInterval) -> Int {
+-        max(20, Int((roundLength / 2).rounded(.up)))
++        recordSeenWords(from: engine.state)
+     }
+ 
+     /// Draws more words when the deck gets low, so a game cannot dead-end on an empty deck.
+@@ -142,23 +123,21 @@ final class GameSession {
+     /// Everything already dealt into this game is excluded, so a top-up never repeats a
+     /// card the group has just seen.
+     func topUpDeckIfNeeded() {
+-        guard let engine, engine.state.phase != .finished, !isToppingUp else { return }
++        guard let engine, !isToppingUp, WordSupply.needsTopUp(engine.state) else { return }
+ 
+         let settings = engine.state.settings
+-        let perTurn = Self.wordsPerTurn(roundLength: settings.roundLength)
+-        guard engine.state.deck.count < perTurn else { return }
+-
+         isToppingUp = true
+         let language = engine.state.deckLanguage
+         let difficulty = settings.difficulty.range
+-        let excluded = Set(deckIDs.compactMap(Int.init))
++        let count = WordSupply.topUpSize(roundLength: settings.roundLength)
++        let excluded = Set(ledger.excludedIDs.compactMap(Int.init))
+         let startedUnder = generation
+ 
+         Task {
+             defer { isToppingUp = false }
+             let provider = BundledWordProvider(difficulty: difficulty, seen: seenWords)
+             let words = (try? await provider.more(
+-                language: language, count: perTurn * 2, excluding: excluded
++                language: language, count: count, excluding: excluded
+             )) ?? []
+ 
+             // The game that asked for these may be over, or replaced, by now.
+@@ -168,7 +147,7 @@ final class GameSession {
+             else { return }
+ 
+             if engine.apply(.deckRefilled(words)) {
+-                deckIDs.formUnion(words.map(\.id))
++                ledger.add(words)
+             }
+         }
+     }
+@@ -178,7 +157,7 @@ final class GameSession {
+     /// What was played is the deck it started with minus what is left. Recording the whole
+     /// deck up front would burn hundreds of words the group never saw.
+     private func recordSeenWords(from state: GameState) {
+-        let played = deckIDs.subtracting(state.deck.remainingIDs).compactMap(Int.init)
++        let played = ledger.playedIDs(in: state.deck).compactMap(Int.init)
+         guard !played.isEmpty else { return }
+         // The deck's own language, not the one on screen — they differ after a fallback,
+         // and after switching language mid-game.
+@@ -191,9 +170,8 @@ final class GameSession {
+     /// The clock is frozen on the way to disk, so a round abandoned at 38 seconds is
+     /// waiting at 38 seconds however long it takes to come back. The live engine keeps its
+     /// wall-clock deadline, so merely suspending the app still costs you the time.
+-    private func persist(_ state: GameState) {
+-        var paused = state
+-        paused.pauseClock(at: Date())
++    private func persist(_ engine: GameEngine) {
++        let paused = engine.stateForSaving()
+         saved = paused
+         store.save(paused)
+     }
+diff --git a/Gamoitsani/Screens/Setup/GameSetupView.swift b/Gamoitsani/Screens/Setup/GameSetupView.swift
+index ac5b590..7151636 100644
+--- a/Gamoitsani/Screens/Setup/GameSetupView.swift
++++ b/Gamoitsani/Screens/Setup/GameSetupView.swift
+@@ -204,8 +204,9 @@ struct GameSetupView: View {
+             // Sized from the clock rather than a flat per-turn guess. Whatever this misses
+             // by, the deck is topped up during play, so it only has to be a good opening
+             // hand rather than the whole game's supply.
+-            let perTurn = GameSession.wordsPerTurn(roundLength: settings.roundLength)
+-            let wanted = max(80, teams.count * settings.rounds * perTurn)
++            let wanted = WordSupply.openingDeckSize(
++                teamCount: teams.count, rounds: settings.rounds, roundLength: settings.roundLength
++            )
+             let provider = BundledWordProvider(
+                 difficulty: settings.difficulty.range,
+                 seen: session.seenWords
+diff --git a/Libraries/Packages/GamoitsaniCore/Package.swift b/Libraries/Packages/GamoitsaniCore/Package.swift
+index 98754d4..19202ed 100644
+--- a/Libraries/Packages/GamoitsaniCore/Package.swift
++++ b/Libraries/Packages/GamoitsaniCore/Package.swift
+@@ -8,11 +8,13 @@ let package = Package(
+     products: [
+         .library(name: "GamoitsaniCore", targets: ["GamoitsaniCore"])
+     ],
+-    dependencies: [],
++    dependencies: [
++        .package(path: "../../../Packages/GameCore")],
+     targets: [
+         .target(
+             name: "GamoitsaniCore",
+-            dependencies: [],
++            dependencies: [
++                .product(name: "GameCore", package: "GameCore")],
+             swiftSettings: [.swiftLanguageMode(.v6)]
+         ),
+         .testTarget(
+diff --git a/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/Awards.swift b/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/Awards.swift
+index a76dea9..7996714 100644
+--- a/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/Awards.swift
++++ b/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/Awards.swift
+@@ -3,6 +3,7 @@
+ //  GamoitsaniCore
+ //
+ import Foundation
++import GameCore
+ 
+ /// A title one team earned outright.
+ public struct Award: Identifiable, Hashable, Sendable {
+diff --git a/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/GameCoreExport.swift b/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/GameCoreExport.swift
+new file mode 100644
+index 0000000..281df66
+--- /dev/null
++++ b/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/GameCoreExport.swift
+@@ -0,0 +1,7 @@
++//
++//  GameCoreExport.swift
++//  GamoitsaniCore
++//
++
++/// The rules of play live in GameCore. Re-exported so every `import GamoitsaniCore` still sees them.
++@_exported import GameCore
+diff --git a/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/PlayerRecord.swift b/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/PlayerRecord.swift
+index 6b25382..fbfb5b4 100644
+--- a/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/PlayerRecord.swift
++++ b/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/PlayerRecord.swift
+@@ -3,6 +3,7 @@
+ //  GamoitsaniCore
+ //
+ import Foundation
++import GameCore
+ 
+ /// What one person has done across every game on this device.
+ ///
+diff --git a/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/TeamDraw.swift b/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/TeamDraw.swift
+index cfa030c..238e2a9 100644
+--- a/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/TeamDraw.swift
++++ b/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/TeamDraw.swift
+@@ -3,6 +3,7 @@
+ //  GamoitsaniCore
+ //
+ import Foundation
++import GameCore
+ 
+ /// Splits a room full of people into teams.
+ ///
+diff --git a/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/WordProvider.swift b/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/WordProvider.swift
+index b999524..d0f1c06 100644
+--- a/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/WordProvider.swift
++++ b/Libraries/Packages/GamoitsaniCore/Sources/GamoitsaniCore/WordProvider.swift
+@@ -3,6 +3,7 @@
+ //  GamoitsaniCore
+ //
+ import Foundation
++import GameCore
+ 
+ /// Supplies the words for a game.
+ public protocol WordProvider: Sendable {
+diff --git a/Libraries/Packages/GamoitsaniCore/Tests/GamoitsaniCoreTests/PlayerRecordTests.swift b/Libraries/Packages/GamoitsaniCore/Tests/GamoitsaniCoreTests/PlayerRecordTests.swift
+index c8cf203..5b3ec66 100644
+--- a/Libraries/Packages/GamoitsaniCore/Tests/GamoitsaniCoreTests/PlayerRecordTests.swift
++++ b/Libraries/Packages/GamoitsaniCore/Tests/GamoitsaniCoreTests/PlayerRecordTests.swift
+@@ -7,53 +7,6 @@ import Foundation
+ import Testing
+ @testable import GamoitsaniCore
+ 
+-@Suite("Describer")
+-struct DescriberTests {
+-
+-    private func team(_ members: [String]) -> Team {
+-        Team(name: "Blue", members: members)
+-    }
+-
+-    @Test("the turn goes round the team")
+-    func rotates() {
+-        let blue = team(["ნიკა", "დათა", "გიო"])
+-        #expect(Describer.name(for: blue, round: 1, extraRound: 0) == "ნიკა")
+-        #expect(Describer.name(for: blue, round: 2, extraRound: 0) == "დათა")
+-        #expect(Describer.name(for: blue, round: 3, extraRound: 0) == "გიო")
+-        #expect(Describer.name(for: blue, round: 4, extraRound: 0) == "ნიკა", "and round again")
+-    }
+-
+-    @Test("it says who is up next")
+-    func next() {
+-        let blue = team(["ნიკა", "დათა"])
+-        #expect(Describer.next(for: blue, round: 1, extraRound: 0) == "დათა")
+-        #expect(Describer.next(for: blue, round: 2, extraRound: 0) == "ნიკა")
+-    }
+-
+-    @Test("nobody is next in a team of one")
+-    func soloHasNoNext() {
+-        #expect(Describer.next(for: team(["ნიკა"]), round: 1, extraRound: 0) == nil)
+-    }
+-
+-    /// Teams can be typed straight in without the player draw.
+-    @Test("a team with no names has no describer")
+-    func anonymousTeam() {
+-        #expect(Describer.name(for: team([]), round: 1, extraRound: 0) == nil)
+-        #expect(Describer.next(for: team([]), round: 1, extraRound: 0) == nil)
+-    }
+-
+-    /// A tie-break is more of the same game. Restarting the rotation would hand the same
+-    /// player two turns in a row.
+-    @Test("extra rounds continue the rotation")
+-    func extraRounds() {
+-        let blue = team(["ნიკა", "დათა", "გიო"])
+-        let lastNormal = Describer.name(for: blue, round: 3, extraRound: 0)
+-        let firstExtra = Describer.name(for: blue, round: 3, extraRound: 1)
+-        #expect(lastNormal != firstExtra)
+-        #expect(firstExtra == "ნიკა")
+-    }
+-}
+-
+ @Suite("Player ledger")
+ struct PlayerLedgerTests {
+ 
+diff --git a/Libraries/Packages/GamoitsaniCore/Tests/GamoitsaniCoreTests/TeamDrawTests.swift b/Libraries/Packages/GamoitsaniCore/Tests/GamoitsaniCoreTests/TeamDrawTests.swift
+index 1e367cb..0bae726 100644
+--- a/Libraries/Packages/GamoitsaniCore/Tests/GamoitsaniCoreTests/TeamDrawTests.swift
++++ b/Libraries/Packages/GamoitsaniCore/Tests/GamoitsaniCoreTests/TeamDrawTests.swift
+@@ -108,42 +108,3 @@ struct TeamDrawTests {
+         #expect(differs, "40 draws of 8 players never differed")
+     }
+ }
+-
+-@Suite("Team persistence")
+-struct TeamCodingTests {
+-
+-    /// A game saved before `members` existed must still load. The synthesised decoder
+-    /// throws `keyNotFound` here, and `GameStateStore` uses `try?` — so this failing means
+-    /// an in-progress game silently disappears when the user updates.
+-    @Test("a team saved without members still decodes")
+-    func decodesLegacyPayload() throws {
+-        let legacy = """
+-        {
+-          "id": "1B4E28BA-2FA1-11D2-883F-0016D3CCA427",
+-          "name": "Team 1",
+-          "score": 7,
+-          "wordsGuessed": 9,
+-          "wordsSkipped": 2,
+-          "currentStreak": 1,
+-          "bestStreak": 4,
+-          "totalGuessTime": 31.5,
+-          "setsSkipped": 0,
+-          "superWordsGuessed": 1
+-        }
+-        """
+-        let team = try JSONDecoder().decode(Team.self, from: Data(legacy.utf8))
+-        #expect(team.name == "Team 1")
+-        #expect(team.score == 7)
+-        #expect(team.bestStreak == 4)
+-        #expect(team.members.isEmpty)
+-    }
+-
+-    @Test("members survive a round trip")
+-    func roundTrip() throws {
+-        let team = Team(name: "Team 1", score: 3, members: ["Nino", "Ana"])
+-        let data = try JSONEncoder().encode(team)
+-        let restored = try JSONDecoder().decode(Team.self, from: data)
+-        #expect(restored == team)
+-        #expect(restored.members == ["Nino", "Ana"])
+-    }
+-}
+diff --git a/Libraries/Packages/GamoitsaniEngine/Sources/GamoitsaniEngine/GameEngine.swift b/Libraries/Packages/GamoitsaniEngine/Sources/GamoitsaniEngine/GameEngine.swift
+index 868d37b..ca98e3e 100644
+--- a/Libraries/Packages/GamoitsaniEngine/Sources/GamoitsaniEngine/GameEngine.swift
++++ b/Libraries/Packages/GamoitsaniEngine/Sources/GamoitsaniEngine/GameEngine.swift
+@@ -6,102 +6,62 @@ import Foundation
+ import Observation
+ import GamoitsaniCore
+ 
+-/// Drives a game.
++/// Drives a game. Observable wrapper over `GameRunner`, which owns the clock and the dice.
+ @MainActor
+ @Observable
+ public final class GameEngine {
+ 
+-    public private(set) var state: GameState
++    private var runner: GameRunner
+ 
+-    /// The last refused event, for debugging and tests. A rejection means the UI offered
+-    public private(set) var lastRejection: GameEventRejection?
++    public var state: GameState { runner.state }
+ 
+-    /// Injected so tests can control time. Nothing in the engine calls `Date()` directly.
+-    private let now: @Sendable () -> Date
++    /// The last refused event. A rejection means the UI offered something the rules disallow.
++    public var lastRejection: GameEventRejection? { runner.lastRejection }
+ 
+-    /// Injected for the same reason as `now`: a rematch needs a fresh super-word position,
+-    /// and the reducer must not draw one itself.
+-    private let nextPlacement: @Sendable () -> SuperWordPlacement
+-
+-    /// Injected alongside `now` and `nextPlacement`, so a rematch's rules are as
+-    /// controllable in a test as its clock.
+-    private let drawChallenges: @Sendable ([Team]) -> [Team.ID: Challenge]
++    public init(runner: GameRunner) {
++        self.runner = runner
++    }
+ 
+-    public init(
++    /// Injected clock and generator so tests control time and randomness.
++    public convenience init(
+         state: GameState,
+-        now: @escaping @Sendable () -> Date = { Date() },
+-        nextPlacement: @escaping @Sendable () -> SuperWordPlacement = { .random() },
+-        drawChallenges: @escaping @Sendable ([Team]) -> [Team.ID: Challenge] = {
+-            Challenge.draw(for: $0)
+-        }
++        clock: any GameClock = SystemClock(),
++        random: any RandomNumberGenerator & Sendable = SystemRandomNumberGenerator()
+     ) {
+-        self.state = state
+-        self.now = now
+-        self.nextPlacement = nextPlacement
+-        self.drawChallenges = drawChallenges
++        self.init(runner: GameRunner(state: state, clock: clock, random: random))
+     }
+ 
+     // MARK: - Events
+ 
+     @discardableResult
+-    public func send(_ event: GameEvent) -> Bool {
+-        // Only a rematch deals rules again, so only a rematch pays for the draw.
+-        let challenges = event == .rematch ? drawChallenges(state.teams) : [:]
+-        return resolve(
+-            GameReducer.reduce(
+-                state, event, at: now(),
+-                nextPlacement: nextPlacement(),
+-                nextChallenges: challenges
+-            )
+-        )
+-    }
++    public func send(_ event: GameEvent) -> Bool { runner.send(event) }
+ 
+     /// Reports the result of work started elsewhere — words drawn while a game is running.
+     /// Deliberately a different method from `send`, so screens cannot reach it.
+     @discardableResult
+-    public func apply(_ effect: GameEffect) -> Bool {
+-        resolve(GameReducer.apply(state, effect))
+-    }
++    public func apply(_ effect: GameEffect) -> Bool { runner.apply(effect) }
+ 
+-    private func resolve(_ result: Result<GameState, GameEventRejection>) -> Bool {
+-        switch result {
+-        case let .success(next):
+-            state = next
+-            lastRejection = nil
+-            return true
+-        case let .failure(rejection):
+-            lastRejection = rejection
+-            return false
+-        }
+-    }
++    /// The game as it goes to disk, with its clock frozen.
++    public func stateForSaving() -> GameState { runner.stateForSaving() }
+ 
+     // MARK: - Time
+ 
+-    /// The current round's clock, or nil outside play.
+-    public var timer: RoundTimer? {
+-        guard let endsAt = state.roundEndsAt else { return nil }
+-        return RoundTimer(
+-            startingAt: endsAt.addingTimeInterval(-state.settings.roundLength),
+-            duration: state.settings.roundLength
+-        )
+-    }
+-
+-    public var remainingTime: TimeInterval {
+-        timer?.remaining(at: now()) ?? 0
+-    }
++    public var timer: RoundTimer? { runner.timer }
++    public var remainingTime: TimeInterval { runner.remainingTime }
+ 
+-    /// Ends the turn if the deadline has passed.
++    /// Ends the turn if the deadline has passed. Reads first: this runs four times a second,
++    /// and a mutating call on `runner` would notify every view reading `state`.
+     @discardableResult
+     public func checkExpiry() -> Bool {
+-        guard state.phase == .playing, let timer, timer.hasExpired(at: now()) else { return false }
+-        return send(.timeExpired)
++        guard runner.isOutOfTime else { return false }
++        return runner.checkExpiry()
+     }
+ 
+     // MARK: - Convenience
+ 
+-    public var currentTeam: Team? { state.currentTeam }
+-    public var wordsInPlay: [DeckWord] { GameRules.unplayedWords(state) }
+-    public var isFinished: Bool { state.phase == .finished }
+-    public var winner: Team? { GameRules.winner(state) }
+-    public var standings: [Team] { state.standings }
++    public var currentTeam: Team? { runner.currentTeam }
++    public var wordsInPlay: [DeckWord] { runner.wordsInPlay }
++    public var isFinished: Bool { runner.isFinished }
++    public var winner: Team? { runner.winner }
++    public var standings: [Team] { runner.standings }
+ }
+diff --git a/Libraries/Packages/GamoitsaniEngine/Tests/GamoitsaniEngineTests/GameEngineTests.swift b/Libraries/Packages/GamoitsaniEngine/Tests/GamoitsaniEngineTests/GameEngineTests.swift
+index 67706b4..5143356 100644
+--- a/Libraries/Packages/GamoitsaniEngine/Tests/GamoitsaniEngineTests/GameEngineTests.swift
++++ b/Libraries/Packages/GamoitsaniEngine/Tests/GamoitsaniEngineTests/GameEngineTests.swift
+@@ -5,6 +5,7 @@
+ 
+ import Testing
+ import Foundation
++import Observation
+ import GamoitsaniCore
+ @testable import GamoitsaniEngine
+ 
+@@ -16,9 +17,10 @@ struct GameEngineTests {
+ 
+     /// A controllable clock. Nothing in the engine calls Date() directly, which is what
+     /// makes expiry testable without waiting 45 seconds.
+-    private final class Clock: @unchecked Sendable {
+-        var now: Date
+-        init(_ now: Date) { self.now = now }
++    private final class Clock: GameClock, @unchecked Sendable {
++        var date: Date
++        init(_ date: Date) { self.date = date }
++        func now() -> Date { date }
+     }
+ 
+     private func makeEngine(
+@@ -32,7 +34,7 @@ struct GameEngineTests {
+             teams: (0..<teams).map { Team(name: "T\($0)") },
+             deck: Deck(words: (0..<words).map { DeckWord(id: "\($0)", text: "w\($0)") })
+         )
+-        return (GameEngine(state: state, now: { clock.now }), clock)
++        return (GameEngine(state: state, clock: clock), clock)
+     }
+ 
+     @Test("send applies the event and publishes the new state")
+@@ -65,7 +67,7 @@ struct GameEngineTests {
+         engine.send(.countdownFinished)
+ 
+         #expect(engine.remainingTime == 45)
+-        clock.now = t0.addingTimeInterval(20)
++        clock.date = t0.addingTimeInterval(20)
+         #expect(engine.remainingTime == 25)
+     }
+ 
+@@ -75,7 +77,7 @@ struct GameEngineTests {
+         engine.send(.beginTurn)
+         engine.send(.countdownFinished)
+ 
+-        clock.now = t0.addingTimeInterval(44)
++        clock.date = t0.addingTimeInterval(44)
+         #expect(engine.checkExpiry() == false)
+         #expect(engine.state.phase == .playing)
+     }
+@@ -90,7 +92,7 @@ struct GameEngineTests {
+         #expect(engine.state.currentTeamIndex == 0)
+ 
+         // App suspended well past the deadline, then resumed.
+-        clock.now = t0.addingTimeInterval(600)
++        clock.date = t0.addingTimeInterval(600)
+         #expect(engine.checkExpiry())
+         #expect(engine.state.phase == .turnInfo)
+         #expect(engine.state.currentTeamIndex == 1, "the turn passed while we were away")
+@@ -99,7 +101,7 @@ struct GameEngineTests {
+     @Test("checkExpiry is inert outside play")
+     func expiryOnlyDuringPlay() {
+         let (engine, clock) = makeEngine()
+-        clock.now = t0.addingTimeInterval(10_000)
++        clock.date = t0.addingTimeInterval(10_000)
+         #expect(engine.checkExpiry() == false, "not playing, so there is nothing to expire")
+     }
+ 
+@@ -114,4 +116,19 @@ struct GameEngineTests {
+         #expect(engine.isFinished == false)
+         #expect(engine.standings.count == 2)
+     }
++
++    /// The play screen calls this four times a second. A check that finds time left must not
++    /// invalidate every view reading `state`.
++    @Test("checkExpiry does not notify observers while time remains")
++    func expiryCheckIsQuiet() {
++        let (engine, clock) = makeEngine(roundLength: 45)
++        engine.send(.beginTurn)
++        engine.send(.countdownFinished)
++        clock.date = t0.addingTimeInterval(10)
++
++        nonisolated(unsafe) var notified = false
++        withObservationTracking { _ = engine.state } onChange: { notified = true }
++        engine.checkExpiry()
++        #expect(notified == false)
++    }
+ }
