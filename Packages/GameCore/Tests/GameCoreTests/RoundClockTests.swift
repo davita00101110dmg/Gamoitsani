@@ -81,6 +81,22 @@ struct RoundClockTests {
         #expect(runner.remainingTime == 0)
     }
 
+    @Test("running out of time can be read without ending the turn")
+    func outOfTimeIsReadOnly() {
+        var (runner, clock) = Fixture.runner(roundLength: 30)
+        #expect(runner.isOutOfTime == false, "not playing yet")
+        runner.startTurn()
+        clock.advance(by: 29.75)
+        #expect(runner.isOutOfTime == false)
+
+        clock.advance(by: 0.25)
+        #expect(runner.isOutOfTime)
+        #expect(runner.state.phase == .playing, "reading it changed nothing")
+
+        runner.checkExpiry()
+        #expect(runner.isOutOfTime == false, "between turns there is no round to run out")
+    }
+
     @Test("a saved game keeps the time it had left, however long it is put away")
     func saveAndResume() throws {
         var (runner, clock) = Fixture.runner(roundLength: 60)

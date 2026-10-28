@@ -124,13 +124,17 @@ public struct GameRunner: Sendable {
         return max(0, endsAt.timeIntervalSince(clock.now()))
     }
 
+    /// Whether the round's deadline has passed while it is still being played. Read-only, so
+    /// an observable owner can check it without notifying anyone.
+    public var isOutOfTime: Bool {
+        guard state.phase == .playing, let endsAt = state.roundEndsAt else { return false }
+        return clock.now() >= endsAt
+    }
+
     /// Ends the turn if the deadline has passed.
     @discardableResult
     public mutating func checkExpiry() -> Bool {
-        guard state.phase == .playing,
-              let endsAt = state.roundEndsAt,
-              clock.now() >= endsAt
-        else { return false }
+        guard isOutOfTime else { return false }
         return send(.timeExpired)
     }
 
